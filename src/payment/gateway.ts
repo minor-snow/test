@@ -1,5 +1,6 @@
 // Payment gateway — sensitive module
-export interface PaymentMethod {
+// Clean review modification
+export interface PaymentGateway {
   type: "credit_card" | "bank_transfer";
   token: string;
 }
