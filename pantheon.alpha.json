@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "protected": [
+    ".pantheon/**",
+    ".cursor/**",
+    ".git/**",
+    "node_modules/**"
+  ],
+  "review_required": [
+    "docs/**",
+    "examples/**"
+  ],
+  "generated": [
+    "dist/**"
+  ],
+  "path_roles": {
+    "docs/**": "docs",
+    "examples/**": "docs",
+    "dist/**": "generated"
+  },
+  "repo_observation": {},
+  "metrics": {
+    "enabled": true,
+    "mode": "local",
+    "generate_daily_report": true,
+    "include_file_paths": true,
+    "anonymize_paths": false,
+    "retention_days": 30
+  },
+  "review_queue": {
+    "enabled": true,
+    "local_only": true
+  },
+  "notifications": {
+    "github": {
+      "label_pr": true,
+      "mention_reviewers": false
+    },
+    "webhook": {
+      "enabled": false
+    }
+  }
+}

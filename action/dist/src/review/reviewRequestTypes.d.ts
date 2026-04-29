@@ -1,0 +1,35 @@
+import type { RepairVerdict } from "../repair/types.js";
+export type ReviewAttentionLevel = "human_review" | "blocking" | "urgent";
+export type ReviewRequestStatus = "open" | "approved" | "rejected" | "revert_requested" | "closed";
+export type ReviewRequestAction = "human_review" | "request_scope_expansion" | "request_replan" | "revert_file" | "approve_repair";
+export type ReviewRequest = {
+    readonly schema_version: "pantheon_review_request@0.1.0";
+    readonly review_id: string;
+    readonly repair_id: string;
+    readonly contract_revision: number;
+    readonly source: "local_cli" | "github_action";
+    readonly status: ReviewRequestStatus;
+    readonly attention_level: ReviewAttentionLevel;
+    readonly verdict: Exclude<RepairVerdict, "pass">;
+    readonly reason: string;
+    readonly files: readonly {
+        readonly path: string;
+        readonly bucket: "review_required" | "outside_scope" | "forbidden";
+        readonly reason: string;
+    }[];
+    readonly recommended_actions: readonly ReviewRequestAction[];
+    readonly pr?: {
+        readonly provider: "github";
+        readonly number?: number;
+        readonly url?: string;
+    };
+    readonly created_at: string;
+    readonly updated_at: string;
+    readonly resolved_at?: string;
+};
+export type ReviewQueue = {
+    readonly schema_version: "pantheon_review_queue@0.1.0";
+    readonly open: readonly ReviewRequest[];
+    readonly closed: readonly ReviewRequest[];
+    readonly updated_at: string;
+};

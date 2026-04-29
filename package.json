@@ -1,0 +1,41 @@
+{
+  "name": "pantheon-alpha",
+  "version": "0.1.0-alpha.0",
+  "description": "JSON-first, auditable, rollback-capable software engineering compiler",
+  "main": "dist/src/index.js",
+  "type": "module",
+  "files": [
+    "dist",
+    "action",
+    "docs",
+    "examples",
+    "AGENTS.md",
+    "pantheon.agent.json",
+    "pantheon.alpha.json"
+  ],
+  "bin": {
+    "pantheon": "./dist/src/cli/pantheon.js",
+    "pantheon-alpha": "./dist/src/cli/pantheon-alpha.js"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "tsc",
+    "build:action": "ncc build src/github/githubActionEntry.ts -o action/dist --license licenses.txt",
+    "serve": "npx tsx src/server.ts",
+    "pantheon": "npx tsx src/cli/pantheon.ts",
+    "pantheon:agent-doctor": "node dist/src/cli/pantheon.js agent doctor"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "@vercel/ncc": "^0.38.4",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.2.0",
+    "fast-json-stable-stringify": "^2.1.0",
+    "fastify": "^5.8.5",
+    "zod": "^4.3.6"
+  }
+}
