@@ -1,0 +1,247 @@
+{
+  "schema_version": "repair_contract@0.1.0",
+  "repair_id": "repair_9f4c88ab4d82",
+  "revision": 2,
+  "source": {
+    "kind": "user_bug_report",
+    "id": "user_bug_report_ea3868ae5ad1"
+  },
+  "intent": "fix: add name validation to createUser",
+  "bug_finding_id": "finding_ad774287630d",
+  "suspect_surface": {
+    "files": [
+      {
+        "path": "src/user.ts",
+        "confidence": "high",
+        "reason": "Explicitly identified by the user as suspect repair surface.",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "reason": "Derived from explicit suspect files, confirmed path references, and failing-test mappings."
+  },
+  "repair_relation_graph": [
+    {
+      "from": "src/user.ts",
+      "to": "src/order.ts",
+      "relation": "same_package",
+      "confidence": "medium",
+      "reason": "Same package or directory as suspect file src/user.ts.",
+      "evidence": [
+        "same_directory:src"
+      ]
+    },
+    {
+      "from": "src/user.ts",
+      "to": "src/user.ts",
+      "relation": "explicit_user_reference",
+      "confidence": "high",
+      "reason": "Explicitly identified by the user as suspect repair surface.",
+      "evidence": [
+        "explicit_suspect_file"
+      ]
+    }
+  ],
+  "graph_build_stats": {
+    "observed_files": 20,
+    "patterns_evaluated": 0,
+    "edges_generated": 2,
+    "edges_after_dedup": 2,
+    "truncation_entries": [],
+    "limitation": "Repair relation graph v1 is an evidence-based candidate graph, not a complete dependency graph or call graph.",
+    "duration_ms": 0
+  },
+  "impact_surface": {
+    "evidence_level": "bootstrap_conservative",
+    "direct_files": [
+      {
+        "path": "src/user.ts",
+        "confidence": "high",
+        "reason": "Explicitly identified by the user as suspect repair surface.",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "related_files": [
+      {
+        "path": "src/order.ts",
+        "confidence": "medium",
+        "reason": "Same package or directory as suspect file src/user.ts.",
+        "evidence": [
+          "same_directory:src"
+        ]
+      }
+    ],
+    "related_tests": [],
+    "risk_areas": [
+      {
+        "label": "payment keyword",
+        "pattern": "src/payment/gateway.ts",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "repo_sensitive_path",
+        "reason": "Observed sensitive path: payment_keyword.",
+        "evidence": [
+          "keyword:Path contains sensitive segment: payment"
+        ],
+        "matched_paths": [
+          "src/payment/gateway.ts"
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "kind": "missing_test_mapping",
+        "note": "No related tests could be mapped from the provided failing tests or suspect files.",
+        "evidence": [
+          "repair:test_mapping_missing"
+        ]
+      },
+      {
+        "kind": "unverified_bug_claim",
+        "note": "The report includes unverified bug claims or hypotheses that must not be treated as confirmed facts.",
+        "evidence": [
+          "fix: add name validation to createUser",
+          "The reported issue should be fixed without introducing new regressions."
+        ]
+      }
+    ]
+  },
+  "repair_scope": {
+    "allowed": [
+      {
+        "pattern": "src/order.ts",
+        "source": "impact_candidate",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "Same package or directory as suspect file src/user.ts.",
+        "evidence": [
+          "same_directory:src"
+        ]
+      },
+      {
+        "pattern": "src/user.ts",
+        "source": "suspect_surface",
+        "confidence": "high",
+        "audit_weight": "normal",
+        "reason": "Explicitly identified by the user as suspect repair surface.",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "review_required": [
+      {
+        "pattern": "src/payment/gateway.ts",
+        "source": "project_role",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "Observed sensitive path: payment_keyword.",
+        "evidence": [
+          "keyword:Path contains sensitive segment: payment"
+        ]
+      }
+    ],
+    "forbidden": [
+      {
+        "pattern": ".cursor/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": ".git/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": ".pantheon/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": "node_modules/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      }
+    ]
+  },
+  "must_preserve": [
+    "Do not change payment or billing behavior outside the intended fix."
+  ],
+  "consistency_checks": [
+    {
+      "id": "check_4d2c4d90c895",
+      "statement": "Do not alter payment, order, or tax behavior outside the intended fix.",
+      "source": "risk_preset",
+      "severity": "hard",
+      "evidence": [
+        "risk_area:commerce_backend"
+      ],
+      "reason": "Commerce repairs are money-flow adjacent and can create hidden regressions."
+    },
+    {
+      "id": "check_b0725582bcc9",
+      "statement": "Do not modify migrations automatically.",
+      "source": "risk_preset",
+      "severity": "hard",
+      "evidence": [
+        "risk_area:migration"
+      ],
+      "reason": "Schema changes require explicit human approval."
+    },
+    {
+      "id": "check_0d074bc4cf95",
+      "statement": "Unknown impact surface remains. Keep the repair conservative and escalate if scope expands.",
+      "source": "unknown_surface",
+      "severity": "review",
+      "evidence": [
+        "missing_test_mapping",
+        "unverified_bug_claim"
+      ],
+      "reason": "Pantheon found unresolved impact signals; those must not be silently ignored."
+    }
+  ],
+  "test_signals": {
+    "related": [],
+    "recommended": [],
+    "missing_mapping": [
+      "No related tests could be mapped from the provided failing tests or suspect files."
+    ]
+  },
+  "repo_state": {
+    "base_sha": "d1a152a29e95c9a1ba87206d1d37aa3c9032126d",
+    "head_sha": "d1a152a29e95c9a1ba87206d1d37aa3c9032126d",
+    "diff_base": "d1a152a29e95c9a1ba87206d1d37aa3c9032126d",
+    "working_tree_status": "dirty",
+    "created_at": "2026-04-29T11:09:32.255Z",
+    "source": "git"
+  },
+  "audit_status": "approved_repair_plan",
+  "source_refs": {
+    "repo_observations_hash": "sha256:f7b70b2391c01f521f438fa568594b58da2ecb6095e903dcef58c8f8109ccb0a",
+    "repo_label": "test-repo",
+    "head_commit_hash": "d1a152a29e95c9a1ba87206d1d37aa3c9032126d"
+  }
+}
