@@ -11,12 +11,18 @@ export function validateEmail(email: string): boolean {
 }
 
 export function createUser(name: string, email: string, role: User["role"] = "user"): User {
+  if (!name || name.trim().length === 0) {
+    throw new Error("Name must not be empty");
+  }
+  if (name.length > 200) {
+    throw new Error("Name must not exceed 200 characters");
+  }
   if (!validateEmail(email)) {
     throw new Error(`Invalid email: ${email}`);
   }
   return {
     id: crypto.randomUUID(),
-    name,
+    name: name.trim(),
     email,
     role,
   };
