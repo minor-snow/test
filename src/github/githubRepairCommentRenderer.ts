@@ -18,8 +18,46 @@ export function renderGitHubRepairComment(result: GitHubRepairRunResult): GitHub
   lines.push(`\`${result.verdict}\``);
   lines.push("");
 
-  if (result.runPhase !== "checked") {
-    lines.push("Pantheon generated or validated a repair session, but human audit is still required before the PR can pass repair governance.");
+  if (result.verdict !== "pass") {
+    lines.push("## Required action");
+    lines.push("");
+    lines.push("This PR cannot be accepted under the current repair contract.");
+    lines.push("");
+    lines.push("Why:");
+    
+    let reasonCount = 1;
+    if (check?.concurrent_findings.some(f => f.kind === "stale_repair_contract")) {
+      lines.push(`${reasonCount++}. The repair contract is stale because the PR base changed after the plan was created.`);
+    }
+    
+    const outsideFiles = check?.findings.filter(f => f.kind === "outside_scope_file") ?? [];
+    if (outsideFiles.length > 0) {
+      if (outsideFiles.length === 1) {
+        lines.push(`${reasonCount++}. \`${outsideFiles[0].file}\` is outside the approved repair scope.`);
+      } else {
+        lines.push(`${reasonCount++}. ${outsideFiles.length} files are outside the approved repair scope (e.g. \`${outsideFiles[0].file}\`).`);
+      }
+    }
+    
+    const forbiddenFiles = check?.findings.filter(f => f.kind === "forbidden_file") ?? [];
+    if (forbiddenFiles.length > 0) {
+      lines.push(`${reasonCount++}. Modified files that are forbidden by the repair scope.`);
+    }
+
+    if (result.runPhase === "intake_pending_audit" || result.runPhase === "plan_pending_audit") {
+      lines.push(`${reasonCount++}. The repair plan requires human audit approval.`);
+    }
+
+    if (reasonCount === 1) {
+      lines.push("1. The repair governance checks failed.");
+    }
+
+    lines.push("");
+    lines.push("Next:");
+    const nextSteps = buildNextSteps(result);
+    for (const step of nextSteps) {
+      lines.push(`- ${step}`);
+    }
     lines.push("");
   } else {
     lines.push("Pantheon checked whether this PR stayed inside the approved repair scope.");
@@ -117,13 +155,6 @@ export function renderGitHubRepairComment(result: GitHubRepairRunResult): GitHub
     }
     lines.push("");
   }
-
-  lines.push("## Agent next steps");
-  lines.push("");
-  for (const step of buildNextSteps(result)) {
-    lines.push(`- ${step}`);
-  }
-  lines.push("");
 
   lines.push("## Artifacts");
   lines.push("");

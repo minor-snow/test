@@ -11,12 +11,14 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "build": "tsc",
+    "build:action": "ncc build src/github/githubActionEntry.ts -o action/dist --license licenses.txt",
     "serve": "npx tsx src/server.ts",
     "pantheon": "npx tsx src/cli/pantheon.ts",
     "pantheon:agent-doctor": "node dist/src/cli/pantheon.js agent doctor"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
+    "@vercel/ncc": "^0.38.4",
     "typescript": "^6.0.3",
     "vitest": "^4.1.5"
   },
