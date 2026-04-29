@@ -22,6 +22,9 @@ import { cmdFeedback } from "./cmdFeedback.js";
 import { cmdReport } from "./cmdReport.js";
 import { cmdRepair } from "./cmdRepair.js";
 import { cmdAgentDoctor } from "./cmdAgentDoctor.js";
+import { cmdAlpha } from "./cmdAlpha.js";
+import { cmdReview } from "./cmdReview.js";
+import { cmdMetrics } from "./cmdMetrics.js";
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -63,6 +66,8 @@ function printHelp(): void {
   console.log("  pantheon feedback                          Print agent feedback to stdout");
   console.log("  pantheon report                            Print reviewer report to stdout");
   console.log("  pantheon repair <subcommand>               Run repair governance workflow");
+  console.log("  pantheon review <subcommand>               Manage local human review requests");
+  console.log("  pantheon metrics <subcommand>              Show local governance metrics");
   console.log("  pantheon agent doctor                      Verify closed-alpha agent entry surface");
   console.log("");
   console.log("Options:");
@@ -82,7 +87,17 @@ function printHelp(): void {
   console.log("  pantheon repair check --repair-id repair_abc123 [--base HEAD]");
   console.log("  pantheon repair list | status | show --repair-id repair_abc123");
   console.log("  pantheon repair close --repair-id repair_abc123 --reason \"merged\"");
-  console.log("  pantheon agent doctor");
+  console.log("  pantheon review list | show --repair-id repair_abc123 | close --repair-id repair_abc123");
+  console.log("  pantheon metrics daily | status");
+  console.log("");
+  console.log("Alpha Harness:");
+  console.log("  pantheon alpha init                        Initialize alpha harness in the repo");
+  console.log("  pantheon alpha doctor                      Check if the repo is agent-usable");
+  console.log("  pantheon alpha status                      Show repair, review, and metrics status");
+  console.log("  pantheon alpha repair ...                  Run repair workflow through the alpha wrapper");
+  console.log("  pantheon alpha review ...                  Inspect local review requests");
+  console.log("  pantheon alpha metrics ...                 Generate or inspect local metrics");
+  console.log("  pantheon alpha uninstall                   Remove generated alpha entry files");
   console.log("");
   console.log("Workflow:");
   console.log("  1. pantheon init                           (once per project)");
@@ -133,6 +148,18 @@ switch (command) {
 
   case "repair":
     cmdRepair(args.slice(1));
+    break;
+
+  case "review":
+    cmdReview(args.slice(1));
+    break;
+
+  case "metrics":
+    cmdMetrics(args.slice(1));
+    break;
+
+  case "alpha":
+    cmdAlpha(args.slice(1));
     break;
 
   case "agent":

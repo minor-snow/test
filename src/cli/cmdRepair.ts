@@ -69,6 +69,10 @@ import {
   detectActiveScopePatternOverlaps,
   detectActualChangedFileOverlaps,
 } from "../repair/session/activeRepairOverlapDetector.js";
+import { appendGovernanceEvent } from "../governanceLog/governanceEventWriter.js";
+import type { GovernanceEvent, GovernanceEventReason } from "../governanceLog/governanceEventTypes.js";
+import { buildReviewRequest } from "../review/reviewRequestBuilder.js";
+import { closeReviewRequest, writeReviewRequest } from "../review/reviewQueueStore.js";
 
 export function cmdRepair(args: string[]): void {
   const subcommand = args[0];
@@ -92,6 +96,10 @@ export function cmdRepair(args: string[]): void {
         repoRoot: getFlag(args, "repo") ?? ".",
         repairId: requireRepairId(args, getFlag(args, "repo") ?? "."),
         configPath: getFlag(args, "config"),
+        overrideBaseSha: getFlag(args, "override-base-sha"),
+        overrideHeadSha: getFlag(args, "override-head-sha"),
+        overrideCheckoutSha: getFlag(args, "override-checkout-sha"),
+        overrideSource: getFlag(args, "override-source"),
       });
       return;
 
@@ -232,6 +240,11 @@ export function cmdRepairPlan(input: {
   repoRoot: string;
   repairId: string;
   configPath?: string;
+  overrideBaseSha?: string;
+  overrideHeadSha?: string;
+  overrideCheckoutSha?: string;
+  overrideSource?: string;
+  sourceOverride?: "local_cli" | "github_action";
 }): void {
   const repoRoot = resolve(input.repoRoot);
   ensureRepairDirs(repoRoot);
@@ -246,11 +259,18 @@ export function cmdRepairPlan(input: {
   }
 
   const context = loadRepairPlanningContext(repoRoot, input.configPath);
-  const repoState = captureRepoStateSnapshot({
+  const rawRepoState = captureRepoStateSnapshot({
     repoRoot,
     diffBase: null,
     source: "git",
   });
+  const repoState = {
+    ...rawRepoState,
+    ...(input.overrideBaseSha ? { base_sha: input.overrideBaseSha, diff_base: input.overrideBaseSha } : {}),
+    ...(input.overrideHeadSha ? { head_sha: input.overrideHeadSha } : {}),
+    ...(input.overrideCheckoutSha ? { checkout_sha: input.overrideCheckoutSha } : {}),
+    ...(input.overrideSource ? { source: input.overrideSource as any } : {}),
+  };
   const contract = buildRepairContract({
     repairId: session.repair_id,
     report,
@@ -298,6 +318,16 @@ export function cmdRepairPlan(input: {
     event: "repair_task_rendered",
     repair_id: contract.repair_id,
     detail: paths.task,
+  });
+  appendGovernanceEvent(repoRoot, {
+    schema_version: "pantheon_governance_event@0.1.0",
+    event_id: `gov_${contract.repair_id}_plan_${Date.now().toString(36)}`,
+    timestamp: new Date().toISOString(),
+    source: input.sourceOverride ?? "local_cli",
+    event_type: "repair_plan_generated",
+    repair_id: contract.repair_id,
+    contract_revision: contract.revision,
+    attention_level: "none",
   });
 
   console.log("Pantheon Repair Plan\n");
@@ -398,6 +428,12 @@ export function cmdRepairCheck(input: {
   baseRef?: string;
   diffJsonPath?: string;
   changedFilesOverride?: string[];
+  sourceOverride?: "local_cli" | "github_action";
+  prNumber?: number;
+  prBaseSha?: string;
+  prHeadSha?: string;
+  artifactDir?: string;
+  sanitizerViolations?: number;
 }): void {
   const repoRoot = resolve(input.repoRoot);
   const contract = loadCurrentRepairContract(repoRoot, input.repairId);
@@ -412,7 +448,8 @@ export function cmdRepairCheck(input: {
   });
   const filteredDiff = {
     ...diff,
-    changed_files: diff.changed_files.filter((file: GitDiffFile) => !file.path.startsWith(".pantheon/repair/")),
+    // Pantheon-generated local state must never cause a repair to fail itself.
+    changed_files: diff.changed_files.filter((file: GitDiffFile) => !file.path.startsWith(".pantheon/")),
   };
 
   const baseResult = verifyRepairDiff({
@@ -481,6 +518,17 @@ export function cmdRepairCheck(input: {
     event: "agent_repair_checked",
     repair_id: contract.repair_id,
     detail: finalCheck.verdict,
+  });
+  syncHumanAttention(repoRoot, {
+    source: input.sourceOverride ?? "local_cli",
+    repairId: contract.repair_id,
+    contract,
+    check: finalCheck,
+    prNumber: input.prNumber,
+    prBaseSha: input.prBaseSha,
+    prHeadSha: input.prHeadSha,
+    artifactDir: input.artifactDir,
+    sanitizerViolations: input.sanitizerViolations ?? 0,
   });
 
   console.log("Pantheon Repair Check\n");
@@ -763,6 +811,117 @@ function readRepairDiff(input: {
   });
 }
 
+function syncHumanAttention(repoRoot: string, input: {
+  source: "local_cli" | "github_action";
+  repairId: string;
+  contract: RepairContract;
+  check: RepairCheck;
+  prNumber?: number;
+  prBaseSha?: string;
+  prHeadSha?: string;
+  artifactDir?: string;
+  sanitizerViolations: number;
+}): void {
+  const event = buildGovernanceEventFromCheck(input);
+  appendGovernanceEvent(repoRoot, event);
+
+  const reviewRequest = buildReviewRequest({
+    repairId: input.repairId,
+    contractRevision: input.contract.revision,
+    source: input.source,
+    check: input.check,
+    contract: input.contract,
+    sanitizerViolations: input.sanitizerViolations,
+    pr: input.prNumber
+      ? {
+          provider: "github",
+          number: input.prNumber,
+        }
+      : undefined,
+  });
+
+  if (reviewRequest) {
+    writeReviewRequest(repoRoot, reviewRequest);
+    appendGovernanceEvent(repoRoot, {
+      schema_version: "pantheon_governance_event@0.1.0",
+      event_id: `gov_${input.repairId}_review_${Date.now().toString(36)}`,
+      timestamp: new Date().toISOString(),
+      source: input.source,
+      event_type: "review_requested",
+      repair_id: input.repairId,
+      contract_revision: input.contract.revision,
+      verdict: reviewRequest.verdict,
+      attention_level: reviewRequest.attention_level,
+      reasons: buildGovernanceReasons(input.check),
+      artifact_dir: input.artifactDir,
+      sanitizer_violations: input.sanitizerViolations,
+    });
+  } else {
+    const closed = closeReviewRequest(repoRoot, input.repairId);
+    if (closed) {
+      appendGovernanceEvent(repoRoot, {
+        schema_version: "pantheon_governance_event@0.1.0",
+        event_id: `gov_${input.repairId}_review_resolved_${Date.now().toString(36)}`,
+        timestamp: new Date().toISOString(),
+        source: input.source,
+        event_type: "review_resolved",
+        repair_id: input.repairId,
+        contract_revision: input.contract.revision,
+        verdict: input.check.verdict,
+        attention_level: "none",
+      });
+    }
+  }
+
+  if (input.check.verdict === "requires_replan") {
+    appendGovernanceEvent(repoRoot, {
+      schema_version: "pantheon_governance_event@0.1.0",
+      event_id: `gov_${input.repairId}_replan_${Date.now().toString(36)}`,
+      timestamp: new Date().toISOString(),
+      source: input.source,
+      event_type: "repair_replanned",
+      repair_id: input.repairId,
+      contract_revision: input.contract.revision,
+      verdict: input.check.verdict,
+      attention_level: "blocking",
+      reasons: buildGovernanceReasons(input.check),
+    });
+  } else if (input.check.verdict === "fail" || input.check.verdict === "requires_scope_expansion") {
+    appendGovernanceEvent(repoRoot, {
+      schema_version: "pantheon_governance_event@0.1.0",
+      event_id: `gov_${input.repairId}_blocked_${Date.now().toString(36)}`,
+      timestamp: new Date().toISOString(),
+      source: input.source,
+      event_type: "repair_blocked",
+      repair_id: input.repairId,
+      contract_revision: input.contract.revision,
+      verdict: input.check.verdict,
+      attention_level: input.check.verdict === "fail" ? "urgent" : "blocking",
+      reasons: buildGovernanceReasons(input.check),
+    });
+  }
+
+  if (input.sanitizerViolations > 0) {
+    appendGovernanceEvent(repoRoot, {
+      schema_version: "pantheon_governance_event@0.1.0",
+      event_id: `gov_${input.repairId}_sanitizer_${Date.now().toString(36)}`,
+      timestamp: new Date().toISOString(),
+      source: input.source,
+      event_type: "artifact_sanitizer_violation",
+      repair_id: input.repairId,
+      contract_revision: input.contract.revision,
+      verdict: "fail",
+      attention_level: "urgent",
+      sanitizer_violations: input.sanitizerViolations,
+      artifact_dir: input.artifactDir,
+      reasons: [{
+        kind: "artifact_sanitizer_violation",
+        action: "block_merge",
+      }],
+    });
+  }
+}
+
 function buildScopeSummary(contract: RepairContract): RepairSession["scope_summary"] {
   return {
     allowed: contract.repair_scope.allowed.map(entry => entry.pattern),
@@ -788,6 +947,124 @@ function deriveRiskLevel(contract: RepairContract): RepairSession["risk_level"] 
     return "low";
   }
   return "unknown";
+}
+
+function buildGovernanceEventFromCheck(input: {
+  source: "local_cli" | "github_action";
+  repairId: string;
+  contract: RepairContract;
+  check: RepairCheck;
+  prNumber?: number;
+  prBaseSha?: string;
+  prHeadSha?: string;
+  artifactDir?: string;
+  sanitizerViolations: number;
+}): GovernanceEvent {
+  return {
+    schema_version: "pantheon_governance_event@0.1.0",
+    event_id: `gov_${input.repairId}_check_${Date.now().toString(36)}`,
+    timestamp: new Date().toISOString(),
+    source: input.source,
+    event_type: "repair_check_completed",
+    repair_id: input.repairId,
+    contract_revision: input.contract.revision,
+    pr: input.prNumber
+      ? {
+          provider: "github",
+          number: input.prNumber,
+          base_sha: input.prBaseSha,
+          head_sha: input.prHeadSha,
+        }
+      : undefined,
+    verdict: input.check.verdict,
+    attention_level: governanceAttentionForVerdict(input.check.verdict, input.sanitizerViolations),
+    changed_files_count: input.check.summary.changed_files,
+    bucket_counts: {
+      allowed: input.check.summary.allowed,
+      review_required: input.check.summary.review_required,
+      forbidden: input.check.summary.forbidden,
+      outside_scope: input.check.summary.outside_scope,
+    },
+    reasons: buildGovernanceReasons(input.check),
+    sanitizer_violations: input.sanitizerViolations,
+    artifact_dir: input.artifactDir,
+  };
+}
+
+function buildGovernanceReasons(check: RepairCheck): GovernanceEventReason[] {
+  const reasons: GovernanceEventReason[] = [];
+  for (const finding of check.findings) {
+    switch (finding.kind) {
+      case "review_required_file":
+        reasons.push({
+          kind: "review_required",
+          file: finding.file,
+          action: "human_review",
+        });
+        break;
+      case "outside_scope_file":
+        reasons.push({
+          kind: "outside_scope",
+          file: finding.file,
+          action: "request_scope_expansion",
+        });
+        break;
+      case "forbidden_file":
+        reasons.push({
+          kind: "forbidden_file_touched",
+          file: finding.file,
+          action: "revert_file",
+        });
+        break;
+      case "stale_repair_contract":
+        reasons.push({
+          kind: "stale_repair_contract",
+          action: "request_replan",
+        });
+        break;
+      case "active_scope_pattern_overlap":
+      case "actual_changed_file_overlap":
+        reasons.push({
+          kind: "concurrent_repair_overlap",
+          file: finding.file,
+          action: finding.severity === "blocking" ? "block_merge" : "human_review",
+        });
+        break;
+      default:
+        break;
+    }
+  }
+  return dedupeGovernanceReasons(reasons);
+}
+
+function dedupeGovernanceReasons(reasons: readonly GovernanceEventReason[]): GovernanceEventReason[] {
+  const seen = new Set<string>();
+  const result: GovernanceEventReason[] = [];
+  for (const reason of reasons) {
+    const key = `${reason.kind}:${reason.file ?? ""}:${reason.pattern ?? ""}:${reason.action}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    result.push(reason);
+  }
+  return result;
+}
+
+function governanceAttentionForVerdict(
+  verdict: RepairCheck["verdict"],
+  sanitizerViolations: number,
+): GovernanceEvent["attention_level"] {
+  if (sanitizerViolations > 0) return "urgent";
+  switch (verdict) {
+    case "pass":
+      return "none";
+    case "requires_review":
+      return "human_review";
+    case "requires_scope_expansion":
+    case "requires_replan":
+      return "blocking";
+    case "fail":
+      return "urgent";
+  }
 }
 
 function mapFindingStatusToSessionStatus(status: BugFinding["status"]): RepairSessionStatus {

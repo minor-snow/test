@@ -1,6 +1,6 @@
 # Pantheon �?System Architecture Walkthrough
 
-> Generated: 2026-04-29 | Phase: P29 | Tests: 1,798 Vitest + 6 Kotlin | Source: ~40,000 LoC (180 files) | Scripts: ~11,800 LoC (50 files) | Test LoC: ~29,000 (145 files) | Total: ~80,800 LoC (375 files)
+> Generated: 2026-04-29 | Phase: P28-0 | Tests: 1,839 Vitest + 6 Kotlin | Source: ~40,000 LoC (180 files) | Scripts: ~11,800 LoC (50 files) | Test LoC: ~29,000 (157 files) | Total: ~80,800 LoC (375 files)
 
 ---
 
@@ -176,7 +176,7 @@ pantheon/
 �?      ├── rejectionTaxonomy.ts  # Rejection classification (198 lines)
 �?      ├── trialValidation.ts    # Post-trial integrity check (61 lines)
 �?      └── runLiveTrial.ts       # Live trial entry point (129 lines)
-├── test/                         # ~28,000 LoC, 1,696 tests, 129 files
+├── test/                         # ~29,000 LoC, 1,839 tests, 157 files
 ├── scripts/                      # ~7,000 LoC, 39 scripts (P6–P23)
 ├── cockpit/                      # HTML UI (release.html, multi-release.html)
 └── data/dogfood/                 # Dogfood data
@@ -621,6 +621,12 @@ No bugs recorded in session context. Pre-existing code was stable.
 | **P13-C** | **Uncertainty Register** | **UncertaintyEntry type, append-only ledger, blocking gate check, wired into runPhase11Handoff.ts** | **�?Complete** |
 | **P14** | **Boundary Mapping Graph** | **185 nodes, 1233 edges, 6 layers, namespaced IDs (blk:/hc:/file:/sym:/test:), critical flags, 6 gates all PASS, queryDownstream/queryUpstream/queryBlastRadiusSeeds, Gate 6 reverse provenance, 0 critical orphans** | **�?Complete** |
 | **P15** | **Blast Radius Engine** | **Deterministic traversal, risk amplification (high/medium/low), critical paths (BFS shortest path, top 20), by-layer impact report, invalid node warnings, markdown + JSON output** | **�?Complete** |
+| **P17-P18** | **Scoped Boundary & Diff Validator** | **Implementation boundary export, scope diff verification** | **✔ Complete** |
+| **P19-P23** | **Change Governance & Agent Trial** | **Change Contracts, Agent Feedback Protocol, Usability Trial** | **✔ Complete** |
+| **P25** | **Python Sidecar Governance** | **Non-TS repository (Saleor) observation support** | **✔ Complete** |
+| **P26.5** | **GitHub PR Distribution** | **Agent-usable Closed Alpha GitHub Repair Gateway** | **✔ Complete** |
+| **P28a** | **Agent-Installable Alpha Harness** | **`pantheon-alpha init / doctor`, `AGENTS.md` and machine-readable protocol endpoints** | **✔ Complete** |
+| **P28-P29** | **Impact-Aware Repair Protocol** | **Concurrency Governance, Session Store, 2-tier locking** | **✔ Complete** |
 
 ---
 
@@ -1946,18 +1952,18 @@ P27: PASS
 |---|---|
 | Source files | 170 (.ts) |
 | Source LoC | ~38,000 |
-| Test files | 129 |
+| Test files | 157 |
 | Test LoC | ~28,000 |
 | Script files | 49 |
 | Script LoC | ~11,300 |
 | **Total LoC** | **~77,300** |
-| **Tests** | **1,780** (Vitest) + 6 (Kotlin) |
-| **Test files** | **129** (Vitest) |
+| **Tests** | **1,839** (Vitest) + 6 (Kotlin) |
+| **Test files** | **157** (Vitest) |
 | Bugs found | 81 |
 | Bug escapes | 0 |
 | `as any` casts in src/ | 17 (scopedHandoffExporter, scopedHandoffValidator, cockpit, cmdGuard) |
 | `TODO/FIXME/HACK in src/` | 0 |
-| Phases completed | P2-P28 |
+| Phases completed | P2-P29 + P26.5 + P28a + P28-0 |
 
 ### Boundary Integrity
 
@@ -1969,7 +1975,7 @@ P27: PASS
 | Freeform string parsing | �?Eliminated | P22 removed regex lines 49-61 |
 | Golden baseline | �?Intact | P20a.3 snapshot passes |
 | Type safety | �?Intact | tsc clean, 0 TODO/FIXME |
-| Test coverage | Strong | 1,780 tests, 129 test files |
+| Test coverage | Strong | 1,839 tests, 157 test files |
 | Agent scope adherence | �?Verified | P23 pet-app + P25g Saleor real agent trials |
 | Feedback recovery | �?Verified | P23.2 + P25e deterministic recovery |
 | Python sidecar isolation | �?Intact | 0 scanner modifications, 0 deps added |

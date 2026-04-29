@@ -76,14 +76,32 @@ async function atomicWriteJson(filePath: string, data: unknown): Promise<void> {
   const tmpPath = `${filePath}.tmp`;
   const content = JSON.stringify(data, null, 2);
   await fs.writeFile(tmpPath, content, "utf8");
-  await fs.rename(tmpPath, filePath);
+  try {
+    await fs.rename(tmpPath, filePath);
+  } catch (error: unknown) {
+    const code = (error as NodeJS.ErrnoException)?.code;
+    if (code !== "EPERM" && code !== "EEXIST") {
+      throw error;
+    }
+    await fs.rm(filePath, { force: true });
+    await fs.rename(tmpPath, filePath);
+  }
 }
 
 async function atomicWriteText(filePath: string, text: string): Promise<void> {
   await fs.mkdir(dirname(filePath), { recursive: true });
   const tmpPath = `${filePath}.tmp`;
   await fs.writeFile(tmpPath, text, "utf8");
-  await fs.rename(tmpPath, filePath);
+  try {
+    await fs.rename(tmpPath, filePath);
+  } catch (error: unknown) {
+    const code = (error as NodeJS.ErrnoException)?.code;
+    if (code !== "EPERM" && code !== "EEXIST") {
+      throw error;
+    }
+    await fs.rm(filePath, { force: true });
+    await fs.rename(tmpPath, filePath);
+  }
 }
 
 // ---------------------------------------------------------------------------

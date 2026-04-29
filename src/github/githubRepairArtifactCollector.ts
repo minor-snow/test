@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync, cpSync } fr
 import { join, resolve } from "node:path";
 import { sanitizeArtifact } from "../artifacts/artifactSanitizer.js";
 import { repairRunPaths } from "../repair/repairArtifactLayout.js";
+import { reviewRequestPaths } from "../review/reviewQueueStore.js";
 import type { GitHubRepairArtifactCollectionResult } from "./githubRepairTypes.js";
 
 export function collectGitHubRepairArtifacts(input: {
@@ -34,6 +35,14 @@ export function collectGitHubRepairArtifacts(input: {
     [runPaths.report, "repair_report.md", "text"],
     [runPaths.feedback, "repair_feedback.md", "text"],
   ];
+
+  const reviewPaths = reviewRequestPaths(repoRoot, input.repairId);
+  if (existsSync(reviewPaths.markdown)) {
+    publicArtifacts.push([reviewPaths.markdown, "review_request.md", "text"]);
+  }
+  if (existsSync(reviewPaths.json)) {
+    publicArtifacts.push([reviewPaths.json, "review_request.json", "json"]);
+  }
 
   for (const [source, target, kind] of publicArtifacts) {
     if (!existsSync(source)) continue;

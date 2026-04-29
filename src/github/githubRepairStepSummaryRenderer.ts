@@ -23,6 +23,13 @@ export function renderGitHubRepairStepSummary(result: GitHubRepairRunResult): Gi
   }
   lines.push(`Artifact sanitizer violations: ${result.artifactCollection.sanitizerViolations.length}`);
   lines.push("");
+  if (result.verdict === "requires_review") {
+    lines.push("Human review required. See review_request.md in pantheon-repair-report/.");
+    lines.push("");
+  } else if (result.verdict === "requires_replan" || result.verdict === "requires_scope_expansion" || result.verdict === "fail") {
+    lines.push("Blocked. See the PR comment, repair_feedback.md, and review_request.md for the next action.");
+    lines.push("");
+  }
   lines.push("See PR comment and artifacts for details.");
   lines.push("");
 

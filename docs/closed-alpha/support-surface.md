@@ -10,6 +10,9 @@
 - public artifacts
 - sanitizer
 - closed alpha feedback packet
+- local governance log
+- local review queue
+- local metrics daily report
 
 ## Not supported
 

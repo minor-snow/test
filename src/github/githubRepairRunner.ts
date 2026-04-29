@@ -18,6 +18,7 @@ import { readJsonFile } from "../repair/repairUtils.js";
 import { loadRepairSession } from "../repair/session/repairSessionStore.js";
 import type { RepairSession } from "../repair/session/repairSessionTypes.js";
 import type { GitHubRepairRunPhase, GitHubRepairRunResult } from "./githubRepairTypes.js";
+import { appendGovernanceEvent } from "../governanceLog/governanceEventWriter.js";
 
 export async function runGitHubRepairAction(env: NodeJS.ProcessEnv = process.env): Promise<GitHubRepairRunResult> {
   const repoRoot = resolve(env.GITHUB_WORKSPACE ?? process.cwd());
@@ -38,6 +39,11 @@ export async function runGitHubRepairAction(env: NodeJS.ProcessEnv = process.env
         repoRoot,
         repairId,
         configPath: inputs.configPath,
+        overrideBaseSha: inputs.baseSha,
+        overrideHeadSha: inputs.headSha,
+        overrideCheckoutSha: env.GITHUB_SHA,
+        overrideSource: "github_pull_request",
+        sourceOverride: "github_action",
       });
       if (inputs.auditMode === "require_plan_approval") {
         runPhase = "plan_pending_audit";
@@ -64,6 +70,10 @@ export async function runGitHubRepairAction(env: NodeJS.ProcessEnv = process.env
         repoRoot,
         repairId,
         baseRef: inputs.baseSha,
+        sourceOverride: "github_action",
+        prNumber: prContext?.prNumber,
+        prBaseSha: inputs.baseSha,
+        prHeadSha: inputs.headSha,
       });
     }
 
@@ -75,6 +85,10 @@ export async function runGitHubRepairAction(env: NodeJS.ProcessEnv = process.env
       repoRoot,
       repairId,
       baseRef: inputs.baseSha,
+      sourceOverride: "github_action",
+      prNumber: prContext?.prNumber,
+      prBaseSha: inputs.baseSha,
+      prHeadSha: inputs.headSha,
     });
     runPhase = "checked";
   }
@@ -91,6 +105,31 @@ export async function runGitHubRepairAction(env: NodeJS.ProcessEnv = process.env
     repairId,
     artifactMode: inputs.artifactMode,
   });
+  if (artifactCollection.sanitizerViolations.length > 0) {
+    appendGovernanceEvent(repoRoot, {
+      schema_version: "pantheon_governance_event@0.1.0",
+      event_id: `gov_${repairId}_github_sanitizer_${Date.now().toString(36)}`,
+      timestamp: new Date().toISOString(),
+      source: "github_action",
+      event_type: "artifact_sanitizer_violation",
+      repair_id: repairId,
+      contract_revision: contract?.revision,
+      pr: prContext ? {
+        provider: "github",
+        number: prContext.prNumber,
+        base_sha: inputs.baseSha,
+        head_sha: inputs.headSha,
+      } : undefined,
+      verdict: "fail",
+      attention_level: "urgent",
+      sanitizer_violations: artifactCollection.sanitizerViolations.length,
+      artifact_dir: artifactCollection.outputDirRelative,
+      reasons: [{
+        kind: "artifact_sanitizer_violation",
+        action: "block_merge",
+      }],
+    });
+  }
   const exitDecision = decideGitHubRepairExit({
     verdict,
     sanitizerViolations: artifactCollection.sanitizerViolations.length,

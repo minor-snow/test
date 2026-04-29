@@ -18,18 +18,43 @@ export function renderGitHubRepairComment(result: GitHubRepairRunResult): GitHub
   lines.push(`\`${result.verdict}\``);
   lines.push("");
 
-  if (result.verdict !== "pass") {
-    lines.push("## Required action");
+  if (result.verdict === "requires_review") {
+    lines.push("## Human review required");
+    lines.push("");
+    lines.push("This PR touched files that the repair contract marks as review-required.");
+    lines.push("");
+    const reviewFindings = check?.findings.filter(finding => finding.kind === "review_required_file") ?? [];
+    if (reviewFindings.length > 0) {
+      lines.push("| File | Reason |");
+      lines.push("|---|---|");
+      for (const finding of reviewFindings.slice(0, 20)) {
+        lines.push(`| \`${finding.file}\` | ${escapeTableCell(finding.message)} |`);
+      }
+      if (reviewFindings.length > 20) {
+        lines.push("");
+        lines.push(`Showing 20 files. ${reviewFindings.length - 20} additional review-required files omitted.`);
+      }
+      lines.push("");
+    }
+    lines.push("");
+    lines.push("## Agent next steps");
+    lines.push("");
+    lines.push("- A human reviewer should inspect these changes.");
+    lines.push("- The agent should stop modifying review-required files.");
+    lines.push("- If additional files are needed, request scope expansion.");
+    lines.push("");
+  } else if (result.verdict !== "pass") {
+    lines.push("## Blocked");
     lines.push("");
     lines.push("This PR cannot be accepted under the current repair contract.");
     lines.push("");
     lines.push("Why:");
-    
+    lines.push("");
     let reasonCount = 1;
     if (check?.concurrent_findings.some(f => f.kind === "stale_repair_contract")) {
       lines.push(`${reasonCount++}. The repair contract is stale because the PR base changed after the plan was created.`);
     }
-    
+
     const outsideFiles = check?.findings.filter(f => f.kind === "outside_scope_file") ?? [];
     if (outsideFiles.length > 0) {
       if (outsideFiles.length === 1) {
@@ -38,22 +63,20 @@ export function renderGitHubRepairComment(result: GitHubRepairRunResult): GitHub
         lines.push(`${reasonCount++}. ${outsideFiles.length} files are outside the approved repair scope (e.g. \`${outsideFiles[0].file}\`).`);
       }
     }
-    
+
     const forbiddenFiles = check?.findings.filter(f => f.kind === "forbidden_file") ?? [];
     if (forbiddenFiles.length > 0) {
-      lines.push(`${reasonCount++}. Modified files that are forbidden by the repair scope.`);
+      lines.push(`${reasonCount++}. Modified files are forbidden by the current repair scope.`);
     }
 
     if (result.runPhase === "intake_pending_audit" || result.runPhase === "plan_pending_audit") {
-      lines.push(`${reasonCount++}. The repair plan requires human audit approval.`);
+      lines.push(`${reasonCount++}. The repair plan requires human audit approval before the agent can continue.`);
     }
-
     if (reasonCount === 1) {
       lines.push("1. The repair governance checks failed.");
     }
-
     lines.push("");
-    lines.push("Next:");
+    lines.push("## Agent next steps");
     const nextSteps = buildNextSteps(result);
     for (const step of nextSteps) {
       lines.push(`- ${step}`);
@@ -161,6 +184,9 @@ export function renderGitHubRepairComment(result: GitHubRepairRunResult): GitHub
   lines.push("- `repair_task.md`");
   lines.push("- `repair_report.md`");
   lines.push("- `repair_feedback.md`");
+  if (result.verdict !== "pass") {
+    lines.push("- `review_request.md`");
+  }
   lines.push("- `artifact_manifest.json`");
   lines.push("");
 

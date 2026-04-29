@@ -38,13 +38,15 @@ describe("readGitDiffSummary", () => {
     });
 
     it("empty override falls through to git", () => {
-      const result = readGitDiffSummary({
-        repoRoot: FIXTURE_ROOT,
-        baseRef: "HEAD",
-        changedFilesOverride: [],
+      withTempNonGitDir(repoRoot => {
+        writeFileSync(join(repoRoot, "README.md"), "# temp\n");
+        const result = readGitDiffSummary({
+          repoRoot,
+          baseRef: "HEAD",
+          changedFilesOverride: [],
+        });
+        expect(result.warnings.length).toBeGreaterThan(0);
       });
-      // Fixture has no git, so should get a warning
-      expect(result.warnings.length).toBeGreaterThan(0);
     });
 
     it("preserves base_ref", () => {
@@ -59,23 +61,29 @@ describe("readGitDiffSummary", () => {
 
   describe("non-git repo", () => {
     it("returns warning when not a git repo", () => {
-      const result = readGitDiffSummary({
-        repoRoot: FIXTURE_ROOT,
-        baseRef: "HEAD",
+      withTempNonGitDir(repoRoot => {
+        writeFileSync(join(repoRoot, "README.md"), "# temp\n");
+        const result = readGitDiffSummary({
+          repoRoot,
+          baseRef: "HEAD",
+        });
+        expect(result.warnings.length).toBeGreaterThan(0);
+        expect(result.changed_files).toHaveLength(0);
       });
-      expect(result.warnings.length).toBeGreaterThan(0);
-      expect(result.changed_files).toHaveLength(0);
     });
 
     it("warning message is actionable", () => {
-      const result = readGitDiffSummary({
-        repoRoot: FIXTURE_ROOT,
-        baseRef: "HEAD",
+      withTempNonGitDir(repoRoot => {
+        writeFileSync(join(repoRoot, "README.md"), "# temp\n");
+        const result = readGitDiffSummary({
+          repoRoot,
+          baseRef: "HEAD",
+        });
+        const hasActionable = result.warnings.some(
+          w => w.includes("--changed") || w.includes("git"),
+        );
+        expect(hasActionable).toBe(true);
       });
-      const hasActionable = result.warnings.some(
-        w => w.includes("--changed") || w.includes("git"),
-      );
-      expect(hasActionable).toBe(true);
     });
   });
 
@@ -130,6 +138,15 @@ describe("readGitDiffSummary", () => {
     });
   });
 });
+
+function withTempNonGitDir(run: (repoRoot: string) => void): void {
+  const repoRoot = mkdtempSync(join(tmpdir(), "pantheon-non-git-"));
+  try {
+    run(repoRoot);
+  } finally {
+    rmSync(repoRoot, { recursive: true, force: true });
+  }
+}
 
 describe("extractChangedFilePaths", () => {
   it("extracts paths from diff summary", () => {

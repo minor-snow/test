@@ -10,7 +10,7 @@ Use Pantheon repair mode in a pull request to verify that a bug fix stayed insid
 2. Generate a repair plan for the current repository state.
 3. Open or update a pull request.
 4. Run the Pantheon repair action in `mode: repair`.
-5. Read the PR comment, step summary, and public artifacts.
+5. Read the PR comment, step summary, review request artifact, and public artifacts.
 
 ## Recommended workflow
 
@@ -36,3 +36,10 @@ Then upload the stable artifact directory:
     name: pantheon-repair-report
     path: ${{ steps.pantheon.outputs.artifact_dir }}
 ```
+
+The uploaded directory includes:
+
+- `repair_report.md`
+- `repair_feedback.md`
+- `review_request.md` when human attention is required
+- `artifact_manifest.json`

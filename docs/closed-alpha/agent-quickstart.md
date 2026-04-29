@@ -14,7 +14,7 @@ Run:
 
 `node ./node_modules/typescript/bin/tsc --noEmit`
 
-`node dist/src/cli/pantheon.js agent doctor`
+`node dist/src/cli/pantheon-alpha.js doctor`
 
 ## Step 2: When you find a bug
 
@@ -30,13 +30,13 @@ Use template:
 
 ## Step 3: Run intake
 
-`node dist/src/cli/pantheon.js repair intake --from .pantheon/repair/inbox/agent_bug_report.json`
+`node dist/src/cli/pantheon-alpha.js repair intake --from .pantheon/repair/inbox/agent_bug_report.json`
 
 Capture the `repair_id`.
 
 ## Step 4: Generate plan
 
-`node dist/src/cli/pantheon.js repair plan --repair-id <repair_id> --config pantheon.alpha.json`
+`node dist/src/cli/pantheon-alpha.js repair plan --repair-id <repair_id>`
 
 Read:
 
@@ -48,8 +48,20 @@ Do not edit forbidden files.
 
 ## Step 6: Check
 
-`node dist/src/cli/pantheon.js repair check --repair-id <repair_id>`
+`node dist/src/cli/pantheon-alpha.js repair check --repair-id <repair_id>`
 
 Read:
 
 `.pantheon/repair/runs/<repair_id>/repair_feedback.md`
+
+## Step 7: If Pantheon requires review
+
+Stop modifying review-required files and run:
+
+`node dist/src/cli/pantheon-alpha.js review list`
+
+`node dist/src/cli/pantheon-alpha.js review show --repair-id <repair_id>`
+
+You can also inspect local governance metrics with:
+
+`node dist/src/cli/pantheon-alpha.js metrics daily`

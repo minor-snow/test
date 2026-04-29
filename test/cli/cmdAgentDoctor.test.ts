@@ -10,6 +10,9 @@ describe("cmdAgentDoctor", () => {
     rmSync(tmpDir, { recursive: true, force: true });
     mkdirSync(join(tmpDir, ".pantheon", "repair", "inbox"), { recursive: true });
     mkdirSync(join(tmpDir, ".pantheon", "repair", "runs"), { recursive: true });
+    mkdirSync(join(tmpDir, ".pantheon", "governance"), { recursive: true });
+    mkdirSync(join(tmpDir, ".pantheon", "reviews"), { recursive: true });
+    mkdirSync(join(tmpDir, ".pantheon", "metrics"), { recursive: true });
     mkdirSync(join(tmpDir, "dist", "src", "cli"), { recursive: true });
     mkdirSync(join(tmpDir, "docs", "closed-alpha"), { recursive: true });
     mkdirSync(join(tmpDir, "examples", "github"), { recursive: true });
@@ -18,13 +21,27 @@ describe("cmdAgentDoctor", () => {
     writeFileSync(join(tmpDir, "pantheon.agent.json"), JSON.stringify({
       schema_version: "pantheon_agent_entry@0.1.0",
       primary_entrypoints: { read_first: "AGENTS.md" },
+      commands: {
+        repair_intake: "node dist/src/cli/pantheon-alpha.js repair intake --from .pantheon/repair/inbox/agent_bug_report.json",
+        repair_plan: "node dist/src/cli/pantheon-alpha.js repair plan --repair-id <repair_id>",
+        repair_check: "node dist/src/cli/pantheon-alpha.js repair check --repair-id <repair_id>",
+        review_list: "node dist/src/cli/pantheon-alpha.js review list",
+        metrics_daily: "node dist/src/cli/pantheon-alpha.js metrics daily",
+        metrics_status: "node dist/src/cli/pantheon-alpha.js metrics status",
+      },
       repair_protocol: {
         requires_repair_id: true,
         latest_is_convenience_only: true,
       },
+      local_governance: {
+        events: ".pantheon/governance/events.jsonl",
+        review_queue: ".pantheon/reviews/review_queue.json",
+        daily_metrics: ".pantheon/metrics/daily/",
+      },
     }, null, 2));
     writeFileSync(join(tmpDir, ".pantheon", "repair", "inbox", "agent_bug_report.template.json"), "{}\n");
     writeFileSync(join(tmpDir, "dist", "src", "cli", "pantheon.js"), "// compiled\n");
+    writeFileSync(join(tmpDir, "dist", "src", "cli", "pantheon-alpha.js"), "// compiled alpha\n");
     writeFileSync(join(tmpDir, "docs", "closed-alpha", "agent-quickstart.md"), "# Agent Quickstart\n");
     writeFileSync(join(tmpDir, "examples", "github", "repair-gate.yml"), "name: test\n");
   });
@@ -38,7 +55,7 @@ describe("cmdAgentDoctor", () => {
 
     expect(result.ready).toBe(true);
     expect(result.checks.every(check => check.ok)).toBe(true);
-    expect(result.nextCommands[0]).toContain("repair intake");
+    expect(result.nextCommands[0]).toContain("pantheon-alpha.js repair intake");
   });
 
   it("surfaces missing dist CLI and suggests a build", () => {
