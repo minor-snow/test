@@ -88,11 +88,6 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Install Pantheon runtime dependencies
-      shell: bash
-      working-directory: ${{ github.action_path }}/..
-      run: npm ci --omit=dev
-
     - name: Run Pantheon action
       id: pantheon
       shell: bash
@@ -117,4 +112,4 @@ runs:
         INPUT_FAILING_TESTS: ${{ inputs.failing_tests }}
         INPUT_MUST_PRESERVE: ${{ inputs.must_preserve }}
         INPUT_AUDIT_MODE: ${{ inputs.audit_mode }}
-      run: node "${{ github.action_path }}/../dist/src/github/githubActionEntry.js"
+      run: node "${{ github.action_path }}/dist/index.js"
