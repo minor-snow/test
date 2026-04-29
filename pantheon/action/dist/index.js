@@ -21883,6 +21883,10 @@ function cmdRepair(args) {
                 repoRoot: getFlag(args, "repo") ?? ".",
                 repairId: requireRepairId(args, getFlag(args, "repo") ?? "."),
                 configPath: getFlag(args, "config"),
+                overrideBaseSha: getFlag(args, "override-base-sha"),
+                overrideHeadSha: getFlag(args, "override-head-sha"),
+                overrideCheckoutSha: getFlag(args, "override-checkout-sha"),
+                overrideSource: getFlag(args, "override-source"),
             });
             return;
         case "audit":
@@ -22005,11 +22009,18 @@ function cmdRepairPlan(input) {
         throw new Error(`Repair plan requires an accepted BugFinding. Current status: ${finding.status}`);
     }
     const context = loadRepairPlanningContext(repoRoot, input.configPath);
-    const repoState = captureRepoStateSnapshot({
+    const rawRepoState = captureRepoStateSnapshot({
         repoRoot,
         diffBase: null,
         source: "git",
     });
+    const repoState = {
+        ...rawRepoState,
+        ...(input.overrideBaseSha ? { base_sha: input.overrideBaseSha, diff_base: input.overrideBaseSha } : {}),
+        ...(input.overrideHeadSha ? { head_sha: input.overrideHeadSha } : {}),
+        ...(input.overrideCheckoutSha ? { checkout_sha: input.overrideCheckoutSha } : {}),
+        ...(input.overrideSource ? { source: input.overrideSource } : {}),
+    };
     const contract = buildRepairContract({
         repairId: session.repair_id,
         report,
@@ -23306,6 +23317,10 @@ async function runGitHubRepairAction(env = process.env) {
                 repoRoot,
                 repairId,
                 configPath: inputs.configPath,
+                overrideBaseSha: inputs.baseSha,
+                overrideHeadSha: inputs.headSha,
+                overrideCheckoutSha: env.GITHUB_SHA,
+                overrideSource: "github_pull_request",
             });
             if (inputs.auditMode === "require_plan_approval") {
                 runPhase = "plan_pending_audit";
