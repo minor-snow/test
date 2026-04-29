@@ -1,0 +1,190 @@
+{
+  "artifact_type": "InterfaceSpec",
+  "title": "Pet Triage Offline Interface Specification",
+  "description": "Derives contracts from the approved offline-first architecture, superseding the old strong-sync interface.",
+  "sections": [
+    {
+      "section_id": "offline_report_api",
+      "title": "Offline Report API",
+      "blocks": [
+        {
+          "block_id": "b_iface_offline_001",
+          "type": "interface",
+          "text": "POST /offline-reports accepts a JSON body with description:string, species:string, optional temperature:number, and a client-generated report_id (UUID v4) as idempotency key. Returns 201 with report_id and creation_timestamp.",
+          "status": "draft",
+          "terms": ["offline submission", "pending report", "idempotency"],
+          "rationale": "Offline-first: triage completes locally; report is created before any network sync.",
+          "linked_architecture_blocks": ["b_offline_001", "b_pending_001"]
+        },
+        {
+          "block_id": "b_iface_offline_002",
+          "type": "constraint",
+          "text": "The client must create a pending report locally upon triage completion, regardless of network state. The report_id must be generated client-side and used as the idempotency key for all subsequent sync operations.",
+          "status": "draft",
+          "terms": ["pending report", "offline submission", "idempotency"],
+          "rationale": "Ensures local persistence before any network attempt, superseding b_pet_iface_009.",
+          "linked_architecture_blocks": ["b_pending_001", "b_pending_002"]
+        },
+        {
+          "block_id": "b_iface_offline_003",
+          "type": "mechanism",
+          "text": "The local decision tree engine produces a deterministic triage result. The result is stored in the pending report along with the version of the decision tree used (tree_version:string).",
+          "status": "draft",
+          "terms": ["pending report", "offline submission"],
+          "rationale": "Triage is performed locally per b_offline_001 and b_offline_004.",
+          "linked_architecture_blocks": ["b_offline_001", "b_offline_004"]
+        }
+      ]
+    },
+    {
+      "section_id": "sync_api",
+      "title": "Sync API",
+      "blocks": [
+        {
+          "block_id": "b_iface_sync_001",
+          "type": "interface",
+          "text": "POST /sync/upload accepts a JSON body with report_id, triage_data (object), vector_clock (object), and idempotency_key (same as report_id). Returns 200 with sync_status (merged, conflicted) and server_version (object).",
+          "status": "draft",
+          "terms": ["sync upload", "sync acknowledgement", "vector clock", "idempotency"],
+          "rationale": "Async upload per b_sync_001; idempotency prevents duplicate processing.",
+          "linked_architecture_blocks": ["b_sync_001", "b_sync_002"]
+        },
+        {
+          "block_id": "b_iface_sync_002",
+          "type": "interface",
+          "text": "GET /sync/pull?since=<timestamp> returns a JSON array of reports modified after the given timestamp, each with report_id, triage_data, vector_clock, and status. Supports pagination via next_token.",
+          "status": "draft",
+          "terms": ["sync pull", "vector clock"],
+          "rationale": "Allows client to pull updates from the clinic backend, supporting multi-clinic replication.",
+          "linked_architecture_blocks": ["b_multiclinic_001", "b_multiclinic_002"]
+        },
+        {
+          "block_id": "b_iface_sync_003",
+          "type": "constraint",
+          "text": "Network failure during sync upload or pull must not be terminal. The sync queue must retain the report with status pending; the retry ledger records the attempt and schedules a retry.",
+          "status": "draft",
+          "terms": ["sync upload", "sync pull", "pending report lifecycle"],
+          "rationale": "Offline-first: network failure is recoverable, superseding b_pet_iface_005.",
+          "linked_architecture_blocks": ["b_sync_003", "b_sync_004"]
+        },
+        {
+          "block_id": "b_iface_sync_004",
+          "type": "mechanism",
+          "text": "The sync queue processes pending reports in FIFO order. Each sync attempt records timestamp, HTTP status, error code, and retry count in the retry ledger. After a configurable max retries, the report transitions to failed_terminal.",
+          "status": "draft",
+          "terms": ["sync queue", "pending report lifecycle", "sync acknowledgement"],
+          "rationale": "Mechanism per b_sync_001 and b_sync_002.",
+          "linked_architecture_blocks": ["b_sync_001", "b_sync_002"]
+        }
+      ]
+    },
+    {
+      "section_id": "conflict_resolution_contract",
+      "title": "Conflict Resolution Contract",
+      "blocks": [
+        {
+          "block_id": "b_iface_conflict_001",
+          "type": "interface",
+          "text": "When a sync upload detects a vector clock conflict, the response includes conflict_payload with local_version (object), server_version (object), and conflicting_fields (array of field names). The client must display a conflict resolution screen.",
+          "status": "draft",
+          "terms": ["conflict payload", "vector clock", "sync upload"],
+          "rationale": "Conflict detection per b_conflict_001 and b_conflict_003.",
+          "linked_architecture_blocks": ["b_conflict_001", "b_conflict_003"]
+        },
+        {
+          "block_id": "b_iface_conflict_002",
+          "type": "constraint",
+          "text": "Clinical fields (diagnosis, vet edits, case status) must use vector clock conflict detection. Low-risk derived metadata (UI cursors, cache timestamps) use last-writer-wins.",
+          "status": "draft",
+          "terms": ["vector clock", "last-writer-wins", "conflict payload"],
+          "rationale": "Per b_conflict_001 and b_conflict_002.",
+          "linked_architecture_blocks": ["b_conflict_001", "b_conflict_002"]
+        },
+        {
+          "block_id": "b_iface_conflict_003",
+          "type": "constraint",
+          "text": "The system must never auto-resolve conflicts on clinical fields. All such conflicts require explicit clinician resolution via the conflict resolution screen.",
+          "status": "draft",
+          "terms": ["conflict payload", "pending report lifecycle"],
+          "rationale": "Per b_conflict_004.",
+          "linked_architecture_blocks": ["b_conflict_004"]
+        },
+        {
+          "block_id": "b_iface_conflict_004",
+          "type": "mechanism",
+          "text": "After clinician resolution, the client sends POST /sync/resolve with report_id, chosen_version (object), and updated vector_clock. The server applies the chosen version and returns 200 with merged status.",
+          "status": "draft",
+          "terms": ["sync upload", "vector clock", "conflict payload"],
+          "rationale": "Resolution mechanism per b_uvc_004.",
+          "linked_architecture_blocks": ["b_uvc_004", "b_conflict_003"]
+        }
+      ]
+    },
+    {
+      "section_id": "pending_report_lifecycle",
+      "title": "Pending Report Lifecycle",
+      "blocks": [
+        {
+          "block_id": "b_iface_lifecycle_001",
+          "type": "mechanism",
+          "text": "Each pending report transitions through states: pending -> queued -> syncing -> merged (success) or conflicted (conflict detected) or failed_retryable (network error) or failed_terminal (max retries exceeded). Conflicted reports transition to requires_review after clinician resolution.",
+          "status": "draft",
+          "terms": ["pending report lifecycle", "pending report"],
+          "rationale": "Defines lifecycle per b_pending_004 and b_sync_004.",
+          "linked_architecture_blocks": ["b_pending_004", "b_sync_004"]
+        },
+        {
+          "block_id": "b_iface_lifecycle_002",
+          "type": "constraint",
+          "text": "Pending reports must survive app restart and process kill. The local store uses SQLite with write-ahead logging.",
+          "status": "draft",
+          "terms": ["pending report"],
+          "rationale": "Per b_pending_002.",
+          "linked_architecture_blocks": ["b_pending_002"]
+        },
+        {
+          "block_id": "b_iface_lifecycle_003",
+          "type": "risk",
+          "text": "The local pending report store must not be treated as an authoritative diagnosis source for clinical decisions. It is a transient sync buffer.",
+          "status": "draft",
+          "terms": ["pending report"],
+          "rationale": "Per b_pending_003.",
+          "linked_architecture_blocks": ["b_pending_003"]
+        }
+      ]
+    },
+    {
+      "section_id": "version_metadata_contract",
+      "title": "Version Metadata Contract",
+      "blocks": [
+        {
+          "block_id": "b_iface_version_001",
+          "type": "interface",
+          "text": "Every report payload includes a vector_clock object mapping clinic_id to version number. The server increments its own version on each accepted update. The client maintains the vector clock locally and sends it with every sync upload.",
+          "status": "draft",
+          "terms": ["vector clock", "sync upload", "sync pull"],
+          "rationale": "Vector clock per b_conflict_001 for conflict detection.",
+          "linked_architecture_blocks": ["b_conflict_001", "b_multiclinic_001"]
+        },
+        {
+          "block_id": "b_iface_version_002",
+          "type": "constraint",
+          "text": "Low-risk metadata fields (UI cursors, cache timestamps) use last-writer-wins. The server and client must mark these fields in the schema as LWW, and the conflict resolution logic must not promote them to vector clock fields.",
+          "status": "draft",
+          "terms": ["last-writer-wins", "vector clock"],
+          "rationale": "Per b_conflict_002.",
+          "linked_architecture_blocks": ["b_conflict_002"]
+        },
+        {
+          "block_id": "b_iface_version_003",
+          "type": "mechanism",
+          "text": "The client must never silently overwrite cloud-side veterinary modifications. When a sync pull returns a report with a higher vector clock version for the clinic, the client must update its local copy and flag any local pending changes for conflict review.",
+          "status": "draft",
+          "terms": ["sync pull", "vector clock", "pending report lifecycle"],
+          "rationale": "Per b_offline_003.",
+          "linked_architecture_blocks": ["b_offline_003", "b_multiclinic_001"]
+        }
+      ]
+    }
+  ]
+}

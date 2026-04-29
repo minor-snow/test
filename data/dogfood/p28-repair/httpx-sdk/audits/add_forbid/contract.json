@@ -1,0 +1,846 @@
+{
+  "schema_version": "repair_contract@0.1.0",
+  "repair_id": "repair_39b4f5a74dc1",
+  "revision": 3,
+  "source": {
+    "kind": "user_bug_report",
+    "id": "user_bug_report_581b06bcedcf"
+  },
+  "intent": "Fix auth header edge case in custom transport flow",
+  "bug_finding_id": "finding_09f775cee39e",
+  "suspect_surface": {
+    "files": [
+      {
+        "path": "httpx/_auth.py",
+        "confidence": "high",
+        "reason": "Explicitly identified by the user as suspect repair surface.",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "reason": "Derived from explicit suspect files, confirmed path references, and failing-test mappings."
+  },
+  "repair_relation_graph": [
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/__init__.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Public API exports — changes affect import compatibility",
+      "evidence": [
+        "5 paths match pattern **/__init__.py"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/__init__.py",
+      "relation": "same_package",
+      "confidence": "medium",
+      "reason": "Same package or directory as suspect file httpx/_auth.py.",
+      "evidence": [
+        "same_directory:httpx"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/__version__.py",
+      "relation": "same_package",
+      "confidence": "medium",
+      "reason": "Same package or directory as suspect file httpx/_auth.py.",
+      "evidence": [
+        "same_directory:httpx"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_api.py",
+      "relation": "same_package",
+      "confidence": "medium",
+      "reason": "Same package or directory as suspect file httpx/_auth.py.",
+      "evidence": [
+        "same_directory:httpx"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_auth.py",
+      "relation": "explicit_user_reference",
+      "confidence": "high",
+      "reason": "Explicitly identified by the user as suspect repair surface.",
+      "evidence": [
+        "explicit_suspect_file"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_client.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Public client behavior surface — changes affect all consumers",
+      "evidence": [
+        "1 paths match pattern **/_client*"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_client.py",
+      "relation": "same_package",
+      "confidence": "medium",
+      "reason": "Same package or directory as suspect file httpx/_auth.py.",
+      "evidence": [
+        "same_directory:httpx"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_config.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Configuration affects default behavior for all consumers",
+      "evidence": [
+        "1 paths match pattern **/_config*"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_config.py",
+      "relation": "same_package",
+      "confidence": "medium",
+      "reason": "Same package or directory as suspect file httpx/_auth.py.",
+      "evidence": [
+        "same_directory:httpx"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_content.py",
+      "relation": "same_package",
+      "confidence": "medium",
+      "reason": "Same package or directory as suspect file httpx/_auth.py.",
+      "evidence": [
+        "same_directory:httpx"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_decoders.py",
+      "relation": "same_package",
+      "confidence": "medium",
+      "reason": "Same package or directory as suspect file httpx/_auth.py.",
+      "evidence": [
+        "same_directory:httpx"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_models.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Data model changes affect serialization and API compatibility",
+      "evidence": [
+        "1 paths match pattern **/_models*"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_transports/__init__.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Transport layer affects request execution semantics",
+      "evidence": [
+        "6 paths match pattern **/_transport*/**"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_transports/asgi.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Transport layer affects request execution semantics",
+      "evidence": [
+        "6 paths match pattern **/_transport*/**"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_transports/base.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Transport layer affects request execution semantics",
+      "evidence": [
+        "6 paths match pattern **/_transport*/**"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_transports/default.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Transport layer affects request execution semantics",
+      "evidence": [
+        "6 paths match pattern **/_transport*/**"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_transports/mock.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Transport layer affects request execution semantics",
+      "evidence": [
+        "6 paths match pattern **/_transport*/**"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_transports/wsgi.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Transport layer affects request execution semantics",
+      "evidence": [
+        "6 paths match pattern **/_transport*/**"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "httpx/_urls.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "URL handling affects request routing",
+      "evidence": [
+        "1 paths match pattern **/_urls*"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "tests/__init__.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Public API exports — changes affect import compatibility",
+      "evidence": [
+        "5 paths match pattern **/__init__.py"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "tests/client/__init__.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Public API exports — changes affect import compatibility",
+      "evidence": [
+        "5 paths match pattern **/__init__.py"
+      ]
+    },
+    {
+      "from": "httpx/_auth.py",
+      "to": "tests/models/__init__.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Public API exports — changes affect import compatibility",
+      "evidence": [
+        "5 paths match pattern **/__init__.py"
+      ]
+    }
+  ],
+  "impact_surface": {
+    "evidence_level": "bootstrap_conservative",
+    "direct_files": [
+      {
+        "path": "httpx/_auth.py",
+        "confidence": "high",
+        "reason": "Explicitly identified by the user as suspect repair surface.",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "related_files": [
+      {
+        "path": "httpx/__init__.py",
+        "confidence": "medium",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      },
+      {
+        "path": "httpx/__version__.py",
+        "confidence": "medium",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      },
+      {
+        "path": "httpx/_api.py",
+        "confidence": "medium",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      },
+      {
+        "path": "httpx/_client.py",
+        "confidence": "medium",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      },
+      {
+        "path": "httpx/_config.py",
+        "confidence": "medium",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      },
+      {
+        "path": "httpx/_content.py",
+        "confidence": "medium",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      },
+      {
+        "path": "httpx/_decoders.py",
+        "confidence": "medium",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      },
+      {
+        "path": "httpx/_models.py",
+        "confidence": "low",
+        "reason": "Data model changes affect serialization and API compatibility",
+        "evidence": [
+          "1 paths match pattern **/_models*"
+        ]
+      },
+      {
+        "path": "httpx/_transports/__init__.py",
+        "confidence": "low",
+        "reason": "Transport layer affects request execution semantics",
+        "evidence": [
+          "6 paths match pattern **/_transport*/**"
+        ]
+      },
+      {
+        "path": "httpx/_transports/asgi.py",
+        "confidence": "low",
+        "reason": "Transport layer affects request execution semantics",
+        "evidence": [
+          "6 paths match pattern **/_transport*/**"
+        ]
+      },
+      {
+        "path": "httpx/_transports/base.py",
+        "confidence": "low",
+        "reason": "Transport layer affects request execution semantics",
+        "evidence": [
+          "6 paths match pattern **/_transport*/**"
+        ]
+      },
+      {
+        "path": "httpx/_transports/default.py",
+        "confidence": "low",
+        "reason": "Transport layer affects request execution semantics",
+        "evidence": [
+          "6 paths match pattern **/_transport*/**"
+        ]
+      },
+      {
+        "path": "httpx/_transports/mock.py",
+        "confidence": "low",
+        "reason": "Transport layer affects request execution semantics",
+        "evidence": [
+          "6 paths match pattern **/_transport*/**"
+        ]
+      },
+      {
+        "path": "httpx/_transports/wsgi.py",
+        "confidence": "low",
+        "reason": "Transport layer affects request execution semantics",
+        "evidence": [
+          "6 paths match pattern **/_transport*/**"
+        ]
+      },
+      {
+        "path": "httpx/_urls.py",
+        "confidence": "low",
+        "reason": "URL handling affects request routing",
+        "evidence": [
+          "1 paths match pattern **/_urls*"
+        ]
+      },
+      {
+        "path": "tests/__init__.py",
+        "confidence": "low",
+        "reason": "Public API exports — changes affect import compatibility",
+        "evidence": [
+          "5 paths match pattern **/__init__.py"
+        ]
+      },
+      {
+        "path": "tests/client/__init__.py",
+        "confidence": "low",
+        "reason": "Public API exports — changes affect import compatibility",
+        "evidence": [
+          "5 paths match pattern **/__init__.py"
+        ]
+      },
+      {
+        "path": "tests/models/__init__.py",
+        "confidence": "low",
+        "reason": "Public API exports — changes affect import compatibility",
+        "evidence": [
+          "5 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "related_tests": [
+      {
+        "path": "tests/test_auth.py",
+        "confidence": "high",
+        "reason": "Python test mapping for httpx/_auth.py.",
+        "evidence": [
+          "python_test_mapping:high"
+        ]
+      }
+    ],
+    "risk_areas": [
+      {
+        "label": "python_sdk_library",
+        "pattern": "**/__init__.py",
+        "bucket": "review_required",
+        "severity": "medium",
+        "source": "risk_preset",
+        "reason": "Public API exports — changes affect import compatibility",
+        "evidence": [
+          "5 paths match pattern **/__init__.py"
+        ],
+        "matched_paths": [
+          "httpx/__init__.py",
+          "httpx/_transports/__init__.py",
+          "tests/__init__.py",
+          "tests/client/__init__.py",
+          "tests/models/__init__.py"
+        ]
+      },
+      {
+        "label": "python_sdk_library",
+        "pattern": "**/_auth*",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "risk_preset",
+        "reason": "Authentication affects security surface",
+        "evidence": [
+          "1 paths match pattern **/_auth*",
+          "Sensitive zone \"authentication\" (high) corroborates"
+        ],
+        "matched_paths": [
+          "httpx/_auth.py"
+        ]
+      },
+      {
+        "label": "python_sdk_library",
+        "pattern": "**/_client*",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "risk_preset",
+        "reason": "Public client behavior surface — changes affect all consumers",
+        "evidence": [
+          "1 paths match pattern **/_client*"
+        ],
+        "matched_paths": [
+          "httpx/_client.py"
+        ]
+      },
+      {
+        "label": "python_sdk_library",
+        "pattern": "**/_config*",
+        "bucket": "review_required",
+        "severity": "medium",
+        "source": "risk_preset",
+        "reason": "Configuration affects default behavior for all consumers",
+        "evidence": [
+          "1 paths match pattern **/_config*"
+        ],
+        "matched_paths": [
+          "httpx/_config.py"
+        ]
+      },
+      {
+        "label": "python_sdk_library",
+        "pattern": "**/_models*",
+        "bucket": "review_required",
+        "severity": "medium",
+        "source": "risk_preset",
+        "reason": "Data model changes affect serialization and API compatibility",
+        "evidence": [
+          "1 paths match pattern **/_models*"
+        ],
+        "matched_paths": [
+          "httpx/_models.py"
+        ]
+      },
+      {
+        "label": "python_sdk_library",
+        "pattern": "**/_transport*/**",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "risk_preset",
+        "reason": "Transport layer affects request execution semantics",
+        "evidence": [
+          "6 paths match pattern **/_transport*/**"
+        ],
+        "matched_paths": [
+          "httpx/_transports/__init__.py",
+          "httpx/_transports/asgi.py",
+          "httpx/_transports/base.py",
+          "httpx/_transports/default.py",
+          "httpx/_transports/mock.py",
+          "httpx/_transports/wsgi.py"
+        ]
+      },
+      {
+        "label": "python_sdk_library",
+        "pattern": "**/_urls*",
+        "bucket": "review_required",
+        "severity": "medium",
+        "source": "risk_preset",
+        "reason": "URL handling affects request routing",
+        "evidence": [
+          "1 paths match pattern **/_urls*"
+        ],
+        "matched_paths": [
+          "httpx/_urls.py"
+        ]
+      },
+      {
+        "label": "authentication",
+        "pattern": "**/auth/**",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "python_sensitive_zone",
+        "reason": "Python sensitive zone authentication.",
+        "evidence": [
+          "Keyword \"auth\" found in 3 paths"
+        ],
+        "matched_paths": [
+          "httpx/_auth.py",
+          "tests/client/test_auth.py",
+          "tests/test_auth.py"
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "kind": "unverified_bug_claim",
+        "note": "The report includes unverified bug claims or hypotheses that must not be treated as confirmed facts.",
+        "evidence": [
+          "Reported failing test: tests/test_auth.py",
+          "Fix auth header edge case in custom transport flow",
+          "The reported issue should be fixed without introducing new regressions."
+        ]
+      }
+    ]
+  },
+  "repair_scope": {
+    "allowed": [
+      {
+        "pattern": "tests/test_auth.py",
+        "source": "impact_candidate",
+        "confidence": "high",
+        "audit_weight": "elevated",
+        "reason": "Python test mapping for httpx/_auth.py.",
+        "evidence": [
+          "python_test_mapping:high"
+        ]
+      }
+    ],
+    "review_required": [
+      {
+        "pattern": "**/_auth*",
+        "source": "risk_preset",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "Authentication affects security surface",
+        "evidence": [
+          "1 paths match pattern **/_auth*",
+          "Sensitive zone \"authentication\" (high) corroborates"
+        ]
+      },
+      {
+        "pattern": "**/_client*",
+        "source": "risk_preset",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "Public client behavior surface — changes affect all consumers",
+        "evidence": [
+          "1 paths match pattern **/_client*"
+        ]
+      },
+      {
+        "pattern": "**/_config*",
+        "source": "risk_preset",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "Configuration affects default behavior for all consumers",
+        "evidence": [
+          "1 paths match pattern **/_config*"
+        ]
+      },
+      {
+        "pattern": "**/_models*",
+        "source": "risk_preset",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "Data model changes affect serialization and API compatibility",
+        "evidence": [
+          "1 paths match pattern **/_models*"
+        ]
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "source": "risk_preset",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "Transport layer affects request execution semantics",
+        "evidence": [
+          "6 paths match pattern **/_transport*/**"
+        ]
+      },
+      {
+        "pattern": "**/_urls*",
+        "source": "risk_preset",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "URL handling affects request routing",
+        "evidence": [
+          "1 paths match pattern **/_urls*"
+        ]
+      },
+      {
+        "pattern": "**/auth/**",
+        "source": "project_role",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "Python sensitive zone authentication.",
+        "evidence": [
+          "Keyword \"auth\" found in 3 paths"
+        ]
+      },
+      {
+        "pattern": "httpx/__version__.py",
+        "source": "project_role",
+        "confidence": "medium",
+        "audit_weight": "critical",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      },
+      {
+        "pattern": "httpx/_api.py",
+        "source": "project_role",
+        "confidence": "medium",
+        "audit_weight": "critical",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      },
+      {
+        "pattern": "httpx/_client.py",
+        "source": "project_role",
+        "confidence": "medium",
+        "audit_weight": "critical",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      },
+      {
+        "pattern": "httpx/_config.py",
+        "source": "project_role",
+        "confidence": "medium",
+        "audit_weight": "critical",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      },
+      {
+        "pattern": "httpx/_content.py",
+        "source": "project_role",
+        "confidence": "medium",
+        "audit_weight": "critical",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      },
+      {
+        "pattern": "httpx/_decoders.py",
+        "source": "project_role",
+        "confidence": "medium",
+        "audit_weight": "critical",
+        "reason": "Same package or directory as suspect file httpx/_auth.py.",
+        "evidence": [
+          "same_directory:httpx"
+        ]
+      }
+    ],
+    "forbidden": [
+      {
+        "pattern": ".cursor/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": ".git/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": ".pantheon/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": "httpx/__init__.py",
+        "source": "human_audit_decision",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Forbidden by human audit decision.",
+        "evidence": [
+          "human_audit_decision"
+        ]
+      },
+      {
+        "pattern": "node_modules/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      }
+    ]
+  },
+  "must_preserve": [
+    "Do not broaden authentication or permission behavior.",
+    "Do not change exported public API symbols without review.",
+    "Do not change public API exports without review."
+  ],
+  "consistency_checks": [
+    {
+      "id": "check_679583459e0b",
+      "statement": "Do not change public API exports without review.",
+      "source": "user_must_preserve",
+      "severity": "hard",
+      "evidence": [
+        "repair:user_must_preserve"
+      ],
+      "reason": "Operator-specified hard constraint."
+    },
+    {
+      "id": "check_8a52a2a0a0bd",
+      "statement": "Do not change exported public API symbols without review.",
+      "source": "project_role",
+      "severity": "review",
+      "evidence": [
+        "project_role:python_sdk_library"
+      ],
+      "reason": "Library repairs can break downstream consumers through API drift."
+    },
+    {
+      "id": "check_7d78207f6d5a",
+      "statement": "Preserve request/response configuration compatibility when touching client or transport modules.",
+      "source": "project_role",
+      "severity": "review",
+      "evidence": [
+        "project_role:python_sdk_library"
+      ],
+      "reason": "Client behavior changes can silently break callers."
+    },
+    {
+      "id": "check_4d409b3cd17f",
+      "statement": "Update or inspect related tests when the repair changes behavior.",
+      "source": "test_signal",
+      "severity": "review",
+      "evidence": [
+        "related_test:tests/test_auth.py",
+        "recommended_test:tests/client/test_client.py",
+        "recommended_test:tests/test_api.py",
+        "recommended_test:tests/test_asgi.py",
+        "recommended_test:tests/test_config.py",
+        "recommended_test:tests/test_content.py",
+        "recommended_test:tests/test_decoders.py",
+        "recommended_test:tests/test_exceptions.py",
+        "recommended_test:tests/test_main.py",
+        "recommended_test:tests/test_multipart.py",
+        "recommended_test:tests/test_status_codes.py",
+        "recommended_test:tests/test_utils.py",
+        "recommended_test:tests/test_wsgi.py"
+      ],
+      "reason": "Related tests are the best available deterministic proxy for behavioral impact in bootstrap mode."
+    },
+    {
+      "id": "check_94055ca43bc2",
+      "statement": "Unknown impact surface remains. Keep the repair conservative and escalate if scope expands.",
+      "source": "unknown_surface",
+      "severity": "review",
+      "evidence": [
+        "unverified_bug_claim"
+      ],
+      "reason": "Pantheon found unresolved impact signals; those must not be silently ignored."
+    }
+  ],
+  "test_signals": {
+    "related": [
+      "tests/test_auth.py"
+    ],
+    "recommended": [
+      "tests/client/test_client.py",
+      "tests/test_api.py",
+      "tests/test_asgi.py",
+      "tests/test_config.py",
+      "tests/test_content.py",
+      "tests/test_decoders.py",
+      "tests/test_exceptions.py",
+      "tests/test_main.py",
+      "tests/test_multipart.py",
+      "tests/test_status_codes.py",
+      "tests/test_utils.py",
+      "tests/test_wsgi.py"
+    ],
+    "missing_mapping": []
+  },
+  "audit_status": "approved_with_modifications",
+  "source_refs": {
+    "repo_observations_hash": "sha256:2f22b6721dc5d221bae0695bd80e577690971a181e82d336180dc229ad9d9c3a",
+    "repo_label": "httpx",
+    "head_commit_hash": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254"
+  }
+}

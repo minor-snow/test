@@ -1,0 +1,290 @@
+{
+  "artifact_id": "pantheon_module",
+  "artifact_type": "ModuleSpec",
+  "schema_version": "module_spec@0.1.0",
+  "revision_id": "rev_361fb7a24643",
+  "sections": [
+    {
+      "section_id": "module_dependencies",
+      "title": "Module Dependencies",
+      "commitments": [
+        {
+          "block_id": "b_mod_001",
+          "type": "mechanism",
+          "text": "The linter module imports type definitions from the core types module and produces Issue arrays without side effects.",
+          "terms": [
+            "linter",
+            "issue"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_001"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_001"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:2952f8a55445749c249c41def4b6899653a22d32a8d54154d96ba51aac29e45a"
+        },
+        {
+          "block_id": "b_mod_002",
+          "type": "mechanism",
+          "text": "The hash module depends only on the stable serializer and Node.js crypto, ensuring deterministic output across platforms.",
+          "terms": [
+            "hash",
+            "stable_serializer"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_003"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:407b8fc25c473633d3ec64c25a6870cd3442d1a860f1d682670800a41842aa9c"
+        },
+        {
+          "block_id": "b_mod_003",
+          "type": "constraint",
+          "text": "The artifact store module must not import from the linter or patch modules to prevent circular dependencies.",
+          "terms": [
+            "artifact_store"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_008"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_005"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:b1038a0e6480b9acbadc5be1f04c54494aa727744690597a1384a026428f003b"
+        },
+        {
+          "block_id": "b_mod_004",
+          "type": "mechanism",
+          "text": "The schema registry module provides Zod validators and is imported by the validator module for gate enforcement.",
+          "terms": [
+            "schema_registry",
+            "validator"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_004"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:b95e6b6b28e9fcc70ef6197d1200ac120ed009e095f5af02c8f4dcf1d0f97e5b"
+        },
+        {
+          "block_id": "b_mod_005",
+          "type": "constraint",
+          "text": "All cross-module imports must use explicit `.js` extensions for ESM compatibility.",
+          "terms": [
+            "esm"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:8a6c2f404c6773e7048ea1e76d32487afb552c5d84e8c5f29152d9581ba1074c"
+        },
+        {
+          "block_id": "b_mod_006",
+          "type": "mechanism",
+          "text": "The render module converts artifact JSON into human-readable markdown for projection storage.",
+          "terms": [
+            "render",
+            "projection"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_015",
+            "b_iface_010",
+            "b_iface_011"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:84ce4bab8dfcdff65b49362c129c1e2307bdbfcadd4ffc1147fffd6e670b2be8"
+        },
+        {
+          "block_id": "b_mod_007",
+          "type": "mechanism",
+          "text": "The semantic regression module compares old and new block arrays to detect meaning loss during patch application.",
+          "terms": [
+            "semantic_regression"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_012",
+            "b_iface_013"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:c7edcd924a11d025a69f8ffb798de71c828264b7f9ba3ca8b31e8cca298d6971"
+        }
+      ]
+    },
+    {
+      "section_id": "module_exports",
+      "title": "Module Exports",
+      "commitments": [
+        {
+          "block_id": "b_mod_008",
+          "type": "interface",
+          "text": "The linter module exports a single public function `lintArtifact` that returns Issue arrays.",
+          "terms": [
+            "linter",
+            "lint_artifact"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_010"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_001"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:efdf99763fce42af53f55bb59050de24ea5d76ea89adc706d4fd3189815126a9"
+        },
+        {
+          "block_id": "b_mod_009",
+          "type": "interface",
+          "text": "The apply patch module exports `compilePatch` and `applyPatch` as separate functions for testability.",
+          "terms": [
+            "compile_patch",
+            "apply_patch"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_008"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:f896f852fc42095e41365117fea15be9736e8df0a1d5681d20badefca2c175c9"
+        },
+        {
+          "block_id": "b_mod_010",
+          "type": "interface",
+          "text": "The integrity check module exports a single `integrityCheck` function that scans all store artifacts.",
+          "terms": [
+            "integrity_check"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_020"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_009"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:cfc5c892161e2733dff2cd4179c55b47ce6dcb9a1e0bc54af4de7933cfcf0067"
+        },
+        {
+          "block_id": "b_mod_011",
+          "type": "interface",
+          "text": "The report generator module exports `generateReportFromStore` for single-artifact and `generateMultiArtifactReport` for multi-artifact reports.",
+          "terms": [
+            "report_generator"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_001",
+            "b_iface_002"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:f3f4fd3c9940eb5c367434c82e252dcdcfc3e8516c4c2bcf1fc10f218a40d04b"
+        },
+        {
+          "block_id": "b_mod_012",
+          "type": "interface",
+          "text": "The backlog export module exports `generateBacklogItems` and `exportBacklogMarkdown` for operator workflow.",
+          "terms": [
+            "backlog_export"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_001",
+            "b_iface_002"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:b7aaf61969e883a778f73d5749f68fd1a7ce264035310f57d78f198768ae2bd4"
+        },
+        {
+          "block_id": "b_mod_013",
+          "type": "mechanism",
+          "text": "The `crossArtifactLinter` produces cross-issue arrays that feed into the `issuePrioritizer` queue.",
+          "linked_interface_blocks": [
+            "b_iface_002"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:b122b5b8a00bfd9c0b490a9b78d061c04bcc1481f92d4a56cfe48e5a105fba8b"
+        },
+        {
+          "block_id": "b_mod_014",
+          "type": "constraint",
+          "text": "No module may export mutable state. All exports must be functions or readonly type definitions.",
+          "terms": [
+            "export"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:92b8970fbb4d27e5333d8baf6eace8ec3093366fe87c4d764a13b9f150bd0206"
+        }
+      ]
+    },
+    {
+      "section_id": "module_internals",
+      "title": "Module Internals",
+      "commitments": [
+        {
+          "block_id": "b_mod_015",
+          "type": "invariant",
+          "text": "Every public function in the linter module must be a pure function with no side effects.",
+          "terms": [
+            "linter",
+            "pure_function"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:8a75675c3b818d37668a1f93087111aa2ce09e1b63e2aa17555ab03f383f77cf"
+        },
+        {
+          "block_id": "b_mod_016",
+          "type": "mechanism",
+          "text": "The fast-path validator committed instantly to avoid gate latency on trivial patches.",
+          "status": "approved",
+          "content_hash": "sha256:17f411447fa745b48d1d456350a450e37f728166ec95d63c913fefcb7defc32b"
+        },
+        {
+          "block_id": "b_mod_017",
+          "type": "mechanism",
+          "text": "The weather forecast integration provides atmospheric data for ambient display widgets.",
+          "status": "approved",
+          "content_hash": "sha256:035689483d353c40b7fc9ffa6ae73e1f7a0642fb72819c841425b755015709c1"
+        },
+        {
+          "block_id": "b_mod_018",
+          "type": "constraint",
+          "text": "Internal helper functions must be prefixed with underscore and not exported from the module boundary.",
+          "terms": [
+            "helper",
+            "module"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:89827d381b86b8e444f606eb23cd497d4406ae65ad7f9c061a2068329e129ca7"
+        },
+        {
+          "block_id": "b_mod_019",
+          "type": "mechanism",
+          "text": "The `stableSerialize` function ensures deterministic JSON output by sorting keys recursively before hashing.",
+          "status": "approved",
+          "content_hash": "sha256:08f82191fd6ca9f9ab12b716c9b6dedcd69f729707006844baaac857627e65ae"
+        },
+        {
+          "block_id": "b_mod_020",
+          "type": "mechanism",
+          "text": "The override patch module allows human operators to bypass failed gates with explicit rationale and risk acceptance.",
+          "terms": [
+            "override_patch",
+            "gate"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:63d77d871d1ce975c47fb8a2b4898eac28bd475b3fdb500eba35f5e9fce4bcca"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created_by": "trial_seed",
+    "created_at": "2025-01-01T00:00:00Z",
+    "tags": [
+      "p7b",
+      "module_spec",
+      "trial"
+    ],
+    "updated_at": "2026-04-25T10:12:23.185Z"
+  },
+  "parent_revision_id": "rev_885e76b4a1e4"
+}

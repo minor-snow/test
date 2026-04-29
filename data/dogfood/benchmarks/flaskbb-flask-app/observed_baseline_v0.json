@@ -1,0 +1,354 @@
+{
+  "schema_version": "observed_baseline@0.1.0",
+  "benchmark_id": "flaskbb-flask-app",
+  "category": "flask_web_app",
+  "pinned_commit": "3df43f16854fba625d8d16498bda253b993677b1",
+  "generated_at": "2026-04-29T02:10:38.249Z",
+  "check_mode": "no_diff_baseline",
+  "layout_signals": {
+    "status": "observed",
+    "count": 6,
+    "items": [
+      {
+        "path": "bucket:config",
+        "evidence": "6 files"
+      },
+      {
+        "path": "bucket:source",
+        "evidence": "87 files"
+      },
+      {
+        "path": "bucket:docs",
+        "evidence": "1 files"
+      },
+      {
+        "path": "bucket:migration",
+        "evidence": "14 files"
+      },
+      {
+        "path": "bucket:test",
+        "evidence": "42 files"
+      },
+      {
+        "path": "bucket:unknown",
+        "evidence": "1 files"
+      }
+    ],
+    "primary_layout": "mixed",
+    "package_layout": "flat_package",
+    "layout_confidence": "medium",
+    "layout_evidence": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: flaskbb"
+      },
+      {
+        "signal": "django_migrations_found",
+        "weight": "moderate",
+        "evidence": "14 migration files"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: django_project=2, library_package=2"
+      }
+    ],
+    "layout_unknowns": [
+      {
+        "aspect": "primary_layout",
+        "reason": "Tied between django_project and library_package"
+      }
+    ]
+  },
+  "framework_signals": {
+    "status": "observed",
+    "count": 6,
+    "items": [
+      {
+        "name": "django",
+        "kind": "web_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "Django-style migrations/ directories found"
+          }
+        ]
+      },
+      {
+        "name": "flask",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "flask found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "flask imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "click imported in source files"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      },
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "sqlalchemy found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "sqlalchemy imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "celery",
+        "kind": "task_queue",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "celery found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "celery imported in source files"
+          }
+        ]
+      }
+    ]
+  },
+  "project_role_signals": {
+    "status": "observed",
+    "count": 3,
+    "items": [
+      {
+        "role": "service_backend",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "api/ directory present"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      },
+      {
+        "role": "cli_application",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points (__main__.py or cli.py)"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "CLI framework in dependencies"
+          }
+        ]
+      }
+    ]
+  },
+  "dependency_manifests": {
+    "status": "observed",
+    "count": 4,
+    "items": [
+      {
+        "source": "pyproject.toml",
+        "package_count": 43,
+        "confidence": "high"
+      },
+      {
+        "source": "requirements-dev.txt",
+        "package_count": 16,
+        "confidence": "high"
+      },
+      {
+        "source": "requirements.txt",
+        "package_count": 43,
+        "confidence": "high"
+      },
+      {
+        "source": "uv.lock",
+        "package_count": 119,
+        "confidence": "high"
+      }
+    ]
+  },
+  "test_mappings": {
+    "status": "observed",
+    "count": 70,
+    "items": []
+  },
+  "sensitive_zones": {
+    "status": "observed",
+    "count": 4,
+    "items": [
+      {
+        "category": "authentication",
+        "severity": "high",
+        "path_count": 26
+      },
+      {
+        "category": "schema_migration",
+        "severity": "high",
+        "path_count": 14
+      },
+      {
+        "category": "runtime_extension",
+        "severity": "medium",
+        "path_count": 12
+      },
+      {
+        "category": "infrastructure_config",
+        "severity": "medium",
+        "path_count": 5
+      }
+    ]
+  },
+  "unknowns": {
+    "status": "observed",
+    "count": 1,
+    "items": [
+      {
+        "category": "unclassified_python_file",
+        "count": 1,
+        "classification": "actionable"
+      },
+      {
+        "category": "scope_granularity_limit",
+        "count": 0,
+        "classification": "intrinsic"
+      }
+    ]
+  },
+  "risk_preset": {
+    "preset": "generic_service",
+    "validation": "validated",
+    "confidence": "high",
+    "matched_signals": [
+      "layout: mixed / flat_package (medium)",
+      "framework: django / web_framework (medium)",
+      "framework: flask / web_framework (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (high)",
+      "framework: sqlalchemy / orm (high)",
+      "framework: celery / task_queue (high)",
+      "project_role: service_backend (high)",
+      "project_role: python_sdk_library (high)",
+      "project_role: cli_application (high)",
+      "sensitive_zone: authentication (high, 26 paths)",
+      "sensitive_zone: schema_migration (high, 14 paths)"
+    ],
+    "suggested_review_count": 2,
+    "suggested_forbidden_count": 0,
+    "dormant_count": 1,
+    "suggested_review": [
+      {
+        "pattern": "**/auth*",
+        "reason": "Authentication logic requires human review",
+        "severity": "high",
+        "matched_path_count": 4
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "Configuration affects system behavior",
+        "severity": "medium",
+        "matched_path_count": 2
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      }
+    ]
+  },
+  "quality": {
+    "python_file_count": 146,
+    "classified_count": 146,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 630,
+    "project_import_count": 162,
+    "declared_package_count": 216,
+    "undeclared_package_count": 10,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 70,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 4,
+    "sensitive_file_count": 54,
+    "manifest_count": 4,
+    "low_confidence_manifest_count": 0
+  }
+}

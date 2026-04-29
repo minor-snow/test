@@ -1,0 +1,72 @@
+{
+  "decision_id": "dec_1777107423766",
+  "decision": "accepted_with_residual_issues",
+  "canonical_revision_id": "rev_12d08a146cb4",
+  "artifact_id": "pantheon_architecture",
+  "operator_id": "cockpit_user",
+  "timestamp": "2026-04-25T08:57:03.766Z",
+  "rationale": "Phase 6 scale trial: 22 issues found, 14/14 LLM proposals committed. DeepSeek produced valid proposals on every attempt. Forced rejection proves gate boundary. 2 residual issues remain (minor undefined_term debt).",
+  "final_coherence_note": "The final canonical after 14 LLM-driven patches reads as a coherent architecture document. No patch corpse indicators. Terminology is consistent. The 2 remaining undefined_term issues are low structural risk.",
+  "three_layer_status": {
+    "integrity_clean": true,
+    "artifact_clean": false,
+    "document_coherent": true
+  },
+  "residual_snapshot": {
+    "total": 2,
+    "by_severity": {
+      "medium": 2
+    },
+    "by_type": {
+      "undefined_term": 2
+    },
+    "by_section": {
+      "sec_gates (Gate System)": 1,
+      "sec_integrity (Integrity & Recovery)": 1
+    },
+    "issues": [
+      {
+        "issue_id": "issue_001",
+        "block_id": "b_trial_025",
+        "section_id": "sec_gates",
+        "section_title": "Gate System",
+        "issue_type": "undefined_term",
+        "severity": "medium",
+        "message": "Term \"applypatch\" is used but not defined in any block's terms array."
+      },
+      {
+        "issue_id": "issue_002",
+        "block_id": "b_trial_036",
+        "section_id": "sec_integrity",
+        "section_title": "Integrity & Recovery",
+        "issue_type": "undefined_term",
+        "severity": "medium",
+        "message": "Term \"repair_ledger\" is used but not defined in any block's terms array."
+      }
+    ]
+  },
+  "backlog_items": [
+    {
+      "id": "BACKLOG-001",
+      "source_issue_id": "issue_001",
+      "block_id": "b_trial_025",
+      "section_id": "sec_gates",
+      "issue_type": "undefined_term",
+      "severity": "medium",
+      "canonical_revision_id": "rev_12d08a146cb4",
+      "why_deferred": "Terminology debt: identifier used without term definition. Low structural risk.",
+      "created_from_release_decision_id": "dec_1777107423766"
+    },
+    {
+      "id": "BACKLOG-002",
+      "source_issue_id": "issue_002",
+      "block_id": "b_trial_036",
+      "section_id": "sec_integrity",
+      "issue_type": "undefined_term",
+      "severity": "medium",
+      "canonical_revision_id": "rev_12d08a146cb4",
+      "why_deferred": "Terminology debt: identifier used without term definition. Low structural risk.",
+      "created_from_release_decision_id": "dec_1777107423766"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": "candidate_decisions@0.1.0",
+  "decisions": [
+    {
+      "candidate": "saleor",
+      "category": "django_commerce",
+      "decision": "accepted",
+      "time_spent_minutes": 0,
+      "reason": "Continuity anchor from P25. Already proven across P25a-h evidence chain.",
+      "repo_url": "https://github.com/saleor/saleor",
+      "pinned_commit": "cf9b59513d0a8c83d410eb5b176e5a55de018797",
+      "maintenance_status": "active",
+      "public_demo_suitability": "high",
+      "preflight_checklist": {
+        "can_clone": true,
+        "acceptable_license": true,
+        "stable_commit_pin": true,
+        "nontrivial_structure": true,
+        "has_tests": true,
+        "representative_framework": true,
+        "has_sensitive_zones": true,
+        "definable_scope": true,
+        "safe_synthetic_diff": true,
+        "useful_as_demo": true
+      }
+    },
+    {
+      "candidate": "fastapi-realworld-example-app (adr1enbe4udou1n)",
+      "category": "fastapi_service",
+      "decision": "accepted",
+      "time_spent_minutes": 12,
+      "reason": "Active FastAPI RealWorld-spec implementation. Has app/api/routes, app/core/security.py, app/crud, app/models, app/schemas, alembic migrations, pyproject.toml with fastapi+sqlalchemy+pydantic+jose+alembic, pytest tests, uv.lock. Nontrivial structure with clear CRUD/auth/routing/pagination patterns suitable for FastAPI service governance testing.",
+      "repo_url": "https://github.com/adr1enbe4udou1n/fastapi-realworld-example-app",
+      "pinned_commit": "2318463f51e2f0584508c6d7fc6ef2640c9101b0",
+      "maintenance_status": "active",
+      "public_demo_suitability": "high",
+      "preflight_checklist": {
+        "can_clone": true,
+        "acceptable_license": true,
+        "stable_commit_pin": true,
+        "nontrivial_structure": true,
+        "has_tests": true,
+        "representative_framework": true,
+        "has_sensitive_zones": true,
+        "definable_scope": true,
+        "safe_synthetic_diff": true,
+        "useful_as_demo": true
+      }
+    },
+    {
+      "candidate": "httpx (encode)",
+      "category": "python_sdk_library",
+      "decision": "accepted",
+      "time_spent_minutes": 8,
+      "reason": "Active Python HTTP client library. Flat package layout (httpx/ at root). Rich source modules: _client.py (67K), _models.py (46K), _auth.py, _transports/, _config.py, _api.py. Comprehensive test suite (tests/ with 18 test files + 3 subdirs). BSD-3-Clause license. py.typed marker. Supports sync/async, HTTP/1.1+HTTP/2. Ideal for SDK/library governance: public API surface, transport layer, auth, config are clearly separable risk zones.",
+      "repo_url": "https://github.com/encode/httpx",
+      "pinned_commit": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+      "maintenance_status": "active",
+      "public_demo_suitability": "high",
+      "preflight_checklist": {
+        "can_clone": true,
+        "acceptable_license": true,
+        "stable_commit_pin": true,
+        "nontrivial_structure": true,
+        "has_tests": true,
+        "representative_framework": true,
+        "has_sensitive_zones": true,
+        "definable_scope": true,
+        "safe_synthetic_diff": true,
+        "useful_as_demo": true
+      }
+    }
+  ]
+}

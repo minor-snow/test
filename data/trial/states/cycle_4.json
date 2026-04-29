@@ -1,0 +1,23 @@
+{
+  "cycle": 4,
+  "issue": {
+    "issue_id": "issue_001",
+    "artifact_id": "pantheon_architecture",
+    "base_revision_id": "rev_f958668ec3e2",
+    "target_block_id": "b_trial_012",
+    "issue_type": "unsafe_canonical_commit",
+    "severity": "high",
+    "message": "Canonical writes must not happen instantly. Block text suggests entries bypass quarantine or gating."
+  },
+  "llmRawOutput": "{\n  \"proposal_id\": \"proposal_for_issue_001\",\n  \"artifact_id\": \"pantheon_architecture\",\n  \"base_revision_id\": \"rev_f958668ec3e2\",\n  \"source_issue_ids\": [\"issue_001\"],\n  \"operations\": [\n    {\n      \"op\": \"replace_block\",\n      \"target_block_id\": \"b_trial_012\",\n      \"replacement_text\": \"Quarantine items must never be promoted directly to the evidence store. Promotion requires passing all four validation gates first.\"\n    }\n  ],\n  \"schema_version\": \"patch_proposal@0.1.0\"\n}",
+  "proposalValid": true,
+  "patchAccepted": true,
+  "regressionPassed": true,
+  "overrideApplied": false,
+  "overrideMode": null,
+  "mechanicalRejection": false,
+  "rejectionReason": null,
+  "rejectionCategories": [],
+  "committed": true,
+  "error": null
+}

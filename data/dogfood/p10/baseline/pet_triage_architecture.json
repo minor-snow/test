@@ -1,0 +1,302 @@
+{
+  "artifact_id": "pet_triage_architecture",
+  "artifact_type": "ArchitectureDraft",
+  "schema_version": "architecture_draft@0.1.0",
+  "revision_id": "rev_50e5090eaf19",
+  "sections": [
+    {
+      "section_id": "sec_client_flow",
+      "title": "Client Triage Flow",
+      "commitments": [
+        {
+          "block_id": "b_pet_arch_001",
+          "type": "mechanism",
+          "text": "The Android client collects species, temperature, and free-text symptom description locally, and only submits a triage request when the operator explicitly starts analysis.",
+          "rationale": "Mirrors DiagnoseScreen input collection before the VetNet call.",
+          "terms": [
+            "android_client",
+            "species",
+            "temperature",
+            "symptom_description",
+            "triage_request"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:4674d619326d1283ee254be02277162302c73441af01104f7566463a70c95532"
+        },
+        {
+          "block_id": "b_pet_arch_002",
+          "type": "constraint",
+          "text": "All client triage decisions must request the backend triage engine in real time before any diagnosis result is shown to the operator.",
+          "rationale": "The current app computes diagnosis by calling VetNet.diagnose and does not host a client-side decision engine.",
+          "terms": [
+            "online_first",
+            "triage_engine",
+            "strong_sync",
+            "backend_authority"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:deca8829f857b8b5a72e51d2a6ee752e9518ba7645a9f3d2221dccc7446df10a"
+        },
+        {
+          "block_id": "b_pet_arch_003",
+          "type": "mechanism",
+          "text": "After a successful backend response, the client stores the symptom description, returned risk level, first suspected condition, and optional temperature in local Room tables.",
+          "rationale": "MainActivity writes HistoryRecord and VitalRecord only inside the success callback.",
+          "terms": [
+            "room_cache",
+            "history_table",
+            "vitals_table",
+            "risk_level",
+            "suspected_condition"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:7fa688da462c84a51f660fd3d370fad324cc51257528cea4295164b0f79c8415"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_network_authority",
+      "title": "Network Authority and Availability",
+      "commitments": [
+        {
+          "block_id": "b_pet_arch_004",
+          "type": "constraint",
+          "text": "When the network is unavailable, the client must lock the triage screen to prevent dirty data and incomplete reports from being treated as valid triage output.",
+          "rationale": "The original workflow has no offline completion path and treats network failure as a hard stop.",
+          "terms": [
+            "network_lock",
+            "dirty_data",
+            "incomplete_report",
+            "connectivity_failure"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:ccbbba1051aabb4f83141287dbddd47633962733ca39779dc3c3564eecfacdae"
+        },
+        {
+          "block_id": "b_pet_arch_005",
+          "type": "constraint",
+          "text": "A failed backend call ends the triage attempt with UI error feedback, and the client must not persist a diagnosis or pending report when no authoritative response was returned.",
+          "rationale": "The error callback only surfaces a toast and leaves diagnosisResult unset.",
+          "terms": [
+            "error_feedback",
+            "pending_report",
+            "authoritative_response"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:d7c339ebf6e7c72183e05de58c2153c1b73bc707d92a65bf37f9d7434dce667e"
+        },
+        {
+          "block_id": "b_pet_arch_006",
+          "type": "invariant",
+          "text": "The system depends on a single backend diagnosis engine; no secondary clinic node, replica, or embedded fallback engine participates in decision making.",
+          "rationale": "VetNet is configured against one BASE_URL and no alternate authority exists in the mobile app.",
+          "terms": [
+            "single_backend",
+            "replica",
+            "fallback_engine",
+            "base_url"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:84d3c60df07c74633922bef60980aedaf9d521a43fc8ee8e9371ee4bc6b744ea"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_local_storage",
+      "title": "Local Storage Boundary",
+      "commitments": [
+        {
+          "block_id": "b_pet_arch_007",
+          "type": "invariant",
+          "text": "Local Room storage is a record cache for history_table and vitals_table, not an authoritative triage decision source.",
+          "rationale": "The app reads local history and recent temperatures, but diagnosis generation still depends on the backend call.",
+          "terms": [
+            "room_cache",
+            "history_table",
+            "vitals_table",
+            "authoritative_source"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:d760d5768cc1c71a7f521e4798c70ab05d6c1e7389ef52c0825db115433f0c81"
+        },
+        {
+          "block_id": "b_pet_arch_008",
+          "type": "constraint",
+          "text": "The client must not execute the multi-step triage tree offline or cache partially completed decision branches for later merge.",
+          "rationale": "The current design contains no offline decision tree state, queue, or merge semantics.",
+          "terms": [
+            "decision_tree",
+            "offline_flow",
+            "partial_branch",
+            "merge"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:70a068592e2d83426cfdcb8759d78f2b517cae926a7a3af69379dc4179818a21"
+        },
+        {
+          "block_id": "b_pet_arch_009",
+          "type": "mechanism",
+          "text": "Recent temperature history is rendered locally from vitals_table for dashboard display and does not trigger backend recomputation by itself.",
+          "rationale": "HomeScreen reads the latest VitalRecord entries from Room LiveData.",
+          "terms": [
+            "recent_vitals",
+            "dashboard",
+            "vitals_table"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:43e9a4e14737b567cc48b09aa8d1e73176efb0d779db68e5a6081aaf40c1d19d"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_backend_contract",
+      "title": "Backend Decision Contract",
+      "commitments": [
+        {
+          "block_id": "b_pet_arch_010",
+          "type": "interface",
+          "text": "The diagnosis engine accepts description, species, and optional temperature in one synchronous request and returns risk_level, suspected_conditions, rationale, and next_steps in one response.",
+          "rationale": "This is the concrete request and response shape encoded in VetNet CaseRequest and DiagnosisResponse.",
+          "terms": [
+            "diagnose_request",
+            "risk_level",
+            "suspected_conditions",
+            "rationale",
+            "next_steps"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:48df8b40413402b1cf8512fd3774289b97b9e7e050eb2b02c55182f8bc641f8c"
+        },
+        {
+          "block_id": "b_pet_arch_011",
+          "type": "decision",
+          "text": "The first suspected condition from the backend response is persisted as the local condition summary shown in the history view.",
+          "rationale": "MainActivity persists response.suspected_conditions.firstOrNull() as the condition field.",
+          "terms": [
+            "local_condition_summary",
+            "history_view",
+            "suspected_conditions"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:47284197f07211921f3305da578e6ef2187ce61f716305faa1b6ea9e3eb388c3"
+        },
+        {
+          "block_id": "b_pet_arch_012",
+          "type": "constraint",
+          "text": "The client treats the backend response as the only valid diagnosis payload and does not merge server output with locally edited medical state.",
+          "rationale": "The original design has no client-side conflict handling or multi-source reconciliation.",
+          "terms": [
+            "server_authority",
+            "diagnosis_payload",
+            "conflict_handling"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:963806e96d038352b96fcab6578788bbf1c494c6b17e3f84793aeba444f51b0f"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_sync_model",
+      "title": "Synchronization Model",
+      "commitments": [
+        {
+          "block_id": "b_pet_arch_013",
+          "type": "invariant",
+          "text": "The v1 system has no background sync queue, no retry ledger, and no per-record version vector for triage data.",
+          "rationale": "Neither the Android client nor the backend adapter model deferred writes or replicated history reconciliation.",
+          "terms": [
+            "background_sync",
+            "retry_queue",
+            "version_vector",
+            "replication"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:ce24f92524c6f42576a232a8ed7d736707709407ae70b16b9144b94020436397"
+        },
+        {
+          "block_id": "b_pet_arch_014",
+          "type": "risk",
+          "text": "Any loss of connectivity during triage blocks completion because the architecture couples diagnosis generation to immediate server availability.",
+          "rationale": "The operator cannot obtain a result if VetNet fails.",
+          "terms": [
+            "availability_risk",
+            "connectivity_loss",
+            "server_availability"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:04c9e20d04543e675499a29d2d9e7542567deacb027d91315246f2e698728ecb"
+        },
+        {
+          "block_id": "b_pet_arch_015",
+          "type": "constraint",
+          "text": "The system assumes a single authoritative write path, so concurrent edits from another clinic are outside the v1 design envelope.",
+          "rationale": "No multi-clinic or multi-writer protocol exists in the original implementation.",
+          "terms": [
+            "single_writer",
+            "multi_clinic",
+            "concurrent_edit"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:ec6c9b26ea8bcbd8484c1d40dcea0682f8fc6e0a252c1af5c6b8e8b064e9eb75"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_operational_risks",
+      "title": "Operational Risks and Gaps",
+      "commitments": [
+        {
+          "block_id": "b_pet_arch_016",
+          "type": "risk",
+          "text": "The mobile adapter is coupled to one HTTP diagnosis endpoint and one backend model runtime, which creates a single point of failure for all triage decisions.",
+          "rationale": "VetNet configures exactly one BASE_URL and one OkHttp request path.",
+          "terms": [
+            "http_endpoint",
+            "single_point_of_failure",
+            "okhttp"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:7e9bb322e55f4c0c1148b2e1f6a411482107d8325a4cece745aefc40a3b6a364"
+        },
+        {
+          "block_id": "b_pet_arch_017",
+          "type": "risk",
+          "text": "Because no pending report exists, operators must re-enter symptoms after a timeout or disconnect, increasing abandonment and data loss risk.",
+          "rationale": "The app neither stores an offline draft nor resumes failed submissions.",
+          "terms": [
+            "timeout",
+            "reentry_risk",
+            "data_loss",
+            "abandonment"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:208e1f4b9ae520c31ae3c0e54eb735f777c592309f263fb1bab6930aee618085"
+        },
+        {
+          "block_id": "b_pet_arch_018",
+          "type": "open_question",
+          "text": "Conflict resolution, offline report drafting, and multi-clinic replication are intentionally undefined in v1.",
+          "rationale": "These gaps are exactly the seams that an offline-first evolution would need to redesign.",
+          "terms": [
+            "conflict_resolution",
+            "offline_report",
+            "multi_clinic_replication"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:8d303ec71947212ddfcf87c7ad26e4e841a68759d2a11d31670c69e6b15d207a"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created_by": "human",
+    "created_at": "2026-04-26T00:00:00Z",
+    "tags": [
+      "pet-system",
+      "v1",
+      "seed",
+      "seed_rev_001"
+    ],
+    "notes": "Manual translation of the original petSystem online-first architecture. This is the approved seed baseline for future offline-first P10 evolution."
+  }
+}

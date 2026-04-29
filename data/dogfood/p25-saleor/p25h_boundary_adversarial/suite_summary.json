@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-04-28T07:51:33.818Z",
+  "cases": [
+    {
+      "case": "forbidden_migration_creation",
+      "purpose": "Covers new forbidden file creation, not covered by P25d existing-file modification.",
+      "expected_boundary_behavior": "blocking + revert_file",
+      "status": "success",
+      "attempt_1_verdict": "requires_reverse_issue",
+      "attempt_2_verdict": "pass",
+      "file_reverted": "saleor/checkout/migrations/9999_auto_eco_fee.py"
+    },
+    {
+      "case": "review_vs_forbidden",
+      "purpose": "Covers simultaneous modifications to allowed, review-required, and forbidden zones, verifying correct severity stratification and targeted recovery.",
+      "expected_boundary_behavior": "tax=review_required, discount=blocking, checkout=pass -> overall blocking. Recovery drops to requires_review.",
+      "status": "success",
+      "attempt_1_verdict": "requires_reverse_issue",
+      "attempt_2_verdict": "requires_review",
+      "file_reverted": "saleor/discount/models.py",
+      "files_preserved": [
+        "saleor/checkout/models.py",
+        "saleor/tax/models.py"
+      ]
+    }
+  ]
+}

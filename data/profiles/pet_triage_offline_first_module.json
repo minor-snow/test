@@ -1,0 +1,54 @@
+{
+  "profile_id": "pet_triage_offline_first_module",
+  "artifact_type": "ModuleSpec",
+  "domain_name": "Pet Triage Offline-First Module Boundaries",
+
+  "allowed_concepts": [
+    "offline decision tree", "pending report", "sync queue", "retry ledger",
+    "conflict resolver", "clinic replica", "audit event", "connectivity observer",
+    "user conflict review", "vector clock", "last-writer-wins", "idempotency",
+    "room database", "background sync", "FIFO", "exponential backoff",
+    "module boundary", "dependency", "failure mode", "test case",
+    "owned data", "responsibility", "interface contract"
+  ],
+
+  "required_concepts": [
+    { "concept": "offline decision tree", "aliases": ["OfflineDecisionTreeRunner", "local triage engine", "decision tree runner"], "required": true },
+    { "concept": "pending report repository", "aliases": ["PendingReportRepository", "report store", "pending report store"], "required": true },
+    { "concept": "sync queue manager", "aliases": ["SyncQueueManager", "sync queue", "upload queue manager"], "required": true },
+    { "concept": "retry ledger", "aliases": ["RetryLedger", "retry log", "retry tracking"], "required": true },
+    { "concept": "conflict resolver", "aliases": ["ConflictResolver", "merge resolver", "conflict handler"], "required": true },
+    { "concept": "clinic replica client", "aliases": ["ClinicReplicaClient", "clinic client", "replica client"], "required": true },
+    { "concept": "audit event writer", "aliases": ["AuditEventWriter", "audit logger", "audit writer"], "required": true },
+    { "concept": "connectivity observer", "aliases": ["ConnectivityObserver", "network observer", "connectivity monitor"], "required": true },
+    { "concept": "user conflict review", "aliases": ["UserConflictReviewPresenter", "conflict review UI", "conflict presenter"], "required": true }
+  ],
+
+  "forbidden_generic_phrases": [
+    "enhance user experience",
+    "leverage cutting-edge technology",
+    "provide robust solution",
+    "world-class platform",
+    "best-in-class",
+    "synergy"
+  ],
+
+  "required_sections": [
+    { "title": "Offline Execution Modules", "aliases": ["Offline Modules", "Client Execution", "Triage Execution"] },
+    { "title": "Persistence Modules", "aliases": ["Storage Modules", "Data Persistence", "Repository Modules"] },
+    { "title": "Sync Modules", "aliases": ["Synchronization Modules", "Sync Infrastructure", "Background Sync"] },
+    { "title": "Conflict Resolution Modules", "aliases": ["Conflict Modules", "Merge Modules", "Resolution Modules"] },
+    { "title": "Infrastructure Modules", "aliases": ["Support Modules", "Cross-Cutting Modules", "Utility Modules"] }
+  ],
+
+  "preferred_block_types": [
+    "module", "invariant", "mechanism", "constraint", "decision", "risk"
+  ],
+
+  "quality_rubric": {
+    "min_sections": 4,
+    "min_blocks": 20,
+    "max_blocks": 35,
+    "min_required_concept_coverage": 0.8
+  }
+}

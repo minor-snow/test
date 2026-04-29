@@ -1,0 +1,127 @@
+{
+  "schema_version": "p27_baseline@1.0.0",
+  "frozen_at": "2026-04-29T01:50:00Z",
+  "phase": "P27-1",
+  "status": "frozen",
+  "core_3": {
+    "saleor-django-commerce": {
+      "pinned_commit": "cf9b59513d0a8c83d410eb5b176e5a55de018797",
+      "category": "django_commerce",
+      "layout": {
+        "primary_layout": "django_project",
+        "package_layout": "django_app_layout",
+        "confidence": "high"
+      },
+      "frameworks": [
+        { "name": "django", "kind": "web_framework", "confidence": "high" },
+        { "name": "celery", "kind": "task_queue", "confidence": "high" },
+        { "name": "click", "kind": "cli_framework", "confidence": "high" },
+        { "name": "pytest", "kind": "test_framework", "confidence": "medium" }
+      ],
+      "project_roles": [
+        { "role": "commerce_backend", "confidence": "high" },
+        { "role": "cli_application", "confidence": "high" }
+      ],
+      "risk_preset": {
+        "preset": "django_commerce",
+        "validation": "validated",
+        "confidence": "high",
+        "suggested_forbidden_count": 1,
+        "suggested_review_count": 9,
+        "dormant_count": 1
+      },
+      "metrics": {
+        "python_file_count": 4248,
+        "classified_ratio": 1.0,
+        "import_observations": 12610,
+        "test_mappings": 977,
+        "high_confidence_test_count": 120,
+        "medium_confidence_test_count": 120,
+        "sensitive_zones": 14,
+        "manifests": 3,
+        "manifest_count": 3
+      }
+    },
+    "fastapi-realworld": {
+      "pinned_commit": "2318463f51e2f0584508c6d7fc6ef2640c9101b0",
+      "category": "fastapi_service",
+      "layout": {
+        "primary_layout": "api_service",
+        "package_layout": "flat_package",
+        "confidence": "medium"
+      },
+      "frameworks": [
+        { "name": "fastapi", "kind": "web_framework", "confidence": "high" },
+        { "name": "sqlalchemy", "kind": "orm", "confidence": "high" },
+        { "name": "click", "kind": "cli_framework", "confidence": "medium" },
+        { "name": "pytest", "kind": "test_framework", "confidence": "medium" },
+        { "name": "httpx", "kind": "http_client", "confidence": "medium" }
+      ],
+      "project_roles": [
+        { "role": "service_backend", "confidence": "high" },
+        { "role": "python_sdk_library", "confidence": "medium" }
+      ],
+      "risk_preset": {
+        "preset": "fastapi_service",
+        "validation": "validated",
+        "confidence": "high",
+        "suggested_forbidden_count": 1,
+        "suggested_review_count": 5,
+        "dormant_count": 1
+      },
+      "metrics": {
+        "python_file_count": 60,
+        "classified_ratio": 1.0,
+        "import_observations": 174,
+        "test_mappings": 29,
+        "high_confidence_test_count": 4,
+        "medium_confidence_test_count": 0,
+        "sensitive_zones": 2,
+        "manifests": 3,
+        "manifest_count": 3
+      }
+    },
+    "httpx-sdk": {
+      "pinned_commit": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+      "category": "python_sdk_library",
+      "layout": {
+        "primary_layout": "library_package",
+        "package_layout": "flat_package",
+        "confidence": "high"
+      },
+      "frameworks": [
+        { "name": "click", "kind": "cli_framework", "confidence": "high" },
+        { "name": "pytest", "kind": "test_framework", "confidence": "medium" }
+      ],
+      "project_roles": [
+        { "role": "python_sdk_library", "confidence": "high" },
+        { "role": "http_client_library", "confidence": "high" }
+      ],
+      "risk_preset": {
+        "preset": "python_sdk_library",
+        "validation": "validated",
+        "confidence": "high",
+        "suggested_forbidden_count": 0,
+        "suggested_review_count": 7,
+        "dormant_count": 0
+      },
+      "metrics": {
+        "python_file_count": 60,
+        "classified_ratio": 1.0,
+        "import_observations": 223,
+        "test_mappings": 21,
+        "high_confidence_test_count": 13,
+        "medium_confidence_test_count": 0,
+        "sensitive_zones": 1,
+        "manifests": 2,
+        "manifest_count": 2
+      }
+    }
+  },
+  "regression_anchors": {
+    "vitest_total": 1641,
+    "vitest_files": 111,
+    "tsc_clean": true,
+    "core_3_green": true
+  }
+}

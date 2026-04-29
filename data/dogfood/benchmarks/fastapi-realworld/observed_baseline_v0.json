@@ -1,0 +1,337 @@
+{
+  "schema_version": "observed_baseline@0.1.0",
+  "benchmark_id": "fastapi-realworld",
+  "category": "fastapi_service",
+  "pinned_commit": "2318463f51e2f0584508c6d7fc6ef2640c9101b0",
+  "generated_at": "2026-04-29T02:10:28.123Z",
+  "check_mode": "no_diff_baseline",
+  "layout_signals": {
+    "status": "observed",
+    "count": 5,
+    "items": [
+      {
+        "path": "bucket:source",
+        "evidence": "36 files"
+      },
+      {
+        "path": "bucket:migration",
+        "evidence": "1 files"
+      },
+      {
+        "path": "bucket:config",
+        "evidence": "2 files"
+      },
+      {
+        "path": "bucket:test",
+        "evidence": "23 files"
+      },
+      {
+        "path": "bucket:unknown",
+        "evidence": "1 files"
+      }
+    ],
+    "primary_layout": "api_service",
+    "package_layout": "flat_package",
+    "layout_confidence": "medium",
+    "layout_evidence": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: app"
+      },
+      {
+        "signal": "app_dir_without_manage_py",
+        "weight": "moderate",
+        "evidence": "app/ directory without Django manage.py"
+      },
+      {
+        "signal": "alembic_dir_found",
+        "weight": "moderate",
+        "evidence": "alembic/ migration directory (non-Django)"
+      }
+    ]
+  },
+  "framework_signals": {
+    "status": "observed",
+    "count": 5,
+    "items": [
+      {
+        "name": "fastapi",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "fastapi found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "fastapi imported in source files"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "app/ directory without manage.py (service pattern)"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "sqlalchemy found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "sqlalchemy imported in source files"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "alembic/ migration directory present"
+          }
+        ]
+      },
+      {
+        "name": "httpx",
+        "kind": "http_client",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpx found in dependency manifests"
+          }
+        ]
+      }
+    ]
+  },
+  "project_role_signals": {
+    "status": "observed",
+    "count": 2,
+    "items": [
+      {
+        "role": "service_backend",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as api_service"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "app/ directory without manage.py (service layout)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "Alembic migrations (service DB pattern)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "api/ directory present"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ]
+  },
+  "dependency_manifests": {
+    "status": "observed",
+    "count": 3,
+    "items": [
+      {
+        "source": "pyproject.toml",
+        "package_count": 13,
+        "confidence": "high"
+      },
+      {
+        "source": "requirements.txt",
+        "package_count": 64,
+        "confidence": "high"
+      },
+      {
+        "source": "uv.lock",
+        "package_count": 64,
+        "confidence": "high"
+      }
+    ]
+  },
+  "test_mappings": {
+    "status": "observed",
+    "count": 29,
+    "items": [
+      {
+        "source": "app/api/routes/articles.py",
+        "test_count": 5,
+        "confidence": "high"
+      },
+      {
+        "source": "app/api/routes/comments.py",
+        "test_count": 3,
+        "confidence": "high"
+      },
+      {
+        "source": "app/api/routes/profiles.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "app/api/routes/tags.py",
+        "test_count": 1,
+        "confidence": "high"
+      }
+    ]
+  },
+  "sensitive_zones": {
+    "status": "observed",
+    "count": 2,
+    "items": [
+      {
+        "category": "authentication",
+        "severity": "high",
+        "path_count": 1
+      },
+      {
+        "category": "security",
+        "severity": "high",
+        "path_count": 1
+      }
+    ]
+  },
+  "unknowns": {
+    "status": "observed",
+    "count": 1,
+    "items": [
+      {
+        "category": "unclassified_python_file",
+        "count": 1,
+        "classification": "actionable"
+      },
+      {
+        "category": "scope_granularity_limit",
+        "count": 0,
+        "classification": "intrinsic"
+      }
+    ]
+  },
+  "risk_preset": {
+    "preset": "fastapi_service",
+    "validation": "validated",
+    "confidence": "high",
+    "matched_signals": [
+      "layout: api_service / flat_package (medium)",
+      "framework: fastapi / web_framework (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (medium)",
+      "framework: sqlalchemy / orm (high)",
+      "framework: httpx / http_client (medium)",
+      "project_role: service_backend (high)",
+      "project_role: python_sdk_library (medium)",
+      "sensitive_zone: authentication (high, 1 paths)",
+      "sensitive_zone: security (high, 1 paths)"
+    ],
+    "suggested_review_count": 5,
+    "suggested_forbidden_count": 1,
+    "dormant_count": 1,
+    "suggested_review": [
+      {
+        "pattern": "**/auth*",
+        "reason": "Authentication logic requires human review",
+        "severity": "high",
+        "matched_path_count": 1
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "Security module requires human review",
+        "severity": "high",
+        "matched_path_count": 1
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "Application configuration affects system behavior",
+        "severity": "medium",
+        "matched_path_count": 1
+      },
+      {
+        "pattern": "**/db/**",
+        "reason": "Database layer changes affect data integrity",
+        "severity": "high",
+        "matched_path_count": 3
+      },
+      {
+        "pattern": "**/deps*",
+        "reason": "Dependency injection affects route behavior",
+        "severity": "medium",
+        "matched_path_count": 1
+      }
+    ],
+    "suggested_forbidden": [
+      {
+        "pattern": "alembic/**",
+        "reason": "Database migrations should not be auto-generated by AI agents",
+        "severity": "critical",
+        "matched_path_count": 4
+      }
+    ],
+    "dormant_patterns": [
+      {
+        "pattern": "**/middleware*",
+        "reason": "No middleware files observed"
+      }
+    ]
+  },
+  "quality": {
+    "python_file_count": 60,
+    "classified_count": 60,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 174,
+    "project_import_count": 90,
+    "declared_package_count": 52,
+    "undeclared_package_count": 5,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 29,
+    "high_confidence_test_count": 4,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 2,
+    "sensitive_file_count": 2,
+    "manifest_count": 3,
+    "low_confidence_manifest_count": 0
+  }
+}

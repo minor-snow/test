@@ -1,0 +1,3654 @@
+{
+  "schema_version": "agent_scope_lite.v1",
+  "scope_id": "scope-lite-9e7063ed5a1d",
+  "source_contract_id": "4fb2d3c9-9e2a-4011-8a4b-ca861917e43a",
+  "source_observations_hash": "sha256:652d110d1b22c54aa8d2d495b1e7f7990a0aca350fedc683d5dece4daa025282",
+  "intent": "Add",
+  "allowed_files": [
+    "saleor/checkout/__init__.py",
+    "saleor/checkout/actions.py",
+    "saleor/checkout/base_calculations.py",
+    "saleor/checkout/calculations.py",
+    "saleor/checkout/checkout_cleaner.py",
+    "saleor/checkout/complete_checkout.py",
+    "saleor/checkout/delivery_context.py",
+    "saleor/checkout/error_codes.py",
+    "saleor/checkout/fetch.py",
+    "saleor/checkout/lock_objects.py",
+    "saleor/checkout/models.py",
+    "saleor/checkout/payment_utils.py",
+    "saleor/checkout/problems.py",
+    "saleor/checkout/search/__init__.py",
+    "saleor/checkout/search/indexing.py",
+    "saleor/checkout/search/loaders.py",
+    "saleor/checkout/tasks.py",
+    "saleor/checkout/tests/__init__.py",
+    "saleor/checkout/tests/fixtures/__init__.py",
+    "saleor/checkout/tests/fixtures/benchmark.py",
+    "saleor/checkout/tests/fixtures/checkout.py",
+    "saleor/checkout/tests/fixtures/checkout_info.py",
+    "saleor/checkout/tests/fixtures/checkout_line.py",
+    "saleor/checkout/tests/fixtures/checkout_line_info.py",
+    "saleor/checkout/tests/fixtures/checkout_with_discount.py",
+    "saleor/checkout/tests/fixtures/checkout_with_payment.py",
+    "saleor/checkout/tests/fixtures/checkout_with_prices.py",
+    "saleor/checkout/tests/fixtures/checkout_with_transaction.py",
+    "saleor/checkout/tests/test_actions.py",
+    "saleor/checkout/tests/test_associate_checkout_with_account.py",
+    "saleor/checkout/tests/test_base_calculations.py",
+    "saleor/checkout/tests/test_calculations.py",
+    "saleor/checkout/tests/test_cart.py",
+    "saleor/checkout/tests/test_checkout.py",
+    "saleor/checkout/tests/test_checkout_complete.py",
+    "saleor/checkout/tests/test_delivery_assignent_to_checkout.py",
+    "saleor/checkout/tests/test_delivery_context.py",
+    "saleor/checkout/tests/test_fetch.py",
+    "saleor/checkout/tests/test_migrations_tasks.py",
+    "saleor/checkout/tests/test_order_from_checkout.py",
+    "saleor/checkout/tests/test_payment_utils.py",
+    "saleor/checkout/tests/test_search_indexing.py",
+    "saleor/checkout/tests/test_search_loaders.py",
+    "saleor/checkout/tests/test_tasks.py",
+    "saleor/checkout/tests/test_utils.py",
+    "saleor/checkout/tests/utils.py",
+    "saleor/checkout/tests/webhooks/__init__.py",
+    "saleor/checkout/tests/webhooks/static_payloads/__init__.py",
+    "saleor/checkout/tests/webhooks/static_payloads/test_calculate_taxes.py",
+    "saleor/checkout/tests/webhooks/static_payloads/test_exclude_shipping.py",
+    "saleor/checkout/tests/webhooks/subscriptions/__init__.py",
+    "saleor/checkout/tests/webhooks/subscriptions/test_calculate_taxes.py",
+    "saleor/checkout/tests/webhooks/subscriptions/test_exclude_shipping.py",
+    "saleor/checkout/tests/webhooks/subscriptions/test_list_shipping_methods.py",
+    "saleor/checkout/tests/webhooks/test_calculate_taxes.py",
+    "saleor/checkout/tests/webhooks/test_exclude_shipping.py",
+    "saleor/checkout/tests/webhooks/test_list_shipping_methods.py",
+    "saleor/checkout/utils.py",
+    "saleor/checkout/webhooks/__init__.py",
+    "saleor/checkout/webhooks/calculate_taxes.py",
+    "saleor/checkout/webhooks/exclude_shipping.py",
+    "saleor/checkout/webhooks/list_shipping_methods.py",
+    "saleor/graphql/checkout/__init__.py",
+    "saleor/graphql/checkout/dataloaders/__init__.py",
+    "saleor/graphql/checkout/dataloaders/calculations.py",
+    "saleor/graphql/checkout/dataloaders/checkout_delivery.py",
+    "saleor/graphql/checkout/dataloaders/checkout_infos.py",
+    "saleor/graphql/checkout/dataloaders/models.py",
+    "saleor/graphql/checkout/dataloaders/problems.py",
+    "saleor/graphql/checkout/dataloaders/promotion_rule_infos.py",
+    "saleor/graphql/checkout/enums.py",
+    "saleor/graphql/checkout/filters.py",
+    "saleor/graphql/checkout/mutations/__init__.py",
+    "saleor/graphql/checkout/mutations/checkout_add_promo_code.py",
+    "saleor/graphql/checkout/mutations/checkout_billing_address_update.py",
+    "saleor/graphql/checkout/mutations/checkout_complete.py",
+    "saleor/graphql/checkout/mutations/checkout_create.py",
+    "saleor/graphql/checkout/mutations/checkout_create_from_order.py",
+    "saleor/graphql/checkout/mutations/checkout_customer_attach.py",
+    "saleor/graphql/checkout/mutations/checkout_customer_detach.py",
+    "saleor/graphql/checkout/mutations/checkout_customer_note_update.py",
+    "saleor/graphql/checkout/mutations/checkout_delete.py",
+    "saleor/graphql/checkout/mutations/checkout_delivery_method_update.py",
+    "saleor/graphql/checkout/mutations/checkout_email_update.py",
+    "saleor/graphql/checkout/mutations/checkout_language_code_update.py",
+    "saleor/graphql/checkout/mutations/checkout_line_delete.py",
+    "saleor/graphql/checkout/mutations/checkout_lines_add.py",
+    "saleor/graphql/checkout/mutations/checkout_lines_delete.py",
+    "saleor/graphql/checkout/mutations/checkout_lines_update.py",
+    "saleor/graphql/checkout/mutations/checkout_remove_promo_code.py",
+    "saleor/graphql/checkout/mutations/checkout_shipping_address_update.py",
+    "saleor/graphql/checkout/mutations/checkout_shipping_method_update.py",
+    "saleor/graphql/checkout/mutations/order_create_from_checkout.py",
+    "saleor/graphql/checkout/mutations/utils.py",
+    "saleor/graphql/checkout/resolvers.py",
+    "saleor/graphql/checkout/schema.py",
+    "saleor/graphql/checkout/sorters.py",
+    "saleor/graphql/checkout/tests/__init__.py",
+    "saleor/graphql/checkout/tests/benchmark/__init__.py",
+    "saleor/graphql/checkout/tests/benchmark/test_checkout.py",
+    "saleor/graphql/checkout/tests/benchmark/test_checkout_mutations.py",
+    "saleor/graphql/checkout/tests/benchmark/test_checkouts.py",
+    "saleor/graphql/checkout/tests/benchmark/test_homepage.py",
+    "saleor/graphql/checkout/tests/deprecated/__init__.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout_billing_address_update.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout_complete.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout_create.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout_customer_attach.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout_email_update.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout_language_code_update.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout_line_delete.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout_lines_add.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout_lines_update.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout_promo_codes.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout_shipping_address_update.py",
+    "saleor/graphql/checkout/tests/deprecated/test_checkout_shipping_method_update.py",
+    "saleor/graphql/checkout/tests/deprecated/test_customer_detach_mutation.py",
+    "saleor/graphql/checkout/tests/mutations/__init__.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_add_promo_code.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_billing_address_update.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_complete.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_complete_price_override.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_complete_with_payment.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_complete_with_transactions.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_create.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_create_from_order.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_customer_attach.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_customer_detach.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_customer_note_update.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_delete.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_delivery_method_update.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_email_update.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_language_code_update.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_line_delete.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_lines_add.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_lines_delete.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_lines_update.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_remove_promo_code.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_shipping_address_update.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_shipping_method_update.py",
+    "saleor/graphql/checkout/tests/mutations/test_checkout_shipping_method_update_nullable_shipping_method_id.py",
+    "saleor/graphql/checkout/tests/mutations/test_order_create_from_checkout.py",
+    "saleor/graphql/checkout/tests/mutations/test_utils.py",
+    "saleor/graphql/checkout/tests/test_checkout.py",
+    "saleor/graphql/checkout/tests/test_checkout_discount_expiration.py",
+    "saleor/graphql/checkout/tests/test_checkout_filters.py",
+    "saleor/graphql/checkout/tests/test_checkout_line_problems.py",
+    "saleor/graphql/checkout/tests/test_checkout_no_shipping_needed.py",
+    "saleor/graphql/checkout/tests/test_checkout_price_expiration.py",
+    "saleor/graphql/checkout/tests/test_checkout_problems.py",
+    "saleor/graphql/checkout/tests/test_checkout_promo_codes.py",
+    "saleor/graphql/checkout/tests/test_checkouts_query.py",
+    "saleor/graphql/checkout/tests/test_utils.py",
+    "saleor/graphql/checkout/tests/utils.py",
+    "saleor/graphql/checkout/types.py",
+    "saleor/graphql/checkout/utils.py"
+  ],
+  "review_required_files": [
+    {
+      "path": "saleor/order/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/actions.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/base_calculations.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/calculations.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/delivery_context.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/error_codes.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/events.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/fetch.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/interface.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/lock_objects.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/models.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/notifications.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/search.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tasks.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/benchmark/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/benchmark/test_fetch_order_prices.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/fixtures/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/fixtures/benchmark.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/fixtures/draft_order.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/fixtures/fulfillment.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/fixtures/order_line.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/fixtures/order.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_actions.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_base_order_line_total.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_base_order_total.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_calculate_prices.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_calculations.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_fetch_order_prices_line_price_expiration.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_fetch_order_prices_tax_app.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_fetch_order_prices.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_fetch.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_fulfillments_actions.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_notifications.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_order_actions_create_fulfillments_for_returned_products.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_order_actions_refund_products.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_order_actions.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_order_search.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_order_utils.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_order.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_refresh_all_order_base_prices_and_discounts.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_refresh_order_base_prices_and_discounts.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_shipping_context.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/test_tasks.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/webhooks/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/webhooks/static_payloads/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/webhooks/static_payloads/test_order_calculate_taxes.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/webhooks/subscriptions/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/webhooks/subscriptions/test_exclude_shipping.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/webhooks/subscriptions/test_order_calculate_taxes.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/webhooks/test_exclude_shipping_cache.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/webhooks/test_exclude_shipping.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/tests/webhooks/test_order_calculate_taxes.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/utils.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/webhooks/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/webhooks/exclude_shipping.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/order/webhooks/order_calculate_taxes.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/calculations/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/calculations/checkout.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/calculations/order.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/error_codes.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/models.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/tests/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/tests/fixtures/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/tests/fixtures/tax_class.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/tests/fixtures/utils.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/tests/test_calculations.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/tests/test_checkout_calculations.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/tests/test_order_calculations.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/tests/test_utils.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/tests/webhooks/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/tests/webhooks/test_parser.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/tests/webhooks/test_shared.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/utils.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/webhooks/__init__.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/webhooks/parser.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    },
+    {
+      "path": "saleor/tax/webhooks/shared.py",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    }
+  ],
+  "forbidden_patterns": [
+    {
+      "pattern": ".pantheon/**",
+      "reason": "Pantheon protocol artifacts — do not modify."
+    },
+    {
+      "pattern": ".cursor/**",
+      "reason": "Cursor adapter artifacts — managed by Pantheon."
+    },
+    {
+      "pattern": ".git/**",
+      "reason": "Protected by pantheon.json"
+    },
+    {
+      "pattern": "node_modules/**",
+      "reason": "Protected by pantheon.json"
+    },
+    {
+      "pattern": "saleor/payment/**",
+      "reason": "Forbidden by explicit boundary proposal."
+    },
+    {
+      "pattern": "saleor/account/**",
+      "reason": "Forbidden by explicit boundary proposal."
+    },
+    {
+      "pattern": "saleor/discount/**",
+      "reason": "Forbidden by explicit boundary proposal."
+    },
+    {
+      "pattern": "saleor/plugins/**",
+      "reason": "Forbidden by explicit boundary proposal."
+    },
+    {
+      "pattern": "saleor/core/settings.py",
+      "reason": "Forbidden by explicit boundary proposal."
+    },
+    {
+      "pattern": "**/migrations/**",
+      "reason": "Forbidden by explicit boundary proposal."
+    }
+  ],
+  "required_tests": [],
+  "instructions": [
+    "Review changes to sensitive paths",
+    "Add path_roles in pantheon.json for 4458 file(s) in the 'unknown' bucket.",
+    "4337 file(s) use unsupported languages. Add language support only if they are in governance scope."
+  ],
+  "violation_hints": [
+    {
+      "path": "saleor/checkout/migrations/0001_auto_20170113_0435.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0001_initial.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0002_auto_20161014_1221.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0002_auto_20170206_0407.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0003_auto_20170906_0556.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0004_auto_20171129_1004.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0005_auto_20180108_0814.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0006_auto_20180221_0825.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0007_merge_cart_with_checkout.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0008_rename_tables.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0009_cart_translated_discount_name.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0010_auto_20180822_0720.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0011_auto_20180913_0817.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0012_remove_cartline_data.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0013_auto_20180913_0841.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0014_auto_20180921_0751.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0015_auto_20181017_1346.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0016_auto_20190112_0506.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0017_auto_20190130_0207.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0018_auto_20190410_0132.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0019_checkout_gift_cards.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0020_auto_20190723_0722.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0021_django_price_2.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0022_auto_20191219_1137.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0023_checkout_country.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0024_auto_20200120_0154.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0025_auto_20200221_0257.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0026_auto_20200709_1102.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0027_auto_20200810_1415.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0028_auto_20200824_1019.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0029_auto_20200904_0529.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0030_checkout_channel_listing.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0031_auto_20210303_1045.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0032_auto_20210308_1135.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0033_checkout_language_code.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0034_remove_checkout_quantity.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0035_alter_checkout_language_code.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0035_checkout_collection_point.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0036_alter_checkout_language_code.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0036_merge_20210824_1103.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0037_merge_20210903_1013.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0037_remove_empty_lines.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0038_merge_20210903_1048.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0039_alter_checkout_email.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0040_add_handle_checkouts_permission.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0041_checkoutline_price_override.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0042_rename_created_checkout_created_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0043_add_token_old_id_created_at_to_checkout_line.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0043_alter_checkout_voucher_code.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0044_fulfill_checkout_line_new_fields.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0045_alter_checkoutline_created_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0046_alter_checkout_line_pk.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0047_merge_20220519_1029.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0048_alter_checkoutline_options.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0049_auto_20220621_0850.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0050_auto_20220713_1057.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0051_auto_20220713_1103.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0052_alter_checkoutline_currency.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0053_checkout_tax_exemption.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0054_alter_checkout_options.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0055_add_last_change_idx.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0055_create_checkout_metadata_model.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0056_move_checkout_metadata_to_separate_model.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0057_remove_metadata_from_checkout_model_state.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0058_auto_20230313_1602.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0058_merge_0055_add_last_change_idx.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0059_merge_0058.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0060_fix_charge_and_authorize_status_for_empty_checkouts.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0061_checkout_last_transaction_modified_at_and_refundable.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0062_update_checkout_last_transaction_modified_at_and_refundable.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0063_auto_20240402_1114.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0063_checkout_base_total_and_subtotal.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0064_checkout_is_voucher_usage_increased.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0064_checkoutline_is_gift.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0065_checkout_completing_started_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0065_checkout_tax_error.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0066_merge_0063_auto_20240402_1114_0065_checkout_tax_error.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0067_auto_20240405_0756.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0068_merge_20240424_1209.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0069_merge_20240514_1008.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0070_checkoutline_undiscounted_unit_price_amount.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0071_propagate_line_unidscounted_unit_price.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0072_alter_checkoutline_undiscounted_unit_price_amount.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0072_propagate_line_undiscounted_unit_price.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0073_checkout_external_shipping_method_id_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0073_merge_20241107_1646.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0074_alter_checkout_external_shipping_method_id.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0074_checkoutline_prior_unit_price_amount.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0075_alter_checkout_base_subtotal_amount_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0075_merge_20250210_1203.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0076_checkout_discount_expiration.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0076_checkout_save_billing_address_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0077_checkout_idx_checkout_created_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0077_merge_20250303_0958.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0078_alter_checkoutline_metadata_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0078_clean_duplicated_gift_lines.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0078_merge_20250507_0613.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0079_alter_checkoutline_prior_unit_price_amount_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0080_alter_checkout_external_shipping_method_id.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0080_merge_20250527_1210.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0081_merge_20251103_0924.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0081_merge_20251107_1134.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0082_merge_20251107_1235.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0082_merge_20251211_1339.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0083_checkout_last_automatic_completion_attempt.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0083_fix_shared_address_instances.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0084_checkout_automaticcompletionattempt_idx.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0085_checkout_delivery_methods_stale_at_checkoutdelivery_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0086_merge_20251212_0956.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0087_merge_20251223_1336.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0088_reapply_fix_shared_address_instances.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0089_checkout_search_vector.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0090_checkout_search_index_dirty.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0091_checkout_checkout_tsearch.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0092_alter_checkoutdelivery_checkout.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/0093_propagate_checkout_delivery.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/__init__.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/fix_empty_data_in_lines.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/tasks/__init__.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/tasks/saleor3_20.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/tasks/saleor3_21.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/checkout/migrations/tasks/saleor3_23.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0001_initial.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0002_auto_20150820_1955.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0003_auto_20150825_1433.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0004_order_total.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0005_deliverygroup_last_updated.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0006_deliverygroup_shipping_method.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0007_deliverygroup_tracking_number.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0008_auto_20151026_0820.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0009_auto_20151201_0820.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0010_auto_20160119_0541.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0011_auto_20160207_0534.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0012_auto_20160216_1032.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0013_auto_20160906_0741.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0014_auto_20161028_0955.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0015_auto_20170206_0407.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0016_order_language_code.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0017_auto_20170906_0556.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0018_auto_20170919_0839.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0019_auto_20171109_1423.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0020_auto_20171123_0609.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0021_auto_20171129_1004.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0022_auto_20171205_0428.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0023_auto_20171206_0506.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0024_remove_order_status.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0025_auto_20171214_1015.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0026_auto_20171218_0428.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0027_auto_20180108_0814.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0028_status_fsm.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0029_auto_20180111_0845.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0030_auto_20180118_0605.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0031_auto_20180119_0405.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0032_orderline_is_shipping_required.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0033_auto_20180123_0832.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0034_auto_20180221_1056.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0035_auto_20180221_1057.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0036_remove_order_total_tax.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0037_auto_20180228_0450.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0038_auto_20180228_0451.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0039_auto_20180312_1203.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0040_auto_20180210_0422.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0041_auto_20180222_0458.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0042_auto_20180227_0436.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0043_auto_20180322_0655.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0044_auto_20180326_1055.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0045_auto_20180329_0142.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0046_order_line_taxes.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0047_order_line_name_length.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0048_auto_20180629_1055.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0049_auto_20180719_0520.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0050_auto_20180803_0337.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0050_auto_20180803_0528.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0051_merge_20180807_0704.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0052_auto_20180822_0720.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0053_orderevent.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0054_move_data_to_order_events.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0055_remove_order_note_order_history_entry.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0056_auto_20180911_1541.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0057_orderevent_parameters_new.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0058_remove_orderevent_parameters.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0059_auto_20180913_0841.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0060_auto_20180919_0731.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0061_auto_20180920_0859.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0062_auto_20180921_0949.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0063_auto_20180926_0446.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0064_auto_20181016_0819.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0065_auto_20181017_1346.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0066_auto_20181023_0319.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0067_auto_20181102_1054.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0068_order_checkout_token.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0069_auto_20190225_2305.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0070_drop_update_event_and_rename_events.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0071_order_gift_cards.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0072_django_price_2.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0073_auto_20190829_0249.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0074_auto_20190930_0731.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0075_auto_20191006_1433.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0076_auto_20191018_0554.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0077_auto_20191118_0606.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0078_auto_20200221_0257.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0079_auto_20200225_0237.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0079_auto_20200304_0752.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0080_invoice.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0081_auto_20200406_0456.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0081_merge_20200309_0952.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0082_fulfillmentline_stock.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0083_merge_20200421_0529.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0084_auto_20200522_0522.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0085_delete_invoice.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0086_auto_20200716_1226.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0087_auto_20200810_1415.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0088_auto_20200812_1101.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0089_auto_20200902_1249.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0090_order_channel_listing.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0091_order_redirect_url.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0092_order_unconfirmed.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0093_auto_20201130_1406.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0094_auto_20201221_1128.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0095_auto_20201229_1014.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0096_order_shipping_tax_rate.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0097_auto_20210107_1148.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0098_discounts_relation.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0099_auto_20210209_0856.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0100_auto_20210216_0914.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0101_auto_20210308_1213.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0102_auto_20210310_1552.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0103_auto_20210401_1105.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0104_auto_20210506_0835.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0105_order_total_paid_amount.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0106_origin_and_original.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0107_set_origin_and_original_values.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0108_origin_not_null.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0109_undiscounted_prices.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0110_auto_20210518_0918.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0111_auto_20210518_1357.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0112_auto_20210616_0548.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0113_orderevent_app.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0114_alter_order_language_code.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0114_auto_20210722_1146.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0114_auto_20210726_1116.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0115_alter_order_language_code.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0115_merge_20210820_1454.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0116_auto_20211207_0705.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0116_merge_20210824_1103.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0117_merge_20210903_1013.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0118_auto_20210913_0731.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0119_orderline_is_gift_card.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0120_orderline_optional_sku.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0121_order_search_document.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0122_merge_20211220_1641.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0123_update_order_search_document.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0124_order_updated_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0125_populate_order_updated_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0126_alter_order_updated_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0127_add_order_number_and_alter_order_token.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0128_set_order_number.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0129_alter_order_number.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0130_save_order_token_in_relation_models.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0131_change_pk_to_uuid.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0132_rewrite_order_relations.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0133_rename_order_token_id.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0134_rewrite_order_gift_cards_relation.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0135_alter_order_options.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0136_auto_20220414_1025.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0137_alter_orderevent_type.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0137_auto_20220427_0822.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0138_add_orderline_token_old_id_created_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0138_orderline_base_price.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0139_fix_undiscounted_total_on_lines.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0139_fulfil_orderline_token_old_id_created_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0140_alter_orderline_old_id_and_created_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0140_fix_order_undiscounted_total.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0141_fulfil_fulfillmentline_orderline_token.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0142_alter_fulfillmentline_line.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0143_update_orderline_pk.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0144_rewrite_fulfillmentline_orderline_relation.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0145_rewrite_order_events.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0146_merge_20220512_1005.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0147_alter_orderline_options.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0148_auto_20220519_1118.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0149_add_fields_for_authorize_and_charge.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0150_update_authorize_and_charge_status.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0151_auto_20220606_1431.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0151_merge_20220615_1224.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0152_merge_20221215_1217.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0152_update_order_search_vector.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0153_merge_20220615_1232.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0154_auto_20220621_0850.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0155_merge_20221215_1223.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0155_order_should_refresh_prices.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0156_merge_20221215_1235.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0156_order_tax_exemption.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0157_order_base_shipping_price_amount.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0158_migrate_base_shipping_price_amount.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0159_merge_20221215_1244.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0159_order_shipping_tax_class_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0160_merge_20221215_1253.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0160_order_external_reference.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0161_merge_20221219_1838.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0162_order_granted_refund.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0163_order_events_rename_transaction_events.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0164_auto_20230329_1200.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0165_fix_order_charge_status_with_transactions.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0165_order_expired_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0166_order_propagate_expired_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0167_bulk_order_create_20230315_1312.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0168_order_bulk_permission.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0169_alter_order_options.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0170_auto_20230529_1314.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0170_merge_20231030_0857.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0171_auto_20230518_0854.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0171_order_order_user_email_user_id_idx.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0172_auto_20230627_0816.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0172_update_order_cc_addresses.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0173_alter_orderline_unit_discount_type_add_is_price_overridden.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0173_auto_20230816_1245.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0174_merge_20231030_1033.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0174_order_checkout_token_btree_idx.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0174_order_idx_order_created_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0175_merge_20231030_1040.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0175_merge_20231122_1040.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0175_order_voucher_code.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0176_merge_20231122_1346.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0176_merge_20240325_1315.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0176_order_voucher_code_add_index.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0177_merge_20240325_1329.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0177_merge_20240606_1022.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0177_set_order_voucher_code.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0178_merge_20231030_1055.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0178_merge_20240606_1036.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0178_merge_20240726_1425.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0179_merge_20231122_1348.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0179_merge_20240726_1438.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0180_auto_20231108_0908.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0180_merge_20240325_1333.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0181_merge_20240606_1325.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0181_order_subtotal_as_a_field.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0182_merge_20240325_1338.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0182_merge_20240726_1442.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0182_orderline_is_gift.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0183_merge_20240607_1222.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0183_order_tax_error.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0184_merge_0182_merge_20240325_1338_0183_order_tax_error.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0184_orderevent_order_order_type_37fa0c_idx.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0185_merge_20240607_1231.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0185_merge_20240726_1445.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0185_ordergrantedrefund_transaction_item.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0186_merge_20240607_1247.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0187_merge_20240617_1056.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0187_merge_20240624_1245.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0188_merge_20240624_1308.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0188_order_undiscounted_base_shipping_price_amount.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0189_merge_20240708_0813.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0189_set_undiscounted_base_shipping_price.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0190_merge_20240708_0814.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0190_set_undiscounted_base_shipping_price.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0191_alter_order_undiscounted_base_shipping_price_amount.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0191_merge_20240725_0844.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0191_merge_20240726_1508.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0192_merge_20240725_0850.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0192_merge_20240726_1513.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0192_set_undiscounted_base_shipping_price_on_draft_orders.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0193_fix_subtotal_value_for_order_from_bulk.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0193_merge_20240726_1516.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0193_merge_20240805_0810.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0194_alter_orderevent_type.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0194_merge_20240805_0820.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0195_merge_20241004_0811.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0195_merge_20241014_0617.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0196_alter_fulfillment_shipping_refund_amount_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0196_merge_20241014_0631.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0197_fix_negative_total_net_for_orders_using_gift_cards.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0197_order_draft_save_billing_address_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0198_clean_duplicated_gift_lines.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0198_orderline_draft_base_price_expire_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0199_set_draft_base_price_expire_at.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0200_order_with_waiting_for_approval_fulfillments.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0201_alter_fulfillment_metadata_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0201_merge_20250507_0613.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0202_alter_order_undiscounted_base_shipping_price_amount.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0203_merge_20250527_1210.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0203_order_lines_count.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0204_merge_0203_merge_20250527_1210_0203_order_lines_count.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0204_set_order_lines_count.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0205_merge_20250603_1125.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0205_merge_20250703_1438.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0206_alter_order_lines_count.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0206_order_shipping_method_metadata_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0207_fulfillment_fulfillment_status_idx.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0207_merge_20251211_1339.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0208_order_lines_count_idx.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0209_orderline_product_type_id.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0210_populated_order_line_product_type_id.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0211_order_totalamount_indexes.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0212_orderline_product_type_id_btree_idx.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0213_auto_20250618_1246.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0214_order_order_status_idx.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0214_orderevent_order_orderevent_date_idx.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0215_merge_20250623_0624.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0216_merge_20250704_1033.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0217_ordergrantedrefund_reason_reference.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0218_merge_20251112_1035.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0219_merge_20251212_0955.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0220_update_order_search_vector.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/0221_remove_digital_orderevents.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/__init__.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/tasks/saleor3_20.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/tasks/saleor3_22.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/order/migrations/tasks/saleor3_23.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0001_initial.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0002_add_default_tax_configs.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0003_add_manage_taxes_permission.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0004_migrate_tax_classes.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0005_migrate_vatlayer.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0006_alter_taxconfiguration_tax_calculation_strategy.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0007_auto_20230217_0837.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0008_auto_20240122_1353.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0009_alter_taxclass_metadata_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0009_alter_taxclasscountryrate_rate.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0010_merge_20250527_1210.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0010_taxconfiguration_use_weighted_tax_for_shipping_and_more.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/0011_merge_20250530_0929.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    },
+    {
+      "path": "saleor/tax/migrations/__init__.py",
+      "violation_kind": "sensitive_path",
+      "context": {
+        "reason": "migration_keyword"
+      }
+    }
+  ]
+}

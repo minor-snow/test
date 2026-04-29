@@ -1,0 +1,85 @@
+{
+  "schema_version": "repair_check.v1",
+  "repair_id": "repair_a5cf0bcfeed5",
+  "verdict": "requires_scope_expansion",
+  "generated_at": "2026-04-29T04:05:28.658Z",
+  "summary": {
+    "changed_files": 2,
+    "allowed": 0,
+    "review_required": 1,
+    "forbidden": 0,
+    "outside_scope": 1,
+    "warnings": 1
+  },
+  "findings": [
+    {
+      "kind": "review_required_file",
+      "severity": "review_required",
+      "file": "saleor/checkout/calculations.py",
+      "message": "Repair touches review-required file: saleor/checkout/calculations.py",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "evidence": [
+        "383 paths match pattern **/checkout/**",
+        "Sensitive zone \"financial_transactions\" (critical) corroborates"
+      ]
+    },
+    {
+      "kind": "outside_scope_file",
+      "severity": "blocking",
+      "file": "README.md",
+      "message": "Repair change is outside the approved scope: README.md",
+      "allowed_actions": [
+        "revert_file",
+        "request_scope_expansion"
+      ],
+      "requires_human": true,
+      "bucket": "outside_scope",
+      "evidence": [
+        "repair_scope:outside"
+      ]
+    },
+    {
+      "kind": "missing_related_test_signal",
+      "severity": "warning",
+      "message": "No related test file was included in the repair diff.",
+      "allowed_actions": [
+        "add_or_run_related_test",
+        "keep_for_human_review"
+      ],
+      "requires_human": false,
+      "evidence": [
+        "related_test:saleor/checkout/tests/test_calculations.py",
+        "related_test:saleor/checkout/tests/test_checkout.py",
+        "related_test:saleor/graphql/order/tests/benchmark/test_draft_order_update.py",
+        "related_test:saleor/graphql/order/tests/benchmark/test_fulfillment.py",
+        "related_test:saleor/graphql/payment/tests/benchmark/__init__.py",
+        "related_test:saleor/graphql/payment/tests/benchmark/test_payment_transactions.py",
+        "related_test:saleor/graphql/payment/tests/deprecated/__init__.py",
+        "related_test:saleor/graphql/payment/tests/deprecated/test_checkout_payment_create.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_check_payment_balance.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_checkout_payment_create.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_payment_capture.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_payment_gateway_initialize_tokenization.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_payment_gateway_initialize.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_payment_initialize.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_payment_method_initialize_tokenization.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_payment_method_process_tokenization.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_payment_refund.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_payment_void.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_stored_payment_method_request_delete.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_transaction_create.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_transaction_event_report.py",
+        "related_test:saleor/graphql/payment/tests/mutations/test_transaction_initialize.py"
+      ]
+    }
+  ],
+  "changed_files": [
+    "saleor/checkout/calculations.py",
+    "README.md"
+  ],
+  "audit_status": "pending_plan_audit"
+}

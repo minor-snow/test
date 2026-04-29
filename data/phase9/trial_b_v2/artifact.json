@@ -1,0 +1,475 @@
+{
+  "artifact_id": "content_moderation_pipeline_architecture",
+  "artifact_type": "ArchitectureDraft",
+  "schema_version": "architecture_draft@0.1.0",
+  "revision_id": "rev_5b50d2173ec3",
+  "sections": [
+    {
+      "section_id": "core_principles",
+      "title": "Core Principles",
+      "commitments": [
+        {
+          "block_id": "b_core_001",
+          "type": "invariant",
+          "text": "The moderation decision log is the source of truth for all content statuses and must be append-only with cryptographic chaining.",
+          "rationale": "Ensures immutability and auditability of all moderation actions, preventing tampering with historical decisions.",
+          "terms": [
+            "moderation decision log",
+            "source of truth",
+            "append-only",
+            "cryptographic chaining"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:fcf3604698f43563b8373289426f07595a7022a002684b0c36d2eb8dc0069576"
+        },
+        {
+          "block_id": "b_core_002",
+          "type": "mechanism",
+          "text": "Each content item transitions through a finite state machine with exactly four states: pending, approved, rejected, and appealed.",
+          "rationale": "Provides a clear and enforceable lifecycle for all moderated content, enabling deterministic processing.",
+          "terms": [
+            "content item",
+            "state transition",
+            "finite state machine"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:605491c3b7b40afa299c2c39ca24043ba7e8ac258b44f7fa5693a710c435fbd8"
+        },
+        {
+          "block_id": "b_core_003",
+          "type": "constraint",
+          "text": "All ML classification scores must be accompanied by a confidence interval and a model version identifier before entering the pipeline.",
+          "rationale": "Enables traceability of model predictions and supports threshold tuning without ambiguity.",
+          "terms": [
+            "ML classification score",
+            "confidence interval",
+            "model version identifier"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:eabb608696d192898157397da9691a7caa748595ff23795b461d4e31fe415c90"
+        },
+        {
+          "block_id": "b_core_004",
+          "type": "decision",
+          "text": "Human reviewers must be assigned to borderline cases based on a weighted round-robin queue that respects reviewer expertise categories.",
+          "rationale": "Distributes workload fairly while ensuring that complex cases are handled by qualified personnel.",
+          "terms": [
+            "human reviewer",
+            "borderline case",
+            "weighted round-robin queue",
+            "expertise category"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:6693b4370f954845ebeaf9374132a7f32d05b43827baa7c95ab04d54190de2ba"
+        },
+        {
+          "block_id": "b_core_005",
+          "type": "risk",
+          "text": "If the ML classification service returns an error for more than 5% of requests in a 5-minute window, the pipeline must fall back to a rule-based classifier.",
+          "rationale": "Prevents complete pipeline stall during model degradation, maintaining throughput with a simpler but deterministic alternative.",
+          "terms": [
+            "ML classification service",
+            "rule-based classifier",
+            "fallback"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:d27927cf4ac6cfe3afa0cdbda67ad1a2524cecae951a9d1cd7234832d76f836f"
+        },
+        {
+          "block_id": "b_core_006",
+          "type": "open_question",
+          "text": "Should the rule-based classifier use a static keyword list or a dynamically updated regex set sourced from the moderation team?",
+          "rationale": "Impacts maintainability and false-positive rates; needs resolution before implementation.",
+          "terms": [
+            "rule-based classifier",
+            "keyword list",
+            "regex set"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:7c194e041f5febc2e615e389818d82e92d74e0c90e0757b95490ca2d9a6d1e69"
+        }
+      ]
+    },
+    {
+      "section_id": "data_model",
+      "title": "Data Model",
+      "commitments": [
+        {
+          "block_id": "b_data_001",
+          "type": "invariant",
+          "text": "Every moderation action record must include a unique action ID, timestamp, operator ID, content ID, action type, and a cryptographic hash of the previous action in the chain.",
+          "rationale": "Guarantees data integrity and enables full audit trail reconstruction without relying on external systems.",
+          "terms": [
+            "moderation action record",
+            "action ID",
+            "operator ID",
+            "content ID",
+            "cryptographic hash"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:906cbfcc41da7e12961ae2abcde6621a463361d80d93666669449c50bccb8234"
+        },
+        {
+          "block_id": "b_data_002",
+          "type": "mechanism",
+          "text": "Content metadata must store the current state, a list of all applied moderation actions, and the severity threshold configuration used at the time of classification.",
+          "rationale": "Preserves the context of each decision, allowing appeals to be evaluated against the same criteria that were originally applied.",
+          "terms": [
+            "content metadata",
+            "current state",
+            "moderation action",
+            "severity threshold"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:c8f5cd85287d44ac9db6e1d4a231db1fd1dac15980363c4226a2d8e97ddc30f2"
+        },
+        {
+          "block_id": "b_data_003",
+          "type": "constraint",
+          "text": "The appeal record must reference the original moderation action ID and include a free-text reason from the appellant, with a maximum length of 2000 characters.",
+          "rationale": "Ensures appeals are traceable to the original decision and provides sufficient context for human review without unbounded storage.",
+          "terms": [
+            "appeal record",
+            "moderation action ID",
+            "appellant"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:81f6dc0e57c4174435ac4df2c27ae6f6a0ee46db7c2076573b8d3c7863dc00fa"
+        },
+        {
+          "block_id": "b_data_004",
+          "type": "decision",
+          "text": "Audit logs must be stored in a separate database cluster with read-only replicas accessible only to the compliance team via a dedicated API.",
+          "rationale": "Isolates audit data from operational databases to prevent accidental corruption or unauthorized modification.",
+          "terms": [
+            "audit log",
+            "database cluster",
+            "read-only replica",
+            "compliance team"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:3dd9015149310429576e2671fdeb41712f59ee9b19c231c4eda313c217756ed1"
+        },
+        {
+          "block_id": "b_data_005",
+          "type": "risk",
+          "text": "If the audit log database cluster becomes unavailable, the pipeline must buffer up to 10,000 action records locally before blocking new moderation actions.",
+          "rationale": "Balances data integrity with availability; avoids data loss while preventing unbounded memory growth.",
+          "terms": [
+            "audit log database cluster",
+            "buffer",
+            "moderation action"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:97d4d6562b76ca3573bc50a27d260f94afdb04dc284dd775de007248d62e6075"
+        }
+      ]
+    },
+    {
+      "section_id": "state_transitions",
+      "title": "State Transitions",
+      "commitments": [
+        {
+          "block_id": "b_state_001",
+          "type": "invariant",
+          "text": "A content item may only transition from 'pending' to 'approved' or 'rejected' after passing through a validation gate that checks for a completed ML classification and a human review decision if required.",
+          "rationale": "Prevents premature or unqualified state changes, ensuring that every decision is backed by the necessary analysis.",
+          "terms": [
+            "content item",
+            "state transition",
+            "validation gate",
+            "ML classification",
+            "human review decision"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:dddb28a9951f47bcb1455af63606e96db1efb59d57e69cdd74dba0bb090eb1b3"
+        },
+        {
+          "block_id": "b_state_002",
+          "type": "mechanism",
+          "text": "When a content item enters the 'appealed' state, the system must automatically create a new review task assigned to a human reviewer who did not participate in the original decision.",
+          "rationale": "Eliminates bias in the appeal process by ensuring a fresh perspective on contested decisions.",
+          "terms": [
+            "appealed state",
+            "review task",
+            "human reviewer"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:6369d3ca9961086b489b27c72ea096fd6255dffd39fc7da84a64f00bf3116dc0"
+        },
+        {
+          "block_id": "b_state_003",
+          "type": "constraint",
+          "text": "No content item may transition from 'appealed' back to 'pending'; it must go directly to 'approved' or 'rejected' after human review.",
+          "rationale": "Prevents infinite loops in the appeal workflow and forces a definitive resolution.",
+          "terms": [
+            "appealed state",
+            "pending state",
+            "human review"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:2932eb8c76dd5a85391363a148e40bf0968e4c5f489f503025a1c8da410c7e20"
+        },
+        {
+          "block_id": "b_state_004",
+          "type": "decision",
+          "text": "The system must support a 'rollback or recovery' transition from 'approved' to 'pending' only when triggered by a compliance officer with a documented reason and a second approval.",
+          "rationale": "Provides a controlled mechanism to correct erroneous approvals while preventing arbitrary reversals.",
+          "terms": [
+            "rollback or recovery",
+            "compliance officer",
+            "second approval"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:415343c125e288d42af324eb44c690c4cd672f92811aebc061dbcc6a8ae88117"
+        },
+        {
+          "block_id": "b_state_005",
+          "type": "risk",
+          "text": "If a state transition fails due to a database write error, the system must retry up to three times with exponential backoff before logging a failure and alerting the operations team.",
+          "rationale": "Handles transient failures gracefully without losing the intended state change, while ensuring persistent issues are escalated.",
+          "terms": [
+            "state transition",
+            "database write error",
+            "exponential backoff"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:9d4cb007c77f0c119bde849cb0674f0ad4329cd2c1cdcb65ac619e7758b34f02"
+        }
+      ]
+    },
+    {
+      "section_id": "validation_gates",
+      "title": "Validation Gates",
+      "commitments": [
+        {
+          "block_id": "b_gate_001",
+          "type": "invariant",
+          "text": "Every content item must pass through a validation gate that verifies the ML classification confidence exceeds the configurable severity threshold for the content category before proceeding to human review or final decision.",
+          "rationale": "Ensures that only items with sufficient confidence are auto-approved or auto-rejected, reducing unnecessary human workload.",
+          "terms": [
+            "validation gate",
+            "ML classification confidence",
+            "severity threshold",
+            "content category"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:85ea26900f38503070565cb08c266d76a8ee595e43e8435df49aec69b767d0c0"
+        },
+        {
+          "block_id": "b_gate_002",
+          "type": "mechanism",
+          "text": "The validation gate for human review must check that the assigned reviewer has not reviewed more than 50 items in the past hour to prevent fatigue-induced errors.",
+          "rationale": "Maintains review quality by enforcing a workload cap based on empirical studies of decision fatigue.",
+          "terms": [
+            "validation gate",
+            "human review",
+            "reviewer",
+            "fatigue"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:b25d93ee86fa116310c62ff6901abebf20c2c633a097f2b0d77f66241b0dad59"
+        },
+        {
+          "block_id": "b_gate_003",
+          "type": "constraint",
+          "text": "An appeal may only enter the human review queue if the appellant's identity has been verified via a valid session token and the content item has not been appealed more than once.",
+          "rationale": "Prevents spam appeals and ensures that only legitimate users can contest decisions.",
+          "terms": [
+            "appeal",
+            "human review queue",
+            "appellant",
+            "session token"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:4976194279d1b6d3b0fed653cc8b8d43ccbd952d1a89f133d80fa3b5b89e002c"
+        },
+        {
+          "block_id": "b_gate_004",
+          "type": "decision",
+          "text": "The validation gate for audit logging must confirm that the action record includes a valid cryptographic hash linking to the previous record before the action is committed.",
+          "rationale": "Enforces chain integrity at write time, preventing gaps or forks in the audit trail.",
+          "terms": [
+            "validation gate",
+            "audit logging",
+            "cryptographic hash"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:52f1ebe6fbe7a912f4921eee3ba73a391356b0565739f4ca3ebf3efe5e35fbe5"
+        },
+        {
+          "block_id": "b_gate_005",
+          "type": "risk",
+          "text": "If the validation gate for severity thresholds fails because the threshold configuration is missing for a content category, the item must be routed to a default 'high severity' human review queue.",
+          "rationale": "Avoids silent drops or misclassification when configuration is incomplete, defaulting to the safest path.",
+          "terms": [
+            "validation gate",
+            "severity threshold",
+            "content category",
+            "human review queue"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:0b17f9d18976c1037ac2a01461616f32f123f4f2da0329dfe1b8bc43bbedeedc"
+        }
+      ]
+    },
+    {
+      "section_id": "failure_modes",
+      "title": "Failure Modes",
+      "commitments": [
+        {
+          "block_id": "b_fail_001",
+          "type": "invariant",
+          "text": "If the ML classification service returns a confidence score below 0.1 for any category, the system must treat the result as a failure mode and route the item to human review with a 'low confidence' flag.",
+          "rationale": "Prevents the system from making decisions based on unreliable predictions, ensuring human oversight for ambiguous cases.",
+          "terms": [
+            "ML classification service",
+            "confidence score",
+            "failure mode",
+            "human review"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:c305da3af64dceff041582dd1b7acdd5ce116ed174af15b939c088367b34d4af"
+        },
+        {
+          "block_id": "b_fail_002",
+          "type": "mechanism",
+          "text": "When a human reviewer fails to respond within 30 minutes, the system must escalate the task to a senior reviewer and log the timeout as a failure mode in the audit trail.",
+          "rationale": "Prevents stalled queues and provides visibility into reviewer responsiveness for performance management.",
+          "terms": [
+            "human reviewer",
+            "senior reviewer",
+            "failure mode",
+            "audit trail"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:e1e7156c7c564dc0b65037b7c5bb9d54da54161892d0275d2cdffe5c8d42803a"
+        },
+        {
+          "block_id": "b_fail_003",
+          "type": "constraint",
+          "text": "Any database write failure that results in data loss for an audit log entry must trigger an immediate page to the on-call engineer and block all new moderation actions until resolved.",
+          "rationale": "Protects the source of truth by halting operations when audit integrity is compromised, preventing cascading data corruption.",
+          "terms": [
+            "database write failure",
+            "data loss",
+            "audit log entry",
+            "on-call engineer"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:26a90f98a22e92c662e2c1d432c49830c13ccc2831d8f748aca7eb19c5a84bea"
+        },
+        {
+          "block_id": "b_fail_004",
+          "type": "decision",
+          "text": "The system must implement a circuit breaker for the ML classification service that opens after 10 consecutive failures, causing all items to be routed to human review until the service recovers.",
+          "rationale": "Prevents repeated calls to a failing service, reducing latency and allowing the pipeline to degrade gracefully.",
+          "terms": [
+            "circuit breaker",
+            "ML classification service",
+            "human review"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:079b406997204ecf3dc705240265167f128f055538d3e5549e796e1ca569fa02"
+        },
+        {
+          "block_id": "b_fail_005",
+          "type": "risk",
+          "text": "If the human review queue exceeds 10,000 items, the system must automatically increase the severity threshold for auto-approval by 20% to reduce backlog, logging the change as a failure mode.",
+          "rationale": "Provides a controlled mechanism to manage queue pressure without requiring manual intervention, while ensuring the adjustment is auditable.",
+          "terms": [
+            "human review queue",
+            "severity threshold",
+            "auto-approval",
+            "failure mode"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:e65db6064ebbe38e765b1f8de92f1c6172cfd19de9eac55d07c296d4faccd4da"
+        }
+      ]
+    },
+    {
+      "section_id": "human_control",
+      "title": "Human Control",
+      "commitments": [
+        {
+          "block_id": "b_human_001",
+          "type": "invariant",
+          "text": "Every final moderation decision (approve, reject, or overturn on appeal) must require explicit human approval from a qualified reviewer, recorded with a digital signature.",
+          "rationale": "Ensures accountability and non-repudiation for all actions that affect content visibility.",
+          "terms": [
+            "human approval",
+            "moderation decision",
+            "digital signature"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:b0f647e65ff3b9b1f163f4f186fc7c075b601aa9c4b904e8fcb03768a4de8cae"
+        },
+        {
+          "block_id": "b_human_002",
+          "type": "mechanism",
+          "text": "The real-time dashboard for moderation team leads must display the current queue size, average review time, and the number of items in each state, updated every 10 seconds via a WebSocket connection.",
+          "rationale": "Provides actionable operational visibility without overwhelming the user with stale data.",
+          "terms": [
+            "real-time dashboard",
+            "moderation team lead",
+            "queue size",
+            "average review time",
+            "WebSocket"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:035b585e41393851c24fc21081a0de0768f40f2c9f2197dae4d58f6dfb935f58"
+        },
+        {
+          "block_id": "b_human_003",
+          "type": "constraint",
+          "text": "Human reviewers may only adjust severity thresholds for content categories after receiving a two-factor authentication approval from a team lead.",
+          "rationale": "Prevents unauthorized threshold changes that could inadvertently allow harmful content or over-moderate.",
+          "terms": [
+            "human reviewer",
+            "severity threshold",
+            "content category",
+            "two-factor authentication",
+            "team lead"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:4fc6bf2b5e124f645ebd06369973a9a032f6f77d83e770ec51359631bbaa49ec"
+        },
+        {
+          "block_id": "b_human_004",
+          "type": "decision",
+          "text": "The system must support a 'rollback or recovery' action where a compliance officer can revert a content item from 'approved' to 'pending' with a mandatory reason field and a second approver.",
+          "rationale": "Gives humans the ability to correct errors while maintaining a clear audit trail of the reversal.",
+          "terms": [
+            "rollback or recovery",
+            "compliance officer",
+            "second approver"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:1ad85548781df2daba39064c868128aef70cfd125d2c810045e370f03d262877"
+        },
+        {
+          "block_id": "b_human_005",
+          "type": "risk",
+          "text": "If a human reviewer's digital signature cannot be verified due to a certificate expiry, the system must reject the action and notify the reviewer to renew their certificate before proceeding.",
+          "rationale": "Prevents unsigned or invalid approvals from entering the audit trail, maintaining legal defensibility.",
+          "terms": [
+            "human reviewer",
+            "digital signature",
+            "certificate expiry"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:bd71375b92a371b7ff687ccd722200364f150399bfeea9febfb12970ff0844d2"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created_by": "draft_agent",
+    "created_at": "2026-04-26T04:35:14.026Z",
+    "tags": [
+      "draft",
+      "llm_generated"
+    ]
+  }
+}

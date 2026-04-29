@@ -1,0 +1,338 @@
+{
+  "schema_version": "saleor_observation_report.v2",
+  "subject_name": "Saleor",
+  "repo_label": "salary",
+  "generated_at": "2026-04-28T05:59:58.437Z",
+  "repo_scale": {
+    "observed_files": 4579,
+    "python_files": 4251,
+    "scan_ms": 569,
+    "enhance_ms": 470,
+    "bucket_distribution": [
+      {
+        "bucket": "config",
+        "count": 4
+      },
+      {
+        "bucket": "migration",
+        "count": 1420
+      },
+      {
+        "bucket": "script",
+        "count": 1
+      },
+      {
+        "bucket": "source",
+        "count": 1142
+      },
+      {
+        "bucket": "test",
+        "count": 1684
+      }
+    ]
+  },
+  "historical_baseline": {
+    "generic_smoke_scan": {
+      "observed_files": 4573,
+      "scan_ms": 317,
+      "unknown_bucket_files": 4457,
+      "import_edges": 0,
+      "test_mappings": 0,
+      "sensitive_paths": 0
+    },
+    "note": "Baseline numbers are from the first generic Saleor smoke scan before the Python sidecar existed."
+  },
+  "python_observation_summary": {
+    "import_observation_count": 12610,
+    "project_import_count": 16,
+    "declared_package_count": 1967,
+    "undeclared_package_count": 187,
+    "dynamic_import_count": 0,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 1
+  },
+  "sensitive_zone_map": [
+    {
+      "category": "financial_transactions",
+      "severity": "critical",
+      "matched_file_count": 339,
+      "source": "keyword",
+      "path_pattern": "**/payment/**"
+    },
+    {
+      "category": "schema_migration",
+      "severity": "high",
+      "matched_file_count": 1425,
+      "source": "keyword",
+      "path_pattern": "**/migration/**"
+    },
+    {
+      "category": "order_lifecycle",
+      "severity": "high",
+      "matched_file_count": 689,
+      "source": "keyword",
+      "path_pattern": "**/order/**"
+    },
+    {
+      "category": "purchase_flow",
+      "severity": "high",
+      "matched_file_count": 412,
+      "source": "keyword",
+      "path_pattern": "**/checkout/**"
+    },
+    {
+      "category": "identity",
+      "severity": "high",
+      "matched_file_count": 325,
+      "source": "keyword",
+      "path_pattern": "**/account/**"
+    },
+    {
+      "category": "authentication",
+      "severity": "high",
+      "matched_file_count": 55,
+      "source": "keyword",
+      "path_pattern": "**/auth/**"
+    },
+    {
+      "category": "authorization",
+      "severity": "high",
+      "matched_file_count": 38,
+      "source": "keyword",
+      "path_pattern": "**/permission/**"
+    },
+    {
+      "category": "administration",
+      "severity": "high",
+      "matched_file_count": 10,
+      "source": "keyword",
+      "path_pattern": "**/admin/**"
+    },
+    {
+      "category": "security",
+      "severity": "high",
+      "matched_file_count": 3,
+      "source": "keyword",
+      "path_pattern": "**/security/**"
+    },
+    {
+      "category": "pricing_adjustment",
+      "severity": "medium",
+      "matched_file_count": 354,
+      "source": "keyword",
+      "path_pattern": "**/discount/**"
+    },
+    {
+      "category": "external_integration",
+      "severity": "medium",
+      "matched_file_count": 266,
+      "source": "keyword",
+      "path_pattern": "**/webhook/**"
+    },
+    {
+      "category": "runtime_extension",
+      "severity": "medium",
+      "matched_file_count": 144,
+      "source": "keyword",
+      "path_pattern": "**/plugin/**"
+    },
+    {
+      "category": "regulatory_calculation",
+      "severity": "medium",
+      "matched_file_count": 133,
+      "source": "keyword",
+      "path_pattern": "**/tax/**"
+    },
+    {
+      "category": "infrastructure_config",
+      "severity": "medium",
+      "matched_file_count": 48,
+      "source": "keyword",
+      "path_pattern": "**/settings/**"
+    }
+  ],
+  "high_risk_domains": [
+    {
+      "domain": "checkout",
+      "path_pattern": "saleor/checkout/**",
+      "risk": "purchase flow / pricing behavior",
+      "severity": "high",
+      "governance_recommendation": "explicit_scope_candidate",
+      "matched_file_count": 184,
+      "source_file_count": 22,
+      "test_file_count": 40,
+      "project_import_count": 1
+    },
+    {
+      "domain": "payment",
+      "path_pattern": "saleor/payment/**",
+      "risk": "financial transactions",
+      "severity": "critical",
+      "governance_recommendation": "protected",
+      "matched_file_count": 151,
+      "source_file_count": 29,
+      "test_file_count": 33,
+      "project_import_count": 0
+    },
+    {
+      "domain": "order",
+      "path_pattern": "saleor/order/**",
+      "risk": "order lifecycle",
+      "severity": "high",
+      "governance_recommendation": "review_required",
+      "matched_file_count": 345,
+      "source_file_count": 18,
+      "test_file_count": 39,
+      "project_import_count": 0
+    },
+    {
+      "domain": "account",
+      "path_pattern": "saleor/account/**",
+      "risk": "identity / user state",
+      "severity": "high",
+      "governance_recommendation": "protected",
+      "matched_file_count": 149,
+      "source_file_count": 22,
+      "test_file_count": 9,
+      "project_import_count": 0
+    },
+    {
+      "domain": "discount",
+      "path_pattern": "saleor/discount/**",
+      "risk": "pricing adjustment",
+      "severity": "medium",
+      "governance_recommendation": "review_required",
+      "matched_file_count": 144,
+      "source_file_count": 13,
+      "test_file_count": 23,
+      "project_import_count": 1
+    },
+    {
+      "domain": "tax",
+      "path_pattern": "saleor/tax/**",
+      "risk": "regulatory / financial calculation",
+      "severity": "medium",
+      "governance_recommendation": "review_required",
+      "matched_file_count": 35,
+      "source_file_count": 10,
+      "test_file_count": 11,
+      "project_import_count": 0
+    },
+    {
+      "domain": "plugins",
+      "path_pattern": "saleor/plugins/**",
+      "risk": "runtime extension behavior",
+      "severity": "medium",
+      "governance_recommendation": "protected",
+      "matched_file_count": 120,
+      "source_file_count": 34,
+      "test_file_count": 74,
+      "project_import_count": 4
+    },
+    {
+      "domain": "graphql",
+      "path_pattern": "saleor/graphql/**",
+      "risk": "public API surface",
+      "severity": "high",
+      "governance_recommendation": "review_required",
+      "matched_file_count": 1521,
+      "source_file_count": 694,
+      "test_file_count": 827,
+      "project_import_count": 3
+    },
+    {
+      "domain": "core",
+      "path_pattern": "saleor/core/**",
+      "risk": "shared infrastructure",
+      "severity": "high",
+      "governance_recommendation": "review_required",
+      "matched_file_count": 152,
+      "source_file_count": 89,
+      "test_file_count": 51,
+      "project_import_count": 3
+    }
+  ],
+  "test_mapping_summary": {
+    "total": 977,
+    "high_confidence": 120,
+    "medium_confidence": 120,
+    "low_confidence": 737,
+    "unknown": 0,
+    "mapped_source_ratio": 0.21015761821366025
+  },
+  "unknown_taxonomy": {
+    "total_unknowns": 1,
+    "classification_counts": [
+      {
+        "classification": "actionable",
+        "count": 1
+      },
+      {
+        "classification": "intrinsic",
+        "count": 0
+      }
+    ],
+    "categories": [
+      {
+        "category": "low_confidence_manifest",
+        "classification": "actionable",
+        "count": 1,
+        "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+      }
+    ]
+  },
+  "suggested_protected_zones": [
+    "saleor/payment/**",
+    "saleor/account/**",
+    "saleor/plugins/**",
+    "migrations/**"
+  ],
+  "suggested_review_required_zones": [
+    "saleor/order/**",
+    "saleor/tax/**",
+    "saleor/discount/**",
+    "saleor/graphql/**",
+    "saleor/core/**"
+  ],
+  "boundary_readiness": {
+    "explicit_scope": "ready_for_explicit_scope",
+    "auto_scope": "not_ready_for_auto_scope",
+    "reasons": [
+      "Observed 8/8 key Saleor domains with file/path-level signals.",
+      "Project import observations are present (16), which is enough for conservative cross-module awareness.",
+      "Test mapping candidates are present (977), so scoped changes can be paired with verification guidance.",
+      "Automatic intent-to-scope inference remains out of scope because import observations are syntax-level only and scope granularity is file/path-level."
+    ]
+  },
+  "recommended_trial_scenario": {
+    "intent": "Add an eco-packaging fee during checkout for selected product types.",
+    "allowed": [
+      "saleor/checkout/**",
+      "saleor/graphql/checkout/**"
+    ],
+    "review_required": [
+      "saleor/order/**",
+      "saleor/tax/**",
+      "tests/integration/**"
+    ],
+    "forbidden": [
+      "saleor/payment/**",
+      "saleor/account/**",
+      "saleor/discount/**",
+      "saleor/plugins/**",
+      "migrations/**",
+      "saleor/core/settings.py",
+      ".pantheon/**",
+      ".cursor/**",
+      ".git/**"
+    ],
+    "rationale": "This trial exercises checkout logic while keeping financial, identity, plugin, and migration surfaces protected."
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

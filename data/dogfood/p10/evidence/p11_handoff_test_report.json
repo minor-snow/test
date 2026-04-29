@@ -1,0 +1,59 @@
+{
+  "test_id": "p11_handoff_test",
+  "model": "deepseek-chat",
+  "model_note": "same-model handoff test is optimistic, not adversarial",
+  "inputs": [
+    "HANDOFF.md",
+    "handoff_package.json"
+  ],
+  "excluded_inputs": [
+    "P10 report",
+    "chat context",
+    "ArchitectureDraft",
+    "InterfaceSpec",
+    "ModuleSpec",
+    "operator notes"
+  ],
+  "result": "ready",
+  "checks": [
+    {
+      "check_id": "invented_fields",
+      "status": "pass",
+      "message": "No self-invented fields"
+    },
+    {
+      "check_id": "lww_misuse",
+      "status": "pass",
+      "message": "No LWW misuse on clinical fields"
+    },
+    {
+      "check_id": "vector_clock_present",
+      "status": "pass",
+      "message": "VectorClock defined with 1 fields"
+    },
+    {
+      "check_id": "invented_states",
+      "status": "pass",
+      "message": "No invented states in PendingReportState"
+    },
+    {
+      "check_id": "audit_conflict_test",
+      "status": "pass",
+      "message": "Conflict-related unit test present"
+    },
+    {
+      "check_id": "invented_policies",
+      "status": "pass",
+      "message": "No invented conflict policies"
+    },
+    {
+      "check_id": "conflict_payload_completeness",
+      "status": "pass",
+      "message": "ConflictPayload has all required fields"
+    }
+  ],
+  "critical_violations": [],
+  "raw_response_length": 6009,
+  "prompt_length": 125197,
+  "created_at": "2026-04-26T07:13:11.226Z"
+}

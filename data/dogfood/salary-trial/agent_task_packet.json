@@ -1,0 +1,37 @@
+{
+  "schema_version": "agent_task_packet.v1",
+  "packet_id": "00ba659d-896e-4596-9c96-c27672a673a6",
+  "generated_at": "2026-04-27T14:26:28.297Z",
+  "scenario_id": "saleor_checkout_delete",
+  "attempt": 1,
+  "intent": "Add a checkoutDelete mutation that allows customers to delete their own abandoned checkout sessions, cleaning up stale data.",
+  "scope": {
+    "allowed_files": [
+      "saleor/checkout/actions.py",
+      "saleor/checkout/utils.py",
+      "saleor/graphql/checkout/mutations/__init__.py",
+      "saleor/graphql/checkout/schema.py"
+    ],
+    "forbidden_patterns": [
+      ".pantheon/**",
+      ".cursor/**",
+      ".git/**"
+    ],
+    "required_tests": []
+  },
+  "stop_conditions": [
+    "Do not modify .pantheon/**",
+    "Do not modify .cursor/**",
+    "Do not expand scope yourself",
+    "If outside scope is required, stop and request Reverse Issue",
+    "Do not modify governance artifacts"
+  ],
+  "feedback_usage": {
+    "feedback_file_expected": ".pantheon/agent_feedback.json",
+    "rule": "If feedback is provided, follow allowed_agent_actions. fix_hint is advisory, not authorization."
+  },
+  "authority_rules": {
+    "json_authoritative": true,
+    "markdown_is_projection": true
+  }
+}

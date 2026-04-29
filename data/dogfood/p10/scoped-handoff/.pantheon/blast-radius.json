@@ -1,0 +1,323 @@
+{
+  "request": {
+    "changed_nodes": [
+      "blk:arch:b_sync_001",
+      "blk:arch:b_sync_003",
+      "blk:arch:nonexistent"
+    ],
+    "change_description": "Sync layer refactor"
+  },
+  "generated_at": "2026-04-26T11:34:28.357Z",
+  "graph_hash": "a00f396bb0d8b9ea",
+  "warnings": [
+    "Node \"blk:arch:nonexistent\" not found in boundary graph"
+  ],
+  "invalid_nodes": [
+    "blk:arch:nonexistent"
+  ],
+  "summary": {
+    "changed_nodes": 3,
+    "valid_changed_nodes": 2,
+    "direct_impact": 25,
+    "total_downstream": 58,
+    "affected_files": 10,
+    "affected_symbols": 21,
+    "affected_tests": 2,
+    "highest_risk_level": "high",
+    "risk_amplification_count": 4
+  },
+  "by_layer": {
+    "architecture": [],
+    "interface": [],
+    "module": [],
+    "handoff": [
+      "hc:definition:pending_report",
+      "hc:definition:pending_report_state",
+      "hc:definition:sync_queue",
+      "hc:definition:retry_ledger",
+      "hc:data_model:PendingReportEntity",
+      "hc:data_model:SyncOperationEntity",
+      "hc:data_model:RetryLedgerEntry",
+      "hc:data_model:OfflineReportEnvelope",
+      "hc:data_model:SyncChangePullRequest",
+      "hc:data_model:SyncChangePullResponse",
+      "hc:data_model:SyncUploadRequest",
+      "hc:data_model:SyncUploadResult",
+      "hc:data_model:SyncAckRequest",
+      "hc:state_machine:PendingReportState",
+      "hc:state_machine:SyncOperationState",
+      "hc:conflict_policy:pending_report_state",
+      "hc:conflict_policy:retry_attempt_count",
+      "hc:forbidden:FA-004",
+      "hc:forbidden:FA-005",
+      "hc:risk:p10_risk_stuck_retry_queue",
+      "hc:task:TASK-001",
+      "hc:task:TASK-002",
+      "hc:task:TASK-004",
+      "hc:task:TASK-006",
+      "hc:task:TASK-010"
+    ],
+    "generated_files": [
+      "file:Enums.kt",
+      "file:Entities.kt",
+      "file:Dtos.kt",
+      "file:StateMachines.kt",
+      "file:ConflictPolicy.kt",
+      "file:ConflictPolicyTests.kt",
+      "file:contracts/Interfaces.kt",
+      "file:contracts/Guards.kt",
+      "file:contracts/ContractTests.kt",
+      "file:contracts/TodoStubs.kt"
+    ],
+    "generated_symbols": [
+      "sym:Entities.kt:PendingReportEntity",
+      "sym:Entities.kt:SyncOperationEntity",
+      "sym:Entities.kt:RetryLedgerEntry",
+      "sym:Entities.kt:ConflictRecordEntity",
+      "sym:Entities.kt:VectorClockEntry",
+      "sym:Entities.kt:AuditEventEntity",
+      "sym:Dtos.kt:OfflineReportEnvelope",
+      "sym:Dtos.kt:SyncChangePullRequest",
+      "sym:Dtos.kt:SyncChangePullResponse",
+      "sym:Dtos.kt:SyncUploadRequest",
+      "sym:Dtos.kt:SyncUploadResult",
+      "sym:Dtos.kt:SyncAckRequest",
+      "sym:Dtos.kt:ConflictPayload",
+      "sym:Dtos.kt:VersionMetadata",
+      "sym:Enums.kt:PendingReportState",
+      "sym:StateMachines.kt:PendingReportStateMachine",
+      "sym:Enums.kt:SyncOperationState",
+      "sym:StateMachines.kt:SyncOperationStateMachine",
+      "sym:Enums.kt:ConflictResolutionState",
+      "sym:StateMachines.kt:ConflictResolutionStateMachine",
+      "sym:contracts/Guards.kt:PantheonGuards"
+    ],
+    "tests": [
+      "test:forbidden:FA-004",
+      "test:forbidden:FA-005"
+    ]
+  },
+  "risk_amplification": [
+    {
+      "node_id": "hc:conflict_policy:pending_report_state",
+      "label": "hc:conflict_policy:pending_report_state",
+      "risk_level": "high",
+      "reason": "High-risk conflict policy affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:conflict_policy:pending_report_state"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:conflict_policy:retry_attempt_count",
+      "label": "hc:conflict_policy:retry_attempt_count",
+      "risk_level": "high",
+      "reason": "High-risk conflict policy affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:conflict_policy:retry_attempt_count"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:forbidden:FA-004",
+      "label": "hc:forbidden:FA-004",
+      "risk_level": "high",
+      "reason": "Forbidden assumption affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:forbidden:FA-004"
+      ],
+      "affected_tests": [
+        "test:forbidden:FA-004"
+      ]
+    },
+    {
+      "node_id": "hc:forbidden:FA-005",
+      "label": "hc:forbidden:FA-005",
+      "risk_level": "high",
+      "reason": "Forbidden assumption affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:forbidden:FA-005"
+      ],
+      "affected_tests": [
+        "test:forbidden:FA-005"
+      ]
+    },
+    {
+      "node_id": "hc:data_model:PendingReportEntity",
+      "label": "hc:data_model:PendingReportEntity",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:PendingReportEntity"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:data_model:SyncOperationEntity",
+      "label": "hc:data_model:SyncOperationEntity",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:SyncOperationEntity"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:data_model:RetryLedgerEntry",
+      "label": "hc:data_model:RetryLedgerEntry",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:RetryLedgerEntry"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:data_model:OfflineReportEnvelope",
+      "label": "hc:data_model:OfflineReportEnvelope",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:OfflineReportEnvelope"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:data_model:SyncChangePullRequest",
+      "label": "hc:data_model:SyncChangePullRequest",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:SyncChangePullRequest"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:data_model:SyncChangePullResponse",
+      "label": "hc:data_model:SyncChangePullResponse",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:SyncChangePullResponse"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:data_model:SyncUploadRequest",
+      "label": "hc:data_model:SyncUploadRequest",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:SyncUploadRequest"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:data_model:SyncUploadResult",
+      "label": "hc:data_model:SyncUploadResult",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:SyncUploadResult"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:data_model:SyncAckRequest",
+      "label": "hc:data_model:SyncAckRequest",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:SyncAckRequest"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:state_machine:PendingReportState",
+      "label": "hc:state_machine:PendingReportState",
+      "risk_level": "medium",
+      "reason": "State machine affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:state_machine:PendingReportState"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:state_machine:SyncOperationState",
+      "label": "hc:state_machine:SyncOperationState",
+      "risk_level": "medium",
+      "reason": "State machine affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:state_machine:SyncOperationState"
+      ],
+      "affected_tests": []
+    }
+  ],
+  "critical_paths": [
+    {
+      "path_id": "path_1",
+      "from": "blk:arch:b_sync_001",
+      "to": "test:forbidden:FA-004",
+      "nodes": [
+        "blk:arch:b_sync_001",
+        "hc:forbidden:FA-004",
+        "test:forbidden:FA-004"
+      ],
+      "risk_level": "high",
+      "reason": "blk:arch:b_sync_001 → test:forbidden:FA-004"
+    },
+    {
+      "path_id": "path_2",
+      "from": "blk:arch:b_sync_001",
+      "to": "test:forbidden:FA-005",
+      "nodes": [
+        "blk:arch:b_sync_001",
+        "hc:forbidden:FA-005",
+        "test:forbidden:FA-005"
+      ],
+      "risk_level": "high",
+      "reason": "blk:arch:b_sync_001 → test:forbidden:FA-005"
+    },
+    {
+      "path_id": "path_3",
+      "from": "blk:arch:b_sync_003",
+      "to": "test:forbidden:FA-004",
+      "nodes": [
+        "blk:arch:b_sync_003",
+        "hc:forbidden:FA-004",
+        "test:forbidden:FA-004"
+      ],
+      "risk_level": "high",
+      "reason": "blk:arch:b_sync_003 → test:forbidden:FA-004"
+    },
+    {
+      "path_id": "path_4",
+      "from": "blk:arch:b_sync_003",
+      "to": "test:forbidden:FA-005",
+      "nodes": [
+        "blk:arch:b_sync_003",
+        "hc:forbidden:FA-005",
+        "test:forbidden:FA-005"
+      ],
+      "risk_level": "high",
+      "reason": "blk:arch:b_sync_003 → test:forbidden:FA-005"
+    }
+  ],
+  "paths_truncated": false,
+  "total_critical_paths_found": 4
+}

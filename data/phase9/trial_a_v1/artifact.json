@@ -1,0 +1,338 @@
+{
+  "artifact_id": "content_moderation_pipeline",
+  "artifact_type": "ArchitectureDraft",
+  "schema_version": "architecture_draft@0.1.0",
+  "revision_id": "rev_54491632e7ae",
+  "sections": [
+    {
+      "section_id": "ml_classification",
+      "title": "ML-Based Classification",
+      "commitments": [
+        {
+          "block_id": "b_ml_1",
+          "type": "mechanism",
+          "text": "Text content is classified using a transformer-based model fine-tuned on platform-specific moderation data.",
+          "terms": [
+            "transformer model",
+            "fine-tuning"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:0170b65fe59270fe525354671ce57b78017868c051bcd54b0e792d0508081a88"
+        },
+        {
+          "block_id": "b_ml_2",
+          "type": "mechanism",
+          "text": "Image content is classified using a convolutional neural network trained on a curated dataset of prohibited and borderline imagery.",
+          "terms": [
+            "convolutional neural network"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:75f20920bdd96a99f8dde3ca2c68cead2227ccdd7250d3fca541419057142b8a"
+        },
+        {
+          "block_id": "b_ml_3",
+          "type": "invariant",
+          "text": "Every piece of content submitted to the platform must pass through the ML classification pipeline before being published.",
+          "status": "draft",
+          "content_hash": "sha256:eb67b5e1ae3ee3746ac2f0a18972e83e29de364a170cb390a89c547fcec55c38"
+        },
+        {
+          "block_id": "b_ml_4",
+          "type": "constraint",
+          "text": "ML classification must complete within 500 milliseconds for text and 2 seconds for images under normal load.",
+          "status": "draft",
+          "content_hash": "sha256:74e9be152c4b450f779a8866ccd2d60b8bfdd72c3808585b547378cc04791354"
+        },
+        {
+          "block_id": "b_ml_5",
+          "type": "decision",
+          "text": "We will use a single ensemble model for text classification rather than separate models for each category.",
+          "status": "draft",
+          "content_hash": "sha256:58c5fdf3bd4fa882e68c8b38e80764faa44fb447cd64c6497b0b6b3e9be244b7"
+        },
+        {
+          "block_id": "b_ml_6",
+          "type": "risk",
+          "text": "ML models may exhibit bias against certain demographics, requiring ongoing fairness audits.",
+          "terms": [
+            "bias",
+            "fairness audit"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:bf30b52bc386c8f4d3d8316856420351043455809f510c7dca158befa4f61801"
+        },
+        {
+          "block_id": "b_ml_7",
+          "type": "open_question",
+          "text": "How frequently should ML models be retrained to adapt to evolving content patterns?",
+          "status": "draft",
+          "content_hash": "sha256:e369e2e48f56eb2fb8fe600c5f9e0da844b7630b12de7fe0475838f48c1d8513"
+        }
+      ]
+    },
+    {
+      "section_id": "human_review_queue",
+      "title": "Human Review Queue",
+      "commitments": [
+        {
+          "block_id": "b_hrq_1",
+          "type": "mechanism",
+          "text": "Content with ML confidence scores between the low and high severity thresholds is automatically placed into the human review queue.",
+          "terms": [
+            "confidence score",
+            "severity threshold"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:6390f1d5866b35ab745f1e118f3d5e2953e6bfb519e3f5bab8a19af4754afcd6"
+        },
+        {
+          "block_id": "b_hrq_2",
+          "type": "invariant",
+          "text": "Each item in the human review queue must be assigned to exactly one human reviewer at a time.",
+          "status": "draft",
+          "content_hash": "sha256:67e1f3008f0b67ea8fd77ea0679cae53a930fd292bdb5a23e0d68517c026e7a0"
+        },
+        {
+          "block_id": "b_hrq_3",
+          "type": "constraint",
+          "text": "Human reviewers must resolve each queue item within 24 hours of assignment.",
+          "status": "draft",
+          "content_hash": "sha256:fbbd7dfab3614888cefbcb0002aa92cb722a3277d640e0360c760eb2fe05bd79"
+        },
+        {
+          "block_id": "b_hrq_4",
+          "type": "decision",
+          "text": "Review queue items are prioritized by content category severity and time in queue, not by user reputation.",
+          "status": "draft",
+          "content_hash": "sha256:35f8c2fa84fd7e169589cd0d4277a320ec18abece0df7082e261486083f57a9d"
+        },
+        {
+          "block_id": "b_hrq_5",
+          "type": "risk",
+          "text": "Insufficient staffing during peak hours may cause queue backlogs exceeding the 24-hour resolution target.",
+          "status": "draft",
+          "content_hash": "sha256:3e9c171582821793ef3ae8ea502a9fb543f3cb6de6c69b3e5689565c36071f1f"
+        },
+        {
+          "block_id": "b_hrq_6",
+          "type": "open_question",
+          "text": "Should reviewers be allowed to skip items they feel unqualified to judge?",
+          "status": "draft",
+          "content_hash": "sha256:a48fad467d9201ec95240670fbb1db4c1441cb8c46f4599ac17f5821d1ed6cc1"
+        }
+      ]
+    },
+    {
+      "section_id": "appeal_process",
+      "title": "Appeal Process",
+      "commitments": [
+        {
+          "block_id": "b_app_1",
+          "type": "mechanism",
+          "text": "Users receive a notification with the moderation decision and a direct link to submit an appeal within 30 days.",
+          "status": "draft",
+          "content_hash": "sha256:2246feec404e42b079a32d5c563935d83d084e40e549998b8b750db9e9009896"
+        },
+        {
+          "block_id": "b_app_2",
+          "type": "invariant",
+          "text": "An appeal must be reviewed by a different human moderator than the one who made the original decision.",
+          "status": "draft",
+          "content_hash": "sha256:2a365bcf44a0cdb245b13caf865cbd17dd36d64c3155a8c6ac2e91f79dc82699"
+        },
+        {
+          "block_id": "b_app_3",
+          "type": "constraint",
+          "text": "Appeals must be resolved within 72 hours of submission.",
+          "status": "draft",
+          "content_hash": "sha256:d775ce57c6ed055e9be0366a750d646c4955290478164f3cfd385b06b071cbd8"
+        },
+        {
+          "block_id": "b_app_4",
+          "type": "decision",
+          "text": "Appeal decisions are final and cannot be further contested within the system.",
+          "status": "draft",
+          "content_hash": "sha256:9d25d5d772736b901a8c144f540a6bc5a530d9d2a746e2074b18dd84bafd596d"
+        },
+        {
+          "block_id": "b_app_5",
+          "type": "risk",
+          "text": "High volume of appeals may overwhelm the moderation team and delay resolution times.",
+          "status": "draft",
+          "content_hash": "sha256:d736d80a8c971df254740a2e3e8855e4bdcb75ec5cf1116484b79dc8efde7f5c"
+        },
+        {
+          "block_id": "b_app_6",
+          "type": "open_question",
+          "text": "Should automated appeals (e.g., for clearly misclassified content) be allowed without human review?",
+          "status": "draft",
+          "content_hash": "sha256:7eba9e899795a3cb9467ee037838f1a046e6e4332ebaf7f8b1d36debf2133cb1"
+        }
+      ]
+    },
+    {
+      "section_id": "audit_logging",
+      "title": "Audit Logging",
+      "commitments": [
+        {
+          "block_id": "b_aud_1",
+          "type": "invariant",
+          "text": "Every moderation action (ML classification, human review, appeal decision) must be recorded in an immutable audit log.",
+          "terms": [
+            "immutable audit log"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:729e77f14a0db76b914c81b7ae0cd456506f5cd1a66462c59b991d0493306781"
+        },
+        {
+          "block_id": "b_aud_2",
+          "type": "mechanism",
+          "text": "Audit log entries include timestamp, actor ID, content ID, action taken, and reason code.",
+          "status": "draft",
+          "content_hash": "sha256:4d40501485ae47d3f4db39e70b7025b2b181b321ec0d2bd05afd6e7b42f69a0e"
+        },
+        {
+          "block_id": "b_aud_3",
+          "type": "constraint",
+          "text": "Audit logs must be retained for at least 7 years to comply with regulatory requirements.",
+          "status": "draft",
+          "content_hash": "sha256:b44e78ce09d49de7b8fd86c05ac2efeed277c12cf9bacd49bc6107cda110f8b2"
+        },
+        {
+          "block_id": "b_aud_4",
+          "type": "decision",
+          "text": "Audit logs will be stored in a write-once, read-many (WORM) storage system to prevent tampering.",
+          "terms": [
+            "WORM storage"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:996907725cf9ef23e8714b7460cc0353b472981fd040969b86a92bbdb3656013"
+        },
+        {
+          "block_id": "b_aud_5",
+          "type": "risk",
+          "text": "Large volume of audit log entries may impact storage costs and query performance over time.",
+          "status": "draft",
+          "content_hash": "sha256:ea09831e113c0b902f901558d7d507af074c7b7673da5b74ae59c3eb4917d266"
+        },
+        {
+          "block_id": "b_aud_6",
+          "type": "open_question",
+          "text": "Should audit logs be encrypted at rest and, if so, which key management strategy should be used?",
+          "status": "draft",
+          "content_hash": "sha256:49a6f884e7af24bd0975669f78c16a20dd6f368a461f09f9949845575ce680ef"
+        }
+      ]
+    },
+    {
+      "section_id": "severity_thresholds",
+      "title": "Configurable Severity Thresholds",
+      "commitments": [
+        {
+          "block_id": "b_thr_1",
+          "type": "mechanism",
+          "text": "Severity thresholds are defined per content category (e.g., hate speech, violence, spam) and consist of a low and high confidence boundary.",
+          "status": "draft",
+          "content_hash": "sha256:1cbf04cf97535f0c4ed95ba921c660c622b72f8da360154ffc2bc9f5ac25994f"
+        },
+        {
+          "block_id": "b_thr_2",
+          "type": "invariant",
+          "text": "Threshold configuration changes must be logged and require approval from at least two moderation team leads.",
+          "status": "draft",
+          "content_hash": "sha256:6354bdf58ebccd7a950dffc8dda95184b6fbb72a71b88d55b8241592da8198dd"
+        },
+        {
+          "block_id": "b_thr_3",
+          "type": "constraint",
+          "text": "Threshold values must be between 0.0 and 1.0, and the low threshold must be less than the high threshold.",
+          "status": "draft",
+          "content_hash": "sha256:7afebcc00aec076083df186f669654ef5d7ac6b26b0211944b529475c675b774"
+        },
+        {
+          "block_id": "b_thr_4",
+          "type": "decision",
+          "text": "Default thresholds are set to 0.3 (low) and 0.7 (high) for all categories, adjustable via the admin panel.",
+          "status": "draft",
+          "content_hash": "sha256:df1db387c8fd22b9bff57f36ee81032fda90095e2db780a99d5021a187e5627e"
+        },
+        {
+          "block_id": "b_thr_5",
+          "type": "risk",
+          "text": "Overly aggressive thresholds may increase false positives and overload the human review queue.",
+          "terms": [
+            "false positive"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:83b82d9d02f7870873315eb0bd31d52d39f56761d9493414bd5cb8f88bfdb4da"
+        },
+        {
+          "block_id": "b_thr_6",
+          "type": "open_question",
+          "text": "Should thresholds be dynamically adjusted based on current queue load and reviewer availability?",
+          "status": "draft",
+          "content_hash": "sha256:886001053d1f02fba84acea5c701480d26af39aac48a93d25bf36a91b18b6680"
+        }
+      ]
+    },
+    {
+      "section_id": "real_time_dashboard",
+      "title": "Real-Time Dashboard",
+      "commitments": [
+        {
+          "block_id": "b_dash_1",
+          "type": "mechanism",
+          "text": "The dashboard displays live metrics including queue size, average resolution time, and ML classification accuracy.",
+          "status": "draft",
+          "content_hash": "sha256:4421106a79f33be2cce82526ef72f0018c493a19ebf257d6060c0dab5cf8dcf0"
+        },
+        {
+          "block_id": "b_dash_2",
+          "type": "invariant",
+          "text": "Dashboard data must refresh at least every 10 seconds to provide near-real-time visibility.",
+          "status": "draft",
+          "content_hash": "sha256:4450cc736dbd81730ff5f049da040e344875a8672b1417a8b9a18e7abeb32a25"
+        },
+        {
+          "block_id": "b_dash_3",
+          "type": "constraint",
+          "text": "The dashboard must be accessible only to authenticated moderation team leads and above.",
+          "status": "draft",
+          "content_hash": "sha256:b3298b640740ca9ea8100f6da53b56d731ad0decd239369c72cfb68fe505e04c"
+        },
+        {
+          "block_id": "b_dash_4",
+          "type": "decision",
+          "text": "We will use a time-series database for storing metrics to support efficient real-time queries and historical comparisons.",
+          "terms": [
+            "time-series database"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:49eac4ff3ea6b104c6050dca85cd9291e9dcb50420fa0bd8928985f1740c4524"
+        },
+        {
+          "block_id": "b_dash_5",
+          "type": "risk",
+          "text": "High-frequency dashboard queries may impact the performance of the underlying moderation database.",
+          "status": "draft",
+          "content_hash": "sha256:87d0edc0213b631121b6ef56dab2997672a7c080b8bb49c8ceb04d74a4c0b668"
+        },
+        {
+          "block_id": "b_dash_6",
+          "type": "open_question",
+          "text": "Should the dashboard include predictive alerts for potential queue overflow or threshold violations?",
+          "status": "draft",
+          "content_hash": "sha256:00b4af388e8324de467f92df59fe55bcf829c5e2ebb5c3236b31436ea44f3a0c"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created_by": "draft_agent",
+    "created_at": "2026-04-26T04:34:30.088Z",
+    "tags": [
+      "draft",
+      "llm_generated"
+    ]
+  }
+}

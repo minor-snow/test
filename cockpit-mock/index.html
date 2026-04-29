@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pantheon – Override Cockpit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ─── Design System ─── */
+    :root {
+      --bg-primary: #0f1117;
+      --bg-secondary: #161822;
+      --bg-surface: #1c1f2e;
+      --bg-surface-hover: #242738;
+      --bg-diff-old: rgba(248, 81, 73, 0.10);
+      --bg-diff-new: rgba(63, 185, 80, 0.10);
+      --border-default: #2d3148;
+      --border-accent: #4f5aff;
+      --border-danger: #f8514980;
+      --border-warning: #d4940080;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --text-muted: #636b77;
+      --text-danger: #f85149;
+      --text-warning: #d49400;
+      --text-success: #3fb950;
+      --text-info: #58a6ff;
+      --accent: #6c72ff;
+      --accent-hover: #8187ff;
+      --danger: #f85149;
+      --warning: #d49400;
+      --success: #3fb950;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --shadow-elevated: 0 8px 32px rgba(0,0,0,0.4);
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Cascadia Code', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ─── Layout ─── */
+    .cockpit {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    .cockpit-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .cockpit-header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .cockpit-header .badge {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(248, 81, 73, 0.15);
+      color: var(--text-danger);
+      border: 1px solid var(--border-danger);
+    }
+
+    .cockpit-header .badge.warning {
+      background: rgba(212, 148, 0, 0.12);
+      color: var(--text-warning);
+      border-color: var(--border-warning);
+    }
+
+    /* ─── Cards ─── */
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: #3a3e56;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    /* ─── Revision Info ─── */
+    .revision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .revision-box {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      border: 1px solid var(--border-default);
+    }
+
+    .revision-box .label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .revision-box .value {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-info);
+    }
+
+    .revision-box .value.candidate {
+      color: var(--text-warning);
+    }
+
+    /* ─── Gate Failures ─── */
+    .gate-failure {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: rgba(248, 81, 73, 0.06);
+      border: 1px solid rgba(248, 81, 73, 0.15);
+      border-radius: var(--radius-md);
+      margin-bottom: 10px;
+    }
+
+    .gate-failure:last-child {
+      margin-bottom: 0;
+    }
+
+    .gate-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(248, 81, 73, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 11px;
+      color: var(--text-danger);
+      font-weight: 700;
+    }
+
+    .gate-failure .gate-name {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-danger);
+      margin-bottom: 4px;
+    }
+
+    .gate-failure .gate-reason {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ─── Diff View ─── */
+    .diff-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .diff-pane {
+      padding: 20px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .diff-pane.old {
+      background: var(--bg-diff-old);
+      border-right: 1px solid var(--border-default);
+    }
+
+    .diff-pane.new {
+      background: var(--bg-diff-new);
+    }
+
+    .diff-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .diff-label.old { color: var(--text-danger); }
+    .diff-label.new { color: var(--text-success); }
+
+    .diff-label .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .diff-label.old .dot { background: var(--text-danger); }
+    .diff-label.new .dot { background: var(--text-success); }
+
+    .diff-text {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .diff-text del {
+      text-decoration: none;
+      background: rgba(248, 81, 73, 0.25);
+      padding: 1px 3px;
+      border-radius: 3px;
+    }
+
+    .diff-text ins {
+      text-decoration: none;
+      background: rgba(63, 185, 80, 0.25);
+      padding: 1px 3px;
+      border-radius: 3px;
+    }
+
+    /* ─── Block Info ─── */
+    .block-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .info-chip {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      color: var(--text-secondary);
+    }
+
+    .info-chip .chip-label {
+      color: var(--text-muted);
+      margin-right: 6px;
+    }
+
+    /* ─── Rationale Input ─── */
+    .rationale-area {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-primary);
+      line-height: 1.6;
+      resize: vertical;
+      min-height: 80px;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .rationale-area:focus {
+      border-color: var(--border-accent);
+    }
+
+    .rationale-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* ─── Action Buttons ─── */
+    .action-bar {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex: 1;
+      text-align: center;
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    .btn-accept {
+      background: rgba(212, 148, 0, 0.15);
+      color: var(--text-warning);
+      border-color: var(--border-warning);
+    }
+
+    .btn-accept:hover {
+      background: rgba(212, 148, 0, 0.25);
+    }
+
+    .btn-retry {
+      background: rgba(88, 166, 255, 0.10);
+      color: var(--text-info);
+      border-color: rgba(88, 166, 255, 0.3);
+    }
+
+    .btn-retry:hover {
+      background: rgba(88, 166, 255, 0.20);
+    }
+
+    .btn-defer {
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      border-color: var(--border-default);
+    }
+
+    .btn-defer:hover {
+      background: var(--bg-surface-hover);
+      color: var(--text-primary);
+    }
+
+    /* ─── Friction Levels ─── */
+    .friction-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding: 10px 16px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .friction-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .friction-dot.o1 { background: var(--text-success); }
+    .friction-dot.o2 { background: var(--text-warning); }
+    .friction-dot.o3 { background: var(--text-danger); }
+
+    .friction-level {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .friction-level.o1 { color: var(--text-success); }
+    .friction-level.o2 { color: var(--text-warning); }
+    .friction-level.o3 { color: var(--text-danger); }
+
+    /* ─── Expandable Audit JSON ─── */
+    .audit-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 10px 0;
+      user-select: none;
+      transition: color 0.2s;
+    }
+
+    .audit-toggle:hover {
+      color: var(--text-secondary);
+    }
+
+    .audit-toggle .arrow {
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+
+    .audit-toggle.open .arrow {
+      transform: rotate(90deg);
+    }
+
+    .audit-json {
+      display: none;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-top: 8px;
+      overflow-x: auto;
+    }
+
+    .audit-json.visible {
+      display: block;
+    }
+
+    .audit-json pre {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      white-space: pre-wrap;
+    }
+
+    /* ─── Confirm Phrase (O3) ─── */
+    .confirm-phrase-container {
+      margin-top: 16px;
+      padding: 16px;
+      background: rgba(248, 81, 73, 0.06);
+      border: 1px solid rgba(248, 81, 73, 0.2);
+      border-radius: var(--radius-md);
+      display: none;
+    }
+
+    .confirm-phrase-container.visible {
+      display: block;
+    }
+
+    .confirm-phrase-label {
+      font-size: 13px;
+      color: var(--text-danger);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .confirm-phrase-input {
+      width: 100%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-danger);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .confirm-phrase-input:focus {
+      box-shadow: 0 0 0 2px rgba(248, 81, 73, 0.2);
+    }
+
+    .confirm-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* ─── Separator ─── */
+    .section-divider {
+      height: 1px;
+      background: var(--border-default);
+      margin: 8px 0 20px;
+    }
+
+    /* ─── Status Feedback ─── */
+    .status-toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: var(--shadow-elevated);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .status-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .status-toast.accept {
+      background: var(--bg-surface);
+      color: var(--text-warning);
+      border: 1px solid var(--border-warning);
+    }
+
+    .status-toast.retry {
+      background: var(--bg-surface);
+      color: var(--text-info);
+      border: 1px solid rgba(88,166,255,0.3);
+    }
+
+    .status-toast.defer {
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-default);
+    }
+
+    /* ─── Friction Level Tabs ─── */
+    .friction-tabs {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 24px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      padding: 3px;
+      border: 1px solid var(--border-default);
+    }
+
+    .friction-tab {
+      flex: 1;
+      text-align: center;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+      border: none;
+      background: transparent;
+      font-family: var(--font-sans);
+    }
+
+    .friction-tab:hover {
+      color: var(--text-secondary);
+      background: var(--bg-surface-hover);
+    }
+
+    .friction-tab.active {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .friction-tab .tab-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .friction-tab .tab-dot.o1 { background: var(--text-success); }
+    .friction-tab .tab-dot.o2 { background: var(--text-warning); }
+    .friction-tab .tab-dot.o3 { background: var(--text-danger); }
+  </style>
+</head>
+<body>
+
+<div class="cockpit">
+  <!-- Header -->
+  <div class="cockpit-header">
+    <h1>Override Cockpit</h1>
+    <span class="badge">Semantic Regression Failed</span>
+  </div>
+
+  <!-- Friction Level Selector (for demo) -->
+  <div class="friction-tabs">
+    <button class="friction-tab active" onclick="setFriction('o1')">
+      <span class="tab-dot o1"></span>O1 — Warning
+    </button>
+    <button class="friction-tab" onclick="setFriction('o2')">
+      <span class="tab-dot o2"></span>O2 — Edit Required
+    </button>
+    <button class="friction-tab" onclick="setFriction('o3')">
+      <span class="tab-dot o3"></span>O3 — Arch Override
+    </button>
+  </div>
+
+  <!-- Friction Indicator -->
+  <div class="friction-indicator" id="frictionIndicator">
+    <span class="friction-dot o1"></span>
+    <span class="friction-level o1">O1</span>
+    <span>— One-click confirmation. Standard warning override.</span>
+  </div>
+
+  <!-- Revision Info -->
+  <div class="card">
+    <div class="card-title">Revision Context</div>
+    <div class="revision-grid">
+      <div class="revision-box">
+        <div class="label">Current Canonical</div>
+        <div class="value">rev_001</div>
+      </div>
+      <div class="revision-box">
+        <div class="label">Candidate</div>
+        <div class="value candidate">rev_002_candidate</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gate Failures -->
+  <div class="card">
+    <div class="card-title">Failed Gates</div>
+    <div class="gate-failure">
+      <div class="gate-icon">✕</div>
+      <div>
+        <div class="gate-name">undefined_term</div>
+        <div class="gate-reason">
+          The term <strong>"quarantine gate"</strong> is used in the replacement text
+          but is not defined in the current artifact glossary or any referenced block.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Affected Block -->
+  <div class="card">
+    <div class="card-title">Affected Block</div>
+    <div class="block-info">
+      <span class="info-chip"><span class="chip-label">block</span>b_mem_001</span>
+      <span class="info-chip"><span class="chip-label">type</span>invariant</span>
+      <span class="info-chip"><span class="chip-label">section</span>sec_memory</span>
+      <span class="info-chip"><span class="chip-label">issue</span>issue_001</span>
+    </div>
+  </div>
+
+  <!-- Diff View -->
+  <div class="card">
+    <div class="card-title">Content Diff</div>
+    <div class="diff-container">
+      <div class="diff-pane old">
+        <div class="diff-label old"><span class="dot"></span>Current (rev_001)</div>
+        <div class="diff-text">
+          All entries are <del>committed instantly</del>.
+        </div>
+      </div>
+      <div class="diff-pane new">
+        <div class="diff-label new"><span class="dot"></span>Proposed (rev_002)</div>
+        <div class="diff-text">
+          Entries must pass a <ins>quarantine gate</ins> before canonical commit.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rationale -->
+  <div class="card" id="rationaleCard">
+    <div class="card-title">Rationale</div>
+    <textarea class="rationale-area" id="rationaleInput" placeholder="Explain your override decision...">Accepted for MVP; glossary definition will be added in a follow-up revision.</textarea>
+    <div class="rationale-hint">Auto-filled from context. Edit if needed.</div>
+
+    <!-- O3 Confirm Phrase -->
+    <div class="confirm-phrase-container" id="confirmPhrase">
+      <div class="confirm-phrase-label">⚠ Architecture constraint override requires confirmation</div>
+      <input class="confirm-phrase-input" id="confirmInput"
+             type="text"
+             placeholder="Type: confirm override arch_constraint">
+      <div class="confirm-hint">You must type the exact phrase to proceed.</div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="card">
+    <div class="card-title">Decision</div>
+    <div class="action-bar">
+      <button class="btn btn-accept" id="btnAccept" onclick="handleAccept()">
+        Accept &amp; Record Risk
+      </button>
+      <button class="btn btn-retry" onclick="handleRetry()">
+        Retry with Scope
+      </button>
+      <button class="btn btn-defer" onclick="handleDefer()">
+        Defer Issue
+      </button>
+    </div>
+  </div>
+
+  <!-- Audit JSON (expandable) -->
+  <div class="card">
+    <div class="audit-toggle" id="auditToggle" onclick="toggleAudit()">
+      <span class="arrow">▶</span>
+      <span>View Generated OverridePatch JSON</span>
+    </div>
+    <div class="audit-json" id="auditJson">
+      <pre id="auditPre">{
+  "override_id": "ovr_20260425_001",
+  "artifact_id": "arch_001",
+  "base_revision_id": "rev_001",
+  "override_type": "accept_with_known_risk",
+  "operator": {
+    "type": "human",
+    "id": "operator_001"
+  },
+  "failed_gates": ["undefined_term"],
+  "affected_issue_ids": ["issue_001"],
+  "rationale": "Accepted for MVP; glossary definition will be added in a follow-up revision.",
+  "risk_acceptance": {
+    "accepted_risks": ["Undefined term: quarantine gate"],
+    "mitigation_plan": "Add glossary definition before implementation.",
+    "revisit_condition": "Before sprint 2 planning"
+  },
+  "timestamp": "2026-04-25T13:19:00Z"
+}</pre>
+    </div>
+  </div>
+</div>
+
+<!-- Status Toast -->
+<div class="status-toast" id="statusToast"></div>
+
+<script>
+  // ─── Friction Level Switching (Demo) ───
+  function setFriction(level) {
+    // Update tabs
+    document.querySelectorAll('.friction-tab').forEach(tab => tab.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+
+    const indicator = document.getElementById('frictionIndicator');
+    const confirmPhrase = document.getElementById('confirmPhrase');
+    const btnAccept = document.getElementById('btnAccept');
+    const rationaleInput = document.getElementById('rationaleInput');
+
+    if (level === 'o1') {
+      indicator.innerHTML = `
+        <span class="friction-dot o1"></span>
+        <span class="friction-level o1">O1</span>
+        <span>— One-click confirmation. Standard warning override.</span>
+      `;
+      confirmPhrase.classList.remove('visible');
+      rationaleInput.removeAttribute('readonly');
+      btnAccept.textContent = 'Accept & Record Risk';
+    } else if (level === 'o2') {
+      indicator.innerHTML = `
+        <span class="friction-dot o2"></span>
+        <span class="friction-level o2">O2</span>
+        <span>— Edit required. Review and modify the diff before confirming.</span>
+      `;
+      confirmPhrase.classList.remove('visible');
+      rationaleInput.removeAttribute('readonly');
+      btnAccept.textContent = 'Confirm Edit & Accept';
+    } else if (level === 'o3') {
+      indicator.innerHTML = `
+        <span class="friction-dot o3"></span>
+        <span class="friction-level o3">O3</span>
+        <span>— Architecture constraint override. Requires typed confirmation phrase.</span>
+      `;
+      confirmPhrase.classList.add('visible');
+      btnAccept.textContent = 'Override Architecture Constraint';
+    }
+  }
+
+  // ─── Audit JSON Toggle ───
+  function toggleAudit() {
+    const toggle = document.getElementById('auditToggle');
+    const json = document.getElementById('auditJson');
+    toggle.classList.toggle('open');
+    json.classList.toggle('visible');
+  }
+
+  // ─── Action Handlers ───
+  function showToast(message, type) {
+    const toast = document.getElementById('statusToast');
+    toast.textContent = message;
+    toast.className = 'status-toast ' + type;
+
+    // Update audit JSON rationale in real-time
+    updateAuditJson();
+
+    requestAnimationFrame(() => {
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    });
+  }
+
+  function handleAccept() {
+    // Check O3 confirmation if needed
+    const confirmContainer = document.getElementById('confirmPhrase');
+    if (confirmContainer.classList.contains('visible')) {
+      const input = document.getElementById('confirmInput').value.trim();
+      if (input !== 'confirm override arch_constraint') {
+        document.getElementById('confirmInput').style.borderColor = 'var(--danger)';
+        document.getElementById('confirmInput').focus();
+        return;
+      }
+    }
+    showToast('✓ Override accepted — rev_002_override committed', 'accept');
+  }
+
+  function handleRetry() {
+    showToast('↻ Retry queued — waiting for scoped rewrite', 'retry');
+  }
+
+  function handleDefer() {
+    showToast('⏸ Issue deferred — no revision created', 'defer');
+  }
+
+  function updateAuditJson() {
+    const rationale = document.getElementById('rationaleInput').value;
+    const auditObj = {
+      override_id: "ovr_20260425_001",
+      artifact_id: "arch_001",
+      base_revision_id: "rev_001",
+      override_type: "accept_with_known_risk",
+      operator: { type: "human", id: "operator_001" },
+      failed_gates: ["undefined_term"],
+      affected_issue_ids: ["issue_001"],
+      rationale: rationale,
+      risk_acceptance: {
+        accepted_risks: ["Undefined term: quarantine gate"],
+        mitigation_plan: "Add glossary definition before implementation.",
+        revisit_condition: "Before sprint 2 planning"
+      },
+      timestamp: new Date().toISOString()
+    };
+    document.getElementById('auditPre').textContent = JSON.stringify(auditObj, null, 2);
+  }
+
+  // Update audit JSON when rationale changes
+  document.getElementById('rationaleInput').addEventListener('input', updateAuditJson);
+</script>
+
+</body>
+</html>

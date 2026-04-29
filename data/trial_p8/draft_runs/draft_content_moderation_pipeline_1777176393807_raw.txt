@@ -1,0 +1,307 @@
+{
+  "artifact_id": "content_moderation_pipeline",
+  "artifact_type": "ArchitectureDraft",
+  "sections": [
+    {
+      "section_id": "ml_classification",
+      "title": "ML-Based Classification",
+      "commitments": [
+        {
+          "block_id": "b_ml_1",
+          "type": "mechanism",
+          "text": "Text content is classified by a transformer-based NLP model with categories: hate_speech, harassment, violence, spam, and safe.",
+          "status": "draft",
+          "terms": ["transformer", "NLP"]
+        },
+        {
+          "block_id": "b_ml_2",
+          "type": "mechanism",
+          "text": "Image content is classified by a convolutional neural network (CNN) for categories: nudity, violence, graphic_gore, and safe.",
+          "status": "draft",
+          "terms": ["CNN"]
+        },
+        {
+          "block_id": "b_ml_3",
+          "type": "invariant",
+          "text": "Every piece of user-generated content submitted to the platform must be processed by at least one ML classifier before publication.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_ml_4",
+          "type": "constraint",
+          "text": "ML classification inference must complete within 500 milliseconds for text and 2 seconds for images.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_ml_5",
+          "type": "decision",
+          "text": "We will use a pre-trained BERT model fine-tuned on our moderation dataset for text classification, rather than training from scratch.",
+          "status": "draft",
+          "terms": ["BERT"]
+        },
+        {
+          "block_id": "b_ml_6",
+          "type": "risk",
+          "text": "ML models may have biased performance across different languages or demographics, leading to unfair moderation outcomes.",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "section_id": "human_review_queue",
+      "title": "Human Review Queue",
+      "commitments": [
+        {
+          "block_id": "b_hrq_1",
+          "type": "mechanism",
+          "text": "Content with ML confidence scores between the low and high thresholds for any category is automatically placed into the human review queue.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_hrq_2",
+          "type": "invariant",
+          "text": "Every item in the human review queue must be assigned to a human reviewer within 5 minutes of entry.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_hrq_3",
+          "type": "constraint",
+          "text": "A single human reviewer may not have more than 50 items in their active queue at any time.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_hrq_4",
+          "type": "decision",
+          "text": "Human reviewers will be presented with the original content, ML classification scores, and a simplified decision interface with three options: approve, reject, or escalate.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_hrq_5",
+          "type": "risk",
+          "text": "Human reviewers may experience fatigue or bias, leading to inconsistent decisions on similar content.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_hrq_6",
+          "type": "open_question",
+          "text": "What is the maximum acceptable latency for a human reviewer to make a decision on a single item?",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "section_id": "appeal_process",
+      "title": "Appeal Process",
+      "commitments": [
+        {
+          "block_id": "b_app_1",
+          "type": "mechanism",
+          "text": "Users whose content is rejected may submit an appeal through a dedicated form, providing a reason for the appeal.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_app_2",
+          "type": "invariant",
+          "text": "Every appeal must be reviewed by a different human moderator than the one who made the original decision.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_app_3",
+          "type": "constraint",
+          "text": "Appeals must be resolved within 24 hours of submission.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_app_4",
+          "type": "decision",
+          "text": "The appeal decision is final and cannot be further contested.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_app_5",
+          "type": "risk",
+          "text": "High volume of appeals may overwhelm the moderation team and delay response times.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_app_6",
+          "type": "open_question",
+          "text": "Should users be allowed to appeal decisions that were automatically taken by the ML system without human review?",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "section_id": "audit_logging",
+      "title": "Audit Logging",
+      "commitments": [
+        {
+          "block_id": "b_aud_1",
+          "type": "invariant",
+          "text": "Every moderation action (ML classification, human decision, appeal, threshold change) must be recorded in an immutable audit log.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_aud_2",
+          "type": "mechanism",
+          "text": "Audit log entries include timestamp, action type, actor ID, content ID, previous and new status, and a unique log sequence number.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_aud_3",
+          "type": "constraint",
+          "text": "Audit logs must be retained for at least 7 years to comply with regulatory requirements.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_aud_4",
+          "type": "decision",
+          "text": "We will use an append-only database (e.g., Amazon QLDB) for audit log storage to ensure immutability.",
+          "status": "draft",
+          "terms": ["QLDB"]
+        },
+        {
+          "block_id": "b_aud_5",
+          "type": "risk",
+          "text": "Audit log storage costs may grow significantly over time due to high volume of moderation actions.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_aud_6",
+          "type": "open_question",
+          "text": "Should audit logs be encrypted at rest and if so, what key management strategy should be used?",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "section_id": "configurable_thresholds",
+      "title": "Configurable Severity Thresholds",
+      "commitments": [
+        {
+          "block_id": "b_thr_1",
+          "type": "mechanism",
+          "text": "Each content category has two configurable thresholds: a low threshold (below which content is auto-approved) and a high threshold (above which content is auto-rejected).",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_thr_2",
+          "type": "invariant",
+          "text": "Threshold values must be between 0.0 and 1.0 inclusive, and the low threshold must be less than the high threshold.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_thr_3",
+          "type": "constraint",
+          "text": "Threshold changes must be approved by at least two moderation team leads before taking effect.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_thr_4",
+          "type": "decision",
+          "text": "Thresholds are stored in a centralized configuration service and are hot-reloaded without system restart.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_thr_5",
+          "type": "risk",
+          "text": "Overly aggressive thresholds may cause high false positive rates, frustrating legitimate users.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_thr_6",
+          "type": "open_question",
+          "text": "Should thresholds be adjustable per geographic region to account for cultural differences in content sensitivity?",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "section_id": "real_time_dashboard",
+      "title": "Real-Time Dashboard",
+      "commitments": [
+        {
+          "block_id": "b_dash_1",
+          "type": "mechanism",
+          "text": "The dashboard displays real-time metrics: queue size, average review time, throughput, and category distribution of flagged content.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_dash_2",
+          "type": "invariant",
+          "text": "Dashboard data must refresh every 5 seconds or less to maintain real-time visibility.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_dash_3",
+          "type": "constraint",
+          "text": "Dashboard access is restricted to moderation team leads and system administrators via role-based access control.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_dash_4",
+          "type": "decision",
+          "text": "We will use a time-series database (e.g., InfluxDB) for storing dashboard metrics to enable efficient aggregation and querying.",
+          "status": "draft",
+          "terms": ["InfluxDB"]
+        },
+        {
+          "block_id": "b_dash_5",
+          "type": "risk",
+          "text": "High-frequency metric updates may put load on the database and affect dashboard performance.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_dash_6",
+          "type": "open_question",
+          "text": "Should the dashboard include historical trend analysis or only current real-time data?",
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "section_id": "system_integration",
+      "title": "System Integration and Data Flow",
+      "commitments": [
+        {
+          "block_id": "b_int_1",
+          "type": "mechanism",
+          "text": "Content ingestion triggers an asynchronous pipeline: ML classification -> threshold evaluation -> auto-action or human queue -> final action -> audit log.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_int_2",
+          "type": "invariant",
+          "text": "All inter-service communication must be authenticated and encrypted using TLS 1.3.",
+          "status": "draft",
+          "terms": ["TLS"]
+        },
+        {
+          "block_id": "b_int_3",
+          "type": "constraint",
+          "text": "The pipeline must be able to handle a peak throughput of 10,000 content items per second without degradation.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_int_4",
+          "type": "decision",
+          "text": "We will use Apache Kafka as the message broker for the asynchronous pipeline to ensure durability and replayability.",
+          "status": "draft",
+          "terms": ["Kafka"]
+        },
+        {
+          "block_id": "b_int_5",
+          "type": "risk",
+          "text": "Kafka broker failure could cause message loss or pipeline delay if not properly replicated.",
+          "status": "draft"
+        },
+        {
+          "block_id": "b_int_6",
+          "type": "open_question",
+          "text": "Should the pipeline support a dead-letter queue for messages that fail processing after multiple retries?",
+          "status": "draft"
+        }
+      ]
+    }
+  ]
+}

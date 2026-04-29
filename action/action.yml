@@ -1,0 +1,120 @@
+name: "Pantheon Boundary Check"
+description: "Check whether an AI-generated PR stayed inside declared code boundaries."
+
+inputs:
+  mode:
+    required: false
+    default: "boundary"
+    description: "Pantheon action mode: boundary or repair."
+  intent:
+    required: false
+    description: "Human-readable change intent. Defaults to PR title."
+  scope:
+    required: true
+    description: "Allowed glob patterns. One per line."
+  review:
+    required: false
+    description: "Review-required glob patterns. One per line."
+  forbid:
+    required: false
+    description: "Forbidden glob patterns. One per line."
+  config_path:
+    required: false
+    default: "pantheon.json"
+    description: "Pantheon config path relative to repo root."
+  fail_on:
+    required: false
+    default: "forbidden,outside_scope"
+    description: "Comma-separated fail conditions: forbidden,outside_scope,review_required,all,none."
+  post_comment:
+    required: false
+    default: "true"
+    description: "Whether to post or update a PR comment."
+  upload_artifacts:
+    required: false
+    default: "true"
+    description: "Whether to stage public artifacts into pantheon-report/."
+  artifact_mode:
+    required: false
+    default: "public"
+    description: "public or debug. Debug includes .pantheon internals."
+  comment_mode:
+    required: false
+    default: "update"
+    description: "update or off."
+  repair_id:
+    required: false
+    description: "Existing Pantheon repair session id."
+  agent_bug_report:
+    required: false
+    description: "Path to AgentBugReport JSON."
+  repair_intent:
+    required: false
+    description: "Experimental inline repair intent."
+  suspect:
+    required: false
+    description: "Comma-separated or newline-separated suspect files."
+  failing_tests:
+    required: false
+    description: "Comma-separated or newline-separated failing test paths."
+  must_preserve:
+    required: false
+    description: "Comma-separated or newline-separated must-preserve constraints."
+  audit_mode:
+    required: false
+    default: "require_plan_approval"
+    description: "auto, require_plan_approval, or require_all."
+
+outputs:
+  repair_id:
+    description: "Pantheon repair session id."
+    value: ${{ steps.pantheon.outputs.repair_id }}
+  repair_verdict:
+    description: "pass, requires_review, requires_scope_expansion, requires_replan, or fail."
+    value: ${{ steps.pantheon.outputs.repair_verdict }}
+  artifact_dir:
+    description: "Stable public artifact directory."
+    value: ${{ steps.pantheon.outputs.artifact_dir }}
+  repair_feedback_path:
+    description: "Path to repair feedback markdown."
+    value: ${{ steps.pantheon.outputs.repair_feedback_path }}
+  comment_status:
+    description: "posted, skipped, or failed."
+    value: ${{ steps.pantheon.outputs.comment_status }}
+  sanitizer_violations:
+    description: "Number of public artifact sanitizer violations."
+    value: ${{ steps.pantheon.outputs.sanitizer_violations }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Pantheon runtime dependencies
+      shell: bash
+      working-directory: ${{ github.action_path }}/..
+      run: npm ci --omit=dev
+
+    - name: Run Pantheon action
+      id: pantheon
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        INPUT_MODE: ${{ inputs.mode }}
+        INPUT_INTENT: ${{ inputs.intent }}
+        INPUT_SCOPE: ${{ inputs.scope }}
+        INPUT_REVIEW: ${{ inputs.review }}
+        INPUT_FORBID: ${{ inputs.forbid }}
+        INPUT_CONFIG_PATH: ${{ inputs.config_path }}
+        INPUT_FAIL_ON: ${{ inputs.fail_on }}
+        INPUT_POST_COMMENT: ${{ inputs.post_comment }}
+        INPUT_UPLOAD_ARTIFACTS: ${{ inputs.upload_artifacts }}
+        INPUT_ARTIFACT_MODE: ${{ inputs.artifact_mode }}
+        INPUT_COMMENT_MODE: ${{ inputs.comment_mode }}
+        INPUT_REPAIR_ID: ${{ inputs.repair_id }}
+        INPUT_AGENT_BUG_REPORT: ${{ inputs.agent_bug_report }}
+        INPUT_REPAIR_INTENT: ${{ inputs.repair_intent }}
+        INPUT_SUSPECT: ${{ inputs.suspect }}
+        INPUT_FAILING_TESTS: ${{ inputs.failing_tests }}
+        INPUT_MUST_PRESERVE: ${{ inputs.must_preserve }}
+        INPUT_AUDIT_MODE: ${{ inputs.audit_mode }}
+      run: node "${{ github.action_path }}/../dist/src/github/githubActionEntry.js"

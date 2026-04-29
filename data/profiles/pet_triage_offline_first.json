@@ -1,0 +1,78 @@
+{
+  "profile_id": "pet_triage_offline_first",
+  "artifact_type": "ArchitectureDraft",
+  "domain_name": "Pet Triage Offline-First Migration",
+
+  "allowed_concepts": [
+    "offline-first", "online-first", "local decision tree", "triage tree",
+    "pending report", "sync queue", "retry ledger", "background sync",
+    "multi-clinic", "clinic replica", "vector clock", "last-writer-wins",
+    "conflict resolution", "deterministic merge", "causal ordering",
+    "audit event", "recovery", "connectivity observer",
+    "android client", "jetpack compose", "room database",
+    "species", "temperature", "symptom", "risk level", "diagnosis",
+    "veterinarian", "operator", "triage request", "triage response",
+    "strong sync", "eventual consistency", "replication boundary",
+    "version metadata", "sync token", "change cursor",
+    "deferred upload", "queue handshake", "offline submission",
+    "user-visible conflict", "clinician review", "appeal",
+    "data integrity", "idempotency", "retry", "circuit breaker",
+    "single point of failure", "degradation mode"
+  ],
+
+  "required_concepts": [
+    { "concept": "offline-first", "aliases": ["offline first", "offline mode", "offline capable", "no-network operation"], "required": true },
+    { "concept": "local decision tree", "aliases": ["embedded triage engine", "client-side decision", "offline triage execution", "local triage"], "required": true },
+    { "concept": "pending report", "aliases": ["pending triage report", "deferred report", "offline report", "local report draft"], "required": true },
+    { "concept": "sync queue", "aliases": ["synchronization queue", "upload queue", "outbound queue", "background sync queue"], "required": true },
+    { "concept": "retry ledger", "aliases": ["retry log", "retry record", "failed upload log", "retry tracking"], "required": true },
+    { "concept": "multi-clinic sync", "aliases": ["multi-clinic", "clinic replication", "cross-clinic sync", "multi-clinic replication"], "required": true },
+    { "concept": "vector clock", "aliases": ["version vector", "causal clock", "logical clock"], "required": true },
+    { "concept": "last-writer-wins", "aliases": ["LWW", "last writer wins", "timestamp-based resolution"], "required": true },
+    { "concept": "conflict resolution", "aliases": ["conflict handling", "conflict detection", "merge conflict", "reconciliation"], "required": true },
+    { "concept": "user-visible conflict", "aliases": ["conflict review", "clinician conflict review", "manual conflict resolution", "conflict escalation"], "required": true },
+    { "concept": "audit event", "aliases": ["audit trail", "audit log", "audit logging", "traceability"], "required": true },
+    { "concept": "recovery", "aliases": ["rollback", "recovery path", "failure recovery", "data recovery"], "required": true }
+  ],
+
+  "forbidden_generic_phrases": [
+    "respect dignity",
+    "enhance user experience",
+    "ensure seamless collaboration",
+    "leverage cutting-edge technology",
+    "ensure scalability",
+    "leverage AI",
+    "enhance efficiency",
+    "provide robust solution",
+    "world-class platform",
+    "next-generation system",
+    "best-in-class",
+    "synergy",
+    "holistic approach",
+    "paradigm shift",
+    "empower stakeholders",
+    "state-of-the-art",
+    "industry-leading"
+  ],
+
+  "required_sections": [
+    { "title": "Offline Client Decision Engine", "aliases": ["Offline Triage Engine", "Local Decision Engine", "Client-Side Triage"] },
+    { "title": "Local Pending Report Store", "aliases": ["Pending Report Storage", "Local Report Persistence", "Offline Report Store"] },
+    { "title": "Sync Queue and Retry Ledger", "aliases": ["Synchronization Queue", "Background Sync", "Upload Queue and Retry"] },
+    { "title": "Conflict Resolution Policy", "aliases": ["Conflict Resolution", "Merge Policy", "Conflict Handling Strategy"] },
+    { "title": "Multi-Clinic Replication Boundary", "aliases": ["Multi-Clinic Sync", "Clinic Replication", "Cross-Clinic Boundary"] },
+    { "title": "User-Visible Conflict Outcomes", "aliases": ["Conflict Review UX", "Clinician Conflict Review", "Conflict Presentation"] },
+    { "title": "Audit and Recovery", "aliases": ["Audit Trail", "Recovery and Audit", "Operational Recovery"] }
+  ],
+
+  "preferred_block_types": [
+    "invariant", "mechanism", "constraint", "decision", "risk", "open_question"
+  ],
+
+  "quality_rubric": {
+    "min_sections": 6,
+    "min_blocks": 30,
+    "max_blocks": 50,
+    "min_required_concept_coverage": 0.8
+  }
+}

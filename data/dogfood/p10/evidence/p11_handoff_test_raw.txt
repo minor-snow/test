@@ -1,0 +1,52 @@
+{
+  "pending_report_entity": {
+    "fields": [
+      {"name": "report_id", "type": "String", "conflict_policy": ""},
+      {"name": "clinic_id", "type": "String", "conflict_policy": ""},
+      {"name": "patient_case_id", "type": "String", "conflict_policy": ""},
+      {"name": "triage_result_json", "type": "String", "conflict_policy": ""},
+      {"name": "status", "type": "String", "conflict_policy": "vector_clock"},
+      {"name": "created_at", "type": "Long", "conflict_policy": ""},
+      {"name": "updated_at", "type": "Long", "conflict_policy": "last_writer_wins"},
+      {"name": "vector_clock_json", "type": "String?", "conflict_policy": ""},
+      {"name": "retry_count", "type": "Int", "conflict_policy": "local_only"},
+      {"name": "last_error", "type": "String?", "conflict_policy": ""}
+    ],
+    "kotlin_code": "@Entity(tableName = \"pending_reports\")\ndata class PendingReportEntity(\n    @PrimaryKey val report_id: String,\n    @ColumnInfo(index = true) val clinic_id: String,\n    @ColumnInfo(index = true) val patient_case_id: String,\n    val triage_result_json: String,\n    @ColumnInfo(index = true) val status: String,\n    val created_at: Long,\n    val updated_at: Long,\n    val vector_clock_json: String?,\n    val retry_count: Int,\n    val last_error: String?\n)"
+  },
+  "pending_report_state": {
+    "values": ["draft", "completed_offline", "queued_for_sync", "syncing", "merged", "conflicted", "requires_review", "failed_retryable", "failed_terminal"],
+    "kotlin_code": "enum class PendingReportState {\n    draft,\n    completed_offline,\n    queued_for_sync,\n    syncing,\n    merged,\n    conflicted,\n    requires_review,\n    failed_retryable,\n    failed_terminal\n}"
+  },
+  "sync_operation_state": {
+    "values": ["queued", "in_flight", "acknowledged", "retry_scheduled", "conflict_detected", "dead_lettered"],
+    "kotlin_code": "enum class SyncOperationState {\n    queued,\n    in_flight,\n    acknowledged,\n    retry_scheduled,\n    conflict_detected,\n    dead_lettered\n}"
+  },
+  "conflict_resolution_state": {
+    "values": ["auto_merged", "lww_applied", "vector_conflict", "manual_review_required", "clinician_resolved"],
+    "kotlin_code": "enum class ConflictResolutionState {\n    auto_merged,\n    lww_applied,\n    vector_conflict,\n    manual_review_required,\n    clinician_resolved\n}"
+  },
+  "conflict_policy": {
+    "values": ["vector_clock", "last_writer_wins", "local_only", "server_token"],
+    "kotlin_code": "enum class ConflictPolicy {\n    vector_clock,\n    last_writer_wins,\n    local_only,\n    server_token\n}"
+  },
+  "vector_clock": {
+    "fields": [{"name": "entries", "type": "Map<String, Int>"}],
+    "kotlin_code": "data class VectorClock(\n    val entries: Map<String, Int>\n)"
+  },
+  "conflict_payload": {
+    "fields": [
+      {"name": "report_id", "type": "String"},
+      {"name": "local_version", "type": "ReportSnapshot"},
+      {"name": "remote_version", "type": "ReportSnapshot"},
+      {"name": "local_clock", "type": "VectorClock"},
+      {"name": "remote_clock", "type": "VectorClock"},
+      {"name": "conflicting_fields", "type": "List<String>"}
+    ],
+    "kotlin_code": "data class ConflictPayload(\n    val report_id: String,\n    val local_version: ReportSnapshot,\n    val remote_version: ReportSnapshot,\n    val local_clock: VectorClock,\n    val remote_clock: VectorClock,\n    val conflicting_fields: List<String>\n)"
+  },
+  "unit_tests": {
+    "test_count": 3,
+    "kotlin_code": "import org.junit.Test\nimport org.junit.Assert.*\n\nclass ConflictPolicyTest {\n\n    @Test\n    fun `clinical fields use vector_clock not LWW`() {\n        val clinicalFields = listOf(\n            \"patient_case_status\",\n            \"vet_note_summary\",\n            \"triage_report_body\",\n            \"risk_level\",\n            \"suspected_condition\"\n        )\n        val policyMatrix = mapOf(\n            \"patient_case_status\" to ConflictPolicy.vector_clock,\n            \"vet_note_summary\" to ConflictPolicy.vector_clock,\n            \"triage_report_body\" to ConflictPolicy.vector_clock,\n            \"risk_level\" to ConflictPolicy.vector_clock,\n            \"suspected_condition\" to ConflictPolicy.vector_clock\n        )\n        for (field in clinicalFields) {\n            assertEquals(\"Field $field must use vector_clock\",\n                ConflictPolicy.vector_clock, policyMatrix[field])\n        }\n    }\n\n    @Test\n    fun `metadata fields can use LWW`() {\n        val metadataFields = listOf(\n            \"last_viewed_screen\",\n            \"local_cache_timestamp\"\n        )\n        val policyMatrix = mapOf(\n            \"last_viewed_screen\" to ConflictPolicy.last_writer_wins,\n            \"local_cache_timestamp\" to ConflictPolicy.last_writer_wins\n        )\n        for (field in metadataFields) {\n            assertEquals(\"Field $field should use last_writer_wins\",\n                ConflictPolicy.last_writer_wins, policyMatrix[field])\n        }\n    }\n\n    @Test(expected = IllegalStateException::class)\n    fun `forbidden transition conflicted to queued_for_sync is rejected`() {\n        val stateMachine = PendingReportStateMachine()\n        stateMachine.transition(PendingReportState.conflicted, PendingReportState.queued_for_sync)\n    }\n}\n\nclass PendingReportStateMachine {\n    private val forbiddenTransitions = setOf(\n        PendingReportState.conflicted to PendingReportState.queued_for_sync,\n        PendingReportState.failed_terminal to PendingReportState.syncing,\n        PendingReportState.requires_review to PendingReportState.queued_for_sync,\n        PendingReportState.merged to PendingReportState.draft,\n        PendingReportState.merged to PendingReportState.queued_for_sync\n    )\n\n    fun transition(from: PendingReportState, to: PendingReportState) {\n        if (forbiddenTransitions.contains(from to to)) {\n            throw IllegalStateException(\"Transition $from -> $to is forbidden\")\n        }\n    }\n}"
+  }
+}

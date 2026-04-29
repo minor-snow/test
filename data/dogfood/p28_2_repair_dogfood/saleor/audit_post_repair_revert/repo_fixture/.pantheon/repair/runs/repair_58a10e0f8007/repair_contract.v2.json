@@ -1,0 +1,218 @@
+{
+  "schema_version": "repair_contract@0.1.0",
+  "repair_id": "repair_58a10e0f8007",
+  "revision": 2,
+  "source": {
+    "kind": "agent_bug_report",
+    "id": "report_saleor_audit_post_repair_revert"
+  },
+  "intent": "Fix product variant logic, human rejects patch.",
+  "bug_finding_id": "finding_f9db3d120d71",
+  "suspect_surface": {
+    "files": [
+      {
+        "path": "saleor/product/models.py",
+        "confidence": "high",
+        "reason": "Primary suspect",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "reason": "Derived from explicit suspect files, confirmed path references, and failing-test mappings."
+  },
+  "repair_relation_graph": [
+    {
+      "from": "saleor/product/models.py",
+      "to": "saleor/product/models.py",
+      "relation": "suspect",
+      "confidence": "high",
+      "reason": "Primary suspect",
+      "evidence": [
+        "explicit_suspect_file"
+      ]
+    }
+  ],
+  "graph_build_stats": {
+    "observed_files": 132,
+    "patterns_evaluated": 0,
+    "edges_generated": 1,
+    "edges_after_dedup": 1,
+    "truncation_entries": [],
+    "limitation": "Repair relation graph v1 is an evidence-based candidate graph, not a complete dependency graph or call graph.",
+    "duration_ms": 0
+  },
+  "impact_surface": {
+    "evidence_level": "bootstrap_conservative",
+    "direct_files": [
+      {
+        "path": "saleor/product/models.py",
+        "confidence": "high",
+        "reason": "Primary suspect",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "related_files": [],
+    "related_tests": [
+      {
+        "path": "tests/test_saleor.py",
+        "confidence": "high",
+        "reason": "Explicit failing test supplied in bug report.",
+        "evidence": [
+          "bug_report:failing_test"
+        ]
+      }
+    ],
+    "risk_areas": [],
+    "unknowns": [
+      {
+        "kind": "invalid_reference",
+        "note": "One or more references in the bug report could not be validated inside the repo.",
+        "evidence": [
+          "tests/test_saleor.py"
+        ]
+      },
+      {
+        "kind": "unknown_related_surface",
+        "note": "No additional related files were found beyond the direct suspect surface.",
+        "evidence": [
+          "repair:no_related_files"
+        ]
+      },
+      {
+        "kind": "unverified_bug_claim",
+        "note": "The report includes unverified bug claims or hypotheses that must not be treated as confirmed facts.",
+        "evidence": [
+          "I think this is the cause.",
+          "It is broken.",
+          "It should work."
+        ]
+      }
+    ]
+  },
+  "repair_scope": {
+    "allowed": [
+      {
+        "pattern": "saleor/product/models.py",
+        "source": "suspect_surface",
+        "confidence": "high",
+        "audit_weight": "normal",
+        "reason": "Primary suspect",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      },
+      {
+        "pattern": "tests/test_saleor.py",
+        "source": "impact_candidate",
+        "confidence": "high",
+        "audit_weight": "elevated",
+        "reason": "Explicit failing test supplied in bug report.",
+        "evidence": [
+          "bug_report:failing_test"
+        ]
+      }
+    ],
+    "review_required": [],
+    "forbidden": [
+      {
+        "pattern": ".cursor/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": ".git/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": ".pantheon/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      }
+    ]
+  },
+  "must_preserve": [],
+  "consistency_checks": [
+    {
+      "id": "check_4d2c4d90c895",
+      "statement": "Do not alter payment, order, or tax behavior outside the intended fix.",
+      "source": "risk_preset",
+      "severity": "hard",
+      "evidence": [
+        "risk_area:commerce_backend"
+      ],
+      "reason": "Commerce repairs are money-flow adjacent and can create hidden regressions."
+    },
+    {
+      "id": "check_b0725582bcc9",
+      "statement": "Do not modify migrations automatically.",
+      "source": "risk_preset",
+      "severity": "hard",
+      "evidence": [
+        "risk_area:migration"
+      ],
+      "reason": "Schema changes require explicit human approval."
+    },
+    {
+      "id": "check_c1fc3f010c75",
+      "statement": "Update or inspect related tests when the repair changes behavior.",
+      "source": "test_signal",
+      "severity": "review",
+      "evidence": [
+        "related_test:tests/test_saleor.py"
+      ],
+      "reason": "Related tests are the best available deterministic proxy for behavioral impact in bootstrap mode."
+    },
+    {
+      "id": "check_242a6433d600",
+      "statement": "Unknown impact surface remains. Keep the repair conservative and escalate if scope expands.",
+      "source": "unknown_surface",
+      "severity": "review",
+      "evidence": [
+        "invalid_reference",
+        "unknown_related_surface",
+        "unverified_bug_claim"
+      ],
+      "reason": "Pantheon found unresolved impact signals; those must not be silently ignored."
+    }
+  ],
+  "test_signals": {
+    "related": [
+      "tests/test_saleor.py"
+    ],
+    "recommended": [],
+    "missing_mapping": []
+  },
+  "repo_state": {
+    "base_sha": null,
+    "head_sha": null,
+    "diff_base": null,
+    "working_tree_status": "unknown",
+    "created_at": "2026-04-29T07:20:04.113Z",
+    "source": "git"
+  },
+  "audit_status": "post_repair_reviewed",
+  "source_refs": {
+    "repo_observations_hash": "sha256:2c1c378902c16297b2960c081de4c313d05e9c152f84f733bf5dd0f9736925c9",
+    "repo_label": "repo_fixture",
+    "head_commit_hash": null
+  }
+}

@@ -1,0 +1,30 @@
+diff --git a/saleor/checkout/calculations.py b/saleor/checkout/calculations.py
+index fd67396..1cf9692 100644
+--- a/saleor/checkout/calculations.py
++++ b/saleor/checkout/calculations.py
+@@ -904,3 +904,5 @@ def fetch_checkout_data(
+         requestor=requestor,
+         allow_sync_webhooks=allow_sync_webhooks,
+     ).then(process_refreshed_prices)
++
++# PANTHEON_P26_REQUIRES_REVIEW_FIXTURE
+diff --git a/saleor/checkout/models.py b/saleor/checkout/models.py
+index f6dcd21..8f5b267 100644
+--- a/saleor/checkout/models.py
++++ b/saleor/checkout/models.py
+@@ -536,3 +536,5 @@ class CheckoutMetadata(ModelWithMetadata):
+     checkout = models.OneToOneField(
+         Checkout, related_name="metadata_storage", on_delete=models.CASCADE
+     )
++
++# PANTHEON_P26_REQUIRES_REVIEW_FIXTURE
+diff --git a/saleor/order/models.py b/saleor/order/models.py
+index 9cd5b46..0cac272 100644
+--- a/saleor/order/models.py
++++ b/saleor/order/models.py
+@@ -944,3 +944,5 @@ class OrderGrantedRefundLine(models.Model):
+     )
+ 
+     reason = models.TextField(blank=True, null=True, default="")
++
++# PANTHEON_P26_REQUIRES_REVIEW_FIXTURE

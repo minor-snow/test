@@ -1,0 +1,76 @@
+{
+  "project_id": "pet_triage_offline_first_migration",
+  "business_change": "Evolve the existing online-first pet triage system into an offline-first Android architecture. The client must complete multi-step triage flows without network, persist pending reports locally, and synchronize with multi-clinic cloud backends asynchronously. Conflicts between offline edits and cloud-side veterinary modifications must be resolved deterministically using Vector Clock or LWW strategies. No silent overwrite. No forced re-entry.",
+  "existing_artifacts": [
+    {
+      "artifact_id": "pet_triage_architecture",
+      "artifact_type": "ArchitectureDraft",
+      "source_revision_id": "rev_50e5090eaf19",
+      "source_store_root": "data/"
+    },
+    {
+      "artifact_id": "pet_triage_interface",
+      "artifact_type": "InterfaceSpec",
+      "source_revision_id": "rev_6e62a0114bb5",
+      "source_store_root": "data/"
+    }
+  ],
+  "superseded_constraints": [
+    {
+      "artifact_id": "pet_triage_architecture",
+      "block_id": "b_pet_arch_002",
+      "text": "All client triage decisions must request the backend triage engine in real time before any diagnosis result is shown.",
+      "reason": "Offline-first requires client-side decision tree execution without network.",
+      "replacement_intent": "Client executes triage tree locally; backend is synced asynchronously."
+    },
+    {
+      "artifact_id": "pet_triage_architecture",
+      "block_id": "b_pet_arch_004",
+      "text": "When the network is unavailable, the client must lock the triage screen.",
+      "reason": "Offline-first means triage must complete without network.",
+      "replacement_intent": "Triage completes offline; results persisted as pending reports."
+    },
+    {
+      "artifact_id": "pet_triage_architecture",
+      "block_id": "b_pet_arch_008",
+      "text": "The client must not execute the multi-step triage tree offline.",
+      "reason": "Core requirement of the migration is offline multi-step triage.",
+      "replacement_intent": "Embedded decision tree engine runs locally with cached rules."
+    },
+    {
+      "artifact_id": "pet_triage_architecture",
+      "block_id": "b_pet_arch_013",
+      "text": "No background sync queue, retry ledger, or version vector.",
+      "reason": "Async sync requires all three.",
+      "replacement_intent": "Sync queue, retry ledger, and vector clock/LWW metadata are new core components."
+    },
+    {
+      "artifact_id": "pet_triage_architecture",
+      "block_id": "b_pet_arch_015",
+      "text": "Single authoritative write path; concurrent clinic edits are outside design envelope.",
+      "reason": "Multi-clinic sync means concurrent writes are expected.",
+      "replacement_intent": "Multi-clinic replication with deterministic conflict resolution."
+    }
+  ],
+  "hard_constraints": [
+    "Offline triage must complete without network",
+    "No silent overwrite of cloud-side veterinary edits",
+    "No forced user re-entry after offline completion",
+    "All conflicts must resolve deterministically or become explicit clinician-visible review states",
+    "Pending reports must survive app restart and device reboot",
+    "Sync must be idempotent and resumable"
+  ],
+  "non_goals": [
+    "Production code implementation",
+    "Real backend deployment",
+    "Automatic database migration",
+    "External writes to real systems",
+    "Full clinical decision validation",
+    "ML model training or inference",
+    "iOS client design"
+  ],
+  "preferred_conflict_strategy": "hybrid",
+  "migration_start_timestamp": "2026-04-26T13:30:00+08:00",
+  "domain_profile": "data/profiles/pet_triage_offline_first.json",
+  "store_root": "data/dogfood/p10/"
+}

@@ -1,0 +1,95 @@
+{
+  "schema_version": "repair_check.v1",
+  "repair_id": "repair_aa5c688582b2",
+  "verdict": "requires_review",
+  "generated_at": "2026-04-29T07:19:13.628Z",
+  "summary": {
+    "changed_files": 2,
+    "allowed": 0,
+    "review_required": 2,
+    "forbidden": 0,
+    "outside_scope": 0,
+    "warnings": 1
+  },
+  "findings": [
+    {
+      "kind": "review_required_file",
+      "severity": "review_required",
+      "file": "httpx/_auth.py",
+      "message": "Repair touches review-required file: httpx/_auth.py",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "evidence": [
+        "1 paths match pattern **/_auth*",
+        "Sensitive zone \"authentication\" (high) corroborates"
+      ]
+    },
+    {
+      "kind": "review_required_file",
+      "severity": "review_required",
+      "file": "httpx/__init__.py",
+      "message": "Repair touches review-required file: httpx/__init__.py",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "evidence": [
+        "1 paths match pattern **/__init__.py"
+      ]
+    },
+    {
+      "kind": "missing_related_test_signal",
+      "severity": "warning",
+      "message": "No related test file was included in the repair diff.",
+      "allowed_actions": [
+        "add_or_run_related_test",
+        "keep_for_human_review"
+      ],
+      "requires_human": false,
+      "evidence": [
+        "related_test:tests/test_httpx.py"
+      ]
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "message": "Changed files overlap a review-required scope in active repair repair_2b7459e1a020.",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "other_repair_id": "repair_2b7459e1a020",
+      "evidence": [
+        "repair:repair_aa5c688582b2",
+        "other_repair:repair_2b7459e1a020"
+      ]
+    }
+  ],
+  "concurrent_findings": [
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "repair_id": "repair_aa5c688582b2",
+      "other_repair_id": "repair_2b7459e1a020",
+      "overlap": {
+        "bucket": "review_required",
+        "files": [
+          "httpx/_auth.py",
+          "httpx/__init__.py"
+        ]
+      },
+      "reason": "Changed files overlap a review-required scope in active repair repair_2b7459e1a020.",
+      "recommended_action": "human_review"
+    }
+  ],
+  "changed_files": [
+    "httpx/_auth.py",
+    "httpx/__init__.py"
+  ],
+  "audit_status": "pending_plan_audit"
+}

@@ -1,0 +1,58 @@
+name: Pantheon Repair Gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  pantheon-repair:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Pantheon CLI
+        run: npm run build
+
+      - name: Run Agent Doctor
+        run: node dist/src/cli/pantheon.js agent-doctor
+
+      - uses: ./action
+        id: pantheon
+        with:
+          mode: repair
+          intent: ${{ github.event.pull_request.title }}
+          suspect: "src/"
+          audit_mode: auto
+          artifact_mode: public
+          post_comment: "true"
+          fail_on: "forbidden,requires_scope_expansion"
+          config_path: pantheon.alpha.json
+
+      - name: Show repair result
+        if: always()
+        run: |
+          echo "repair_id=${{ steps.pantheon.outputs.repair_id }}"
+          echo "verdict=${{ steps.pantheon.outputs.repair_verdict }}"
+          echo "artifact_dir=${{ steps.pantheon.outputs.artifact_dir }}"
+          echo "sanitizer_violations=${{ steps.pantheon.outputs.sanitizer_violations }}"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pantheon-repair-report
+          path: ${{ steps.pantheon.outputs.artifact_dir }}

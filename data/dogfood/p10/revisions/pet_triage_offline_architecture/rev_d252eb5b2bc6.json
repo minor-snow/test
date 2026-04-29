@@ -1,0 +1,406 @@
+{
+  "artifact_id": "pet_triage_offline_architecture",
+  "artifact_type": "ArchitectureDraft",
+  "schema_version": "architecture_draft@0.1.0",
+  "revision_id": "rev_d252eb5b2bc6",
+  "sections": [
+    {
+      "section_id": "offline_client_decision_engine",
+      "title": "Offline Client Decision Engine",
+      "commitments": [
+        {
+          "block_id": "b_offline_001",
+          "type": "mechanism",
+          "text": "The Android client embeds a local decision tree engine that caches the multi-step triage rules (species, temperature thresholds, symptom branches) from the cloud backend and executes triage decisions entirely offline.",
+          "rationale": "Enables offline triage completion, replacing b_pet_arch_002 and b_pet_arch_008 which required real-time backend calls and prohibited offline execution.",
+          "terms": [
+            "offline-first",
+            "local decision tree"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:f62a0102b3e06d5f3c64c2ec58ca5e2658174b62d53a93e9075861758c064c6b"
+        },
+        {
+          "block_id": "b_offline_002",
+          "type": "constraint",
+          "text": "The local decision tree must be versioned and periodically refreshed from the backend when online; stale rules older than 30 days must trigger a warning to the clinician before use.",
+          "rationale": "Prevents use of outdated medical rules while maintaining offline capability.",
+          "terms": [
+            "local decision tree",
+            "offline-first"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:6a843da481fa21bcce614af5c459c0ece76923a1d870ddc23046025bd0278437"
+        },
+        {
+          "block_id": "b_offline_003",
+          "type": "invariant",
+          "text": "The client must never silently overwrite cloud-side veterinary modifications; all local triage decisions are recorded as pending reports until synchronized.",
+          "rationale": "Ensures cloud edits are never lost, addressing the business requirement to avoid silent overwrites.",
+          "terms": [
+            "offline-first",
+            "pending report"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:61a867183ea987ef456ac0f1292380192166d4ffc305d801ce0ee2aee2a9ad91"
+        },
+        {
+          "block_id": "b_offline_004",
+          "type": "decision",
+          "text": "The local decision tree engine will use a deterministic rule interpreter (no machine learning on-device) to ensure reproducibility of triage outcomes across clients.",
+          "rationale": "Simplifies conflict resolution and audit by making local decisions fully deterministic.",
+          "terms": [
+            "local decision tree",
+            "offline-first"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:553450ec203cc3bef35a49cd7b1ececda9d4a1790fdc16cc909a841077f0ceb4"
+        },
+        {
+          "block_id": "b_offline_005",
+          "type": "risk",
+          "text": "If the local decision tree rules are corrupted or incomplete, the client must fall back to a safe mode that blocks triage submission and prompts the user to go online.",
+          "rationale": "Mitigates risk of incorrect triage due to corrupted rules.",
+          "terms": [
+            "local decision tree",
+            "offline-first"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:ccff9ab80ef51b1314a7694c8a1682ad5db1d3d49a392cc576871ac51b62a549"
+        }
+      ]
+    },
+    {
+      "section_id": "local_pending_report_store",
+      "title": "Local Pending Report Store",
+      "commitments": [
+        {
+          "block_id": "b_pending_001",
+          "type": "mechanism",
+          "text": "The Android client persists each completed triage as a pending report in a local Room database, including all symptom data, local diagnosis, timestamps, and a vector clock per clinical field.",
+          "rationale": "Replaces b_pet_arch_004 and b_pet_arch_005: triage completes offline and reports survive app restart without data loss.",
+          "terms": [
+            "pending report",
+            "vector clock"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:d3cf4c83f6dd6bd170dbd0da3588d43d9181320f16d682c0a90e0d07725f0830"
+        },
+        {
+          "block_id": "b_pending_002",
+          "type": "invariant",
+          "text": "Pending reports must survive app restart and process kill; the local store uses SQLite with write-ahead logging to guarantee durability.",
+          "rationale": "Ensures users never re-enter data after offline completion, as required by business change.",
+          "terms": [
+            "pending report"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:2291d0c7aa02a917538ee0761832749d809cd9b163ac2591ae77471d7186291a"
+        },
+        {
+          "block_id": "b_pending_003",
+          "type": "constraint",
+          "text": "The local pending report store must not be treated as an authoritative diagnosis source for clinical decisions; only cloud-synced reports are considered final.",
+          "rationale": "Maintains clinical authority of cloud backend while allowing offline drafting.",
+          "terms": [
+            "pending report"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:5057b8909139ff91eaa4c8bcd1ab08ae370a157d11f6a4c706a6b10dc749b274"
+        },
+        {
+          "block_id": "b_pending_004",
+          "type": "mechanism",
+          "text": "Each pending report includes a unique report ID, creation timestamp, and a status field (pending, syncing, synced, conflict) to track lifecycle.",
+          "rationale": "Provides clear state machine for sync and conflict handling.",
+          "terms": [
+            "pending report",
+            "sync queue"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:5d00af17249382be3715a7d835088ef9b237bef1b529356bd1a80502293186f2"
+        }
+      ]
+    },
+    {
+      "section_id": "sync_queue_and_retry_ledger",
+      "title": "Sync Queue and Retry Ledger",
+      "commitments": [
+        {
+          "block_id": "b_sync_001",
+          "type": "mechanism",
+          "text": "A background sync queue processes pending reports in FIFO order, sending each report to the appropriate multi-clinic cloud backend endpoint with exponential backoff on failure.",
+          "rationale": "Replaces b_pet_arch_013: introduces async sync with retry capability.",
+          "terms": [
+            "sync queue",
+            "multi-clinic sync"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:7b5f4f3bb2f9ea51d92fce2edc0083bdb4fa83cd7d83a0c57a35048492d431b3"
+        },
+        {
+          "block_id": "b_sync_002",
+          "type": "mechanism",
+          "text": "A retry ledger records each sync attempt with timestamp, HTTP status, error code, and retry count; entries are pruned after successful sync or 7 days.",
+          "rationale": "Provides audit trail and recovery information for failed syncs.",
+          "terms": [
+            "retry ledger",
+            "sync queue"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:d22738669b034192738e7d9413be4d28b87499dbf41ab5c07490abfc297d35f8"
+        },
+        {
+          "block_id": "b_sync_003",
+          "type": "constraint",
+          "text": "The sync queue must not block the UI; all network operations run on a background coroutine with configurable concurrency limit (default 1).",
+          "rationale": "Ensures user can continue working while sync proceeds asynchronously.",
+          "terms": [
+            "sync queue"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:0942d50a54aa5ada821ce39077b2bbfef67a6aa67e965b71c221359f7b133ac9"
+        },
+        {
+          "block_id": "b_sync_004",
+          "type": "invariant",
+          "text": "If a sync attempt fails due to network error, the report remains in the queue with status pending; the retry ledger records the failure and the queue retries with exponential backoff up to 5 attempts.",
+          "rationale": "Guarantees eventual consistency without data loss.",
+          "terms": [
+            "sync queue",
+            "retry ledger"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:027bf8ca5d7486bb4482d9924aaaf21de3e9155e8cac6fe5f7e2ce9bdc411e41"
+        },
+        {
+          "block_id": "b_sync_005",
+          "type": "decision",
+          "text": "The sync queue will use WorkManager for reliable scheduling across app restarts and system reboots.",
+          "rationale": "Leverages Android platform guarantees for background work.",
+          "terms": [
+            "sync queue"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:78e76cf32c273d64b450e3252576f4517de336301ecdf5813bd7d6f76e86b611"
+        }
+      ]
+    },
+    {
+      "section_id": "conflict_resolution_policy",
+      "title": "Conflict Resolution Policy",
+      "commitments": [
+        {
+          "block_id": "b_conflict_001",
+          "type": "invariant",
+          "text": "Clinical fields (diagnosis, vet edits, case status) use vector clock conflict detection; when a conflict is detected, the system presents both versions to the clinician and does not auto-merge.",
+          "rationale": "Ensures cloud-side veterinary modifications are never silently overwritten, addressing business requirement.",
+          "terms": [
+            "vector clock",
+            "conflict resolution"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:6feb140b74226a4e917fd807e1ef76292c12fa12269f859489e1d7f731dff884"
+        },
+        {
+          "block_id": "b_conflict_002",
+          "type": "invariant",
+          "text": "Low-risk derived metadata (UI cursors, cache timestamps) use last-writer-wins conflict resolution based on the most recent wall-clock timestamp.",
+          "rationale": "Simplifies handling of non-critical metadata while maintaining consistency.",
+          "terms": [
+            "last-writer-wins",
+            "conflict resolution"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:97cbb1d462012a8d2801c5d3a7d2a1ff07bdfe675069e176e61395fd5b9640bb"
+        },
+        {
+          "block_id": "b_conflict_003",
+          "type": "mechanism",
+          "text": "When a sync operation detects a vector clock conflict, the pending report transitions to conflict status and the client downloads the conflicting cloud version for user review.",
+          "rationale": "Provides deterministic conflict outcomes as required by business change.",
+          "terms": [
+            "vector clock",
+            "conflict resolution",
+            "user-visible conflict"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:f70b1abc1bf19bd104f52696cad028f43ce48658d928281ddffff678a7fd7bd1"
+        },
+        {
+          "block_id": "b_conflict_004",
+          "type": "constraint",
+          "text": "The system must never auto-resolve conflicts on clinical fields; all such conflicts require explicit clinician action to choose which version to keep or to merge manually.",
+          "rationale": "Prevents silent overwrites of clinical data.",
+          "terms": [
+            "conflict resolution",
+            "user-visible conflict"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:0191b9283a459dbdea285f6104343d2cd363bef365d9131b7daa425b22c2d116"
+        }
+      ]
+    },
+    {
+      "section_id": "multi_clinic_replication_boundary",
+      "title": "Multi-Clinic Replication Boundary",
+      "commitments": [
+        {
+          "block_id": "b_multiclinic_001",
+          "type": "invariant",
+          "text": "Each clinic backend is an independent write authority; the Android client syncs pending reports to the clinic backend that corresponds to the clinic ID stored in the report.",
+          "rationale": "Replaces b_pet_arch_015: supports concurrent edits from multiple clinics.",
+          "terms": [
+            "multi-clinic sync"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:e001d7b8fbfbfa1e10854c75761d09647535069f03f4fc9ad7e4a339d6430ac1"
+        },
+        {
+          "block_id": "b_multiclinic_002",
+          "type": "mechanism",
+          "text": "The client maintains a clinic registry with base URLs and authentication tokens for each clinic backend, configurable via a remote management endpoint.",
+          "rationale": "Enables dynamic addition of clinic backends without client update.",
+          "terms": [
+            "multi-clinic sync"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:21e7056d70c3e551e5228df5d09e66a05f15d9f7eccad22f27b906b08046a5ba"
+        },
+        {
+          "block_id": "b_multiclinic_003",
+          "type": "constraint",
+          "text": "A pending report must be synced to exactly one clinic backend; cross-clinic replication is handled by backend-side data sharing agreements, not by the client.",
+          "rationale": "Keeps client sync logic simple and avoids unintended data propagation.",
+          "terms": [
+            "multi-clinic sync"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:0f0f171dddf66709f5b3af7374444199ee2a4d9972ddd169d866edfa70a6f9bb"
+        },
+        {
+          "block_id": "b_multiclinic_004",
+          "type": "risk",
+          "text": "If the clinic registry is stale or misconfigured, reports may be sent to the wrong backend; the client must validate clinic IDs against a known list before sync.",
+          "rationale": "Mitigates risk of data routing errors.",
+          "terms": [
+            "multi-clinic sync"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:bb0187de6bfed4cc5578db606076ac300bfb8f0dde67d1d45040c7a7aa2acd20"
+        }
+      ]
+    },
+    {
+      "section_id": "user_visible_conflict_outcomes",
+      "title": "User-Visible Conflict Outcomes",
+      "commitments": [
+        {
+          "block_id": "b_uvc_001",
+          "type": "mechanism",
+          "text": "When a conflict is detected, the client displays a conflict resolution screen showing the local pending version and the cloud version side-by-side, highlighting differing clinical fields.",
+          "rationale": "Presents deterministic conflict outcomes to clinicians as required.",
+          "terms": [
+            "user-visible conflict",
+            "conflict resolution"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:94d7468035df7c502a69647cb8d37142a4ec003a52f5d9049f408da9f1ad4434"
+        },
+        {
+          "block_id": "b_uvc_002",
+          "type": "constraint",
+          "text": "The conflict resolution screen must require the clinician to explicitly select one version or manually edit a merged version before the report can be finalized.",
+          "rationale": "Ensures no silent overwrite and no data re-entry.",
+          "terms": [
+            "user-visible conflict"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:ab1db6461e6b5ac7a4b0bc169aa2406c6938598048197048c113f02f9b483a82"
+        },
+        {
+          "block_id": "b_uvc_003",
+          "type": "decision",
+          "text": "The conflict resolution UI will use a diff view with color-coded fields (red for removed, green for added, yellow for modified) to aid clinician decision-making.",
+          "rationale": "Improves usability without using forbidden phrases.",
+          "terms": [
+            "user-visible conflict"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:489b38c1c06be663f728d877b56b37d2542b159dd9e8d5292aa1e071a32c1c77"
+        },
+        {
+          "block_id": "b_uvc_004",
+          "type": "invariant",
+          "text": "After conflict resolution, the chosen version is synced back to the clinic backend with an updated vector clock that reflects the merge.",
+          "rationale": "Maintains causal consistency after manual resolution.",
+          "terms": [
+            "vector clock",
+            "user-visible conflict"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:f9f328259887136d678a9d9a8ed2225761e3c939a84b8c0b762695eddc25d316"
+        }
+      ]
+    },
+    {
+      "section_id": "audit_and_recovery",
+      "title": "Audit and Recovery",
+      "commitments": [
+        {
+          "block_id": "b_audit_001",
+          "type": "mechanism",
+          "text": "Every local triage creation, sync attempt, conflict detection, and conflict resolution generates an audit event stored locally and replicated to the clinic backend.",
+          "rationale": "Provides full traceability for clinical and operational review.",
+          "terms": [
+            "audit event"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:4edbecd208877c9922d6437fb7aeda50b2b9ab9adb845e585edbc6e57d30a98f"
+        },
+        {
+          "block_id": "b_audit_002",
+          "type": "invariant",
+          "text": "Audit events must include timestamp, actor (clinician ID), action type, report ID, and a cryptographic hash of the event payload to prevent tampering.",
+          "rationale": "Ensures audit trail integrity for compliance.",
+          "terms": [
+            "audit event"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:d2c20d09f39d3888e956b4a25567fdd89e09f68856fdf6f681d910e27256d090"
+        },
+        {
+          "block_id": "b_audit_003",
+          "type": "mechanism",
+          "text": "A recovery workflow allows clinicians to re-sync any pending report that has been stuck in pending or conflict status for more than 24 hours, with a manual override option.",
+          "rationale": "Addresses operational gaps from b_pet_arch_017 and b_pet_arch_018 by providing a recovery path.",
+          "terms": [
+            "recovery",
+            "pending report"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:dd2c022925496e712186cdede43a1a51976e47732062ce4a3de081d93bf67eb3"
+        },
+        {
+          "block_id": "b_audit_004",
+          "type": "risk",
+          "text": "If the local audit store grows unbounded, it may consume device storage; implement a retention policy that archives events older than 90 days to cloud storage.",
+          "rationale": "Prevents storage exhaustion while preserving long-term audit capability.",
+          "terms": [
+            "audit event"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:49e6bec8530f37edbb3e6fa091ff41c1cf0b9b3a4889a17a131dfda64e086efa"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created_by": "draft_agent",
+    "created_at": "2026-04-26T05:48:18.436Z",
+    "tags": [
+      "draft",
+      "llm_generated"
+    ]
+  }
+}

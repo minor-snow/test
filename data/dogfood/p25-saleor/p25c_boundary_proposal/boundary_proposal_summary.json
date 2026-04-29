@@ -1,0 +1,56 @@
+{
+  "phase": "P25c",
+  "subject": "Saleor",
+  "scenario": "eco_packaging_fee_checkout",
+  "intent": "Add an eco-packaging fee during checkout for selected product types.",
+  "repo_root": "H:\\Boom\\salary",
+  "output_dir": "H:\\Boom\\pantheon\\data\\dogfood\\p25-saleor\\p25c_boundary_proposal",
+  "boundaries": {
+    "allowed_patterns": [
+      "saleor/checkout/**",
+      "saleor/graphql/checkout/**"
+    ],
+    "review_required_patterns": [
+      "saleor/tax/**",
+      "saleor/order/**",
+      "tests/integration/**"
+    ],
+    "forbidden_patterns": [
+      "saleor/payment/**",
+      "saleor/account/**",
+      "saleor/discount/**",
+      "saleor/plugins/**",
+      "migrations/**",
+      "saleor/checkout/migrations/**",
+      "saleor/order/migrations/**",
+      "saleor/tax/migrations/**",
+      "saleor/core/settings.py"
+    ]
+  },
+  "resolved_scope": {
+    "allowed_file_count": 157,
+    "review_required_file_count": 78,
+    "forbidden_pattern_count": 13,
+    "required_test_count": 0
+  },
+  "guard_baseline": {
+    "changed_files": 235,
+    "in_scope": 157,
+    "review_required": 78,
+    "outside_scope": 0,
+    "forbidden": 0
+  },
+  "artifacts": {
+    "task_md": ".pantheon/task.md",
+    "scope_md": ".pantheon/scope.md",
+    "python_report_md": ".pantheon/python_report.md",
+    "check_json": ".pantheon/check.json",
+    "internal_scope_json": ".pantheon/internal/agent_scope.json",
+    "internal_contract_json": ".pantheon/internal/change_contract_lite.json"
+  },
+  "conclusions": [
+    "Saleor is ready for explicit-scope governance.",
+    "This boundary package is file/path-level only; automatic intent-to-scope inference remains out of scope.",
+    "P25d should use this package as the source of truth for synthetic PR checking."
+  ]
+}

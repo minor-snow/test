@@ -1,0 +1,37 @@
+{
+  "schema_version": "repair_check.v1",
+  "repair_id": "repair_d1ee0718c948",
+  "verdict": "pass",
+  "generated_at": "2026-04-29T08:16:59.440Z",
+  "summary": {
+    "changed_files": 1,
+    "allowed": 1,
+    "review_required": 0,
+    "forbidden": 0,
+    "outside_scope": 0,
+    "warnings": 1
+  },
+  "findings": [
+    {
+      "kind": "missing_related_test_signal",
+      "severity": "warning",
+      "message": "No related test file was included in the repair diff.",
+      "allowed_actions": [
+        "add_or_run_related_test",
+        "keep_for_human_review"
+      ],
+      "requires_human": false,
+      "evidence": [
+        "related_test:saleor/checkout/tests/test_calculations.py",
+        "related_test:test/auth/login.test.ts",
+        "related_test:test/payment/billing.test.ts",
+        "related_test:tests/utils/format.test.ts"
+      ]
+    }
+  ],
+  "concurrent_findings": [],
+  "changed_files": [
+    "src/utils/format.ts"
+  ],
+  "audit_status": "approved_repair_plan"
+}

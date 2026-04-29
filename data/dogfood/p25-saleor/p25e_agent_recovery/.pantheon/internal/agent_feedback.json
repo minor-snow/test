@@ -1,0 +1,59 @@
+{
+  "schema_version": "agent_feedback.v1",
+  "feedback_id": "398da49f-b4e1-4235-8cf9-c1dd953337d5",
+  "generated_at": "2026-04-28T06:48:29.052Z",
+  "source": {
+    "phase": "diff_verification",
+    "source_id": "86ee34a6-aefd-4ac0-a1c3-5941fc14a440"
+  },
+  "verdict": "requires_review",
+  "summary": {
+    "violation_count": 1,
+    "blocking_count": 0,
+    "review_required_count": 1,
+    "reverse_issue_required_count": 0,
+    "requires_human_count": 1
+  },
+  "violations": [
+    {
+      "violation_id": "v-0",
+      "kind": "requires_human_review",
+      "severity": "review_required",
+      "location": {
+        "file_path": "saleor/tax/models.py"
+      },
+      "constraint": {
+        "constraint_id": "scope.review_required_files",
+        "constraint_kind": "human_review",
+        "description": "File requires manual review."
+      },
+      "message": "File requires human review: saleor/tax/models.py",
+      "fix_hint": "Keep the change scoped and ask for human review before merge.",
+      "allowed_agent_actions": [
+        "ask_human_review"
+      ],
+      "requires_human": true
+    }
+  ],
+  "repair_plan": [
+    {
+      "action_id": "r-0",
+      "action": "ask_human_review",
+      "target": {
+        "file_path": "saleor/tax/models.py"
+      },
+      "reason": "Request human review.",
+      "priority": "medium",
+      "requires_human": true
+    }
+  ],
+  "retry_guidance": {
+    "retry_allowed": false,
+    "retry_mode": "requires_human",
+    "max_recommended_retries": 0,
+    "instructions": [
+      "At least one violation requires human review. Escalate before retrying."
+    ]
+  },
+  "human_review_required": true
+}

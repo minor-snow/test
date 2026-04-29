@@ -1,0 +1,202 @@
+{
+  "run_id": "e2e_1777263618002",
+  "run_at": "2026-04-27T04:20:18.002Z",
+  "overall_status": "pass",
+  "stages": [
+    {
+      "stage_id": "p11_handoff",
+      "stage_name": "P11 Handoff Generation",
+      "status": "pass",
+      "input_hashes": {
+        "architecture": "349f93c7f2da490a",
+        "interface": "6024dba3ab498c54",
+        "module": "9c567b47bcc5219c"
+      },
+      "output_hashes": {
+        "handoff_package": "f474a51770646a73"
+      },
+      "blocking_reasons": [
+        "risk_notes_completeness"
+      ],
+      "golden_checks": {
+        "readiness_pass_count": {
+          "expected": ">= 11",
+          "actual": 12,
+          "pass": true
+        },
+        "total_checks": {
+          "expected": 13,
+          "actual": 13,
+          "pass": true
+        }
+      },
+      "duration_ms": 12
+    },
+    {
+      "stage_id": "p12_codegen",
+      "stage_name": "P12 Deterministic Codegen",
+      "status": "pass",
+      "input_hashes": {
+        "handoff_package": "9c477448ab0324c4"
+      },
+      "output_hashes": {
+        "codegen_package": "6d06dba9fa5909c0"
+      },
+      "blocking_reasons": [],
+      "golden_checks": {
+        "file_count_12": {
+          "expected": 12,
+          "actual": 12,
+          "pass": true
+        },
+        "entity_count": {
+          "expected": ">= 6",
+          "actual": 6,
+          "pass": true
+        },
+        "evaluator_pass": {
+          "expected": "pass",
+          "actual": "pass",
+          "pass": true
+        }
+      },
+      "duration_ms": 6
+    },
+    {
+      "stage_id": "p14_boundary_graph",
+      "stage_name": "P14 Boundary Graph",
+      "status": "pass",
+      "input_hashes": {
+        "handoff_package": "9c477448ab0324c4",
+        "codegen_output": "1e91fad39ecf6da1"
+      },
+      "output_hashes": {
+        "boundary_graph": "5bcb50cda71460ea"
+      },
+      "blocking_reasons": [],
+      "golden_checks": {
+        "gates_6_of_6": {
+          "expected": 6,
+          "actual": 6,
+          "pass": true
+        },
+        "node_count_gte_160": {
+          "expected": ">= 160",
+          "actual": 180,
+          "pass": true
+        },
+        "gen_files_12": {
+          "expected": 12,
+          "actual": 12,
+          "pass": true
+        }
+      },
+      "duration_ms": 5
+    },
+    {
+      "stage_id": "p15_blast_radius",
+      "stage_name": "P15 Blast Radius",
+      "status": "pass",
+      "input_hashes": {
+        "boundary_graph": "05acd4bfa031fbac"
+      },
+      "output_hashes": {
+        "blast_radius": "79404f0b7669453c"
+      },
+      "blocking_reasons": [],
+      "golden_checks": {
+        "total_downstream_gte_60": {
+          "expected": ">= 60",
+          "actual": 62,
+          "pass": true
+        },
+        "highest_risk_high": {
+          "expected": "high",
+          "actual": "high",
+          "pass": true
+        }
+      },
+      "duration_ms": 11
+    },
+    {
+      "stage_id": "p17_scoped_handoff",
+      "stage_name": "P17 Scoped Handoff Export",
+      "status": "pass",
+      "input_hashes": {
+        "boundary_graph": "05acd4bfa031fbac",
+        "blast_radius": "4b5f82a843e184b9"
+      },
+      "output_hashes": {
+        "scope_package": "76e1cb90e6b261f2"
+      },
+      "blocking_reasons": [],
+      "golden_checks": {
+        "allowed_files_gt_0": {
+          "expected": "> 0",
+          "actual": 10,
+          "pass": true
+        },
+        "required_tests_gt_0": {
+          "expected": "> 0",
+          "actual": 8,
+          "pass": true
+        }
+      },
+      "duration_ms": 5
+    },
+    {
+      "stage_id": "p18_pass_fixture",
+      "stage_name": "P18 Scope Diff — Pass Fixture",
+      "status": "pass",
+      "input_hashes": {
+        "scope_package": "3835fad05af644e8"
+      },
+      "output_hashes": {
+        "report": "c60e5edbab7be948"
+      },
+      "blocking_reasons": [],
+      "golden_checks": {
+        "status_pass": {
+          "expected": "pass",
+          "actual": "pass",
+          "pass": true
+        },
+        "zero_violations": {
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        }
+      },
+      "duration_ms": 1
+    },
+    {
+      "stage_id": "p18_outside_scope",
+      "stage_name": "P18 Scope Diff — Outside Scope",
+      "status": "pass",
+      "input_hashes": {},
+      "output_hashes": {
+        "report": "391edf0ceb2c04b1"
+      },
+      "blocking_reasons": [],
+      "golden_checks": {
+        "status_requires_reverse_issue": {
+          "expected": "requires_reverse_issue",
+          "actual": "requires_reverse_issue",
+          "pass": true
+        },
+        "has_outside_violation": {
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      },
+      "duration_ms": 1
+    }
+  ],
+  "canonical_pointer_check": {
+    "before": "065b672dcebbc303",
+    "after": "065b672dcebbc303",
+    "unchanged": true
+  },
+  "total_duration_ms": 48
+}

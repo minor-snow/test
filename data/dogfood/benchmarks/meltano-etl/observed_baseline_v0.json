@@ -1,0 +1,423 @@
+{
+  "schema_version": "observed_baseline@0.1.0",
+  "benchmark_id": "meltano-etl",
+  "category": "data_pipeline",
+  "pinned_commit": "e99eac14cb855adc3375ae7bb239bef2f8af7a71",
+  "generated_at": "2026-04-29T02:10:48.989Z",
+  "check_mode": "no_diff_baseline",
+  "layout_signals": {
+    "status": "observed",
+    "count": 6,
+    "items": [
+      {
+        "path": "bucket:config",
+        "evidence": "5 files"
+      },
+      {
+        "path": "bucket:source",
+        "evidence": "175 files"
+      },
+      {
+        "path": "bucket:unknown",
+        "evidence": "2 files"
+      },
+      {
+        "path": "bucket:script",
+        "evidence": "2 files"
+      },
+      {
+        "path": "bucket:migration",
+        "evidence": "20 files"
+      },
+      {
+        "path": "bucket:test",
+        "evidence": "118 files"
+      }
+    ],
+    "primary_layout": "library_package",
+    "package_layout": "src_layout",
+    "layout_confidence": "high",
+    "layout_evidence": [
+      {
+        "signal": "src_layout_detected",
+        "weight": "strong",
+        "evidence": "src/ directory with package(s): meltano"
+      },
+      {
+        "signal": "django_migrations_found",
+        "weight": "moderate",
+        "evidence": "20 migration files"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      }
+    ]
+  },
+  "framework_signals": {
+    "status": "observed",
+    "count": 4,
+    "items": [
+      {
+        "name": "django",
+        "kind": "web_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "Django-style migrations/ directories found"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "click imported in source files"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      },
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "sqlalchemy found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "sqlalchemy imported in source files"
+          }
+        ]
+      }
+    ]
+  },
+  "project_role_signals": {
+    "status": "observed",
+    "count": 2,
+    "items": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      },
+      {
+        "role": "cli_application",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points (__main__.py or cli.py)"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "CLI framework in dependencies"
+          }
+        ]
+      }
+    ]
+  },
+  "dependency_manifests": {
+    "status": "observed",
+    "count": 4,
+    "items": [
+      {
+        "source": "integration/example-library/meltano-env-precedence/env-var-in-pip-url-example-124/pyproject.toml",
+        "package_count": 0,
+        "confidence": "low"
+      },
+      {
+        "source": "noxfile.py",
+        "package_count": 0,
+        "confidence": "low"
+      },
+      {
+        "source": "pyproject.toml",
+        "package_count": 14,
+        "confidence": "high"
+      },
+      {
+        "source": "uv.lock",
+        "package_count": 138,
+        "confidence": "high"
+      }
+    ]
+  },
+  "test_mappings": {
+    "status": "observed",
+    "count": 150,
+    "items": [
+      {
+        "source": "src/meltano/cli/add.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/cli.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/compile.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/config.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/elt.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/environment.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/hub.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/initialize.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/install.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/invoke.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/lock.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/logs.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/remove.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/run.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/schedule.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/state.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/cli/upgrade.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/core/behavior/addon.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/core/behavior/canonical.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "src/meltano/core/behavior/hookable.py",
+        "test_count": 1,
+        "confidence": "high"
+      }
+    ]
+  },
+  "sensitive_zones": {
+    "status": "observed",
+    "count": 3,
+    "items": [
+      {
+        "category": "schema_migration",
+        "severity": "high",
+        "path_count": 22
+      },
+      {
+        "category": "runtime_extension",
+        "severity": "medium",
+        "path_count": 52
+      },
+      {
+        "category": "infrastructure_config",
+        "severity": "medium",
+        "path_count": 10
+      }
+    ]
+  },
+  "unknowns": {
+    "status": "observed",
+    "count": 4,
+    "items": [
+      {
+        "category": "unclassified_python_file",
+        "count": 2,
+        "classification": "actionable"
+      },
+      {
+        "category": "low_confidence_manifest",
+        "count": 2,
+        "classification": "actionable"
+      },
+      {
+        "category": "scope_granularity_limit",
+        "count": 0,
+        "classification": "intrinsic"
+      }
+    ]
+  },
+  "risk_preset": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / src_layout (high)",
+      "framework: django / web_framework (medium)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (high)",
+      "framework: sqlalchemy / orm (high)",
+      "project_role: python_sdk_library (high)",
+      "project_role: cli_application (high)",
+      "sensitive_zone: schema_migration (high, 22 paths)"
+    ],
+    "suggested_review_count": 1,
+    "suggested_forbidden_count": 0,
+    "dormant_count": 6,
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 29
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "quality": {
+    "python_file_count": 318,
+    "classified_count": 318,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 1880,
+    "project_import_count": 0,
+    "declared_package_count": 973,
+    "undeclared_package_count": 39,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 150,
+    "high_confidence_test_count": 74,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 3,
+    "sensitive_file_count": 82,
+    "manifest_count": 4,
+    "low_confidence_manifest_count": 2
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "schema_version": "p27_baseline@1.0.0",
+  "frozen_at": "2026-04-29T02:15:00Z",
+  "phase": "P27.5",
+  "status": "smoke",
+  "extended_5": {
+    "flaskbb-flask-app": {
+      "pinned_commit": "3df43f16854fba625d8d16498bda253b993677b1",
+      "category": "flask_web_app",
+      "support_level": "smoke",
+      "layout": {
+        "primary_layout": "mixed",
+        "package_layout": "flat_package",
+        "confidence": "medium"
+      },
+      "frameworks": [
+        { "name": "flask", "kind": "web_framework", "confidence": "high" },
+        { "name": "sqlalchemy", "kind": "orm", "confidence": "high" },
+        { "name": "celery", "kind": "task_queue", "confidence": "high" },
+        { "name": "click", "kind": "cli_framework", "confidence": "high" },
+        { "name": "pytest", "kind": "test_framework", "confidence": "medium" },
+        { "name": "django", "kind": "web_framework", "confidence": "medium" }
+      ],
+      "project_roles": [
+        { "role": "service_backend", "confidence": "high" },
+        { "role": "python_sdk_library", "confidence": "high" },
+        { "role": "cli_application", "confidence": "high" }
+      ],
+      "risk_preset": {
+        "preset": "generic_service",
+        "validation": "validated",
+        "confidence": "high",
+        "suggested_forbidden_count": 0,
+        "suggested_review_count": 2,
+        "dormant_count": 1
+      },
+      "metrics": {
+        "python_file_count": 146,
+        "classified_ratio": 1.0,
+        "import_observations": 630,
+        "test_mappings": 70,
+        "sensitive_zones": 4,
+        "manifests": 4
+      }
+    },
+    "httpie-cli-tool": {
+      "pinned_commit": "5b604c37c6c67e18e7c3e9aee6c88a8c22b98345",
+      "category": "python_cli_tool",
+      "support_level": "smoke",
+      "layout": {
+        "primary_layout": "library_package",
+        "package_layout": "flat_package",
+        "confidence": "medium"
+      },
+      "frameworks": [
+        { "name": "click", "kind": "cli_framework", "confidence": "medium" }
+      ],
+      "project_roles": [
+        { "role": "python_sdk_library", "confidence": "high" }
+      ],
+      "risk_preset": {
+        "preset": "python_sdk_library",
+        "validation": "partial",
+        "confidence": "medium",
+        "suggested_forbidden_count": 0,
+        "suggested_review_count": 1,
+        "dormant_count": 6
+      },
+      "metrics": {
+        "python_file_count": 133,
+        "classified_ratio": 1.0,
+        "import_observations": 527,
+        "test_mappings": 73,
+        "sensitive_zones": 2,
+        "manifests": 2
+      }
+    },
+    "meltano-etl": {
+      "pinned_commit": "e99eac14cb855adc3375ae7bb239bef2f8af7a71",
+      "category": "data_pipeline",
+      "support_level": "smoke",
+      "layout": {
+        "primary_layout": "library_package",
+        "package_layout": "src_layout",
+        "confidence": "high"
+      },
+      "frameworks": [
+        { "name": "click", "kind": "cli_framework", "confidence": "high" },
+        { "name": "sqlalchemy", "kind": "orm", "confidence": "high" },
+        { "name": "django", "kind": "web_framework", "confidence": "medium" },
+        { "name": "pytest", "kind": "test_framework", "confidence": "medium" }
+      ],
+      "project_roles": [
+        { "role": "python_sdk_library", "confidence": "high" },
+        { "role": "cli_application", "confidence": "high" }
+      ],
+      "risk_preset": {
+        "preset": "python_sdk_library",
+        "validation": "partial",
+        "confidence": "medium",
+        "suggested_forbidden_count": 0,
+        "suggested_review_count": 1,
+        "dormant_count": 6
+      },
+      "metrics": {
+        "python_file_count": 318,
+        "classified_ratio": 1.0,
+        "import_observations": 1880,
+        "test_mappings": 150,
+        "sensitive_zones": 3,
+        "manifests": 4
+      }
+    },
+    "tiktoken-ml": {
+      "pinned_commit": "dcb39287a1f90a94d4bf6146df25da03c017646f",
+      "category": "ml_tooling_tokenizer",
+      "support_level": "smoke",
+      "layout": {
+        "primary_layout": "library_package",
+        "package_layout": "flat_package",
+        "confidence": "high"
+      },
+      "frameworks": [],
+      "project_roles": [
+        { "role": "python_sdk_library", "confidence": "high" }
+      ],
+      "risk_preset": {
+        "preset": "python_sdk_library",
+        "validation": "partial",
+        "confidence": "medium",
+        "suggested_forbidden_count": 0,
+        "suggested_review_count": 1,
+        "dormant_count": 6
+      },
+      "metrics": {
+        "python_file_count": 18,
+        "classified_ratio": 1.0,
+        "import_observations": 46,
+        "test_mappings": 6,
+        "sensitive_zones": 0,
+        "manifests": 2
+      }
+    },
+    "python-monorepo": {
+      "pinned_commit": "95d8695bad890f910faae33669ae83634447f2af",
+      "category": "python_monorepo",
+      "support_level": "observed-only",
+      "layout": {
+        "confidence": "none"
+      },
+      "frameworks": [],
+      "project_roles": [],
+      "risk_preset": {
+        "preset": "unknown",
+        "validation": "unvalidated",
+        "confidence": "low",
+        "suggested_forbidden_count": 0,
+        "suggested_review_count": 0,
+        "dormant_count": 0
+      },
+      "metrics": {
+        "python_file_count": 6,
+        "classified_ratio": 0.0,
+        "import_observations": 0,
+        "test_mappings": 0,
+        "sensitive_zones": 0,
+        "manifests": 0
+      }
+    }
+  }
+}

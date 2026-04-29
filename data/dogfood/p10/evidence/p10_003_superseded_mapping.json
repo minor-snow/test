@@ -1,0 +1,52 @@
+[
+  {
+    "superseded_block_id": "b_pet_arch_002",
+    "superseded_text": "All client triage decisions must request the backend triage engine in real time before any diagnosis",
+    "replacement_blocks": [
+      {
+        "block_id": "b_offline_001",
+        "text": "The Android client embeds a local decision tree engine that caches the multi-step triage rules (species, temperature thr"
+      }
+    ]
+  },
+  {
+    "superseded_block_id": "b_pet_arch_004",
+    "superseded_text": "When the network is unavailable, the client must lock the triage screen.",
+    "replacement_blocks": [
+      {
+        "block_id": "b_pending_001",
+        "text": "The Android client persists each completed triage as a pending report in a local Room database, including all symptom da"
+      }
+    ]
+  },
+  {
+    "superseded_block_id": "b_pet_arch_008",
+    "superseded_text": "The client must not execute the multi-step triage tree offline.",
+    "replacement_blocks": [
+      {
+        "block_id": "b_offline_001",
+        "text": "The Android client embeds a local decision tree engine that caches the multi-step triage rules (species, temperature thr"
+      }
+    ]
+  },
+  {
+    "superseded_block_id": "b_pet_arch_013",
+    "superseded_text": "No background sync queue, retry ledger, or version vector.",
+    "replacement_blocks": [
+      {
+        "block_id": "b_sync_001",
+        "text": "A background sync queue processes pending reports in FIFO order, sending each report to the appropriate multi-clinic clo"
+      }
+    ]
+  },
+  {
+    "superseded_block_id": "b_pet_arch_015",
+    "superseded_text": "Single authoritative write path; concurrent clinic edits are outside design envelope.",
+    "replacement_blocks": [
+      {
+        "block_id": "b_multiclinic_001",
+        "text": "Each clinic backend is an independent write authority; the Android client syncs pending reports to the clinic backend th"
+      }
+    ]
+  }
+]

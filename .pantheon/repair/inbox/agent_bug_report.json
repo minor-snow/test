@@ -1,0 +1,32 @@
+{
+  "schema_version": "agent_bug_report@0.1.0",
+  "report_id": "bug_report_github_repair_runner_followup",
+  "reported_by": {
+    "agent": "stranger-agent",
+    "session_id": "closed-alpha-sim-001"
+  },
+  "summary": "Repair runner should preserve bounded public repair artifact output.",
+  "observed_behavior": "A prior repair-gate run surfaced a public artifact sanitizer violation in the report directory.",
+  "expected_behavior": "Public repair artifacts should remain sanitizer-clean and bounded.",
+  "evidence": [
+    {
+      "kind": "failing_test",
+      "path": "test/github/githubRepairRunner.test.ts",
+      "test_name": "runs the repair_id main path against a PR base diff and returns pass"
+    },
+    {
+      "kind": "code_observation",
+      "path": "src/github/githubRepairRunner.ts",
+      "summary": "The GitHub repair runner assembles public repair artifacts and repair summaries."
+    }
+  ],
+  "suspected_files": [
+    {
+      "path": "src/github/githubRepairRunner.ts",
+      "confidence": "medium",
+      "reason": "Coordinates repair action outputs and artifact collection."
+    }
+  ],
+  "agent_hypothesis": "The runner may be copying an unsafe public artifact into the stable report directory.",
+  "requested_action": "repair_analysis"
+}

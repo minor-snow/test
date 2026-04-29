@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pantheon — Draft Review Cockpit</title>
+  <style>
+    :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d37; --text: #e0e0e6; --dim: #8888a0; --accent: #6c8aff; --green: #4ade80; --red: #f87171; --yellow: #facc15; --orange: #fb923c; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 2rem; }
+    h1 { font-size: 1.6rem; color: var(--accent); margin-bottom: 1.5rem; }
+    h2 { font-size: 1.1rem; color: var(--dim); margin: 1.2rem 0 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; margin-bottom: 1rem; }
+    .score-big { font-size: 3rem; font-weight: 700; text-align: center; padding: 1rem 0; }
+    .score-big.high { color: var(--green); }
+    .score-big.mid { color: var(--yellow); }
+    .score-big.low { color: var(--red); }
+    .rec { text-align: center; font-size: 1rem; font-weight: 600; padding: 0.4rem 0.8rem; border-radius: 4px; display: inline-block; margin: 0.5rem auto; }
+    .rec.accept_as_seed { background: rgba(74,222,128,0.15); color: var(--green); }
+    .rec.accept_for_cleanup { background: rgba(250,204,21,0.15); color: var(--yellow); }
+    .rec.reject_draft { background: rgba(248,113,113,0.15); color: var(--red); }
+    .bar-container { background: var(--border); border-radius: 4px; height: 20px; margin: 0.5rem 0; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th, td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--border); }
+    th { color: var(--dim); font-weight: 500; }
+    .tag { font-size: 0.75rem; padding: 0.15rem 0.4rem; border-radius: 3px; }
+    .tag.high { background: rgba(248,113,113,0.2); color: var(--red); }
+    .tag.medium { background: rgba(251,146,60,0.2); color: var(--orange); }
+    .tag.low { background: rgba(250,204,21,0.2); color: var(--yellow); }
+    .concept-row { display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+    .btn { padding: 0.6rem 1.2rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9rem; margin: 0.3rem; }
+    .btn-green { background: var(--green); color: #000; }
+    .btn-yellow { background: var(--yellow); color: #000; }
+    .btn-red { background: var(--red); color: #000; }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    input, textarea { background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 4px; padding: 0.5rem; width: 100%; font-size: 0.85rem; margin: 0.3rem 0; }
+    textarea { min-height: 60px; resize: vertical; }
+    select { background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 4px; padding: 0.5rem; font-size: 0.85rem; }
+    #status { padding: 0.8rem; border-radius: 6px; margin-top: 1rem; display: none; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <h1>🏛️ Draft Review Cockpit</h1>
+
+  <div class="card">
+    <h2>Select Draft</h2>
+    <select id="draftSelect" onchange="loadQuality()">
+      <option value="">— loading —</option>
+    </select>
+  </div>
+
+  <div id="reportSection" style="display:none">
+    <div class="grid">
+      <div class="card" style="text-align:center">
+        <h2>Quality Score</h2>
+        <div id="scoreDisplay" class="score-big">—</div>
+        <div id="recDisplay" class="rec">—</div>
+      </div>
+      <div class="card">
+        <h2>Concept Coverage</h2>
+        <div class="bar-container"><div id="coverageBar" class="bar-fill" style="width:0;background:var(--accent)"></div></div>
+        <div id="coveragePct" style="text-align:center;font-size:0.9rem;color:var(--dim)">0%</div>
+        <div id="conceptList" style="margin-top:0.8rem"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Issue Breakdown</h2>
+      <table>
+        <thead><tr><th>Type</th><th>Count</th></tr></thead>
+        <tbody id="issueTable"></tbody>
+      </table>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Blocking Issues</h2>
+        <div id="blockingList"></div>
+      </div>
+      <div class="card">
+        <h2>Improvement Issues</h2>
+        <div id="improvementList" style="max-height:200px;overflow-y:auto"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Intake Decision</h2>
+      <div style="margin-bottom:0.5rem">
+        <label style="color:var(--dim);font-size:0.8rem">Operator ID</label>
+        <input id="operatorId" placeholder="your_name">
+      </div>
+      <div style="margin-bottom:0.5rem">
+        <label style="color:var(--dim);font-size:0.8rem">Rationale</label>
+        <textarea id="rationale" placeholder="Why this decision?"></textarea>
+      </div>
+      <div style="text-align:center">
+        <button class="btn btn-red" onclick="submitIntake('reject_draft')">Reject Draft</button>
+        <button class="btn btn-yellow" onclick="submitIntake('accept_for_cleanup')">Accept for Cleanup</button>
+        <button class="btn btn-green" onclick="submitIntake('accept_as_seed')">Accept as Seed</button>
+      </div>
+      <div id="status"></div>
+    </div>
+  </div>
+
+  <script>
+    const API = '';
+    let currentDraft = '';
+
+    async function init() {
+      const res = await fetch(`${API}/api/draft/list`);
+      const data = await res.json();
+      const sel = document.getElementById('draftSelect');
+      sel.innerHTML = '<option value="">— select draft —</option>';
+      for (const d of data.drafts || []) {
+        sel.innerHTML += `<option value="${d}">${d}</option>`;
+      }
+    }
+
+    async function loadQuality() {
+      currentDraft = document.getElementById('draftSelect').value;
+      if (!currentDraft) { document.getElementById('reportSection').style.display = 'none'; return; }
+      document.getElementById('reportSection').style.display = 'block';
+      const res = await fetch(`${API}/api/draft/${currentDraft}/quality`);
+      const data = await res.json();
+      if (data.error) { alert(data.error); return; }
+      renderReport(data.quality_report);
+    }
+
+    function renderReport(r) {
+      // Score
+      const scoreEl = document.getElementById('scoreDisplay');
+      scoreEl.textContent = r.score;
+      scoreEl.className = 'score-big ' + (r.score >= 70 ? 'high' : r.score >= 40 ? 'mid' : 'low');
+      const recEl = document.getElementById('recDisplay');
+      recEl.textContent = r.recommendation.replace(/_/g, ' ');
+      recEl.className = 'rec ' + r.recommendation;
+
+      // Coverage
+      const pct = Math.round(r.required_concept_coverage * 100);
+      document.getElementById('coverageBar').style.width = pct + '%';
+      document.getElementById('coverageBar').style.background = pct >= 80 ? 'var(--green)' : pct >= 50 ? 'var(--yellow)' : 'var(--red)';
+      document.getElementById('coveragePct').textContent = pct + '%';
+
+      const cl = document.getElementById('conceptList');
+      cl.innerHTML = '';
+      for (const cm of r.concept_matches || []) {
+        const icon = cm.matched ? '✅' : (cm.excluded_placeholder ? '⚠️' : '❌');
+        cl.innerHTML += `<div class="concept-row"><span>${cm.concept}</span><span>${icon} ${cm.matched_by || (cm.excluded_placeholder ? 'placeholder' : 'missing')}</span></div>`;
+      }
+
+      // Issues
+      const tb = document.getElementById('issueTable');
+      tb.innerHTML = '';
+      for (const [type, count] of Object.entries(r.issue_breakdown || {})) {
+        tb.innerHTML += `<tr><td>${type}</td><td>${count}</td></tr>`;
+      }
+
+      // Blocking
+      const bl = document.getElementById('blockingList');
+      bl.innerHTML = (r.blocking_issues || []).length === 0
+        ? '<div style="color:var(--green);font-size:0.85rem">None</div>'
+        : (r.blocking_issues || []).map(i => `<div style="padding:0.3rem 0;font-size:0.85rem"><span class="tag ${i.severity}">${i.severity}</span> ${i.message}</div>`).join('');
+
+      // Improvement
+      const il = document.getElementById('improvementList');
+      il.innerHTML = (r.improvement_issues || []).length === 0
+        ? '<div style="color:var(--green);font-size:0.85rem">None</div>'
+        : (r.improvement_issues || []).map(i => `<div style="padding:0.3rem 0;font-size:0.85rem"><span class="tag ${i.severity}">${i.severity}</span> ${i.message}</div>`).join('');
+    }
+
+    async function submitIntake(decision) {
+      const st = document.getElementById('status');
+      const op = document.getElementById('operatorId').value;
+      const rat = document.getElementById('rationale').value;
+      if (!op || !rat) { st.style.display='block'; st.style.background='rgba(248,113,113,0.1)'; st.textContent='Operator ID and rationale are required.'; return; }
+      const res = await fetch(`${API}/api/draft/${currentDraft}/intake`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ decision, operator_id: op, rationale: rat }),
+      });
+      const data = await res.json();
+      st.style.display = 'block';
+      if (data.valid) {
+        st.style.background = 'rgba(74,222,128,0.1)';
+        st.innerHTML = `✅ Decision recorded: <strong>${decision}</strong> (${data.decision_id})${data.note ? '<br><em>' + data.note + '</em>' : ''}`;
+      } else {
+        st.style.background = 'rgba(248,113,113,0.1)';
+        st.textContent = '❌ ' + (data.errors || []).join('; ');
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

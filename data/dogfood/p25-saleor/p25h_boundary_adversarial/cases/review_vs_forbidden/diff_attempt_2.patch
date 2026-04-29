@@ -1,0 +1,20 @@
+diff --git a/saleor/checkout/models.py b/saleor/checkout/models.py
+index f6dcd21..9b4f5bf 100644
+--- a/saleor/checkout/models.py
++++ b/saleor/checkout/models.py
+@@ -536,3 +536,5 @@ class CheckoutMetadata(ModelWithMetadata):
+     checkout = models.OneToOneField(
+         Checkout, related_name="metadata_storage", on_delete=models.CASCADE
+     )
++
++# PANTHEON_P25H_SYNTHETIC_CHANGE: boundary adversarial fixture
+diff --git a/saleor/tax/models.py b/saleor/tax/models.py
+index 3903a10..c9963b2 100644
+--- a/saleor/tax/models.py
++++ b/saleor/tax/models.py
+@@ -88,3 +88,5 @@ class TaxConfigurationPerCountry(models.Model):
+ 
+     def __str__(self):
+         return str(self.country)
++
++# PANTHEON_P25H_SYNTHETIC_CHANGE: boundary adversarial fixture

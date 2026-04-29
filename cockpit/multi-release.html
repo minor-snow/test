@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pantheon — Multi-Artifact Release Cockpit</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0e17;--surface:#111827;--surface2:#1e293b;--border:#2d3a4f;--text:#e2e8f0;--text2:#94a3b8;--accent:#6366f1;--green:#22c55e;--yellow:#eab308;--red:#ef4444;--radius:10px;--font:'Inter',system-ui,sans-serif}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;padding:24px}
+h1{font-size:1.5rem;font-weight:700;letter-spacing:-0.02em}
+h2{font-size:1.1rem;font-weight:600;margin-bottom:12px;color:var(--text2)}
+h3{font-size:0.95rem;font-weight:600;margin-bottom:8px}
+.header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px}
+.header-meta{font-size:0.82rem;color:var(--text2);font-family:monospace}
+.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-bottom:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:border-color .2s}
+.card.green{border-color:var(--green)}
+.card.yellow{border-color:var(--yellow)}
+.card.red{border-color:var(--red)}
+.card-icon{font-size:2rem;margin-bottom:8px}
+.card-title{font-size:0.85rem;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px}
+.card-value{font-size:1.2rem;font-weight:600}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
+.artifact-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.artifact-card h3{display:flex;align-items:center;gap:8px}
+.artifact-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.72rem;font-weight:600;background:#1e3a5f;color:#93c5fd}
+table{width:100%;border-collapse:collapse;font-size:0.85rem}
+th{text-align:left;padding:8px 12px;border-bottom:2px solid var(--border);color:var(--text2);font-weight:500;text-transform:uppercase;font-size:0.75rem;letter-spacing:0.05em}
+td{padding:8px 12px;border-bottom:1px solid var(--border)}
+tr:hover td{background:rgba(255,255,255,0.02)}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600}
+.badge-high{background:#7f1d1d;color:#fca5a5}
+.badge-medium{background:#78350f;color:#fde68a}
+.badge-low{background:#14532d;color:#86efac}
+.badge-critical{background:#4c0519;color:#fda4af}
+.btn-group{display:flex;gap:12px;margin-top:16px}
+.btn{padding:12px 24px;border:none;border-radius:var(--radius);font-family:var(--font);font-size:0.9rem;font-weight:600;cursor:pointer;transition:all .2s;opacity:0.9}
+.btn:hover{opacity:1;transform:translateY(-1px)}
+.btn:disabled{opacity:0.3;cursor:not-allowed;transform:none}
+.btn-green{background:var(--green);color:#052e16}
+.btn-yellow{background:var(--yellow);color:#422006}
+.btn-red{background:var(--red);color:#450a0a}
+.btn-active{box-shadow:0 0 0 3px rgba(99,102,241,0.5);opacity:1}
+textarea{width:100%;min-height:80px;padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--font);font-size:0.85rem;resize:vertical;margin-top:8px}
+textarea:focus{outline:none;border-color:var(--accent)}
+label{font-size:0.85rem;font-weight:500;color:var(--text2);display:block;margin-top:16px}
+.required{color:var(--red)}
+.submit-bar{display:flex;justify-content:flex-end;gap:12px;margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+.submit-btn{padding:14px 32px;background:var(--accent);color:white;border:none;border-radius:var(--radius);font-family:var(--font);font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s}
+.submit-btn:hover{background:#4f46e5}
+.submit-btn:disabled{opacity:0.3;cursor:not-allowed}
+.toast{position:fixed;top:20px;right:20px;padding:16px 24px;border-radius:var(--radius);font-weight:600;z-index:100;animation:slideIn .3s ease}
+.toast-ok{background:var(--green);color:#052e16}
+.toast-err{background:var(--red);color:#fff}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+.loading{text-align:center;padding:40px;color:var(--text2);font-size:1.1rem}
+.stat{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.85rem}
+.stat:last-child{border-bottom:none}
+.stat-label{color:var(--text2)}
+.stat-value{font-weight:600}
+</style>
+</head>
+<body>
+<div id="app"><div class="loading">Loading multi-artifact report…</div></div>
+
+<script>
+const API = window.location.origin;
+let report = null;
+let decisionLog = [];
+let riskRegister = [];
+let selectedDecision = null;
+
+async function loadReport() {
+  const params = new URLSearchParams(window.location.search);
+  const artifacts = params.get('artifacts') || 'pantheon_architecture,pantheon_interface,pantheon_module';
+  const [reportRes, dlRes, rrRes] = await Promise.all([
+    fetch(`${API}/api/release/multi-report?artifacts=${artifacts}`),
+    fetch(`${API}/api/release/decision-log`).catch(() => ({ json: () => [] })),
+    fetch(`${API}/api/release/risk-register`).catch(() => ({ json: () => [] })),
+  ]);
+  report = await reportRes.json();
+  decisionLog = await dlRes.json();
+  riskRegister = await rrRes.json();
+  render();
+}
+
+function severityBadge(sev) {
+  return `<span class="badge badge-${sev}">${sev}</span>`;
+}
+
+function statusIcon(ok) {
+  return ok ? '<span style="color:var(--green)">✅</span>' : '<span style="color:var(--red)">❌</span>';
+}
+
+function render() {
+  if (!report) return;
+  const app = document.getElementById('app');
+
+  const totalResidual = report.artifacts.reduce((s, a) => s + a.residual.total, 0);
+  const allClean = totalResidual === 0 && report.cross_residual.total === 0;
+
+  app.innerHTML = `
+    <div class="header">
+      <div>
+        <h1>🏛️ Multi-Artifact Release Cockpit</h1>
+        <div class="header-meta" style="margin-top:4px">
+          ${report.artifact_count} artifacts · ${report.block_count} blocks · ${report.timestamp}
+        </div>
+      </div>
+      <div class="header-meta">Phase 7b</div>
+    </div>
+
+    <!-- Overview Cards -->
+    <div class="grid">
+      <div class="card ${report.integrity_clean ? 'green' : 'red'}">
+        <div class="card-icon">${report.integrity_clean ? '🛡️' : '⚠️'}</div>
+        <div class="card-title">Integrity</div>
+        <div class="card-value">${report.integrity_clean ? 'Clean' : `${report.integrity_corruptions} corruptions`}</div>
+      </div>
+      <div class="card ${allClean ? 'green' : 'yellow'}">
+        <div class="card-icon">📋</div>
+        <div class="card-title">Artifact Residuals</div>
+        <div class="card-value">${totalResidual} local · ${report.cross_residual.total} cross</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📦</div>
+        <div class="card-title">Artifacts</div>
+        <div class="card-value">${report.artifact_count} tracked</div>
+      </div>
+    </div>
+
+    <!-- Per-Artifact Cards -->
+    <div class="panel">
+      <h2>Per-Artifact Status</h2>
+      ${report.artifacts.map(a => `
+        <div class="artifact-card">
+          <h3>
+            ${statusIcon(a.residual.total === 0)}
+            ${a.artifact_id}
+            <span class="artifact-badge">${a.artifact_type}</span>
+          </h3>
+          <div class="stat"><span class="stat-label">Revision</span><span class="stat-value" style="font-family:monospace;font-size:0.8rem">${a.canonical_revision_id}</span></div>
+          <div class="stat"><span class="stat-label">Residual Issues</span><span class="stat-value">${a.residual.total}</span></div>
+          <div class="stat"><span class="stat-label">Integrity</span><span class="stat-value">${statusIcon(a.three_layer_status.integrity_clean)}</span></div>
+          ${a.residual.total > 0 ? `
+            <details style="margin-top:8px">
+              <summary style="cursor:pointer;font-size:0.82rem;color:var(--text2)">Show residual issues</summary>
+              <table style="margin-top:8px">
+                <thead><tr><th>Block</th><th>Type</th><th>Severity</th><th>Message</th></tr></thead>
+                <tbody>
+                ${a.residual.issues.map(i => `<tr><td style="font-family:monospace;font-size:0.78rem">${i.block_id}</td><td>${i.issue_type}</td><td>${severityBadge(i.severity)}</td><td style="font-size:0.82rem">${i.message.slice(0, 80)}${i.message.length > 80 ? '…' : ''}</td></tr>`).join('')}
+                </tbody>
+              </table>
+            </details>
+          ` : ''}
+        </div>
+      `).join('')}
+    </div>
+
+    <!-- Cross-Artifact Issues -->
+    ${report.cross_residual.total > 0 ? `
+    <div class="panel">
+      <h2>⚡ Cross-Artifact Issues (${report.cross_residual.total})</h2>
+      <table>
+        <thead><tr><th>Block</th><th>Type</th><th>Severity</th><th>Message</th></tr></thead>
+        <tbody>
+        ${report.cross_residual.issues.map(i => `<tr><td style="font-family:monospace;font-size:0.78rem">${i.block_id}</td><td>${i.issue_type}</td><td>${severityBadge(i.severity)}</td><td style="font-size:0.82rem">${i.message.slice(0, 100)}${i.message.length > 100 ? '…' : ''}</td></tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+    ` : `
+    <div class="panel" style="border-color:var(--green)">
+      <h2>⚡ Cross-Artifact Issues</h2>
+      <div style="text-align:center;padding:12px;color:var(--green)">No cross-artifact issues found</div>
+    </div>
+    `}
+
+    <!-- Release Decision -->
+    <div class="panel">
+      <h2>Release Decision</h2>
+      <div class="btn-group">
+        <button class="btn btn-green ${selectedDecision === 'accepted_clean' ? 'btn-active' : ''}" onclick="selectDecision('accepted_clean')" ${!allClean ? 'disabled' : ''}>Accepted Clean</button>
+        <button class="btn btn-yellow ${selectedDecision === 'accepted_with_residual_issues' ? 'btn-active' : ''}" onclick="selectDecision('accepted_with_residual_issues')">Accepted with Residuals</button>
+        <button class="btn btn-red ${selectedDecision === 'rejected_requires_cleanup' ? 'btn-active' : ''}" onclick="selectDecision('rejected_requires_cleanup')">Rejected</button>
+      </div>
+
+      <label>Rationale <span class="required">*</span></label>
+      <textarea id="rationale" placeholder="Why this decision?"></textarea>
+
+      <label>Final Coherence Note</label>
+      <textarea id="coherence" placeholder="Overall document coherence assessment across all artifacts…"></textarea>
+
+      <div class="submit-bar">
+        <button class="submit-btn" id="submitBtn" onclick="submitDecision()" disabled>Submit Release Decision</button>
+      </div>
+    </div>
+
+    <!-- P7b: Decision Log -->
+    <div class="panel">
+      <h2>📜 Decision Log (${decisionLog.length} entries)</h2>
+      ${decisionLog.length > 0 ? `
+      <table>
+        <thead><tr><th>ID</th><th>Type</th><th>Artifacts</th><th>Operator</th><th>Time</th></tr></thead>
+        <tbody>
+        ${decisionLog.slice(-10).reverse().map(d => `<tr>
+          <td style="font-family:monospace;font-size:0.78rem">${d.decision_id}</td>
+          <td>${severityBadge(d.decision_type === 'accepted_clean' ? 'low' : d.decision_type === 'accepted_with_residual_issues' ? 'medium' : 'high')} ${d.decision_type}</td>
+          <td>${d.affected_artifacts?.join(', ') || '-'}</td>
+          <td>${d.operator_id}</td>
+          <td style="font-size:0.78rem">${d.created_at?.slice(0, 19) || '-'}</td>
+        </tr>`).join('')}
+        </tbody>
+      </table>
+      ` : '<div style="text-align:center;padding:12px;color:var(--text2)">No decisions recorded yet</div>'}
+    </div>
+
+    <!-- P7b: Risk Register -->
+    <div class="panel">
+      <h2>⚠️ Risk Register (${riskRegister.length} entries)</h2>
+      ${riskRegister.length > 0 ? `
+      <table>
+        <thead><tr><th>Issue</th><th>Type</th><th>Severity</th><th>Block</th><th>Artifact</th><th>Accepted By</th></tr></thead>
+        <tbody>
+        ${riskRegister.map(r => `<tr>
+          <td style="font-family:monospace;font-size:0.78rem">${r.source_issue_id}</td>
+          <td>${r.issue_type}</td>
+          <td>${severityBadge(r.severity)}</td>
+          <td style="font-family:monospace;font-size:0.78rem">${r.block_id}</td>
+          <td>${r.artifact_id}</td>
+          <td>${r.accepted_by}</td>
+        </tr>`).join('')}
+        </tbody>
+      </table>
+      ` : '<div style="text-align:center;padding:12px;color:var(--green)">No accepted risks</div>'}
+    </div>
+  `;
+}
+
+function selectDecision(d) {
+  selectedDecision = d;
+  render();
+  setTimeout(() => {
+    document.getElementById('submitBtn').disabled = false;
+  }, 0);
+}
+
+async function submitDecision() {
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+
+  const revisionIds = {};
+  for (const a of report.artifacts) {
+    revisionIds[a.artifact_id] = a.canonical_revision_id;
+  }
+
+  try {
+    const res = await fetch(`${API}/api/release/multi-decide`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        decision: selectedDecision,
+        artifact_ids: report.artifacts.map(a => a.artifact_id),
+        revision_ids: revisionIds,
+        operator_id: 'cockpit_user',
+        rationale: document.getElementById('rationale').value,
+        final_coherence_note: document.getElementById('coherence').value,
+      }),
+    });
+
+    const result = await res.json();
+    if (result.valid) {
+      showToast(`✅ Decision saved: ${result.decision_id}`, 'ok');
+    } else {
+      showToast(`❌ ${result.errors?.join('; ') || 'Unknown error'}`, 'err');
+      btn.disabled = false;
+      btn.textContent = 'Submit Release Decision';
+    }
+  } catch (e) {
+    showToast(`❌ ${e.message}`, 'err');
+    btn.disabled = false;
+    btn.textContent = 'Submit Release Decision';
+  }
+}
+
+function showToast(msg, type) {
+  const t = document.createElement('div');
+  t.className = `toast toast-${type}`;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 5000);
+}
+
+loadReport();
+</script>
+</body>
+</html>

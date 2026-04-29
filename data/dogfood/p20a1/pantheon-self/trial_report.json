@@ -1,0 +1,67 @@
+{
+  "trial_id": "p20a1-pantheon-self",
+  "repo_label": "pantheon",
+  "repo_state": "working_tree_only",
+  "head_commit_hash": null,
+  "scan_time_ms": 544,
+  "observation_hash": "sha256:d06de3f5092684323b33500bc28a75505be74bd1259d0cd440c6e06e3fd68597",
+  "hash_stable": true,
+  "absolute_path_violations": 0,
+  "partial_scan": false,
+  "observation_validation": "valid",
+  "lite_validation": "valid",
+  "metrics": {
+    "file_count": 5076,
+    "unknown_count": 989,
+    "unknown_ratio_pct": 19.5,
+    "excluded_count": 5,
+    "excluded_ratio_pct": 0.1,
+    "import_edge_count": 1690,
+    "unresolved_import_count": 7,
+    "test_mapping_count": 109,
+    "unmapped_source_count": 80,
+    "sensitive_path_count": 11,
+    "config_hint_count": 3,
+    "owner_hint_count": 0,
+    "bucket_summary": {
+      "generated": 4478,
+      "config": 9,
+      "docs": 28,
+      "asset": 15,
+      "script": 51,
+      "src": 189,
+      "test": 306
+    }
+  },
+  "lite_verdict": "requires_review",
+  "lite_reasons": [
+    "No Git repository detected; observations are working-tree-only",
+    "Changed file(s) import undeclared package(s): @org/pkg, express, my-internal-pkg, lodash, d-pkg, some-private-pkg"
+  ],
+  "lite_required_actions": [
+    "Consider initializing a Git repository for full audit trail",
+    "Add undeclared package(s) to package.json or review imports: @org/pkg, express, my-internal-pkg, lodash, d-pkg, some-private-pkg"
+  ],
+  "changed_file_statuses": [
+    {
+      "path": "src/repoObservation/importExtractor.ts",
+      "status": "observed",
+      "reason": "File found in observations"
+    },
+    {
+      "path": "src/repoObservation/repoScanner.ts",
+      "status": "observed",
+      "reason": "File found in observations"
+    },
+    {
+      "path": "src/changeContract/lite/changeContractLiteBuilder.ts",
+      "status": "observed",
+      "reason": "File found in observations"
+    },
+    {
+      "path": "test/repoObservation/importExtractor.test.ts",
+      "status": "observed",
+      "reason": "File found in observations"
+    }
+  ]
+}

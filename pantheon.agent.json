@@ -1,0 +1,38 @@
+{
+  "schema_version": "pantheon_agent_entry@0.1.0",
+  "project": "pantheon",
+  "purpose": "AI repair governance closed alpha",
+  "primary_entrypoints": {
+    "read_first": "AGENTS.md",
+    "human_quickstart": "docs/closed-alpha/quickstart-github.md",
+    "agent_quickstart": "docs/closed-alpha/agent-quickstart.md"
+  },
+  "commands": {
+    "install": "npm install",
+    "build": "npm run build",
+    "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit",
+    "test": "node ./node_modules/vitest/vitest.mjs run --reporter=dot",
+    "repair_intake": "node dist/src/cli/pantheon.js repair intake --from .pantheon/repair/inbox/agent_bug_report.json",
+    "repair_plan": "node dist/src/cli/pantheon.js repair plan --repair-id <repair_id> --config pantheon.alpha.json",
+    "repair_check": "node dist/src/cli/pantheon.js repair check --repair-id <repair_id>"
+  },
+  "repair_protocol": {
+    "bug_report_template": ".pantheon/repair/inbox/agent_bug_report.template.json",
+    "inbox": ".pantheon/repair/inbox/",
+    "runs": ".pantheon/repair/runs/",
+    "requires_repair_id": true,
+    "latest_is_convenience_only": true
+  },
+  "public_artifacts": [
+    "repair_task.md",
+    "repair_report.md",
+    "repair_feedback.md",
+    "repair_check.json"
+  ],
+  "hard_rules": [
+    "Do not patch before bug report.",
+    "Do not use latest for correctness.",
+    "Do not edit forbidden files.",
+    "Do not treat hypotheses as confirmed facts."
+  ]
+}

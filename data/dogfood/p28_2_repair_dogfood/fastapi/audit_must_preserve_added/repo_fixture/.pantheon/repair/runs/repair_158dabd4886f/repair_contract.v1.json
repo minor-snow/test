@@ -1,0 +1,218 @@
+{
+  "schema_version": "repair_contract@0.1.0",
+  "repair_id": "repair_158dabd4886f",
+  "revision": 1,
+  "source": {
+    "kind": "agent_bug_report",
+    "id": "report_fastapi_audit_must_preserve_added"
+  },
+  "intent": "Fix endpoint pagination.",
+  "bug_finding_id": "finding_5613ff5f7e8b",
+  "suspect_surface": {
+    "files": [
+      {
+        "path": "app/api/routes/articles.py",
+        "confidence": "high",
+        "reason": "Primary suspect",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "reason": "Derived from explicit suspect files, confirmed path references, and failing-test mappings."
+  },
+  "repair_relation_graph": [
+    {
+      "from": "app/api/routes/articles.py",
+      "to": "app/api/routes/articles.py",
+      "relation": "suspect",
+      "confidence": "high",
+      "reason": "Primary suspect",
+      "evidence": [
+        "explicit_suspect_file"
+      ]
+    }
+  ],
+  "graph_build_stats": {
+    "observed_files": 259,
+    "patterns_evaluated": 0,
+    "edges_generated": 1,
+    "edges_after_dedup": 1,
+    "truncation_entries": [],
+    "limitation": "Repair relation graph v1 is an evidence-based candidate graph, not a complete dependency graph or call graph.",
+    "duration_ms": 0
+  },
+  "impact_surface": {
+    "evidence_level": "bootstrap_conservative",
+    "direct_files": [
+      {
+        "path": "app/api/routes/articles.py",
+        "confidence": "high",
+        "reason": "Primary suspect",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "related_files": [],
+    "related_tests": [
+      {
+        "path": "tests/test_fastapi.py",
+        "confidence": "high",
+        "reason": "Explicit failing test supplied in bug report.",
+        "evidence": [
+          "bug_report:failing_test"
+        ]
+      }
+    ],
+    "risk_areas": [],
+    "unknowns": [
+      {
+        "kind": "invalid_reference",
+        "note": "One or more references in the bug report could not be validated inside the repo.",
+        "evidence": [
+          "tests/test_fastapi.py"
+        ]
+      },
+      {
+        "kind": "unknown_related_surface",
+        "note": "No additional related files were found beyond the direct suspect surface.",
+        "evidence": [
+          "repair:no_related_files"
+        ]
+      },
+      {
+        "kind": "unverified_bug_claim",
+        "note": "The report includes unverified bug claims or hypotheses that must not be treated as confirmed facts.",
+        "evidence": [
+          "I think this is the cause.",
+          "It is broken.",
+          "It should work."
+        ]
+      }
+    ]
+  },
+  "repair_scope": {
+    "allowed": [
+      {
+        "pattern": "app/api/routes/articles.py",
+        "source": "suspect_surface",
+        "confidence": "high",
+        "audit_weight": "normal",
+        "reason": "Primary suspect",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      },
+      {
+        "pattern": "tests/test_fastapi.py",
+        "source": "impact_candidate",
+        "confidence": "high",
+        "audit_weight": "elevated",
+        "reason": "Explicit failing test supplied in bug report.",
+        "evidence": [
+          "bug_report:failing_test"
+        ]
+      }
+    ],
+    "review_required": [],
+    "forbidden": [
+      {
+        "pattern": ".cursor/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": ".git/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": ".pantheon/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      }
+    ]
+  },
+  "must_preserve": [],
+  "consistency_checks": [
+    {
+      "id": "check_e5217b3c3751",
+      "statement": "Do not bypass authentication or authorization dependencies.",
+      "source": "project_role",
+      "severity": "hard",
+      "evidence": [
+        "project_role:service_backend"
+      ],
+      "reason": "Service repairs must not weaken request-level security checks."
+    },
+    {
+      "id": "check_451dddf60564",
+      "statement": "Do not change schema or migration behavior without review.",
+      "source": "risk_preset",
+      "severity": "review",
+      "evidence": [
+        "project_role:service_backend"
+      ],
+      "reason": "Database and migration-adjacent changes require human review."
+    },
+    {
+      "id": "check_67efd0991204",
+      "statement": "Update or inspect related tests when the repair changes behavior.",
+      "source": "test_signal",
+      "severity": "review",
+      "evidence": [
+        "related_test:tests/test_fastapi.py"
+      ],
+      "reason": "Related tests are the best available deterministic proxy for behavioral impact in bootstrap mode."
+    },
+    {
+      "id": "check_242a6433d600",
+      "statement": "Unknown impact surface remains. Keep the repair conservative and escalate if scope expands.",
+      "source": "unknown_surface",
+      "severity": "review",
+      "evidence": [
+        "invalid_reference",
+        "unknown_related_surface",
+        "unverified_bug_claim"
+      ],
+      "reason": "Pantheon found unresolved impact signals; those must not be silently ignored."
+    }
+  ],
+  "test_signals": {
+    "related": [
+      "tests/test_fastapi.py"
+    ],
+    "recommended": [],
+    "missing_mapping": []
+  },
+  "repo_state": {
+    "base_sha": null,
+    "head_sha": null,
+    "diff_base": null,
+    "working_tree_status": "unknown",
+    "created_at": "2026-04-29T08:10:06.801Z",
+    "source": "git"
+  },
+  "audit_status": "pending_plan_audit",
+  "source_refs": {
+    "repo_observations_hash": "sha256:1c8697cd1316b41e68c982ddbdd66fcee63efef903de05428da5d3b7e343cbab",
+    "repo_label": "repo_fixture",
+    "head_commit_hash": null
+  }
+}

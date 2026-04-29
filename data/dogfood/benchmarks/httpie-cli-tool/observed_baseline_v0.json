@@ -1,0 +1,298 @@
+{
+  "schema_version": "observed_baseline@0.1.0",
+  "benchmark_id": "httpie-cli-tool",
+  "category": "python_cli_tool",
+  "pinned_commit": "5b604c37c6c67e18e7c3e9aee6c88a8c22b98345",
+  "generated_at": "2026-04-29T02:10:43.338Z",
+  "check_mode": "no_diff_baseline",
+  "layout_signals": {
+    "status": "observed",
+    "count": 4,
+    "items": [
+      {
+        "path": "bucket:docs",
+        "evidence": "3 files"
+      },
+      {
+        "path": "bucket:source",
+        "evidence": "85 files"
+      },
+      {
+        "path": "bucket:config",
+        "evidence": "3 files"
+      },
+      {
+        "path": "bucket:test",
+        "evidence": "44 files"
+      }
+    ],
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "layout_confidence": "medium",
+    "layout_evidence": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: httpie"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: library_package=3, cli_app=2"
+      }
+    ]
+  },
+  "framework_signals": {
+    "status": "observed",
+    "count": 1,
+    "items": [
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      }
+    ]
+  },
+  "project_role_signals": {
+    "status": "observed",
+    "count": 1,
+    "items": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ]
+  },
+  "dependency_manifests": {
+    "status": "observed",
+    "count": 2,
+    "items": [
+      {
+        "source": "setup.cfg",
+        "package_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "setup.py",
+        "package_count": 0,
+        "confidence": "low"
+      }
+    ]
+  },
+  "test_mappings": {
+    "status": "observed",
+    "count": 73,
+    "items": [
+      {
+        "source": "extras/packaging/linux/scripts/httpie_cli.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/cli/nested_json/errors.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/cli/nested_json/tokens.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/config.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/downloads.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/encoding.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/internal/update_warnings.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/manager/cli.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/manager/tasks/sessions.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/output/formatters/json.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/output/formatters/xml.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/output/lexers/json.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/sessions.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpie/uploads.py",
+        "test_count": 1,
+        "confidence": "high"
+      }
+    ]
+  },
+  "sensitive_zones": {
+    "status": "observed",
+    "count": 2,
+    "items": [
+      {
+        "category": "authentication",
+        "severity": "high",
+        "path_count": 2
+      },
+      {
+        "category": "runtime_extension",
+        "severity": "medium",
+        "path_count": 10
+      }
+    ]
+  },
+  "unknowns": {
+    "status": "observed",
+    "count": 1,
+    "items": [
+      {
+        "category": "low_confidence_manifest",
+        "count": 1,
+        "classification": "actionable"
+      },
+      {
+        "category": "scope_granularity_limit",
+        "count": 0,
+        "classification": "intrinsic"
+      }
+    ]
+  },
+  "risk_preset": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (medium)",
+      "framework: click / cli_framework (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: authentication (high, 2 paths)"
+    ],
+    "suggested_review_count": 1,
+    "suggested_forbidden_count": 0,
+    "dormant_count": 6,
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 16
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "quality": {
+    "python_file_count": 133,
+    "classified_count": 133,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 527,
+    "project_import_count": 98,
+    "declared_package_count": 0,
+    "undeclared_package_count": 87,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 73,
+    "high_confidence_test_count": 14,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 2,
+    "sensitive_file_count": 11,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 1
+  }
+}

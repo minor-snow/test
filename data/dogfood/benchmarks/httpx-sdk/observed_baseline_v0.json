@@ -1,0 +1,324 @@
+{
+  "schema_version": "observed_baseline@0.1.0",
+  "benchmark_id": "httpx-sdk",
+  "category": "python_sdk_library",
+  "pinned_commit": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+  "generated_at": "2026-04-29T02:10:33.022Z",
+  "check_mode": "no_diff_baseline",
+  "layout_signals": {
+    "status": "observed",
+    "count": 3,
+    "items": [
+      {
+        "path": "bucket:source",
+        "evidence": "23 files"
+      },
+      {
+        "path": "bucket:config",
+        "evidence": "2 files"
+      },
+      {
+        "path": "bucket:test",
+        "evidence": "37 files"
+      }
+    ],
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "layout_confidence": "high",
+    "layout_evidence": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: httpx"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ]
+  },
+  "framework_signals": {
+    "status": "observed",
+    "count": 2,
+    "items": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "click imported in source files"
+          }
+        ]
+      }
+    ]
+  },
+  "project_role_signals": {
+    "status": "observed",
+    "count": 2,
+    "items": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      },
+      {
+        "role": "http_client_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpcore dependency (HTTP transport layer)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "API-related paths in library package"
+          },
+          {
+            "dimension": "layout_classification",
+            "detail": "Library package with HTTP core dependency"
+          }
+        ]
+      }
+    ]
+  },
+  "dependency_manifests": {
+    "status": "observed",
+    "count": 2,
+    "items": [
+      {
+        "source": "pyproject.toml",
+        "package_count": 13,
+        "confidence": "high"
+      },
+      {
+        "source": "requirements.txt",
+        "package_count": 15,
+        "confidence": "high"
+      }
+    ]
+  },
+  "test_mappings": {
+    "status": "observed",
+    "count": 21,
+    "items": [
+      {
+        "source": "httpx/_api.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpx/_auth.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpx/_client.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpx/_config.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpx/_content.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpx/_decoders.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpx/_exceptions.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpx/_main.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpx/_multipart.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpx/_status_codes.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpx/_transports/asgi.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpx/_transports/wsgi.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "httpx/_utils.py",
+        "test_count": 1,
+        "confidence": "high"
+      }
+    ]
+  },
+  "sensitive_zones": {
+    "status": "observed",
+    "count": 1,
+    "items": [
+      {
+        "category": "authentication",
+        "severity": "high",
+        "path_count": 3
+      }
+    ]
+  },
+  "unknowns": {
+    "status": "observed",
+    "count": 0,
+    "items": [
+      {
+        "category": "scope_granularity_limit",
+        "count": 0,
+        "classification": "intrinsic"
+      }
+    ]
+  },
+  "risk_preset": {
+    "preset": "python_sdk_library",
+    "validation": "validated",
+    "confidence": "high",
+    "matched_signals": [
+      "layout: library_package / flat_package (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (high)",
+      "project_role: python_sdk_library (high)",
+      "project_role: http_client_library (high)",
+      "sensitive_zone: authentication (high, 3 paths)"
+    ],
+    "suggested_review_count": 7,
+    "suggested_forbidden_count": 0,
+    "dormant_count": 0,
+    "suggested_review": [
+      {
+        "pattern": "**/_client*",
+        "reason": "Public client behavior surface — changes affect all consumers",
+        "severity": "high",
+        "matched_path_count": 1
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "Transport layer affects request execution semantics",
+        "severity": "high",
+        "matched_path_count": 6
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "Authentication affects security surface",
+        "severity": "high",
+        "matched_path_count": 1
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "Configuration affects default behavior for all consumers",
+        "severity": "medium",
+        "matched_path_count": 1
+      },
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 5
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "Data model changes affect serialization and API compatibility",
+        "severity": "medium",
+        "matched_path_count": 1
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "URL handling affects request routing",
+        "severity": "medium",
+        "matched_path_count": 1
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": []
+  },
+  "quality": {
+    "python_file_count": 60,
+    "classified_count": 60,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 223,
+    "project_import_count": 1,
+    "declared_package_count": 25,
+    "undeclared_package_count": 4,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 21,
+    "high_confidence_test_count": 13,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 1,
+    "sensitive_file_count": 3,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 0
+  }
+}

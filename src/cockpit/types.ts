@@ -1,0 +1,171 @@
+/**
+ * Release Decision Cockpit — Types
+ *
+ * ref: Phase 5 (Usability & Operator Workflow)
+ *
+ * These types define the data structures for the release decision workflow:
+ *   - TrialReportData: structured report for operator review
+ *   - ReleaseDecision: signed-off decision with rationale
+ *   - BacklogItem: residual issue with full provenance
+ *   - ResidualSnapshot: aggregated residual issue data
+ */
+
+// ---------------------------------------------------------------------------
+// Release Decision
+// ---------------------------------------------------------------------------
+
+export type ReleaseDecisionType =
+  | "accepted_clean"
+  | "accepted_with_residual_issues"
+  | "rejected_requires_cleanup";
+
+export type ThreeLayerStatus = {
+  integrity_clean: boolean;
+  artifact_clean: boolean;      // residual_issues === 0
+  document_coherent: boolean;   // always requires final_coherence_note
+};
+
+export type ReleaseDecision = {
+  decision_id: string;
+  decision: ReleaseDecisionType;
+  canonical_revision_id: string;
+  artifact_id: string;
+  operator_id: string;
+  timestamp: string;
+  rationale: string;
+  final_coherence_note: string;
+  three_layer_status: ThreeLayerStatus;
+  residual_snapshot: ResidualSnapshot;
+  backlog_items: BacklogItem[];
+};
+
+// ---------------------------------------------------------------------------
+// Residual Snapshot
+// ---------------------------------------------------------------------------
+
+export type ResidualIssue = {
+  issue_id: string;
+  block_id: string;
+  section_id: string;
+  section_title: string;
+  issue_type: string;
+  severity: string;
+  message: string;
+};
+
+export type ResidualSnapshot = {
+  total: number;
+  by_severity: Record<string, number>;
+  by_type: Record<string, number>;
+  by_section: Record<string, number>;
+  issues: ResidualIssue[];
+};
+
+// ---------------------------------------------------------------------------
+// Backlog Item
+// ---------------------------------------------------------------------------
+
+export type BacklogItem = {
+  id: string;
+  source_issue_id: string;
+  block_id: string;
+  section_id: string;
+  issue_type: string;
+  severity: string;
+  canonical_revision_id: string;
+  why_deferred: string;
+  created_from_release_decision_id: string;
+};
+
+// ---------------------------------------------------------------------------
+// Trial Report Data (for cockpit consumption)
+// ---------------------------------------------------------------------------
+
+export type CycleDigest = {
+  cycle: number;
+  target_block_id: string | null;
+  issue_type: string | null;
+  committed: boolean;
+  rejected: boolean;
+  override: boolean;
+};
+
+export type TrialReportData = {
+  artifact_id: string;
+  artifact_type: string;
+  canonical_revision_id: string;
+  schema_version: string;
+  timestamp: string;
+
+  // Three-layer status
+  three_layer_status: ThreeLayerStatus;
+
+  // Trial metrics
+  total_cycles: number;
+  issues_found: number;
+  issues_by_rule: Record<string, number>;
+  proposals_generated: number;
+  proposals_accepted: number;
+  semantic_rejections: number;
+  natural_rejections: number;
+  forced_rejections: number;
+  overrides: number;
+
+  // Residual
+  residual: ResidualSnapshot;
+
+  // Cycle history
+  cycles: CycleDigest[];
+
+  // Canonical preview
+  canonical_markdown_preview: string;
+
+  // Integrity details
+  integrity_corruptions: number;
+  integrity_warnings: number;
+};
+
+// ---------------------------------------------------------------------------
+// P7a: Multi-Artifact Report Data
+// ---------------------------------------------------------------------------
+
+export type ArtifactReportSummary = {
+  artifact_id: string;
+  artifact_type: string;
+  canonical_revision_id: string;
+  residual: ResidualSnapshot;
+  three_layer_status: ThreeLayerStatus;
+  canonical_markdown_preview: string;
+};
+
+export type CrossResidualSnapshot = {
+  total: number;
+  by_type: Record<string, number>;
+  issues: ResidualIssue[];
+};
+
+export type MultiArtifactReportData = {
+  timestamp: string;
+  artifact_count: number;
+  block_count: number;
+  artifacts: ArtifactReportSummary[];
+  cross_residual: CrossResidualSnapshot;
+  integrity_clean: boolean;
+  integrity_corruptions: number;
+  integrity_warnings: number;
+};
+
+export type MultiArtifactReleaseDecision = {
+  decision_id: string;
+  decision: ReleaseDecisionType;
+  artifact_ids: string[];
+  revision_ids: Record<string, string>;
+  operator_id: string;
+  timestamp: string;
+  rationale: string;
+  final_coherence_note: string;
+  artifacts: ArtifactReportSummary[];
+  cross_residual: CrossResidualSnapshot;
+  integrity_clean: boolean;
+  backlog_items: BacklogItem[];
+};

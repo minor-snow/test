@@ -1,0 +1,404 @@
+{
+  "artifact_id": "pantheon_architecture",
+  "artifact_type": "ArchitectureDraft",
+  "schema_version": "architecture_draft@0.1.0",
+  "revision_id": "rev_ae2253d75abb",
+  "sections": [
+    {
+      "section_id": "sec_core",
+      "title": "Core Principles",
+      "commitments": [
+        {
+          "block_id": "b_trial_001",
+          "type": "invariant",
+          "text": "Every state transition in the Pantheon pipeline is deterministic host code. LLM outputs are treated as untrusted proposals that must pass through the quarantine-to-evidence promotion path before affecting canonical state.",
+          "terms": [
+            "quarantine",
+            "evidence",
+            "canonical"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:bfbb4e66b473d42c4209fc199dd4fead0a967a6fdb365eec690b716206f24d69"
+        },
+        {
+          "block_id": "b_trial_002",
+          "type": "invariant",
+          "text": "The system maintains a single source of truth per artifact through the canonical pointer, which references exactly one immutable revision. All revisions are content-addressed via SHA-256.",
+          "terms": [
+            "canonical",
+            "revision",
+            "sha-256"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:a3c1209a3912e896b3ca8cc33843a9ae8f894ad684929627f86d095fd04752a8"
+        },
+        {
+          "block_id": "b_trial_003",
+          "type": "invariant",
+          "text": "Schema versioning follows the format type@major.minor.patch. Every persisted object must carry a schema_version field. Unknown schema versions are treated as corrupt data.",
+          "terms": [
+            "schema_version"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:3ee863d5f24fe9b362a636e9babe30f5a962d9ae8bcee048df5c44cccf07d519"
+        },
+        {
+          "block_id": "b_trial_004",
+          "type": "invariant",
+          "text": "Audit logs are append-only and must record every state transition that affects canonical state. Missing audit entries for canonical revisions indicate a partial write and are treated as corruption.",
+          "terms": [
+            "audit_log"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:61bf74beeae223081a2d831ee8f4bedf90c210c3d477e4ca071cd6a4f51e85c1"
+        },
+        {
+          "block_id": "b_trial_005",
+          "type": "invariant",
+          "text": "In legacy mode, patch results were committed to the canonical store without gating. This behavior is now prohibited.",
+          "terms": [
+            "canonical"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:e22b28dbc28c2039ac20fc2a52420a8c11da10d14abe897add78bd3c264f17fd"
+        },
+        {
+          "block_id": "b_trial_006",
+          "type": "invariant",
+          "text": "The integrity check system performs read-only scans of the data directory. It never modifies data. Every finding type has a fixed action defined in the recovery policy document.",
+          "terms": [
+            "integrity_check"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:79a40192af470b3ffa959cc34d405ac6eb706dd397a421987bf44d206478255a"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_store",
+      "title": "Artifact Store",
+      "commitments": [
+        {
+          "block_id": "b_trial_007",
+          "type": "invariant",
+          "text": "The artifact store uses a directory-based layout with five top-level subdirectories: revisions/, canonical/, audit/, quarantine/, and evidence/. Each artifact gets its own subdirectory under revisions/.",
+          "terms": [
+            "artifact_store",
+            "revisions",
+            "quarantine",
+            "evidence"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:fd4bfde9410f663d58b0b8a034b1e6db3825466ecfad23bb361a8df6fd49d1ca"
+        },
+        {
+          "block_id": "b_trial_008",
+          "type": "invariant",
+          "text": "All file writes use atomic write semantics: data is first written to a .tmp file, then renamed to the final path. This prevents partial writes from corrupting the store.",
+          "terms": [],
+          "status": "draft",
+          "content_hash": "sha256:837bb0a13d1b94913e91402cdbb0405b14eb5ec363982b01128bc0c940867403"
+        },
+        {
+          "block_id": "b_trial_009",
+          "type": "invariant",
+          "text": "Revisions are immutable once written. The store enforces this by rejecting writes to existing revision files. Content modification requires creating a new revision with a new content-addressed ID.",
+          "terms": [
+            "revision"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:f89c7310a339af08fa5cf560f21d2bfc5c7e8bf2348de3c89b51487733944cae"
+        },
+        {
+          "block_id": "b_trial_010",
+          "type": "invariant",
+          "text": "Projections are human-readable Markdown renders of artifact revisions. They are regenerated on demand and stored in a designated directory. Projections are not authoritative; the revision JSON is.",
+          "terms": [
+            "projection"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:3cb1c9ba27dc3f73bc48a0d65bbeaa6a137309278ab4fdad4425fa0c1560e850"
+        },
+        {
+          "block_id": "b_trial_011",
+          "type": "invariant",
+          "text": "The canonical pointer file stores the artifact identifier and current revision identifier. Both fields are validated during integrity checks. A pointer with a mismatched identifier is flagged as corrupt.",
+          "terms": [
+            "canonical_pointer"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:f5083e8a088fcf349d4a961b1f13faa245c773d47facb6cce02c31815744b001"
+        },
+        {
+          "block_id": "b_trial_012",
+          "type": "invariant",
+          "text": "Quarantine items must never be promoted directly to the evidence store. Promotion requires passing all four validation gates first.",
+          "terms": [
+            "quarantine",
+            "evidence"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:9ddc6dcf7e5f8dd3b0e037881105f463f20a2a64974d7e5f326fe86386acb3a7"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_pipeline",
+      "title": "Pipeline Orchestration",
+      "commitments": [
+        {
+          "block_id": "b_trial_013",
+          "type": "invariant",
+          "text": "The pipeline executes a fixed 14-step workflow from human idea to committed revision. The orchestrator is a general-purpose function that accepts an artifact and optional patch text override.",
+          "terms": [
+            "pipeline"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:dff2a416a7460aa77761b7f0ee6ed0fb7a15b54871256d439805150929c44ebd"
+        },
+        {
+          "block_id": "b_trial_014",
+          "type": "invariant",
+          "text": "Step sequence: create artifact → lint → quarantine issues → validate → promote to evidence → generate patch proposal → compile patch → apply patch → semantic regression → commit or halt for override.",
+          "terms": [
+            "patch_proposal"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:cf7e8fcc5a4280c47f939bfd87d56babe152f69d4947ebbd3423e4962dc6cea9"
+        },
+        {
+          "block_id": "b_trial_015",
+          "type": "invariant",
+          "text": "The pipeline halts at the semantic regression gate if any regression is detected. Control passes to the human override cockpit. The pipeline does not auto-resolve regressions.",
+          "terms": [
+            "semantic_regression",
+            "override"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:c0777109cbef3e69bfeb82ce15d95dc158802f6495a4fe366f8ce3e6d40b93c8"
+        },
+        {
+          "block_id": "b_trial_016",
+          "type": "invariant",
+          "text": "If a patch is rejected by the mechanical gates, the pipeline records the rejection in the audit log and halts. The operator must then decide whether to manually intervene or retry.",
+          "terms": [],
+          "status": "draft",
+          "content_hash": "sha256:f5aff3defe1a56ef5295140bb95af5b13cbfaa67941f7f64ec4923e9818cccec"
+        },
+        {
+          "block_id": "b_trial_017",
+          "type": "invariant",
+          "text": "Each pipeline cycle processes exactly one issue. Multi-issue resolution requires multiple cycles. This constraint prevents patch conflicts and keeps the audit trail linear.",
+          "terms": [],
+          "status": "draft",
+          "content_hash": "sha256:4318247dc7b2805a02632b130e5169f05f6f3e37dd3112ce0970a7b78fc46c72"
+        },
+        {
+          "block_id": "b_trial_018",
+          "type": "constraint",
+          "text": "The trial must adhere to the specified constraints to ensure valid and reproducible results.",
+          "terms": [],
+          "status": "draft",
+          "content_hash": "sha256:0787204ef92d85e372e903eb08bc3e904b992a17d178241508a0c0799dce855c"
+        },
+        {
+          "block_id": "b_trial_019",
+          "type": "invariant",
+          "text": "The orchestrator must not contain demo-specific logic. All demo flows are isolated in the src/demo/ directory and injected via parameters.",
+          "terms": [
+            "orchestrator"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:d5b75ed6df47733e7b7c21e3446226764fd4a85999a110b85ae42801fa5fcd97"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_gates",
+      "title": "Gate System",
+      "commitments": [
+        {
+          "block_id": "b_trial_020",
+          "type": "invariant",
+          "text": "Four sequential gates validate every skill output before it can affect system state: Schema Gate (G-01), Source Reference Gate (G-02), Capability Gate (G-03), and Type-Specific Invariant Gate (G-04).",
+          "terms": [
+            "schema_gate",
+            "source_reference_gate",
+            "capability_gate"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:90fda592bc2bcee9311f1e83aaadc740a7ba0eaa0e4f2ce2668b4e479998841f"
+        },
+        {
+          "block_id": "b_trial_021",
+          "type": "invariant",
+          "text": "The Capability Gate enforces skill-level restrictions. L1 skills can only produce Issues. L2 skills can produce PatchProposals. No skill may write directly to canonical or commit stores.",
+          "terms": [
+            "skill_level"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:8b69562e0b0f1541ed4c3e91342c3b097df39cc54d032049c4e7a29636c20ffc"
+        },
+        {
+          "block_id": "b_trial_022",
+          "type": "invariant",
+          "text": "The `trust_boundary` between LLM output and host state is the validation pipeline. Raw LLM JSON enters as untrusted input and must pass all four gates to reach quarantine status.",
+          "terms": [
+            "quarantine"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:357377c3e3bafb1f78683164bd385859843db2e1ad3f6442f0aa8da5fb5ac3b6"
+        },
+        {
+          "block_id": "b_trial_023",
+          "type": "invariant",
+          "text": "ArtifactPatch objects are never produced by LLM directly. The host compiles them from PatchProposals by resolving block references and computing expected hashes. This is the compilePatch function.",
+          "terms": [
+            "artifact_patch",
+            "compile_patch"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:022bb7b1e5c76e1396f17b6def8c73cbe7b59ae8f6ee7305908580125df7ca70"
+        },
+        {
+          "block_id": "b_trial_024",
+          "type": "invariant",
+          "text": "Before the gate system was introduced, validated outputs were committed instantly without capability checks. This created an escalation path where L1 skills could forge patch proposals.",
+          "terms": [],
+          "status": "draft",
+          "content_hash": "sha256:19b63c51a2d1fd9c7aaec402aa934fafc225b20be906aa13ea957d80371b6e30"
+        },
+        {
+          "block_id": "b_trial_025",
+          "type": "invariant",
+          "text": "The applyPatch function performs seven mechanical checks in order: artifact_id match, base_revision_id match, target_block_id existence, expected_old_hash match, cross-section check, new_block hash verification, and elevated review flagging for patches with more than three operations.",
+          "terms": [
+            "apply_patch"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:87b9d9b92b80718b7048fb3017960bb2b4fd4fadfd61370513c58604c629ae0a"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_regression",
+      "title": "Semantic Regression",
+      "commitments": [
+        {
+          "block_id": "b_trial_026",
+          "type": "invariant",
+          "text": "The semantic regression gate compares old and new block pairs to detect two categories of regression: constraint deletion and undefined term introduction. It operates on text diff, not structural diff.",
+          "terms": [
+            "constraint_deletion",
+            "undefined_term"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:e970fd324b695d19ccde6ab82af516840110dfe46fc7c20dd6207e33be8f3e34"
+        },
+        {
+          "block_id": "b_trial_027",
+          "type": "invariant",
+          "text": "Constraint deletion is detected by checking whether strong modal keywords (must, never, always, shall, prohibited, forbidden, required) present in the old text are absent from the new text.",
+          "terms": [],
+          "status": "draft",
+          "content_hash": "sha256:8e055dee93d1f94cb13dbce2f40d9a80e16161dcff9037666c300163256ff751"
+        },
+        {
+          "block_id": "b_trial_028",
+          "type": "invariant",
+          "text": "The regression gate produces a SemanticRegressionResult with status (passed/failed), a list of failed gates, affected block IDs, and human-readable reasons for each failure.",
+          "terms": [
+            "semantic_regression_result"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:f64ebd6ae38e2c0f4e60171beb1aec36ec534e8bb6a42e0cd2467f479b53aa47"
+        },
+        {
+          "block_id": "b_trial_029",
+          "type": "invariant",
+          "text": "Each regression finding carries a `confidence_score` between 0 and 1. Findings below the configurable threshold are downgraded to warnings and do not block the pipeline.",
+          "terms": [],
+          "status": "draft",
+          "content_hash": "sha256:069f48d7011eb8187a6c7c120dd4843f7c8194d5a1851b90ac3eb8e2ca93e6e7"
+        },
+        {
+          "block_id": "b_trial_030",
+          "type": "invariant",
+          "text": "Human overrides can accept regressions with known risk. Override decisions are recorded in the audit log with the override type, justification, and the operator's identifier.",
+          "terms": [
+            "override"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:0de96e82a779653b82726b916c45f1c470e61ff825b3514eead87c72a348a2c8"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_integrity",
+      "title": "Integrity & Recovery",
+      "commitments": [
+        {
+          "block_id": "b_trial_031",
+          "type": "invariant",
+          "text": "The integrity check performs 8 categories of validation: canonical pointer target existence, revision parseability, schema version registration, block hash consistency, revision ID recomputation, parent chain continuity, orphan detection, and audit log validation.",
+          "terms": [],
+          "status": "draft",
+          "content_hash": "sha256:f1232a6bf848487e863887b39af7d979545d2fde20fece4320afb305ed83da19"
+        },
+        {
+          "block_id": "b_trial_032",
+          "type": "invariant",
+          "text": "Every finding type has exactly one fixed action. Corrupt findings block pipeline execution. Warning findings are reported but do not block. There is no case-by-case handling.",
+          "terms": [
+            "finding"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:d270dc324bc84c2aac20ca0b276d9d3af71a88cfdbc90e6f14e3e22300392a25"
+        },
+        {
+          "block_id": "b_trial_033",
+          "type": "invariant",
+          "text": "In early development, corrupted revisions were committed instantly to canonical without integrity verification. Phase 2 hardening eliminated this path by requiring integrity checks as a release gate.",
+          "terms": [
+            "integrity_check"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:8b0ce63865bed31b2244ead6645406a1de9ce9a928ac0cf54373bb2256376c0c"
+        },
+        {
+          "block_id": "b_trial_034",
+          "type": "constraint",
+          "text": "",
+          "terms": [],
+          "status": "draft",
+          "content_hash": "sha256:99f4229b33aa5643882235e1579d62e57f2be0df707c9acaa1dd91ad42897c0b"
+        },
+        {
+          "block_id": "b_trial_035",
+          "type": "invariant",
+          "text": "Automatic repair of corrupt data is prohibited. All corrupt findings require human intervention following the four-step recovery flow: inspect report, decide fix, execute fix, re-run integrity check.",
+          "terms": [
+            "recovery_flow"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:c2c86e8fcd7be2b1c970096643bba97b0878977ee4bc44acc4cb02094db730a3"
+        },
+        {
+          "block_id": "b_trial_036",
+          "type": "constraint",
+          "text": "The `recovery_orchestrator` coordinates with the `repair_ledger` to determine which corrupt entries require prioritized human attention.",
+          "terms": [],
+          "status": "draft",
+          "content_hash": "sha256:17353807fab7605e0b0cd6b71d3000ae493b281b3da8097e90bda9bbcfd7e6ad"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created_by": "human",
+    "created_at": "2026-04-25T00:00:00Z",
+    "notes": "Phase 3 trial seed artifact — frozen after initial verification.",
+    "updated_at": "2026-04-25T08:54:53.556Z"
+  },
+  "parent_revision_id": "rev_07898491104a"
+}

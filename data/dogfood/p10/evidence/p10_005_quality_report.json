@@ -1,0 +1,82 @@
+{
+  "artifact_id": "pet_triage_offline_module",
+  "revision_id": "rev_17695c778e19",
+  "score": 99,
+  "section_count": 5,
+  "block_count": 22,
+  "required_concept_coverage": 1,
+  "concept_matches": [
+    {
+      "concept": "offline decision tree",
+      "matched": true,
+      "matched_by": "block b_mod_offline_001 text"
+    },
+    {
+      "concept": "pending report repository",
+      "matched": true,
+      "matched_by": "block b_mod_persist_001 text"
+    },
+    {
+      "concept": "sync queue manager",
+      "matched": true,
+      "matched_by": "block b_mod_sync_001 text"
+    },
+    {
+      "concept": "retry ledger",
+      "matched": true,
+      "matched_by": "block b_mod_sync_002 text"
+    },
+    {
+      "concept": "conflict resolver",
+      "matched": true,
+      "matched_by": "block b_mod_conflict_001 text"
+    },
+    {
+      "concept": "clinic replica client",
+      "matched": true,
+      "matched_by": "block b_mod_infra_001 text"
+    },
+    {
+      "concept": "audit event writer",
+      "matched": true,
+      "matched_by": "block b_mod_infra_003 text"
+    },
+    {
+      "concept": "connectivity observer",
+      "matched": true,
+      "matched_by": "block b_mod_infra_006 text"
+    },
+    {
+      "concept": "user conflict review",
+      "matched": true,
+      "matched_by": "block b_mod_conflict_001 text"
+    }
+  ],
+  "issue_breakdown": {
+    "overbroad_block": 2
+  },
+  "severity_breakdown": {
+    "high": 0,
+    "medium": 2,
+    "low": 0,
+    "critical": 0
+  },
+  "blocking_issues": [],
+  "improvement_issues": [
+    {
+      "issue_type": "overbroad_block",
+      "severity": "medium",
+      "message": "Block \"b_mod_persist_001\" covers too many unrelated topics",
+      "block_id": "b_mod_persist_001",
+      "section_id": "persistence_modules"
+    },
+    {
+      "issue_type": "overbroad_block",
+      "severity": "medium",
+      "message": "Block \"b_mod_sync_001\" covers too many unrelated topics",
+      "block_id": "b_mod_sync_001",
+      "section_id": "sync_modules"
+    }
+  ],
+  "recommendation": "accept_as_seed"
+}

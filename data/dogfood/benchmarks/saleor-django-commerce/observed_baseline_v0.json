@@ -1,0 +1,510 @@
+{
+  "schema_version": "observed_baseline@0.1.0",
+  "benchmark_id": "saleor-django-commerce",
+  "category": "django_commerce",
+  "pinned_commit": "cf9b59513d0a8c83d410eb5b176e5a55de018797",
+  "generated_at": "2026-04-29T02:10:20.791Z",
+  "check_mode": "no_diff_baseline",
+  "layout_signals": {
+    "status": "observed",
+    "count": 6,
+    "items": [
+      {
+        "path": "bucket:source",
+        "evidence": "1142 files"
+      },
+      {
+        "path": "bucket:config",
+        "evidence": "4 files"
+      },
+      {
+        "path": "bucket:test",
+        "evidence": "1684 files"
+      },
+      {
+        "path": "bucket:script",
+        "evidence": "1 files"
+      },
+      {
+        "path": "bucket:migration",
+        "evidence": "1420 files"
+      },
+      {
+        "path": "bucket:unknown",
+        "evidence": "1 files"
+      }
+    ],
+    "primary_layout": "django_project",
+    "package_layout": "django_app_layout",
+    "layout_confidence": "high",
+    "layout_evidence": [
+      {
+        "signal": "django_app_layout_detected",
+        "weight": "strong",
+        "evidence": "Django manage.py + migrations + packages: saleor"
+      },
+      {
+        "signal": "manage_py_found",
+        "weight": "strong",
+        "evidence": "manage.py in repo root"
+      },
+      {
+        "signal": "django_migrations_found",
+        "weight": "moderate",
+        "evidence": "1420 migration files"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      }
+    ]
+  },
+  "framework_signals": {
+    "status": "observed",
+    "count": 4,
+    "items": [
+      {
+        "name": "django",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "django found in dependency manifests"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "manage.py found in repo root"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "Django-style migrations/ directories found"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "django imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      },
+      {
+        "name": "celery",
+        "kind": "task_queue",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "celery found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "celery imported in source files"
+          }
+        ]
+      }
+    ]
+  },
+  "project_role_signals": {
+    "status": "observed",
+    "count": 2,
+    "items": [
+      {
+        "role": "commerce_backend",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "Commerce path families: checkout, payment, order, discount, invoice, shipping, warehouse"
+          },
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as django_project"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Django with commerce-domain directories"
+          }
+        ]
+      },
+      {
+        "role": "cli_application",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points (__main__.py or cli.py)"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "CLI framework in dependencies"
+          }
+        ]
+      }
+    ]
+  },
+  "dependency_manifests": {
+    "status": "observed",
+    "count": 3,
+    "items": [
+      {
+        "source": "pyproject.toml",
+        "package_count": 69,
+        "confidence": "high"
+      },
+      {
+        "source": "setup.cfg",
+        "package_count": 0,
+        "confidence": "low"
+      },
+      {
+        "source": "uv.lock",
+        "package_count": 230,
+        "confidence": "high"
+      }
+    ]
+  },
+  "test_mappings": {
+    "status": "observed",
+    "count": 977,
+    "items": [
+      {
+        "source": "saleor/account/apps.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/account/error_codes.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/account/events.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/account/forms.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/account/i18n.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/account/i18n_rules_override.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/account/i18n_valid_address_extension.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/account/lock_objects.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/account/models.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/account/notifications.py",
+        "test_count": 2,
+        "confidence": "high"
+      },
+      {
+        "source": "saleor/account/search.py",
+        "test_count": 2,
+        "confidence": "high"
+      },
+      {
+        "source": "saleor/account/signals.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/account/tasks.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/account/throttling.py",
+        "test_count": 2,
+        "confidence": "high"
+      },
+      {
+        "source": "saleor/account/utils.py",
+        "test_count": 2,
+        "confidence": "high"
+      },
+      {
+        "source": "saleor/account/validators.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/account/widgets.py",
+        "test_count": 1,
+        "confidence": "medium"
+      },
+      {
+        "source": "saleor/app/installation_utils.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "saleor/app/manifest_validations.py",
+        "test_count": 1,
+        "confidence": "high"
+      },
+      {
+        "source": "saleor/app/models.py",
+        "test_count": 1,
+        "confidence": "high"
+      }
+    ]
+  },
+  "sensitive_zones": {
+    "status": "observed",
+    "count": 14,
+    "items": [
+      {
+        "category": "financial_transactions",
+        "severity": "critical",
+        "path_count": 339
+      },
+      {
+        "category": "purchase_flow",
+        "severity": "high",
+        "path_count": 412
+      },
+      {
+        "category": "order_lifecycle",
+        "severity": "high",
+        "path_count": 689
+      },
+      {
+        "category": "identity",
+        "severity": "high",
+        "path_count": 325
+      },
+      {
+        "category": "authentication",
+        "severity": "high",
+        "path_count": 55
+      },
+      {
+        "category": "authorization",
+        "severity": "high",
+        "path_count": 38
+      },
+      {
+        "category": "security",
+        "severity": "high",
+        "path_count": 3
+      },
+      {
+        "category": "administration",
+        "severity": "high",
+        "path_count": 10
+      },
+      {
+        "category": "schema_migration",
+        "severity": "high",
+        "path_count": 1425
+      },
+      {
+        "category": "pricing_adjustment",
+        "severity": "medium",
+        "path_count": 354
+      },
+      {
+        "category": "regulatory_calculation",
+        "severity": "medium",
+        "path_count": 133
+      },
+      {
+        "category": "runtime_extension",
+        "severity": "medium",
+        "path_count": 144
+      },
+      {
+        "category": "external_integration",
+        "severity": "medium",
+        "path_count": 266
+      },
+      {
+        "category": "infrastructure_config",
+        "severity": "medium",
+        "path_count": 48
+      }
+    ]
+  },
+  "unknowns": {
+    "status": "observed",
+    "count": 2,
+    "items": [
+      {
+        "category": "unclassified_python_file",
+        "count": 1,
+        "classification": "actionable"
+      },
+      {
+        "category": "low_confidence_manifest",
+        "count": 1,
+        "classification": "actionable"
+      },
+      {
+        "category": "scope_granularity_limit",
+        "count": 0,
+        "classification": "intrinsic"
+      }
+    ]
+  },
+  "risk_preset": {
+    "preset": "django_commerce",
+    "validation": "validated",
+    "confidence": "high",
+    "matched_signals": [
+      "layout: django_project / django_app_layout (high)",
+      "framework: django / web_framework (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (high)",
+      "framework: celery / task_queue (high)",
+      "project_role: commerce_backend (high)",
+      "project_role: cli_application (high)",
+      "sensitive_zone: financial_transactions (critical, 339 paths)",
+      "sensitive_zone: purchase_flow (high, 412 paths)",
+      "sensitive_zone: order_lifecycle (high, 689 paths)",
+      "sensitive_zone: identity (high, 325 paths)",
+      "sensitive_zone: authentication (high, 55 paths)",
+      "sensitive_zone: authorization (high, 38 paths)",
+      "sensitive_zone: security (high, 3 paths)",
+      "sensitive_zone: administration (high, 10 paths)",
+      "sensitive_zone: schema_migration (high, 1425 paths)"
+    ],
+    "suggested_review_count": 9,
+    "suggested_forbidden_count": 1,
+    "dormant_count": 1,
+    "suggested_review": [
+      {
+        "pattern": "**/payment/**",
+        "reason": "Financial transaction logic requires human review",
+        "severity": "critical",
+        "matched_path_count": 234
+      },
+      {
+        "pattern": "**/checkout/**",
+        "reason": "Purchase flow logic requires human review",
+        "severity": "high",
+        "matched_path_count": 383
+      },
+      {
+        "pattern": "**/order/**",
+        "reason": "Order lifecycle logic requires human review",
+        "severity": "high",
+        "matched_path_count": 479
+      },
+      {
+        "pattern": "**/account/**",
+        "reason": "Identity and account management requires human review",
+        "severity": "high",
+        "matched_path_count": 318
+      },
+      {
+        "pattern": "**/auth/**",
+        "reason": "Authentication logic requires human review",
+        "severity": "high",
+        "matched_path_count": 15
+      },
+      {
+        "pattern": "**/discount/**",
+        "reason": "Pricing adjustment logic is money-flow adjacent",
+        "severity": "medium",
+        "matched_path_count": 244
+      },
+      {
+        "pattern": "**/tax/**",
+        "reason": "Tax calculation has regulatory implications",
+        "severity": "medium",
+        "matched_path_count": 67
+      },
+      {
+        "pattern": "**/plugin*/**",
+        "reason": "Plugin/extension points affect runtime behavior",
+        "severity": "medium",
+        "matched_path_count": 255
+      },
+      {
+        "pattern": "**/settings*",
+        "reason": "Infrastructure configuration affects system behavior",
+        "severity": "medium",
+        "matched_path_count": 3
+      }
+    ],
+    "suggested_forbidden": [
+      {
+        "pattern": "**/migrations/**",
+        "reason": "Schema migrations should not be auto-generated by AI agents",
+        "severity": "critical",
+        "matched_path_count": 1422
+      }
+    ],
+    "dormant_patterns": [
+      {
+        "pattern": "**/billing/**",
+        "reason": "No billing directory observed"
+      }
+    ]
+  },
+  "quality": {
+    "python_file_count": 4248,
+    "classified_count": 4248,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 12610,
+    "project_import_count": 16,
+    "declared_package_count": 1974,
+    "undeclared_package_count": 180,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 977,
+    "high_confidence_test_count": 120,
+    "medium_confidence_test_count": 120,
+    "sensitive_zone_count": 14,
+    "sensitive_file_count": 2904,
+    "manifest_count": 3,
+    "low_confidence_manifest_count": 1
+  }
+}

@@ -1,0 +1,105 @@
+diff --git a/saleor/checkout/base_calculations.py b/saleor/checkout/base_calculations.py
+index b84c8ff..050af47 100644
+--- a/saleor/checkout/base_calculations.py
++++ b/saleor/checkout/base_calculations.py
+@@ -169,8 +169,9 @@ def base_checkout_total(
+     currency = checkout_info.checkout.currency
+     subtotal = base_checkout_subtotal(lines, checkout_info.channel, currency)
+     shipping_price = base_checkout_delivery_price(checkout_info, lines)
++    eco_packaging_fee = checkout_info.checkout.eco_packaging_fee
+ 
+-    return subtotal + shipping_price
++    return subtotal + shipping_price + eco_packaging_fee
+ 
+ 
+ def base_checkout_subtotal(
+@@ -210,6 +211,7 @@ def checkout_total(
+     subtotal = base_checkout_subtotal(lines, checkout_info.channel, currency)
+     shipping_price = base_checkout_delivery_price(checkout_info, lines)
+     discount = checkout_info.checkout.discount
++    eco_packaging_fee = checkout_info.checkout.eco_packaging_fee
+ 
+     # order promotion discount and entire_order voucher discount with
+     # apply_once_per_order set to False are not included in the total price yet
+@@ -221,7 +223,7 @@ def checkout_total(
+     # net value if we are having a discount that covers whole price.
+     if discount_not_included:
+         subtotal = max(zero_money(currency), subtotal - discount)
+-    return subtotal + shipping_price
++    return subtotal + shipping_price + eco_packaging_fee
+ 
+ 
+ def get_line_total_price_with_propagated_checkout_discount(
+diff --git a/saleor/checkout/calculations.py b/saleor/checkout/calculations.py
+index fd67396..045c035 100644
+--- a/saleor/checkout/calculations.py
++++ b/saleor/checkout/calculations.py
+@@ -467,6 +467,7 @@ def _fetch_checkout_prices_if_expired(
+                         "price_expiration",
+                         "discount_expiration",
+                         "tax_error",
++                        "eco_packaging_fee_amount",
+                     ]
+ 
+                     from .utils import checkout_lines_bulk_update
+@@ -705,7 +706,7 @@ def _remove_tax(checkout, lines_info):
+ 
+ 
+ def _calculate_checkout_total(checkout, currency):
+-    total = checkout.subtotal + checkout.shipping_price
++    total = checkout.subtotal + checkout.shipping_price + checkout.eco_packaging_fee
+     return quantize_price(
+         total,
+         currency,
+@@ -836,7 +837,8 @@ def _set_checkout_base_prices(
+     checkout.subtotal = TaxedMoney(net=subtotal, gross=subtotal)
+ 
+     # Calculate checkout total
+-    total = subtotal + shipping_price
++    eco_packaging_fee = checkout.eco_packaging_fee
++    total = subtotal + shipping_price + eco_packaging_fee
+     checkout.total = quantize_price(TaxedMoney(net=total, gross=total), currency)
+ 
+ 
+diff --git a/saleor/checkout/models.py b/saleor/checkout/models.py
+index f6dcd21..76ee0a1 100644
+--- a/saleor/checkout/models.py
++++ b/saleor/checkout/models.py
+@@ -246,6 +246,16 @@ class Checkout(models.Model):
+         max_digits=5, decimal_places=4, default=Decimal("0.0")
+     )
+ 
++    eco_packaging_fee_amount = models.DecimalField(
++        max_digits=settings.DEFAULT_MAX_DIGITS,
++        decimal_places=settings.DEFAULT_DECIMAL_PLACES,
++        default=Decimal(0),
++    )
++    eco_packaging_fee = MoneyField(
++        amount_field="eco_packaging_fee_amount",
++        currency_field="currency",
++    )
++
+     undiscounted_base_shipping_price_amount = models.DecimalField(
+         max_digits=settings.DEFAULT_MAX_DIGITS,
+         decimal_places=settings.DEFAULT_DECIMAL_PLACES,
+diff --git a/saleor/order/models.py b/saleor/order/models.py
+index 9cd5b46..f6f8afc 100644
+--- a/saleor/order/models.py
++++ b/saleor/order/models.py
+@@ -239,6 +239,16 @@ class Order(ModelWithMetadata, ModelWithExternalReference):
+         amount_field="undiscounted_base_shipping_price_amount",
+         currency_field="currency",
+     )
++    eco_packaging_fee_amount = models.DecimalField(
++        max_digits=settings.DEFAULT_MAX_DIGITS,
++        decimal_places=settings.DEFAULT_DECIMAL_PLACES,
++        default=Decimal("0.0"),
++    )
++    eco_packaging_fee = MoneyField(
++        amount_field="eco_packaging_fee_amount",
++        currency_field="currency",
++    )
++
+     shipping_tax_rate = models.DecimalField(
+         max_digits=5, decimal_places=4, blank=True, null=True
+     )

@@ -1,0 +1,211 @@
+{
+  "schema_version": "repair_contract@0.1.0",
+  "repair_id": "repair_57f9c85ee22d",
+  "revision": 1,
+  "source": {
+    "kind": "agent_bug_report",
+    "id": "report_fastapi_allowed_route_fix"
+  },
+  "intent": "Fix endpoint pagination.",
+  "bug_finding_id": "finding_ab786385a5ca",
+  "suspect_surface": {
+    "files": [
+      {
+        "path": "app/api/routes/articles.py",
+        "confidence": "high",
+        "reason": "Primary suspect",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "reason": "Derived from explicit suspect files, confirmed path references, and failing-test mappings."
+  },
+  "repair_relation_graph": [
+    {
+      "from": "app/api/routes/articles.py",
+      "to": "app/api/routes/articles.py",
+      "relation": "suspect",
+      "confidence": "high",
+      "reason": "Primary suspect",
+      "evidence": [
+        "explicit_suspect_file"
+      ]
+    }
+  ],
+  "graph_build_stats": {
+    "observed_files": 69,
+    "patterns_evaluated": 0,
+    "edges_generated": 1,
+    "edges_after_dedup": 1,
+    "truncation_entries": [],
+    "limitation": "Repair relation graph v1 is an evidence-based candidate graph, not a complete dependency graph or call graph.",
+    "duration_ms": 0
+  },
+  "impact_surface": {
+    "evidence_level": "bootstrap_conservative",
+    "direct_files": [
+      {
+        "path": "app/api/routes/articles.py",
+        "confidence": "high",
+        "reason": "Primary suspect",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "related_files": [],
+    "related_tests": [
+      {
+        "path": "tests/api/articles/test_articles.py",
+        "confidence": "high",
+        "reason": "Python test mapping for app/api/routes/articles.py.",
+        "evidence": [
+          "python_test_mapping:high"
+        ]
+      }
+    ],
+    "risk_areas": [],
+    "unknowns": [
+      {
+        "kind": "unknown_related_surface",
+        "note": "No additional related files were found beyond the direct suspect surface.",
+        "evidence": [
+          "repair:no_related_files"
+        ]
+      },
+      {
+        "kind": "unverified_bug_claim",
+        "note": "The report includes unverified bug claims or hypotheses that must not be treated as confirmed facts.",
+        "evidence": [
+          "Reported failing test: tests/api/articles/test_articles.py",
+          "I think this is the cause.",
+          "It is broken.",
+          "It should work."
+        ]
+      }
+    ]
+  },
+  "repair_scope": {
+    "allowed": [
+      {
+        "pattern": "app/api/routes/articles.py",
+        "source": "suspect_surface",
+        "confidence": "high",
+        "audit_weight": "normal",
+        "reason": "Primary suspect",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      },
+      {
+        "pattern": "tests/api/articles/test_articles.py",
+        "source": "impact_candidate",
+        "confidence": "high",
+        "audit_weight": "elevated",
+        "reason": "Python test mapping for app/api/routes/articles.py.",
+        "evidence": [
+          "python_test_mapping:high"
+        ]
+      }
+    ],
+    "review_required": [],
+    "forbidden": [
+      {
+        "pattern": ".cursor/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": ".git/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": ".pantheon/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      }
+    ]
+  },
+  "must_preserve": [],
+  "consistency_checks": [
+    {
+      "id": "check_e5217b3c3751",
+      "statement": "Do not bypass authentication or authorization dependencies.",
+      "source": "project_role",
+      "severity": "hard",
+      "evidence": [
+        "project_role:service_backend"
+      ],
+      "reason": "Service repairs must not weaken request-level security checks."
+    },
+    {
+      "id": "check_451dddf60564",
+      "statement": "Do not change schema or migration behavior without review.",
+      "source": "risk_preset",
+      "severity": "review",
+      "evidence": [
+        "project_role:service_backend"
+      ],
+      "reason": "Database and migration-adjacent changes require human review."
+    },
+    {
+      "id": "check_6188c381cb64",
+      "statement": "Update or inspect related tests when the repair changes behavior.",
+      "source": "test_signal",
+      "severity": "review",
+      "evidence": [
+        "related_test:tests/api/articles/test_articles.py"
+      ],
+      "reason": "Related tests are the best available deterministic proxy for behavioral impact in bootstrap mode."
+    },
+    {
+      "id": "check_9cd610de2bd6",
+      "statement": "Unknown impact surface remains. Keep the repair conservative and escalate if scope expands.",
+      "source": "unknown_surface",
+      "severity": "review",
+      "evidence": [
+        "unknown_related_surface",
+        "unverified_bug_claim"
+      ],
+      "reason": "Pantheon found unresolved impact signals; those must not be silently ignored."
+    }
+  ],
+  "test_signals": {
+    "related": [
+      "tests/api/articles/test_articles.py"
+    ],
+    "recommended": [],
+    "missing_mapping": []
+  },
+  "repo_state": {
+    "base_sha": null,
+    "head_sha": null,
+    "diff_base": null,
+    "working_tree_status": "unknown",
+    "created_at": "2026-04-29T07:19:12.503Z",
+    "source": "git"
+  },
+  "audit_status": "pending_plan_audit",
+  "source_refs": {
+    "repo_observations_hash": "sha256:c5d1bfb7fa3b68bf496320b4dea1c8e9934b97b59a450824eb6b16fd0cff7fa1",
+    "repo_label": "repo_fixture",
+    "head_commit_hash": null
+  }
+}

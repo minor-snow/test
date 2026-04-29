@@ -1,0 +1,98 @@
+{
+  "schema_version": "change_contract_lite.v1",
+  "contract_id": "120fcd51-7599-4522-92c9-b89bc951334d",
+  "mode": "bootstrap",
+  "created_at": "2026-04-29T08:12:05.006Z",
+  "intent": "P20a.1 self-scan trial: validate observation quality on Pantheon itself",
+  "refs": {
+    "repo_observations_hash": "sha256:d06de3f5092684323b33500bc28a75505be74bd1259d0cd440c6e06e3fd68597",
+    "head_commit_hash": null,
+    "repo_state": "working_tree_only",
+    "has_uncommitted_changes": null
+  },
+  "changed_files": [
+    "src/repoObservation/importExtractor.ts",
+    "src/repoObservation/repoScanner.ts",
+    "src/changeContract/lite/changeContractLiteBuilder.ts",
+    "test/repoObservation/importExtractor.test.ts"
+  ],
+  "observed_scope": {
+    "touched_buckets": [
+      "src",
+      "test"
+    ],
+    "touched_sensitive_paths": [],
+    "related_tests": [
+      "test/repoObservation/importExtractor.test.ts",
+      "test/repoObservation/repoScanner.test.ts",
+      "test/changeContract/lite/changeContractLiteBuilder.test.ts"
+    ],
+    "owner_hints": [],
+    "unknowns": [],
+    "changed_file_statuses": [
+      {
+        "path": "src/repoObservation/importExtractor.ts",
+        "status": "observed",
+        "reason": "File found in observations"
+      },
+      {
+        "path": "src/repoObservation/repoScanner.ts",
+        "status": "observed",
+        "reason": "File found in observations"
+      },
+      {
+        "path": "src/changeContract/lite/changeContractLiteBuilder.ts",
+        "status": "observed",
+        "reason": "File found in observations"
+      },
+      {
+        "path": "test/repoObservation/importExtractor.test.ts",
+        "status": "observed",
+        "reason": "File found in observations"
+      }
+    ],
+    "sensitive_path_details": [],
+    "undeclared_package_details": [
+      {
+        "file_path": "test/repoObservation/importExtractor.test.ts",
+        "package_name": "@org/pkg"
+      },
+      {
+        "file_path": "test/repoObservation/importExtractor.test.ts",
+        "package_name": "@org/pkg"
+      },
+      {
+        "file_path": "test/repoObservation/importExtractor.test.ts",
+        "package_name": "express"
+      },
+      {
+        "file_path": "test/repoObservation/importExtractor.test.ts",
+        "package_name": "my-internal-pkg"
+      },
+      {
+        "file_path": "test/repoObservation/importExtractor.test.ts",
+        "package_name": "lodash"
+      },
+      {
+        "file_path": "test/repoObservation/importExtractor.test.ts",
+        "package_name": "d-pkg"
+      },
+      {
+        "file_path": "test/repoObservation/importExtractor.test.ts",
+        "package_name": "some-private-pkg"
+      }
+    ],
+    "unmapped_src_details": []
+  },
+  "decision": {
+    "verdict": "requires_review",
+    "reasons": [
+      "No Git repository detected; observations are working-tree-only",
+      "Changed file(s) import undeclared package(s): @org/pkg, express, my-internal-pkg, lodash, d-pkg, some-private-pkg"
+    ],
+    "required_actions": [
+      "Consider initializing a Git repository for full audit trail",
+      "Add undeclared package(s) to package.json or review imports: @org/pkg, express, my-internal-pkg, lodash, d-pkg, some-private-pkg"
+    ]
+  }
+}

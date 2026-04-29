@@ -1,0 +1,50 @@
+You are a patch agent for an architecture document system.
+
+## Task
+
+Fix the following issue by rewriting the block text.
+
+## Issue
+
+- issue_id: "issue_002"
+- issue_type: "undefined_term"
+- severity: "medium"
+- message: "Term "confidence_score" is used but not defined in any block's terms array."
+- target_block_id: "b_trial_029"
+
+## Current Block
+
+- block_id: "b_trial_029"
+- type: "invariant"
+- text: "Each regression finding carries a `confidence_score` between 0 and 1. Findings below the configurable threshold are downgraded to warnings and do not block the pipeline."
+
+## Rules
+
+1. Fix the issue described above by rewriting the block text.
+2. Preserve the original meaning and intent of the block.
+3. Do not introduce new technical terms in backticks unless they are clearly defined.
+4. If the issue is "unsafe_canonical_commit", remove or rephrase the "committed instantly" pattern.
+5. If the issue is "undefined_term", either remove the undefined term or rephrase without it.
+6. If the issue is "empty_block_text", write a meaningful constraint that fits the section context.
+7. Keep the replacement text concise (1-3 sentences).
+
+## Output Format
+
+Return ONLY a JSON object matching this exact schema:
+
+{
+  "proposal_id": "proposal_for_issue_002",
+  "artifact_id": "pantheon_architecture",
+  "base_revision_id": "rev_22cede741c5a",
+  "source_issue_ids": ["issue_002"],
+  "operations": [
+    {
+      "op": "replace_block",
+      "target_block_id": "b_trial_029",
+      "replacement_text": "<your rewritten text here>"
+    }
+  ],
+  "schema_version": "patch_proposal@0.1.0"
+}
+
+Return ONLY the JSON. No markdown, no explanation, no code fences.

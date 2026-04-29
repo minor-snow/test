@@ -1,0 +1,216 @@
+{
+  "artifact_id": "pet_triage_interface",
+  "artifact_type": "InterfaceSpec",
+  "schema_version": "interface_spec@0.1.0",
+  "revision_id": "rev_6e62a0114bb5",
+  "sections": [
+    {
+      "section_id": "sec_submit_api",
+      "title": "Triage Submit API",
+      "commitments": [
+        {
+          "block_id": "b_pet_iface_001",
+          "type": "interface",
+          "text": "POST /triage/submit accepts a JSON body with description:string, species:string, and optional temperature:number.",
+          "rationale": "This is the normalized REST form of the VetNet request payload used by the Android client.",
+          "terms": [
+            "triage_submit",
+            "description",
+            "species",
+            "temperature"
+          ],
+          "linked_architecture_blocks": [
+            "b_pet_arch_001",
+            "b_pet_arch_010"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:c05098d9264106a195bce4a9560ad3d2bc654df73c1533d8d6b9458605af079c"
+        },
+        {
+          "block_id": "b_pet_iface_002",
+          "type": "interface",
+          "text": "POST /triage/submit is synchronous: the request blocks until the backend triage engine returns the final diagnosis payload or fails.",
+          "rationale": "The original app waits on one OkHttp callback and has no async acceptance handshake.",
+          "terms": [
+            "synchronous_api",
+            "triage_engine",
+            "strong_sync"
+          ],
+          "linked_architecture_blocks": [
+            "b_pet_arch_002",
+            "b_pet_arch_010"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:606929b4c48c48584479b23958b83a6784039ddd8c78ec6777344e9ff8e1f185"
+        },
+        {
+          "block_id": "b_pet_iface_003",
+          "type": "interface",
+          "text": "A successful 200 response contains risk_level, suspected_conditions[], rationale, and next_steps for one completed triage decision.",
+          "rationale": "Matches the DiagnosisResponse fields shown in the UI.",
+          "terms": [
+            "risk_level",
+            "suspected_conditions",
+            "rationale",
+            "next_steps"
+          ],
+          "linked_architecture_blocks": [
+            "b_pet_arch_010",
+            "b_pet_arch_011"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:5fa4297f6f104d230bbbf5d08b04f40f0cbc29d3aa7f1392170523527065a2f7"
+        },
+        {
+          "block_id": "b_pet_iface_004",
+          "type": "interface",
+          "text": "The client must not commit a local diagnosis record until a successful response from POST /triage/submit has been parsed.",
+          "rationale": "HistoryRecord and VitalRecord are written only after onSuccess.",
+          "terms": [
+            "local_commit",
+            "history_record",
+            "success_response"
+          ],
+          "linked_architecture_blocks": [
+            "b_pet_arch_003",
+            "b_pet_arch_005"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:35eb7b24bdc11f520327de2f56f1fbc91bc0cd212b67f212f7a3bb0522ab4808"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_failure_contract",
+      "title": "Failure Contract",
+      "commitments": [
+        {
+          "block_id": "b_pet_iface_005",
+          "type": "interface",
+          "text": "Network timeout or transport failure is terminal for that triage attempt and returns no authoritative diagnosis payload.",
+          "rationale": "The mobile client surfaces an error and leaves the triage unresolved.",
+          "terms": [
+            "network_timeout",
+            "transport_failure",
+            "terminal_failure"
+          ],
+          "linked_architecture_blocks": [
+            "b_pet_arch_004",
+            "b_pet_arch_005",
+            "b_pet_arch_014"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:e3eb2a253ed0d52732b0ceb9c2f35ce519bce19223f9505c8273ba97602aeb76"
+        },
+        {
+          "block_id": "b_pet_iface_006",
+          "type": "interface",
+          "text": "The interface exposes no offline submission endpoint, no deferred upload token, and no queue handshake for later replay.",
+          "rationale": "v1 is online-first and strong-sync only.",
+          "terms": [
+            "offline_submission",
+            "deferred_upload",
+            "queue_handshake"
+          ],
+          "linked_architecture_blocks": [
+            "b_pet_arch_008",
+            "b_pet_arch_013"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:d988cca01a4b268a5ad27ab93d7f8666a29c29bf5e396547378d71670f1191f6"
+        },
+        {
+          "block_id": "b_pet_iface_007",
+          "type": "interface",
+          "text": "The contract exposes no conflict metadata such as version vectors, last-writer markers, or server change tokens.",
+          "rationale": "There is no protocol for reconciling concurrent clinic updates in v1.",
+          "terms": [
+            "version_vector",
+            "last_writer_wins",
+            "change_token",
+            "conflict_metadata"
+          ],
+          "linked_architecture_blocks": [
+            "b_pet_arch_013",
+            "b_pet_arch_015",
+            "b_pet_arch_018"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:41bc913268c94b90878efe63876a94710b3c78238a4f32bb4d061fcfe04fd9c6"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_client_persistence",
+      "title": "Client Persistence Semantics",
+      "commitments": [
+        {
+          "block_id": "b_pet_iface_008",
+          "type": "interface",
+          "text": "On success the client stores a history summary with date, symptoms, riskLevel, and condition, and may also append one temperature vital locally.",
+          "rationale": "This mirrors the Room insert behavior after diagnosis success.",
+          "terms": [
+            "history_summary",
+            "riskLevel",
+            "condition",
+            "temperature_vital"
+          ],
+          "linked_architecture_blocks": [
+            "b_pet_arch_003",
+            "b_pet_arch_007",
+            "b_pet_arch_011"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:6ad0e7fe7ff5167fa1e54e8b7887f2c43a4e4f10f47b4a8c36908108f272a35f"
+        },
+        {
+          "block_id": "b_pet_iface_009",
+          "type": "interface",
+          "text": "On failure the client may display an error toast, but it must not create a pending report, partial triage record, or synthetic diagnosis.",
+          "rationale": "v1 errors are terminal and no offline artifact is created.",
+          "terms": [
+            "error_toast",
+            "partial_triage",
+            "synthetic_diagnosis"
+          ],
+          "linked_architecture_blocks": [
+            "b_pet_arch_004",
+            "b_pet_arch_005",
+            "b_pet_arch_017"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:bd5d2c925dc60c99492bcdff8ad0b8f75b4b3e27854408f83e70bb463d162e35"
+        },
+        {
+          "block_id": "b_pet_iface_010",
+          "type": "interface",
+          "text": "The interface contract assumes one backend authority for each triage decision and does not define reconciliation between clinic replicas.",
+          "rationale": "This keeps the seed faithful to the original single-backend design.",
+          "terms": [
+            "backend_authority",
+            "clinic_replica",
+            "reconciliation"
+          ],
+          "linked_architecture_blocks": [
+            "b_pet_arch_006",
+            "b_pet_arch_015",
+            "b_pet_arch_018"
+          ],
+          "status": "approved",
+          "content_hash": "sha256:132e86d498823cc46729075617efe90a24329e90a4a5851060ee8a8d732404c7"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created_by": "human",
+    "created_at": "2026-04-26T00:00:00Z",
+    "tags": [
+      "pet-system",
+      "v1",
+      "seed",
+      "seed_rev_001"
+    ],
+    "notes": "Synchronous REST contract translated from the original VetNet call path. This seed intentionally captures the strong-sync baseline before offline-first redesign."
+  }
+}

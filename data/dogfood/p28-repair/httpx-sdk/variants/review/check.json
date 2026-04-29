@@ -1,0 +1,48 @@
+{
+  "schema_version": "repair_check.v1",
+  "repair_id": "repair_39b4f5a74dc1",
+  "verdict": "requires_review",
+  "generated_at": "2026-04-29T04:05:27.535Z",
+  "summary": {
+    "changed_files": 1,
+    "allowed": 0,
+    "review_required": 1,
+    "forbidden": 0,
+    "outside_scope": 0,
+    "warnings": 1
+  },
+  "findings": [
+    {
+      "kind": "review_required_file",
+      "severity": "review_required",
+      "file": "httpx/_auth.py",
+      "message": "Repair touches review-required file: httpx/_auth.py",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "evidence": [
+        "1 paths match pattern **/_auth*",
+        "Sensitive zone \"authentication\" (high) corroborates"
+      ]
+    },
+    {
+      "kind": "missing_related_test_signal",
+      "severity": "warning",
+      "message": "No related test file was included in the repair diff.",
+      "allowed_actions": [
+        "add_or_run_related_test",
+        "keep_for_human_review"
+      ],
+      "requires_human": false,
+      "evidence": [
+        "related_test:tests/test_auth.py"
+      ]
+    }
+  ],
+  "changed_files": [
+    "httpx/_auth.py"
+  ],
+  "audit_status": "pending_plan_audit"
+}

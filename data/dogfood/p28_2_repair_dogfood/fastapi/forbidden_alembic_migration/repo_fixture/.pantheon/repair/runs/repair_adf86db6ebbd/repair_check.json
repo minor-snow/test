@@ -1,0 +1,82 @@
+{
+  "schema_version": "repair_check.v1",
+  "repair_id": "repair_adf86db6ebbd",
+  "verdict": "fail",
+  "generated_at": "2026-04-29T07:19:14.339Z",
+  "summary": {
+    "changed_files": 2,
+    "allowed": 1,
+    "review_required": 0,
+    "forbidden": 1,
+    "outside_scope": 0,
+    "warnings": 1
+  },
+  "findings": [
+    {
+      "kind": "forbidden_file",
+      "severity": "blocking",
+      "file": "alembic/versions/1234_fix.py",
+      "message": "Forbidden repair change: alembic/versions/1234_fix.py",
+      "allowed_actions": [
+        "revert_file",
+        "request_scope_expansion"
+      ],
+      "requires_human": true,
+      "bucket": "forbidden",
+      "evidence": [
+        "1 paths match pattern alembic/**",
+        "Alembic migration framework detected"
+      ]
+    },
+    {
+      "kind": "missing_related_test_signal",
+      "severity": "warning",
+      "message": "No related test file was included in the repair diff.",
+      "allowed_actions": [
+        "add_or_run_related_test",
+        "keep_for_human_review"
+      ],
+      "requires_human": false,
+      "evidence": [
+        "related_test:tests/test_fastapi.py"
+      ]
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "blocking",
+      "message": "Changed files overlap a forbidden scope in active repair repair_5beec15a6ab0.",
+      "allowed_actions": [
+        "request_replan"
+      ],
+      "requires_human": true,
+      "bucket": "forbidden",
+      "other_repair_id": "repair_5beec15a6ab0",
+      "evidence": [
+        "repair:repair_adf86db6ebbd",
+        "other_repair:repair_5beec15a6ab0"
+      ]
+    }
+  ],
+  "concurrent_findings": [
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "blocking",
+      "repair_id": "repair_adf86db6ebbd",
+      "other_repair_id": "repair_5beec15a6ab0",
+      "overlap": {
+        "bucket": "forbidden",
+        "files": [
+          "app/api/routes/articles.py",
+          "alembic/versions/1234_fix.py"
+        ]
+      },
+      "reason": "Changed files overlap a forbidden scope in active repair repair_5beec15a6ab0.",
+      "recommended_action": "request_replan"
+    }
+  ],
+  "changed_files": [
+    "app/api/routes/articles.py",
+    "alembic/versions/1234_fix.py"
+  ],
+  "audit_status": "pending_plan_audit"
+}

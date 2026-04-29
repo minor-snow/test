@@ -1,0 +1,432 @@
+{
+  "artifact_id": "pet_triage_offline_module",
+  "artifact_type": "ModuleSpec",
+  "schema_version": "module_spec@0.1.0",
+  "revision_id": "rev_17695c778e19",
+  "sections": [
+    {
+      "section_id": "offline_execution_modules",
+      "title": "Offline Execution Modules",
+      "commitments": [
+        {
+          "block_id": "b_mod_offline_001",
+          "type": "module",
+          "text": "OfflineDecisionTreeRunner: Responsible for executing the local decision tree engine to produce a deterministic triage result. It caches the multi-step triage rules and ensures the tree is versioned and periodically refreshed from the backend when connectivity is available.",
+          "rationale": "Encapsulates the core offline triage logic, ensuring deterministic outputs and version control.",
+          "terms": [
+            "offline decision tree"
+          ],
+          "linked_architecture_blocks": [
+            "b_offline_001",
+            "b_offline_002",
+            "b_offline_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_offline_001",
+            "b_iface_offline_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:bab46e09e51b6e1991e5c67b443f7f103854aef58601a87bef3d98949dee89e8"
+        },
+        {
+          "block_id": "b_mod_offline_002",
+          "type": "invariant",
+          "text": "The offline decision tree must never silently overwrite cloud-side veterinary modifications; all local triage results are stored as pending reports and subject to conflict resolution.",
+          "rationale": "Prevents data loss and ensures clinical integrity.",
+          "terms": [
+            "offline decision tree"
+          ],
+          "linked_architecture_blocks": [
+            "b_offline_003"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_version_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:78f06d1471a7319e1645851ea2865f47b5d0304db9a3ba768cf64c8ea3ad75fa"
+        },
+        {
+          "block_id": "b_mod_offline_003",
+          "type": "mechanism",
+          "text": "The OfflineDecisionTreeRunner uses a deterministic rule interpreter (no machine learning) to evaluate triage rules based on species, symptoms, and urgency.",
+          "rationale": "Ensures reproducibility and simplicity.",
+          "terms": [
+            "offline decision tree"
+          ],
+          "linked_architecture_blocks": [
+            "b_offline_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_offline_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:2c5df52034973392442220060b111c2330ee03f2f71253b217c7e0d49c53f123"
+        }
+      ]
+    },
+    {
+      "section_id": "persistence_modules",
+      "title": "Persistence Modules",
+      "commitments": [
+        {
+          "block_id": "b_mod_persist_001",
+          "type": "module",
+          "text": "PendingReportRepository: Manages local persistence of pending reports using Room database with SQLite. Each report includes a unique report ID, creation timestamp, and status field (pending, queued, syncing, merged, conflict). Reports survive app restart and process kill.",
+          "rationale": "Provides reliable local storage for offline reports.",
+          "terms": [
+            "pending report repository"
+          ],
+          "linked_architecture_blocks": [
+            "b_pending_001",
+            "b_pending_002",
+            "b_pending_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_lifecycle_001",
+            "b_iface_lifecycle_002"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:1377672e668a4a68c7b79402436cea334ec2943e95c7ddf5b1f958f663b4f4ae"
+        },
+        {
+          "block_id": "b_mod_persist_002",
+          "type": "invariant",
+          "text": "The local pending report store must not be treated as an authoritative diagnosis source for clinical decisions; it is a transient cache.",
+          "rationale": "Prevents misuse of local data for critical decisions.",
+          "terms": [
+            "pending report repository"
+          ],
+          "linked_architecture_blocks": [
+            "b_pending_003"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_lifecycle_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:6b51f59ebf53af69c74509aa22d7d375ddb7e37c67f918d1332ba232395c2467"
+        },
+        {
+          "block_id": "b_mod_persist_003",
+          "type": "mechanism",
+          "text": "PendingReportRepository exposes methods to insert, update status, query by status, and retrieve all pending reports for sync.",
+          "rationale": "Standard CRUD operations for sync queue consumption.",
+          "terms": [
+            "pending report repository"
+          ],
+          "linked_architecture_blocks": [
+            "b_pending_001",
+            "b_pending_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_lifecycle_001"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:27c4073c2cf27998d2e3a700baef9f89a28af61c3896858f1d3d4dbeb82d9091"
+        }
+      ]
+    },
+    {
+      "section_id": "sync_modules",
+      "title": "Sync Modules",
+      "commitments": [
+        {
+          "block_id": "b_mod_sync_001",
+          "type": "module",
+          "text": "SyncQueueManager: Manages a background sync queue that processes pending reports in FIFO order. It sends each report to the appropriate clinic backend and updates the report status. All network operations run on a background coroutine to avoid blocking the UI.",
+          "rationale": "Centralizes sync orchestration and ensures non-blocking operation.",
+          "terms": [
+            "sync queue manager"
+          ],
+          "linked_architecture_blocks": [
+            "b_sync_001",
+            "b_sync_003"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_sync_001",
+            "b_iface_sync_004"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:2d1f420cd93d12cfdb0a10787ad623dffd872f2ffee39f879177e27e457754c2"
+        },
+        {
+          "block_id": "b_mod_sync_002",
+          "type": "module",
+          "text": "RetryLedger: Records each sync attempt with timestamp, HTTP status, error code, and retry count. It supports exponential backoff and ensures failed reports remain in the queue with status 'pending' for retry.",
+          "rationale": "Provides visibility and control over sync failures.",
+          "terms": [
+            "retry ledger"
+          ],
+          "linked_architecture_blocks": [
+            "b_sync_002",
+            "b_sync_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_sync_003",
+            "b_iface_sync_004"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:eccaf430aa25f5720223225cbc1354e7fc6c2b16838a58bca8766bc392eb4382"
+        },
+        {
+          "block_id": "b_mod_sync_003",
+          "type": "constraint",
+          "text": "The sync queue must not block the UI; all network operations run on a background coroutine.",
+          "rationale": "Ensures smooth user experience.",
+          "terms": [
+            "sync queue manager"
+          ],
+          "linked_architecture_blocks": [
+            "b_sync_003"
+          ],
+          "linked_interface_blocks": [],
+          "status": "draft",
+          "content_hash": "sha256:8b55bd9869f6282e5f466f9b10f04a8d77d832760cdb3e3e59acfd3567ebc0ec"
+        },
+        {
+          "block_id": "b_mod_sync_004",
+          "type": "invariant",
+          "text": "If a sync attempt fails due to network error, the report remains in the queue with status 'pending' for retry.",
+          "rationale": "Prevents data loss from transient failures.",
+          "terms": [
+            "sync queue manager",
+            "retry ledger"
+          ],
+          "linked_architecture_blocks": [
+            "b_sync_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_sync_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:fdd5bf10519fe53678e155a4901c152b6c6296c77daeefe04f2669f95733f49c"
+        }
+      ]
+    },
+    {
+      "section_id": "conflict_resolution_modules",
+      "title": "Conflict Resolution Modules",
+      "commitments": [
+        {
+          "block_id": "b_mod_conflict_001",
+          "type": "module",
+          "text": "ConflictResolver: Implements vector clock conflict detection for clinical fields (diagnosis, vet edits, case status) and last-writer-wins for low-risk metadata. When a conflict is detected, it transitions the pending report to 'conflict' status and triggers the user conflict review.",
+          "rationale": "Ensures clinical data integrity while allowing automatic resolution for non-critical fields.",
+          "terms": [
+            "conflict resolver"
+          ],
+          "linked_architecture_blocks": [
+            "b_conflict_001",
+            "b_conflict_002",
+            "b_conflict_003"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_conflict_001",
+            "b_iface_conflict_002",
+            "b_iface_conflict_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:28685541339045045b96a2e39dcbb8fb036edbee4fdaf4f90e2cd0ae979c70bf"
+        },
+        {
+          "block_id": "b_mod_conflict_002",
+          "type": "invariant",
+          "text": "The system must never auto-resolve conflicts on clinical fields; all such conflicts require clinician intervention.",
+          "rationale": "Prevents automated decisions on critical medical data.",
+          "terms": [
+            "conflict resolver"
+          ],
+          "linked_architecture_blocks": [
+            "b_conflict_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_conflict_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:18a7c65f7ea55cfab9049262e370d8a76455ee7b7157e083a33b9d165f33567a"
+        },
+        {
+          "block_id": "b_mod_conflict_003",
+          "type": "mechanism",
+          "text": "When a sync upload detects a vector clock conflict, the response includes conflict_payload with both versions. The ConflictResolver stores this payload locally and updates the report status to 'conflict'.",
+          "rationale": "Captures conflict data for user review.",
+          "terms": [
+            "conflict resolver"
+          ],
+          "linked_architecture_blocks": [
+            "b_conflict_003"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_conflict_001"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:b63757a8b3d0f2a6e85c14a5e6a31f204345cbcf7921c563479ed4e592a60283"
+        }
+      ]
+    },
+    {
+      "section_id": "infrastructure_modules",
+      "title": "Infrastructure Modules",
+      "commitments": [
+        {
+          "block_id": "b_mod_infra_001",
+          "type": "module",
+          "text": "ClinicReplicaClient: Maintains a clinic registry with base URLs and authentication tokens for each clinic. It handles sending pending reports to the correct clinic backend and supports GET /sync/pull for pulling remote changes.",
+          "rationale": "Abstracts multi-clinic communication and authentication.",
+          "terms": [
+            "clinic replica client"
+          ],
+          "linked_architecture_blocks": [
+            "b_multiclinic_001",
+            "b_multiclinic_002",
+            "b_multiclinic_003"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_sync_001",
+            "b_iface_sync_002"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:7d79cfe673f83ea678fd1fb906ca9b114dc3cb9a0e79580d7284093209ea9ed3"
+        },
+        {
+          "block_id": "b_mod_infra_002",
+          "type": "risk",
+          "text": "If the clinic registry is stale or misconfigured, reports may be sent to the wrong backend. The ClinicReplicaClient must validate registry entries before use.",
+          "rationale": "Mitigates misconfiguration risk.",
+          "terms": [
+            "clinic replica client"
+          ],
+          "linked_architecture_blocks": [
+            "b_multiclinic_004"
+          ],
+          "linked_interface_blocks": [],
+          "status": "draft",
+          "content_hash": "sha256:1068509cbb680c78ae3562dc47901d497a5e873ede83bef4af8fdbdea7cefdf7"
+        },
+        {
+          "block_id": "b_mod_infra_003",
+          "type": "module",
+          "text": "AuditEventWriter: Generates and persists audit events for every local triage creation, sync attempt, conflict detection, and conflict resolution. Each event includes timestamp, actor (clinician ID), action type, report ID, and a checksum of the payload.",
+          "rationale": "Provides traceability and accountability.",
+          "terms": [
+            "audit event writer"
+          ],
+          "linked_architecture_blocks": [
+            "b_audit_001",
+            "b_audit_002"
+          ],
+          "linked_interface_blocks": [],
+          "status": "draft",
+          "content_hash": "sha256:dc2e0a1fceb205fb673492b2b7fdb8ca048dda5d33f36bd665e96e1ed9ed23b3"
+        },
+        {
+          "block_id": "b_mod_infra_004",
+          "type": "invariant",
+          "text": "Audit events must include timestamp, actor (clinician ID), action type, report ID, and a checksum of the payload.",
+          "rationale": "Ensures audit completeness.",
+          "terms": [
+            "audit event writer"
+          ],
+          "linked_architecture_blocks": [
+            "b_audit_002"
+          ],
+          "linked_interface_blocks": [],
+          "status": "draft",
+          "content_hash": "sha256:330abe05fbf4038411ddbfcf807b5554a92441bf07a6fb0ce8db022b34d1db6a"
+        },
+        {
+          "block_id": "b_mod_infra_005",
+          "type": "risk",
+          "text": "If the local audit store grows unbounded, it may consume device storage; implement a retention policy (e.g., delete events older than 90 days).",
+          "rationale": "Prevents storage exhaustion.",
+          "terms": [
+            "audit event writer"
+          ],
+          "linked_architecture_blocks": [
+            "b_audit_004"
+          ],
+          "linked_interface_blocks": [],
+          "status": "draft",
+          "content_hash": "sha256:1ff569f7da41dbace038c5edef03d99f1aab002031a6ef9d567c741742f21ed0"
+        },
+        {
+          "block_id": "b_mod_infra_006",
+          "type": "module",
+          "text": "ConnectivityObserver: Monitors network connectivity and notifies the SyncQueueManager when connectivity is restored to trigger sync attempts.",
+          "rationale": "Enables automatic sync resumption.",
+          "terms": [
+            "connectivity observer"
+          ],
+          "linked_architecture_blocks": [
+            "b_sync_001",
+            "b_sync_003"
+          ],
+          "linked_interface_blocks": [],
+          "status": "draft",
+          "content_hash": "sha256:6f60956caac407f0399c8d85ce94bf6e5ec4aba95bf4d2bd49449ec0f95d7844"
+        },
+        {
+          "block_id": "b_mod_infra_007",
+          "type": "module",
+          "text": "UserConflictReviewPresenter: Displays a conflict resolution screen showing both versions of the report with diff view. It requires the clinician to explicitly select one version for each conflicting field and then submits the resolution via POST /sync/resolve.",
+          "rationale": "Provides user interface for manual conflict resolution.",
+          "terms": [
+            "user conflict review"
+          ],
+          "linked_architecture_blocks": [
+            "b_uvc_001",
+            "b_uvc_002",
+            "b_uvc_003"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_conflict_004"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:b0cab59826ac84fcf6d9244e021851520315de5d2f2512d1d5bbebb8588bb5b2"
+        },
+        {
+          "block_id": "b_mod_infra_008",
+          "type": "constraint",
+          "text": "The conflict resolution screen must require the clinician to explicitly select one version for each conflicting field before submission.",
+          "rationale": "Ensures deliberate clinician action.",
+          "terms": [
+            "user conflict review"
+          ],
+          "linked_architecture_blocks": [
+            "b_uvc_002"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_conflict_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:6d212f67a1f1a2fe6cd72d26cb4c50f7576e14b5255482bcd7c90c96edd4680e"
+        },
+        {
+          "block_id": "b_mod_infra_009",
+          "type": "mechanism",
+          "text": "After conflict resolution, the chosen version is synced back to the clinic backend with an updated vector clock.",
+          "rationale": "Completes the resolution cycle.",
+          "terms": [
+            "user conflict review",
+            "conflict resolver"
+          ],
+          "linked_architecture_blocks": [
+            "b_uvc_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_conflict_004"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:6ca8c0719fb67239b688ca67831380ff53da073aa59165615bc88275f1c2aefe"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created_by": "draft_agent",
+    "created_at": "2026-04-26T06:14:03.279Z",
+    "tags": [
+      "draft",
+      "llm_generated"
+    ]
+  }
+}

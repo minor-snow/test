@@ -1,0 +1,135 @@
+{
+  "schema_version": "benchmark_manifest@0.1.0",
+  "benchmarks": [
+    {
+      "benchmark_id": "saleor-django-commerce",
+      "category": "django_commerce",
+      "local_path": "H:/Boom/salary",
+      "pinned_commit": "cf9b59513d0a8c83d410eb5b176e5a55de018797",
+      "change_intent": "Add an eco-packaging fee during checkout for selected product types.",
+      "scope": {
+        "allowed": [
+          "saleor/checkout/**",
+          "saleor/graphql/checkout/**"
+        ],
+        "review": [
+          "saleor/tax/**",
+          "saleor/order/**"
+        ],
+        "forbid": [
+          "saleor/payment/**",
+          "saleor/account/**",
+          "saleor/discount/**",
+          "saleor/plugins/**",
+          "**/migrations/**"
+        ]
+      }
+    },
+    {
+      "benchmark_id": "fastapi-realworld",
+      "category": "fastapi_service",
+      "local_path": "H:/Boom/benchmarks/fastapi-realworld",
+      "pinned_commit": "2318463f51e2f0584508c6d7fc6ef2640c9101b0",
+      "change_intent": "Add an account visibility rule to the article feed API.",
+      "scope": {
+        "allowed": [
+          "app/api/**",
+          "app/schemas/**"
+        ],
+        "review": [
+          "app/crud/**",
+          "app/models/**"
+        ],
+        "forbid": [
+          "app/core/security.py",
+          "app/core/config.py",
+          "app/db/**",
+          "alembic/**"
+        ]
+      }
+    },
+    {
+      "benchmark_id": "httpx-sdk",
+      "category": "python_sdk_library",
+      "local_path": "H:/Boom/benchmarks/httpx",
+      "pinned_commit": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+      "change_intent": "Add a custom retry transport for idempotent HTTP methods.",
+      "scope": {
+        "allowed": [
+          "httpx/_transports/**",
+          "httpx/_utils.py"
+        ],
+        "review": [
+          "httpx/_client.py",
+          "httpx/_config.py",
+          "httpx/_models.py"
+        ],
+        "forbid": [
+          "httpx/_auth.py",
+          "httpx/__init__.py",
+          "httpx/_api.py"
+        ]
+      }
+    },
+    {
+      "benchmark_id": "flaskbb-flask-app",
+      "category": "flask_web_app",
+      "local_path": "H:/Boom/benchmarks/flaskbb",
+      "pinned_commit": "3df43f16854fba625d8d16498bda253b993677b1",
+      "change_intent": "Add rate limiting to the user registration endpoint.",
+      "scope": {
+        "allowed": ["flaskbb/auth/**"],
+        "review": ["flaskbb/user/**"],
+        "forbid": ["flaskbb/plugins/**", "**/migrations/**"]
+      }
+    },
+    {
+      "benchmark_id": "httpie-cli-tool",
+      "category": "python_cli_tool",
+      "local_path": "H:/Boom/benchmarks/httpie-cli",
+      "pinned_commit": "5b604c37c6c67e18e7c3e9aee6c88a8c22b98345",
+      "change_intent": "Add a --compress flag for gzip encoding outgoing request bodies.",
+      "scope": {
+        "allowed": ["httpie/cli/**", "httpie/output/**"],
+        "review": ["httpie/sessions.py", "httpie/config.py"],
+        "forbid": ["httpie/ssl_/**"]
+      }
+    },
+    {
+      "benchmark_id": "meltano-etl",
+      "category": "data_pipeline",
+      "local_path": "H:/Boom/benchmarks/meltano",
+      "pinned_commit": "e99eac14cb855adc3375ae7bb239bef2f8af7a71",
+      "change_intent": "Add a new custom extractor plugin type for real-time CDC streams.",
+      "scope": {
+        "allowed": ["src/meltano/core/plugin/**"],
+        "review": ["src/meltano/core/runner/**"],
+        "forbid": ["src/meltano/core/migration/**"]
+      }
+    },
+    {
+      "benchmark_id": "tiktoken-ml",
+      "category": "ml_tooling_tokenizer",
+      "local_path": "H:/Boom/benchmarks/tiktoken",
+      "pinned_commit": "dcb39287a1f90a94d4bf6146df25da03c017646f",
+      "change_intent": "Add a new encoding preset for a custom vocabulary model.",
+      "scope": {
+        "allowed": ["tiktoken/**"],
+        "review": ["tiktoken/_educational.py"],
+        "forbid": ["tiktoken_ext/**"]
+      }
+    },
+    {
+      "benchmark_id": "python-monorepo",
+      "category": "python_monorepo",
+      "local_path": "H:/Boom/benchmarks/python-monorepo",
+      "pinned_commit": "95d8695bad890f910faae33669ae83634447f2af",
+      "change_intent": "Add a shared health-check utility to the common library.",
+      "scope": {
+        "allowed": ["common/**"],
+        "review": ["service1/**", "service2/**"],
+        "forbid": []
+      }
+    }
+  ]
+}

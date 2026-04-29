@@ -1,0 +1,23 @@
+[
+  {
+    "from": "saleor/checkout/calculations.py",
+    "to": "saleor/checkout/calculations.py",
+    "relation": "suspect",
+    "confidence": "high",
+    "reason": "Primary suspect",
+    "evidence": [
+      "explicit_suspect_file"
+    ]
+  },
+  {
+    "from": "saleor/checkout/calculations.py",
+    "to": "saleor/order/models.py",
+    "relation": "risk_preset",
+    "confidence": "low",
+    "reason": "Order lifecycle logic requires human review",
+    "evidence": [
+      "1 paths match pattern **/order/**",
+      "Sensitive zone \"order_lifecycle\" (high) corroborates"
+    ]
+  }
+]

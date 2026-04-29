@@ -1,0 +1,51 @@
+{
+  "schema_version": "p26_hosted_validation_summary.v1",
+  "generated_at": "2026-04-28T00:00:00Z",
+  "status": "hosted_validated",
+  "release_blockers_fixed": [
+    {
+      "id": "p26-hosted-001",
+      "title": "Base diff mode included untracked working-tree files",
+      "fix": "Skip untracked file collection when baseRef is present."
+    },
+    {
+      "id": "p26-hosted-002",
+      "title": "Action entry did not receive GITHUB_TOKEN",
+      "fix": "Forward github.token into the compiled Action entry environment."
+    }
+  ],
+  "cases": [
+    {
+      "name": "blocking_release_pr",
+      "pr_number": 1,
+      "pr_url": "https://github.com/minor-snow/pantheon/pull/1",
+      "run_id": 25051242771,
+      "run_url": "https://github.com/minor-snow/pantheon/actions/runs/25051242771",
+      "comment_url": "https://github.com/minor-snow/pantheon/pull/1#issuecomment-4334960954",
+      "workflow_conclusion": "failure",
+      "pantheon_verdict": "requires_reverse_issue",
+      "comment_posted": true,
+      "artifact_uploaded": true,
+      "notes": [
+        "This PR intentionally exercised the hosted blocking path.",
+        "Generated dist/src/** files remained forbidden in Bootstrap Mode for this repo."
+      ]
+    },
+    {
+      "name": "review_required_success_pr",
+      "pr_number": 2,
+      "pr_url": "https://github.com/minor-snow/pantheon/pull/2",
+      "run_id": 25051308314,
+      "run_url": "https://github.com/minor-snow/pantheon/actions/runs/25051308314",
+      "comment_url": "https://github.com/minor-snow/pantheon/pull/2#issuecomment-4334970861",
+      "workflow_conclusion": "success",
+      "pantheon_verdict": "requires_review",
+      "comment_posted": true,
+      "artifact_uploaded": true,
+      "notes": [
+        "This PR intentionally exercised the hosted non-blocking warning path.",
+        "requires_review produced exit code 0 with a visible PR comment."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "case": "review_vs_forbidden",
+  "purpose": "Covers simultaneous modifications to allowed, review-required, and forbidden zones, verifying correct severity stratification and targeted recovery.",
+  "expected_boundary_behavior": "tax=review_required, discount=blocking, checkout=pass -> overall blocking. Recovery drops to requires_review.",
+  "status": "success",
+  "attempt_1_verdict": "requires_reverse_issue",
+  "attempt_2_verdict": "requires_review",
+  "file_reverted": "saleor/discount/models.py",
+  "files_preserved": [
+    "saleor/checkout/models.py",
+    "saleor/tax/models.py"
+  ]
+}

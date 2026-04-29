@@ -1,0 +1,786 @@
+{
+  "scope_id": "sync-conflict-policy-change_mofrw3eg",
+  "created_at": "2026-04-26T12:57:05.852Z",
+  "source": {
+    "handoff_package_hash": "30f869ca134f685a",
+    "boundary_graph_hash": "a00f396bb0d8b9ea",
+    "blast_radius_report_hash": "22c23fae",
+    "locale": "en",
+    "generator_version": "p17.0"
+  },
+  "request": {
+    "changed_nodes": [
+      "blk:arch:b_sync_001",
+      "blk:arch:b_sync_003",
+      "blk:arch:nonexistent"
+    ],
+    "change_description": "Sync layer refactor"
+  },
+  "summary": {
+    "risk_level": "high",
+    "must_require_human_review": true,
+    "downstream_nodes": 58,
+    "affected_files": 10,
+    "affected_symbols": 21,
+    "affected_tests": 2
+  },
+  "allowed_files": [
+    {
+      "path": "Enums.kt",
+      "origin": "blast_radius_generated",
+      "reason": "Affected by blast radius traversal from changed node(s).",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ],
+      "allowed_operations": [
+        "read",
+        "modify",
+        "regenerate",
+        "test"
+      ]
+    },
+    {
+      "path": "Entities.kt",
+      "origin": "blast_radius_generated",
+      "reason": "Affected by blast radius traversal from changed node(s).",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ],
+      "allowed_operations": [
+        "read",
+        "modify",
+        "regenerate",
+        "test"
+      ]
+    },
+    {
+      "path": "Dtos.kt",
+      "origin": "blast_radius_generated",
+      "reason": "Affected by blast radius traversal from changed node(s).",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ],
+      "allowed_operations": [
+        "read",
+        "modify",
+        "regenerate",
+        "test"
+      ]
+    },
+    {
+      "path": "StateMachines.kt",
+      "origin": "blast_radius_generated",
+      "reason": "Affected by blast radius traversal from changed node(s).",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ],
+      "allowed_operations": [
+        "read",
+        "modify",
+        "regenerate",
+        "test"
+      ]
+    },
+    {
+      "path": "ConflictPolicy.kt",
+      "origin": "blast_radius_generated",
+      "reason": "Affected by blast radius traversal from changed node(s).",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ],
+      "allowed_operations": [
+        "read",
+        "modify",
+        "regenerate",
+        "test"
+      ]
+    },
+    {
+      "path": "ConflictPolicyTests.kt",
+      "origin": "blast_radius_generated",
+      "reason": "Affected by blast radius traversal from changed node(s).",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ],
+      "allowed_operations": [
+        "read",
+        "modify",
+        "test"
+      ]
+    },
+    {
+      "path": "contracts/Interfaces.kt",
+      "origin": "blast_radius_generated",
+      "reason": "Affected by blast radius traversal from changed node(s).",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ],
+      "allowed_operations": [
+        "read",
+        "modify",
+        "regenerate",
+        "test"
+      ]
+    },
+    {
+      "path": "contracts/Guards.kt",
+      "origin": "blast_radius_generated",
+      "reason": "Affected by blast radius traversal from changed node(s).",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ],
+      "allowed_operations": [
+        "read",
+        "modify",
+        "regenerate",
+        "test"
+      ]
+    },
+    {
+      "path": "contracts/ContractTests.kt",
+      "origin": "blast_radius_generated",
+      "reason": "Affected by blast radius traversal from changed node(s).",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ],
+      "allowed_operations": [
+        "read",
+        "modify",
+        "test"
+      ]
+    },
+    {
+      "path": "contracts/TodoStubs.kt",
+      "origin": "blast_radius_generated",
+      "reason": "Affected by blast radius traversal from changed node(s).",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ],
+      "allowed_operations": [
+        "read",
+        "modify",
+        "regenerate",
+        "test"
+      ]
+    }
+  ],
+  "forbidden_files": [
+    {
+      "pattern": ".pantheon/**",
+      "reason": "Pantheon protocol files must not be modified by downstream agents."
+    },
+    {
+      "pattern": ".cursor/**",
+      "reason": "Cursor adapter files must not be modified by downstream agents."
+    },
+    {
+      "pattern": "ui/**",
+      "reason": "Not in current blast radius scope."
+    },
+    {
+      "pattern": "navigation/**",
+      "reason": "Not in current blast radius scope."
+    },
+    {
+      "pattern": "theme/**",
+      "reason": "Not in current blast radius scope."
+    },
+    {
+      "pattern": "build/**",
+      "reason": "Not in current blast radius scope."
+    },
+    {
+      "pattern": "gradle/**",
+      "reason": "Not in current blast radius scope."
+    }
+  ],
+  "required_tests": [
+    {
+      "test_id": "test:forbidden:FA-004",
+      "test_name": "test:FA-004",
+      "file_path": "contracts/Guards.kt",
+      "requirement": "must_run",
+      "reason": "Affected by risk amplification from: hc:forbidden:FA-004",
+      "source_nodes": [
+        "hc:forbidden:FA-004"
+      ]
+    },
+    {
+      "test_id": "test:forbidden:FA-005",
+      "test_name": "test:FA-005",
+      "file_path": "contracts/Guards.kt",
+      "requirement": "must_run",
+      "reason": "Affected by risk amplification from: hc:forbidden:FA-005",
+      "source_nodes": [
+        "hc:forbidden:FA-005"
+      ]
+    }
+  ],
+  "affected_symbols": [
+    {
+      "symbol_id": "sym:Entities.kt:PendingReportEntity",
+      "symbol_name": "PendingReportEntity",
+      "file_path": "Entities.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Entities.kt:SyncOperationEntity",
+      "symbol_name": "SyncOperationEntity",
+      "file_path": "Entities.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Entities.kt:RetryLedgerEntry",
+      "symbol_name": "RetryLedgerEntry",
+      "file_path": "Entities.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Entities.kt:ConflictRecordEntity",
+      "symbol_name": "ConflictRecordEntity",
+      "file_path": "Entities.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Entities.kt:VectorClockEntry",
+      "symbol_name": "VectorClockEntry",
+      "file_path": "Entities.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Entities.kt:AuditEventEntity",
+      "symbol_name": "AuditEventEntity",
+      "file_path": "Entities.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Dtos.kt:OfflineReportEnvelope",
+      "symbol_name": "OfflineReportEnvelope",
+      "file_path": "Dtos.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Dtos.kt:SyncChangePullRequest",
+      "symbol_name": "SyncChangePullRequest",
+      "file_path": "Dtos.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Dtos.kt:SyncChangePullResponse",
+      "symbol_name": "SyncChangePullResponse",
+      "file_path": "Dtos.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Dtos.kt:SyncUploadRequest",
+      "symbol_name": "SyncUploadRequest",
+      "file_path": "Dtos.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Dtos.kt:SyncUploadResult",
+      "symbol_name": "SyncUploadResult",
+      "file_path": "Dtos.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Dtos.kt:SyncAckRequest",
+      "symbol_name": "SyncAckRequest",
+      "file_path": "Dtos.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Dtos.kt:ConflictPayload",
+      "symbol_name": "ConflictPayload",
+      "file_path": "Dtos.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Dtos.kt:VersionMetadata",
+      "symbol_name": "VersionMetadata",
+      "file_path": "Dtos.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Enums.kt:PendingReportState",
+      "symbol_name": "PendingReportState",
+      "file_path": "Enums.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:StateMachines.kt:PendingReportStateMachine",
+      "symbol_name": "PendingReportStateMachine",
+      "file_path": "StateMachines.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Enums.kt:SyncOperationState",
+      "symbol_name": "SyncOperationState",
+      "file_path": "Enums.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:StateMachines.kt:SyncOperationStateMachine",
+      "symbol_name": "SyncOperationStateMachine",
+      "file_path": "StateMachines.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:Enums.kt:ConflictResolutionState",
+      "symbol_name": "ConflictResolutionState",
+      "file_path": "Enums.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:StateMachines.kt:ConflictResolutionStateMachine",
+      "symbol_name": "ConflictResolutionStateMachine",
+      "file_path": "StateMachines.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    },
+    {
+      "symbol_id": "sym:contracts/Guards.kt:PantheonGuards",
+      "symbol_name": "PantheonGuards",
+      "file_path": "contracts/Guards.kt",
+      "reason": "Affected by blast radius traversal.",
+      "source_nodes": [
+        "blk:arch:b_sync_001",
+        "blk:arch:b_sync_003"
+      ]
+    }
+  ],
+  "must_preserve": [
+    {
+      "constraint_id": "constraint_preserve_pending_report_state",
+      "statement": "Conflict policy pending_report_state resolution rules must not be silently changed.",
+      "severity": "high",
+      "source_nodes": [
+        "hc:conflict_policy:pending_report_state"
+      ],
+      "enforced_by": []
+    },
+    {
+      "constraint_id": "constraint_preserve_retry_attempt_count",
+      "statement": "Conflict policy retry_attempt_count resolution rules must not be silently changed.",
+      "severity": "high",
+      "source_nodes": [
+        "hc:conflict_policy:retry_attempt_count"
+      ],
+      "enforced_by": []
+    },
+    {
+      "constraint_id": "constraint_hc_forbidden_FA_004",
+      "statement": "Forbidden assumption: FA-004",
+      "severity": "high",
+      "source_nodes": [
+        "hc:forbidden:FA-004"
+      ],
+      "enforced_by": [
+        {
+          "kind": "guard",
+          "id": "file:contracts/ContractTests.kt",
+          "file_path": "contracts/ContractTests.kt",
+          "enforcement_source": "heuristic_downstream_match"
+        },
+        {
+          "kind": "guard",
+          "id": "file:contracts/Guards.kt",
+          "file_path": "contracts/Guards.kt",
+          "enforcement_source": "heuristic_downstream_match"
+        },
+        {
+          "kind": "test",
+          "id": "test:forbidden:FA-004",
+          "file_path": "contracts/Guards.kt",
+          "enforcement_source": "heuristic_downstream_match"
+        }
+      ]
+    },
+    {
+      "constraint_id": "constraint_hc_forbidden_FA_005",
+      "statement": "Forbidden assumption: FA-005",
+      "severity": "high",
+      "source_nodes": [
+        "hc:forbidden:FA-005"
+      ],
+      "enforced_by": [
+        {
+          "kind": "guard",
+          "id": "file:contracts/ContractTests.kt",
+          "file_path": "contracts/ContractTests.kt",
+          "enforcement_source": "heuristic_downstream_match"
+        },
+        {
+          "kind": "guard",
+          "id": "file:contracts/Guards.kt",
+          "file_path": "contracts/Guards.kt",
+          "enforcement_source": "heuristic_downstream_match"
+        },
+        {
+          "kind": "test",
+          "id": "test:forbidden:FA-005",
+          "file_path": "contracts/Guards.kt",
+          "enforcement_source": "heuristic_downstream_match"
+        }
+      ]
+    }
+  ],
+  "forbidden_assumptions": [
+    {
+      "assumption_id": "hc:forbidden:FA-004",
+      "statement": "FA-004",
+      "reason": "Forbidden assumption affected by blast radius",
+      "source_nodes": [
+        "hc:forbidden:FA-004"
+      ],
+      "enforced_by": [
+        {
+          "kind": "guard",
+          "id": "file:contracts/ContractTests.kt",
+          "file_path": "contracts/ContractTests.kt",
+          "enforcement_source": "heuristic_downstream_match"
+        },
+        {
+          "kind": "guard",
+          "id": "file:contracts/Guards.kt",
+          "file_path": "contracts/Guards.kt",
+          "enforcement_source": "heuristic_downstream_match"
+        },
+        {
+          "kind": "test",
+          "id": "test:forbidden:FA-004",
+          "file_path": "contracts/Guards.kt",
+          "enforcement_source": "heuristic_downstream_match"
+        }
+      ]
+    },
+    {
+      "assumption_id": "hc:forbidden:FA-005",
+      "statement": "FA-005",
+      "reason": "Forbidden assumption affected by blast radius",
+      "source_nodes": [
+        "hc:forbidden:FA-005"
+      ],
+      "enforced_by": [
+        {
+          "kind": "guard",
+          "id": "file:contracts/ContractTests.kt",
+          "file_path": "contracts/ContractTests.kt",
+          "enforcement_source": "heuristic_downstream_match"
+        },
+        {
+          "kind": "guard",
+          "id": "file:contracts/Guards.kt",
+          "file_path": "contracts/Guards.kt",
+          "enforcement_source": "heuristic_downstream_match"
+        },
+        {
+          "kind": "test",
+          "id": "test:forbidden:FA-005",
+          "file_path": "contracts/Guards.kt",
+          "enforcement_source": "heuristic_downstream_match"
+        }
+      ]
+    }
+  ],
+  "risk_amplification": [
+    {
+      "risk_id": "hc:conflict_policy:pending_report_state",
+      "label": "hc:conflict_policy:pending_report_state",
+      "risk_level": "high",
+      "reason": "High-risk conflict policy affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:conflict_policy:pending_report_state"
+      ],
+      "affected_tests": []
+    },
+    {
+      "risk_id": "hc:conflict_policy:retry_attempt_count",
+      "label": "hc:conflict_policy:retry_attempt_count",
+      "risk_level": "high",
+      "reason": "High-risk conflict policy affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:conflict_policy:retry_attempt_count"
+      ],
+      "affected_tests": []
+    },
+    {
+      "risk_id": "hc:forbidden:FA-004",
+      "label": "hc:forbidden:FA-004",
+      "risk_level": "high",
+      "reason": "Forbidden assumption affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:forbidden:FA-004"
+      ],
+      "affected_tests": [
+        "test:forbidden:FA-004"
+      ]
+    },
+    {
+      "risk_id": "hc:forbidden:FA-005",
+      "label": "hc:forbidden:FA-005",
+      "risk_level": "high",
+      "reason": "Forbidden assumption affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:forbidden:FA-005"
+      ],
+      "affected_tests": [
+        "test:forbidden:FA-005"
+      ]
+    },
+    {
+      "risk_id": "hc:data_model:PendingReportEntity",
+      "label": "hc:data_model:PendingReportEntity",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:PendingReportEntity"
+      ],
+      "affected_tests": []
+    },
+    {
+      "risk_id": "hc:data_model:SyncOperationEntity",
+      "label": "hc:data_model:SyncOperationEntity",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:SyncOperationEntity"
+      ],
+      "affected_tests": []
+    },
+    {
+      "risk_id": "hc:data_model:RetryLedgerEntry",
+      "label": "hc:data_model:RetryLedgerEntry",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:RetryLedgerEntry"
+      ],
+      "affected_tests": []
+    },
+    {
+      "risk_id": "hc:data_model:OfflineReportEnvelope",
+      "label": "hc:data_model:OfflineReportEnvelope",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:OfflineReportEnvelope"
+      ],
+      "affected_tests": []
+    },
+    {
+      "risk_id": "hc:data_model:SyncChangePullRequest",
+      "label": "hc:data_model:SyncChangePullRequest",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:SyncChangePullRequest"
+      ],
+      "affected_tests": []
+    },
+    {
+      "risk_id": "hc:data_model:SyncChangePullResponse",
+      "label": "hc:data_model:SyncChangePullResponse",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:SyncChangePullResponse"
+      ],
+      "affected_tests": []
+    },
+    {
+      "risk_id": "hc:data_model:SyncUploadRequest",
+      "label": "hc:data_model:SyncUploadRequest",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:SyncUploadRequest"
+      ],
+      "affected_tests": []
+    },
+    {
+      "risk_id": "hc:data_model:SyncUploadResult",
+      "label": "hc:data_model:SyncUploadResult",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:SyncUploadResult"
+      ],
+      "affected_tests": []
+    },
+    {
+      "risk_id": "hc:data_model:SyncAckRequest",
+      "label": "hc:data_model:SyncAckRequest",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:data_model:SyncAckRequest"
+      ],
+      "affected_tests": []
+    },
+    {
+      "risk_id": "hc:state_machine:PendingReportState",
+      "label": "hc:state_machine:PendingReportState",
+      "risk_level": "medium",
+      "reason": "State machine affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:state_machine:PendingReportState"
+      ],
+      "affected_tests": []
+    },
+    {
+      "risk_id": "hc:state_machine:SyncOperationState",
+      "label": "hc:state_machine:SyncOperationState",
+      "risk_level": "medium",
+      "reason": "State machine affected",
+      "source_path": [
+        "blk:arch:b_sync_001",
+        "hc:state_machine:SyncOperationState"
+      ],
+      "affected_tests": []
+    }
+  ],
+  "reverse_issue_required_if": [
+    {
+      "trigger_id": "missing_field",
+      "condition": "A required field is missing from generated models.",
+      "required_action": "Create a Pantheon reverse issue instead of editing generated code.",
+      "example_command": "npx tsx scripts/createImplementationIssue.ts --artifact \"<artifact_id>\" --block \"<block_id>\" --type \"missing_field\" --description \"...\" --context \"...\""
+    },
+    {
+      "trigger_id": "new_state_transition",
+      "condition": "A new state transition is required that is not in the generated state machine.",
+      "required_action": "Create a Pantheon reverse issue to add the transition at architecture level.",
+      "example_command": "npx tsx scripts/createImplementationIssue.ts --artifact \"<artifact_id>\" --block \"<block_id>\" --type \"missing_state\" --description \"...\" --context \"...\""
+    },
+    {
+      "trigger_id": "new_conflict_policy",
+      "condition": "A new conflict policy is required.",
+      "required_action": "Create a Pantheon reverse issue to define the policy at architecture level.",
+      "example_command": "npx tsx scripts/createImplementationIssue.ts --artifact \"<artifact_id>\" --block \"<block_id>\" --type \"contract_mismatch\" --description \"...\" --context \"...\""
+    },
+    {
+      "trigger_id": "modify_forbidden_file",
+      "condition": "Implementation needs to modify a file outside the allowed list.",
+      "required_action": "Create a Pantheon reverse issue requesting scope expansion.",
+      "example_command": "npx tsx scripts/createImplementationIssue.ts --artifact \"<artifact_id>\" --block \"<block_id>\" --type \"other\" --description \"Scope expansion needed: ...\" --context \"...\""
+    },
+    {
+      "trigger_id": "contract_test_failure",
+      "condition": "A generated contract test blocks implementation.",
+      "required_action": "Create a Pantheon reverse issue; do not modify the test.",
+      "example_command": "npx tsx scripts/createImplementationIssue.ts --artifact \"<artifact_id>\" --block \"<block_id>\" --type \"contract_mismatch\" --description \"...\" --context \"...\""
+    },
+    {
+      "trigger_id": "need_to_change_generated_code",
+      "condition": "Downstream agent needs to change generated boundary code directly.",
+      "required_action": "Create a Pantheon reverse issue; boundary code is regenerated from architecture.",
+      "example_command": "npx tsx scripts/createImplementationIssue.ts --artifact \"<artifact_id>\" --block \"<block_id>\" --type \"other\" --description \"Generated code gap: ...\" --context \"...\""
+    }
+  ],
+  "implementation_context": "# Scoped Implementation Context\n# Generated by Pantheon at 2026-04-26T12:57:05.850Z\n\n## Risk Level\n- HIGH\n\n## Allowed Files\n- Enums.kt\n- Entities.kt\n- Dtos.kt\n- StateMachines.kt\n- ConflictPolicy.kt\n- ConflictPolicyTests.kt\n- contracts/Interfaces.kt\n- contracts/Guards.kt\n- contracts/ContractTests.kt\n- contracts/TodoStubs.kt\n\n## Required Tests\n- test:forbidden:FA-004 (must_run)\n- test:forbidden:FA-005 (must_run)\n\n## Must Preserve Constraints\n- Conflict policy pending_report_state resolution rules must not be silently changed.\n- Conflict policy retry_attempt_count resolution rules must not be silently changed.\n- Forbidden assumption: FA-004\n- Forbidden assumption: FA-005",
+  "human_readable_summary": "Risk level: HIGH\nDownstream impact: 58 nodes\nAffected files: 10\nAffected symbols: 21\nAffected tests: 2"
+}

@@ -1,0 +1,102 @@
+You are a patch agent for an architecture document system.
+
+## Task
+
+Fix the following issue by rewriting the block text and/or updating its cross-artifact links.
+
+## Issue
+
+- issue_id: "cross_issue_004"
+- issue_type: "stale_link"
+- severity: "high"
+- message: "Block "b_iface_012" references architecture block "b_nonexistent_regression_api" which does not exist in any ArchitectureDraft artifact."
+- target_block_id: "b_iface_012"
+
+## Current Block
+
+- block_id: "b_iface_012"
+- type: "interface"
+- text: "POST /api/regression/check runs semantic regression analysis on a candidate revision against the current canonical."
+
+## Architecture Block Candidates
+
+The following ArchitectureDraft blocks are available for linking:
+
+- "b_trial_001": "Every state transition in the Pantheon pipeline is deterministic host code. LLM outputs are treated as untrusted proposa"
+- "b_trial_002": "The system maintains a single source of truth per artifact through the canonical pointer, which references exactly one i"
+- "b_trial_003": "Schema versioning follows the format type@major.minor.patch. Every persisted object must carry a schema_version field. U"
+- "b_trial_004": "Audit logs are append-only and must record every state transition that affects canonical state. Missing audit entries fo"
+- "b_trial_005": "In legacy mode, patch results were committed instantly to the canonical store without gating. This behavior is now prohi"
+- "b_trial_006": "The integrity check system performs read-only scans of the data directory. It never modifies data. Every finding type ha"
+- "b_trial_007": "The artifact store uses a directory-based layout with five top-level subdirectories: revisions/, canonical/, audit/, qua"
+- "b_trial_008": "All file writes use atomic write semantics: data is first written to a .tmp file, then renamed to the final path. This p"
+- "b_trial_009": "Revisions are immutable once written. The store enforces this by rejecting writes to existing revision files. Content mo"
+- "b_trial_010": "Projections are human-readable Markdown renders of artifact revisions. They are regenerated on demand and stored in the "
+- "b_trial_011": "The canonical pointer file stores the artifact_id and current_revision_id. Both fields are validated during integrity ch"
+- "b_trial_012": "Quarantine items must never be committed instantly to the evidence store. Promotion requires passing all four validation"
+- "b_trial_013": "The pipeline executes a fixed 14-step workflow from human idea to committed revision. The orchestrator is a general-purp"
+- "b_trial_014": "Step sequence: create artifact → lint → quarantine issues → validate → promote to evidence → generate patch proposal → c"
+- "b_trial_015": "The pipeline halts at the semantic regression gate if any regression is detected. Control passes to the human override c"
+- "b_trial_016": "If a patch is rejected by the mechanical gates, the pipeline records the rejection in the audit log and halts. The `roll"
+- "b_trial_017": "Each pipeline cycle processes exactly one issue. Multi-issue resolution requires multiple cycles. This constraint preven"
+- "b_trial_018": ""
+- "b_trial_019": "The orchestrator must not contain demo-specific logic. All demo flows are isolated in the src/demo/ directory and inject"
+- "b_trial_020": "Four sequential gates validate every skill output before it can affect system state: Schema Gate (G-01), Source Referenc"
+- "b_trial_021": "The Capability Gate enforces skill-level restrictions. L1 skills can only produce Issues. L2 skills can produce PatchPro"
+- "b_trial_022": "The `trust_boundary` between LLM output and host state is the validation pipeline. Raw LLM JSON enters as untrusted inpu"
+- "b_trial_023": "ArtifactPatch objects are never produced by LLM directly. The host compiles them from PatchProposals by resolving block "
+- "b_trial_024": "Before the gate system was introduced, validated outputs were committed instantly without capability checks. This create"
+- "b_trial_025": "The applyPatch function performs seven mechanical checks in order: artifact_id match, base_revision_id match, target_blo"
+- "b_trial_026": "The semantic regression gate compares old and new block pairs to detect two categories of regression: constraint deletio"
+- "b_trial_027": "Constraint deletion is detected by checking whether strong modal keywords (must, never, always, shall, prohibited, forbi"
+- "b_trial_028": "The regression gate produces a SemanticRegressionResult with status (passed/failed), a list of failed gates, affected bl"
+- "b_trial_029": "Each regression finding carries a `confidence_score` between 0 and 1. Findings below the configurable threshold are down"
+- "b_trial_030": "Human overrides can accept regressions with known risk. Override decisions are recorded in the audit log with the overri"
+- "b_trial_031": "The integrity check performs 8 categories of validation: canonical pointer target existence, revision parseability, sche"
+- "b_trial_032": "Every finding type has exactly one fixed action. Corrupt findings block pipeline execution. Warning findings are reporte"
+- "b_trial_033": "In early development, corrupted revisions were committed instantly to canonical without integrity verification. Phase 2 "
+- "b_trial_034": ""
+- "b_trial_035": "Automatic repair of corrupt data is prohibited. All corrupt findings require human intervention following the four-step "
+- "b_trial_036": "The `recovery_orchestrator` coordinates with the `repair_ledger` to determine which corrupt entries require prioritized "
+
+## Current Links
+
+This block currently links to: ["b_nonexistent_regression_api"]
+
+## Rules
+
+1. Fix the issue described above by rewriting the block text.
+2. Preserve the original meaning and intent of the block.
+3. Do not introduce new technical terms in backticks unless they are clearly defined.
+4. If the issue is "unsafe_canonical_commit", remove or rephrase the "committed instantly" pattern.
+5. If the issue is "undefined_term", either remove the undefined term or rephrase without it.
+6. If the issue is "empty_block_text", write a meaningful constraint that fits the section context.
+7. Keep the replacement text concise (1-3 sentences).
+
+8. If the issue is "orphan_interface_contract", you MUST add replacement_linked_architecture_blocks.
+   Pick 1-3 architecture block IDs from the candidates above that are semantically related to this interface block.
+9. If the issue is "stale_link", you MUST fix replacement_linked_architecture_blocks.
+   Replace the stale/nonexistent block IDs with valid ones from the candidates above.
+10. You may also improve the replacement_text if needed, but the primary fix is the links.
+
+## Output Format
+
+Return ONLY a JSON object matching this exact schema:
+
+{
+  "proposal_id": "proposal_for_cross_issue_004",
+  "artifact_id": "pantheon_interface",
+  "base_revision_id": "rev_ab38984813be",
+  "source_issue_ids": ["cross_issue_004"],
+  "operations": [
+    {
+      "op": "replace_block",
+      "target_block_id": "b_iface_012",
+      "replacement_text": "<your rewritten text here>",
+      "replacement_linked_architecture_blocks": ["<valid_block_id_1>", "<valid_block_id_2>"]
+    }
+  ],
+  "schema_version": "patch_proposal@0.1.0"
+}
+
+Return ONLY the JSON. No markdown, no explanation, no code fences.

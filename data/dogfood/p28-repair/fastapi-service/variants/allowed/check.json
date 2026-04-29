@@ -1,0 +1,37 @@
+{
+  "schema_version": "repair_check.v1",
+  "repair_id": "repair_37e2ad2a542a",
+  "verdict": "pass",
+  "generated_at": "2026-04-29T04:05:27.697Z",
+  "summary": {
+    "changed_files": 1,
+    "allowed": 1,
+    "review_required": 0,
+    "forbidden": 0,
+    "outside_scope": 0,
+    "warnings": 1
+  },
+  "findings": [
+    {
+      "kind": "missing_related_test_signal",
+      "severity": "warning",
+      "message": "No related test file was included in the repair diff.",
+      "allowed_actions": [
+        "add_or_run_related_test",
+        "keep_for_human_review"
+      ],
+      "requires_human": false,
+      "evidence": [
+        "related_test:tests/api/articles/test_article_create.py",
+        "related_test:tests/api/articles/test_article_delete.py",
+        "related_test:tests/api/articles/test_article_get.py",
+        "related_test:tests/api/articles/test_article_list.py",
+        "related_test:tests/api/articles/test_article_update.py"
+      ]
+    }
+  ],
+  "changed_files": [
+    "app/api/routes/articles.py"
+  ],
+  "audit_status": "pending_plan_audit"
+}

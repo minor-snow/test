@@ -1,0 +1,63 @@
+{
+  "profile_id": "pet_triage_offline_first_interface",
+  "artifact_type": "InterfaceSpec",
+  "domain_name": "Pet Triage Offline-First Interface Contract",
+
+  "allowed_concepts": [
+    "offline submission", "pending report", "sync upload", "sync pull",
+    "sync acknowledgement", "sync token", "change cursor", "sync queue",
+    "conflict payload", "conflict resolution", "conflict metadata",
+    "vector clock", "last-writer-wins", "version metadata",
+    "pending report lifecycle", "report status", "idempotency",
+    "retry", "deferred upload", "queue handshake",
+    "clinic endpoint", "multi-clinic", "replication boundary",
+    "offline-first", "background sync", "connectivity",
+    "triage request", "diagnosis", "risk level", "species", "temperature",
+    "audit event", "error contract", "terminal failure", "recoverable failure",
+    "clinician review", "user-visible conflict"
+  ],
+
+  "required_concepts": [
+    { "concept": "offline submission", "aliases": ["offline report", "offline-first submission", "local submission", "deferred submission"], "required": true },
+    { "concept": "pending report", "aliases": ["pending triage report", "local report", "offline report draft"], "required": true },
+    { "concept": "sync upload", "aliases": ["upload pending", "sync push", "report upload", "outbound sync"], "required": true },
+    { "concept": "sync pull", "aliases": ["sync changes", "change pull", "inbound sync", "server changes"], "required": true },
+    { "concept": "sync acknowledgement", "aliases": ["sync ack", "ack", "cursor advance", "sync confirm"], "required": true },
+    { "concept": "conflict payload", "aliases": ["conflict metadata", "conflict envelope", "merge conflict data"], "required": true },
+    { "concept": "vector clock", "aliases": ["version vector", "causal clock", "logical clock"], "required": true },
+    { "concept": "last-writer-wins", "aliases": ["LWW", "last writer wins", "timestamp resolution"], "required": true },
+    { "concept": "idempotency", "aliases": ["idempotent", "idempotent upload", "retry safety"], "required": true },
+    { "concept": "pending report lifecycle", "aliases": ["report status", "report state", "lifecycle state", "report lifecycle"], "required": true }
+  ],
+
+  "forbidden_generic_phrases": [
+    "enhance user experience",
+    "leverage cutting-edge technology",
+    "ensure seamless collaboration",
+    "provide robust solution",
+    "world-class platform",
+    "next-generation system",
+    "best-in-class",
+    "synergy",
+    "holistic approach"
+  ],
+
+  "required_sections": [
+    { "title": "Offline Report API", "aliases": ["Offline Submission API", "Offline Report Draft API", "Local Report API"] },
+    { "title": "Sync API", "aliases": ["Synchronization API", "Sync Upload API", "Background Sync Contract"] },
+    { "title": "Conflict Resolution Contract", "aliases": ["Conflict API", "Conflict Payload Contract", "Merge Contract"] },
+    { "title": "Pending Report Lifecycle", "aliases": ["Report Lifecycle", "Report Status Contract", "Pending Report States"] },
+    { "title": "Version Metadata Contract", "aliases": ["Version Metadata", "Clock Metadata", "Versioning Contract"] }
+  ],
+
+  "preferred_block_types": [
+    "interface", "constraint", "mechanism", "decision", "risk"
+  ],
+
+  "quality_rubric": {
+    "min_sections": 4,
+    "min_blocks": 15,
+    "max_blocks": 30,
+    "min_required_concept_coverage": 0.8
+  }
+}

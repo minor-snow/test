@@ -1,0 +1,312 @@
+{
+  "generated_at": "2026-04-26T06:29:06.175Z",
+  "artifacts": [
+    {
+      "artifact_id": "pet_triage_offline_architecture",
+      "revision_id": "rev_d252eb5b2bc6",
+      "score": 100,
+      "recommendation": "accept_as_seed",
+      "residual_issues": 9
+    },
+    {
+      "artifact_id": "pet_triage_offline_interface",
+      "revision_id": "rev_a1695505f72c",
+      "score": 91,
+      "recommendation": "accept_as_seed",
+      "residual_issues": 42
+    },
+    {
+      "artifact_id": "pet_triage_offline_module",
+      "revision_id": "rev_17695c778e19",
+      "score": 99,
+      "recommendation": "accept_as_seed",
+      "residual_issues": 22
+    }
+  ],
+  "local_issues_by_artifact": {
+    "architecture": 9,
+    "interface": 42,
+    "module": 22
+  },
+  "cross_issues": {
+    "orphan_interface_contract": 0,
+    "stale_link": 0,
+    "orphan_module_contract": 0,
+    "stale_interface_link": 0
+  },
+  "link_coverage": {
+    "interface_to_architecture_links": 30,
+    "module_to_architecture_links": 37,
+    "module_to_interface_links": 23,
+    "unique_architecture_blocks_linked": 27,
+    "unique_interface_blocks_linked": 14
+  },
+  "requirement_traceability": [
+    {
+      "requirement": "offline-first",
+      "architecture_blocks": [
+        "b_offline_001",
+        "b_offline_002",
+        "b_offline_003",
+        "b_offline_004",
+        "b_offline_005",
+        "b_pending_001",
+        "b_pending_002",
+        "b_pending_003",
+        "b_uvc_001",
+        "b_audit_001",
+        "b_audit_004"
+      ],
+      "interface_blocks": [
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_offline_003",
+        "b_iface_sync_003",
+        "b_iface_conflict_001",
+        "b_iface_lifecycle_002",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_003"
+      ],
+      "module_blocks": [
+        "b_mod_offline_001",
+        "b_mod_offline_002",
+        "b_mod_offline_003",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_conflict_003",
+        "b_mod_infra_003",
+        "b_mod_infra_005"
+      ],
+      "status": "covered"
+    },
+    {
+      "requirement": "local multi-step decision tree",
+      "architecture_blocks": [
+        "b_offline_001",
+        "b_offline_002",
+        "b_offline_004",
+        "b_offline_005"
+      ],
+      "interface_blocks": [
+        "b_iface_offline_003"
+      ],
+      "module_blocks": [
+        "b_mod_offline_001",
+        "b_mod_offline_002",
+        "b_mod_offline_003"
+      ],
+      "status": "covered"
+    },
+    {
+      "requirement": "pending report",
+      "architecture_blocks": [
+        "b_offline_003",
+        "b_pending_001",
+        "b_pending_002",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_conflict_003",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_audit_003"
+      ],
+      "interface_blocks": [
+        "b_iface_offline_002",
+        "b_iface_offline_003",
+        "b_iface_sync_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_002",
+        "b_iface_lifecycle_003"
+      ],
+      "module_blocks": [
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_conflict_001",
+        "b_mod_infra_001"
+      ],
+      "status": "covered"
+    },
+    {
+      "requirement": "background async sync",
+      "architecture_blocks": [
+        "b_sync_001",
+        "b_sync_003",
+        "b_sync_005"
+      ],
+      "interface_blocks": [
+        "b_iface_sync_003",
+        "b_iface_sync_004"
+      ],
+      "module_blocks": [
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_sync_003"
+      ],
+      "status": "covered"
+    },
+    {
+      "requirement": "multi-clinic cloud sync",
+      "architecture_blocks": [
+        "b_sync_001",
+        "b_multiclinic_001",
+        "b_multiclinic_002",
+        "b_multiclinic_003",
+        "b_uvc_004",
+        "b_audit_001"
+      ],
+      "interface_blocks": [
+        "b_iface_sync_002"
+      ],
+      "module_blocks": [
+        "b_mod_sync_001",
+        "b_mod_infra_001",
+        "b_mod_infra_009"
+      ],
+      "status": "covered"
+    },
+    {
+      "requirement": "vector clock",
+      "architecture_blocks": [
+        "b_pending_001",
+        "b_conflict_001",
+        "b_conflict_003",
+        "b_uvc_004"
+      ],
+      "interface_blocks": [
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003"
+      ],
+      "module_blocks": [
+        "b_mod_conflict_001",
+        "b_mod_conflict_003",
+        "b_mod_infra_009"
+      ],
+      "status": "covered"
+    },
+    {
+      "requirement": "LWW",
+      "architecture_blocks": [
+        "b_conflict_002"
+      ],
+      "interface_blocks": [
+        "b_iface_conflict_002",
+        "b_iface_version_002"
+      ],
+      "module_blocks": [
+        "b_mod_conflict_001"
+      ],
+      "status": "covered"
+    },
+    {
+      "requirement": "deterministic conflict resolution",
+      "architecture_blocks": [
+        "b_offline_004",
+        "b_conflict_001",
+        "b_conflict_002",
+        "b_conflict_003",
+        "b_conflict_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_uvc_004",
+        "b_audit_001"
+      ],
+      "interface_blocks": [
+        "b_iface_offline_003",
+        "b_iface_sync_001",
+        "b_iface_conflict_001",
+        "b_iface_conflict_003",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_version_002"
+      ],
+      "module_blocks": [
+        "b_mod_offline_001",
+        "b_mod_offline_002",
+        "b_mod_offline_003",
+        "b_mod_persist_001",
+        "b_mod_infra_003",
+        "b_mod_infra_007",
+        "b_mod_infra_008",
+        "b_mod_infra_009"
+      ],
+      "status": "covered"
+    },
+    {
+      "requirement": "no silent overwrite",
+      "architecture_blocks": [
+        "b_offline_002",
+        "b_offline_003",
+        "b_conflict_001",
+        "b_conflict_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_audit_002",
+        "b_audit_003"
+      ],
+      "interface_blocks": [
+        "b_iface_conflict_003",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_version_003"
+      ],
+      "module_blocks": [
+        "b_mod_offline_002",
+        "b_mod_conflict_002",
+        "b_mod_infra_003",
+        "b_mod_infra_004",
+        "b_mod_infra_007",
+        "b_mod_infra_008"
+      ],
+      "status": "covered"
+    },
+    {
+      "requirement": "no forced re-entry",
+      "architecture_blocks": [
+        "b_pending_001",
+        "b_pending_002",
+        "b_sync_004",
+        "b_uvc_002"
+      ],
+      "interface_blocks": [
+        "b_iface_offline_002",
+        "b_iface_lifecycle_002"
+      ],
+      "module_blocks": [
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_sync_004",
+        "b_mod_infra_003"
+      ],
+      "status": "covered"
+    }
+  ],
+  "local_issue_breakdown": {
+    "architecture": {
+      "domain_irrelevant_content": 9
+    },
+    "interface": {
+      "undefined_term": 27,
+      "domain_irrelevant_content": 15
+    },
+    "module": {
+      "domain_irrelevant_content": 21,
+      "undefined_term": 1
+    }
+  },
+  "integrity": {
+    "findings_count": 0,
+    "clean": true
+  },
+  "decision": "pass_with_local_residuals",
+  "total_local_residuals": 73
+}

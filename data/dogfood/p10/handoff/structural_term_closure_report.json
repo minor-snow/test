@@ -1,0 +1,266 @@
+{
+  "total_unknown_structural_terms": 9,
+  "resolved_count": 9,
+  "unresolved_count": 0,
+  "resolved_terms": [
+    {
+      "term": "audit_event_writer",
+      "status": "resolved",
+      "resolved_by": "implementation_task",
+      "source_refs": {
+        "source_architecture_blocks": [
+          "b_audit_001",
+          "b_audit_002",
+          "b_mod_infra_003",
+          "b_mod_infra_004"
+        ],
+        "source_interface_blocks": [],
+        "source_module_blocks": []
+      },
+      "reason": "Referenced in task 'TASK-007: Implement AuditEventWriter' (weak resolution — module/component term)"
+    },
+    {
+      "term": "clinic_id",
+      "status": "resolved",
+      "resolved_by": "data_model_field",
+      "source_refs": {
+        "source_architecture_blocks": [
+          "b_offline_003",
+          "b_pending_001",
+          "b_pending_002",
+          "b_pending_003",
+          "b_pending_004",
+          "b_sync_001",
+          "b_conflict_003",
+          "b_multiclinic_001",
+          "b_multiclinic_003",
+          "b_audit_003"
+        ],
+        "source_interface_blocks": [
+          "b_iface_offline_002",
+          "b_iface_offline_003",
+          "b_iface_sync_004",
+          "b_iface_lifecycle_001",
+          "b_iface_lifecycle_002",
+          "b_iface_lifecycle_003"
+        ],
+        "source_module_blocks": [
+          "b_mod_offline_002",
+          "b_mod_persist_001",
+          "b_mod_persist_002",
+          "b_mod_persist_003",
+          "b_mod_sync_001",
+          "b_mod_conflict_001",
+          "b_mod_infra_001"
+        ]
+      },
+      "reason": "Field 'clinic_id' in PendingReportEntity (type: String)"
+    },
+    {
+      "term": "clinic_replica_client",
+      "status": "resolved",
+      "resolved_by": "implementation_task",
+      "source_refs": {
+        "source_architecture_blocks": [
+          "b_sync_001",
+          "b_multiclinic_001",
+          "b_multiclinic_002",
+          "b_multiclinic_003",
+          "b_multiclinic_004",
+          "b_uvc_004",
+          "b_audit_001",
+          "b_iface_sync_002",
+          "b_mod_sync_001",
+          "b_mod_infra_001",
+          "b_mod_infra_002",
+          "b_mod_infra_009"
+        ],
+        "source_interface_blocks": [],
+        "source_module_blocks": []
+      },
+      "reason": "Referenced in task 'TASK-006: Implement ClinicReplicaClient DTOs and network layer' (weak resolution — module/component term)"
+    },
+    {
+      "term": "conflict_resolver",
+      "status": "resolved",
+      "resolved_by": "implementation_task",
+      "source_refs": {
+        "source_architecture_blocks": [
+          "b_offline_002",
+          "b_offline_004",
+          "b_pending_001",
+          "b_pending_003",
+          "b_conflict_001",
+          "b_conflict_002",
+          "b_conflict_003",
+          "b_conflict_004",
+          "b_uvc_001",
+          "b_uvc_002",
+          "b_uvc_003",
+          "b_uvc_004",
+          "b_audit_001",
+          "b_audit_002",
+          "b_audit_003",
+          "b_iface_conflict_001",
+          "b_iface_conflict_002",
+          "b_iface_conflict_003",
+          "b_iface_conflict_004",
+          "b_iface_lifecycle_001",
+          "b_iface_lifecycle_003",
+          "b_iface_version_001",
+          "b_iface_version_002",
+          "b_iface_version_003",
+          "b_mod_offline_002",
+          "b_mod_persist_002",
+          "b_mod_conflict_001",
+          "b_mod_conflict_002",
+          "b_mod_conflict_003",
+          "b_mod_infra_003",
+          "b_mod_infra_004",
+          "b_mod_infra_007",
+          "b_mod_infra_008",
+          "b_mod_infra_009"
+        ],
+        "source_interface_blocks": [],
+        "source_module_blocks": []
+      },
+      "reason": "Referenced in task 'TASK-005: Implement ConflictResolver with hybrid policy' (weak resolution — module/component term)"
+    },
+    {
+      "term": "connectivity_observer",
+      "status": "resolved",
+      "resolved_by": "implementation_task",
+      "source_refs": {
+        "source_architecture_blocks": [
+          "b_sync_001",
+          "b_sync_002",
+          "b_sync_003",
+          "b_sync_004",
+          "b_sync_005",
+          "b_iface_sync_003",
+          "b_iface_sync_004",
+          "b_mod_persist_003",
+          "b_mod_sync_001",
+          "b_mod_sync_002",
+          "b_mod_sync_003"
+        ],
+        "source_interface_blocks": [],
+        "source_module_blocks": []
+      },
+      "reason": "Referenced in task 'TASK-004: Implement SyncQueueManager and RetryLedger' (weak resolution — module/component term)"
+    },
+    {
+      "term": "next_token",
+      "status": "resolved",
+      "resolved_by": "conflict_policy_matrix",
+      "source_refs": {
+        "source_architecture_blocks": [
+          "b_conflict_002"
+        ],
+        "source_interface_blocks": [
+          "b_iface_conflict_002",
+          "b_iface_version_002"
+        ],
+        "source_module_blocks": []
+      },
+      "reason": "Found in conflict_policy_matrix 'sync_cursor' (policy: server_token)"
+    },
+    {
+      "term": "pending_report_repository",
+      "status": "resolved",
+      "resolved_by": "implementation_task",
+      "source_refs": {
+        "source_architecture_blocks": [
+          "b_offline_003",
+          "b_pending_001",
+          "b_pending_002",
+          "b_pending_003",
+          "b_pending_004",
+          "b_sync_001",
+          "b_conflict_003",
+          "b_multiclinic_001",
+          "b_multiclinic_003",
+          "b_audit_003",
+          "b_iface_offline_002",
+          "b_iface_offline_003",
+          "b_iface_sync_004",
+          "b_iface_lifecycle_001",
+          "b_iface_lifecycle_002",
+          "b_iface_lifecycle_003",
+          "b_mod_offline_002",
+          "b_mod_persist_001",
+          "b_mod_persist_002",
+          "b_mod_persist_003",
+          "b_mod_sync_001",
+          "b_mod_conflict_001",
+          "b_mod_infra_001"
+        ],
+        "source_interface_blocks": [],
+        "source_module_blocks": []
+      },
+      "reason": "Referenced in task 'TASK-002: Implement PendingReportRepository' (weak resolution — module/component term)"
+    },
+    {
+      "term": "report_id",
+      "status": "resolved",
+      "resolved_by": "data_model_field",
+      "source_refs": {
+        "source_architecture_blocks": [
+          "b_offline_003",
+          "b_pending_001",
+          "b_pending_002",
+          "b_pending_003",
+          "b_pending_004",
+          "b_sync_001",
+          "b_conflict_003",
+          "b_multiclinic_001",
+          "b_multiclinic_003",
+          "b_audit_003"
+        ],
+        "source_interface_blocks": [
+          "b_iface_offline_002",
+          "b_iface_offline_003",
+          "b_iface_sync_004",
+          "b_iface_lifecycle_001",
+          "b_iface_lifecycle_002",
+          "b_iface_lifecycle_003"
+        ],
+        "source_module_blocks": [
+          "b_mod_offline_002",
+          "b_mod_persist_001",
+          "b_mod_persist_002",
+          "b_mod_persist_003",
+          "b_mod_sync_001",
+          "b_mod_conflict_001",
+          "b_mod_infra_001"
+        ]
+      },
+      "reason": "Field 'report_id' in PendingReportEntity (type: String)"
+    },
+    {
+      "term": "sync_queue_manager",
+      "status": "resolved",
+      "resolved_by": "implementation_task",
+      "source_refs": {
+        "source_architecture_blocks": [
+          "b_sync_001",
+          "b_sync_002",
+          "b_sync_003",
+          "b_sync_004",
+          "b_sync_005",
+          "b_iface_sync_003",
+          "b_iface_sync_004",
+          "b_mod_persist_003",
+          "b_mod_sync_001",
+          "b_mod_sync_002",
+          "b_mod_sync_003"
+        ],
+        "source_interface_blocks": [],
+        "source_module_blocks": []
+      },
+      "reason": "Referenced in task 'TASK-004: Implement SyncQueueManager and RetryLedger' (weak resolution — module/component term)"
+    }
+  ],
+  "unresolved_terms": [],
+  "generated_at": "2026-04-26T07:45:36.306Z"
+}

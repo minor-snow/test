@@ -1,0 +1,274 @@
+{
+  "artifact_id": "pantheon_interface",
+  "artifact_type": "InterfaceSpec",
+  "schema_version": "interface_spec@0.1.0",
+  "revision_id": "rev_65b77ee11259",
+  "sections": [
+    {
+      "section_id": "sec_store_api",
+      "title": "Store API",
+      "commitments": [
+        {
+          "block_id": "b_iface_001",
+          "type": "interface",
+          "text": "GET /api/revisions/:artifactId returns the list of all revision IDs for the given artifact, ordered by creation time descending.",
+          "terms": [
+            "revision"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_007"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:2b32baa7985d082aaac6931e615aff5f520a7502352adbb3fed27bbcb0227014"
+        },
+        {
+          "block_id": "b_iface_002",
+          "type": "interface",
+          "text": "GET /api/canonical/:artifactId returns the current canonical pointer including the current_revision_id and artifact_id.",
+          "terms": [
+            "canonical"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_008"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:650ad7b3950cc9da734e3e9edf1748c9862253e4292a88ab030bfb843ac11f74"
+        },
+        {
+          "block_id": "b_iface_003",
+          "type": "interface",
+          "text": "POST /api/artifact creates a new artifact in the store. The request body must be a valid Artifact JSON conforming to the registered schema_version.",
+          "terms": [
+            "artifact"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_007",
+            "b_trial_009"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:4bb3eba9bcb7c443419892e5e996efcbaa781e064137afb79e5b33ff2c371afd"
+        },
+        {
+          "block_id": "b_iface_004",
+          "type": "interface",
+          "text": "PUT /api/canonical/:artifactId updates the canonical pointer to a new revision_id. The target revision must already exist in the store.",
+          "terms": [
+            "canonical"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_008"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:eac7833a8baf7bad6758f11ce747b70319546188ec75d61890d4b7057f2772e1"
+        },
+        {
+          "block_id": "b_iface_005",
+          "type": "interface",
+          "text": "GET /api/audit/:artifactId returns the append-only audit log as newline-delimited JSON entries.",
+          "terms": [
+            "audit_log"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_010"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:8575484d1957bdb85a11317832a1b28c4bad79e0cf553166196de4319077c268"
+        },
+        {
+          "block_id": "b_iface_006",
+          "type": "interface",
+          "text": "DELETE /api/quarantine/:id removes a quarantined item after it has been promoted to evidence or explicitly rejected.",
+          "terms": [],
+          "linked_architecture_blocks": [
+            "b_trial_012",
+            "b_trial_014",
+            "b_trial_022"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:478c5323366d77d14b622783a5570995b0ac75bf018c5af09a03b1f4873b0eef"
+        },
+        {
+          "block_id": "b_iface_007",
+          "type": "interface",
+          "text": "GET /api/quarantine returns all items currently in quarantine, with their validation status.",
+          "terms": [],
+          "linked_architecture_blocks": [
+            "b_trial_012",
+            "b_trial_007",
+            "b_trial_008"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:a5d41d70af79a7e9fb6515087c8e625db55ee98705c8ba28e82529ce251a4ba3"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_gate_api",
+      "title": "Gate & Validation API",
+      "commitments": [
+        {
+          "block_id": "b_iface_008",
+          "type": "interface",
+          "text": "POST /api/validate accepts a raw SkillOutput JSON and runs it through the four-gate validation pipeline: schema, source reference, capability, and type-specific invariant gates.",
+          "terms": [
+            "gate"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_019",
+            "b_trial_020"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:56936df89ae71198373922885a7a76c5e667d80a862daffe48f8b603acffae39"
+        },
+        {
+          "block_id": "b_iface_009",
+          "type": "interface",
+          "text": "The response includes a per-gate breakdown: each gate reports passed/failed status and an array of error messages.",
+          "terms": [],
+          "linked_architecture_blocks": [
+            "b_trial_020"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:a6eabfe9b0556916c619b9c73e6d3cfffb119fdc27f9c935aa421497c691ac63"
+        },
+        {
+          "block_id": "b_iface_010",
+          "type": "interface",
+          "text": "POST /api/patch/compile accepts a PatchProposal and returns an ArtifactPatch with expected_old_hash populated for each operation.",
+          "terms": [
+            "patch"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_013"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:3f2a17c4e94d020b6aa1cb7a297e17666c2d71a2896ba7fbb29cec6bb7f7f0d5"
+        },
+        {
+          "block_id": "b_iface_011",
+          "type": "interface",
+          "text": "POST /api/patch/apply accepts an ArtifactPatch and returns either an accepted result with the candidate revision, or a rejected result with the reason code.",
+          "terms": [],
+          "linked_architecture_blocks": [
+            "b_trial_014"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:86ca88098a05589337bd92114b237b8bf911ba07e8b735ee60390b25753326c6"
+        },
+        {
+          "block_id": "b_iface_012",
+          "type": "interface",
+          "text": "POST /api/regression/check runs semantic regression analysis on a candidate revision against the current canonical.",
+          "terms": [],
+          "linked_architecture_blocks": [
+            "b_trial_026",
+            "b_trial_028"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:deccdff12cd89749d3f200fd7b915ec6b2770fc50455b173631600b36e108326"
+        },
+        {
+          "block_id": "b_iface_013",
+          "type": "interface",
+          "text": "POST /api/override/apply records a human override decision for a failed semantic regression gate.",
+          "terms": [],
+          "linked_architecture_blocks": [
+            "b_trial_015",
+            "b_trial_030"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:9156d29d897daa4db790a0a9f906c487c222242e160ee6a1fb87648aa6c812b8"
+        },
+        {
+          "block_id": "b_iface_014",
+          "type": "interface",
+          "text": "GET /api/integrity returns the latest integrity check report including corruption count, warning count, and detailed findings.",
+          "terms": [],
+          "linked_architecture_blocks": [
+            "b_trial_006",
+            "b_trial_031",
+            "b_trial_032"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:720fa3d77b65bdbe0e46a47cf8745979753989a53afe2e215b892939ce129423"
+        }
+      ]
+    },
+    {
+      "section_id": "sec_linter_api",
+      "title": "Linter & Trial API",
+      "commitments": [
+        {
+          "block_id": "b_iface_015",
+          "type": "interface",
+          "text": "POST /api/lint accepts an Artifact JSON and returns an array of Issue objects detected by the deterministic linter rules.",
+          "terms": [
+            "issue"
+          ],
+          "linked_architecture_blocks": [
+            "b_trial_001"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:ccc073a02d26ad795a75bf82806e25730fe99b555ff7ab695603fa2f2a3fe8cd"
+        },
+        {
+          "block_id": "b_iface_016",
+          "type": "interface",
+          "text": "POST /api/trial/start initiates a trial run with the specified seed artifact, LLM client configuration, and cycle limit.",
+          "terms": [],
+          "linked_architecture_blocks": [
+            "b_trial_001",
+            "b_trial_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:15bdde3db362dea96ddc4ca1e3b682735dd6fc777c610b93da1207bb49faea64"
+        },
+        {
+          "block_id": "b_iface_017",
+          "type": "interface",
+          "text": "GET /api/trial/report returns the current TrialReport including cycle results, rejection taxonomy, and override breakdown.",
+          "terms": [],
+          "linked_architecture_blocks": [
+            "b_trial_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:d0511ce886fb28b5538adb8f097b8e1276725f80705ddc8791a134cf56ab326b"
+        },
+        {
+          "block_id": "b_iface_018",
+          "type": "constraint",
+          "text": "In legacy mode, trial results were committed instantly to the canonical store without validation. This endpoint is now disabled.",
+          "terms": [],
+          "linked_architecture_blocks": [
+            "b_trial_005"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:60f5e3d94bffe5f67ad101e0be9fc85f1a91e8ab07d908de80405fbc368fd838"
+        },
+        {
+          "block_id": "b_iface_019",
+          "type": "constraint",
+          "text": "The `trial_orchestrator` coordinates with the `cycle_scheduler` to determine which issues to attempt in each cycle.",
+          "terms": [],
+          "status": "draft",
+          "content_hash": "sha256:41c100edb3267757406330bf7e7441dc8441542a548a0f94b8375aab1bed9488"
+        },
+        {
+          "block_id": "b_iface_020",
+          "type": "constraint",
+          "text": "The `response_parser` extracts structured PatchProposal JSON from raw LLM output, handling markdown fences and whitespace.",
+          "terms": [],
+          "status": "draft",
+          "content_hash": "sha256:70fd2be699f706b4700979e41020a77b430d9a4a6efdcbd4e885407e7d4e1f95"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created_by": "human",
+    "created_at": "2026-04-25T00:00:00Z",
+    "notes": "Phase 7a InterfaceSpec seed — frozen after initial verification.",
+    "updated_at": "2026-04-25T09:48:13.593Z"
+  },
+  "parent_revision_id": "rev_560bc8909ca6"
+}

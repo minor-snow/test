@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pantheon — Release Decision Cockpit</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0e17;--surface:#111827;--surface2:#1e293b;--border:#2d3a4f;--text:#e2e8f0;--text2:#94a3b8;--accent:#6366f1;--green:#22c55e;--yellow:#eab308;--red:#ef4444;--radius:10px;--font:'Inter',system-ui,sans-serif}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;padding:24px}
+h1{font-size:1.5rem;font-weight:700;letter-spacing:-0.02em}
+h2{font-size:1.1rem;font-weight:600;margin-bottom:12px;color:var(--text2)}
+.header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px}
+.header-meta{font-size:0.82rem;color:var(--text2);font-family:monospace}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:border-color .2s}
+.card.green{border-color:var(--green)}
+.card.yellow{border-color:var(--yellow)}
+.card.red{border-color:var(--red)}
+.card-icon{font-size:2rem;margin-bottom:8px}
+.card-title{font-size:0.85rem;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px}
+.card-value{font-size:1.2rem;font-weight:600}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
+table{width:100%;border-collapse:collapse;font-size:0.85rem}
+th{text-align:left;padding:8px 12px;border-bottom:2px solid var(--border);color:var(--text2);font-weight:500;text-transform:uppercase;font-size:0.75rem;letter-spacing:0.05em}
+td{padding:8px 12px;border-bottom:1px solid var(--border)}
+tr:hover td{background:var(--surface2)}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600}
+.badge-high{background:#7f1d1d;color:#fca5a5}
+.badge-medium{background:#78350f;color:#fde68a}
+.badge-low{background:#14532d;color:#86efac}
+.btn-group{display:flex;gap:12px;margin-top:16px}
+.btn{padding:12px 24px;border:none;border-radius:var(--radius);font-family:var(--font);font-size:0.9rem;font-weight:600;cursor:pointer;transition:all .2s;opacity:0.9}
+.btn:hover{opacity:1;transform:translateY(-1px)}
+.btn:disabled{opacity:0.3;cursor:not-allowed;transform:none}
+.btn-green{background:var(--green);color:#052e16}
+.btn-yellow{background:var(--yellow);color:#422006}
+.btn-red{background:var(--red);color:#450a0a}
+.btn-active{box-shadow:0 0 0 3px rgba(99,102,241,0.5);opacity:1}
+textarea{width:100%;min-height:80px;padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--font);font-size:0.85rem;resize:vertical;margin-top:8px}
+textarea:focus{outline:none;border-color:var(--accent)}
+label{font-size:0.85rem;font-weight:500;color:var(--text2);display:block;margin-top:16px}
+.required{color:var(--red)}
+.preview{max-height:300px;overflow-y:auto;padding:16px;background:var(--surface2);border-radius:8px;font-size:0.82rem;line-height:1.6;white-space:pre-wrap;font-family:monospace}
+.submit-bar{display:flex;justify-content:flex-end;gap:12px;margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+.submit-btn{padding:14px 32px;background:var(--accent);color:white;border:none;border-radius:var(--radius);font-family:var(--font);font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s}
+.submit-btn:hover{background:#4f46e5}
+.submit-btn:disabled{opacity:0.3;cursor:not-allowed}
+.toast{position:fixed;top:20px;right:20px;padding:16px 24px;border-radius:var(--radius);font-weight:600;z-index:100;animation:slideIn .3s ease}
+.toast-ok{background:var(--green);color:#052e16}
+.toast-err{background:var(--red);color:#fff}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+.backlog-panel{display:none}
+.backlog-panel.visible{display:block}
+.loading{text-align:center;padding:40px;color:var(--text2);font-size:1.1rem}
+.collapsible{cursor:pointer;user-select:none}
+.collapsible::before{content:'▸ ';transition:transform .2s}
+.collapsible.open::before{content:'▾ '}
+.collapse-body{display:none;margin-top:12px}
+.collapse-body.open{display:block}
+</style>
+</head>
+<body>
+<div id="app"><div class="loading">Loading report data…</div></div>
+<script>
+const API = '';
+let reportData = null;
+let selectedDecision = null;
+
+async function loadReport() {
+  try {
+    const res = await fetch(API + '/api/release/report');
+    reportData = await res.json();
+    render();
+  } catch (e) {
+    document.getElementById('app').innerHTML = `<div class="panel" style="color:var(--red)">Failed to load report: ${e.message}</div>`;
+  }
+}
+
+function severityBadge(sev) {
+  return `<span class="badge badge-${sev}">${sev.toUpperCase()}</span>`;
+}
+
+function render() {
+  const d = reportData;
+  const r = d.residual;
+  const tl = d.three_layer_status;
+
+  const layerClass = (ok) => ok ? 'green' : 'red';
+  const layerIcon = (ok) => ok ? '✅' : '❌';
+  const artifactIcon = r.total === 0 ? '✅' : (r.by_severity?.high > 0 ? '❌' : '⚠');
+  const artifactClass = r.total === 0 ? 'green' : (r.by_severity?.high > 0 ? 'red' : 'yellow');
+
+  let residualRows = '';
+  for (const issue of r.issues) {
+    residualRows += `<tr><td><code>${issue.block_id}</code></td><td>${issue.section_title}</td><td>${issue.issue_type}</td><td>${severityBadge(issue.severity)}</td><td style="color:var(--text2);font-size:0.8rem">${issue.message}</td></tr>`;
+  }
+
+  let byTypeRows = '';
+  for (const [t, c] of Object.entries(r.by_type)) {
+    byTypeRows += `<tr><td>${t}</td><td>${c}</td></tr>`;
+  }
+
+  let bySevRows = '';
+  for (const [s, c] of Object.entries(r.by_severity)) {
+    bySevRows += `<tr><td>${severityBadge(s)}</td><td>${c}</td></tr>`;
+  }
+
+  let bySecRows = '';
+  for (const [s, c] of Object.entries(r.by_section)) {
+    bySecRows += `<tr><td>${s}</td><td>${c}</td></tr>`;
+  }
+
+  let cycleRows = '';
+  for (const c of d.cycles) {
+    const status = c.committed ? '✅' : c.rejected ? '🚫' : '⏸';
+    cycleRows += `<tr><td>${c.cycle}</td><td>${status}</td><td>${c.issue_type || '—'}</td><td><code>${c.target_block_id || '—'}</code></td><td>${c.override ? '⚡' : ''}</td></tr>`;
+  }
+
+  document.getElementById('app').innerHTML = `
+    <div class="header">
+      <div><h1>🏛️ Pantheon — Release Decision Cockpit</h1></div>
+      <div class="header-meta">
+        <div>${d.artifact_id} · ${d.artifact_type}</div>
+        <div>rev: ${d.canonical_revision_id} · ${d.schema_version}</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card ${layerClass(tl.integrity_clean)}">
+        <div class="card-icon">${layerIcon(tl.integrity_clean)}</div>
+        <div class="card-title">Layer 1: Integrity</div>
+        <div class="card-value">${tl.integrity_clean ? 'Clean' : 'CORRUPT'}</div>
+        <div style="font-size:0.8rem;color:var(--text2);margin-top:4px">corruptions: ${d.integrity_corruptions} · warnings: ${d.integrity_warnings}</div>
+      </div>
+      <div class="card ${artifactClass}">
+        <div class="card-icon">${artifactIcon}</div>
+        <div class="card-title">Layer 2: Artifact</div>
+        <div class="card-value">${r.total === 0 ? 'Clean' : r.total + ' residual issues'}</div>
+        <div style="font-size:0.8rem;color:var(--text2);margin-top:4px">high: ${r.by_severity?.high||0} · medium: ${r.by_severity?.medium||0} · low: ${r.by_severity?.low||0}</div>
+      </div>
+      <div class="card yellow">
+        <div class="card-icon">⏳</div>
+        <div class="card-title">Layer 3: Coherence</div>
+        <div class="card-value">Pending Human Review</div>
+        <div style="font-size:0.8rem;color:var(--text2);margin-top:4px">Requires final_coherence_note</div>
+      </div>
+    </div>
+
+    ${r.total > 0 ? `
+    <div class="panel">
+      <h2>Residual Issue Dashboard</h2>
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:16px">
+        <div><h2 style="font-size:0.8rem">By Severity</h2><table>${bySevRows}</table></div>
+        <div><h2 style="font-size:0.8rem">By Type</h2><table>${byTypeRows}</table></div>
+        <div><h2 style="font-size:0.8rem">By Section</h2><table>${bySecRows}</table></div>
+      </div>
+      <table><thead><tr><th>Block</th><th>Section</th><th>Type</th><th>Severity</th><th>Message</th></tr></thead><tbody>${residualRows}</tbody></table>
+    </div>` : ''}
+
+    ${d.cycles.length > 0 ? `
+    <div class="panel">
+      <h2 class="collapsible" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">Trial Cycle History (${d.total_cycles} cycles)</h2>
+      <div class="collapse-body">
+        <div style="font-size:0.85rem;color:var(--text2);margin-bottom:12px">Proposals: ${d.proposals_generated} generated · ${d.proposals_accepted} accepted · ${d.semantic_rejections} semantic rejections · ${d.overrides} overrides</div>
+        <table><thead><tr><th>#</th><th>Status</th><th>Type</th><th>Block</th><th>Override</th></tr></thead><tbody>${cycleRows}</tbody></table>
+      </div>
+    </div>` : ''}
+
+    <div class="panel">
+      <h2 class="collapsible" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">Canonical Preview</h2>
+      <div class="collapse-body"><div class="preview">${escapeHtml(d.canonical_markdown_preview)}</div></div>
+    </div>
+
+    <div class="panel" id="decision-panel">
+      <h2>Release Decision</h2>
+      <div class="btn-group">
+        <button class="btn btn-green" id="btn-clean" onclick="selectDecision('accepted_clean')" ${r.total > 0 ? 'disabled title="Cannot accept clean with residual issues"' : ''}>✅ Accepted Clean</button>
+        <button class="btn btn-yellow" id="btn-residual" onclick="selectDecision('accepted_with_residual_issues')" ${(r.by_severity?.high||0) > 0 ? 'disabled title="Cannot accept with high-severity issues"' : ''}>⚠ Accepted with Residuals</button>
+        <button class="btn btn-red" id="btn-reject" onclick="selectDecision('rejected_requires_cleanup')">❌ Rejected — Requires Cleanup</button>
+      </div>
+
+      <label>Rationale <span class="required">*</span></label>
+      <textarea id="rationale" placeholder="Why this decision? What was considered?"></textarea>
+
+      <label>Final Coherence Note <span class="required">*</span> <span style="font-size:0.75rem;color:var(--text2)">(This is a human judgment, not a boolean)</span></label>
+      <textarea id="coherence-note" placeholder="Describe whether the final canonical reads like a document a human would continue to maintain…"></textarea>
+
+      <div class="backlog-panel" id="backlog-panel">
+        <label>Backlog Disposition</label>
+        <div id="backlog-items" style="margin-top:8px"></div>
+      </div>
+
+      <div class="submit-bar">
+        <button class="submit-btn" id="submit-btn" onclick="submitDecision()" disabled>Submit Release Decision</button>
+      </div>
+    </div>
+  `;
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function selectDecision(type) {
+  selectedDecision = type;
+  document.querySelectorAll('.btn-group .btn').forEach(b => b.classList.remove('btn-active'));
+  document.getElementById({
+    accepted_clean: 'btn-clean',
+    accepted_with_residual_issues: 'btn-residual',
+    rejected_requires_cleanup: 'btn-reject'
+  }[type]).classList.add('btn-active');
+
+  const bp = document.getElementById('backlog-panel');
+  if (type === 'accepted_with_residual_issues' && reportData.residual.total > 0) {
+    bp.classList.add('visible');
+    renderBacklogItems();
+  } else {
+    bp.classList.remove('visible');
+  }
+
+  document.getElementById('submit-btn').disabled = false;
+}
+
+function renderBacklogItems() {
+  const container = document.getElementById('backlog-items');
+  let html = '';
+  reportData.residual.issues.forEach((issue, i) => {
+    html += `<div style="padding:8px;margin-bottom:8px;background:var(--surface2);border-radius:6px">
+      <div style="font-size:0.82rem"><strong>BACKLOG-${String(i+1).padStart(3,'0')}</strong> · <code>${issue.block_id}</code> · ${issue.issue_type} · ${severityBadge(issue.severity)}</div>
+      <textarea id="defer-${i}" style="min-height:40px;margin-top:4px" placeholder="Why deferred?">${getDefaultDeferral(issue.issue_type)}</textarea>
+    </div>`;
+  });
+  container.innerHTML = html;
+}
+
+function getDefaultDeferral(type) {
+  const templates = {
+    undefined_term: 'Terminology debt: identifier used without term definition. Low structural risk.',
+    redundant_narrative: 'Advisory: narrative overlap. Consider consolidation in next editorial pass.',
+    domain_irrelevant_content: 'Domain irrelevant content requires rewrite.',
+    empty_block_text: 'Empty block requires substantive content.',
+    unsafe_canonical_commit: 'Unsafe commit language requires rewrite.',
+  };
+  return templates[type] || 'Deferred to next maintenance cycle.';
+}
+
+async function submitDecision() {
+  const rationale = document.getElementById('rationale').value.trim();
+  const coherenceNote = document.getElementById('coherence-note').value.trim();
+
+  if (!rationale) { showToast('Rationale is required', true); return; }
+  if (!coherenceNote) { showToast('Coherence note is required', true); return; }
+  if (!selectedDecision) { showToast('Select a decision', true); return; }
+
+  // Only send operator-authored fields + viewed revision for stale guard.
+  // Server regenerates snapshot/three_layer/backlog from store.
+  const backlogItems = [];
+  if (selectedDecision === 'accepted_with_residual_issues') {
+    reportData.residual.issues.forEach((issue, i) => {
+      const el = document.getElementById(`defer-${i}`);
+      backlogItems.push({
+        source_issue_id: issue.issue_id,
+        why_deferred: el ? el.value.trim() : '',
+      });
+    });
+  }
+
+  const decision = {
+    decision: selectedDecision,
+    canonical_revision_id: reportData.canonical_revision_id, // stale guard
+    operator_id: 'cockpit_user',
+    rationale,
+    final_coherence_note: coherenceNote,
+    backlog_items: backlogItems,
+  };
+
+  try {
+    const res = await fetch(API + '/api/release/decide', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(decision),
+    });
+    const result = await res.json();
+    if (result.valid) {
+      showToast(`Decision recorded: ${selectedDecision}`);
+    } else if (result.stale) {
+      showToast('Stale review — refreshing report…', true);
+      setTimeout(() => { loadReport(); }, 1500);
+    } else {
+      showToast(`Validation failed: ${result.errors.join('; ')}`, true);
+    }
+  } catch (e) {
+    showToast(`Error: ${e.message}`, true);
+  }
+}
+
+function showToast(msg, isErr) {
+  const el = document.createElement('div');
+  el.className = `toast ${isErr ? 'toast-err' : 'toast-ok'}`;
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 4000);
+}
+
+loadReport();
+</script>
+</body>
+</html>

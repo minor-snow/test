@@ -1,0 +1,35 @@
+{
+  "status": "success",
+  "attempt_1": {
+    "verdict": "requires_reverse_issue",
+    "blocking_findings": 1,
+    "total_findings": 2
+  },
+  "attempt_2": {
+    "verdict": "requires_review",
+    "blocking_findings": 0,
+    "review_findings": 1,
+    "total_findings": 1
+  },
+  "recovery_delta": {
+    "verdict_improved": true,
+    "blocking_cleared": true,
+    "forbidden_file_cleared": true,
+    "allowed_file_preserved": true,
+    "review_file_preserved": true
+  },
+  "recovery_actions": [
+    {
+      "file": "saleor/payment/gateway.py",
+      "action": "revert_file",
+      "source": "check.json findings[*].allowed_actions",
+      "finding_kind": "forbidden_file_modified",
+      "finding_severity": "reverse_issue_required"
+    }
+  ],
+  "files": {
+    "allowedFile": "saleor/checkout/models.py",
+    "reviewFile": "saleor/tax/models.py",
+    "forbiddenFile": "saleor/payment/gateway.py"
+  }
+}

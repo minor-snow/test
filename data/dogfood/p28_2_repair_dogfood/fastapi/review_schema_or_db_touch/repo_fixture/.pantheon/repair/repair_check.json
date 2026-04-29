@@ -1,0 +1,48 @@
+{
+  "schema_version": "repair_check.v1",
+  "repair_id": "repair_5d83b3564829",
+  "verdict": "requires_review",
+  "generated_at": "2026-04-29T07:02:07.841Z",
+  "summary": {
+    "changed_files": 2,
+    "allowed": 1,
+    "review_required": 1,
+    "forbidden": 0,
+    "outside_scope": 0,
+    "warnings": 1
+  },
+  "findings": [
+    {
+      "kind": "review_required_file",
+      "severity": "review_required",
+      "file": "app/db/article.py",
+      "message": "Repair touches review-required file: app/db/article.py",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "evidence": [
+        "1 paths match pattern **/db/**"
+      ]
+    },
+    {
+      "kind": "missing_related_test_signal",
+      "severity": "warning",
+      "message": "No related test file was included in the repair diff.",
+      "allowed_actions": [
+        "add_or_run_related_test",
+        "keep_for_human_review"
+      ],
+      "requires_human": false,
+      "evidence": [
+        "related_test:tests/test_fastapi.py"
+      ]
+    }
+  ],
+  "changed_files": [
+    "app/api/routes/articles.py",
+    "app/db/article.py"
+  ],
+  "audit_status": "pending_plan_audit"
+}

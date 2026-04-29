@@ -1,0 +1,37 @@
+{
+  "schema_version": "diff_verification_result.v1",
+  "verified_at": "2026-04-28T06:31:43.160Z",
+  "source_scope_id": "scope-lite-9e7063ed5a1d",
+  "source_contract_id": "4fb2d3c9-9e2a-4011-8a4b-ca861917e43a",
+  "verdict": "requires_reverse_issue",
+  "reasons": [
+    "`saleor/payment/gateway.py` matches forbidden pattern `saleor/payment/**`.",
+    "`saleor/tax/models.py` requires review."
+  ],
+  "required_actions": [
+    "Revert changes to forbidden files. They are managed by Pantheon."
+  ],
+  "file_statuses": [
+    {
+      "path": "saleor/checkout/models.py",
+      "status": "allowed",
+      "reasons": [
+        "Within authorized scope."
+      ]
+    },
+    {
+      "path": "saleor/payment/gateway.py",
+      "status": "forbidden",
+      "reasons": [
+        "Matches forbidden pattern: saleor/payment/** — Forbidden by explicit boundary proposal."
+      ]
+    },
+    {
+      "path": "saleor/tax/models.py",
+      "status": "review_required",
+      "reasons": [
+        "Explicit review-required boundary."
+      ]
+    }
+  ]
+}

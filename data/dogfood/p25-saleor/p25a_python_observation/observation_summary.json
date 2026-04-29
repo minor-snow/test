@@ -1,0 +1,61 @@
+{
+  "repo_label": "salary",
+  "observed_files": 4579,
+  "python_files": 4251,
+  "scan_ms": 569,
+  "enhance_ms": 470,
+  "quality": {
+    "python_file_count": 4248,
+    "classified_count": 4248,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 12610,
+    "project_import_count": 16,
+    "declared_package_count": 1967,
+    "undeclared_package_count": 187,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 977,
+    "high_confidence_test_count": 120,
+    "medium_confidence_test_count": 120,
+    "sensitive_zone_count": 14,
+    "sensitive_file_count": 2904,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 1
+  },
+  "sensitive_categories": [
+    "financial_transactions",
+    "purchase_flow",
+    "order_lifecycle",
+    "identity",
+    "authentication",
+    "authorization",
+    "security",
+    "administration",
+    "schema_migration",
+    "pricing_adjustment",
+    "regulatory_calculation",
+    "runtime_extension",
+    "external_integration",
+    "infrastructure_config"
+  ],
+  "unknown_categories": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "count": 1
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "count": 0
+    }
+  ],
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

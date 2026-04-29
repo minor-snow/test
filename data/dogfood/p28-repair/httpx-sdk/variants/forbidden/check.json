@@ -1,0 +1,48 @@
+{
+  "schema_version": "repair_check.v1",
+  "repair_id": "repair_39b4f5a74dc1",
+  "verdict": "fail",
+  "generated_at": "2026-04-29T04:05:27.539Z",
+  "summary": {
+    "changed_files": 1,
+    "allowed": 0,
+    "review_required": 0,
+    "forbidden": 1,
+    "outside_scope": 0,
+    "warnings": 1
+  },
+  "findings": [
+    {
+      "kind": "forbidden_file",
+      "severity": "blocking",
+      "file": ".pantheon/tmp/secret.py",
+      "message": "Forbidden repair change: .pantheon/tmp/secret.py",
+      "allowed_actions": [
+        "revert_file",
+        "request_scope_expansion"
+      ],
+      "requires_human": true,
+      "bucket": "forbidden",
+      "evidence": [
+        "repair:default_protected"
+      ]
+    },
+    {
+      "kind": "missing_related_test_signal",
+      "severity": "warning",
+      "message": "No related test file was included in the repair diff.",
+      "allowed_actions": [
+        "add_or_run_related_test",
+        "keep_for_human_review"
+      ],
+      "requires_human": false,
+      "evidence": [
+        "related_test:tests/test_auth.py"
+      ]
+    }
+  ],
+  "changed_files": [
+    ".pantheon/tmp/secret.py"
+  ],
+  "audit_status": "pending_plan_audit"
+}

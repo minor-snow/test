@@ -1,0 +1,67 @@
+{
+  "profile_id": "software_engineering_architecture",
+  "artifact_type": "ArchitectureDraft",
+  "domain_name": "Software Engineering System Architecture",
+
+  "allowed_concepts": [
+    "artifact", "revision", "canonical", "quarantine", "evidence",
+    "patch", "gate", "audit", "integrity", "release decision",
+    "risk register", "decision log", "linter", "schema", "hash",
+    "block", "section", "commitment", "override", "operator",
+    "pipeline", "workflow", "state machine", "event", "queue",
+    "database", "cache", "API", "endpoint", "authentication",
+    "authorization", "encryption", "logging", "monitoring",
+    "retry", "timeout", "circuit breaker", "rate limiting",
+    "idempotency", "transaction", "rollback", "migration"
+  ],
+
+  "required_concepts": [
+    { "concept": "source of truth", "aliases": ["canonical source", "single source of truth", "authoritative store"], "required": true },
+    { "concept": "state transition", "aliases": ["state machine", "state change", "lifecycle"], "required": true },
+    { "concept": "validation gate", "aliases": ["validation", "gate", "guard", "check"], "required": true },
+    { "concept": "failure mode", "aliases": ["failure", "error handling", "fault tolerance", "degradation"], "required": true },
+    { "concept": "human approval", "aliases": ["operator approval", "manual review", "human-in-the-loop", "operator decision"], "required": true },
+    { "concept": "rollback or recovery", "aliases": ["rollback", "recovery", "undo", "compensation", "retry"], "required": true },
+    { "concept": "audit trail", "aliases": ["audit", "audit log", "audit logging", "traceability"], "required": true },
+    { "concept": "data integrity", "aliases": ["integrity", "consistency", "corruption detection", "hash verification"], "required": true }
+  ],
+
+  "forbidden_generic_phrases": [
+    "respect dignity",
+    "enhance user experience",
+    "ensure seamless collaboration",
+    "leverage cutting-edge technology",
+    "ensure scalability",
+    "improve user experience",
+    "leverage AI",
+    "enhance efficiency",
+    "provide robust solution",
+    "world-class platform",
+    "next-generation system",
+    "best-in-class",
+    "synergy",
+    "holistic approach",
+    "paradigm shift",
+    "empower stakeholders"
+  ],
+
+  "required_sections": [
+    { "title": "Core Principles", "aliases": ["Core Architecture", "Foundational Principles", "System Principles"] },
+    { "title": "Data Model", "aliases": ["Data Architecture", "Data Storage", "Storage Layer", "Data Layer"] },
+    { "title": "State Transitions", "aliases": ["State Machine", "Lifecycle", "State Management", "Workflow States"] },
+    { "title": "Validation Gates", "aliases": ["Validation", "Gates", "Quality Gates", "Integrity Checks"] },
+    { "title": "Failure Modes", "aliases": ["Error Handling", "Fault Tolerance", "Failure Handling", "Resilience"] },
+    { "title": "Human Control", "aliases": ["Human Review", "Operator Control", "Manual Override", "Human-in-the-Loop"] }
+  ],
+
+  "preferred_block_types": [
+    "invariant", "mechanism", "constraint", "decision", "risk", "open_question"
+  ],
+
+  "quality_rubric": {
+    "min_sections": 5,
+    "min_blocks": 30,
+    "max_blocks": 50,
+    "min_required_concept_coverage": 0.8
+  }
+}

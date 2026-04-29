@@ -1,0 +1,552 @@
+{
+  "schema_version": "repair_contract@0.1.0",
+  "repair_id": "repair_b129a6863c32",
+  "revision": 2,
+  "source": {
+    "kind": "agent_bug_report",
+    "id": "report_saleor_audit_post_repair_approved"
+  },
+  "intent": "Fix checkout fee rounding and update order, human approves review.",
+  "bug_finding_id": "finding_c7a6fd575019",
+  "suspect_surface": {
+    "files": [
+      {
+        "path": "saleor/checkout/calculations.py",
+        "confidence": "high",
+        "reason": "Primary suspect",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "reason": "Derived from explicit suspect files, confirmed path references, and failing-test mappings."
+  },
+  "repair_relation_graph": [
+    {
+      "from": "saleor/checkout/calculations.py",
+      "to": "saleor/checkout/calculations.py",
+      "relation": "suspect",
+      "confidence": "high",
+      "reason": "Primary suspect",
+      "evidence": [
+        "explicit_suspect_file"
+      ]
+    },
+    {
+      "from": "saleor/checkout/calculations.py",
+      "to": "saleor/checkout/tests/test_calculations.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Purchase flow logic requires human review",
+      "evidence": [
+        "2 paths match pattern **/checkout/**",
+        "Sensitive zone \"purchase_flow\" (high) corroborates"
+      ]
+    },
+    {
+      "from": "saleor/checkout/calculations.py",
+      "to": "saleor/order/models.py",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Order lifecycle logic requires human review",
+      "evidence": [
+        "1 paths match pattern **/order/**",
+        "Sensitive zone \"order_lifecycle\" (high) corroborates"
+      ]
+    },
+    {
+      "from": "saleor/checkout/calculations.py",
+      "to": "saleor/payment/gateway.py",
+      "relation": "risk_preset",
+      "confidence": "medium",
+      "reason": "Financial transaction logic requires human review",
+      "evidence": [
+        "3 paths match pattern **/payment/**",
+        "Sensitive zone \"financial_transactions\" (critical) corroborates"
+      ]
+    },
+    {
+      "from": "saleor/checkout/calculations.py",
+      "to": "src/auth/login.ts",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Authentication logic requires human review",
+      "evidence": [
+        "2 paths match pattern **/auth/**",
+        "Sensitive zone \"authentication\" (high) corroborates"
+      ]
+    },
+    {
+      "from": "saleor/checkout/calculations.py",
+      "to": "src/payment/billing.ts",
+      "relation": "risk_preset",
+      "confidence": "medium",
+      "reason": "Financial transaction logic requires human review",
+      "evidence": [
+        "3 paths match pattern **/payment/**",
+        "Sensitive zone \"financial_transactions\" (critical) corroborates"
+      ]
+    },
+    {
+      "from": "saleor/checkout/calculations.py",
+      "to": "test/auth/login.test.ts",
+      "relation": "risk_preset",
+      "confidence": "low",
+      "reason": "Authentication logic requires human review",
+      "evidence": [
+        "2 paths match pattern **/auth/**",
+        "Sensitive zone \"authentication\" (high) corroborates"
+      ]
+    },
+    {
+      "from": "saleor/checkout/calculations.py",
+      "to": "test/payment/billing.test.ts",
+      "relation": "risk_preset",
+      "confidence": "medium",
+      "reason": "Financial transaction logic requires human review",
+      "evidence": [
+        "3 paths match pattern **/payment/**",
+        "Sensitive zone \"financial_transactions\" (critical) corroborates"
+      ]
+    }
+  ],
+  "graph_build_stats": {
+    "observed_files": 145,
+    "patterns_evaluated": 4,
+    "edges_generated": 8,
+    "edges_after_dedup": 8,
+    "truncation_entries": [],
+    "limitation": "Repair relation graph v1 is an evidence-based candidate graph, not a complete dependency graph or call graph.",
+    "duration_ms": 1
+  },
+  "impact_surface": {
+    "evidence_level": "bootstrap_conservative",
+    "direct_files": [
+      {
+        "path": "saleor/checkout/calculations.py",
+        "confidence": "high",
+        "reason": "Primary suspect",
+        "evidence": [
+          "explicit_suspect_file"
+        ]
+      }
+    ],
+    "related_files": [
+      {
+        "path": "saleor/order/models.py",
+        "confidence": "low",
+        "reason": "Order lifecycle logic requires human review",
+        "evidence": [
+          "1 paths match pattern **/order/**",
+          "Sensitive zone \"order_lifecycle\" (high) corroborates"
+        ]
+      },
+      {
+        "path": "saleor/payment/gateway.py",
+        "confidence": "medium",
+        "reason": "Financial transaction logic requires human review",
+        "evidence": [
+          "3 paths match pattern **/payment/**",
+          "Sensitive zone \"financial_transactions\" (critical) corroborates"
+        ]
+      },
+      {
+        "path": "src/auth/login.ts",
+        "confidence": "low",
+        "reason": "Authentication logic requires human review",
+        "evidence": [
+          "2 paths match pattern **/auth/**",
+          "Sensitive zone \"authentication\" (high) corroborates"
+        ]
+      },
+      {
+        "path": "src/payment/billing.ts",
+        "confidence": "medium",
+        "reason": "Financial transaction logic requires human review",
+        "evidence": [
+          "3 paths match pattern **/payment/**",
+          "Sensitive zone \"financial_transactions\" (critical) corroborates"
+        ]
+      }
+    ],
+    "related_tests": [
+      {
+        "path": "saleor/checkout/tests/test_calculations.py",
+        "confidence": "high",
+        "reason": "Python test mapping for saleor/checkout/calculations.py.",
+        "evidence": [
+          "python_test_mapping:high"
+        ]
+      },
+      {
+        "path": "test/auth/login.test.ts",
+        "confidence": "low",
+        "reason": "Authentication logic requires human review",
+        "evidence": [
+          "2 paths match pattern **/auth/**",
+          "Sensitive zone \"authentication\" (high) corroborates"
+        ]
+      },
+      {
+        "path": "test/payment/billing.test.ts",
+        "confidence": "medium",
+        "reason": "Financial transaction logic requires human review",
+        "evidence": [
+          "3 paths match pattern **/payment/**",
+          "Sensitive zone \"financial_transactions\" (critical) corroborates"
+        ]
+      },
+      {
+        "path": "tests/test_saleor.py",
+        "confidence": "high",
+        "reason": "Explicit failing test supplied in bug report.",
+        "evidence": [
+          "bug_report:failing_test"
+        ]
+      }
+    ],
+    "risk_areas": [
+      {
+        "label": "django_commerce",
+        "pattern": "**/auth/**",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "risk_preset",
+        "reason": "Authentication logic requires human review",
+        "evidence": [
+          "2 paths match pattern **/auth/**",
+          "Sensitive zone \"authentication\" (high) corroborates"
+        ],
+        "matched_paths": [
+          "src/auth/login.ts"
+        ]
+      },
+      {
+        "label": "purchase_flow",
+        "pattern": "**/checkout/**",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "python_sensitive_zone",
+        "reason": "Python sensitive zone purchase_flow.",
+        "evidence": [
+          "Keyword \"checkout\" found in 2 paths"
+        ],
+        "matched_paths": [
+          "saleor/checkout/calculations.py",
+          "saleor/checkout/tests/test_calculations.py"
+        ]
+      },
+      {
+        "label": "django_commerce",
+        "pattern": "**/checkout/**",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "risk_preset",
+        "reason": "Purchase flow logic requires human review",
+        "evidence": [
+          "2 paths match pattern **/checkout/**",
+          "Sensitive zone \"purchase_flow\" (high) corroborates"
+        ],
+        "matched_paths": [
+          "saleor/checkout/calculations.py",
+          "saleor/checkout/tests/test_calculations.py"
+        ]
+      },
+      {
+        "label": "order_lifecycle",
+        "pattern": "**/order/**",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "python_sensitive_zone",
+        "reason": "Python sensitive zone order_lifecycle.",
+        "evidence": [
+          "Keyword \"order\" found in 1 paths"
+        ],
+        "matched_paths": [
+          "saleor/order/models.py"
+        ]
+      },
+      {
+        "label": "django_commerce",
+        "pattern": "**/order/**",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "risk_preset",
+        "reason": "Order lifecycle logic requires human review",
+        "evidence": [
+          "1 paths match pattern **/order/**",
+          "Sensitive zone \"order_lifecycle\" (high) corroborates"
+        ],
+        "matched_paths": [
+          "saleor/order/models.py"
+        ]
+      },
+      {
+        "label": "financial_transactions",
+        "pattern": "**/payment/**",
+        "bucket": "forbidden",
+        "severity": "critical",
+        "source": "python_sensitive_zone",
+        "reason": "Python sensitive zone financial_transactions.",
+        "evidence": [
+          "Keyword \"payment\" found in 1 paths"
+        ],
+        "matched_paths": [
+          "saleor/payment/gateway.py"
+        ]
+      },
+      {
+        "label": "django_commerce",
+        "pattern": "**/payment/**",
+        "bucket": "review_required",
+        "severity": "critical",
+        "source": "risk_preset",
+        "reason": "Financial transaction logic requires human review",
+        "evidence": [
+          "3 paths match pattern **/payment/**",
+          "Sensitive zone \"financial_transactions\" (critical) corroborates"
+        ],
+        "matched_paths": [
+          "saleor/payment/gateway.py",
+          "src/payment/billing.ts"
+        ]
+      },
+      {
+        "label": "payment keyword",
+        "pattern": "saleor/payment/gateway.py",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "repo_sensitive_path",
+        "reason": "Observed sensitive path: payment_keyword.",
+        "evidence": [
+          "keyword:Path contains sensitive segment: payment"
+        ],
+        "matched_paths": [
+          "saleor/payment/gateway.py"
+        ]
+      },
+      {
+        "label": "auth keyword",
+        "pattern": "src/auth/login.ts",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "repo_sensitive_path",
+        "reason": "Observed sensitive path: auth_keyword.",
+        "evidence": [
+          "keyword:Path contains sensitive segment: auth"
+        ],
+        "matched_paths": [
+          "src/auth/login.ts"
+        ]
+      },
+      {
+        "label": "payment keyword",
+        "pattern": "src/payment/billing.ts",
+        "bucket": "review_required",
+        "severity": "high",
+        "source": "repo_sensitive_path",
+        "reason": "Observed sensitive path: payment_keyword.",
+        "evidence": [
+          "keyword:Path contains sensitive segment: payment"
+        ],
+        "matched_paths": [
+          "src/payment/billing.ts"
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "kind": "invalid_reference",
+        "note": "One or more references in the bug report could not be validated inside the repo.",
+        "evidence": [
+          "tests/test_saleor.py"
+        ]
+      },
+      {
+        "kind": "unverified_bug_claim",
+        "note": "The report includes unverified bug claims or hypotheses that must not be treated as confirmed facts.",
+        "evidence": [
+          "I think this is the cause.",
+          "It is broken.",
+          "It should work."
+        ]
+      }
+    ]
+  },
+  "repair_scope": {
+    "allowed": [
+      {
+        "pattern": "tests/test_saleor.py",
+        "source": "impact_candidate",
+        "confidence": "high",
+        "audit_weight": "elevated",
+        "reason": "Explicit failing test supplied in bug report.",
+        "evidence": [
+          "bug_report:failing_test"
+        ]
+      }
+    ],
+    "review_required": [
+      {
+        "pattern": "**/auth/**",
+        "source": "risk_preset",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "Authentication logic requires human review",
+        "evidence": [
+          "2 paths match pattern **/auth/**",
+          "Sensitive zone \"authentication\" (high) corroborates"
+        ]
+      },
+      {
+        "pattern": "**/checkout/**",
+        "source": "risk_preset",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "Purchase flow logic requires human review",
+        "evidence": [
+          "2 paths match pattern **/checkout/**",
+          "Sensitive zone \"purchase_flow\" (high) corroborates"
+        ]
+      },
+      {
+        "pattern": "**/order/**",
+        "source": "risk_preset",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "Order lifecycle logic requires human review",
+        "evidence": [
+          "1 paths match pattern **/order/**",
+          "Sensitive zone \"order_lifecycle\" (high) corroborates"
+        ]
+      },
+      {
+        "pattern": "src/auth/login.ts",
+        "source": "project_role",
+        "confidence": "medium",
+        "audit_weight": "elevated",
+        "reason": "Observed sensitive path: auth_keyword.",
+        "evidence": [
+          "keyword:Path contains sensitive segment: auth"
+        ]
+      }
+    ],
+    "forbidden": [
+      {
+        "pattern": ".cursor/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": ".git/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": ".pantheon/**",
+        "source": "default_policy",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Pantheon protected path.",
+        "evidence": [
+          "repair:default_protected"
+        ]
+      },
+      {
+        "pattern": "**/payment/**",
+        "source": "project_role",
+        "confidence": "high",
+        "audit_weight": "critical",
+        "reason": "Python sensitive zone financial_transactions.",
+        "evidence": [
+          "Keyword \"payment\" found in 1 paths"
+        ]
+      }
+    ]
+  },
+  "must_preserve": [
+    "Do not broaden authentication or permission behavior.",
+    "Do not change payment or billing behavior outside the intended fix."
+  ],
+  "consistency_checks": [
+    {
+      "id": "check_4d2c4d90c895",
+      "statement": "Do not alter payment, order, or tax behavior outside the intended fix.",
+      "source": "risk_preset",
+      "severity": "hard",
+      "evidence": [
+        "risk_area:commerce_backend"
+      ],
+      "reason": "Commerce repairs are money-flow adjacent and can create hidden regressions."
+    },
+    {
+      "id": "check_b0725582bcc9",
+      "statement": "Do not modify migrations automatically.",
+      "source": "risk_preset",
+      "severity": "hard",
+      "evidence": [
+        "risk_area:migration"
+      ],
+      "reason": "Schema changes require explicit human approval."
+    },
+    {
+      "id": "check_7a46fb0ade0a",
+      "statement": "Update or inspect related tests when the repair changes behavior.",
+      "source": "test_signal",
+      "severity": "review",
+      "evidence": [
+        "related_test:saleor/checkout/tests/test_calculations.py",
+        "related_test:test/auth/login.test.ts",
+        "related_test:test/payment/billing.test.ts",
+        "related_test:tests/test_saleor.py",
+        "recommended_test:saleor/product/tests/test_models.py",
+        "recommended_test:tests/test_auth.py",
+        "recommended_test:tests/test_utils.py",
+        "recommended_test:tests/utils/format.test.ts"
+      ],
+      "reason": "Related tests are the best available deterministic proxy for behavioral impact in bootstrap mode."
+    },
+    {
+      "id": "check_5dac2deaafbe",
+      "statement": "Unknown impact surface remains. Keep the repair conservative and escalate if scope expands.",
+      "source": "unknown_surface",
+      "severity": "review",
+      "evidence": [
+        "invalid_reference",
+        "unverified_bug_claim"
+      ],
+      "reason": "Pantheon found unresolved impact signals; those must not be silently ignored."
+    }
+  ],
+  "test_signals": {
+    "related": [
+      "saleor/checkout/tests/test_calculations.py",
+      "test/auth/login.test.ts",
+      "test/payment/billing.test.ts",
+      "tests/test_saleor.py"
+    ],
+    "recommended": [
+      "saleor/product/tests/test_models.py",
+      "tests/test_auth.py",
+      "tests/test_utils.py",
+      "tests/utils/format.test.ts"
+    ],
+    "missing_mapping": []
+  },
+  "audit_status": "post_repair_reviewed",
+  "source_refs": {
+    "repo_observations_hash": "sha256:d3d2550afd60e85f591cc795308a6ab57a699d1768a05fbcedca6549e3bbe419",
+    "repo_label": "repo_fixture",
+    "head_commit_hash": null
+  }
+}

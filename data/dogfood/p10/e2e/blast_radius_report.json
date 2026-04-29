@@ -1,0 +1,370 @@
+{
+  "request": {
+    "changed_nodes": [
+      "blk:arch:b_conflict_001"
+    ]
+  },
+  "generated_at": "2026-04-27T04:20:17.992Z",
+  "graph_hash": "9c477448ab0324c4",
+  "warnings": [],
+  "invalid_nodes": [],
+  "summary": {
+    "changed_nodes": 1,
+    "valid_changed_nodes": 1,
+    "direct_impact": 23,
+    "total_downstream": 62,
+    "affected_files": 10,
+    "affected_symbols": 21,
+    "affected_tests": 8,
+    "highest_risk_level": "high",
+    "risk_amplification_count": 8
+  },
+  "by_layer": {
+    "architecture": [],
+    "interface": [],
+    "module": [],
+    "handoff": [
+      "hc:definition:pending_report_state",
+      "hc:definition:vector_clock",
+      "hc:definition:conflict_payload",
+      "hc:definition:conflict_type",
+      "hc:definition:user_visible_conflict_state",
+      "hc:data_model:ConflictRecordEntity",
+      "hc:data_model:VectorClockEntry",
+      "hc:data_model:SyncUploadResult",
+      "hc:data_model:ConflictPayload",
+      "hc:data_model:VersionMetadata",
+      "hc:state_machine:ConflictResolutionState",
+      "hc:conflict_policy:patient_case_status",
+      "hc:conflict_policy:vet_note_summary",
+      "hc:conflict_policy:suspected_condition",
+      "hc:forbidden:FA-001",
+      "hc:forbidden:FA-002",
+      "hc:forbidden:FA-005",
+      "hc:forbidden:FA-006",
+      "hc:forbidden:FA-008",
+      "hc:task:TASK-001",
+      "hc:task:TASK-005",
+      "hc:task:TASK-008",
+      "hc:task:TASK-009"
+    ],
+    "generated_files": [
+      "file:Enums.kt",
+      "file:Entities.kt",
+      "file:Dtos.kt",
+      "file:StateMachines.kt",
+      "file:ConflictPolicy.kt",
+      "file:ConflictPolicyTests.kt",
+      "file:contracts/Interfaces.kt",
+      "file:contracts/Guards.kt",
+      "file:contracts/ContractTests.kt",
+      "file:contracts/TodoStubs.kt"
+    ],
+    "generated_symbols": [
+      "sym:Entities.kt:PendingReportEntity",
+      "sym:Entities.kt:SyncOperationEntity",
+      "sym:Entities.kt:RetryLedgerEntry",
+      "sym:Entities.kt:ConflictRecordEntity",
+      "sym:Entities.kt:VectorClockEntry",
+      "sym:Entities.kt:AuditEventEntity",
+      "sym:Dtos.kt:OfflineReportEnvelope",
+      "sym:Dtos.kt:SyncChangePullRequest",
+      "sym:Dtos.kt:SyncChangePullResponse",
+      "sym:Dtos.kt:SyncUploadRequest",
+      "sym:Dtos.kt:SyncUploadResult",
+      "sym:Dtos.kt:SyncAckRequest",
+      "sym:Dtos.kt:ConflictPayload",
+      "sym:Dtos.kt:VersionMetadata",
+      "sym:Enums.kt:PendingReportState",
+      "sym:StateMachines.kt:PendingReportStateMachine",
+      "sym:Enums.kt:SyncOperationState",
+      "sym:StateMachines.kt:SyncOperationStateMachine",
+      "sym:Enums.kt:ConflictResolutionState",
+      "sym:StateMachines.kt:ConflictResolutionStateMachine",
+      "sym:contracts/Guards.kt:PantheonGuards"
+    ],
+    "tests": [
+      "test:policy:patient_case_status",
+      "test:policy:vet_note_summary",
+      "test:policy:suspected_condition",
+      "test:forbidden:FA-001",
+      "test:forbidden:FA-002",
+      "test:forbidden:FA-005",
+      "test:forbidden:FA-006",
+      "test:forbidden:FA-008"
+    ]
+  },
+  "risk_amplification": [
+    {
+      "node_id": "hc:conflict_policy:patient_case_status",
+      "label": "hc:conflict_policy:patient_case_status",
+      "risk_level": "high",
+      "reason": "High-risk conflict policy affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:conflict_policy:patient_case_status"
+      ],
+      "affected_tests": [
+        "test:policy:patient_case_status"
+      ]
+    },
+    {
+      "node_id": "hc:conflict_policy:vet_note_summary",
+      "label": "hc:conflict_policy:vet_note_summary",
+      "risk_level": "high",
+      "reason": "High-risk conflict policy affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:conflict_policy:vet_note_summary"
+      ],
+      "affected_tests": [
+        "test:policy:vet_note_summary"
+      ]
+    },
+    {
+      "node_id": "hc:conflict_policy:suspected_condition",
+      "label": "hc:conflict_policy:suspected_condition",
+      "risk_level": "high",
+      "reason": "High-risk conflict policy affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:conflict_policy:suspected_condition"
+      ],
+      "affected_tests": [
+        "test:policy:suspected_condition"
+      ]
+    },
+    {
+      "node_id": "hc:forbidden:FA-001",
+      "label": "hc:forbidden:FA-001",
+      "risk_level": "high",
+      "reason": "Forbidden assumption affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:forbidden:FA-001"
+      ],
+      "affected_tests": [
+        "test:forbidden:FA-001"
+      ]
+    },
+    {
+      "node_id": "hc:forbidden:FA-002",
+      "label": "hc:forbidden:FA-002",
+      "risk_level": "high",
+      "reason": "Forbidden assumption affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:forbidden:FA-002"
+      ],
+      "affected_tests": [
+        "test:forbidden:FA-002"
+      ]
+    },
+    {
+      "node_id": "hc:forbidden:FA-005",
+      "label": "hc:forbidden:FA-005",
+      "risk_level": "high",
+      "reason": "Forbidden assumption affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:forbidden:FA-005"
+      ],
+      "affected_tests": [
+        "test:forbidden:FA-005"
+      ]
+    },
+    {
+      "node_id": "hc:forbidden:FA-006",
+      "label": "hc:forbidden:FA-006",
+      "risk_level": "high",
+      "reason": "Forbidden assumption affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:forbidden:FA-006"
+      ],
+      "affected_tests": [
+        "test:forbidden:FA-006"
+      ]
+    },
+    {
+      "node_id": "hc:forbidden:FA-008",
+      "label": "hc:forbidden:FA-008",
+      "risk_level": "high",
+      "reason": "Forbidden assumption affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:forbidden:FA-008"
+      ],
+      "affected_tests": [
+        "test:forbidden:FA-008"
+      ]
+    },
+    {
+      "node_id": "hc:data_model:ConflictRecordEntity",
+      "label": "hc:data_model:ConflictRecordEntity",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:data_model:ConflictRecordEntity"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:data_model:VectorClockEntry",
+      "label": "hc:data_model:VectorClockEntry",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:data_model:VectorClockEntry"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:data_model:SyncUploadResult",
+      "label": "hc:data_model:SyncUploadResult",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:data_model:SyncUploadResult"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:data_model:ConflictPayload",
+      "label": "hc:data_model:ConflictPayload",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:data_model:ConflictPayload"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:data_model:VersionMetadata",
+      "label": "hc:data_model:VersionMetadata",
+      "risk_level": "medium",
+      "reason": "Data model affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:data_model:VersionMetadata"
+      ],
+      "affected_tests": []
+    },
+    {
+      "node_id": "hc:state_machine:ConflictResolutionState",
+      "label": "hc:state_machine:ConflictResolutionState",
+      "risk_level": "medium",
+      "reason": "State machine affected",
+      "source_path": [
+        "blk:arch:b_conflict_001",
+        "hc:state_machine:ConflictResolutionState"
+      ],
+      "affected_tests": []
+    }
+  ],
+  "critical_paths": [
+    {
+      "path_id": "path_1",
+      "from": "blk:arch:b_conflict_001",
+      "to": "test:policy:patient_case_status",
+      "nodes": [
+        "blk:arch:b_conflict_001",
+        "hc:conflict_policy:patient_case_status",
+        "test:policy:patient_case_status"
+      ],
+      "risk_level": "high",
+      "reason": "blk:arch:b_conflict_001 → test:policy:patient_case_status"
+    },
+    {
+      "path_id": "path_2",
+      "from": "blk:arch:b_conflict_001",
+      "to": "test:policy:vet_note_summary",
+      "nodes": [
+        "blk:arch:b_conflict_001",
+        "hc:conflict_policy:vet_note_summary",
+        "test:policy:vet_note_summary"
+      ],
+      "risk_level": "high",
+      "reason": "blk:arch:b_conflict_001 → test:policy:vet_note_summary"
+    },
+    {
+      "path_id": "path_3",
+      "from": "blk:arch:b_conflict_001",
+      "to": "test:policy:suspected_condition",
+      "nodes": [
+        "blk:arch:b_conflict_001",
+        "hc:conflict_policy:suspected_condition",
+        "test:policy:suspected_condition"
+      ],
+      "risk_level": "high",
+      "reason": "blk:arch:b_conflict_001 → test:policy:suspected_condition"
+    },
+    {
+      "path_id": "path_4",
+      "from": "blk:arch:b_conflict_001",
+      "to": "test:forbidden:FA-001",
+      "nodes": [
+        "blk:arch:b_conflict_001",
+        "hc:forbidden:FA-001",
+        "test:forbidden:FA-001"
+      ],
+      "risk_level": "high",
+      "reason": "blk:arch:b_conflict_001 → test:forbidden:FA-001"
+    },
+    {
+      "path_id": "path_5",
+      "from": "blk:arch:b_conflict_001",
+      "to": "test:forbidden:FA-002",
+      "nodes": [
+        "blk:arch:b_conflict_001",
+        "hc:forbidden:FA-002",
+        "test:forbidden:FA-002"
+      ],
+      "risk_level": "high",
+      "reason": "blk:arch:b_conflict_001 → test:forbidden:FA-002"
+    },
+    {
+      "path_id": "path_6",
+      "from": "blk:arch:b_conflict_001",
+      "to": "test:forbidden:FA-005",
+      "nodes": [
+        "blk:arch:b_conflict_001",
+        "hc:forbidden:FA-005",
+        "test:forbidden:FA-005"
+      ],
+      "risk_level": "high",
+      "reason": "blk:arch:b_conflict_001 → test:forbidden:FA-005"
+    },
+    {
+      "path_id": "path_7",
+      "from": "blk:arch:b_conflict_001",
+      "to": "test:forbidden:FA-006",
+      "nodes": [
+        "blk:arch:b_conflict_001",
+        "hc:forbidden:FA-006",
+        "test:forbidden:FA-006"
+      ],
+      "risk_level": "high",
+      "reason": "blk:arch:b_conflict_001 → test:forbidden:FA-006"
+    },
+    {
+      "path_id": "path_8",
+      "from": "blk:arch:b_conflict_001",
+      "to": "test:forbidden:FA-008",
+      "nodes": [
+        "blk:arch:b_conflict_001",
+        "hc:forbidden:FA-008",
+        "test:forbidden:FA-008"
+      ],
+      "risk_level": "high",
+      "reason": "blk:arch:b_conflict_001 → test:forbidden:FA-008"
+    }
+  ],
+  "paths_truncated": false,
+  "total_critical_paths_found": 8,
+  "markdown": "# Blast Radius Report\n\n## Changed Nodes\n\n- `blk:arch:b_conflict_001`\n\n## Summary\n\n| Metric | Count |\n|---|---|\n| Changed nodes | 1 (1 valid) |\n| Direct impact | 23 |\n| Total downstream | 62 |\n| Affected files | 10 |\n| Affected symbols | 21 |\n| Affected tests | 8 |\n| Highest risk | **high** |\n| Risk amplifications | 8 |\n\n## Affected Generated Files\n\n- `file:Enums.kt`\n- `file:Entities.kt`\n- `file:Dtos.kt`\n- `file:StateMachines.kt`\n- `file:ConflictPolicy.kt`\n- `file:ConflictPolicyTests.kt`\n- `file:contracts/Interfaces.kt`\n- `file:contracts/Guards.kt`\n- `file:contracts/ContractTests.kt`\n- `file:contracts/TodoStubs.kt`\n\n## Affected Tests\n\n- `test:policy:patient_case_status`\n- `test:policy:vet_note_summary`\n- `test:policy:suspected_condition`\n- `test:forbidden:FA-001`\n- `test:forbidden:FA-002`\n- `test:forbidden:FA-005`\n- `test:forbidden:FA-006`\n- `test:forbidden:FA-008`\n\n## Risk Amplification\n\n### hc:conflict_policy:patient_case_status — **high**\n\n- Reason: High-risk conflict policy affected\n- Tests: `test:policy:patient_case_status`\n- Path: `blk:arch:b_conflict_001` → `hc:conflict_policy:patient_case_status`\n\n### hc:conflict_policy:vet_note_summary — **high**\n\n- Reason: High-risk conflict policy affected\n- Tests: `test:policy:vet_note_summary`\n- Path: `blk:arch:b_conflict_001` → `hc:conflict_policy:vet_note_summary`\n\n### hc:conflict_policy:suspected_condition — **high**\n\n- Reason: High-risk conflict policy affected\n- Tests: `test:policy:suspected_condition`\n- Path: `blk:arch:b_conflict_001` → `hc:conflict_policy:suspected_condition`\n\n### hc:forbidden:FA-001 — **high**\n\n- Reason: Forbidden assumption affected\n- Tests: `test:forbidden:FA-001`\n- Path: `blk:arch:b_conflict_001` → `hc:forbidden:FA-001`\n\n### hc:forbidden:FA-002 — **high**\n\n- Reason: Forbidden assumption affected\n- Tests: `test:forbidden:FA-002`\n- Path: `blk:arch:b_conflict_001` → `hc:forbidden:FA-002`\n\n### hc:forbidden:FA-005 — **high**\n\n- Reason: Forbidden assumption affected\n- Tests: `test:forbidden:FA-005`\n- Path: `blk:arch:b_conflict_001` → `hc:forbidden:FA-005`\n\n### hc:forbidden:FA-006 — **high**\n\n- Reason: Forbidden assumption affected\n- Tests: `test:forbidden:FA-006`\n- Path: `blk:arch:b_conflict_001` → `hc:forbidden:FA-006`\n\n### hc:forbidden:FA-008 — **high**\n\n- Reason: Forbidden assumption affected\n- Tests: `test:forbidden:FA-008`\n- Path: `blk:arch:b_conflict_001` → `hc:forbidden:FA-008`\n\n## Critical Paths\n\n🔴 `blk:arch:b_conflict_001` → `hc:conflict_policy:patient_case_status` → `test:policy:patient_case_status`\n\n🔴 `blk:arch:b_conflict_001` → `hc:conflict_policy:vet_note_summary` → `test:policy:vet_note_summary`\n\n🔴 `blk:arch:b_conflict_001` → `hc:conflict_policy:suspected_condition` → `test:policy:suspected_condition`\n\n🔴 `blk:arch:b_conflict_001` → `hc:forbidden:FA-001` → `test:forbidden:FA-001`\n\n🔴 `blk:arch:b_conflict_001` → `hc:forbidden:FA-002` → `test:forbidden:FA-002`\n\n🔴 `blk:arch:b_conflict_001` → `hc:forbidden:FA-005` → `test:forbidden:FA-005`\n\n🔴 `blk:arch:b_conflict_001` → `hc:forbidden:FA-006` → `test:forbidden:FA-006`\n\n🔴 `blk:arch:b_conflict_001` → `hc:forbidden:FA-008` → `test:forbidden:FA-008`\n"
+}

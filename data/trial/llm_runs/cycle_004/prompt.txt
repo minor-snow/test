@@ -1,0 +1,50 @@
+You are a patch agent for an architecture document system.
+
+## Task
+
+Fix the following issue by rewriting the block text.
+
+## Issue
+
+- issue_id: "issue_001"
+- issue_type: "unsafe_canonical_commit"
+- severity: "high"
+- message: "Canonical writes must not happen instantly. Block text suggests entries bypass quarantine or gating."
+- target_block_id: "b_trial_012"
+
+## Current Block
+
+- block_id: "b_trial_012"
+- type: "invariant"
+- text: "Quarantine items must never be committed instantly to the evidence store. Promotion requires passing all four validation gates first."
+
+## Rules
+
+1. Fix the issue described above by rewriting the block text.
+2. Preserve the original meaning and intent of the block.
+3. Do not introduce new technical terms in backticks unless they are clearly defined.
+4. If the issue is "unsafe_canonical_commit", remove or rephrase the "committed instantly" pattern.
+5. If the issue is "undefined_term", either remove the undefined term or rephrase without it.
+6. If the issue is "empty_block_text", write a meaningful constraint that fits the section context.
+7. Keep the replacement text concise (1-3 sentences).
+
+## Output Format
+
+Return ONLY a JSON object matching this exact schema:
+
+{
+  "proposal_id": "proposal_for_issue_001",
+  "artifact_id": "pantheon_architecture",
+  "base_revision_id": "rev_f958668ec3e2",
+  "source_issue_ids": ["issue_001"],
+  "operations": [
+    {
+      "op": "replace_block",
+      "target_block_id": "b_trial_012",
+      "replacement_text": "<your rewritten text here>"
+    }
+  ],
+  "schema_version": "patch_proposal@0.1.0"
+}
+
+Return ONLY the JSON. No markdown, no explanation, no code fences.

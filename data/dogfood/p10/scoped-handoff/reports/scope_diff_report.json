@@ -1,0 +1,60 @@
+{
+  "generated_at": "2026-04-26T12:58:03.545Z",
+  "scope_id": "sync-conflict-policy-change_mofrw3eg",
+  "status": "requires_human_review",
+  "source": {
+    "scope_path": "data/dogfood/p10/scoped-handoff/.pantheon/scope.json",
+    "required_tests_path": "data/dogfood/p10/scoped-handoff/.pantheon/required-tests.json",
+    "scope_hash": "63865805dd982b4a",
+    "required_tests_hash": "2dfa090f9529a409"
+  },
+  "summary": {
+    "changed_files": 1,
+    "allowed_files_modified": 1,
+    "outside_scope_files": 0,
+    "forbidden_files_modified": 0,
+    "protocol_files_modified": 0,
+    "generated_boundary_files_modified": 1,
+    "required_tests": 2,
+    "required_tests_passed": 2,
+    "required_tests_failed": 0,
+    "required_tests_missing": 0,
+    "reverse_issue_triggers": 1
+  },
+  "blocking_reasons": [
+    "Human review is required for HIGH risk scope."
+  ],
+  "violations": [
+    {
+      "violation_id": "v_human_review_missing",
+      "violation_type": "human_review_missing",
+      "severity": "high",
+      "message": "Human review is required for HIGH risk scope.",
+      "required_action": "Provide human review with reviewer_id and rationale before proceeding.",
+      "source": {
+        "scope_id": "sync-conflict-policy-change_mofrw3eg",
+        "rule": "must_require_human_review = true"
+      }
+    },
+    {
+      "violation_id": "v_reverse_issue_required",
+      "violation_type": "reverse_issue_required",
+      "severity": "high",
+      "message": "One or more changes require a Pantheon Reverse Issue or approved scope expansion.",
+      "required_action": "Create a Pantheon Reverse Issue or expand scope through approved Pantheon workflow.",
+      "source": {
+        "scope_id": "sync-conflict-policy-change_mofrw3eg"
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "warning_id": "w_gen_boundary_ConflictPolicy.kt",
+      "warning_type": "generated_file_modified_but_allowed",
+      "message": "Generated boundary files should normally be regenerated through Pantheon, not hand-edited. File: \"ConflictPolicy.kt\"."
+    }
+  ],
+  "required_actions": [
+    "Provide human review with reviewer_id and rationale."
+  ]
+}

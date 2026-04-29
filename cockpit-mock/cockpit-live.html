@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pantheon – Live Override Cockpit</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #1c2333;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --text-dim: #8b949e;
+      --accent: #58a6ff;
+      --green: #3fb950;
+      --red: #f85149;
+      --orange: #d29922;
+      --yellow: #e3b341;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    h1 { font-size: 1.6rem; font-weight: 600; }
+    h2 { font-size: 1.1rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+
+    .header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+    .badge {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 4px 10px; border-radius: 4px; color: #fff;
+    }
+    .badge-failed { background: var(--red); }
+    .badge-passed { background: var(--green); }
+    .badge-override { background: var(--orange); }
+    .badge-idle { background: var(--text-dim); }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tag {
+      display: inline-block; background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 4px; padding: 2px 8px; font-size: 0.8rem; margin-right: 6px; color: var(--text-dim);
+    }
+    .tag strong { color: var(--text); }
+
+    .diff-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border-radius: 6px; overflow: hidden; }
+    .diff-old, .diff-new { padding: 1rem; font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 0.85rem; line-height: 1.7; }
+    .diff-old { background: rgba(248, 81, 73, 0.1); }
+    .diff-new { background: rgba(63, 185, 80, 0.1); }
+    .diff-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+    .diff-label-old { color: var(--red); }
+    .diff-label-new { color: var(--green); }
+
+    .issue-item { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .issue-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; margin-top: 2px; }
+    .issue-icon-fail { background: var(--red); color: #fff; }
+    .issue-type { color: var(--red); font-weight: 600; font-size: 0.85rem; }
+
+    textarea {
+      width: 100%; background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 6px; color: var(--text); padding: 0.75rem; font-size: 0.9rem;
+      resize: vertical; min-height: 60px; font-family: inherit;
+    }
+    textarea:focus { outline: none; border-color: var(--accent); }
+
+    .btn-row { display: flex; gap: 0.75rem; margin-top: 1rem; }
+    .btn {
+      flex: 1; padding: 0.75rem 1rem; border: none; border-radius: 6px;
+      font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.15s;
+    }
+    .btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; filter: none; transform: none; }
+    .btn-accept { background: var(--green); color: #fff; }
+    .btn-retry { background: transparent; border: 2px solid var(--accent); color: var(--accent); }
+    .btn-defer { background: transparent; border: 2px solid var(--border); color: var(--text-dim); }
+
+    .run-btn {
+      background: var(--accent); color: #fff; padding: 0.75rem 2rem;
+      border: none; border-radius: 6px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .run-btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+    .run-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    details { margin-top: 1rem; }
+    summary { cursor: pointer; color: var(--accent); font-size: 0.85rem; }
+    pre {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 6px; padding: 1rem; font-size: 0.8rem; overflow-x: auto;
+      margin-top: 0.5rem; color: var(--text-dim); max-height: 400px; overflow-y: auto;
+    }
+
+    .toast {
+      position: fixed; top: 1.5rem; right: 1.5rem;
+      padding: 1rem 1.5rem; border-radius: 8px; font-weight: 600;
+      animation: slideIn 0.3s ease; z-index: 100;
+    }
+    .toast-success { background: var(--green); color: #fff; }
+    .toast-error { background: var(--red); color: #fff; }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+    .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; vertical-align: middle; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #idle-screen { text-align: center; padding: 4rem 2rem; }
+    #idle-screen p { color: var(--text-dim); margin: 1rem 0 2rem; }
+
+    #cockpit-screen { display: none; }
+    #override-done { display: none; }
+    .override-done-panel { background: rgba(63, 185, 80, 0.1); border-color: var(--green); }
+  </style>
+</head>
+<body>
+
+  <!-- Idle Screen -->
+  <div id="idle-screen">
+    <h1>🏛️ Pantheon – Live Override Cockpit</h1>
+    <p>Run the full pipeline on the §21 artifact to see the override workflow in action.</p>
+    <button class="run-btn" onclick="runPipeline()" id="run-btn">
+      Run Pipeline
+    </button>
+  </div>
+
+  <!-- Cockpit Screen -->
+  <div id="cockpit-screen">
+    <div class="header">
+      <h1>Override Cockpit</h1>
+      <span id="status-badge" class="badge badge-failed">LOADING…</span>
+    </div>
+
+    <!-- Revision Context -->
+    <div class="panel">
+      <h2>Revision Context</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="panel" style="margin: 0;">
+          <div style="color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">Current Canonical</div>
+          <div id="current-rev" style="color: var(--accent); font-family: monospace; margin-top: 4px;">—</div>
+        </div>
+        <div class="panel" style="margin: 0;">
+          <div style="color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">Candidate</div>
+          <div id="candidate-rev" style="color: var(--orange); font-family: monospace; margin-top: 4px;">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Failed Gates -->
+    <div class="panel" id="failed-gates-panel">
+      <h2>Failed Gates</h2>
+      <div id="failed-gates-list"></div>
+    </div>
+
+    <!-- Affected Block -->
+    <div class="panel" id="affected-block-panel">
+      <h2>Affected Blocks</h2>
+      <div id="affected-blocks"></div>
+    </div>
+
+    <!-- Content Diff -->
+    <div class="panel">
+      <h2>Content Diff</h2>
+      <div class="diff-container" id="diff-container">
+        <div class="diff-old">
+          <div class="diff-label diff-label-old">● Current</div>
+          <div id="diff-old-text"></div>
+        </div>
+        <div class="diff-new">
+          <div class="diff-label diff-label-new">● Proposed</div>
+          <div id="diff-new-text"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rationale -->
+    <div class="panel" id="rationale-panel">
+      <h2>Rationale</h2>
+      <textarea id="rationale" placeholder="Enter rationale for accepting this override…">Accepted for MVP; glossary definition will be added in a follow-up revision.</textarea>
+      <div style="color: var(--text-dim); font-size: 0.75rem; margin-top: 4px;">Required. Explains why this override is acceptable.</div>
+    </div>
+
+    <!-- Decision Buttons -->
+    <div class="panel" id="decision-panel">
+      <h2>Decision</h2>
+      <div class="btn-row">
+        <button class="btn btn-accept" id="btn-accept" onclick="applyOverride('accept_with_known_risk')">
+          Accept & Record Risk
+        </button>
+        <button class="btn btn-defer" id="btn-defer" onclick="applyOverride('defer_issue')">
+          Defer Issue
+        </button>
+      </div>
+    </div>
+
+    <!-- Override Applied -->
+    <div id="override-done">
+      <div class="panel override-done-panel">
+        <h2 style="color: var(--green);">✅ Override Applied</h2>
+        <p style="margin-top: 0.5rem;">New revision committed. Canonical pointer updated.</p>
+        <div style="margin-top: 0.75rem;">
+          <span class="tag"><strong>new revision</strong></span>
+          <span id="new-rev-tag" class="tag" style="color: var(--green);"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audit Log -->
+    <details id="audit-details">
+      <summary>▶ View Audit Log</summary>
+      <pre id="audit-json"></pre>
+    </details>
+
+    <!-- Full Pipeline State -->
+    <details style="margin-top: 0.5rem;">
+      <summary>▶ View Full Pipeline State</summary>
+      <pre id="pipeline-json"></pre>
+    </details>
+  </div>
+
+  <script>
+    const API = 'http://localhost:3456';
+    let pipelineData = null;
+
+    function showToast(message, type = 'success') {
+      const t = document.createElement('div');
+      t.className = `toast toast-${type}`;
+      t.textContent = message;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 3000);
+    }
+
+    async function runPipeline() {
+      const btn = document.getElementById('run-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>Running pipeline…';
+
+      try {
+        const res = await fetch(`${API}/api/pipeline/run`);
+        pipelineData = await res.json();
+        renderCockpit(pipelineData);
+        document.getElementById('idle-screen').style.display = 'none';
+        document.getElementById('cockpit-screen').style.display = 'block';
+      } catch (err) {
+        showToast(`Pipeline failed: ${err.message}`, 'error');
+        btn.disabled = false;
+        btn.textContent = 'Run Pipeline';
+      }
+    }
+
+    function renderCockpit(data) {
+      // Status badge
+      const badge = document.getElementById('status-badge');
+      if (data.phase === 'regression_failed') {
+        badge.textContent = 'SEMANTIC REGRESSION FAILED';
+        badge.className = 'badge badge-failed';
+      } else if (data.phase === 'override_applied') {
+        badge.textContent = 'OVERRIDE APPLIED';
+        badge.className = 'badge badge-override';
+      } else if (data.phase === 'committed') {
+        badge.textContent = 'COMMITTED';
+        badge.className = 'badge badge-passed';
+      } else {
+        badge.textContent = data.phase.toUpperCase();
+        badge.className = 'badge badge-idle';
+      }
+
+      // Revision context
+      document.getElementById('current-rev').textContent = data.current_revision || '—';
+      document.getElementById('candidate-rev').textContent = data.candidate_revision || '—';
+
+      // Failed gates
+      const gatesList = document.getElementById('failed-gates-list');
+      gatesList.innerHTML = '';
+      if (data.failed_gates && data.failed_gates.length > 0) {
+        data.reasons.forEach((reason, i) => {
+          const gate = data.failed_gates[Math.min(i, data.failed_gates.length - 1)];
+          gatesList.innerHTML += `
+            <div class="issue-item">
+              <div class="issue-icon issue-icon-fail">✕</div>
+              <div>
+                <div class="issue-type">${gate}</div>
+                <div style="color: var(--text-dim); font-size: 0.85rem;">${reason}</div>
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        gatesList.innerHTML = '<div style="color: var(--green);">All gates passed ✓</div>';
+      }
+
+      // Affected blocks
+      const blocksDiv = document.getElementById('affected-blocks');
+      blocksDiv.innerHTML = '';
+      if (data.affected_blocks) {
+        data.affected_blocks.forEach(b => {
+          blocksDiv.innerHTML += `<span class="tag">block <strong>${b}</strong></span>`;
+        });
+      }
+
+      // Issues
+      if (data.issues && data.issues.length > 0) {
+        data.issues.forEach(issue => {
+          blocksDiv.innerHTML += `<span class="tag">type <strong>${issue.issue_type}</strong></span>`;
+          blocksDiv.innerHTML += `<span class="tag">severity <strong>${issue.severity}</strong></span>`;
+        });
+      }
+
+      // Diff
+      if (data.diff) {
+        const oldText = data.diff.old_blocks.map(b => b.text).join('\n');
+        const newText = data.diff.new_blocks.map(b => b.text).join('\n');
+        document.getElementById('diff-old-text').textContent = oldText;
+        document.getElementById('diff-new-text').textContent = newText;
+      }
+
+      // Audit log
+      document.getElementById('audit-json').textContent = JSON.stringify(data.audit_log, null, 2);
+
+      // Full state
+      document.getElementById('pipeline-json').textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function applyOverride(overrideType) {
+      const rationale = document.getElementById('rationale').value.trim();
+      if (!rationale) {
+        showToast('Rationale is required.', 'error');
+        return;
+      }
+
+      const btn = overrideType === 'accept_with_known_risk'
+        ? document.getElementById('btn-accept')
+        : document.getElementById('btn-defer');
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(`${API}/api/pipeline/override`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            override_type: overrideType,
+            operator: { type: 'human', id: 'cockpit_user' },
+            rationale: rationale,
+            risk_acceptance: {
+              accepted_risks: pipelineData.reasons || [],
+              mitigation_plan: 'Will address in next revision.',
+            },
+          }),
+        });
+
+        const result = await res.json();
+        pipelineData = result;
+        renderCockpit(result);
+
+        // Show override done
+        document.getElementById('decision-panel').style.display = 'none';
+        document.getElementById('rationale-panel').style.display = 'none';
+        document.getElementById('override-done').style.display = 'block';
+        document.getElementById('new-rev-tag').textContent = result.current_revision;
+
+        showToast('Override applied. Canonical updated.', 'success');
+      } catch (err) {
+        showToast(`Override failed: ${err.message}`, 'error');
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

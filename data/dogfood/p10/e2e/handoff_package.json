@@ -1,0 +1,3038 @@
+{
+  "package_id": "handoff_1777263617965",
+  "project_id": "pet_triage_offline_migration",
+  "created_at": "2026-04-27T04:20:17.965Z",
+  "source_artifacts": [
+    {
+      "artifact_id": "pet_triage_offline_architecture",
+      "artifact_type": "ArchitectureDraft",
+      "revision_id": "rev_d252eb5b2bc6"
+    },
+    {
+      "artifact_id": "pet_triage_offline_interface",
+      "artifact_type": "InterfaceSpec",
+      "revision_id": "rev_a1695505f72c"
+    },
+    {
+      "artifact_id": "pet_triage_offline_module",
+      "artifact_type": "ModuleSpec",
+      "revision_id": "rev_17695c778e19"
+    }
+  ],
+  "implementation_scope": {
+    "target_platform": "android",
+    "stack": [
+      "Kotlin",
+      "Jetpack Compose",
+      "Room",
+      "WorkManager",
+      "OkHttp/Retrofit"
+    ],
+    "included_components": [
+      "OfflineDecisionTreeRunner",
+      "PendingReportRepository",
+      "SyncQueueManager",
+      "RetryLedger",
+      "ConflictResolver",
+      "ClinicReplicaClient",
+      "AuditEventWriter",
+      "ConnectivityObserver",
+      "UserConflictReviewPresenter"
+    ],
+    "excluded_components": [
+      "Backend server implementation",
+      "iOS client",
+      "Web admin dashboard",
+      "ML-based triage"
+    ],
+    "non_goals": [
+      "Real-time collaborative editing",
+      "P2P sync between devices",
+      "Full CRDT implementation",
+      "Backend migration"
+    ]
+  },
+  "contract_definitions": [
+    {
+      "term": "pending_report",
+      "kind": "schema",
+      "definition": "A locally-created triage report that has not yet been confirmed by the backend. Persisted in Room, survives app restart.",
+      "source_architecture_blocks": [
+        "b_offline_003",
+        "b_pending_001",
+        "b_pending_002",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_conflict_003",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_002",
+        "b_iface_offline_003",
+        "b_iface_sync_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_002",
+        "b_iface_lifecycle_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_conflict_001",
+        "b_mod_infra_001"
+      ],
+      "fields": [
+        {
+          "name": "report_id",
+          "type": "String (UUID)",
+          "required": true,
+          "description": "Unique identifier for the report"
+        },
+        {
+          "name": "clinic_id",
+          "type": "String",
+          "required": true,
+          "description": "Target clinic backend identifier"
+        },
+        {
+          "name": "patient_case_id",
+          "type": "String",
+          "required": true,
+          "description": "Associated patient case"
+        },
+        {
+          "name": "triage_result",
+          "type": "TriageResult",
+          "required": true,
+          "description": "Output from OfflineDecisionTreeRunner"
+        },
+        {
+          "name": "status",
+          "type": "PendingReportState",
+          "required": true,
+          "description": "Current lifecycle state"
+        },
+        {
+          "name": "created_at",
+          "type": "Instant",
+          "required": true,
+          "description": "Local creation timestamp"
+        },
+        {
+          "name": "vector_clock",
+          "type": "Map<String, Int>",
+          "required": false,
+          "description": "Causal version vector"
+        },
+        {
+          "name": "retry_count",
+          "type": "Int",
+          "required": true,
+          "description": "Number of sync attempts"
+        }
+      ]
+    },
+    {
+      "term": "pending_report_state",
+      "kind": "enum",
+      "definition": "Lifecycle states of a pending report from local creation through sync and conflict resolution.",
+      "source_architecture_blocks": [
+        "b_offline_003",
+        "b_offline_004",
+        "b_pending_001",
+        "b_pending_002",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_sync_004",
+        "b_conflict_001",
+        "b_conflict_002",
+        "b_conflict_003",
+        "b_conflict_004",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_002",
+        "b_iface_offline_003",
+        "b_iface_sync_001",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_002",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_sync_002",
+        "b_mod_sync_004",
+        "b_mod_conflict_001",
+        "b_mod_conflict_002",
+        "b_mod_conflict_003",
+        "b_mod_infra_001",
+        "b_mod_infra_003",
+        "b_mod_infra_007",
+        "b_mod_infra_008",
+        "b_mod_infra_009"
+      ],
+      "enum_values": [
+        {
+          "value": "draft",
+          "description": "Report being composed locally"
+        },
+        {
+          "value": "completed_offline",
+          "description": "Triage completed, awaiting queue"
+        },
+        {
+          "value": "queued_for_sync",
+          "description": "In sync queue, waiting for connectivity"
+        },
+        {
+          "value": "syncing",
+          "description": "Currently being uploaded to clinic backend"
+        },
+        {
+          "value": "merged",
+          "description": "Successfully merged with backend state"
+        },
+        {
+          "value": "conflicted",
+          "description": "Vector clock conflict detected, needs resolution"
+        },
+        {
+          "value": "requires_review",
+          "description": "Conflict requires clinician manual review"
+        },
+        {
+          "value": "failed_retryable",
+          "description": "Sync failed, will retry with backoff"
+        },
+        {
+          "value": "failed_terminal",
+          "description": "Max retries exceeded, requires manual intervention"
+        }
+      ]
+    },
+    {
+      "term": "sync_queue",
+      "kind": "module",
+      "definition": "FIFO queue managed by SyncQueueManager. Processes pending reports in order, triggered by ConnectivityObserver.",
+      "source_architecture_blocks": [
+        "b_sync_001",
+        "b_sync_003",
+        "b_sync_005"
+      ],
+      "source_interface_blocks": [
+        "b_iface_sync_003",
+        "b_iface_sync_004"
+      ],
+      "source_module_blocks": [
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_sync_003"
+      ]
+    },
+    {
+      "term": "retry_ledger",
+      "kind": "schema",
+      "definition": "Per-report log of sync attempts. Records timestamp, HTTP status, error code, retry count. Drives exponential backoff.",
+      "source_architecture_blocks": [
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_004"
+      ],
+      "source_interface_blocks": [
+        "b_iface_sync_003",
+        "b_iface_sync_004"
+      ],
+      "source_module_blocks": [
+        "b_mod_sync_002"
+      ],
+      "fields": [
+        {
+          "name": "ledger_entry_id",
+          "type": "String (UUID)",
+          "required": true,
+          "description": "Unique entry identifier"
+        },
+        {
+          "name": "report_id",
+          "type": "String",
+          "required": true,
+          "description": "Associated pending report"
+        },
+        {
+          "name": "attempt_number",
+          "type": "Int",
+          "required": true,
+          "description": "Sequential attempt counter"
+        },
+        {
+          "name": "timestamp",
+          "type": "Instant",
+          "required": true,
+          "description": "When this attempt occurred"
+        },
+        {
+          "name": "http_status",
+          "type": "Int?",
+          "required": false,
+          "description": "HTTP response status or null if network error"
+        },
+        {
+          "name": "error_code",
+          "type": "String?",
+          "required": false,
+          "description": "Application-level error code"
+        },
+        {
+          "name": "next_retry_at",
+          "type": "Instant?",
+          "required": false,
+          "description": "Scheduled next retry (exponential backoff)"
+        }
+      ]
+    },
+    {
+      "term": "sync_cursor",
+      "kind": "field",
+      "definition": "Server-issued opaque token representing the last-known sync position. Used in GET /sync/pull to request only new changes.",
+      "source_architecture_blocks": [
+        "b_conflict_002"
+      ],
+      "source_interface_blocks": [
+        "b_iface_conflict_002",
+        "b_iface_version_002"
+      ],
+      "source_module_blocks": []
+    },
+    {
+      "term": "clinic_replica_id",
+      "kind": "identifier",
+      "definition": "Unique identifier for a clinic backend instance. Each clinic has independent state and sync endpoint.",
+      "source_architecture_blocks": [
+        "b_multiclinic_001",
+        "b_multiclinic_002",
+        "b_multiclinic_003",
+        "b_multiclinic_004",
+        "b_uvc_004",
+        "b_audit_001"
+      ],
+      "source_interface_blocks": [
+        "b_iface_sync_002"
+      ],
+      "source_module_blocks": [
+        "b_mod_sync_001",
+        "b_mod_infra_001",
+        "b_mod_infra_002",
+        "b_mod_infra_009"
+      ]
+    },
+    {
+      "term": "device_id",
+      "kind": "identifier",
+      "definition": "Unique identifier for the Android device. Used as an actor in vector clock entries.",
+      "source_architecture_blocks": [
+        "b_offline_004",
+        "b_audit_004"
+      ],
+      "source_interface_blocks": [],
+      "source_module_blocks": [
+        "b_mod_infra_005"
+      ]
+    },
+    {
+      "term": "actor_id",
+      "kind": "identifier",
+      "definition": "Identity of the user performing an action (clinician ID). Recorded in audit events and vector clock entries.",
+      "source_architecture_blocks": [
+        "b_audit_002"
+      ],
+      "source_interface_blocks": [],
+      "source_module_blocks": [
+        "b_mod_infra_003",
+        "b_mod_infra_004"
+      ]
+    },
+    {
+      "term": "vector_clock",
+      "kind": "schema",
+      "definition": "Map<ActorId, SequenceNumber> tracking causal history of edits. Used to detect concurrent modifications on clinical fields.",
+      "source_architecture_blocks": [
+        "b_pending_001",
+        "b_conflict_001",
+        "b_conflict_003",
+        "b_uvc_004"
+      ],
+      "source_interface_blocks": [
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_conflict_001",
+        "b_mod_conflict_003",
+        "b_mod_infra_009"
+      ],
+      "fields": [
+        {
+          "name": "entries",
+          "type": "Map<String, Int>",
+          "required": true,
+          "description": "Actor ID to sequence number mapping"
+        }
+      ]
+    },
+    {
+      "term": "lww_policy",
+      "kind": "policy",
+      "definition": "Conflict resolution policy for non-clinical metadata fields. Latest timestamp wins. Only permitted on fields classified as non-clinical.",
+      "source_architecture_blocks": [
+        "b_conflict_002"
+      ],
+      "source_interface_blocks": [
+        "b_iface_conflict_002",
+        "b_iface_version_002"
+      ],
+      "source_module_blocks": [
+        "b_mod_conflict_001"
+      ]
+    },
+    {
+      "term": "conflict_payload",
+      "kind": "schema",
+      "definition": "Server response when a sync upload detects a vector clock conflict. Contains local version, remote version, and conflict metadata.",
+      "source_architecture_blocks": [
+        "b_conflict_001"
+      ],
+      "source_interface_blocks": [],
+      "source_module_blocks": [
+        "b_mod_conflict_003",
+        "b_mod_infra_007"
+      ],
+      "fields": [
+        {
+          "name": "report_id",
+          "type": "String",
+          "required": true,
+          "description": "Report with conflict"
+        },
+        {
+          "name": "local_version",
+          "type": "ReportSnapshot",
+          "required": true,
+          "description": "Client's version of the report"
+        },
+        {
+          "name": "remote_version",
+          "type": "ReportSnapshot",
+          "required": true,
+          "description": "Server's version of the report"
+        },
+        {
+          "name": "local_clock",
+          "type": "VectorClock",
+          "required": true,
+          "description": "Client's vector clock"
+        },
+        {
+          "name": "remote_clock",
+          "type": "VectorClock",
+          "required": true,
+          "description": "Server's vector clock"
+        },
+        {
+          "name": "conflicting_fields",
+          "type": "List<String>",
+          "required": true,
+          "description": "Field names with divergent values"
+        }
+      ]
+    },
+    {
+      "term": "conflict_type",
+      "kind": "enum",
+      "definition": "Classification of detected conflicts.",
+      "source_architecture_blocks": [
+        "b_conflict_001",
+        "b_audit_001"
+      ],
+      "source_interface_blocks": [
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_lifecycle_001",
+        "b_iface_version_001"
+      ],
+      "source_module_blocks": [
+        "b_mod_conflict_001",
+        "b_mod_infra_003"
+      ],
+      "enum_values": [
+        {
+          "value": "vector_clock_divergence",
+          "description": "Concurrent edits detected via vector clock"
+        },
+        {
+          "value": "lww_overwrite",
+          "description": "LWW applied to metadata field (informational)"
+        },
+        {
+          "value": "schema_version_mismatch",
+          "description": "Client and server schema versions differ"
+        }
+      ]
+    },
+    {
+      "term": "resolution_policy",
+      "kind": "enum",
+      "definition": "How a specific conflict should be resolved.",
+      "source_architecture_blocks": [
+        "b_conflict_004"
+      ],
+      "source_interface_blocks": [
+        "b_iface_conflict_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_conflict_002"
+      ],
+      "enum_values": [
+        {
+          "value": "auto_merge",
+          "description": "Non-overlapping changes merged automatically"
+        },
+        {
+          "value": "lww_applied",
+          "description": "Last-writer-wins applied (metadata only)"
+        },
+        {
+          "value": "clinician_review",
+          "description": "Conflict requires explicit clinician selection"
+        }
+      ]
+    },
+    {
+      "term": "user_visible_conflict_state",
+      "kind": "state",
+      "definition": "UI state where the clinician sees both versions of a conflicted report and must explicitly select a resolution for each conflicting field.",
+      "source_architecture_blocks": [
+        "b_offline_002",
+        "b_conflict_001",
+        "b_conflict_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_audit_002",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_conflict_003",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_conflict_001",
+        "b_mod_conflict_002",
+        "b_mod_infra_003",
+        "b_mod_infra_004",
+        "b_mod_infra_007",
+        "b_mod_infra_008"
+      ]
+    },
+    {
+      "term": "audit_event",
+      "kind": "schema",
+      "definition": "Immutable record of a system action. Includes timestamp, actor, action type, report ID, and payload checksum.",
+      "source_architecture_blocks": [
+        "b_audit_001",
+        "b_audit_002"
+      ],
+      "source_interface_blocks": [],
+      "source_module_blocks": [
+        "b_mod_infra_003",
+        "b_mod_infra_004"
+      ],
+      "fields": [
+        {
+          "name": "event_id",
+          "type": "String (UUID)",
+          "required": true,
+          "description": "Unique event identifier"
+        },
+        {
+          "name": "timestamp",
+          "type": "Instant",
+          "required": true,
+          "description": "When the event occurred"
+        },
+        {
+          "name": "actor_id",
+          "type": "String",
+          "required": true,
+          "description": "Clinician or system actor"
+        },
+        {
+          "name": "action_type",
+          "type": "String",
+          "required": true,
+          "description": "Type of action (e.g. triage_created, sync_attempted)"
+        },
+        {
+          "name": "report_id",
+          "type": "String?",
+          "required": false,
+          "description": "Associated report, if applicable"
+        },
+        {
+          "name": "payload_checksum",
+          "type": "String",
+          "required": true,
+          "description": "SHA-256 of the event payload"
+        }
+      ]
+    },
+    {
+      "term": "offline_decision_tree",
+      "kind": "module",
+      "definition": "Deterministic rule interpreter (no ML) that evaluates species, symptoms, and urgency to produce a triage result. Rules are versioned and refreshed on connectivity restore.",
+      "source_architecture_blocks": [
+        "b_offline_001",
+        "b_offline_002",
+        "b_offline_004",
+        "b_offline_005"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_offline_001",
+        "b_mod_offline_002",
+        "b_mod_offline_003"
+      ]
+    },
+    {
+      "term": "sync_status",
+      "kind": "state",
+      "definition": "Current state of a sync operation, represented by SyncOperationState enum. Tracks progress from queued through in_flight to acknowledged, conflict_detected, or dead_lettered.",
+      "source_architecture_blocks": [
+        "b_conflict_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_002"
+      ],
+      "source_module_blocks": []
+    }
+  ],
+  "conflict_policy_matrix": [
+    {
+      "field_group": "patient_case_status",
+      "fields": [
+        "case_status",
+        "triage_urgency",
+        "case_priority"
+      ],
+      "policy": "vector_clock",
+      "rationale": "Clinical case status changes are safety-critical; concurrent edits must be detected and reviewed.",
+      "risk_level": "high",
+      "user_visible_on_conflict": true,
+      "audit_required": true,
+      "source_architecture_blocks": [
+        "b_offline_001",
+        "b_offline_003",
+        "b_offline_004",
+        "b_offline_005",
+        "b_pending_001",
+        "b_conflict_001",
+        "b_audit_001"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_offline_003",
+        "b_iface_sync_001",
+        "b_iface_sync_002",
+        "b_iface_conflict_002"
+      ],
+      "source_module_blocks": [
+        "b_mod_offline_001",
+        "b_mod_offline_002",
+        "b_mod_offline_003",
+        "b_mod_conflict_001",
+        "b_mod_infra_003"
+      ]
+    },
+    {
+      "field_group": "vet_note_summary",
+      "fields": [
+        "remote_vet_note",
+        "case_note_summary",
+        "clinical_notes"
+      ],
+      "policy": "vector_clock",
+      "rationale": "Veterinary edits are clinical changes and must not be overwritten by LWW.",
+      "risk_level": "high",
+      "user_visible_on_conflict": true,
+      "audit_required": true,
+      "source_architecture_blocks": [
+        "b_offline_003",
+        "b_conflict_001"
+      ],
+      "source_interface_blocks": [
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_offline_002"
+      ]
+    },
+    {
+      "field_group": "triage_report_body",
+      "fields": [
+        "triage_result",
+        "symptom_assessment",
+        "species_evaluation"
+      ],
+      "policy": "vector_clock",
+      "rationale": "Triage report body contains clinical assessment; must preserve causal history.",
+      "risk_level": "high",
+      "user_visible_on_conflict": true,
+      "audit_required": true,
+      "source_architecture_blocks": [
+        "b_offline_001",
+        "b_pending_001"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_offline_001",
+        "b_mod_offline_002",
+        "b_mod_offline_003"
+      ]
+    },
+    {
+      "field_group": "risk_level",
+      "fields": [
+        "risk_level",
+        "severity_score",
+        "clinical_risk"
+      ],
+      "policy": "vector_clock",
+      "rationale": "Risk level directly affects clinical decisions and treatment pathways.",
+      "risk_level": "high",
+      "user_visible_on_conflict": true,
+      "audit_required": true,
+      "source_architecture_blocks": [],
+      "source_interface_blocks": [],
+      "source_module_blocks": []
+    },
+    {
+      "field_group": "suspected_condition",
+      "fields": [
+        "suspected_condition",
+        "differential_diagnosis",
+        "condition_tags"
+      ],
+      "policy": "vector_clock",
+      "rationale": "Suspected conditions are clinical judgment; concurrent edits require review.",
+      "risk_level": "high",
+      "user_visible_on_conflict": true,
+      "audit_required": true,
+      "source_architecture_blocks": [
+        "b_pending_001",
+        "b_pending_003",
+        "b_conflict_001"
+      ],
+      "source_interface_blocks": [
+        "b_iface_conflict_002",
+        "b_iface_lifecycle_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_persist_002",
+        "b_mod_conflict_001"
+      ]
+    },
+    {
+      "field_group": "pending_report_state",
+      "fields": [
+        "status",
+        "report_state"
+      ],
+      "policy": "vector_clock",
+      "rationale": "Report lifecycle state drives sync and conflict behavior; must not be silently overwritten.",
+      "risk_level": "medium",
+      "user_visible_on_conflict": true,
+      "audit_required": true,
+      "source_architecture_blocks": [
+        "b_offline_003",
+        "b_pending_001",
+        "b_pending_002",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_sync_004",
+        "b_conflict_003",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_uvc_001",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_002",
+        "b_iface_offline_003",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_002",
+        "b_iface_lifecycle_003",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_sync_002",
+        "b_mod_sync_004",
+        "b_mod_conflict_001",
+        "b_mod_conflict_003",
+        "b_mod_infra_001"
+      ]
+    },
+    {
+      "field_group": "sync_cursor",
+      "fields": [
+        "sync_cursor",
+        "pull_cursor",
+        "server_cursor",
+        "next_token"
+      ],
+      "policy": "server_token",
+      "rationale": "Sync cursor is server-authoritative; client always accepts server's value.",
+      "risk_level": "low",
+      "user_visible_on_conflict": false,
+      "audit_required": false,
+      "source_architecture_blocks": [
+        "b_conflict_002"
+      ],
+      "source_interface_blocks": [
+        "b_iface_conflict_002",
+        "b_iface_version_002"
+      ],
+      "source_module_blocks": []
+    },
+    {
+      "field_group": "retry_attempt_count",
+      "fields": [
+        "retry_count",
+        "attempt_number",
+        "retry_attempt_count"
+      ],
+      "policy": "local_only",
+      "rationale": "Retry counts are device-local state; never synced or merged.",
+      "risk_level": "low",
+      "user_visible_on_conflict": false,
+      "audit_required": false,
+      "source_architecture_blocks": [
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_004",
+        "b_audit_001"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_002",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_lifecycle_001"
+      ],
+      "source_module_blocks": [
+        "b_mod_sync_002",
+        "b_mod_sync_004",
+        "b_mod_infra_003",
+        "b_mod_infra_006"
+      ]
+    },
+    {
+      "field_group": "last_viewed_screen",
+      "fields": [
+        "last_viewed_screen",
+        "last_active_tab",
+        "ui_state"
+      ],
+      "policy": "last_writer_wins",
+      "rationale": "UI navigation state is non-clinical metadata; latest value is sufficient.",
+      "risk_level": "low",
+      "user_visible_on_conflict": false,
+      "audit_required": false,
+      "source_architecture_blocks": [
+        "b_pending_001",
+        "b_uvc_001",
+        "b_uvc_002"
+      ],
+      "source_interface_blocks": [
+        "b_iface_conflict_001",
+        "b_iface_conflict_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_persist_001",
+        "b_mod_infra_003",
+        "b_mod_infra_007",
+        "b_mod_infra_008"
+      ]
+    },
+    {
+      "field_group": "local_cache_timestamp",
+      "fields": [
+        "local_cache_timestamp",
+        "last_sync_at",
+        "updated_at"
+      ],
+      "policy": "last_writer_wins",
+      "rationale": "Cache timestamps are operational metadata; LWW is safe.",
+      "risk_level": "low",
+      "user_visible_on_conflict": false,
+      "audit_required": false,
+      "source_architecture_blocks": [
+        "b_conflict_002"
+      ],
+      "source_interface_blocks": [
+        "b_iface_conflict_002",
+        "b_iface_version_002"
+      ],
+      "source_module_blocks": []
+    },
+    {
+      "field_group": "clinic_replica_id",
+      "fields": [
+        "clinic_replica_id",
+        "clinic_id",
+        "backend_id"
+      ],
+      "policy": "server_token",
+      "rationale": "Clinic identity is server-assigned; client accepts server value.",
+      "risk_level": "low",
+      "user_visible_on_conflict": false,
+      "audit_required": false,
+      "source_architecture_blocks": [
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_multiclinic_004"
+      ],
+      "source_interface_blocks": [
+        "b_iface_sync_002"
+      ],
+      "source_module_blocks": []
+    },
+    {
+      "field_group": "device_id",
+      "fields": [
+        "device_id",
+        "android_device_id"
+      ],
+      "policy": "local_only",
+      "rationale": "Device ID is device-local; never overwritten by sync.",
+      "risk_level": "low",
+      "user_visible_on_conflict": false,
+      "audit_required": false,
+      "source_architecture_blocks": [],
+      "source_interface_blocks": [],
+      "source_module_blocks": []
+    },
+    {
+      "field_group": "actor_id",
+      "fields": [
+        "actor_id",
+        "clinician_id",
+        "user_id"
+      ],
+      "policy": "local_only",
+      "rationale": "Actor identity is set at login; not subject to sync conflict.",
+      "risk_level": "low",
+      "user_visible_on_conflict": false,
+      "audit_required": false,
+      "source_architecture_blocks": [
+        "b_audit_002"
+      ],
+      "source_interface_blocks": [],
+      "source_module_blocks": [
+        "b_mod_infra_003",
+        "b_mod_infra_004"
+      ]
+    }
+  ],
+  "data_models": [
+    {
+      "name": "PendingReportEntity",
+      "kind": "room_entity",
+      "fields": [
+        {
+          "name": "report_id",
+          "type": "String",
+          "nullable": false,
+          "primary_key": true,
+          "description": "UUID primary key"
+        },
+        {
+          "name": "clinic_id",
+          "type": "String",
+          "nullable": false,
+          "indexed": true,
+          "description": "Target clinic backend"
+        },
+        {
+          "name": "patient_case_id",
+          "type": "String",
+          "nullable": false,
+          "indexed": true,
+          "description": "Associated patient case"
+        },
+        {
+          "name": "triage_result_json",
+          "type": "String",
+          "nullable": false,
+          "description": "Serialized TriageResult from decision tree"
+        },
+        {
+          "name": "status",
+          "type": "String",
+          "nullable": false,
+          "indexed": true,
+          "description": "PendingReportState enum value",
+          "conflict_policy": "vector_clock"
+        },
+        {
+          "name": "created_at",
+          "type": "Long",
+          "nullable": false,
+          "description": "Epoch millis of local creation"
+        },
+        {
+          "name": "updated_at",
+          "type": "Long",
+          "nullable": false,
+          "description": "Epoch millis of last local update",
+          "conflict_policy": "last_writer_wins"
+        },
+        {
+          "name": "vector_clock_json",
+          "type": "String",
+          "nullable": true,
+          "description": "Serialized VectorClock map"
+        },
+        {
+          "name": "retry_count",
+          "type": "Int",
+          "nullable": false,
+          "description": "Current retry attempt count",
+          "conflict_policy": "local_only"
+        },
+        {
+          "name": "last_error",
+          "type": "String",
+          "nullable": true,
+          "description": "Last sync error message"
+        }
+      ],
+      "invariants": [
+        "status must be a valid PendingReportState enum value",
+        "retry_count >= 0",
+        "created_at <= updated_at",
+        "If status is 'merged', vector_clock_json must not be null"
+      ],
+      "source_architecture_blocks": [
+        "b_offline_003",
+        "b_pending_001",
+        "b_pending_002",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_conflict_003",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_002",
+        "b_iface_offline_003",
+        "b_iface_sync_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_002",
+        "b_iface_lifecycle_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_conflict_001",
+        "b_mod_infra_001"
+      ]
+    },
+    {
+      "name": "SyncOperationEntity",
+      "kind": "room_entity",
+      "fields": [
+        {
+          "name": "operation_id",
+          "type": "String",
+          "nullable": false,
+          "primary_key": true,
+          "description": "UUID primary key"
+        },
+        {
+          "name": "report_id",
+          "type": "String",
+          "nullable": false,
+          "indexed": true,
+          "description": "Associated pending report"
+        },
+        {
+          "name": "clinic_id",
+          "type": "String",
+          "nullable": false,
+          "description": "Target clinic"
+        },
+        {
+          "name": "status",
+          "type": "String",
+          "nullable": false,
+          "indexed": true,
+          "description": "SyncOperationState enum value"
+        },
+        {
+          "name": "created_at",
+          "type": "Long",
+          "nullable": false,
+          "description": "When operation was queued"
+        },
+        {
+          "name": "started_at",
+          "type": "Long",
+          "nullable": true,
+          "description": "When upload started"
+        },
+        {
+          "name": "completed_at",
+          "type": "Long",
+          "nullable": true,
+          "description": "When operation completed"
+        }
+      ],
+      "invariants": [
+        "status must be a valid SyncOperationState enum value",
+        "started_at is null if status is 'queued'"
+      ],
+      "source_architecture_blocks": [
+        "b_sync_001",
+        "b_sync_003",
+        "b_sync_005"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_sync_001",
+        "b_iface_sync_002",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_conflict_001",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_sync_001",
+        "b_mod_infra_006"
+      ]
+    },
+    {
+      "name": "RetryLedgerEntry",
+      "kind": "room_entity",
+      "fields": [
+        {
+          "name": "entry_id",
+          "type": "String",
+          "nullable": false,
+          "primary_key": true,
+          "description": "UUID primary key"
+        },
+        {
+          "name": "report_id",
+          "type": "String",
+          "nullable": false,
+          "indexed": true,
+          "description": "Associated pending report"
+        },
+        {
+          "name": "attempt_number",
+          "type": "Int",
+          "nullable": false,
+          "description": "Sequential attempt counter"
+        },
+        {
+          "name": "timestamp",
+          "type": "Long",
+          "nullable": false,
+          "description": "Epoch millis of attempt"
+        },
+        {
+          "name": "http_status",
+          "type": "Int",
+          "nullable": true,
+          "description": "HTTP response code or null"
+        },
+        {
+          "name": "error_code",
+          "type": "String",
+          "nullable": true,
+          "description": "Application error code"
+        },
+        {
+          "name": "next_retry_at",
+          "type": "Long",
+          "nullable": true,
+          "description": "Scheduled next retry epoch millis"
+        }
+      ],
+      "invariants": [
+        "attempt_number >= 1",
+        "If http_status is null, error_code should describe network failure"
+      ],
+      "source_architecture_blocks": [
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_004"
+      ],
+      "source_interface_blocks": [
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_lifecycle_001"
+      ],
+      "source_module_blocks": [
+        "b_mod_sync_002"
+      ]
+    },
+    {
+      "name": "ConflictRecordEntity",
+      "kind": "room_entity",
+      "fields": [
+        {
+          "name": "conflict_id",
+          "type": "String",
+          "nullable": false,
+          "primary_key": true,
+          "description": "UUID primary key"
+        },
+        {
+          "name": "report_id",
+          "type": "String",
+          "nullable": false,
+          "indexed": true,
+          "description": "Report with conflict"
+        },
+        {
+          "name": "conflict_type",
+          "type": "String",
+          "nullable": false,
+          "description": "ConflictType enum value"
+        },
+        {
+          "name": "local_version_json",
+          "type": "String",
+          "nullable": false,
+          "description": "Serialized local report snapshot"
+        },
+        {
+          "name": "remote_version_json",
+          "type": "String",
+          "nullable": false,
+          "description": "Serialized remote report snapshot"
+        },
+        {
+          "name": "conflicting_fields_json",
+          "type": "String",
+          "nullable": false,
+          "description": "JSON array of conflicting field names"
+        },
+        {
+          "name": "resolution_status",
+          "type": "String",
+          "nullable": false,
+          "description": "ConflictResolutionState enum value"
+        },
+        {
+          "name": "resolved_by",
+          "type": "String",
+          "nullable": true,
+          "description": "Actor ID who resolved (null if auto)"
+        },
+        {
+          "name": "resolved_at",
+          "type": "Long",
+          "nullable": true,
+          "description": "Resolution timestamp"
+        }
+      ],
+      "invariants": [
+        "If resolution_status is 'clinician_resolved', resolved_by must not be null",
+        "conflict_type must be a valid ConflictType enum value"
+      ],
+      "source_architecture_blocks": [
+        "b_offline_004",
+        "b_pending_001",
+        "b_pending_004",
+        "b_conflict_001",
+        "b_conflict_002",
+        "b_conflict_003",
+        "b_conflict_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_sync_001",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_lifecycle_001",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_conflict_001",
+        "b_mod_conflict_003"
+      ]
+    },
+    {
+      "name": "VectorClockEntry",
+      "kind": "room_entity",
+      "fields": [
+        {
+          "name": "clock_id",
+          "type": "String",
+          "nullable": false,
+          "primary_key": true,
+          "description": "Composite key: report_id + actor_id"
+        },
+        {
+          "name": "report_id",
+          "type": "String",
+          "nullable": false,
+          "indexed": true,
+          "description": "Associated report"
+        },
+        {
+          "name": "actor_id",
+          "type": "String",
+          "nullable": false,
+          "description": "Actor (device/clinician)"
+        },
+        {
+          "name": "sequence_number",
+          "type": "Int",
+          "nullable": false,
+          "description": "Monotonically increasing counter"
+        }
+      ],
+      "invariants": [
+        "sequence_number >= 0",
+        "clock_id = report_id + ':' + actor_id"
+      ],
+      "source_architecture_blocks": [
+        "b_pending_001",
+        "b_conflict_001",
+        "b_conflict_003",
+        "b_uvc_004"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_003",
+        "b_iface_sync_001",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_004",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_conflict_001",
+        "b_mod_conflict_002",
+        "b_mod_conflict_003",
+        "b_mod_infra_003",
+        "b_mod_infra_007",
+        "b_mod_infra_008",
+        "b_mod_infra_009"
+      ]
+    },
+    {
+      "name": "AuditEventEntity",
+      "kind": "room_entity",
+      "fields": [
+        {
+          "name": "event_id",
+          "type": "String",
+          "nullable": false,
+          "primary_key": true,
+          "description": "UUID primary key"
+        },
+        {
+          "name": "timestamp",
+          "type": "Long",
+          "nullable": false,
+          "indexed": true,
+          "description": "Epoch millis"
+        },
+        {
+          "name": "actor_id",
+          "type": "String",
+          "nullable": false,
+          "description": "Clinician or system"
+        },
+        {
+          "name": "action_type",
+          "type": "String",
+          "nullable": false,
+          "indexed": true,
+          "description": "triage_created, sync_attempted, conflict_detected, etc."
+        },
+        {
+          "name": "report_id",
+          "type": "String",
+          "nullable": true,
+          "indexed": true,
+          "description": "Associated report if applicable"
+        },
+        {
+          "name": "payload_checksum",
+          "type": "String",
+          "nullable": false,
+          "description": "SHA-256 of event payload"
+        },
+        {
+          "name": "details_json",
+          "type": "String",
+          "nullable": true,
+          "description": "Serialized event details"
+        }
+      ],
+      "invariants": [
+        "action_type must be one of the defined audit action types",
+        "payload_checksum is SHA-256 hex string"
+      ],
+      "source_architecture_blocks": [
+        "b_offline_004",
+        "b_sync_002",
+        "b_audit_001",
+        "b_audit_002",
+        "b_audit_004"
+      ],
+      "source_interface_blocks": [],
+      "source_module_blocks": [
+        "b_mod_infra_003"
+      ]
+    },
+    {
+      "name": "OfflineReportEnvelope",
+      "kind": "network_dto",
+      "fields": [
+        {
+          "name": "report_id",
+          "type": "String",
+          "nullable": false,
+          "description": "Report UUID"
+        },
+        {
+          "name": "clinic_id",
+          "type": "String",
+          "nullable": false,
+          "description": "Target clinic"
+        },
+        {
+          "name": "patient_case_id",
+          "type": "String",
+          "nullable": false,
+          "description": "Patient case"
+        },
+        {
+          "name": "triage_result",
+          "type": "TriageResult",
+          "nullable": false,
+          "description": "Decision tree output"
+        },
+        {
+          "name": "created_at",
+          "type": "String (ISO-8601)",
+          "nullable": false,
+          "description": "Creation timestamp"
+        },
+        {
+          "name": "device_id",
+          "type": "String",
+          "nullable": false,
+          "description": "Source device"
+        },
+        {
+          "name": "vector_clock",
+          "type": "Map<String, Int>",
+          "nullable": false,
+          "description": "Current vector clock"
+        }
+      ],
+      "invariants": [
+        "Must be serializable to JSON for HTTP upload"
+      ],
+      "source_architecture_blocks": [
+        "b_offline_003",
+        "b_pending_001",
+        "b_pending_002",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_conflict_003",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_sync_001",
+        "b_iface_sync_003",
+        "b_iface_conflict_001",
+        "b_iface_version_001"
+      ],
+      "source_module_blocks": [
+        "b_mod_persist_001",
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_sync_002",
+        "b_mod_sync_003",
+        "b_mod_sync_004",
+        "b_mod_conflict_003",
+        "b_mod_infra_001",
+        "b_mod_infra_003",
+        "b_mod_infra_006",
+        "b_mod_infra_007",
+        "b_mod_infra_009"
+      ]
+    },
+    {
+      "name": "SyncChangePullRequest",
+      "kind": "network_dto",
+      "fields": [
+        {
+          "name": "clinic_id",
+          "type": "String",
+          "nullable": false,
+          "description": "Clinic to pull from"
+        },
+        {
+          "name": "sync_cursor",
+          "type": "String",
+          "nullable": true,
+          "description": "Last known cursor (null for first pull)"
+        },
+        {
+          "name": "device_id",
+          "type": "String",
+          "nullable": false,
+          "description": "Requesting device"
+        }
+      ],
+      "invariants": [],
+      "source_architecture_blocks": [
+        "b_offline_003",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_003",
+        "b_sync_004",
+        "b_sync_005",
+        "b_conflict_003",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_multiclinic_004",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_sync_001",
+        "b_iface_sync_002",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_conflict_001",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_infra_001",
+        "b_mod_infra_002"
+      ]
+    },
+    {
+      "name": "SyncChangePullResponse",
+      "kind": "network_dto",
+      "fields": [
+        {
+          "name": "changes",
+          "type": "List<RemoteChange>",
+          "nullable": false,
+          "description": "List of changes since cursor"
+        },
+        {
+          "name": "new_cursor",
+          "type": "String",
+          "nullable": false,
+          "description": "Updated cursor for next pull"
+        },
+        {
+          "name": "has_more",
+          "type": "Boolean",
+          "nullable": false,
+          "description": "Whether more changes exist"
+        }
+      ],
+      "invariants": [
+        "new_cursor must be opaque — client must not parse it"
+      ],
+      "source_architecture_blocks": [
+        "b_offline_003",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_003",
+        "b_sync_004",
+        "b_sync_005",
+        "b_conflict_003",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_multiclinic_004",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_sync_001",
+        "b_iface_sync_002",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_infra_001",
+        "b_mod_infra_002"
+      ]
+    },
+    {
+      "name": "SyncUploadRequest",
+      "kind": "network_dto",
+      "fields": [
+        {
+          "name": "report",
+          "type": "OfflineReportEnvelope",
+          "nullable": false,
+          "description": "Report to upload"
+        },
+        {
+          "name": "expected_server_clock",
+          "type": "Map<String, Int>",
+          "nullable": true,
+          "description": "Client's last known server clock (for conflict detection)"
+        }
+      ],
+      "invariants": [],
+      "source_architecture_blocks": [
+        "b_offline_003",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_003",
+        "b_sync_004",
+        "b_sync_005",
+        "b_conflict_003",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_multiclinic_004",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_sync_001",
+        "b_iface_sync_002",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_conflict_001",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_sync_001",
+        "b_mod_infra_006"
+      ]
+    },
+    {
+      "name": "SyncUploadResult",
+      "kind": "network_dto",
+      "fields": [
+        {
+          "name": "status",
+          "type": "String",
+          "nullable": false,
+          "description": "'accepted' | 'conflict' | 'rejected'"
+        },
+        {
+          "name": "server_clock",
+          "type": "Map<String, Int>",
+          "nullable": false,
+          "description": "Server's updated vector clock"
+        },
+        {
+          "name": "conflict_payload",
+          "type": "ConflictPayload",
+          "nullable": true,
+          "description": "Present only if status='conflict'"
+        }
+      ],
+      "invariants": [
+        "If status='conflict', conflict_payload must not be null"
+      ],
+      "source_architecture_blocks": [
+        "b_offline_003",
+        "b_offline_004",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_003",
+        "b_sync_004",
+        "b_sync_005",
+        "b_conflict_001",
+        "b_conflict_002",
+        "b_conflict_003",
+        "b_conflict_004",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_multiclinic_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_sync_001",
+        "b_iface_sync_002",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_sync_001",
+        "b_mod_conflict_001",
+        "b_mod_conflict_003",
+        "b_mod_infra_006"
+      ]
+    },
+    {
+      "name": "SyncAckRequest",
+      "kind": "network_dto",
+      "fields": [
+        {
+          "name": "report_id",
+          "type": "String",
+          "nullable": false,
+          "description": "Report being acknowledged"
+        },
+        {
+          "name": "client_clock",
+          "type": "Map<String, Int>",
+          "nullable": false,
+          "description": "Client's current clock after merge"
+        }
+      ],
+      "invariants": [],
+      "source_architecture_blocks": [
+        "b_offline_003",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_003",
+        "b_sync_004",
+        "b_sync_005",
+        "b_conflict_003",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_multiclinic_004",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_sync_001",
+        "b_iface_sync_002",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_conflict_001",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_sync_001",
+        "b_mod_infra_006"
+      ]
+    },
+    {
+      "name": "ConflictPayload",
+      "kind": "network_dto",
+      "fields": [
+        {
+          "name": "report_id",
+          "type": "String",
+          "nullable": false,
+          "description": "Report with conflict"
+        },
+        {
+          "name": "local_version",
+          "type": "ReportSnapshot",
+          "nullable": false,
+          "description": "Client's version"
+        },
+        {
+          "name": "remote_version",
+          "type": "ReportSnapshot",
+          "nullable": false,
+          "description": "Server's version"
+        },
+        {
+          "name": "local_clock",
+          "type": "Map<String, Int>",
+          "nullable": false,
+          "description": "Client's vector clock"
+        },
+        {
+          "name": "remote_clock",
+          "type": "Map<String, Int>",
+          "nullable": false,
+          "description": "Server's vector clock"
+        },
+        {
+          "name": "conflicting_fields",
+          "type": "List<String>",
+          "nullable": false,
+          "description": "Fields with divergent values"
+        }
+      ],
+      "invariants": [
+        "conflicting_fields must not be empty"
+      ],
+      "source_architecture_blocks": [
+        "b_conflict_001"
+      ],
+      "source_interface_blocks": [
+        "b_iface_sync_001",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_lifecycle_001",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_conflict_001",
+        "b_mod_conflict_003"
+      ]
+    },
+    {
+      "name": "VersionMetadata",
+      "kind": "network_dto",
+      "fields": [
+        {
+          "name": "vector_clock",
+          "type": "Map<String, Int>",
+          "nullable": false,
+          "description": "Causal version vector"
+        },
+        {
+          "name": "last_modified_by",
+          "type": "String",
+          "nullable": false,
+          "description": "Actor who last modified"
+        },
+        {
+          "name": "last_modified_at",
+          "type": "String (ISO-8601)",
+          "nullable": false,
+          "description": "Last modification timestamp"
+        },
+        {
+          "name": "schema_version",
+          "type": "String",
+          "nullable": false,
+          "description": "Data schema version"
+        }
+      ],
+      "invariants": [
+        "Included in every sync request/response for version tracking"
+      ],
+      "source_architecture_blocks": [
+        "b_offline_002",
+        "b_pending_001",
+        "b_conflict_001",
+        "b_conflict_003",
+        "b_conflict_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_004"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_003",
+        "b_iface_sync_001",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_004",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_offline_001",
+        "b_mod_conflict_001",
+        "b_mod_conflict_003",
+        "b_mod_infra_007",
+        "b_mod_infra_008",
+        "b_mod_infra_009"
+      ]
+    }
+  ],
+  "state_machines": [
+    {
+      "name": "PendingReportState",
+      "states": [
+        "draft",
+        "completed_offline",
+        "queued_for_sync",
+        "syncing",
+        "merged",
+        "conflicted",
+        "requires_review",
+        "failed_retryable",
+        "failed_terminal"
+      ],
+      "allowed_transitions": [
+        {
+          "from": "draft",
+          "to": "completed_offline",
+          "trigger": "triage_completed",
+          "audit_event_required": true
+        },
+        {
+          "from": "completed_offline",
+          "to": "queued_for_sync",
+          "trigger": "enqueue_for_sync",
+          "audit_event_required": false
+        },
+        {
+          "from": "queued_for_sync",
+          "to": "syncing",
+          "trigger": "sync_started",
+          "audit_event_required": false
+        },
+        {
+          "from": "syncing",
+          "to": "merged",
+          "trigger": "sync_accepted",
+          "audit_event_required": true
+        },
+        {
+          "from": "syncing",
+          "to": "conflicted",
+          "trigger": "conflict_detected",
+          "audit_event_required": true
+        },
+        {
+          "from": "syncing",
+          "to": "failed_retryable",
+          "trigger": "sync_failed_transient",
+          "audit_event_required": false
+        },
+        {
+          "from": "failed_retryable",
+          "to": "queued_for_sync",
+          "trigger": "retry_scheduled",
+          "audit_event_required": false
+        },
+        {
+          "from": "failed_retryable",
+          "to": "failed_terminal",
+          "trigger": "max_retries_exceeded",
+          "audit_event_required": true
+        },
+        {
+          "from": "conflicted",
+          "to": "requires_review",
+          "trigger": "clinician_review_required",
+          "audit_event_required": true
+        },
+        {
+          "from": "requires_review",
+          "to": "merged",
+          "trigger": "clinician_resolved",
+          "audit_event_required": true
+        },
+        {
+          "from": "conflicted",
+          "to": "merged",
+          "trigger": "auto_merge_succeeded",
+          "audit_event_required": true
+        }
+      ],
+      "forbidden_transitions": [
+        {
+          "from": "conflicted",
+          "to": "queued_for_sync",
+          "reason": "Cannot bypass conflict resolution by re-queueing; must resolve or escalate to review first"
+        },
+        {
+          "from": "failed_terminal",
+          "to": "syncing",
+          "reason": "Terminal failure requires manual intervention, not automatic retry"
+        },
+        {
+          "from": "requires_review",
+          "to": "queued_for_sync",
+          "reason": "Cannot skip clinician review by re-queueing"
+        },
+        {
+          "from": "merged",
+          "to": "draft",
+          "reason": "Merged reports cannot revert to draft"
+        },
+        {
+          "from": "merged",
+          "to": "queued_for_sync",
+          "reason": "Already merged; re-sync not permitted"
+        }
+      ],
+      "source_architecture_blocks": [
+        "b_offline_003",
+        "b_pending_001",
+        "b_pending_002",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_conflict_003",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_audit_003"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_offline_003",
+        "b_iface_sync_001",
+        "b_iface_sync_002",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_002",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_sync_002",
+        "b_mod_sync_004",
+        "b_mod_conflict_001",
+        "b_mod_conflict_003",
+        "b_mod_infra_001",
+        "b_mod_infra_002",
+        "b_mod_infra_003",
+        "b_mod_infra_004",
+        "b_mod_infra_007"
+      ]
+    },
+    {
+      "name": "SyncOperationState",
+      "states": [
+        "queued",
+        "in_flight",
+        "acknowledged",
+        "retry_scheduled",
+        "conflict_detected",
+        "dead_lettered"
+      ],
+      "allowed_transitions": [
+        {
+          "from": "queued",
+          "to": "in_flight",
+          "trigger": "upload_started",
+          "audit_event_required": false
+        },
+        {
+          "from": "in_flight",
+          "to": "acknowledged",
+          "trigger": "server_ack_received",
+          "audit_event_required": true
+        },
+        {
+          "from": "in_flight",
+          "to": "conflict_detected",
+          "trigger": "conflict_response",
+          "audit_event_required": true
+        },
+        {
+          "from": "in_flight",
+          "to": "retry_scheduled",
+          "trigger": "transient_failure",
+          "audit_event_required": false
+        },
+        {
+          "from": "retry_scheduled",
+          "to": "queued",
+          "trigger": "retry_timer_expired",
+          "audit_event_required": false
+        },
+        {
+          "from": "retry_scheduled",
+          "to": "dead_lettered",
+          "trigger": "max_retries_exceeded",
+          "audit_event_required": true
+        },
+        {
+          "from": "conflict_detected",
+          "to": "queued",
+          "trigger": "conflict_resolved_requeue",
+          "audit_event_required": true
+        }
+      ],
+      "forbidden_transitions": [
+        {
+          "from": "dead_lettered",
+          "to": "queued",
+          "reason": "Dead-lettered operations require manual intervention"
+        },
+        {
+          "from": "acknowledged",
+          "to": "in_flight",
+          "reason": "Acknowledged operations are terminal"
+        },
+        {
+          "from": "dead_lettered",
+          "to": "in_flight",
+          "reason": "Cannot retry dead-lettered operations automatically"
+        }
+      ],
+      "source_architecture_blocks": [
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_003",
+        "b_sync_004",
+        "b_sync_005"
+      ],
+      "source_interface_blocks": [
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_sync_001",
+        "b_iface_sync_002",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_conflict_001",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_sync_001",
+        "b_mod_sync_002",
+        "b_mod_infra_006"
+      ]
+    },
+    {
+      "name": "ConflictResolutionState",
+      "states": [
+        "auto_merged",
+        "lww_applied",
+        "vector_conflict",
+        "manual_review_required",
+        "clinician_resolved"
+      ],
+      "allowed_transitions": [
+        {
+          "from": "vector_conflict",
+          "to": "auto_merged",
+          "trigger": "non_overlapping_fields_merged",
+          "audit_event_required": true
+        },
+        {
+          "from": "vector_conflict",
+          "to": "manual_review_required",
+          "trigger": "overlapping_clinical_fields",
+          "audit_event_required": true
+        },
+        {
+          "from": "vector_conflict",
+          "to": "lww_applied",
+          "trigger": "metadata_only_conflict",
+          "audit_event_required": true
+        },
+        {
+          "from": "manual_review_required",
+          "to": "clinician_resolved",
+          "trigger": "clinician_selected_version",
+          "audit_event_required": true
+        }
+      ],
+      "forbidden_transitions": [
+        {
+          "from": "manual_review_required",
+          "to": "auto_merged",
+          "reason": "Clinical conflicts cannot be auto-merged; clinician must review"
+        },
+        {
+          "from": "clinician_resolved",
+          "to": "manual_review_required",
+          "reason": "Resolution is final; cannot revert to review"
+        },
+        {
+          "from": "lww_applied",
+          "to": "manual_review_required",
+          "reason": "LWW resolution is final for metadata"
+        }
+      ],
+      "source_architecture_blocks": [
+        "b_offline_004",
+        "b_pending_001",
+        "b_conflict_001",
+        "b_conflict_002",
+        "b_conflict_003",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_uvc_004",
+        "b_audit_001"
+      ],
+      "source_interface_blocks": [
+        "b_iface_sync_001",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003"
+      ],
+      "source_module_blocks": [
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_conflict_001",
+        "b_mod_conflict_002",
+        "b_mod_conflict_003",
+        "b_mod_infra_003",
+        "b_mod_infra_007",
+        "b_mod_infra_008",
+        "b_mod_infra_009"
+      ]
+    }
+  ],
+  "implementation_tasks": [
+    {
+      "task_id": "TASK-001",
+      "title": "Define offline triage data models",
+      "target_module": "data",
+      "description": "Create Room entity classes for PendingReportEntity, SyncOperationEntity, RetryLedgerEntry, ConflictRecordEntity, VectorClockEntry, and AuditEventEntity. Create network DTO classes for OfflineReportEnvelope, SyncChangePullRequest/Response, SyncUploadRequest/Result, SyncAckRequest, ConflictPayload, and VersionMetadata. Define all enums: PendingReportState, SyncOperationState, ConflictResolutionState, ConflictType.",
+      "source_blocks": [
+        "b_offline_003",
+        "b_offline_004",
+        "b_pending_001",
+        "b_pending_002",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_003",
+        "b_sync_004",
+        "b_sync_005",
+        "b_conflict_001",
+        "b_conflict_002",
+        "b_conflict_003",
+        "b_conflict_004",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_multiclinic_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_002",
+        "b_audit_003",
+        "b_audit_004",
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_offline_003",
+        "b_iface_sync_001",
+        "b_iface_sync_002",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_002",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003",
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_sync_002",
+        "b_mod_sync_003",
+        "b_mod_sync_004",
+        "b_mod_conflict_001",
+        "b_mod_conflict_002",
+        "b_mod_conflict_003",
+        "b_mod_infra_001",
+        "b_mod_infra_003",
+        "b_mod_infra_004",
+        "b_mod_infra_005",
+        "b_mod_infra_006",
+        "b_mod_infra_007",
+        "b_mod_infra_008",
+        "b_mod_infra_009"
+      ],
+      "acceptance_criteria": [
+        "All 6 Room entities compile and have @Entity annotation",
+        "All 8 network DTOs are serializable to JSON",
+        "All enum values match the state machine definitions exactly",
+        "Primary keys and indexes match DataModelSpec",
+        "No field uses an undefined type"
+      ],
+      "required_tests": [
+        "Room entity insert/query round-trip test",
+        "DTO JSON serialization/deserialization test",
+        "Enum exhaustiveness test (all values covered in when/switch)"
+      ]
+    },
+    {
+      "task_id": "TASK-002",
+      "title": "Implement PendingReportRepository",
+      "target_module": "persistence",
+      "description": "Implement the PendingReportRepository using Room DAO. Must support: insert new report, update status, query by status, query all pending for sync, delete merged reports (optional cleanup). All operations must be suspend functions for coroutine compatibility.",
+      "source_blocks": [
+        "b_offline_003",
+        "b_pending_001",
+        "b_pending_002",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_conflict_003",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_audit_003",
+        "b_iface_offline_002",
+        "b_iface_offline_003",
+        "b_iface_sync_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_002",
+        "b_iface_lifecycle_003",
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_conflict_001",
+        "b_mod_infra_001"
+      ],
+      "acceptance_criteria": [
+        "Insert creates report with status 'draft' and retry_count=0",
+        "Update status transitions are validated against PendingReportState machine",
+        "Query by status returns correct subset",
+        "Reports survive process kill (Room persistence verified)",
+        "No blocking operations on main thread"
+      ],
+      "required_tests": [
+        "Insert and retrieve by ID",
+        "Status transition: draft → completed_offline → queued_for_sync",
+        "Query all reports with status 'queued_for_sync'",
+        "Reject invalid transition: merged → draft"
+      ]
+    },
+    {
+      "task_id": "TASK-003",
+      "title": "Implement OfflineDecisionTreeRunner",
+      "target_module": "triage",
+      "description": "Implement the deterministic rule interpreter for offline triage. Takes species, symptoms, and urgency as input. Produces a TriageResult. Rules are versioned and loaded from bundled assets, refreshed from backend on connectivity restore. No machine learning — pure rule evaluation.",
+      "source_blocks": [
+        "b_offline_001",
+        "b_offline_002",
+        "b_offline_004",
+        "b_offline_005",
+        "b_conflict_003",
+        "b_uvc_001",
+        "b_iface_offline_003",
+        "b_mod_offline_001",
+        "b_mod_offline_002",
+        "b_mod_offline_003"
+      ],
+      "acceptance_criteria": [
+        "Same input always produces same output (deterministic)",
+        "Rule version is tracked and available for display",
+        "Rules can be refreshed from network without app restart",
+        "Triage result includes confidence and reasoning chain",
+        "No network call required during triage execution"
+      ],
+      "required_tests": [
+        "Determinism test: same input → same output across runs",
+        "Rule version tracking test",
+        "Multiple species/symptom combinations test",
+        "Edge case: empty symptoms list"
+      ]
+    },
+    {
+      "task_id": "TASK-004",
+      "title": "Implement SyncQueueManager and RetryLedger",
+      "target_module": "sync",
+      "description": "Implement the FIFO sync queue using WorkManager or equivalent background scheduler. Process pending reports in order. Record each attempt in RetryLedger. Implement exponential backoff. Trigger sync on connectivity restore via ConnectivityObserver. All network operations on background coroutine.",
+      "source_blocks": [
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_003",
+        "b_sync_004",
+        "b_sync_005",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_sync_002",
+        "b_mod_sync_003"
+      ],
+      "acceptance_criteria": [
+        "Reports are processed in FIFO order",
+        "Each sync attempt creates a RetryLedgerEntry",
+        "Exponential backoff doubles delay on each failure",
+        "Max retries exceeded → status transitions to failed_terminal",
+        "UI thread is never blocked by sync operations",
+        "Sync triggers automatically on connectivity restore"
+      ],
+      "required_tests": [
+        "FIFO ordering test with 3+ queued reports",
+        "Retry ledger records attempt details",
+        "Backoff delay calculation test",
+        "Max retries → terminal failure transition",
+        "ConnectivityObserver triggers re-sync"
+      ]
+    },
+    {
+      "task_id": "TASK-005",
+      "title": "Implement ConflictResolver with hybrid policy",
+      "target_module": "conflict",
+      "description": "Implement the hybrid conflict resolution engine. Vector clock comparison for clinical fields. LWW for metadata fields. Auto-merge for non-overlapping changes. Escalate overlapping clinical conflicts to clinician review. Store ConflictRecordEntity locally. Never auto-resolve clinical field conflicts.",
+      "source_blocks": [
+        "b_offline_002",
+        "b_offline_004",
+        "b_pending_001",
+        "b_pending_003",
+        "b_conflict_001",
+        "b_conflict_002",
+        "b_conflict_003",
+        "b_conflict_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_002",
+        "b_audit_003",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003",
+        "b_mod_offline_002",
+        "b_mod_persist_002",
+        "b_mod_conflict_001",
+        "b_mod_conflict_002",
+        "b_mod_conflict_003",
+        "b_mod_infra_003",
+        "b_mod_infra_004",
+        "b_mod_infra_007",
+        "b_mod_infra_008",
+        "b_mod_infra_009"
+      ],
+      "acceptance_criteria": [
+        "Clinical field conflicts always require clinician review",
+        "Metadata-only conflicts resolve via LWW automatically",
+        "Non-overlapping changes auto-merge correctly",
+        "ConflictRecordEntity persisted with both versions",
+        "Audit event generated for every conflict detection and resolution",
+        "Field classification matches conflict_policy_matrix exactly"
+      ],
+      "required_tests": [
+        "Clinical field conflict → requires_review",
+        "Metadata-only conflict → lww_applied",
+        "Non-overlapping fields → auto_merged",
+        "Mixed clinical + metadata → clinical part requires review",
+        "Audit event generation test",
+        "ConflictPayload storage test"
+      ]
+    },
+    {
+      "task_id": "TASK-006",
+      "title": "Implement ClinicReplicaClient DTOs and network layer",
+      "target_module": "network",
+      "description": "Implement the multi-clinic network client. Maintain clinic registry with base URLs and auth tokens. Support POST /sync/upload, GET /sync/pull, POST /sync/ack, POST /sync/resolve. Route requests to correct clinic backend based on clinic_id. Validate registry before use.",
+      "source_blocks": [
+        "b_sync_001",
+        "b_multiclinic_001",
+        "b_multiclinic_002",
+        "b_multiclinic_003",
+        "b_multiclinic_004",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_iface_sync_002",
+        "b_mod_sync_001",
+        "b_mod_infra_001",
+        "b_mod_infra_002",
+        "b_mod_infra_009"
+      ],
+      "acceptance_criteria": [
+        "Requests routed to correct clinic based on clinic_id",
+        "Auth tokens included in all requests",
+        "Registry validation rejects stale/missing entries",
+        "All 4 endpoints implemented (upload, pull, ack, resolve)",
+        "Network errors return structured error codes"
+      ],
+      "required_tests": [
+        "Routing test: different clinic_ids → different base URLs",
+        "Auth token inclusion test",
+        "Stale registry rejection test",
+        "Network error handling test"
+      ]
+    },
+    {
+      "task_id": "TASK-007",
+      "title": "Implement AuditEventWriter",
+      "target_module": "audit",
+      "description": "Implement the audit event writer. Generate immutable audit events for: triage creation, sync attempt, sync success, sync failure, conflict detection, conflict resolution, clinician review. Each event includes timestamp, actor_id, action_type, report_id, and SHA-256 payload checksum.",
+      "source_blocks": [
+        "b_audit_001",
+        "b_audit_002",
+        "b_mod_infra_003",
+        "b_mod_infra_004"
+      ],
+      "acceptance_criteria": [
+        "All 7 action types generate correct events",
+        "Events are immutable (no update/delete operations)",
+        "Payload checksum is SHA-256",
+        "Events persist in Room database",
+        "actor_id is always populated (clinician or 'system')"
+      ],
+      "required_tests": [
+        "Event generation for each action type",
+        "Checksum consistency test",
+        "Immutability test: no update method exposed",
+        "Query by action_type and report_id"
+      ]
+    },
+    {
+      "task_id": "TASK-008",
+      "title": "Add state-machine and conflict-resolution unit tests",
+      "target_module": "test",
+      "description": "Comprehensive unit test suite covering all 3 state machines and the conflict resolver. Verify all allowed transitions, all forbidden transitions, audit event requirements, and edge cases. Include property-based tests for vector clock merge.",
+      "source_blocks": [
+        "b_offline_004",
+        "b_pending_001",
+        "b_pending_004",
+        "b_conflict_001",
+        "b_conflict_002",
+        "b_conflict_003",
+        "b_conflict_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_003",
+        "b_iface_offline_002",
+        "b_iface_sync_001",
+        "b_iface_sync_004",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_lifecycle_001",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003",
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_conflict_001",
+        "b_mod_conflict_002",
+        "b_mod_conflict_003",
+        "b_mod_infra_003",
+        "b_mod_infra_007",
+        "b_mod_infra_008",
+        "b_mod_infra_009"
+      ],
+      "acceptance_criteria": [
+        "Every allowed transition tested",
+        "Every forbidden transition tested (must throw/reject)",
+        "Audit event requirement verified for flagged transitions",
+        "Vector clock merge produces correct result",
+        "No orphan states (every state reachable)"
+      ],
+      "required_tests": [
+        "PendingReportState: all 11 transitions",
+        "PendingReportState: all 5 forbidden transitions",
+        "SyncOperationState: all 7 transitions",
+        "SyncOperationState: all 3 forbidden transitions",
+        "ConflictResolutionState: all 4 transitions",
+        "ConflictResolutionState: all 3 forbidden transitions",
+        "Vector clock merge: concurrent edits test",
+        "Vector clock merge: causally ordered test"
+      ]
+    },
+    {
+      "task_id": "TASK-009",
+      "title": "Implement UserConflictReviewPresenter",
+      "target_module": "ui",
+      "description": "Implement the conflict review UI screen. Display both local and remote versions side-by-side with field-level diff highlighting. Require clinician to explicitly select a version for each conflicting field. Submit resolution via POST /sync/resolve. Generate audit event on resolution.",
+      "source_blocks": [
+        "b_offline_002",
+        "b_conflict_001",
+        "b_conflict_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_audit_002",
+        "b_audit_003",
+        "b_iface_conflict_003",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_version_003",
+        "b_mod_conflict_001",
+        "b_mod_conflict_002",
+        "b_mod_infra_003",
+        "b_mod_infra_004",
+        "b_mod_infra_007",
+        "b_mod_infra_008"
+      ],
+      "acceptance_criteria": [
+        "Both versions displayed with clear diff highlighting",
+        "Each conflicting field requires explicit selection",
+        "Cannot submit without resolving all fields",
+        "Resolution generates audit event with clinician actor_id",
+        "POST /sync/resolve called with updated vector clock"
+      ],
+      "required_tests": [
+        "UI displays both versions correctly",
+        "Submit blocked until all fields resolved",
+        "Resolution generates correct audit event",
+        "Vector clock updated after resolution"
+      ]
+    },
+    {
+      "task_id": "TASK-010",
+      "title": "Implement ConnectivityObserver and auto-sync trigger",
+      "target_module": "infrastructure",
+      "description": "Monitor network connectivity using Android ConnectivityManager. Notify SyncQueueManager when connectivity restores. Debounce rapid connectivity changes. Do not trigger sync if queue is empty.",
+      "source_blocks": [
+        "b_offline_002",
+        "b_sync_003",
+        "b_sync_004",
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_sync_003",
+        "b_iface_lifecycle_001",
+        "b_mod_offline_001",
+        "b_mod_sync_001",
+        "b_mod_sync_003",
+        "b_mod_sync_004",
+        "b_mod_conflict_001",
+        "b_mod_infra_006"
+      ],
+      "acceptance_criteria": [
+        "Connectivity change detected within 1 second",
+        "SyncQueueManager notified on restore",
+        "Rapid on/off changes debounced",
+        "No sync triggered if queue is empty",
+        "Works with both WiFi and cellular"
+      ],
+      "required_tests": [
+        "Connectivity restore triggers sync",
+        "Debounce test: rapid changes",
+        "Empty queue: no sync triggered"
+      ]
+    }
+  ],
+  "risk_notes": [],
+  "forbidden_assumptions": [
+    {
+      "assumption_id": "FA-001",
+      "statement": "Do not use LWW for clinical case status, veterinary notes, triage results, risk levels, or suspected conditions unless the field is explicitly listed in the conflict_policy_matrix with policy=last_writer_wins AND a high-risk acceptance exists in the RiskRegister.",
+      "reason": "Clinical data requires causal ordering via vector clocks to prevent silent data loss from concurrent edits by different clinicians or devices.",
+      "source_blocks": [
+        "b_offline_004",
+        "b_pending_001",
+        "b_pending_003",
+        "b_pending_004",
+        "b_conflict_001",
+        "b_conflict_002",
+        "b_conflict_003",
+        "b_conflict_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_003",
+        "b_iface_sync_001",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003",
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_conflict_001",
+        "b_mod_conflict_002",
+        "b_mod_conflict_003",
+        "b_mod_infra_003",
+        "b_mod_infra_007",
+        "b_mod_infra_008",
+        "b_mod_infra_009"
+      ]
+    },
+    {
+      "assumption_id": "FA-002",
+      "statement": "Do not silently overwrite remote veterinary edits when syncing local pending reports.",
+      "reason": "A remote vet may have updated case notes during the offline period. Silent overwrite could discard critical clinical observations.",
+      "source_blocks": [
+        "b_offline_003",
+        "b_pending_001",
+        "b_pending_003",
+        "b_conflict_001",
+        "b_conflict_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_audit_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_lifecycle_003",
+        "b_iface_version_003",
+        "b_mod_offline_002",
+        "b_mod_persist_002",
+        "b_mod_conflict_001",
+        "b_mod_conflict_002"
+      ]
+    },
+    {
+      "assumption_id": "FA-003",
+      "statement": "Do not require users to re-enter completed offline triage data after network restore or app restart.",
+      "reason": "Offline triage results are persisted in Room and survive process kill. Forcing re-entry causes data loss and wastes clinician time.",
+      "source_blocks": [
+        "b_pending_001",
+        "b_pending_002",
+        "b_sync_005",
+        "b_uvc_002",
+        "b_iface_offline_002",
+        "b_iface_lifecycle_002",
+        "b_mod_persist_001",
+        "b_mod_infra_003"
+      ]
+    },
+    {
+      "assumption_id": "FA-004",
+      "statement": "Do not treat network failure as terminal for completed offline reports. Failed syncs must remain in the retry queue.",
+      "reason": "Offline-first architecture guarantees that completed reports are never lost due to network conditions. The retry ledger handles backoff and eventual delivery.",
+      "source_blocks": [
+        "b_offline_003",
+        "b_pending_001",
+        "b_pending_002",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_003",
+        "b_sync_004",
+        "b_sync_005",
+        "b_conflict_003",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_uvc_001",
+        "b_audit_003",
+        "b_iface_offline_002",
+        "b_iface_offline_003",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_002",
+        "b_iface_lifecycle_003",
+        "b_iface_version_003",
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_sync_002",
+        "b_mod_sync_003",
+        "b_mod_sync_004",
+        "b_mod_conflict_001",
+        "b_mod_infra_001",
+        "b_mod_infra_006"
+      ]
+    },
+    {
+      "assumption_id": "FA-005",
+      "statement": "Do not invent new sync states or report lifecycle states outside the defined state machines (PendingReportState, SyncOperationState, ConflictResolutionState).",
+      "reason": "Undocumented states break the deterministic state machine contracts, make conflict resolution unpredictable, and prevent audit trail completeness.",
+      "source_blocks": [
+        "b_offline_003",
+        "b_offline_004",
+        "b_pending_001",
+        "b_pending_002",
+        "b_pending_003",
+        "b_pending_004",
+        "b_sync_001",
+        "b_sync_002",
+        "b_sync_003",
+        "b_sync_004",
+        "b_sync_005",
+        "b_conflict_001",
+        "b_conflict_002",
+        "b_conflict_003",
+        "b_conflict_004",
+        "b_multiclinic_001",
+        "b_multiclinic_003",
+        "b_multiclinic_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_003",
+        "b_iface_offline_001",
+        "b_iface_offline_002",
+        "b_iface_offline_003",
+        "b_iface_sync_001",
+        "b_iface_sync_002",
+        "b_iface_sync_003",
+        "b_iface_sync_004",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_002",
+        "b_iface_lifecycle_003",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003",
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_persist_003",
+        "b_mod_sync_001",
+        "b_mod_sync_002",
+        "b_mod_sync_003",
+        "b_mod_sync_004",
+        "b_mod_conflict_001",
+        "b_mod_conflict_002",
+        "b_mod_conflict_003",
+        "b_mod_infra_001",
+        "b_mod_infra_003",
+        "b_mod_infra_006",
+        "b_mod_infra_007",
+        "b_mod_infra_008",
+        "b_mod_infra_009"
+      ]
+    },
+    {
+      "assumption_id": "FA-006",
+      "statement": "Do not omit audit events for conflict resolution transitions. Every conflict detection, clinician review, and resolution action must generate an audit event.",
+      "reason": "Audit trail is required for clinical compliance and post-incident review. Missing audit events make conflict history non-reconstructable.",
+      "source_blocks": [
+        "b_offline_002",
+        "b_offline_004",
+        "b_pending_004",
+        "b_sync_002",
+        "b_sync_004",
+        "b_conflict_001",
+        "b_conflict_002",
+        "b_conflict_003",
+        "b_conflict_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_002",
+        "b_audit_003",
+        "b_audit_004",
+        "b_iface_sync_001",
+        "b_iface_conflict_001",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_iface_version_003",
+        "b_mod_offline_002",
+        "b_mod_persist_001",
+        "b_mod_persist_002",
+        "b_mod_sync_004",
+        "b_mod_conflict_001",
+        "b_mod_conflict_002",
+        "b_mod_conflict_003",
+        "b_mod_infra_003",
+        "b_mod_infra_004",
+        "b_mod_infra_005",
+        "b_mod_infra_007",
+        "b_mod_infra_008",
+        "b_mod_infra_009"
+      ]
+    },
+    {
+      "assumption_id": "FA-007",
+      "statement": "Do not parse the sync_cursor. It is an opaque server-issued token. Client must store and return it as-is.",
+      "reason": "Cursor format is server-internal. Parsing it creates a coupling that breaks on server-side cursor format changes.",
+      "source_blocks": [
+        "b_iface_sync_001",
+        "b_iface_conflict_001",
+        "b_iface_conflict_004",
+        "b_iface_version_001",
+        "b_iface_version_002",
+        "b_mod_infra_006"
+      ]
+    },
+    {
+      "assumption_id": "FA-008",
+      "statement": "Do not auto-resolve conflicts on overlapping clinical fields. If both local and remote versions modified the same clinical field, the conflict must be escalated to clinician review.",
+      "reason": "Only a clinician can determine which version of a clinical observation is correct. Automated resolution risks patient safety.",
+      "source_blocks": [
+        "b_offline_002",
+        "b_pending_001",
+        "b_pending_003",
+        "b_conflict_001",
+        "b_conflict_003",
+        "b_conflict_004",
+        "b_uvc_001",
+        "b_uvc_002",
+        "b_uvc_003",
+        "b_uvc_004",
+        "b_audit_001",
+        "b_audit_002",
+        "b_audit_003",
+        "b_iface_conflict_002",
+        "b_iface_conflict_003",
+        "b_iface_conflict_004",
+        "b_iface_lifecycle_001",
+        "b_iface_lifecycle_003",
+        "b_iface_version_003",
+        "b_mod_offline_002",
+        "b_mod_persist_002",
+        "b_mod_conflict_001",
+        "b_mod_conflict_002",
+        "b_mod_conflict_003",
+        "b_mod_infra_003",
+        "b_mod_infra_004",
+        "b_mod_infra_007",
+        "b_mod_infra_008"
+      ]
+    }
+  ]
+}

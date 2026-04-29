@@ -1,0 +1,224 @@
+{
+  "schema_version": "repair_check.v1",
+  "repair_id": "repair_5847aed7357d",
+  "verdict": "requires_review",
+  "generated_at": "2026-04-29T08:03:50.703Z",
+  "summary": {
+    "changed_files": 1,
+    "allowed": 0,
+    "review_required": 1,
+    "forbidden": 0,
+    "outside_scope": 0,
+    "warnings": 1
+  },
+  "findings": [
+    {
+      "kind": "review_required_file",
+      "severity": "review_required",
+      "file": "httpx/_auth.py",
+      "message": "Repair touches review-required file: httpx/_auth.py",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "evidence": [
+        "1 paths match pattern **/_auth*",
+        "Sensitive zone \"authentication\" (high) corroborates"
+      ]
+    },
+    {
+      "kind": "missing_related_test_signal",
+      "severity": "warning",
+      "message": "No related test file was included in the repair diff.",
+      "allowed_actions": [
+        "add_or_run_related_test",
+        "keep_for_human_review"
+      ],
+      "requires_human": false,
+      "evidence": [
+        "related_test:tests/test_httpx.py"
+      ]
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "message": "Changed files overlap a review-required scope in active repair repair_4575bde605d5.",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "other_repair_id": "repair_4575bde605d5",
+      "evidence": [
+        "repair:repair_5847aed7357d",
+        "other_repair:repair_4575bde605d5"
+      ]
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "message": "Changed files overlap a review-required scope in active repair repair_005f2c0e45f8.",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "other_repair_id": "repair_005f2c0e45f8",
+      "evidence": [
+        "repair:repair_5847aed7357d",
+        "other_repair:repair_005f2c0e45f8"
+      ]
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "message": "Changed files overlap a review-required scope in active repair repair_b7f8136f8907.",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "other_repair_id": "repair_b7f8136f8907",
+      "evidence": [
+        "repair:repair_5847aed7357d",
+        "other_repair:repair_b7f8136f8907"
+      ]
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "message": "Changed files overlap a review-required scope in active repair repair_5b12dcc56735.",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "other_repair_id": "repair_5b12dcc56735",
+      "evidence": [
+        "repair:repair_5847aed7357d",
+        "other_repair:repair_5b12dcc56735"
+      ]
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "message": "Changed files overlap a review-required scope in active repair repair_4a3866fdc9cd.",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "other_repair_id": "repair_4a3866fdc9cd",
+      "evidence": [
+        "repair:repair_5847aed7357d",
+        "other_repair:repair_4a3866fdc9cd"
+      ]
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "message": "Changed files overlap a review-required scope in active repair repair_02a1becb005c.",
+      "allowed_actions": [
+        "keep_for_human_review"
+      ],
+      "requires_human": true,
+      "bucket": "review_required",
+      "other_repair_id": "repair_02a1becb005c",
+      "evidence": [
+        "repair:repair_5847aed7357d",
+        "other_repair:repair_02a1becb005c"
+      ]
+    }
+  ],
+  "concurrent_findings": [
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "repair_id": "repair_5847aed7357d",
+      "other_repair_id": "repair_4575bde605d5",
+      "overlap": {
+        "bucket": "review_required",
+        "files": [
+          "httpx/_auth.py"
+        ]
+      },
+      "reason": "Changed files overlap a review-required scope in active repair repair_4575bde605d5.",
+      "recommended_action": "human_review"
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "repair_id": "repair_5847aed7357d",
+      "other_repair_id": "repair_005f2c0e45f8",
+      "overlap": {
+        "bucket": "review_required",
+        "files": [
+          "httpx/_auth.py"
+        ]
+      },
+      "reason": "Changed files overlap a review-required scope in active repair repair_005f2c0e45f8.",
+      "recommended_action": "human_review"
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "repair_id": "repair_5847aed7357d",
+      "other_repair_id": "repair_b7f8136f8907",
+      "overlap": {
+        "bucket": "review_required",
+        "files": [
+          "httpx/_auth.py"
+        ]
+      },
+      "reason": "Changed files overlap a review-required scope in active repair repair_b7f8136f8907.",
+      "recommended_action": "human_review"
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "repair_id": "repair_5847aed7357d",
+      "other_repair_id": "repair_5b12dcc56735",
+      "overlap": {
+        "bucket": "review_required",
+        "files": [
+          "httpx/_auth.py"
+        ]
+      },
+      "reason": "Changed files overlap a review-required scope in active repair repair_5b12dcc56735.",
+      "recommended_action": "human_review"
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "repair_id": "repair_5847aed7357d",
+      "other_repair_id": "repair_4a3866fdc9cd",
+      "overlap": {
+        "bucket": "review_required",
+        "files": [
+          "httpx/_auth.py"
+        ]
+      },
+      "reason": "Changed files overlap a review-required scope in active repair repair_4a3866fdc9cd.",
+      "recommended_action": "human_review"
+    },
+    {
+      "kind": "actual_changed_file_overlap",
+      "severity": "requires_human_audit",
+      "repair_id": "repair_5847aed7357d",
+      "other_repair_id": "repair_02a1becb005c",
+      "overlap": {
+        "bucket": "review_required",
+        "files": [
+          "httpx/_auth.py"
+        ]
+      },
+      "reason": "Changed files overlap a review-required scope in active repair repair_02a1becb005c.",
+      "recommended_action": "human_review"
+    }
+  ],
+  "changed_files": [
+    "httpx/_auth.py"
+  ],
+  "audit_status": "approved_with_modifications"
+}

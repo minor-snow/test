@@ -1,0 +1,55 @@
+{
+  "schema_version": "pantheon_check.v1",
+  "verdict": "requires_reverse_issue",
+  "intent": "Add",
+  "summary": {
+    "changed_files": 3,
+    "in_scope": 1,
+    "review_required": 1,
+    "outside_scope": 0,
+    "forbidden": 1
+  },
+  "findings": [
+    {
+      "kind": "forbidden_file_modified",
+      "severity": "reverse_issue_required",
+      "file": "saleor/discount/models.py",
+      "message": "Forbidden file modified: saleor/discount/models.py",
+      "allowed_actions": [
+        "revert_file"
+      ],
+      "requires_human": true
+    },
+    {
+      "kind": "requires_human_review",
+      "severity": "review_required",
+      "file": "saleor/tax/models.py",
+      "message": "File requires human review: saleor/tax/models.py",
+      "allowed_actions": [
+        "ask_human_review"
+      ],
+      "requires_human": true
+    }
+  ],
+  "artifacts": {
+    "task": ".pantheon/task.md",
+    "scope": ".pantheon/scope.md",
+    "report": ".pantheon/report.md",
+    "feedback": ".pantheon/feedback.md"
+  },
+  "repo": {
+    "label": "wt2",
+    "head_commit": "cf9b59513d0a8c83d410eb5b176e5a55de018797",
+    "state": "checked"
+  },
+  "attempt": 1,
+  "history": [
+    {
+      "attempt": 1,
+      "verdict": "requires_reverse_issue",
+      "violation_count": 1,
+      "artifact_dir": ".pantheon/attempts/attempt_1",
+      "timestamp": "2026-04-28T07:51:28.747Z"
+    }
+  ]
+}

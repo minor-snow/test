@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pantheon Cockpit — Blast Radius Analyzer</title>
+  <meta name="description" content="Interactive blast radius analyzer for Pantheon boundary mapping system">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header id="app-header">
+    <div class="header-left">
+      <h1><span data-i18n="app.title">PANTHEON COCKPIT</span></h1>
+      <span class="header-subtitle" data-i18n="app.subtitle">Blast Radius Analyzer</span>
+    </div>
+    <div class="header-right">
+      <div class="locale-switcher" id="locale-switcher">
+        <button class="locale-btn active" data-locale="en">EN</button>
+        <button class="locale-btn" data-locale="zh-CN">中文</button>
+      </div>
+      <div class="header-stats" id="header-stats">
+        <div class="stat-chip" id="stat-nodes"><span class="stat-value">—</span> nodes</div>
+        <div class="stat-chip" id="stat-edges"><span class="stat-value">—</span> edges</div>
+        <div class="stat-chip" id="stat-gates"><span class="stat-value">—</span> gates</div>
+        <div class="stat-chip status-chip" id="stat-status" data-i18n="status.loading">Loading…</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <main id="app-main">
+    <!-- Left: Node Picker -->
+    <section class="panel panel-picker" id="panel-picker">
+      <div class="panel-header">
+        <h2 data-i18n="nodePicker.title">Change Source</h2>
+        <button class="btn-clear" id="btn-clear-selection" data-i18n="nodePicker.clear">✕ Clear</button>
+      </div>
+
+      <div class="search-box">
+        <input type="text" id="node-search" data-i18n="nodePicker.search" placeholder="Search nodes…" autocomplete="off">
+      </div>
+
+      <div class="filter-row" id="layer-filters">
+        <button class="filter-chip active" data-layer="all" data-i18n="nodePicker.filterAll">All</button>
+        <button class="filter-chip" data-layer="architecture" style="--chip-color: var(--color-arch)" data-i18n="nodePicker.filterArch">Arch</button>
+        <button class="filter-chip" data-layer="interface" style="--chip-color: var(--color-iface)" data-i18n="nodePicker.filterIface">Iface</button>
+        <button class="filter-chip" data-layer="module" style="--chip-color: var(--color-module)" data-i18n="nodePicker.filterModule">Module</button>
+        <button class="filter-chip" data-layer="handoff" style="--chip-color: var(--color-handoff)" data-i18n="nodePicker.filterHandoff">Handoff</button>
+        <button class="filter-chip" data-layer="generated" style="--chip-color: var(--color-gen)" data-i18n="nodePicker.filterGen">Gen</button>
+        <button class="filter-chip" data-layer="test" style="--chip-color: var(--color-test)" data-i18n="nodePicker.filterTest">Test</button>
+      </div>
+
+      <div class="selected-tags" id="selected-tags"></div>
+
+      <ul class="node-list" id="node-list"></ul>
+    </section>
+
+    <!-- Center: Impact View -->
+    <section class="panel panel-impact" id="panel-impact">
+      <div class="panel-header">
+        <h2 data-i18n="impact.title">Impact Analysis</h2>
+        <span class="impact-risk-badge" id="impact-risk-badge"></span>
+      </div>
+
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">◎</div>
+        <p data-i18n="impact.empty">Select one or more nodes from the left panel to compute blast radius</p>
+      </div>
+
+      <div class="impact-content hidden" id="impact-content">
+        <!-- Summary cards -->
+        <div class="summary-grid" id="summary-grid">
+          <div class="summary-card" id="card-direct">
+            <span class="card-value">—</span>
+            <span class="card-label" data-i18n="impact.directImpact">Direct Impact</span>
+          </div>
+          <div class="summary-card" id="card-downstream">
+            <span class="card-value">—</span>
+            <span class="card-label" data-i18n="impact.totalDownstream">Total Downstream</span>
+          </div>
+          <div class="summary-card" id="card-files">
+            <span class="card-value">—</span>
+            <span class="card-label" data-i18n="impact.files">Files</span>
+          </div>
+          <div class="summary-card" id="card-symbols">
+            <span class="card-value">—</span>
+            <span class="card-label" data-i18n="impact.symbols">Symbols</span>
+          </div>
+          <div class="summary-card" id="card-tests">
+            <span class="card-value">—</span>
+            <span class="card-label" data-i18n="impact.tests">Tests</span>
+          </div>
+          <div class="summary-card" id="card-risk-count">
+            <span class="card-value">—</span>
+            <span class="card-label" data-i18n="impact.riskAmplifications">Risk Amplifications</span>
+          </div>
+        </div>
+
+        <!-- Layer breakdown -->
+        <div class="layer-breakdown" id="layer-breakdown">
+          <h3 data-i18n="impact.layerBreakdown">Impact by Layer</h3>
+          <div class="layer-bars" id="layer-bars"></div>
+        </div>
+
+        <!-- Affected lists -->
+        <div class="affected-section" id="affected-files-section">
+          <h3 class="collapsible" data-target="affected-files-list">
+            <span class="collapse-icon">▸</span> <span data-i18n="impact.affectedFiles">Affected Files</span> <span class="count-badge" id="files-count"></span>
+          </h3>
+          <ul class="affected-list hidden" id="affected-files-list"></ul>
+        </div>
+
+        <div class="affected-section" id="affected-symbols-section">
+          <h3 class="collapsible" data-target="affected-symbols-list">
+            <span class="collapse-icon">▸</span> <span data-i18n="impact.affectedSymbols">Affected Symbols</span> <span class="count-badge" id="symbols-count"></span>
+          </h3>
+          <ul class="affected-list hidden" id="affected-symbols-list"></ul>
+        </div>
+
+        <div class="affected-section" id="affected-tests-section">
+          <h3 class="collapsible" data-target="affected-tests-list">
+            <span class="collapse-icon">▸</span> <span data-i18n="impact.affectedTests">Affected Tests</span> <span class="count-badge" id="tests-count"></span>
+          </h3>
+          <ul class="affected-list hidden" id="affected-tests-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: Risk Panel -->
+    <section class="panel panel-risk" id="panel-risk">
+      <div class="panel-header">
+        <h2 data-i18n="risk.title">Risk & Paths</h2>
+      </div>
+
+      <div class="risk-content hidden" id="risk-content">
+        <!-- Risk amplification -->
+        <div class="risk-section" id="risk-amplification-section">
+          <h3 data-i18n="risk.amplification">Risk Amplification</h3>
+          <div id="risk-amplification-list"></div>
+        </div>
+
+        <!-- Critical paths -->
+        <div class="risk-section" id="critical-paths-section">
+          <h3><span data-i18n="risk.criticalPaths">Critical Paths</span> <span class="path-toggle" id="path-toggle">Top 5</span></h3>
+          <div id="critical-paths-list"></div>
+          <button class="btn-show-more hidden" id="btn-show-more-paths" data-i18n="risk.showMore">Show more paths</button>
+        </div>
+
+        <!-- Export actions -->
+        <div class="export-section">
+          <button class="btn-export" id="btn-copy-markdown" title="Copy blast radius report as Markdown" data-i18n="export.copyMarkdown">
+            📋 Copy Markdown
+          </button>
+          <button class="btn-export" id="btn-copy-context" title="Copy scoped implementation context" data-i18n="export.copyContext">
+            📦 Copy Implementation Context
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Fixture check banner -->
+  <div class="fixture-banner hidden" id="fixture-banner" data-i18n="fixture.mismatch">
+    ⚠ Cockpit traversal differs from canonical P15 report
+  </div>
+
+  <!-- Toast -->
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+You are a patch agent for an architecture document system.
+
+## Task
+
+Fix the following issue by rewriting the block text and/or updating its cross-artifact links.
+
+## Issue
+
+- issue_id: "cross_issue_001"
+- issue_type: "orphan_module_contract"
+- severity: "medium"
+- message: "Module block "b_mod_019" has no linked_interface_blocks. Every module interface/mechanism should trace to at least one interface contract."
+- target_block_id: "b_mod_019"
+
+## Current Block
+
+- block_id: "b_mod_019"
+- type: "mechanism"
+- text: "The `stableSerialize` function ensures deterministic JSON output by sorting keys recursively before hashing."
+
+## Interface Block Candidates
+
+The following InterfaceSpec blocks are available for linking:
+
+- "b_iface_001": "GET /api/revisions/:artifactId returns the list of all revision IDs for the given artifact, ordered by creation time des"
+- "b_iface_002": "GET /api/canonical/:artifactId returns the current canonical pointer including the current_revision_id and artifact_id."
+- "b_iface_003": "POST /api/artifact creates a new artifact in the store. The request body must be a valid Artifact JSON conforming to the"
+- "b_iface_004": "PUT /api/canonical/:artifactId updates the canonical pointer to a new revision_id. The target revision must already exis"
+- "b_iface_005": "GET /api/audit/:artifactId returns the append-only audit log as newline-delimited JSON entries."
+- "b_iface_006": "DELETE /api/quarantine/:id removes a quarantined item after it has been promoted to evidence or explicitly rejected."
+- "b_iface_007": "GET /api/quarantine returns all items currently in quarantine, with their validation status."
+- "b_iface_008": "POST /api/validate accepts a raw SkillOutput JSON and runs it through the four-gate validation pipeline: schema, source "
+- "b_iface_009": "The response includes a per-gate breakdown: each gate reports passed/failed status and an array of error messages."
+- "b_iface_010": "POST /api/patch/compile accepts a PatchProposal and returns an ArtifactPatch with expected_old_hash populated for each o"
+- "b_iface_011": "POST /api/patch/apply accepts an ArtifactPatch and returns either an accepted result with the candidate revision, or a r"
+- "b_iface_012": "POST /api/regression/check runs semantic regression analysis on a candidate revision against the current canonical."
+- "b_iface_013": "POST /api/override/apply records a human override decision for a failed semantic regression gate."
+- "b_iface_014": "GET /api/integrity returns the latest integrity check report including corruption count, warning count, and detailed fin"
+- "b_iface_015": "POST /api/lint accepts an Artifact JSON and returns an array of Issue objects detected by the deterministic linter rules"
+- "b_iface_016": "POST /api/trial/start initiates a trial run with the specified seed artifact, LLM client configuration, and cycle limit."
+- "b_iface_017": "GET /api/trial/report returns the current TrialReport including cycle results, rejection taxonomy, and override breakdow"
+- "b_iface_018": "In legacy mode, trial results were committed instantly to the canonical store without validation. This endpoint is now d"
+- "b_iface_019": "The `trial_orchestrator` coordinates with the `cycle_scheduler` to determine which issues to attempt in each cycle."
+- "b_iface_020": "The `response_parser` extracts structured PatchProposal JSON from raw LLM output, handling markdown fences and whitespac"
+
+## Current Interface Links
+
+This block has NO linked_interface_blocks (empty or missing).
+
+## Rules
+
+1. Fix the issue described above by rewriting the block text.
+2. Preserve the original meaning and intent of the block.
+3. Do not introduce new technical terms in backticks unless they are clearly defined.
+4. If the issue is "unsafe_canonical_commit", remove or rephrase the "committed instantly" pattern.
+5. If the issue is "undefined_term", either remove the undefined term or rephrase without it.
+6. If the issue is "empty_block_text", write a meaningful constraint that fits the section context.
+7. Keep the replacement text concise (1-3 sentences).
+
+8. If the issue is "orphan_module_contract", you MUST add replacement_linked_interface_blocks.
+   Pick 1-3 interface block IDs from the candidates above that are semantically related to this module block.
+9. If the issue is "stale_interface_link", you MUST fix replacement_linked_interface_blocks.
+   Replace the stale/nonexistent block IDs with valid ones from the candidates above.
+10. You may also improve the replacement_text if needed, but the primary fix is the links.
+
+## Output Format
+
+Return ONLY a JSON object matching this exact schema:
+
+{
+  "proposal_id": "proposal_for_cross_issue_001",
+  "artifact_id": "pantheon_module",
+  "base_revision_id": "rev_161f3b725e6c",
+  "source_issue_ids": ["cross_issue_001"],
+  "operations": [
+    {
+      "op": "replace_block",
+      "target_block_id": "b_mod_019",
+      "replacement_text": "<your rewritten text here>",
+      "replacement_linked_interface_blocks": ["<valid_block_id_1>", "<valid_block_id_2>"]
+    }
+  ],
+  "schema_version": "patch_proposal@0.1.0"
+}
+
+Return ONLY the JSON. No markdown, no explanation, no code fences.

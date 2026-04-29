@@ -1,0 +1,326 @@
+{
+  "artifact_id": "pet_triage_offline_module",
+  "artifact_type": "ModuleSpec",
+  "schema_version": "module_spec@0.1.0",
+  "revision_id": "rev_2566493e54aa",
+  "sections": [
+    {
+      "section_id": "Offline Execution Modules",
+      "title": "Offline Execution Modules",
+      "commitments": [
+        {
+          "block_id": "b_mod_offline_001",
+          "type": "module",
+          "text": "OfflineDecisionTreeRunner: Executes the local decision tree engine to produce a deterministic triage result. Responsibility: Given a pet description and species, run the cached decision tree and return triage outcome. Dependencies: Decision tree asset (versioned, periodically refreshed), species mapping table. Owned data: None (stateless). Failure modes: Missing or corrupted tree asset -> fallback to error state; version mismatch -> trigger refresh.",
+          "rationale": "Encapsulates the deterministic rule interpreter required by b_offline_004 and b_iface_offline_003.",
+          "terms": [
+            "offline decision tree"
+          ],
+          "linked_architecture_blocks": [
+            "b_offline_001",
+            "b_offline_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_offline_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:030250341023c70f0692e32c01af6f508af1fb764da86c5b43dafa47f81017b7"
+        },
+        {
+          "block_id": "b_mod_offline_002",
+          "type": "mechanism",
+          "text": "The decision tree asset is cached locally with a version identifier. On app startup and periodically when online, the client checks for a newer version from the backend and replaces the cached tree atomically.",
+          "rationale": "Implements b_offline_002 constraint for periodic refresh.",
+          "terms": [
+            "offline decision tree"
+          ],
+          "linked_architecture_blocks": [
+            "b_offline_002"
+          ],
+          "linked_interface_blocks": [],
+          "status": "draft",
+          "content_hash": "sha256:9932aa5170e7b1c2a4a53947f3604b5d2a47a9fbdf6f035a1db2e474f0a341be"
+        },
+        {
+          "block_id": "b_mod_offline_003",
+          "type": "invariant",
+          "text": "The local decision tree engine must never overwrite cloud-side veterinary modifications; all local triage results are stored as pending reports that require sync.",
+          "rationale": "Enforces b_offline_003 invariant.",
+          "terms": [
+            "offline decision tree"
+          ],
+          "linked_architecture_blocks": [
+            "b_offline_003"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_version_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:d032d4688e0e544561572ecc1135a9d1c088ef9e72f182eef7590a94594a16e0"
+        }
+      ]
+    },
+    {
+      "section_id": "Persistence Modules",
+      "title": "Persistence Modules",
+      "commitments": [
+        {
+          "block_id": "b_mod_persist_001",
+          "type": "module",
+          "text": "PendingReportRepository: Manages local persistence of pending reports using Room/SQLite. Responsibility: CRUD operations for pending reports, ensuring survival across app restarts. Dependencies: SQLite database, report ID generator. Owned data: Pending reports table with fields: report_id, creation_timestamp, status (pending, queued, syncing, merged, conflict), triage_data, vector_clock, clinic_id. Failure modes: Database corruption -> recovery from backup; disk full -> graceful failure with user notification.",
+          "rationale": "Implements b_pending_001, b_pending_002, b_pending_004 and b_iface_lifecycle_002.",
+          "terms": [
+            "pending report repository"
+          ],
+          "linked_architecture_blocks": [
+            "b_pending_001",
+            "b_pending_002",
+            "b_pending_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_lifecycle_002"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:69137b40dfd1433b2c42733029f5f0484ae67b460246ed1608a47886e8d1fd27"
+        },
+        {
+          "block_id": "b_mod_persist_002",
+          "type": "constraint",
+          "text": "The local pending report store must not be treated as an authoritative diagnosis source for clinical decisions; it is a temporary buffer for sync.",
+          "rationale": "Enforces b_pending_003 and b_iface_lifecycle_003.",
+          "terms": [
+            "pending report repository"
+          ],
+          "linked_architecture_blocks": [
+            "b_pending_003"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_lifecycle_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:cab22b053a1871361998d6a4daac9442092a5e88dc30f3b5e9a7422a211360af"
+        }
+      ]
+    },
+    {
+      "section_id": "Sync Modules",
+      "title": "Sync Modules",
+      "commitments": [
+        {
+          "block_id": "b_mod_sync_001",
+          "type": "module",
+          "text": "SyncQueueManager: Manages the background FIFO queue of pending reports to be uploaded. Responsibility: Enqueue reports, process next report, handle success/failure callbacks. Dependencies: PendingReportRepository, RetryLedger, ConnectivityObserver, ClinicReplicaClient. Owned data: In-memory queue state (persisted via repository status). Failure modes: Queue stall due to persistent network failure -> exponential backoff; corrupted queue state -> rebuild from repository.",
+          "rationale": "Implements b_sync_001, b_sync_003, b_sync_004 and b_iface_sync_004.",
+          "terms": [
+            "sync queue manager"
+          ],
+          "linked_architecture_blocks": [
+            "b_sync_001",
+            "b_sync_003",
+            "b_sync_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_sync_004"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:afbeeed1d9f89992969abb4fd4ef58c6cda735d6eb9921f3c88ad0c08249b973"
+        },
+        {
+          "block_id": "b_mod_sync_002",
+          "type": "module",
+          "text": "RetryLedger: Records each sync attempt with timestamp, HTTP status, error code, and retry count. Responsibility: Track sync attempts for monitoring and recovery. Dependencies: None (standalone table). Owned data: Retry ledger table with fields: report_id, attempt_timestamp, http_status, error_code, retry_count. Failure modes: Database write failure -> skip logging (non-critical).",
+          "rationale": "Implements b_sync_002.",
+          "terms": [
+            "retry ledger"
+          ],
+          "linked_architecture_blocks": [
+            "b_sync_002"
+          ],
+          "linked_interface_blocks": [],
+          "status": "draft",
+          "content_hash": "sha256:11183093265c32eb7e57f95f9c62d81b75dd62326248612539e746adc86de40a"
+        },
+        {
+          "block_id": "b_mod_sync_003",
+          "type": "constraint",
+          "text": "The sync queue must not block the UI; all network operations run on a background coroutine thread.",
+          "rationale": "Enforces b_sync_003.",
+          "terms": [
+            "sync queue manager"
+          ],
+          "linked_architecture_blocks": [
+            "b_sync_003"
+          ],
+          "linked_interface_blocks": [],
+          "status": "draft",
+          "content_hash": "sha256:a7f3d19cd471a78105cb0e0f4ca1033085015f656ac4d313625056a1ce18aab2"
+        },
+        {
+          "block_id": "b_mod_sync_004",
+          "type": "mechanism",
+          "text": "If a sync attempt fails due to network error, the report remains in the queue with status 'queued' and a retry count is incremented. After a configurable number of retries, the report transitions to 'failed' for manual recovery.",
+          "rationale": "Implements b_sync_004 and b_iface_sync_003.",
+          "terms": [
+            "sync queue manager",
+            "retry ledger"
+          ],
+          "linked_architecture_blocks": [
+            "b_sync_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_sync_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:92ff0ef89a9ed2c54e9e3408d120b222dfb726950a8f8acf452818509a209755"
+        }
+      ]
+    },
+    {
+      "section_id": "Conflict Resolution Modules",
+      "title": "Conflict Resolution Modules",
+      "commitments": [
+        {
+          "block_id": "b_mod_conflict_001",
+          "type": "module",
+          "text": "ConflictResolver: Detects and manages vector clock conflicts between local and cloud versions. Responsibility: Compare vector clocks, determine if conflict exists, transition report to conflict state, and apply user resolution. Dependencies: PendingReportRepository, ClinicReplicaClient. Owned data: None (stateless). Failure modes: Clock skew -> false positive conflict; missing clock -> treat as new.",
+          "rationale": "Implements b_conflict_001, b_conflict_003, b_conflict_004 and b_iface_conflict_001, b_iface_conflict_002, b_iface_conflict_003.",
+          "terms": [
+            "conflict resolver"
+          ],
+          "linked_architecture_blocks": [
+            "b_conflict_001",
+            "b_conflict_003",
+            "b_conflict_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_conflict_001",
+            "b_iface_conflict_002",
+            "b_iface_conflict_003"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:132bd3511f99a0e869e1de734db16fcab3733930cf93ed4f38c226090cb1b115"
+        },
+        {
+          "block_id": "b_mod_conflict_002",
+          "type": "invariant",
+          "text": "Clinical fields (diagnosis, vet edits, case status) use vector clock conflict detection; low-risk metadata (UI cursors, cache timestamps) use last-writer-wins.",
+          "rationale": "Enforces b_conflict_001 and b_conflict_002.",
+          "terms": [
+            "conflict resolver"
+          ],
+          "linked_architecture_blocks": [
+            "b_conflict_001",
+            "b_conflict_002"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_conflict_002"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:325e767fd7fa2d83c24ed775477f5d18a7c591bdb4e36f1e0c7a1b5def43cad3"
+        },
+        {
+          "block_id": "b_mod_conflict_003",
+          "type": "module",
+          "text": "UserConflictReviewPresenter: Presents a conflict resolution screen showing local and cloud versions with diff view. Responsibility: Display diff, capture clinician selection, and trigger resolution sync. Dependencies: ConflictResolver, PendingReportRepository. Owned data: None (UI state). Failure modes: UI thread blocking -> offload diff computation; user dismisses without resolving -> keep conflict state.",
+          "rationale": "Implements b_uvc_001, b_uvc_002, b_uvc_003, b_uvc_004 and b_iface_conflict_004.",
+          "terms": [
+            "user conflict review"
+          ],
+          "linked_architecture_blocks": [
+            "b_uvc_001",
+            "b_uvc_002",
+            "b_uvc_003",
+            "b_uvc_004"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_conflict_004"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:114dbf15ef590898ac5b0015d59d12e8810f1bf2a81a4a847bb61f737c54bdb5"
+        }
+      ]
+    },
+    {
+      "section_id": "Infrastructure Modules",
+      "title": "Infrastructure Modules",
+      "commitments": [
+        {
+          "block_id": "b_mod_infra_001",
+          "type": "module",
+          "text": "ClinicReplicaClient: Manages HTTP communication with clinic backends. Responsibility: Send reports to correct clinic URL, handle authentication, parse responses. Dependencies: Clinic registry (base URLs, auth tokens). Owned data: Clinic registry cache. Failure modes: Stale registry -> wrong backend (b_multiclinic_004); token expiry -> re-authenticate.",
+          "rationale": "Implements b_multiclinic_001, b_multiclinic_002, b_multiclinic_003 and b_iface_offline_001, b_iface_sync_001.",
+          "terms": [
+            "clinic replica client"
+          ],
+          "linked_architecture_blocks": [
+            "b_multiclinic_001",
+            "b_multiclinic_002",
+            "b_multiclinic_003"
+          ],
+          "linked_interface_blocks": [
+            "b_iface_offline_001",
+            "b_iface_sync_001"
+          ],
+          "status": "draft",
+          "content_hash": "sha256:23dbf7767616673ecb3d8f2ed9292efd2453b04910cb3f273326bfa8eea16db9"
+        },
+        {
+          "block_id": "b_mod_infra_002",
+          "type": "module",
+          "text": "AuditEventWriter: Records all local triage creation, sync attempts, conflict detections, and conflict resolutions. Responsibility: Append audit events to local store. Dependencies: PendingReportRepository (for report IDs). Owned data: Audit event table with fields: timestamp, actor (clinician ID), action_type, report_id, details. Failure modes: Store full -> enforce retention policy (b_audit_004); write failure -> non-blocking error log.",
+          "rationale": "Implements b_audit_001, b_audit_002, b_audit_004.",
+          "terms": [
+            "audit event writer"
+          ],
+          "linked_architecture_blocks": [
+            "b_audit_001",
+            "b_audit_002",
+            "b_audit_004"
+          ],
+          "linked_interface_blocks": [],
+          "status": "draft",
+          "content_hash": "sha256:05a7e945716db39e1783911cfb9886616a38a14ed9bdcccfc20c97a06ad8241a"
+        },
+        {
+          "block_id": "b_mod_infra_003",
+          "type": "module",
+          "text": "ConnectivityObserver: Monitors network connectivity and notifies SyncQueueManager. Responsibility: Provide connectivity status and changes. Dependencies: Android connectivity API. Owned data: None (stateless). Failure modes: False positive/negative -> sync attempts may fail or be delayed.",
+          "rationale": "Supports b_sync_003 by enabling background sync only when online.",
+          "terms": [
+            "connectivity observer"
+          ],
+          "linked_architecture_blocks": [
+            "b_sync_003"
+          ],
+          "linked_interface_blocks": [],
+          "status": "draft",
+          "content_hash": "sha256:7b4ecf3353f95e5907c59e418cff5e88300d33f501e525c02dcba4c9b79c13e3"
+        },
+        {
+          "block_id": "b_mod_infra_004",
+          "type": "mechanism",
+          "text": "A recovery workflow allows clinicians to re-sync any pending report that has been stuck in 'failed' status, via a manual action in the UI.",
+          "rationale": "Implements b_audit_003.",
+          "terms": [
+            "sync queue manager",
+            "audit event writer"
+          ],
+          "linked_architecture_blocks": [
+            "b_audit_003"
+          ],
+          "linked_interface_blocks": [],
+          "status": "draft",
+          "content_hash": "sha256:9eae138b82eb7b32e08ab53bf850561afd185a7aaffc15d954cf25442a54e233"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created_by": "draft_agent",
+    "created_at": "2026-04-26T06:07:22.837Z",
+    "tags": [
+      "draft",
+      "llm_generated"
+    ]
+  }
+}

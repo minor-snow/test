@@ -1,0 +1,48 @@
+{
+  "schema_version": "repair_check.v1",
+  "repair_id": "repair_39b4f5a74dc1",
+  "verdict": "requires_scope_expansion",
+  "generated_at": "2026-04-29T04:05:27.544Z",
+  "summary": {
+    "changed_files": 1,
+    "allowed": 0,
+    "review_required": 0,
+    "forbidden": 0,
+    "outside_scope": 1,
+    "warnings": 1
+  },
+  "findings": [
+    {
+      "kind": "outside_scope_file",
+      "severity": "blocking",
+      "file": "README.md",
+      "message": "Repair change is outside the approved scope: README.md",
+      "allowed_actions": [
+        "revert_file",
+        "request_scope_expansion"
+      ],
+      "requires_human": true,
+      "bucket": "outside_scope",
+      "evidence": [
+        "repair_scope:outside"
+      ]
+    },
+    {
+      "kind": "missing_related_test_signal",
+      "severity": "warning",
+      "message": "No related test file was included in the repair diff.",
+      "allowed_actions": [
+        "add_or_run_related_test",
+        "keep_for_human_review"
+      ],
+      "requires_human": false,
+      "evidence": [
+        "related_test:tests/test_auth.py"
+      ]
+    }
+  ],
+  "changed_files": [
+    "README.md"
+  ],
+  "audit_status": "pending_plan_audit"
+}

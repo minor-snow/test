@@ -1,0 +1,23 @@
+[
+  {
+    "from": "saleor/checkout/calculations.py",
+    "to": "saleor/checkout/calculations.py",
+    "relation": "suspect",
+    "confidence": "high",
+    "reason": "Primary suspect",
+    "evidence": [
+      "explicit_suspect_file"
+    ]
+  },
+  {
+    "from": "saleor/checkout/calculations.py",
+    "to": "saleor/payment/gateway.py",
+    "relation": "risk_preset",
+    "confidence": "medium",
+    "reason": "Financial transaction logic requires human review",
+    "evidence": [
+      "1 paths match pattern **/payment/**",
+      "Sensitive zone \"financial_transactions\" (critical) corroborates"
+    ]
+  }
+]
