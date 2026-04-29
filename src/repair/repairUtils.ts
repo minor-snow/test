@@ -29,6 +29,19 @@ export function readJsonFile<T>(path: string): T {
   return JSON.parse(readFileSync(path, "utf-8")) as T;
 }
 
+/**
+ * Safe variant of readJsonFile that returns null on parse/read errors
+ * instead of throwing. Useful for optional artifact loading where
+ * missing or malformed files should not crash the pipeline.
+ */
+export function readJsonFileSafe<T>(path: string): T | null {
+  try {
+    return readJsonFile<T>(path);
+  } catch {
+    return null;
+  }
+}
+
 export function uniqueSorted(values: readonly string[]): string[] {
   return [...new Set(values)].sort((a, b) => a.localeCompare(b));
 }
