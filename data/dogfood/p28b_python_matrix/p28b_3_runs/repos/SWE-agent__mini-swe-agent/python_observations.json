@@ -1,0 +1,4570 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "SWE-agent__mini-swe-agent",
+    "observed_file_count": 213,
+    "python_file_count": 109
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "src_layout",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "src_layout_detected",
+        "weight": "strong",
+        "evidence": "src/ directory with package(s): minisweagent"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "source": 57,
+      "config": 2,
+      "test": 50
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      },
+      {
+        "name": "typer",
+        "kind": "cli_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "typer found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "typer imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      },
+      {
+        "role": "cli_application",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points (__main__.py or cli.py)"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "CLI framework in dependencies"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / src_layout (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (medium)",
+      "framework: typer / cli_framework (high)",
+      "project_role: python_sdk_library (high)",
+      "project_role: cli_application (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 25,
+        "evidence": [
+          "25 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".github/bump_version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1328,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 993,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 7571,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "src/minisweagent/agents/default.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6516,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/agents/interactive.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9313,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/agents/utils/prompt_user.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 772,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/agents/utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/agents/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1008,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/config/benchmarks/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 53,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/config/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1930,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/environments/docker.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6588,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/environments/extra/bubblewrap.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5386,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/environments/extra/contree.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5934,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/environments/extra/swerex_docker.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3278,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/environments/extra/swerex_modal.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5161,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/environments/extra/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/environments/local.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3097,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/environments/singularity.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5684,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/environments/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1467,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 641,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/extra/roulette.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2211,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/extra/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/litellm_model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7015,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/litellm_response_model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3270,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/litellm_textbased_model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2052,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/openrouter_model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7489,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/openrouter_response_model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5020,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/openrouter_textbased_model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3177,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/portkey_model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9732,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/portkey_response_model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6770,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/requesty_model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6897,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/test_models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10997,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/utils/actions_text.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2356,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/utils/actions_toolcall.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3814,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/utils/actions_toolcall_response.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4442,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/utils/anthropic_utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1217,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/utils/cache_control.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2432,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/utils/content_string.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3654,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/utils/openai_multimodal.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1915,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/utils/retry.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 885,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/models/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4579,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/benchmarks/swebench.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13046,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/benchmarks/swebench_single.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4752,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/benchmarks/utils/batch_progress.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6986,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/benchmarks/utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/benchmarks/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 67,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/extra/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/hello_world.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1199,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/mini.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4976,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/utilities/config.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4379,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/utilities/inspector.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10528,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/utilities/mini_extra.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1644,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/utilities/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 80,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/run/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 39,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/utils/log.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1032,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/utils/serialize.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 967,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2468,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/minisweagent/__main__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 201,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/agents/test_default.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 15528,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/agents/test_init.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2239,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/agents/test_interactive.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 45325,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/agents/test_multimodal.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8415,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/agents/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/config/test_init.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4475,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/config/test_swebench_template.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6103,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/config/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5147,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/environments/extra/test_bubblewrap.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9941,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/environments/extra/test_contree.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5570,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/environments/extra/test_swerex_docker.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1516,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/environments/extra/test_swerex_modal.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2572,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/environments/extra/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 14,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/environments/test_docker.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8512,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/environments/test_init.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1292,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/environments/test_local.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7055,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/environments/test_singularity.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7768,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/environments/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/test_actions_toolcall.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5789,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/test_anthropic_model_integration.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7176,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/test_anthropic_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4133,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/test_cache_control.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2503,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/test_content_string.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3136,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/test_init.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9272,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/test_litellm_model.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3616,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/test_litellm_textbased_model.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5116,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/test_openrouter_textbased_model.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8560,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/test_portkey_model.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8268,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/test_portkey_response_model.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 13472,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/test_test_models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9105,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/run/test_batch_progress.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4521,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/run/test_cli_integration.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 23486,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/run/test_extra_config.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 20074,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/run/test_inspector.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 18142,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/run/test_local.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2641,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/run/test_run_hello_world.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1983,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/run/test_save.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2619,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/run/test_swebench.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 21554,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/run/test_swebench_single.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4198,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/run/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_data/update_outputs_github_issue.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 937,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_data/update_outputs_local.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 899,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_data/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_fire.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6349,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/utils/test_serialize.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5496,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/utils/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": ".github/bump_version.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": ".github/bump_version.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": ".github/bump_version.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": ".github/bump_version.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/default.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/default.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/default.py",
+      "raw_specifier": "traceback",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "traceback",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/default.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/default.py",
+      "raw_specifier": "from jinja2 import StrictUndefined, Template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/default.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/default.py",
+      "raw_specifier": "from minisweagent import Environment, Model, __version__",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/agents/default.py",
+      "raw_specifier": "from minisweagent.exceptions import InterruptAgentFlow, LimitsExceeded",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/agents/default.py",
+      "raw_specifier": "from minisweagent.utils.serialize import recursive_merge",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/agents/interactive.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/interactive.py",
+      "raw_specifier": "from typing import Literal, NoReturn",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/interactive.py",
+      "raw_specifier": "from rich.console import Console",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/interactive.py",
+      "raw_specifier": "from rich.rule import Rule",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/interactive.py",
+      "raw_specifier": "from minisweagent.agents.default import AgentConfig, DefaultAgent",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/agents/interactive.py",
+      "raw_specifier": "from minisweagent.agents.utils.prompt_user import _multiline_prompt, prompt_session",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/agents/interactive.py",
+      "raw_specifier": "from minisweagent.exceptions import LimitsExceeded, Submitted, UserInterruption",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/agents/interactive.py",
+      "raw_specifier": "from minisweagent.models.utils.content_string import get_content_string",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/agents/utils/prompt_user.py",
+      "raw_specifier": "from prompt_toolkit.formatted_text.html import HTML",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "prompt_toolkit",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/utils/prompt_user.py",
+      "raw_specifier": "from prompt_toolkit.history import FileHistory",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "prompt_toolkit",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/utils/prompt_user.py",
+      "raw_specifier": "from prompt_toolkit.shortcuts import PromptSession",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "prompt_toolkit",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/utils/prompt_user.py",
+      "raw_specifier": "from minisweagent import global_config_dir",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/agents/__init__.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/__init__.py",
+      "raw_specifier": "importlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/agents/__init__.py",
+      "raw_specifier": "from minisweagent import Agent, Environment, Model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/config/__init__.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/config/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/config/__init__.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/config/__init__.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/docker.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/docker.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/docker.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/docker.py",
+      "raw_specifier": "shlex",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shlex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/docker.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/docker.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/docker.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/docker.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/docker.py",
+      "raw_specifier": "from minisweagent.exceptions import Submitted",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/docker.py",
+      "raw_specifier": "from minisweagent.utils.serialize import recursive_merge",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/bubblewrap.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/bubblewrap.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/bubblewrap.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/bubblewrap.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/bubblewrap.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/bubblewrap.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/bubblewrap.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/bubblewrap.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/bubblewrap.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/bubblewrap.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/bubblewrap.py",
+      "raw_specifier": "from minisweagent.exceptions import Submitted",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/bubblewrap.py",
+      "raw_specifier": "from minisweagent.utils.serialize import recursive_merge",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "shlex",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shlex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "from dataclasses import asdict, is_dataclass",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "from numbers import Number",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "numbers",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "from typing import Any, NotRequired, TypedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "from contree_sdk import ContreeSync",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "contree_sdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "from contree_sdk.config import ContreeConfig",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "contree_sdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "from contree_sdk.sdk.objects.image import ContreeImageSync",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "contree_sdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "from minisweagent import Environment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "from minisweagent.exceptions import Submitted",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/contree.py",
+      "raw_specifier": "from minisweagent.utils.serialize import recursive_merge",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_docker.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_docker.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_docker.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_docker.py",
+      "raw_specifier": "from swerex.deployment.docker import DockerDeployment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "swerex",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_docker.py",
+      "raw_specifier": "from swerex.runtime.abstract import Command as RexCommand",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "swerex",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_docker.py",
+      "raw_specifier": "from minisweagent.exceptions import Submitted",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_docker.py",
+      "raw_specifier": "from minisweagent.utils.serialize import recursive_merge",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_modal.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_modal.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_modal.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_modal.py",
+      "raw_specifier": "from swerex.deployment.modal import ModalDeployment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "swerex",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_modal.py",
+      "raw_specifier": "from swerex.runtime.abstract import Command as RexCommand",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "swerex",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_modal.py",
+      "raw_specifier": "from minisweagent.exceptions import Submitted",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/extra/swerex_modal.py",
+      "raw_specifier": "from minisweagent.utils.serialize import recursive_merge",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/local.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/local.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/local.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/local.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/local.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/local.py",
+      "raw_specifier": "from minisweagent.exceptions import Submitted",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/local.py",
+      "raw_specifier": "from minisweagent.utils.serialize import recursive_merge",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/singularity.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/singularity.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/singularity.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/singularity.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/singularity.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/singularity.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/singularity.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/singularity.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/singularity.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/singularity.py",
+      "raw_specifier": "from minisweagent.exceptions import Submitted",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/singularity.py",
+      "raw_specifier": "from minisweagent.utils.serialize import recursive_merge",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/environments/__init__.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/__init__.py",
+      "raw_specifier": "importlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/environments/__init__.py",
+      "raw_specifier": "from minisweagent import Environment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/extra/roulette.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/extra/roulette.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/extra/roulette.py",
+      "raw_specifier": "from minisweagent import Model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/extra/roulette.py",
+      "raw_specifier": "from minisweagent.models import get_model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "from collections.abc import Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "from typing import Any, Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "litellm",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "litellm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "from minisweagent.models import GLOBAL_MODEL_STATS",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "from minisweagent.models.utils.actions_toolcall import ( BASH_TOOL, format_toolcall_observation_messages, parse_toolcall_actions, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "from minisweagent.models.utils.anthropic_utils import _reorder_anthropic_thinking_blocks",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "from minisweagent.models.utils.cache_control import set_cache_control",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "from minisweagent.models.utils.openai_multimodal import expand_multimodal_content",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_model.py",
+      "raw_specifier": "from minisweagent.models.utils.retry import retry",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_response_model.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_response_model.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_response_model.py",
+      "raw_specifier": "from collections.abc import Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_response_model.py",
+      "raw_specifier": "litellm",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "litellm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_response_model.py",
+      "raw_specifier": "from minisweagent.models import GLOBAL_MODEL_STATS",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_response_model.py",
+      "raw_specifier": "from minisweagent.models.litellm_model import LitellmModel, LitellmModelConfig",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_response_model.py",
+      "raw_specifier": "from minisweagent.models.utils.actions_toolcall_response import ( BASH_TOOL_RESPONSE_API, format_toolcall_observation_messages, parse_toolcall_actions_response, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_response_model.py",
+      "raw_specifier": "from minisweagent.models.utils.retry import retry",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_textbased_model.py",
+      "raw_specifier": "litellm",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "litellm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_textbased_model.py",
+      "raw_specifier": "from minisweagent.models.litellm_model import LitellmModel, LitellmModelConfig",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/litellm_textbased_model.py",
+      "raw_specifier": "from minisweagent.models.utils.actions_text import format_observation_messages, parse_regex_actions",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "from typing import Any, Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "from minisweagent.models import GLOBAL_MODEL_STATS",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "from minisweagent.models.utils.actions_toolcall import ( BASH_TOOL, format_toolcall_observation_messages, parse_toolcall_actions, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "from minisweagent.models.utils.anthropic_utils import _reorder_anthropic_thinking_blocks",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "from minisweagent.models.utils.cache_control import set_cache_control",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "from minisweagent.models.utils.openai_multimodal import expand_multimodal_content",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_model.py",
+      "raw_specifier": "from minisweagent.models.utils.retry import retry",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_response_model.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_response_model.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_response_model.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_response_model.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_response_model.py",
+      "raw_specifier": "from minisweagent.models import GLOBAL_MODEL_STATS",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_response_model.py",
+      "raw_specifier": "from minisweagent.models.openrouter_model import ( OpenRouterAPIError, OpenRouterAuthenticationError, OpenRouterModel, OpenRouterModelConfig, OpenRouterRateLimitError, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_response_model.py",
+      "raw_specifier": "from minisweagent.models.utils.actions_toolcall_response import ( BASH_TOOL_RESPONSE_API, format_toolcall_observation_messages, parse_toolcall_actions_response, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_response_model.py",
+      "raw_specifier": "from minisweagent.models.utils.retry import retry",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_textbased_model.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_textbased_model.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_textbased_model.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_textbased_model.py",
+      "raw_specifier": "from minisweagent.models.openrouter_model import ( OpenRouterAPIError, OpenRouterAuthenticationError, OpenRouterModel, OpenRouterModelConfig, OpenRouterRateLimitError, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/openrouter_textbased_model.py",
+      "raw_specifier": "from minisweagent.models.utils.actions_text import format_observation_messages, parse_regex_actions",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "from typing import Any, Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "litellm",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "litellm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "from minisweagent.models import GLOBAL_MODEL_STATS",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "from minisweagent.models.utils.actions_toolcall import ( BASH_TOOL, format_toolcall_observation_messages, parse_toolcall_actions, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "from minisweagent.models.utils.anthropic_utils import _reorder_anthropic_thinking_blocks",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "from minisweagent.models.utils.cache_control import set_cache_control",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "from minisweagent.models.utils.openai_multimodal import expand_multimodal_content",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "from minisweagent.models.utils.retry import retry",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_model.py",
+      "raw_specifier": "from portkey_ai import Portkey",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "portkey_ai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_response_model.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_response_model.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_response_model.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_response_model.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_response_model.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_response_model.py",
+      "raw_specifier": "from typing import Any, Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_response_model.py",
+      "raw_specifier": "litellm",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "litellm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_response_model.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_response_model.py",
+      "raw_specifier": "from minisweagent.models import GLOBAL_MODEL_STATS",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_response_model.py",
+      "raw_specifier": "from minisweagent.models.utils.actions_toolcall_response import ( BASH_TOOL_RESPONSE_API, format_toolcall_observation_messages, parse_toolcall_actions_response, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_response_model.py",
+      "raw_specifier": "from minisweagent.models.utils.retry import retry",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/portkey_response_model.py",
+      "raw_specifier": "from portkey_ai import Portkey",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "portkey_ai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "from typing import Any, Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "from minisweagent.models import GLOBAL_MODEL_STATS",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "from minisweagent.models.utils.actions_toolcall import ( BASH_TOOL, format_toolcall_observation_messages, parse_toolcall_actions, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "from minisweagent.models.utils.anthropic_utils import _reorder_anthropic_thinking_blocks",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "from minisweagent.models.utils.cache_control import set_cache_control",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "from minisweagent.models.utils.openai_multimodal import expand_multimodal_content",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/requesty_model.py",
+      "raw_specifier": "from minisweagent.models.utils.retry import retry",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_text.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_text.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_text.py",
+      "raw_specifier": "from jinja2 import StrictUndefined, Template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_text.py",
+      "raw_specifier": "from minisweagent.exceptions import FormatError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_text.py",
+      "raw_specifier": "from minisweagent.models.utils.openai_multimodal import expand_multimodal_content",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_toolcall.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_toolcall.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_toolcall.py",
+      "raw_specifier": "from jinja2 import StrictUndefined, Template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_toolcall.py",
+      "raw_specifier": "from minisweagent.exceptions import FormatError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_toolcall.py",
+      "raw_specifier": "from minisweagent.models.utils.openai_multimodal import expand_multimodal_content",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_toolcall_response.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_toolcall_response.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_toolcall_response.py",
+      "raw_specifier": "from jinja2 import StrictUndefined, Template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/actions_toolcall_response.py",
+      "raw_specifier": "from minisweagent.exceptions import FormatError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/cache_control.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/cache_control.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/cache_control.py",
+      "raw_specifier": "from typing import Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/content_string.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/openai_multimodal.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/openai_multimodal.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/openai_multimodal.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/retry.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/retry.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/utils/retry.py",
+      "raw_specifier": "from tenacity import Retrying, before_sleep_log, retry_if_not_exception_type, stop_after_attempt, wait_exponential",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "tenacity",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/__init__.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/__init__.py",
+      "raw_specifier": "importlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/__init__.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/models/__init__.py",
+      "raw_specifier": "from minisweagent import Model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/models/__init__.py",
+      "raw_specifier": "from minisweagent.models.litellm_model import LitellmModel",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "concurrent.futures",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "concurrent",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "traceback",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "traceback",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "typer",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "typer",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "from jinja2 import StrictUndefined, Template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "from rich.live import Live",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "from minisweagent import Environment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "from minisweagent.agents.default import DefaultAgent",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "from minisweagent.config import builtin_config_dir, get_config_from_spec",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "from minisweagent.environments import get_environment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "from minisweagent.models import get_model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "from minisweagent.run.benchmarks.utils.batch_progress import RunBatchProgressManager",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "from minisweagent.utils.log import add_file_handler, logger",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "from minisweagent.utils.serialize import UNSET, recursive_merge",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench.py",
+      "raw_specifier": "from datasets import load_dataset",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "datasets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench_single.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench_single.py",
+      "raw_specifier": "typer",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "typer",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench_single.py",
+      "raw_specifier": "from datasets import load_dataset",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "datasets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench_single.py",
+      "raw_specifier": "from minisweagent import global_config_dir",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench_single.py",
+      "raw_specifier": "from minisweagent.agents import get_agent",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench_single.py",
+      "raw_specifier": "from minisweagent.config import builtin_config_dir, get_config_from_spec",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench_single.py",
+      "raw_specifier": "from minisweagent.models import get_model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench_single.py",
+      "raw_specifier": "from minisweagent.run.benchmarks.swebench import ( DATASET_MAPPING, get_sb_environment, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench_single.py",
+      "raw_specifier": "from minisweagent.utils.log import logger",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/swebench_single.py",
+      "raw_specifier": "from minisweagent.utils.serialize import UNSET, recursive_merge",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/utils/batch_progress.py",
+      "raw_specifier": "collections",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/utils/batch_progress.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/utils/batch_progress.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/utils/batch_progress.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/utils/batch_progress.py",
+      "raw_specifier": "from threading import Lock",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/utils/batch_progress.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/utils/batch_progress.py",
+      "raw_specifier": "from rich.console import Group",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/utils/batch_progress.py",
+      "raw_specifier": "from rich.progress import ( BarColumn, MofNCompleteColumn, Progress, SpinnerColumn, TaskID, TaskProgressColumn, TextColumn, TimeElapsedColumn, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/utils/batch_progress.py",
+      "raw_specifier": "from rich.table import Table",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/benchmarks/utils/batch_progress.py",
+      "raw_specifier": "minisweagent.models",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/hello_world.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/hello_world.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/hello_world.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/hello_world.py",
+      "raw_specifier": "typer",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "typer",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/hello_world.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/hello_world.py",
+      "raw_specifier": "from minisweagent import package_dir",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/hello_world.py",
+      "raw_specifier": "from minisweagent.agents.default import DefaultAgent",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/hello_world.py",
+      "raw_specifier": "from minisweagent.environments.local import LocalEnvironment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/hello_world.py",
+      "raw_specifier": "from minisweagent.models.litellm_model import LitellmModel",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "typer",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "typer",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "from rich.console import Console",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "from minisweagent import global_config_dir",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "from minisweagent.agents import get_agent",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "from minisweagent.agents.utils.prompt_user import _multiline_prompt",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "from minisweagent.config import builtin_config_dir, get_config_from_spec",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "from minisweagent.environments import get_environment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "from minisweagent.models import get_model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "from minisweagent.run.utilities.config import configure_if_first_time",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/mini.py",
+      "raw_specifier": "from minisweagent.utils.serialize import UNSET, recursive_merge",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/config.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/config.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/config.py",
+      "raw_specifier": "from dotenv import load_dotenv, set_key, unset_key",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/config.py",
+      "raw_specifier": "from rich.console import Console",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/config.py",
+      "raw_specifier": "from rich.rule import Rule",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/config.py",
+      "raw_specifier": "from typer import Argument, Typer",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "typer",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/config.py",
+      "raw_specifier": "from minisweagent import global_config_file",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/config.py",
+      "raw_specifier": "from prompt_toolkit.shortcuts.prompt import prompt as _prompt",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "prompt_toolkit",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "typer",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "typer",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "from rich.text import Text",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "from textual.app import App, ComposeResult",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "textual",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "from textual.binding import Binding",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "textual",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "from textual.command import DiscoveryHit, Hit, Hits, Provider",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "textual",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "from textual.containers import Container, Vertical, VerticalScroll",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "textual",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "from textual.widgets import Footer, Header, Static",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "textual",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/inspector.py",
+      "raw_specifier": "from minisweagent.models.utils.content_string import get_content_string",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/mini_extra.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/mini_extra.py",
+      "raw_specifier": "from importlib import import_module",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/run/utilities/mini_extra.py",
+      "raw_specifier": "from rich.console import Console",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/utils/log.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/utils/log.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/utils/log.py",
+      "raw_specifier": "from rich.logging import RichHandler",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/utils/serialize.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/__init__.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/__init__.py",
+      "raw_specifier": "from typing import Any, Protocol",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/__init__.py",
+      "raw_specifier": "dotenv",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/__init__.py",
+      "raw_specifier": "from platformdirs import user_config_dir",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "platformdirs",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/__init__.py",
+      "raw_specifier": "from rich.console import Console",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/minisweagent/__init__.py",
+      "raw_specifier": "from minisweagent.utils.log import logger",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/minisweagent/__main__.py",
+      "raw_specifier": "from minisweagent.run.mini import app",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "minisweagent",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "pyyaml",
+        "requests",
+        "jinja2",
+        "pydantic",
+        "litellm",
+        "tenacity",
+        "rich",
+        "python_dotenv",
+        "typer",
+        "platformdirs",
+        "textual",
+        "prompt_toolkit",
+        "datasets",
+        "openai",
+        "modal",
+        "boto3",
+        "contree_sdk"
+      ],
+      "dev_packages": [
+        "pytest",
+        "pytest_cov",
+        "pytest_asyncio",
+        "pytest_xdist",
+        "pre_commit",
+        "ruff",
+        "mkdocs_include_markdown_plugin"
+      ],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": ".github/bump_version.py",
+      "candidate_test_paths": [
+        ".github/tests/test_bump_version.py",
+        "tests/test_bump_version.py",
+        ".github/tests/test_.github.py",
+        "test/test_bump_version.py",
+        "tests/bump_version/test_bump_version.py",
+        "tests/bump_versions/test_bump_version.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/agents/default.py",
+      "candidate_test_paths": [
+        "src/minisweagent/agents/tests/test_default.py",
+        "tests/minisweagent/agents/test_default.py",
+        "src/minisweagent/agents/tests/test_agents.py",
+        "test/test_default.py",
+        "tests/test_default.py",
+        "tests/default/test_default.py",
+        "tests/defaults/test_default.py",
+        "tests/agents/test_default.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/agents/test_default.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/agents/test_default.py [library_package layout]"
+    },
+    {
+      "source_path": "src/minisweagent/agents/interactive.py",
+      "candidate_test_paths": [
+        "src/minisweagent/agents/tests/test_interactive.py",
+        "tests/minisweagent/agents/test_interactive.py",
+        "src/minisweagent/agents/tests/test_agents.py",
+        "test/test_interactive.py",
+        "tests/test_interactive.py",
+        "tests/interactive/test_interactive.py",
+        "tests/interactives/test_interactive.py",
+        "tests/agents/test_interactive.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/agents/test_interactive.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/agents/test_interactive.py [library_package layout]"
+    },
+    {
+      "source_path": "src/minisweagent/agents/utils/prompt_user.py",
+      "candidate_test_paths": [
+        "src/minisweagent/agents/utils/tests/test_prompt_user.py",
+        "tests/minisweagent/agents/utils/test_prompt_user.py",
+        "src/minisweagent/agents/utils/tests/test_utils.py",
+        "test/test_prompt_user.py",
+        "tests/test_prompt_user.py",
+        "tests/prompt_user/test_prompt_user.py",
+        "tests/prompt_users/test_prompt_user.py",
+        "tests/utils/test_prompt_user.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/environments/docker.py",
+      "candidate_test_paths": [
+        "src/minisweagent/environments/tests/test_docker.py",
+        "tests/minisweagent/environments/test_docker.py",
+        "src/minisweagent/environments/tests/test_environments.py",
+        "test/test_docker.py",
+        "tests/test_docker.py",
+        "tests/docker/test_docker.py",
+        "tests/dockers/test_docker.py",
+        "tests/environments/test_docker.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/environments/test_docker.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/environments/test_docker.py [library_package layout]"
+    },
+    {
+      "source_path": "src/minisweagent/environments/extra/bubblewrap.py",
+      "candidate_test_paths": [
+        "src/minisweagent/environments/extra/tests/test_bubblewrap.py",
+        "tests/minisweagent/environments/extra/test_bubblewrap.py",
+        "src/minisweagent/environments/extra/tests/test_extra.py",
+        "test/test_bubblewrap.py",
+        "tests/test_bubblewrap.py",
+        "tests/bubblewrap/test_bubblewrap.py",
+        "tests/bubblewraps/test_bubblewrap.py",
+        "tests/extra/test_bubblewrap.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/environments/extra/contree.py",
+      "candidate_test_paths": [
+        "src/minisweagent/environments/extra/tests/test_contree.py",
+        "tests/minisweagent/environments/extra/test_contree.py",
+        "src/minisweagent/environments/extra/tests/test_extra.py",
+        "test/test_contree.py",
+        "tests/test_contree.py",
+        "tests/contree/test_contree.py",
+        "tests/contrees/test_contree.py",
+        "tests/extra/test_contree.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/environments/extra/swerex_docker.py",
+      "candidate_test_paths": [
+        "src/minisweagent/environments/extra/tests/test_swerex_docker.py",
+        "tests/minisweagent/environments/extra/test_swerex_docker.py",
+        "src/minisweagent/environments/extra/tests/test_extra.py",
+        "test/test_swerex_docker.py",
+        "tests/test_swerex_docker.py",
+        "tests/swerex_docker/test_swerex_docker.py",
+        "tests/swerex_dockers/test_swerex_docker.py",
+        "tests/extra/test_swerex_docker.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/environments/extra/swerex_modal.py",
+      "candidate_test_paths": [
+        "src/minisweagent/environments/extra/tests/test_swerex_modal.py",
+        "tests/minisweagent/environments/extra/test_swerex_modal.py",
+        "src/minisweagent/environments/extra/tests/test_extra.py",
+        "test/test_swerex_modal.py",
+        "tests/test_swerex_modal.py",
+        "tests/swerex_modal/test_swerex_modal.py",
+        "tests/swerex_modals/test_swerex_modal.py",
+        "tests/extra/test_swerex_modal.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/environments/local.py",
+      "candidate_test_paths": [
+        "src/minisweagent/environments/tests/test_local.py",
+        "tests/minisweagent/environments/test_local.py",
+        "src/minisweagent/environments/tests/test_environments.py",
+        "test/test_local.py",
+        "tests/test_local.py",
+        "tests/local/test_local.py",
+        "tests/locals/test_local.py",
+        "tests/environments/test_local.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/environments/test_local.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/environments/test_local.py [library_package layout]"
+    },
+    {
+      "source_path": "src/minisweagent/environments/singularity.py",
+      "candidate_test_paths": [
+        "src/minisweagent/environments/tests/test_singularity.py",
+        "tests/minisweagent/environments/test_singularity.py",
+        "src/minisweagent/environments/tests/test_environments.py",
+        "test/test_singularity.py",
+        "tests/test_singularity.py",
+        "tests/singularity/test_singularity.py",
+        "tests/singularitys/test_singularity.py",
+        "tests/environments/test_singularity.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/environments/test_singularity.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/environments/test_singularity.py [library_package layout]"
+    },
+    {
+      "source_path": "src/minisweagent/exceptions.py",
+      "candidate_test_paths": [
+        "src/minisweagent/tests/test_exceptions.py",
+        "tests/minisweagent/test_exceptions.py",
+        "src/minisweagent/tests/test_minisweagent.py",
+        "test/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/extra/roulette.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/extra/tests/test_roulette.py",
+        "tests/minisweagent/models/extra/test_roulette.py",
+        "src/minisweagent/models/extra/tests/test_extra.py",
+        "test/test_roulette.py",
+        "tests/test_roulette.py",
+        "tests/roulette/test_roulette.py",
+        "tests/roulettes/test_roulette.py",
+        "tests/extra/test_roulette.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/litellm_model.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/tests/test_litellm_model.py",
+        "tests/minisweagent/models/test_litellm_model.py",
+        "src/minisweagent/models/tests/test_models.py",
+        "test/test_litellm_model.py",
+        "tests/test_litellm_model.py",
+        "tests/litellm_model/test_litellm_model.py",
+        "tests/litellm_models/test_litellm_model.py",
+        "tests/models/test_litellm_model.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/models/test_litellm_model.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/models/test_litellm_model.py [library_package layout]"
+    },
+    {
+      "source_path": "src/minisweagent/models/litellm_response_model.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/tests/test_litellm_response_model.py",
+        "tests/minisweagent/models/test_litellm_response_model.py",
+        "src/minisweagent/models/tests/test_models.py",
+        "test/test_litellm_response_model.py",
+        "tests/test_litellm_response_model.py",
+        "tests/litellm_response_model/test_litellm_response_model.py",
+        "tests/litellm_response_models/test_litellm_response_model.py",
+        "tests/models/test_litellm_response_model.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/litellm_textbased_model.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/tests/test_litellm_textbased_model.py",
+        "tests/minisweagent/models/test_litellm_textbased_model.py",
+        "src/minisweagent/models/tests/test_models.py",
+        "test/test_litellm_textbased_model.py",
+        "tests/test_litellm_textbased_model.py",
+        "tests/litellm_textbased_model/test_litellm_textbased_model.py",
+        "tests/litellm_textbased_models/test_litellm_textbased_model.py",
+        "tests/models/test_litellm_textbased_model.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/models/test_litellm_textbased_model.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/models/test_litellm_textbased_model.py [library_package layout]"
+    },
+    {
+      "source_path": "src/minisweagent/models/openrouter_model.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/tests/test_openrouter_model.py",
+        "tests/minisweagent/models/test_openrouter_model.py",
+        "src/minisweagent/models/tests/test_models.py",
+        "test/test_openrouter_model.py",
+        "tests/test_openrouter_model.py",
+        "tests/openrouter_model/test_openrouter_model.py",
+        "tests/openrouter_models/test_openrouter_model.py",
+        "tests/models/test_openrouter_model.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/openrouter_response_model.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/tests/test_openrouter_response_model.py",
+        "tests/minisweagent/models/test_openrouter_response_model.py",
+        "src/minisweagent/models/tests/test_models.py",
+        "test/test_openrouter_response_model.py",
+        "tests/test_openrouter_response_model.py",
+        "tests/openrouter_response_model/test_openrouter_response_model.py",
+        "tests/openrouter_response_models/test_openrouter_response_model.py",
+        "tests/models/test_openrouter_response_model.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/openrouter_textbased_model.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/tests/test_openrouter_textbased_model.py",
+        "tests/minisweagent/models/test_openrouter_textbased_model.py",
+        "src/minisweagent/models/tests/test_models.py",
+        "test/test_openrouter_textbased_model.py",
+        "tests/test_openrouter_textbased_model.py",
+        "tests/openrouter_textbased_model/test_openrouter_textbased_model.py",
+        "tests/openrouter_textbased_models/test_openrouter_textbased_model.py",
+        "tests/models/test_openrouter_textbased_model.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/models/test_openrouter_textbased_model.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/models/test_openrouter_textbased_model.py [library_package layout]"
+    },
+    {
+      "source_path": "src/minisweagent/models/portkey_model.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/tests/test_portkey_model.py",
+        "tests/minisweagent/models/test_portkey_model.py",
+        "src/minisweagent/models/tests/test_models.py",
+        "test/test_portkey_model.py",
+        "tests/test_portkey_model.py",
+        "tests/portkey_model/test_portkey_model.py",
+        "tests/portkey_models/test_portkey_model.py",
+        "tests/models/test_portkey_model.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/models/test_portkey_model.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/models/test_portkey_model.py [library_package layout]"
+    },
+    {
+      "source_path": "src/minisweagent/models/portkey_response_model.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/tests/test_portkey_response_model.py",
+        "tests/minisweagent/models/test_portkey_response_model.py",
+        "src/minisweagent/models/tests/test_models.py",
+        "test/test_portkey_response_model.py",
+        "tests/test_portkey_response_model.py",
+        "tests/portkey_response_model/test_portkey_response_model.py",
+        "tests/portkey_response_models/test_portkey_response_model.py",
+        "tests/models/test_portkey_response_model.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/models/test_portkey_response_model.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/models/test_portkey_response_model.py [library_package layout]"
+    },
+    {
+      "source_path": "src/minisweagent/models/requesty_model.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/tests/test_requesty_model.py",
+        "tests/minisweagent/models/test_requesty_model.py",
+        "src/minisweagent/models/tests/test_models.py",
+        "test/test_requesty_model.py",
+        "tests/test_requesty_model.py",
+        "tests/requesty_model/test_requesty_model.py",
+        "tests/requesty_models/test_requesty_model.py",
+        "tests/models/test_requesty_model.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/utils/actions_text.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/utils/tests/test_actions_text.py",
+        "tests/minisweagent/models/utils/test_actions_text.py",
+        "src/minisweagent/models/utils/tests/test_utils.py",
+        "test/test_actions_text.py",
+        "tests/test_actions_text.py",
+        "tests/actions_text/test_actions_text.py",
+        "tests/actions_texts/test_actions_text.py",
+        "tests/utils/test_actions_text.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/utils/actions_toolcall.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/utils/tests/test_actions_toolcall.py",
+        "tests/minisweagent/models/utils/test_actions_toolcall.py",
+        "src/minisweagent/models/utils/tests/test_utils.py",
+        "test/test_actions_toolcall.py",
+        "tests/test_actions_toolcall.py",
+        "tests/actions_toolcall/test_actions_toolcall.py",
+        "tests/actions_toolcalls/test_actions_toolcall.py",
+        "tests/utils/test_actions_toolcall.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/utils/actions_toolcall_response.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/utils/tests/test_actions_toolcall_response.py",
+        "tests/minisweagent/models/utils/test_actions_toolcall_response.py",
+        "src/minisweagent/models/utils/tests/test_utils.py",
+        "test/test_actions_toolcall_response.py",
+        "tests/test_actions_toolcall_response.py",
+        "tests/actions_toolcall_response/test_actions_toolcall_response.py",
+        "tests/actions_toolcall_responses/test_actions_toolcall_response.py",
+        "tests/utils/test_actions_toolcall_response.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/utils/anthropic_utils.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/utils/tests/test_anthropic_utils.py",
+        "tests/minisweagent/models/utils/test_anthropic_utils.py",
+        "src/minisweagent/models/utils/tests/test_utils.py",
+        "test/test_anthropic_utils.py",
+        "tests/test_anthropic_utils.py",
+        "tests/anthropic_utils/test_anthropic_utils.py",
+        "tests/utils/test_anthropic_utils.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/utils/cache_control.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/utils/tests/test_cache_control.py",
+        "tests/minisweagent/models/utils/test_cache_control.py",
+        "src/minisweagent/models/utils/tests/test_utils.py",
+        "test/test_cache_control.py",
+        "tests/test_cache_control.py",
+        "tests/cache_control/test_cache_control.py",
+        "tests/cache_controls/test_cache_control.py",
+        "tests/utils/test_cache_control.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/utils/content_string.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/utils/tests/test_content_string.py",
+        "tests/minisweagent/models/utils/test_content_string.py",
+        "src/minisweagent/models/utils/tests/test_utils.py",
+        "test/test_content_string.py",
+        "tests/test_content_string.py",
+        "tests/content_string/test_content_string.py",
+        "tests/content_strings/test_content_string.py",
+        "tests/utils/test_content_string.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/utils/openai_multimodal.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/utils/tests/test_openai_multimodal.py",
+        "tests/minisweagent/models/utils/test_openai_multimodal.py",
+        "src/minisweagent/models/utils/tests/test_utils.py",
+        "test/test_openai_multimodal.py",
+        "tests/test_openai_multimodal.py",
+        "tests/openai_multimodal/test_openai_multimodal.py",
+        "tests/openai_multimodals/test_openai_multimodal.py",
+        "tests/utils/test_openai_multimodal.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/models/utils/retry.py",
+      "candidate_test_paths": [
+        "src/minisweagent/models/utils/tests/test_retry.py",
+        "tests/minisweagent/models/utils/test_retry.py",
+        "src/minisweagent/models/utils/tests/test_utils.py",
+        "test/test_retry.py",
+        "tests/test_retry.py",
+        "tests/retry/test_retry.py",
+        "tests/retrys/test_retry.py",
+        "tests/utils/test_retry.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/run/benchmarks/swebench.py",
+      "candidate_test_paths": [
+        "src/minisweagent/run/benchmarks/tests/test_swebench.py",
+        "tests/minisweagent/run/benchmarks/test_swebench.py",
+        "src/minisweagent/run/benchmarks/tests/test_benchmarks.py",
+        "test/test_swebench.py",
+        "tests/test_swebench.py",
+        "tests/swebench/test_swebench.py",
+        "tests/swebenchs/test_swebench.py",
+        "tests/benchmarks/test_swebench.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/run/benchmarks/swebench_single.py",
+      "candidate_test_paths": [
+        "src/minisweagent/run/benchmarks/tests/test_swebench_single.py",
+        "tests/minisweagent/run/benchmarks/test_swebench_single.py",
+        "src/minisweagent/run/benchmarks/tests/test_benchmarks.py",
+        "test/test_swebench_single.py",
+        "tests/test_swebench_single.py",
+        "tests/swebench_single/test_swebench_single.py",
+        "tests/swebench_singles/test_swebench_single.py",
+        "tests/benchmarks/test_swebench_single.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/run/benchmarks/utils/batch_progress.py",
+      "candidate_test_paths": [
+        "src/minisweagent/run/benchmarks/utils/tests/test_batch_progress.py",
+        "tests/minisweagent/run/benchmarks/utils/test_batch_progress.py",
+        "src/minisweagent/run/benchmarks/utils/tests/test_utils.py",
+        "test/test_batch_progress.py",
+        "tests/test_batch_progress.py",
+        "tests/batch_progress/test_batch_progress.py",
+        "tests/utils/test_batch_progress.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/run/hello_world.py",
+      "candidate_test_paths": [
+        "src/minisweagent/run/tests/test_hello_world.py",
+        "tests/minisweagent/run/test_hello_world.py",
+        "src/minisweagent/run/tests/test_run.py",
+        "test/test_hello_world.py",
+        "tests/test_hello_world.py",
+        "tests/hello_world/test_hello_world.py",
+        "tests/hello_worlds/test_hello_world.py",
+        "tests/run/test_hello_world.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/run/mini.py",
+      "candidate_test_paths": [
+        "src/minisweagent/run/tests/test_mini.py",
+        "tests/minisweagent/run/test_mini.py",
+        "src/minisweagent/run/tests/test_run.py",
+        "test/test_mini.py",
+        "tests/test_mini.py",
+        "tests/mini/test_mini.py",
+        "tests/minis/test_mini.py",
+        "tests/run/test_mini.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/run/utilities/config.py",
+      "candidate_test_paths": [
+        "src/minisweagent/run/utilities/tests/test_config.py",
+        "tests/minisweagent/run/utilities/test_config.py",
+        "src/minisweagent/run/utilities/tests/test_utilities.py",
+        "test/test_config.py",
+        "tests/test_config.py",
+        "tests/config/test_config.py",
+        "tests/configs/test_config.py",
+        "tests/utilities/test_config.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/run/utilities/inspector.py",
+      "candidate_test_paths": [
+        "src/minisweagent/run/utilities/tests/test_inspector.py",
+        "tests/minisweagent/run/utilities/test_inspector.py",
+        "src/minisweagent/run/utilities/tests/test_utilities.py",
+        "test/test_inspector.py",
+        "tests/test_inspector.py",
+        "tests/inspector/test_inspector.py",
+        "tests/inspectors/test_inspector.py",
+        "tests/utilities/test_inspector.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/run/utilities/mini_extra.py",
+      "candidate_test_paths": [
+        "src/minisweagent/run/utilities/tests/test_mini_extra.py",
+        "tests/minisweagent/run/utilities/test_mini_extra.py",
+        "src/minisweagent/run/utilities/tests/test_utilities.py",
+        "test/test_mini_extra.py",
+        "tests/test_mini_extra.py",
+        "tests/mini_extra/test_mini_extra.py",
+        "tests/mini_extras/test_mini_extra.py",
+        "tests/utilities/test_mini_extra.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/utils/log.py",
+      "candidate_test_paths": [
+        "src/minisweagent/utils/tests/test_log.py",
+        "tests/minisweagent/utils/test_log.py",
+        "src/minisweagent/utils/tests/test_utils.py",
+        "test/test_log.py",
+        "tests/test_log.py",
+        "tests/log/test_log.py",
+        "tests/logs/test_log.py",
+        "tests/utils/test_log.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/minisweagent/utils/serialize.py",
+      "candidate_test_paths": [
+        "src/minisweagent/utils/tests/test_serialize.py",
+        "tests/minisweagent/utils/test_serialize.py",
+        "src/minisweagent/utils/tests/test_utils.py",
+        "test/test_serialize.py",
+        "tests/test_serialize.py",
+        "tests/serialize/test_serialize.py",
+        "tests/serializes/test_serialize.py",
+        "tests/utils/test_serialize.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/utils/test_serialize.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/utils/test_serialize.py [library_package layout]"
+    },
+    {
+      "source_path": "src/minisweagent/__main__.py",
+      "candidate_test_paths": [
+        "src/minisweagent/tests/test___main__.py",
+        "tests/minisweagent/test___main__.py",
+        "src/minisweagent/tests/test_minisweagent.py",
+        "test/test___main__.py",
+        "tests/test___main__.py",
+        "tests/__main__/test___main__.py",
+        "tests/__main__s/test___main__.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 107,
+    "classified_count": 107,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 327,
+    "project_import_count": 0,
+    "declared_package_count": 63,
+    "undeclared_package_count": 116,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 41,
+    "high_confidence_test_count": 11,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 1,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

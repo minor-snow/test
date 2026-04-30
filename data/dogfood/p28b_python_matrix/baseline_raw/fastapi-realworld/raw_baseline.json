@@ -1,0 +1,2985 @@
+{
+  "repo_id": "fastapi-realworld",
+  "category": "fastapi_service",
+  "local_path": "H:/Boom/benchmarks/fastapi-realworld",
+  "pinned_commit": "2318463f51e2f0584508c6d7fc6ef2640c9101b0",
+  "expected_min_support": "validated",
+  "scan_ms": 2540,
+  "timeout": false,
+  "exit_code": 0,
+  "python_obs_path": "H:\\Boom\\benchmarks\\fastapi-realworld\\.pantheon\\internal\\python_observations.json",
+  "python_obs_available": true,
+  "python_obs": {
+    "schema_version": "python_observations.v1",
+    "repo": {
+      "root_label": "fastapi-realworld",
+      "observed_file_count": 100,
+      "python_file_count": 63
+    },
+    "layout": {
+      "primary_layout": "api_service",
+      "package_layout": "flat_package",
+      "confidence": "medium",
+      "signals": [
+        {
+          "signal": "flat_package_detected",
+          "weight": "strong",
+          "evidence": "Root-level package(s) with __init__.py: app"
+        },
+        {
+          "signal": "app_dir_without_manage_py",
+          "weight": "moderate",
+          "evidence": "app/ directory without Django manage.py"
+        },
+        {
+          "signal": "alembic_dir_found",
+          "weight": "moderate",
+          "evidence": "alembic/ migration directory (non-Django)"
+        }
+      ],
+      "unknowns": [],
+      "bucket_summary": {
+        "source": 36,
+        "migration": 1,
+        "config": 2,
+        "test": 23,
+        "unknown": 1
+      }
+    },
+    "framework_profile": {
+      "framework_signals": [
+        {
+          "name": "fastapi",
+          "kind": "web_framework",
+          "confidence": "high",
+          "evidence": [
+            {
+              "dimension": "dependency_manifest",
+              "detail": "fastapi found in dependency manifests"
+            },
+            {
+              "dimension": "import_pattern",
+              "detail": "fastapi imported in source files"
+            },
+            {
+              "dimension": "path_pattern",
+              "detail": "app/ directory without manage.py (service pattern)"
+            }
+          ]
+        },
+        {
+          "name": "pytest",
+          "kind": "test_framework",
+          "confidence": "medium",
+          "evidence": [
+            {
+              "dimension": "dependency_manifest",
+              "detail": "pytest found in dependency manifests"
+            }
+          ]
+        },
+        {
+          "name": "click",
+          "kind": "cli_framework",
+          "confidence": "medium",
+          "evidence": [
+            {
+              "dimension": "dependency_manifest",
+              "detail": "click found in dependency manifests"
+            }
+          ]
+        },
+        {
+          "name": "sqlalchemy",
+          "kind": "orm",
+          "confidence": "high",
+          "evidence": [
+            {
+              "dimension": "dependency_manifest",
+              "detail": "sqlalchemy found in dependency manifests"
+            },
+            {
+              "dimension": "import_pattern",
+              "detail": "sqlalchemy imported in source files"
+            },
+            {
+              "dimension": "path_pattern",
+              "detail": "alembic/ migration directory present"
+            }
+          ]
+        },
+        {
+          "name": "httpx",
+          "kind": "http_client",
+          "confidence": "medium",
+          "evidence": [
+            {
+              "dimension": "dependency_manifest",
+              "detail": "httpx found in dependency manifests"
+            }
+          ]
+        }
+      ],
+      "project_role_signals": [
+        {
+          "role": "service_backend",
+          "confidence": "high",
+          "evidence": [
+            {
+              "dimension": "layout_classification",
+              "detail": "Layout classified as api_service"
+            },
+            {
+              "dimension": "dependency_manifest",
+              "detail": "API framework found in dependencies"
+            },
+            {
+              "dimension": "path_pattern",
+              "detail": "app/ directory without manage.py (service layout)"
+            },
+            {
+              "dimension": "path_pattern",
+              "detail": "Alembic migrations (service DB pattern)"
+            },
+            {
+              "dimension": "path_pattern",
+              "detail": "api/ directory present"
+            }
+          ]
+        },
+        {
+          "role": "python_sdk_library",
+          "confidence": "medium",
+          "evidence": [
+            {
+              "dimension": "dependency_manifest",
+              "detail": "Packaging config without web framework"
+            }
+          ]
+        }
+      ],
+      "unknowns": []
+    },
+    "risk_preset_validation": {
+      "preset": "fastapi_service",
+      "validation": "validated",
+      "confidence": "high",
+      "matched_signals": [
+        "layout: api_service / flat_package (medium)",
+        "framework: fastapi / web_framework (high)",
+        "framework: pytest / test_framework (medium)",
+        "framework: click / cli_framework (medium)",
+        "framework: sqlalchemy / orm (high)",
+        "framework: httpx / http_client (medium)",
+        "project_role: service_backend (high)",
+        "project_role: python_sdk_library (medium)",
+        "sensitive_zone: authentication (high, 1 paths)",
+        "sensitive_zone: security (high, 1 paths)"
+      ],
+      "suggested_review": [
+        {
+          "pattern": "**/auth*",
+          "reason": "Authentication logic requires human review",
+          "severity": "high",
+          "matched_path_count": 1,
+          "evidence": [
+            "1 paths match pattern **/auth*",
+            "Sensitive zone \"authentication\" (high) corroborates"
+          ]
+        },
+        {
+          "pattern": "**/security*",
+          "reason": "Security module requires human review",
+          "severity": "high",
+          "matched_path_count": 1,
+          "evidence": [
+            "1 paths match pattern **/security*",
+            "Sensitive zone \"security\" (high) corroborates"
+          ]
+        },
+        {
+          "pattern": "**/config*",
+          "reason": "Application configuration affects system behavior",
+          "severity": "medium",
+          "matched_path_count": 1,
+          "evidence": [
+            "1 paths match pattern **/config*"
+          ]
+        },
+        {
+          "pattern": "**/db/**",
+          "reason": "Database layer changes affect data integrity",
+          "severity": "high",
+          "matched_path_count": 3,
+          "evidence": [
+            "3 paths match pattern **/db/**"
+          ]
+        },
+        {
+          "pattern": "**/deps*",
+          "reason": "Dependency injection affects route behavior",
+          "severity": "medium",
+          "matched_path_count": 1,
+          "evidence": [
+            "1 paths match pattern **/deps*",
+            "FastAPI dependency injection pattern"
+          ]
+        }
+      ],
+      "suggested_forbidden": [
+        {
+          "pattern": "alembic/**",
+          "reason": "Database migrations should not be auto-generated by AI agents",
+          "severity": "critical",
+          "matched_path_count": 4,
+          "evidence": [
+            "4 paths match pattern alembic/**",
+            "Alembic migration framework detected"
+          ]
+        }
+      ],
+      "dormant_patterns": [
+        {
+          "pattern": "**/middleware*",
+          "reason": "No middleware files observed"
+        }
+      ]
+    },
+    "files": [
+      {
+        "path": "alembic/env.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 2050,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "alembic/versions/29b2b20b29d7_.py",
+        "bucket": "migration",
+        "extension": ".py",
+        "size_bytes": 5038,
+        "evidence": [
+          "Alembic versions"
+        ]
+      },
+      {
+        "path": "app/api/api.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 859,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/api/deps.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 3095,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/api/routes/articles.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 5512,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/api/routes/auth.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1427,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/api/routes/comments.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 3732,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/api/routes/favorites.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1882,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/api/routes/profiles.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 2371,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/api/routes/tags.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 578,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/api/routes/user.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1277,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/api/routes/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/api/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/core/config.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 2104,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/core/security.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 902,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/crud/crud_article.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 4787,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/crud/crud_comment.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1731,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/crud/crud_user.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 2252,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/crud/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/db/base_class.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 117,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/db/session.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 525,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/db/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/main.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 894,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/models/article.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 3050,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/models/comment.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1584,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/models/tag.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 649,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/models/user.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 2683,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/models/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/schemas/articles.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 963,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/schemas/base.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 522,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/schemas/comments.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 515,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/schemas/profiles.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 230,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/schemas/tags.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 97,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/schemas/users.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 817,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/schemas/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/seed.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 3054,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "app/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 23,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "pyproject.toml",
+        "bucket": "config",
+        "extension": ".toml",
+        "size_bytes": 1137,
+        "evidence": [
+          "Project config"
+        ]
+      },
+      {
+        "path": "requirements.txt",
+        "bucket": "config",
+        "extension": ".txt",
+        "size_bytes": 45308,
+        "evidence": [
+          "Requirements file"
+        ]
+      },
+      {
+        "path": "tests/api/articles/test_article_create.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 2994,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/articles/test_article_delete.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1483,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/articles/test_article_favorite.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1971,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/articles/test_article_get.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1126,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/articles/test_article_list.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 6294,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/articles/test_article_update.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1815,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/articles/__init__.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/comments/test_comment_create.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1798,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/comments/test_comment_delete.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 3505,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/comments/test_comment_list.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1204,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/comments/__init__.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/profiles/test_profile_follow.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1996,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/profiles/test_profile_get.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1387,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/profiles/__init__.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/tags/test_tag_list.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 537,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/tags/__init__.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/users/test_current_user.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 671,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/users/test_login_user.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1637,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/users/test_register_user.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 2048,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/users/test_update_user.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 2059,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/api/users/__init__.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/conftest.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 2836,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/__init__.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "uv.lock",
+        "bucket": "unknown",
+        "extension": ".lock",
+        "size_bytes": 175520,
+        "evidence": []
+      }
+    ],
+    "import_observations": [
+      {
+        "from_file": "alembic/env.py",
+        "raw_specifier": "from logging.config import fileConfig",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "alembic/env.py",
+        "raw_specifier": "from sqlalchemy import engine_from_config, pool",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "alembic/env.py",
+        "raw_specifier": "from alembic import context",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "alembic",
+        "confidence": "high"
+      },
+      {
+        "from_file": "alembic/env.py",
+        "raw_specifier": "from app.core.config import settings",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "alembic/env.py",
+        "raw_specifier": "from app.db.base_class import Base",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "alembic/env.py",
+        "raw_specifier": "from app.models.article import Article  # noqa",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "alembic/env.py",
+        "raw_specifier": "from app.models.comment import Comment  # noqa",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "alembic/env.py",
+        "raw_specifier": "from app.models.tag import Tag  # noqa",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "alembic/env.py",
+        "raw_specifier": "from app.models.user import User  # noqa",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/api.py",
+        "raw_specifier": "from fastapi import APIRouter",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/api.py",
+        "raw_specifier": "from app.api.routes import articles, auth, comments, favorites, profiles, tags, user",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from collections.abc import AsyncGenerator",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from typing import Annotated",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from fastapi import Depends, HTTPException, Request, Security, status",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from fastapi.security import APIKeyHeader",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from jose import jwt",
+        "import_kind": "from_import",
+        "status": "undeclared_package",
+        "top_level_module": "jose",
+        "confidence": "low"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from pydantic import ValidationError",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "pydantic",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from sqlalchemy.ext.asyncio import AsyncSession",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from app.core import security",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from app.crud.crud_article import ArticlesRepository",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from app.crud.crud_comment import CommentsRepository",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from app.crud.crud_user import UsersRepository",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from app.db.session import SessionLocal, SessionLocalRo",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/deps.py",
+        "raw_specifier": "from app.models.user import User",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/articles.py",
+        "raw_specifier": "from fastapi import APIRouter, Body, Depends, HTTPException, Path, Query",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/articles.py",
+        "raw_specifier": "from slugify import slugify",
+        "import_kind": "from_import",
+        "status": "undeclared_package",
+        "top_level_module": "slugify",
+        "confidence": "low"
+      },
+      {
+        "from_file": "app/api/routes/articles.py",
+        "raw_specifier": "from app.api.deps import ( CurrentUser, OptionalCurrentUser, get_articles_service, )",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/articles.py",
+        "raw_specifier": "from app.crud.crud_article import ArticlesRepository",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/articles.py",
+        "raw_specifier": "from app.models.article import Article",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/articles.py",
+        "raw_specifier": "from app.schemas.articles import ( MultipleArticlesResponse, NewArticleRequest, SingleArticleResponse, UpdateArticleRequest, )",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/auth.py",
+        "raw_specifier": "from fastapi import APIRouter, Body, Depends, HTTPException",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/auth.py",
+        "raw_specifier": "from app.api.deps import get_users_service",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/auth.py",
+        "raw_specifier": "from app.crud.crud_user import UsersRepository",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/auth.py",
+        "raw_specifier": "from app.schemas.users import LoginUserRequest, NewUserRequest, UserResponse",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/comments.py",
+        "raw_specifier": "from fastapi import APIRouter, Body, Depends, HTTPException, Path",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/comments.py",
+        "raw_specifier": "from app.api.deps import ( CurrentUser, OptionalCurrentUser, get_articles_service, get_comments_service, )",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/comments.py",
+        "raw_specifier": "from app.crud.crud_article import ArticlesRepository",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/comments.py",
+        "raw_specifier": "from app.crud.crud_comment import CommentsRepository",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/comments.py",
+        "raw_specifier": "from app.models.article import Article",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/comments.py",
+        "raw_specifier": "from app.models.comment import Comment",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/comments.py",
+        "raw_specifier": "from app.schemas.comments import ( MultipleCommentsResponse, NewCommentRequest, SingleCommentResponse, )",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/favorites.py",
+        "raw_specifier": "from fastapi import APIRouter, Depends, HTTPException, Path",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/favorites.py",
+        "raw_specifier": "from app.api.deps import CurrentUser, get_articles_service",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/favorites.py",
+        "raw_specifier": "from app.crud.crud_article import ArticlesRepository",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/favorites.py",
+        "raw_specifier": "from app.models.article import Article",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/favorites.py",
+        "raw_specifier": "from app.schemas.articles import SingleArticleResponse",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/profiles.py",
+        "raw_specifier": "from fastapi import APIRouter, Depends, HTTPException, Path",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/profiles.py",
+        "raw_specifier": "from app.api.deps import ( CurrentUser, OptionalCurrentUser, get_users_service, )",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/profiles.py",
+        "raw_specifier": "from app.crud.crud_user import UsersRepository",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/profiles.py",
+        "raw_specifier": "from app.models.user import User",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/profiles.py",
+        "raw_specifier": "from app.schemas.profiles import ProfileResponse",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/tags.py",
+        "raw_specifier": "from fastapi import APIRouter",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/tags.py",
+        "raw_specifier": "from sqlalchemy import select",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/tags.py",
+        "raw_specifier": "from app.db.session import SessionLocalRo",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/tags.py",
+        "raw_specifier": "from app.models.tag import Tag",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/tags.py",
+        "raw_specifier": "from app.schemas.tags import TagsResponse",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/user.py",
+        "raw_specifier": "from fastapi import APIRouter, Body, Depends, HTTPException",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/user.py",
+        "raw_specifier": "from app.api.deps import CurrentUser, get_users_service",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/user.py",
+        "raw_specifier": "from app.crud.crud_user import UsersRepository",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/api/routes/user.py",
+        "raw_specifier": "from app.schemas.users import UpdateUserRequest, UserResponse",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/core/config.py",
+        "raw_specifier": "os",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "os",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/core/config.py",
+        "raw_specifier": "secrets",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "secrets",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/core/config.py",
+        "raw_specifier": "from typing import Any",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/core/config.py",
+        "raw_specifier": "from pydantic import ValidationInfo, field_validator",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "pydantic",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/core/config.py",
+        "raw_specifier": "from pydantic.networks import PostgresDsn",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "pydantic",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/core/config.py",
+        "raw_specifier": "from pydantic_settings import BaseSettings, SettingsConfigDict",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "pydantic_settings",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/core/security.py",
+        "raw_specifier": "from datetime import UTC, datetime, timedelta",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "datetime",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/core/security.py",
+        "raw_specifier": "from typing import Any",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/core/security.py",
+        "raw_specifier": "bcrypt",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "bcrypt",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/core/security.py",
+        "raw_specifier": "from jose import jwt",
+        "import_kind": "from_import",
+        "status": "undeclared_package",
+        "top_level_module": "jose",
+        "confidence": "low"
+      },
+      {
+        "from_file": "app/core/security.py",
+        "raw_specifier": "from app.core.config import settings",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "asyncio",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "asyncio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "from collections.abc import Sequence",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "from typing import Any",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "from slugify import slugify",
+        "import_kind": "from_import",
+        "status": "undeclared_package",
+        "top_level_module": "slugify",
+        "confidence": "low"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "from sqlalchemy import Select, func, select",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "from sqlalchemy.ext.asyncio import AsyncSession",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "from sqlalchemy.orm import joinedload",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "from sqlalchemy.sql.expression import desc",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "from app.db.session import SessionLocalRo",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "from app.models.article import Article",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "from app.models.tag import Tag",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "from app.models.user import User",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_article.py",
+        "raw_specifier": "from app.schemas.articles import NewArticle, UpdateArticle",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_comment.py",
+        "raw_specifier": "from collections.abc import Sequence",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_comment.py",
+        "raw_specifier": "from typing import Any",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_comment.py",
+        "raw_specifier": "from sqlalchemy import select",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_comment.py",
+        "raw_specifier": "from sqlalchemy.ext.asyncio import AsyncSession",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_comment.py",
+        "raw_specifier": "from sqlalchemy.orm import joinedload",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_comment.py",
+        "raw_specifier": "from sqlalchemy.sql.expression import desc",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_comment.py",
+        "raw_specifier": "from app.models.article import Article",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_comment.py",
+        "raw_specifier": "from app.models.comment import Comment",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_comment.py",
+        "raw_specifier": "from app.models.user import User",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_comment.py",
+        "raw_specifier": "from app.schemas.comments import NewComment",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_user.py",
+        "raw_specifier": "from sqlalchemy import select",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_user.py",
+        "raw_specifier": "from sqlalchemy.ext.asyncio import AsyncSession",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_user.py",
+        "raw_specifier": "from sqlalchemy.orm import joinedload",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_user.py",
+        "raw_specifier": "from app.core.security import get_password_hash, verify_password",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_user.py",
+        "raw_specifier": "from app.models.user import User",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/crud/crud_user.py",
+        "raw_specifier": "from app.schemas.users import NewUser, UpdateUser",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/db/base_class.py",
+        "raw_specifier": "from typing import Any",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/db/base_class.py",
+        "raw_specifier": "from sqlalchemy.orm import DeclarativeBase",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/db/session.py",
+        "raw_specifier": "from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/db/session.py",
+        "raw_specifier": "from app.core.config import settings, settingsReadOnly",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/main.py",
+        "raw_specifier": "from fastapi import FastAPI",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/main.py",
+        "raw_specifier": "from fastapi.middleware.cors import CORSMiddleware",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/main.py",
+        "raw_specifier": "from fastapi.openapi.utils import get_openapi",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "fastapi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/main.py",
+        "raw_specifier": "from app.api.api import router",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/main.py",
+        "raw_specifier": "from app.core.config import settings",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/article.py",
+        "raw_specifier": "from datetime import datetime",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "datetime",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/article.py",
+        "raw_specifier": "from typing import TYPE_CHECKING",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/article.py",
+        "raw_specifier": "from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table, Text",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/article.py",
+        "raw_specifier": "from sqlalchemy.orm import Mapped, mapped_column, relationship",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/article.py",
+        "raw_specifier": "from app.db.base_class import Base",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/article.py",
+        "raw_specifier": "from app.schemas.articles import Article as ArticleDto",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/article.py",
+        "raw_specifier": "from app.schemas.base import convert_datetime_to_realworld",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/article.py",
+        "raw_specifier": "from app.models.comment import Comment",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/article.py",
+        "raw_specifier": "from app.models.tag import Tag",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/article.py",
+        "raw_specifier": "from app.models.user import User",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/comment.py",
+        "raw_specifier": "from datetime import datetime",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "datetime",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/comment.py",
+        "raw_specifier": "from typing import TYPE_CHECKING",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/comment.py",
+        "raw_specifier": "from sqlalchemy import DateTime, ForeignKey, Integer, Text",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/comment.py",
+        "raw_specifier": "from sqlalchemy.orm import Mapped, mapped_column, relationship",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/comment.py",
+        "raw_specifier": "from app.db.base_class import Base",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/comment.py",
+        "raw_specifier": "from app.schemas.base import convert_datetime_to_realworld",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/comment.py",
+        "raw_specifier": "from app.schemas.comments import Comment as CommentDto",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/comment.py",
+        "raw_specifier": "from app.models.article import Article",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/comment.py",
+        "raw_specifier": "from app.models.user import User",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/tag.py",
+        "raw_specifier": "from typing import TYPE_CHECKING",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/tag.py",
+        "raw_specifier": "from sqlalchemy import Integer, String",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/tag.py",
+        "raw_specifier": "from sqlalchemy.orm import Mapped, mapped_column, relationship",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/tag.py",
+        "raw_specifier": "from app.db.base_class import Base",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/tag.py",
+        "raw_specifier": "from app.models.article import article_tag",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/tag.py",
+        "raw_specifier": "from app.models.article import Article",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/user.py",
+        "raw_specifier": "from datetime import datetime",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "datetime",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/user.py",
+        "raw_specifier": "from typing import TYPE_CHECKING",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/user.py",
+        "raw_specifier": "from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table, Text",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/user.py",
+        "raw_specifier": "from sqlalchemy.orm import Mapped, mapped_column, relationship",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/user.py",
+        "raw_specifier": "from app.core import security",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/user.py",
+        "raw_specifier": "from app.db.base_class import Base",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/user.py",
+        "raw_specifier": "from app.models.article import article_favorite",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/user.py",
+        "raw_specifier": "from app.schemas.profiles import Profile as ProfileDto",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/user.py",
+        "raw_specifier": "from app.schemas.users import User as UserDto",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/user.py",
+        "raw_specifier": "from app.models.article import Article",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/models/user.py",
+        "raw_specifier": "from app.models.comment import Comment",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/articles.py",
+        "raw_specifier": "from pydantic import Field",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "pydantic",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/articles.py",
+        "raw_specifier": "from app.schemas.base import BaseModel",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/articles.py",
+        "raw_specifier": "from app.schemas.profiles import Profile",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/base.py",
+        "raw_specifier": "from datetime import UTC, datetime",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "datetime",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/base.py",
+        "raw_specifier": "from pydantic import BaseModel as PBaseModel",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "pydantic",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/base.py",
+        "raw_specifier": "from pydantic import ConfigDict",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "pydantic",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/base.py",
+        "raw_specifier": "from pydantic.alias_generators import to_camel",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "pydantic",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/comments.py",
+        "raw_specifier": "from pydantic import Field",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "pydantic",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/comments.py",
+        "raw_specifier": "from app.schemas.base import BaseModel",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/comments.py",
+        "raw_specifier": "from app.schemas.profiles import Profile",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/profiles.py",
+        "raw_specifier": "from app.schemas.base import BaseModel",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/tags.py",
+        "raw_specifier": "from app.schemas.base import BaseModel",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/users.py",
+        "raw_specifier": "from pydantic import EmailStr, Field",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "pydantic",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/schemas/users.py",
+        "raw_specifier": "from app.schemas.base import BaseModel",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "asyncio",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "asyncio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "logging",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "os",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "os",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "sys",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "sys",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "from random import choice",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "random",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "from faker import Faker",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "faker",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "from slugify import slugify",
+        "import_kind": "from_import",
+        "status": "undeclared_package",
+        "top_level_module": "slugify",
+        "confidence": "low"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "from sqlalchemy import delete, select",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "from sqlalchemy.orm import joinedload",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "sqlalchemy",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "from app.core.security import get_password_hash",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "from app.db.session import SessionLocal",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "from app.models.article import Article",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "from app.models.comment import Comment",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "from app.models.tag import Tag",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      },
+      {
+        "from_file": "app/seed.py",
+        "raw_specifier": "from app.models.user import User",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "app",
+        "confidence": "high"
+      }
+    ],
+    "dependency_manifests": [
+      {
+        "source_path": "pyproject.toml",
+        "source_type": "pyproject.toml",
+        "packages": [
+          "alembic",
+          "bcrypt",
+          "faker",
+          "fastapi",
+          "httpx",
+          "psycopg",
+          "pydantic_settings",
+          "pydantic",
+          "python_jose",
+          "python_slugify",
+          "requests",
+          "sqlalchemy",
+          "uvicorn"
+        ],
+        "dev_packages": [],
+        "confidence": "high",
+        "warnings": []
+      },
+      {
+        "source_path": "requirements.txt",
+        "source_type": "requirements.txt",
+        "packages": [
+          "alembic",
+          "annotated_doc",
+          "annotated_types",
+          "anyio",
+          "bcrypt",
+          "certifi",
+          "cffi",
+          "charset_normalizer",
+          "click",
+          "colorama",
+          "coverage",
+          "cryptography",
+          "dnspython",
+          "ecdsa",
+          "email_validator",
+          "faker",
+          "fastapi",
+          "greenlet",
+          "h11",
+          "httpcore",
+          "httptools",
+          "httpx",
+          "idna",
+          "iniconfig",
+          "librt",
+          "mako",
+          "markupsafe",
+          "mypy",
+          "mypy_extensions",
+          "packaging",
+          "pathspec",
+          "pluggy",
+          "psycopg",
+          "psycopg_binary",
+          "psycopg_pool",
+          "pyasn1",
+          "pycparser",
+          "pydantic",
+          "pydantic_core",
+          "pydantic_settings",
+          "pygments",
+          "pytest",
+          "pytest_asyncio",
+          "pytest_cov",
+          "python_dotenv",
+          "python_jose",
+          "python_slugify",
+          "pyyaml",
+          "requests",
+          "rsa",
+          "ruff",
+          "six",
+          "sqlalchemy",
+          "starlette",
+          "text_unidecode",
+          "types_python_slugify",
+          "typing_extensions",
+          "typing_inspection",
+          "tzdata",
+          "urllib3",
+          "uvicorn",
+          "uvloop",
+          "watchfiles",
+          "websockets"
+        ],
+        "dev_packages": [],
+        "confidence": "high",
+        "warnings": []
+      },
+      {
+        "source_path": "uv.lock",
+        "source_type": "uv.lock",
+        "packages": [
+          "alembic",
+          "annotated_doc",
+          "annotated_types",
+          "anyio",
+          "bcrypt",
+          "certifi",
+          "cffi",
+          "charset_normalizer",
+          "click",
+          "colorama",
+          "coverage",
+          "cryptography",
+          "dnspython",
+          "ecdsa",
+          "email_validator",
+          "faker",
+          "fastapi",
+          "greenlet",
+          "h11",
+          "httpcore",
+          "httptools",
+          "httpx",
+          "idna",
+          "iniconfig",
+          "librt",
+          "mako",
+          "markupsafe",
+          "mypy",
+          "mypy_extensions",
+          "packaging",
+          "pathspec",
+          "pluggy",
+          "psycopg",
+          "psycopg_binary",
+          "psycopg_pool",
+          "pyasn1",
+          "pycparser",
+          "pydantic",
+          "pydantic_core",
+          "pydantic_settings",
+          "pygments",
+          "pytest",
+          "pytest_asyncio",
+          "pytest_cov",
+          "python_dotenv",
+          "python_jose",
+          "python_slugify",
+          "pyyaml",
+          "requests",
+          "rsa",
+          "ruff",
+          "six",
+          "sqlalchemy",
+          "starlette",
+          "text_unidecode",
+          "types_python_slugify",
+          "typing_extensions",
+          "typing_inspection",
+          "tzdata",
+          "urllib3",
+          "uvicorn",
+          "uvloop",
+          "watchfiles",
+          "websockets"
+        ],
+        "dev_packages": [],
+        "confidence": "high",
+        "warnings": []
+      }
+    ],
+    "test_mappings": [
+      {
+        "source_path": "alembic/env.py",
+        "candidate_test_paths": [
+          "alembic/tests/test_env.py",
+          "tests/test_env.py",
+          "alembic/tests/test_alembic.py",
+          "test/test_env.py",
+          "tests/env/test_env.py",
+          "tests/envs/test_env.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/api/api.py",
+        "candidate_test_paths": [
+          "app/api/tests/test_api.py",
+          "tests/api/test_api.py",
+          "test/test_api.py",
+          "tests/test_api.py",
+          "tests/apis/test_api.py",
+          "tests/api/api/test_api_create.py",
+          "tests/api/api/test_api_get.py",
+          "tests/api/api/test_api_list.py",
+          "tests/api/api/test_api_update.py",
+          "tests/api/api/test_api_delete.py",
+          "tests/api/api/test_api.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/api/deps.py",
+        "candidate_test_paths": [
+          "app/api/tests/test_deps.py",
+          "tests/api/test_deps.py",
+          "app/api/tests/test_api.py",
+          "test/test_deps.py",
+          "tests/test_deps.py",
+          "tests/deps/test_deps.py",
+          "tests/api/deps/test_dep_create.py",
+          "tests/api/deps/test_dep_get.py",
+          "tests/api/deps/test_dep_list.py",
+          "tests/api/deps/test_dep_update.py",
+          "tests/api/deps/test_dep_delete.py",
+          "tests/api/deps/test_deps.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/api/routes/articles.py",
+        "candidate_test_paths": [
+          "app/api/routes/tests/test_articles.py",
+          "tests/api/routes/test_articles.py",
+          "app/api/routes/tests/test_routes.py",
+          "test/test_articles.py",
+          "tests/test_articles.py",
+          "tests/articles/test_articles.py",
+          "tests/routes/test_articles.py",
+          "tests/api/articles/test_article_create.py",
+          "tests/api/articles/test_article_get.py",
+          "tests/api/articles/test_article_list.py",
+          "tests/api/articles/test_article_update.py",
+          "tests/api/articles/test_article_delete.py",
+          "tests/api/articles/test_articles.py",
+          "tests/api/test_articles.py"
+        ],
+        "existing_test_paths": [
+          "tests/api/articles/test_article_create.py",
+          "tests/api/articles/test_article_get.py",
+          "tests/api/articles/test_article_list.py",
+          "tests/api/articles/test_article_update.py",
+          "tests/api/articles/test_article_delete.py"
+        ],
+        "confidence": "high",
+        "reason": "API route domain test match: tests/api/articles/test_article_create.py [service_backend context]"
+      },
+      {
+        "source_path": "app/api/routes/auth.py",
+        "candidate_test_paths": [
+          "app/api/routes/tests/test_auth.py",
+          "tests/api/routes/test_auth.py",
+          "app/api/routes/tests/test_routes.py",
+          "test/test_auth.py",
+          "tests/test_auth.py",
+          "tests/auth/test_auth.py",
+          "tests/auths/test_auth.py",
+          "tests/routes/test_auth.py",
+          "tests/api/auth/test_auth_create.py",
+          "tests/api/auth/test_auth_get.py",
+          "tests/api/auth/test_auth_list.py",
+          "tests/api/auth/test_auth_update.py",
+          "tests/api/auth/test_auth_delete.py",
+          "tests/api/auth/test_auth.py",
+          "tests/api/test_auth.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/api/routes/comments.py",
+        "candidate_test_paths": [
+          "app/api/routes/tests/test_comments.py",
+          "tests/api/routes/test_comments.py",
+          "app/api/routes/tests/test_routes.py",
+          "test/test_comments.py",
+          "tests/test_comments.py",
+          "tests/comments/test_comments.py",
+          "tests/routes/test_comments.py",
+          "tests/api/comments/test_comment_create.py",
+          "tests/api/comments/test_comment_get.py",
+          "tests/api/comments/test_comment_list.py",
+          "tests/api/comments/test_comment_update.py",
+          "tests/api/comments/test_comment_delete.py",
+          "tests/api/comments/test_comments.py",
+          "tests/api/test_comments.py"
+        ],
+        "existing_test_paths": [
+          "tests/api/comments/test_comment_create.py",
+          "tests/api/comments/test_comment_list.py",
+          "tests/api/comments/test_comment_delete.py"
+        ],
+        "confidence": "high",
+        "reason": "API route domain test match: tests/api/comments/test_comment_create.py [service_backend context]"
+      },
+      {
+        "source_path": "app/api/routes/favorites.py",
+        "candidate_test_paths": [
+          "app/api/routes/tests/test_favorites.py",
+          "tests/api/routes/test_favorites.py",
+          "app/api/routes/tests/test_routes.py",
+          "test/test_favorites.py",
+          "tests/test_favorites.py",
+          "tests/favorites/test_favorites.py",
+          "tests/routes/test_favorites.py",
+          "tests/api/favorites/test_favorite_create.py",
+          "tests/api/favorites/test_favorite_get.py",
+          "tests/api/favorites/test_favorite_list.py",
+          "tests/api/favorites/test_favorite_update.py",
+          "tests/api/favorites/test_favorite_delete.py",
+          "tests/api/favorites/test_favorites.py",
+          "tests/api/test_favorites.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/api/routes/profiles.py",
+        "candidate_test_paths": [
+          "app/api/routes/tests/test_profiles.py",
+          "tests/api/routes/test_profiles.py",
+          "app/api/routes/tests/test_routes.py",
+          "test/test_profiles.py",
+          "tests/test_profiles.py",
+          "tests/profiles/test_profiles.py",
+          "tests/routes/test_profiles.py",
+          "tests/api/profiles/test_profile_create.py",
+          "tests/api/profiles/test_profile_get.py",
+          "tests/api/profiles/test_profile_list.py",
+          "tests/api/profiles/test_profile_update.py",
+          "tests/api/profiles/test_profile_delete.py",
+          "tests/api/profiles/test_profiles.py",
+          "tests/api/test_profiles.py"
+        ],
+        "existing_test_paths": [
+          "tests/api/profiles/test_profile_get.py"
+        ],
+        "confidence": "high",
+        "reason": "API route domain test match: tests/api/profiles/test_profile_get.py [service_backend context]"
+      },
+      {
+        "source_path": "app/api/routes/tags.py",
+        "candidate_test_paths": [
+          "app/api/routes/tests/test_tags.py",
+          "tests/api/routes/test_tags.py",
+          "app/api/routes/tests/test_routes.py",
+          "test/test_tags.py",
+          "tests/test_tags.py",
+          "tests/tags/test_tags.py",
+          "tests/routes/test_tags.py",
+          "tests/api/tags/test_tag_create.py",
+          "tests/api/tags/test_tag_get.py",
+          "tests/api/tags/test_tag_list.py",
+          "tests/api/tags/test_tag_update.py",
+          "tests/api/tags/test_tag_delete.py",
+          "tests/api/tags/test_tags.py",
+          "tests/api/test_tags.py"
+        ],
+        "existing_test_paths": [
+          "tests/api/tags/test_tag_list.py"
+        ],
+        "confidence": "high",
+        "reason": "API route domain test match: tests/api/tags/test_tag_list.py [service_backend context]"
+      },
+      {
+        "source_path": "app/api/routes/user.py",
+        "candidate_test_paths": [
+          "app/api/routes/tests/test_user.py",
+          "tests/api/routes/test_user.py",
+          "app/api/routes/tests/test_routes.py",
+          "test/test_user.py",
+          "tests/test_user.py",
+          "tests/user/test_user.py",
+          "tests/users/test_user.py",
+          "tests/routes/test_user.py",
+          "tests/api/user/test_user_create.py",
+          "tests/api/user/test_user_get.py",
+          "tests/api/user/test_user_list.py",
+          "tests/api/user/test_user_update.py",
+          "tests/api/user/test_user_delete.py",
+          "tests/api/user/test_user.py",
+          "tests/api/test_user.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/core/config.py",
+        "candidate_test_paths": [
+          "app/core/tests/test_config.py",
+          "tests/core/test_config.py",
+          "app/core/tests/test_core.py",
+          "test/test_config.py",
+          "tests/test_config.py",
+          "tests/config/test_config.py",
+          "tests/configs/test_config.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/core/security.py",
+        "candidate_test_paths": [
+          "app/core/tests/test_security.py",
+          "tests/core/test_security.py",
+          "app/core/tests/test_core.py",
+          "test/test_security.py",
+          "tests/test_security.py",
+          "tests/security/test_security.py",
+          "tests/securitys/test_security.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/crud/crud_article.py",
+        "candidate_test_paths": [
+          "app/crud/tests/test_crud_article.py",
+          "tests/crud/test_crud_article.py",
+          "app/crud/tests/test_crud.py",
+          "test/test_crud_article.py",
+          "tests/test_crud_article.py",
+          "tests/crud_article/test_crud_article.py",
+          "tests/crud_articles/test_crud_article.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/crud/crud_comment.py",
+        "candidate_test_paths": [
+          "app/crud/tests/test_crud_comment.py",
+          "tests/crud/test_crud_comment.py",
+          "app/crud/tests/test_crud.py",
+          "test/test_crud_comment.py",
+          "tests/test_crud_comment.py",
+          "tests/crud_comment/test_crud_comment.py",
+          "tests/crud_comments/test_crud_comment.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/crud/crud_user.py",
+        "candidate_test_paths": [
+          "app/crud/tests/test_crud_user.py",
+          "tests/crud/test_crud_user.py",
+          "app/crud/tests/test_crud.py",
+          "test/test_crud_user.py",
+          "tests/test_crud_user.py",
+          "tests/crud_user/test_crud_user.py",
+          "tests/crud_users/test_crud_user.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/db/base_class.py",
+        "candidate_test_paths": [
+          "app/db/tests/test_base_class.py",
+          "tests/db/test_base_class.py",
+          "app/db/tests/test_db.py",
+          "test/test_base_class.py",
+          "tests/test_base_class.py",
+          "tests/base_class/test_base_class.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/db/session.py",
+        "candidate_test_paths": [
+          "app/db/tests/test_session.py",
+          "tests/db/test_session.py",
+          "app/db/tests/test_db.py",
+          "test/test_session.py",
+          "tests/test_session.py",
+          "tests/session/test_session.py",
+          "tests/sessions/test_session.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/main.py",
+        "candidate_test_paths": [
+          "app/tests/test_main.py",
+          "tests/test_main.py",
+          "app/tests/test_app.py",
+          "test/test_main.py",
+          "tests/main/test_main.py",
+          "tests/mains/test_main.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/models/article.py",
+        "candidate_test_paths": [
+          "app/models/tests/test_article.py",
+          "tests/models/test_article.py",
+          "app/models/tests/test_models.py",
+          "test/test_article.py",
+          "tests/test_article.py",
+          "tests/article/test_article.py",
+          "tests/articles/test_article.py",
+          "tests/schemas/test_article.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/models/comment.py",
+        "candidate_test_paths": [
+          "app/models/tests/test_comment.py",
+          "tests/models/test_comment.py",
+          "app/models/tests/test_models.py",
+          "test/test_comment.py",
+          "tests/test_comment.py",
+          "tests/comment/test_comment.py",
+          "tests/comments/test_comment.py",
+          "tests/schemas/test_comment.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/models/tag.py",
+        "candidate_test_paths": [
+          "app/models/tests/test_tag.py",
+          "tests/models/test_tag.py",
+          "app/models/tests/test_models.py",
+          "test/test_tag.py",
+          "tests/test_tag.py",
+          "tests/tag/test_tag.py",
+          "tests/tags/test_tag.py",
+          "tests/schemas/test_tag.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/models/user.py",
+        "candidate_test_paths": [
+          "app/models/tests/test_user.py",
+          "tests/models/test_user.py",
+          "app/models/tests/test_models.py",
+          "test/test_user.py",
+          "tests/test_user.py",
+          "tests/user/test_user.py",
+          "tests/users/test_user.py",
+          "tests/schemas/test_user.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/schemas/articles.py",
+        "candidate_test_paths": [
+          "app/schemas/tests/test_articles.py",
+          "tests/schemas/test_articles.py",
+          "app/schemas/tests/test_schemas.py",
+          "test/test_articles.py",
+          "tests/test_articles.py",
+          "tests/articles/test_articles.py",
+          "tests/models/test_articles.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/schemas/base.py",
+        "candidate_test_paths": [
+          "app/schemas/tests/test_base.py",
+          "tests/schemas/test_base.py",
+          "app/schemas/tests/test_schemas.py",
+          "test/test_base.py",
+          "tests/test_base.py",
+          "tests/base/test_base.py",
+          "tests/bases/test_base.py",
+          "tests/models/test_base.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/schemas/comments.py",
+        "candidate_test_paths": [
+          "app/schemas/tests/test_comments.py",
+          "tests/schemas/test_comments.py",
+          "app/schemas/tests/test_schemas.py",
+          "test/test_comments.py",
+          "tests/test_comments.py",
+          "tests/comments/test_comments.py",
+          "tests/models/test_comments.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/schemas/profiles.py",
+        "candidate_test_paths": [
+          "app/schemas/tests/test_profiles.py",
+          "tests/schemas/test_profiles.py",
+          "app/schemas/tests/test_schemas.py",
+          "test/test_profiles.py",
+          "tests/test_profiles.py",
+          "tests/profiles/test_profiles.py",
+          "tests/models/test_profiles.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/schemas/tags.py",
+        "candidate_test_paths": [
+          "app/schemas/tests/test_tags.py",
+          "tests/schemas/test_tags.py",
+          "app/schemas/tests/test_schemas.py",
+          "test/test_tags.py",
+          "tests/test_tags.py",
+          "tests/tags/test_tags.py",
+          "tests/models/test_tags.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/schemas/users.py",
+        "candidate_test_paths": [
+          "app/schemas/tests/test_users.py",
+          "tests/schemas/test_users.py",
+          "app/schemas/tests/test_schemas.py",
+          "test/test_users.py",
+          "tests/test_users.py",
+          "tests/users/test_users.py",
+          "tests/models/test_users.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "app/seed.py",
+        "candidate_test_paths": [
+          "app/tests/test_seed.py",
+          "tests/test_seed.py",
+          "app/tests/test_app.py",
+          "test/test_seed.py",
+          "tests/seed/test_seed.py",
+          "tests/seeds/test_seed.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      }
+    ],
+    "sensitive_zones": [
+      {
+        "path_pattern": "**/auth/**",
+        "matched_paths": [
+          "app/api/routes/auth.py"
+        ],
+        "category": "authentication",
+        "severity": "high",
+        "source": "keyword",
+        "evidence": [
+          "Keyword \"auth\" found in 1 paths"
+        ]
+      },
+      {
+        "path_pattern": "**/security/**",
+        "matched_paths": [
+          "app/core/security.py"
+        ],
+        "category": "security",
+        "severity": "high",
+        "source": "keyword",
+        "evidence": [
+          "Keyword \"security\" found in 1 paths"
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "category": "unclassified_python_file",
+        "classification": "actionable",
+        "paths": [
+          "uv.lock"
+        ],
+        "count": 1,
+        "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+      },
+      {
+        "category": "scope_granularity_limit",
+        "classification": "intrinsic",
+        "paths": [],
+        "count": 0,
+        "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+      }
+    ],
+    "quality": {
+      "python_file_count": 60,
+      "classified_count": 60,
+      "classified_ratio": 1,
+      "unknown_count": 0,
+      "unknown_ratio": 0,
+      "import_observation_count": 174,
+      "project_import_count": 90,
+      "declared_package_count": 52,
+      "undeclared_package_count": 5,
+      "dynamic_import_count": 0,
+      "test_mapping_count": 29,
+      "high_confidence_test_count": 4,
+      "medium_confidence_test_count": 0,
+      "sensitive_zone_count": 2,
+      "sensitive_file_count": 2,
+      "manifest_count": 3,
+      "low_confidence_manifest_count": 0
+    },
+    "limitations": [
+      "Python import observations are syntax-level observations, not full runtime import resolution.",
+      "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+      "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+      "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+      "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+      "Namespace packages without __init__.py are not detected as project packages."
+    ]
+  },
+  "support_assessment": {
+    "support_level": "validated",
+    "reason": "All 5 observation signals present",
+    "meets_expected": true,
+    "signals": {
+      "has_layout": true,
+      "has_framework": true,
+      "has_project_role": true,
+      "has_test_mapping": true,
+      "has_risk_preset": true,
+      "python_file_count": 60,
+      "crash": false,
+      "sanitizer_clean": true
+    },
+    "gaps": []
+  },
+  "sanitizer": {
+    "violations": 0,
+    "details": [],
+    "clean": true
+  },
+  "notes": "ok"
+}

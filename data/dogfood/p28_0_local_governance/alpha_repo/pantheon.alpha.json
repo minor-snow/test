@@ -1,0 +1,58 @@
+{
+  "schema_version": "pantheon_alpha_config@0.1.0",
+  "version": 1,
+  "protected": [
+    ".pantheon/**",
+    ".cursor/**",
+    ".git/**",
+    "node_modules/**"
+  ],
+  "review_required": [],
+  "generated": [],
+  "path_roles": {},
+  "repo_observation": {},
+  "artifact_mode": "public",
+  "default_fail_on": [
+    "fail",
+    "requires_replan",
+    "requires_scope_expansion"
+  ],
+  "review_required_fails_ci": false,
+  "repair": {
+    "require_repair_id": true,
+    "allow_inline_repair_intent": false,
+    "default_audit_mode": "require_plan_approval"
+  },
+  "github": {
+    "enabled": false,
+    "workflow_path": ".github/workflows/pantheon-repair.yml",
+    "post_comment": false,
+    "upload_artifact": false
+  },
+  "privacy": {
+    "public_artifacts_only": true,
+    "sanitize_public_artifacts": true,
+    "allow_debug_artifacts": false
+  },
+  "metrics": {
+    "enabled": true,
+    "mode": "local",
+    "generate_daily_report": true,
+    "include_file_paths": true,
+    "anonymize_paths": false,
+    "retention_days": 30
+  },
+  "review_queue": {
+    "enabled": true,
+    "local_only": true
+  },
+  "notifications": {
+    "github": {
+      "label_pr": true,
+      "mention_reviewers": false
+    },
+    "webhook": {
+      "enabled": false
+    }
+  }
+}

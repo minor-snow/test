@@ -1,0 +1,3090 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "nox",
+    "observed_file_count": 98,
+    "python_file_count": 64
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: nox"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "source": 23,
+      "config": 3,
+      "docs": 1,
+      "test": 37
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      },
+      {
+        "name": "httpx",
+        "kind": "http_client",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpx found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (medium)",
+      "framework: httpx / http_client (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".github/action_helper.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3316,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 1923,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 10661,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "nox/command.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6787,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/logger.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5548,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/manifest.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 18506,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/popen.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3184,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/project.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5210,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/registry.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4443,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/sessions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 49009,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/tasks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17919,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/tox_to_nox.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4357,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/virtualenv.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 32961,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/workflow.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2432,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/_cli.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9177,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/_decorators.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6793,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/_options.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 23190,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/_option_set.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14043,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/_parametrize.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7202,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/_resolver.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8838,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/_typing.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 804,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/_version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3683,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1571,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nox/__main__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1106,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "noxfile.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6699,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 4334,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "requirements-conda-test.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 225,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3559,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 656,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_duplicate_sessions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 166,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_multiple_sessions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 976,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_nested.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 813,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_normalization.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 288,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_options.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 960,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_options_pythons.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 952,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_parametrize.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 196,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_pythons.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 447,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_requires.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2487,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_script_mode.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 188,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_script_mode_exec.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 423,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_script_mode_url_req.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 349,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_spaces.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 833,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/noxfile_tags.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 578,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/orig_dir/noxfile.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 410,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/pep721example1.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 99,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/resources/sym_dir/noxfile.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 22,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_action_helper.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2692,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_command.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 17305,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_logger.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3306,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_main.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 40084,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_manifest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 15924,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_project.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3194,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_registry.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4072,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_sessions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 57976,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_tasks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 29173,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_toml.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3047,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_tox_to_nox.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7948,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_virtualenv.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 60232,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_workflow.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3399,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test__cli.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5641,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test__option_set.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5594,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test__parametrize.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11186,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test__resolver.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6200,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test__version.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4144,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": ".github/action_helper.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": ".github/action_helper.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": ".github/action_helper.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": ".github/action_helper.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/command.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/command.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/command.py",
+      "raw_specifier": "shlex",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shlex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/command.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/command.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/command.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/command.py",
+      "raw_specifier": "from collections.abc import Iterable, Mapping, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/command.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Literal, overload",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/command.py",
+      "raw_specifier": "from nox.logger import logger",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/command.py",
+      "raw_specifier": "from nox.popen import DEFAULT_INTERRUPT_TIMEOUT, DEFAULT_TERMINATE_TIMEOUT, popen",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/command.py",
+      "raw_specifier": "from collections.abc import Iterable, Mapping, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/command.py",
+      "raw_specifier": "from typing import IO",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/logger.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/logger.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/logger.py",
+      "raw_specifier": "from typing import Any, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/logger.py",
+      "raw_specifier": "from colorlog import ColoredFormatter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "colorlog",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/manifest.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/manifest.py",
+      "raw_specifier": "ast",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ast",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/manifest.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/manifest.py",
+      "raw_specifier": "operator",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "operator",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/manifest.py",
+      "raw_specifier": "from collections.abc import Mapping",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/manifest.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/manifest.py",
+      "raw_specifier": "from nox._decorators import Call, Func",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/manifest.py",
+      "raw_specifier": "from nox._resolver import CycleError, lazy_stable_topo_sort",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/manifest.py",
+      "raw_specifier": "from nox.sessions import Session, SessionRunner",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/manifest.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nox/manifest.py",
+      "raw_specifier": "from collections.abc import Iterable, Iterator, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/popen.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/popen.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/popen.py",
+      "raw_specifier": "locale",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "locale",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/popen.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/popen.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/popen.py",
+      "raw_specifier": "from typing import IO, TYPE_CHECKING",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/popen.py",
+      "raw_specifier": "from collections.abc import Mapping, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "from typing import TYPE_CHECKING",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "packaging.requirements",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "packaging.specifiers",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "from dependency_groups import resolve",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "dependency_groups",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "tomli",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "tomli",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "tomllib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tomllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/project.py",
+      "raw_specifier": "nox",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/registry.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/registry.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/registry.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/registry.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/registry.py",
+      "raw_specifier": "from collections.abc import Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/registry.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, Literal, overload",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/registry.py",
+      "raw_specifier": "from ._decorators import Func",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "nox/registry.py",
+      "raw_specifier": "from collections.abc import Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/registry.py",
+      "raw_specifier": "from ._typing import Python",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._typing",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "enum",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "hashlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "unicodedata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "unicodedata",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "humanize",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "humanize",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "nox.command",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "nox.virtualenv",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "from nox.logger import logger",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "from nox.popen import DEFAULT_INTERRUPT_TIMEOUT, DEFAULT_TERMINATE_TIMEOUT",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "from nox.virtualenv import ( CondaEnv, PassthroughEnv, ProcessEnv, VirtualEnv, get_virtualenv, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "from collections.abc import ( Callable, Generator, Iterable, Iterator, Mapping, Sequence, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "from typing import ( IO, Any, Literal, NoReturn, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "from nox._decorators import Func",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "from nox.command import ExternalType",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/sessions.py",
+      "raw_specifier": "from nox.manifest import Manifest",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "ast",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ast",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "importlib.util",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "from collections.abc import Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, TypeVar",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "from colorlog.escape_codes import parse_colors",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "colorlog",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "nox",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "from nox import _options, registry",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "from nox._resolver import CycleError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "from nox._version import InvalidVersionSpecifier, VersionCheckFailed, check_nox_version",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "from nox.logger import logger",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "from nox.manifest import WARN_PYTHONS_IGNORED, Manifest",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "from nox.sessions import Result, Status, _duration_str",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tasks.py",
+      "raw_specifier": "from argparse import Namespace",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "from configparser import ConfigParser",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "configparser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "from subprocess import check_output",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "jinja2",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "from collections.abc import Iterable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/tox_to_nox.py",
+      "raw_specifier": "from importlib.resources import files",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "sysconfig",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sysconfig",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "from socket import gethostbyname",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "socket",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, ClassVar, Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "from packaging import version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "nox",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "nox.command",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "from nox.logger import logger",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "from collections.abc import Callable, Mapping, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "from nox._typing import Python",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "from uv import find_uv_bin  # noqa: PLC0415",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "uv",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/virtualenv.py",
+      "raw_specifier": "pbs_installer",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pbs_installer",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/workflow.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/workflow.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/workflow.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nox/workflow.py",
+      "raw_specifier": "from collections.abc import Callable, Iterable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "importlib.metadata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "urllib.parse",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Literal, NoReturn, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "packaging.requirements",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "packaging.utils",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "nox.command",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "nox.registry",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "nox.virtualenv",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "from nox import _options, tasks, workflow",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "from nox._options import DefaultStr",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "from nox._version import get_nox_version",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "from nox.logger import logger, setup_logging",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "from nox.project import load_toml",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "from argparse import Namespace",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nox/_cli.py",
+      "raw_specifier": "from collections.abc import Generator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_decorators.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_decorators.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_decorators.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_decorators.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_decorators.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_decorators.py",
+      "raw_specifier": "from collections.abc import Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_decorators.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, Literal, TypeVar, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_decorators.py",
+      "raw_specifier": "from collections.abc import Iterable, Mapping, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_decorators.py",
+      "raw_specifier": "from . import _typing",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "nox/_decorators.py",
+      "raw_specifier": "from ._parametrize import Param",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._parametrize",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "argcomplete",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "argcomplete",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "from nox import _option_set",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "from nox.tasks import discover_manifest, filter_manifest, load_nox_module",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "from nox.virtualenv import ALL_VENVS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "from collections.abc import Callable, Iterable, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_options.py",
+      "raw_specifier": "from nox._option_set import NoxOptions",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_option_set.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_option_set.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nox/_option_set.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_option_set.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_option_set.py",
+      "raw_specifier": "from argparse import ArgumentError, ArgumentParser, Namespace",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nox/_option_set.py",
+      "raw_specifier": "from collections.abc import Callable, Iterable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_option_set.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_option_set.py",
+      "raw_specifier": "argcomplete",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "argcomplete",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_option_set.py",
+      "raw_specifier": "attrs",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "attrs",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_option_set.py",
+      "raw_specifier": "attrs.validators",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "attrs",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_option_set.py",
+      "raw_specifier": "from collections.abc import Callable, Iterable, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_parametrize.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_parametrize.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_parametrize.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_parametrize.py",
+      "raw_specifier": "from collections.abc import Iterable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_parametrize.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_parametrize.py",
+      "raw_specifier": "from collections.abc import Callable, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_resolver.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_resolver.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_resolver.py",
+      "raw_specifier": "from collections.abc import Hashable, Iterable, Iterator, Mapping",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_resolver.py",
+      "raw_specifier": "from typing import TypeVar",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_typing.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_typing.py",
+      "raw_specifier": "from collections.abc import Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_version.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_version.py",
+      "raw_specifier": "ast",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ast",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_version.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_version.py",
+      "raw_specifier": "from importlib import metadata",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_version.py",
+      "raw_specifier": "from packaging.specifiers import InvalidSpecifier, SpecifierSet",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/_version.py",
+      "raw_specifier": "from packaging.version import InvalidVersion, Version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/__init__.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/__init__.py",
+      "raw_specifier": "from types import ModuleType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/__init__.py",
+      "raw_specifier": "from nox import project",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/__init__.py",
+      "raw_specifier": "from nox._cli import main",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/__init__.py",
+      "raw_specifier": "from nox._options import noxfile_options as options",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/__init__.py",
+      "raw_specifier": "from nox._parametrize import Param as param  # noqa: N813",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/__init__.py",
+      "raw_specifier": "from nox._parametrize import parametrize_decorator as parametrize",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/__init__.py",
+      "raw_specifier": "from nox.registry import session_decorator as session",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/__init__.py",
+      "raw_specifier": "from nox.sessions import Session",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/__main__.py",
+      "raw_specifier": "from __future__ import annotations  # pragma: no cover",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nox/__main__.py",
+      "raw_specifier": "from nox._cli import nox_main as main  # pragma: no cover",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "nox",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "nox",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "noxfile.py",
+      "source_type": "noxfile.py",
+      "packages": [],
+      "dev_packages": [
+        "dependency_groups",
+        "test",
+        "uv",
+        "coverage",
+        "prek",
+        "docs"
+      ],
+      "confidence": "low",
+      "warnings": [
+        "noxfile.py parsing is weak detection"
+      ]
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "argcomplete",
+        "attrs",
+        "colorlog",
+        "dependency_groups",
+        "humanize",
+        "packaging",
+        "tomli",
+        ","
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements-conda-test.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "argcomplete",
+        "attrs",
+        "colorlog",
+        "coverage",
+        "dependency_groups",
+        "httpx",
+        "humanize",
+        "jinja2",
+        "pbs_installer",
+        "pytest",
+        "pytest_xdist",
+        "tox",
+        "virtualenv",
+        "zstandard"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tests/resources/noxfile.py",
+      "source_type": "noxfile.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No session.install() calls found in noxfile.py"
+      ]
+    },
+    {
+      "source_path": "tests/resources/orig_dir/noxfile.py",
+      "source_type": "noxfile.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No session.install() calls found in noxfile.py"
+      ]
+    },
+    {
+      "source_path": "tests/resources/sym_dir/noxfile.py",
+      "source_type": "noxfile.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No session.install() calls found in noxfile.py"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": ".github/action_helper.py",
+      "candidate_test_paths": [
+        ".github/tests/test_action_helper.py",
+        "tests/test_action_helper.py",
+        ".github/tests/test_.github.py",
+        "test/test_action_helper.py",
+        "tests/action_helper/test_action_helper.py",
+        "tests/action_helpers/test_action_helper.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_action_helper.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_action_helper.py [library_package layout]"
+    },
+    {
+      "source_path": "nox/command.py",
+      "candidate_test_paths": [
+        "nox/tests/test_command.py",
+        "tests/test_command.py",
+        "nox/tests/test_nox.py",
+        "test/test_command.py",
+        "tests/command/test_command.py",
+        "tests/commands/test_command.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_command.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_command.py [library_package layout]"
+    },
+    {
+      "source_path": "nox/logger.py",
+      "candidate_test_paths": [
+        "nox/tests/test_logger.py",
+        "tests/test_logger.py",
+        "nox/tests/test_nox.py",
+        "test/test_logger.py",
+        "tests/logger/test_logger.py",
+        "tests/loggers/test_logger.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_logger.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_logger.py [library_package layout]"
+    },
+    {
+      "source_path": "nox/manifest.py",
+      "candidate_test_paths": [
+        "nox/tests/test_manifest.py",
+        "tests/test_manifest.py",
+        "nox/tests/test_nox.py",
+        "test/test_manifest.py",
+        "tests/manifest/test_manifest.py",
+        "tests/manifests/test_manifest.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_manifest.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_manifest.py [library_package layout]"
+    },
+    {
+      "source_path": "nox/popen.py",
+      "candidate_test_paths": [
+        "nox/tests/test_popen.py",
+        "tests/test_popen.py",
+        "nox/tests/test_nox.py",
+        "test/test_popen.py",
+        "tests/popen/test_popen.py",
+        "tests/popens/test_popen.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nox/project.py",
+      "candidate_test_paths": [
+        "nox/tests/test_project.py",
+        "tests/test_project.py",
+        "nox/tests/test_nox.py",
+        "test/test_project.py",
+        "tests/project/test_project.py",
+        "tests/projects/test_project.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_project.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_project.py [library_package layout]"
+    },
+    {
+      "source_path": "nox/registry.py",
+      "candidate_test_paths": [
+        "nox/tests/test_registry.py",
+        "tests/test_registry.py",
+        "nox/tests/test_nox.py",
+        "test/test_registry.py",
+        "tests/registry/test_registry.py",
+        "tests/registrys/test_registry.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_registry.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_registry.py [library_package layout]"
+    },
+    {
+      "source_path": "nox/sessions.py",
+      "candidate_test_paths": [
+        "nox/tests/test_sessions.py",
+        "tests/test_sessions.py",
+        "nox/tests/test_nox.py",
+        "test/test_sessions.py",
+        "tests/sessions/test_sessions.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_sessions.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_sessions.py [library_package layout]"
+    },
+    {
+      "source_path": "nox/tasks.py",
+      "candidate_test_paths": [
+        "nox/tests/test_tasks.py",
+        "tests/test_tasks.py",
+        "nox/tests/test_nox.py",
+        "test/test_tasks.py",
+        "tests/tasks/test_tasks.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_tasks.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_tasks.py [library_package layout]"
+    },
+    {
+      "source_path": "nox/tox_to_nox.py",
+      "candidate_test_paths": [
+        "nox/tests/test_tox_to_nox.py",
+        "tests/test_tox_to_nox.py",
+        "nox/tests/test_nox.py",
+        "test/test_tox_to_nox.py",
+        "tests/tox_to_nox/test_tox_to_nox.py",
+        "tests/tox_to_noxs/test_tox_to_nox.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_tox_to_nox.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_tox_to_nox.py [library_package layout]"
+    },
+    {
+      "source_path": "nox/virtualenv.py",
+      "candidate_test_paths": [
+        "nox/tests/test_virtualenv.py",
+        "tests/test_virtualenv.py",
+        "nox/tests/test_nox.py",
+        "test/test_virtualenv.py",
+        "tests/virtualenv/test_virtualenv.py",
+        "tests/virtualenvs/test_virtualenv.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_virtualenv.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_virtualenv.py [library_package layout]"
+    },
+    {
+      "source_path": "nox/workflow.py",
+      "candidate_test_paths": [
+        "nox/tests/test_workflow.py",
+        "tests/test_workflow.py",
+        "nox/tests/test_nox.py",
+        "test/test_workflow.py",
+        "tests/workflow/test_workflow.py",
+        "tests/workflows/test_workflow.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_workflow.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_workflow.py [library_package layout]"
+    },
+    {
+      "source_path": "nox/_cli.py",
+      "candidate_test_paths": [
+        "nox/tests/test_cli.py",
+        "tests/test_cli.py",
+        "nox/tests/test_nox.py",
+        "test/test_cli.py",
+        "tests/cli/test_cli.py",
+        "tests/clis/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nox/_decorators.py",
+      "candidate_test_paths": [
+        "nox/tests/test_decorators.py",
+        "tests/test_decorators.py",
+        "nox/tests/test_nox.py",
+        "test/test_decorators.py",
+        "tests/decorators/test_decorators.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nox/_options.py",
+      "candidate_test_paths": [
+        "nox/tests/test_options.py",
+        "tests/test_options.py",
+        "nox/tests/test_nox.py",
+        "test/test_options.py",
+        "tests/options/test_options.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nox/_option_set.py",
+      "candidate_test_paths": [
+        "nox/tests/test_option_set.py",
+        "tests/test_option_set.py",
+        "nox/tests/test_nox.py",
+        "test/test_option_set.py",
+        "tests/option_set/test_option_set.py",
+        "tests/option_sets/test_option_set.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nox/_parametrize.py",
+      "candidate_test_paths": [
+        "nox/tests/test_parametrize.py",
+        "tests/test_parametrize.py",
+        "nox/tests/test_nox.py",
+        "test/test_parametrize.py",
+        "tests/parametrize/test_parametrize.py",
+        "tests/parametrizes/test_parametrize.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nox/_resolver.py",
+      "candidate_test_paths": [
+        "nox/tests/test_resolver.py",
+        "tests/test_resolver.py",
+        "nox/tests/test_nox.py",
+        "test/test_resolver.py",
+        "tests/resolver/test_resolver.py",
+        "tests/resolvers/test_resolver.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nox/_typing.py",
+      "candidate_test_paths": [
+        "nox/tests/test_typing.py",
+        "tests/test_typing.py",
+        "nox/tests/test_nox.py",
+        "test/test_typing.py",
+        "tests/typing/test_typing.py",
+        "tests/typings/test_typing.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nox/_version.py",
+      "candidate_test_paths": [
+        "nox/tests/test_version.py",
+        "tests/test_version.py",
+        "nox/tests/test_nox.py",
+        "test/test_version.py",
+        "tests/version/test_version.py",
+        "tests/versions/test_version.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nox/__main__.py",
+      "candidate_test_paths": [
+        "nox/tests/test___main__.py",
+        "tests/test___main__.py",
+        "nox/tests/test_nox.py",
+        "test/test___main__.py",
+        "tests/__main__/test___main__.py",
+        "tests/__main__s/test___main__.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "noxfile.py",
+      "candidate_test_paths": [
+        "test/test_noxfile.py",
+        "tests/test_noxfile.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "noxfile.py",
+        "tests/resources/noxfile.py",
+        "tests/resources/orig_dir/noxfile.py",
+        "tests/resources/sym_dir/noxfile.py"
+      ],
+      "count": 4,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 61,
+    "classified_count": 61,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 235,
+    "project_import_count": 46,
+    "declared_package_count": 19,
+    "undeclared_package_count": 9,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 22,
+    "high_confidence_test_count": 11,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 6,
+    "low_confidence_manifest_count": 4
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

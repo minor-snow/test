@@ -73,7 +73,7 @@ async function startServer() {
 
     const override: OverridePatch = {
       override_id: `ovr_${Date.now()}`,
-      artifact_id: "arch_001",
+      artifact_id: currentState.artifact!.artifact_id,
       base_revision_id: currentState.candidateRevision!.revision_id,
       override_type: req.body.override_type || "accept_with_known_risk",
       operator: req.body.operator || { type: "human", id: "cockpit_user" },

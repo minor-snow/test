@@ -1,0 +1,67 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "05e99eb911314a60616084a21cedf6834af3ee62b9146865d13bebb4b4298a74",
+  "pinned_commit": "831c8f0948af519e45b90801d7430ff25451f972",
+  "completed_at": "2026-04-30T11:54:15.103Z",
+  "repo_id": "pallets/click",
+  "category_expected": "python_cli_tool",
+  "category_observed": "generic_service",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 214,
+  "python_files": 76,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "pytest/medium",
+    "click/high",
+    "httpx/medium"
+  ],
+  "project_role_signals": [
+    "service_backend/medium",
+    "python_sdk_library/high",
+    "http_client_library/high",
+    "cli_application/high"
+  ],
+  "test_mapping_count": 28,
+  "risk_preset": "generic_service",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "pallets/click",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected python_cli_tool, got generic_service",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "examples/aliases/pyproject.toml",
+        "examples/colors/pyproject.toml",
+        "examples/completion/pyproject.toml",
+        "examples/complex/pyproject.toml",
+        "examples/imagepipe/pyproject.toml",
+        "examples/inout/pyproject.toml",
+        "examples/naval/pyproject.toml",
+        "examples/repo/pyproject.toml",
+        "examples/termui/pyproject.toml",
+        "examples/validation/pyproject.toml",
+        "uv.lock"
+      ],
+      "count": 11,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

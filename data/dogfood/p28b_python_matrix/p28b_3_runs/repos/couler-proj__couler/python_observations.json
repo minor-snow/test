@@ -1,0 +1,3758 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "couler-proj__couler",
+    "observed_file_count": 166,
+    "python_file_count": 91
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: couler"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 4,
+      "source": 62,
+      "test": 25
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (medium)",
+      "framework: pytest / test_framework (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: security (high, 1 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 6,
+        "evidence": [
+          "6 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 992,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "couler/argo.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8434,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/argo_submitter.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7128,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/config.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4473,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/constants.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1602,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/proto_repr.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10500,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/run_templates.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 15976,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/states.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3800,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/step_update_utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9267,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/syntax/concurrent.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2993,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/syntax/conditional.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2339,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/syntax/dag.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3245,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/syntax/dns.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 938,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/syntax/exit_handler.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1584,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/syntax/image_pull_secret.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 905,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/syntax/loop.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4511,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/syntax/predicates.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1999,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/syntax/recursion.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2985,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/syntax/toleration.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 853,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/syntax/volume.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1303,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/syntax/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1409,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/artifact.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5124,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/cache.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1053,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/container.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7441,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/dns.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1644,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/image_pull_secret.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 817,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/job.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2904,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/output.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7914,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/script.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4701,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/secret.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2543,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/step.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1759,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/template.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1867,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/toleration.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 963,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/volume.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1233,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/volume_claim.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1226,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/workflow.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11359,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/templates/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1448,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9790,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/workflow_validation_utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3542,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/core/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 610,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/docker_submitter.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 975,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/proto/couler_pb2.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 52770,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/proto/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 608,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/steps/katib.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4338,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/steps/mpi.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3263,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/steps/pod_utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2946,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/steps/pytorch.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3442,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/steps/tensorflow.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5072,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/tests/argo_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 23883,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/argo_yaml_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2402,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/artifact_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10320,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/cluster_config_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1364,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/cron_workflow_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1283,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/daemon_step_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2204,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/dag_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9718,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/env_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7036,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/input_parameter_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3253,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/katib_step_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2829,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/map_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8039,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/mpi_step_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3902,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/proto_repr_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6485,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/pytorch_step_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4088,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/resource_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1814,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/run_concurrent_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4831,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/secret_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3876,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/step_output_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2422,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/tensorflow_step_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5173,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/test_data/dummy_cluster_config.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 889,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/utils_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3095,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/while_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2253,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/workflow_basic_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 13336,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/workflow_validation_utils_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4036,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 676,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "couler/_version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 638,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "couler/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 659,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/coin_flip.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 775,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/dag.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1100,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/default_submitter.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 749,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/depends.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2213,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/hello_world.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 251,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/node_assign.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 891,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration_tests/dag_depends_example.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2045,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration_tests/dag_example.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3904,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration_tests/flip_coin_example.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1983,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration_tests/flip_coin_security_context_example.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2105,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration_tests/memoization_example.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1581,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration_tests/mpi_example.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1485,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration_tests/volume_example.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1793,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "requirements-dev.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 129,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 97,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 2143,
+      "evidence": [
+        "Project config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "pyaml",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pyaml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "from kubernetes import client as k8s_client",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kubernetes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "from kubernetes import config",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kubernetes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "from couler.argo_submitter import ArgoSubmitter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "from couler.core import states  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "from couler.core.config import config_defaults, config_workflow  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "from couler.core.constants import *  # noqa: F401, F403",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "from couler.core.constants import WorkflowCRD",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "from couler.core.run_templates import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "from couler.core.states import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "from couler.core.syntax import *  # noqa: F401, F403",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "from couler.core.templates import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo.py",
+      "raw_specifier": "from couler.core.workflow_validation_utils import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo_submitter.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo_submitter.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo_submitter.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo_submitter.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo_submitter.py",
+      "raw_specifier": "pyaml",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pyaml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo_submitter.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/argo_submitter.py",
+      "raw_specifier": "from kubernetes import client as k8s_client",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kubernetes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo_submitter.py",
+      "raw_specifier": "from kubernetes import config",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kubernetes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo_submitter.py",
+      "raw_specifier": "from couler.core.constants import CronWorkflowCRD, WorkflowCRD",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo_submitter.py",
+      "raw_specifier": "from ctypes import c_char_p, cdll",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/argo_submitter.py",
+      "raw_specifier": "from couler.core.proto_repr import get_default_proto_workflow",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/config.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/config.py",
+      "raw_specifier": "from couler.core import states, utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/config.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/constants.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/proto_repr.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/proto_repr.py",
+      "raw_specifier": "from couler.core import states, utils  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/proto_repr.py",
+      "raw_specifier": "from couler.core.templates.output import OutputArtifact, OutputJob",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/proto_repr.py",
+      "raw_specifier": "from couler.proto import couler_pb2",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/run_templates.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/run_templates.py",
+      "raw_specifier": "pyaml",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pyaml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/run_templates.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/core/run_templates.py",
+      "raw_specifier": "from couler.core import states, step_update_utils, utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/run_templates.py",
+      "raw_specifier": "from couler.core.templates import ( Container, Job, Output, OutputArtifact, OutputJob, Script, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/run_templates.py",
+      "raw_specifier": "from couler.core.templates.output import ( _container_output, _job_output, _script_output, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/run_templates.py",
+      "raw_specifier": "from couler.core.templates.volume import VolumeMount",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/run_templates.py",
+      "raw_specifier": "from couler.core import proto_repr",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/states.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/states.py",
+      "raw_specifier": "from strgen import StringGenerator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "strgen",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/core/states.py",
+      "raw_specifier": "from stringcase import spinalcase",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "stringcase",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/states.py",
+      "raw_specifier": "from couler.core import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/states.py",
+      "raw_specifier": "from couler.core.templates import Workflow",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/states.py",
+      "raw_specifier": "from couler.core.proto_repr import cleanup_proto_workflow",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/step_update_utils.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/step_update_utils.py",
+      "raw_specifier": "couler.core.templates.output",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/step_update_utils.py",
+      "raw_specifier": "from couler.core import states, utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/step_update_utils.py",
+      "raw_specifier": "from couler.core.templates import OutputArtifact, Step",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/concurrent.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/concurrent.py",
+      "raw_specifier": "from couler.core import states, utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/concurrent.py",
+      "raw_specifier": "from couler.core.step_update_utils import _update_steps",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/concurrent.py",
+      "raw_specifier": "from couler.core.templates import Steps",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/conditional.py",
+      "raw_specifier": "from couler.core import states",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/conditional.py",
+      "raw_specifier": "from couler.core.templates import Step, output",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/dag.py",
+      "raw_specifier": "from couler.core import states, utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/dag.py",
+      "raw_specifier": "from couler.core.templates import OutputArtifact, OutputJob, OutputParameter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/dns.py",
+      "raw_specifier": "from couler.core import states",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/dns.py",
+      "raw_specifier": "from couler.core.templates.dns import DnsConfig",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/exit_handler.py",
+      "raw_specifier": "from couler.core import states",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/exit_handler.py",
+      "raw_specifier": "from couler.core.constants import WFStatus",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/image_pull_secret.py",
+      "raw_specifier": "from couler.core import states",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/image_pull_secret.py",
+      "raw_specifier": "from couler.core.templates.image_pull_secret import ImagePullSecret",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/loop.py",
+      "raw_specifier": "pyaml",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pyaml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/loop.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/core/syntax/loop.py",
+      "raw_specifier": "from couler.core import states",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/loop.py",
+      "raw_specifier": "from couler.core.templates import Step, output",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/recursion.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/recursion.py",
+      "raw_specifier": "from couler.core import states, utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/recursion.py",
+      "raw_specifier": "from couler.core.templates import Step, Steps, output",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/toleration.py",
+      "raw_specifier": "from couler.core import states",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/toleration.py",
+      "raw_specifier": "from couler.core.templates.toleration import Toleration",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/volume.py",
+      "raw_specifier": "from couler.core import states",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/volume.py",
+      "raw_specifier": "from couler.core.templates.volume import Volume",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/volume.py",
+      "raw_specifier": "from couler.core.templates.volume_claim import VolumeClaimTemplate",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/__init__.py",
+      "raw_specifier": "from couler.core.syntax.concurrent import concurrent  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/__init__.py",
+      "raw_specifier": "from couler.core.syntax.conditional import when  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/__init__.py",
+      "raw_specifier": "from couler.core.syntax.dag import dag, set_dependencies  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/__init__.py",
+      "raw_specifier": "from couler.core.syntax.dns import set_dns  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/__init__.py",
+      "raw_specifier": "from couler.core.syntax.exit_handler import set_exit_handler  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/__init__.py",
+      "raw_specifier": "from couler.core.syntax.image_pull_secret import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/__init__.py",
+      "raw_specifier": "from couler.core.syntax.loop import map  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/__init__.py",
+      "raw_specifier": "from couler.core.syntax.predicates import *  # noqa: F401, F403",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/__init__.py",
+      "raw_specifier": "from couler.core.syntax.recursion import exec_while  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/__init__.py",
+      "raw_specifier": "from couler.core.syntax.toleration import add_toleration  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/syntax/__init__.py",
+      "raw_specifier": "from couler.core.syntax.volume import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/artifact.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/artifact.py",
+      "raw_specifier": "from couler import argo as couler",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/artifact.py",
+      "raw_specifier": "from couler.core import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/cache.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/container.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/container.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/container.py",
+      "raw_specifier": "from couler.core import states, utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/container.py",
+      "raw_specifier": "from couler.core.constants import OVERWRITE_GPU_ENVS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/container.py",
+      "raw_specifier": "from couler.core.templates.artifact import TypedArtifact",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/container.py",
+      "raw_specifier": "from couler.core.templates.output import OutputArtifact, OutputJob",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/container.py",
+      "raw_specifier": "from couler.core.templates.secret import Secret",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/container.py",
+      "raw_specifier": "from couler.core.templates.template import Template",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/dns.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/dns.py",
+      "raw_specifier": "from couler.core import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/image_pull_secret.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/job.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/job.py",
+      "raw_specifier": "from couler.core import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/job.py",
+      "raw_specifier": "from couler.core.templates.template import Template",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/script.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/script.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/script.py",
+      "raw_specifier": "from couler.core import states, utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/script.py",
+      "raw_specifier": "from couler.core.constants import OVERWRITE_GPU_ENVS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/script.py",
+      "raw_specifier": "from couler.core.templates.container import Container",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/script.py",
+      "raw_specifier": "from couler.core.templates.secret import Secret",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/secret.py",
+      "raw_specifier": "hashlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/secret.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/secret.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/secret.py",
+      "raw_specifier": "from couler.core import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/step.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/step.py",
+      "raw_specifier": "from couler.core import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/step.py",
+      "raw_specifier": "from couler.core.templates.template import Template",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/template.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/template.py",
+      "raw_specifier": "from couler.core import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/toleration.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/volume.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/volume_claim.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/volume_claim.py",
+      "raw_specifier": "from typing import List",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/workflow.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/workflow.py",
+      "raw_specifier": "from inspect import getfullargspec",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/workflow.py",
+      "raw_specifier": "from couler.core import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/workflow.py",
+      "raw_specifier": "from couler.core.templates import Container, Job, Script, Step, Template",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/workflow.py",
+      "raw_specifier": "from couler.core.templates.image_pull_secret import ImagePullSecret",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/workflow.py",
+      "raw_specifier": "from couler.core.templates.toleration import Toleration",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/workflow.py",
+      "raw_specifier": "from couler.core.templates.volume import Volume",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/workflow.py",
+      "raw_specifier": "from couler.core.templates.volume_claim import VolumeClaimTemplate",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/__init__.py",
+      "raw_specifier": "from couler.core.templates.artifact import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/__init__.py",
+      "raw_specifier": "from couler.core.templates.cache import Cache  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/__init__.py",
+      "raw_specifier": "from couler.core.templates.container import Container  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/__init__.py",
+      "raw_specifier": "from couler.core.templates.job import Job  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/__init__.py",
+      "raw_specifier": "from couler.core.templates.output import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/__init__.py",
+      "raw_specifier": "from couler.core.templates.script import Script  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/__init__.py",
+      "raw_specifier": "from couler.core.templates.secret import Secret  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/__init__.py",
+      "raw_specifier": "from couler.core.templates.step import Step, Steps  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/__init__.py",
+      "raw_specifier": "from couler.core.templates.template import Template  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/templates/__init__.py",
+      "raw_specifier": "from couler.core.templates.workflow import Workflow  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/utils.py",
+      "raw_specifier": "base64",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/utils.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/utils.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/utils.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/utils.py",
+      "raw_specifier": "textwrap",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "textwrap",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/utils.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/utils.py",
+      "raw_specifier": "from importlib import util",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/utils.py",
+      "raw_specifier": "from couler.core.constants import ImagePullPolicy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/utils.py",
+      "raw_specifier": "from couler.core.templates import Output",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/utils.py",
+      "raw_specifier": "from couler.core.templates.output import parse_argo_output",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/workflow_validation_utils.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/workflow_validation_utils.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/core/workflow_validation_utils.py",
+      "raw_specifier": "from argo.workflows import client",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "argo",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/core/workflow_validation_utils.py",
+      "raw_specifier": "from argo.workflows.client.models import ( V1alpha1DAGTemplate, V1alpha1ResourceTemplate, V1alpha1ScriptTemplate, V1alpha1WorkflowStep, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "argo",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/docker_submitter.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/docker_submitter.py",
+      "raw_specifier": "docker",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "docker",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/proto/couler_pb2.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/proto/couler_pb2.py",
+      "raw_specifier": "from google.protobuf import descriptor as _descriptor",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "google",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/proto/couler_pb2.py",
+      "raw_specifier": "from google.protobuf import message as _message",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "google",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/proto/couler_pb2.py",
+      "raw_specifier": "from google.protobuf import reflection as _reflection",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "google",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/proto/couler_pb2.py",
+      "raw_specifier": "from google.protobuf import symbol_database as _symbol_database",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "google",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/proto/couler_pb2.py",
+      "raw_specifier": "from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "google",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/steps/katib.py",
+      "raw_specifier": "from io import StringIO",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/katib.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "couler/steps/katib.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/mpi.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/mpi.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/mpi.py",
+      "raw_specifier": "pyaml",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pyaml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/mpi.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/mpi.py",
+      "raw_specifier": "from couler.core import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/mpi.py",
+      "raw_specifier": "from couler.steps.pod_utils import _generate_pod_spec",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/pod_utils.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/pod_utils.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/pytorch.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/pytorch.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/pytorch.py",
+      "raw_specifier": "pyaml",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pyaml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/pytorch.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/pytorch.py",
+      "raw_specifier": "from couler.core import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/pytorch.py",
+      "raw_specifier": "from couler.steps.pod_utils import _generate_pod_spec",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/tensorflow.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/tensorflow.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/tensorflow.py",
+      "raw_specifier": "pyaml",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pyaml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/tensorflow.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/tensorflow.py",
+      "raw_specifier": "from couler.core import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/steps/tensorflow.py",
+      "raw_specifier": "from couler.steps.pod_utils import _generate_pod_spec",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "couler/__init__.py",
+      "raw_specifier": "from couler.argo import *  # noqa: F401, F403",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/coin_flip.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/coin_flip.py",
+      "raw_specifier": "from couler.argo_submitter import ArgoSubmitter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/coin_flip.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/dag.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/dag.py",
+      "raw_specifier": "from couler.argo_submitter import ArgoSubmitter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/default_submitter.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/default_submitter.py",
+      "raw_specifier": "from couler.argo_submitter import ArgoSubmitter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/depends.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/depends.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/depends.py",
+      "raw_specifier": "from couler.argo_submitter import ArgoSubmitter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/depends.py",
+      "raw_specifier": "from typing import Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/depends.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/hello_world.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/hello_world.py",
+      "raw_specifier": "from couler.argo_submitter import ArgoSubmitter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/node_assign.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/node_assign.py",
+      "raw_specifier": "from couler.argo_submitter import ArgoSubmitter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/node_assign.py",
+      "raw_specifier": "from couler.core.templates.toleration import Toleration",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/dag_depends_example.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/dag_depends_example.py",
+      "raw_specifier": "from couler.argo_submitter import ArgoSubmitter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/dag_example.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/dag_example.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/dag_example.py",
+      "raw_specifier": "from couler.argo_submitter import ( _SUBMITTER_IMPL_ENV_VAR_KEY, ArgoSubmitter, _SubmitterImplTypes, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/dag_example.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/flip_coin_example.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/flip_coin_example.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/flip_coin_example.py",
+      "raw_specifier": "from couler.argo_submitter import ( _SUBMITTER_IMPL_ENV_VAR_KEY, ArgoSubmitter, _SubmitterImplTypes, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/flip_coin_example.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/flip_coin_security_context_example.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/flip_coin_security_context_example.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/flip_coin_security_context_example.py",
+      "raw_specifier": "from couler.argo_submitter import ( _SUBMITTER_IMPL_ENV_VAR_KEY, ArgoSubmitter, _SubmitterImplTypes, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/flip_coin_security_context_example.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/memoization_example.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/memoization_example.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/memoization_example.py",
+      "raw_specifier": "from couler.argo_submitter import ( _SUBMITTER_IMPL_ENV_VAR_KEY, ArgoSubmitter, _SubmitterImplTypes, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/mpi_example.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/mpi_example.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/mpi_example.py",
+      "raw_specifier": "from couler.argo_submitter import ( _SUBMITTER_IMPL_ENV_VAR_KEY, ArgoSubmitter, _SubmitterImplTypes, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/mpi_example.py",
+      "raw_specifier": "from couler.steps import mpi",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/volume_example.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/volume_example.py",
+      "raw_specifier": "couler.argo",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/volume_example.py",
+      "raw_specifier": "from couler.argo_submitter import ( _SUBMITTER_IMPL_ENV_VAR_KEY, ArgoSubmitter, _SubmitterImplTypes, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration_tests/volume_example.py",
+      "raw_specifier": "from couler.core.templates.volume import VolumeMount",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "couler",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "requirements-dev.txt",
+      "source_type": "requirements-dev.txt",
+      "packages": [],
+      "dev_packages": [
+        "pre_commit",
+        "pytest",
+        "pytest_cov",
+        "deprecated",
+        "protobuf",
+        "argo_workflows",
+        "mkdocs",
+        "mkdocs_material",
+        "jinja2"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "pyaml",
+        "kubernetes",
+        "docker",
+        "deprecated",
+        "stringcase",
+        "stringgenerator"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "couler/argo.py",
+      "candidate_test_paths": [
+        "couler/tests/test_argo.py",
+        "tests/test_argo.py",
+        "couler/tests/test_couler.py",
+        "test/test_argo.py",
+        "tests/argo/test_argo.py",
+        "tests/argos/test_argo.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/argo_submitter.py",
+      "candidate_test_paths": [
+        "couler/tests/test_argo_submitter.py",
+        "tests/test_argo_submitter.py",
+        "couler/tests/test_couler.py",
+        "test/test_argo_submitter.py",
+        "tests/argo_submitter/test_argo_submitter.py",
+        "tests/argo_submitters/test_argo_submitter.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/config.py",
+      "candidate_test_paths": [
+        "couler/core/tests/test_config.py",
+        "tests/core/test_config.py",
+        "couler/core/tests/test_core.py",
+        "test/test_config.py",
+        "tests/test_config.py",
+        "tests/config/test_config.py",
+        "tests/configs/test_config.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/constants.py",
+      "candidate_test_paths": [
+        "couler/core/tests/test_constants.py",
+        "tests/core/test_constants.py",
+        "couler/core/tests/test_core.py",
+        "test/test_constants.py",
+        "tests/test_constants.py",
+        "tests/constants/test_constants.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/proto_repr.py",
+      "candidate_test_paths": [
+        "couler/core/tests/test_proto_repr.py",
+        "tests/core/test_proto_repr.py",
+        "couler/core/tests/test_core.py",
+        "test/test_proto_repr.py",
+        "tests/test_proto_repr.py",
+        "tests/proto_repr/test_proto_repr.py",
+        "tests/proto_reprs/test_proto_repr.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/run_templates.py",
+      "candidate_test_paths": [
+        "couler/core/tests/test_run_templates.py",
+        "tests/core/test_run_templates.py",
+        "couler/core/tests/test_core.py",
+        "test/test_run_templates.py",
+        "tests/test_run_templates.py",
+        "tests/run_templates/test_run_templates.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/states.py",
+      "candidate_test_paths": [
+        "couler/core/tests/test_states.py",
+        "tests/core/test_states.py",
+        "couler/core/tests/test_core.py",
+        "test/test_states.py",
+        "tests/test_states.py",
+        "tests/states/test_states.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/step_update_utils.py",
+      "candidate_test_paths": [
+        "couler/core/tests/test_step_update_utils.py",
+        "tests/core/test_step_update_utils.py",
+        "couler/core/tests/test_core.py",
+        "test/test_step_update_utils.py",
+        "tests/test_step_update_utils.py",
+        "tests/step_update_utils/test_step_update_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/syntax/concurrent.py",
+      "candidate_test_paths": [
+        "couler/core/syntax/tests/test_concurrent.py",
+        "tests/core/syntax/test_concurrent.py",
+        "couler/core/syntax/tests/test_syntax.py",
+        "test/test_concurrent.py",
+        "tests/test_concurrent.py",
+        "tests/concurrent/test_concurrent.py",
+        "tests/concurrents/test_concurrent.py",
+        "tests/syntax/test_concurrent.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/syntax/conditional.py",
+      "candidate_test_paths": [
+        "couler/core/syntax/tests/test_conditional.py",
+        "tests/core/syntax/test_conditional.py",
+        "couler/core/syntax/tests/test_syntax.py",
+        "test/test_conditional.py",
+        "tests/test_conditional.py",
+        "tests/conditional/test_conditional.py",
+        "tests/conditionals/test_conditional.py",
+        "tests/syntax/test_conditional.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/syntax/dag.py",
+      "candidate_test_paths": [
+        "couler/core/syntax/tests/test_dag.py",
+        "tests/core/syntax/test_dag.py",
+        "couler/core/syntax/tests/test_syntax.py",
+        "test/test_dag.py",
+        "tests/test_dag.py",
+        "tests/dag/test_dag.py",
+        "tests/dags/test_dag.py",
+        "tests/syntax/test_dag.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/syntax/dns.py",
+      "candidate_test_paths": [
+        "couler/core/syntax/tests/test_dns.py",
+        "tests/core/syntax/test_dns.py",
+        "couler/core/syntax/tests/test_syntax.py",
+        "test/test_dns.py",
+        "tests/test_dns.py",
+        "tests/dns/test_dns.py",
+        "tests/syntax/test_dns.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/syntax/exit_handler.py",
+      "candidate_test_paths": [
+        "couler/core/syntax/tests/test_exit_handler.py",
+        "tests/core/syntax/test_exit_handler.py",
+        "couler/core/syntax/tests/test_syntax.py",
+        "test/test_exit_handler.py",
+        "tests/test_exit_handler.py",
+        "tests/exit_handler/test_exit_handler.py",
+        "tests/exit_handlers/test_exit_handler.py",
+        "tests/syntax/test_exit_handler.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/syntax/image_pull_secret.py",
+      "candidate_test_paths": [
+        "couler/core/syntax/tests/test_image_pull_secret.py",
+        "tests/core/syntax/test_image_pull_secret.py",
+        "couler/core/syntax/tests/test_syntax.py",
+        "test/test_image_pull_secret.py",
+        "tests/test_image_pull_secret.py",
+        "tests/image_pull_secret/test_image_pull_secret.py",
+        "tests/image_pull_secrets/test_image_pull_secret.py",
+        "tests/syntax/test_image_pull_secret.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/syntax/loop.py",
+      "candidate_test_paths": [
+        "couler/core/syntax/tests/test_loop.py",
+        "tests/core/syntax/test_loop.py",
+        "couler/core/syntax/tests/test_syntax.py",
+        "test/test_loop.py",
+        "tests/test_loop.py",
+        "tests/loop/test_loop.py",
+        "tests/loops/test_loop.py",
+        "tests/syntax/test_loop.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/syntax/predicates.py",
+      "candidate_test_paths": [
+        "couler/core/syntax/tests/test_predicates.py",
+        "tests/core/syntax/test_predicates.py",
+        "couler/core/syntax/tests/test_syntax.py",
+        "test/test_predicates.py",
+        "tests/test_predicates.py",
+        "tests/predicates/test_predicates.py",
+        "tests/syntax/test_predicates.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/syntax/recursion.py",
+      "candidate_test_paths": [
+        "couler/core/syntax/tests/test_recursion.py",
+        "tests/core/syntax/test_recursion.py",
+        "couler/core/syntax/tests/test_syntax.py",
+        "test/test_recursion.py",
+        "tests/test_recursion.py",
+        "tests/recursion/test_recursion.py",
+        "tests/recursions/test_recursion.py",
+        "tests/syntax/test_recursion.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/syntax/toleration.py",
+      "candidate_test_paths": [
+        "couler/core/syntax/tests/test_toleration.py",
+        "tests/core/syntax/test_toleration.py",
+        "couler/core/syntax/tests/test_syntax.py",
+        "test/test_toleration.py",
+        "tests/test_toleration.py",
+        "tests/toleration/test_toleration.py",
+        "tests/tolerations/test_toleration.py",
+        "tests/syntax/test_toleration.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/syntax/volume.py",
+      "candidate_test_paths": [
+        "couler/core/syntax/tests/test_volume.py",
+        "tests/core/syntax/test_volume.py",
+        "couler/core/syntax/tests/test_syntax.py",
+        "test/test_volume.py",
+        "tests/test_volume.py",
+        "tests/volume/test_volume.py",
+        "tests/volumes/test_volume.py",
+        "tests/syntax/test_volume.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/artifact.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_artifact.py",
+        "tests/core/templates/test_artifact.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_artifact.py",
+        "tests/test_artifact.py",
+        "tests/artifact/test_artifact.py",
+        "tests/artifacts/test_artifact.py",
+        "tests/templates/test_artifact.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/cache.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_cache.py",
+        "tests/core/templates/test_cache.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_cache.py",
+        "tests/test_cache.py",
+        "tests/cache/test_cache.py",
+        "tests/caches/test_cache.py",
+        "tests/templates/test_cache.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/container.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_container.py",
+        "tests/core/templates/test_container.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_container.py",
+        "tests/test_container.py",
+        "tests/container/test_container.py",
+        "tests/containers/test_container.py",
+        "tests/templates/test_container.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/dns.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_dns.py",
+        "tests/core/templates/test_dns.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_dns.py",
+        "tests/test_dns.py",
+        "tests/dns/test_dns.py",
+        "tests/templates/test_dns.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/image_pull_secret.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_image_pull_secret.py",
+        "tests/core/templates/test_image_pull_secret.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_image_pull_secret.py",
+        "tests/test_image_pull_secret.py",
+        "tests/image_pull_secret/test_image_pull_secret.py",
+        "tests/image_pull_secrets/test_image_pull_secret.py",
+        "tests/templates/test_image_pull_secret.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/job.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_job.py",
+        "tests/core/templates/test_job.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_job.py",
+        "tests/test_job.py",
+        "tests/job/test_job.py",
+        "tests/jobs/test_job.py",
+        "tests/templates/test_job.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/output.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_output.py",
+        "tests/core/templates/test_output.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_output.py",
+        "tests/test_output.py",
+        "tests/output/test_output.py",
+        "tests/outputs/test_output.py",
+        "tests/templates/test_output.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/script.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_script.py",
+        "tests/core/templates/test_script.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_script.py",
+        "tests/test_script.py",
+        "tests/script/test_script.py",
+        "tests/scripts/test_script.py",
+        "tests/templates/test_script.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/secret.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_secret.py",
+        "tests/core/templates/test_secret.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_secret.py",
+        "tests/test_secret.py",
+        "tests/secret/test_secret.py",
+        "tests/secrets/test_secret.py",
+        "tests/templates/test_secret.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/step.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_step.py",
+        "tests/core/templates/test_step.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_step.py",
+        "tests/test_step.py",
+        "tests/step/test_step.py",
+        "tests/steps/test_step.py",
+        "tests/templates/test_step.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/template.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_template.py",
+        "tests/core/templates/test_template.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_template.py",
+        "tests/test_template.py",
+        "tests/template/test_template.py",
+        "tests/templates/test_template.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/toleration.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_toleration.py",
+        "tests/core/templates/test_toleration.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_toleration.py",
+        "tests/test_toleration.py",
+        "tests/toleration/test_toleration.py",
+        "tests/tolerations/test_toleration.py",
+        "tests/templates/test_toleration.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/volume.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_volume.py",
+        "tests/core/templates/test_volume.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_volume.py",
+        "tests/test_volume.py",
+        "tests/volume/test_volume.py",
+        "tests/volumes/test_volume.py",
+        "tests/templates/test_volume.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/volume_claim.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_volume_claim.py",
+        "tests/core/templates/test_volume_claim.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_volume_claim.py",
+        "tests/test_volume_claim.py",
+        "tests/volume_claim/test_volume_claim.py",
+        "tests/volume_claims/test_volume_claim.py",
+        "tests/templates/test_volume_claim.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/templates/workflow.py",
+      "candidate_test_paths": [
+        "couler/core/templates/tests/test_workflow.py",
+        "tests/core/templates/test_workflow.py",
+        "couler/core/templates/tests/test_templates.py",
+        "test/test_workflow.py",
+        "tests/test_workflow.py",
+        "tests/workflow/test_workflow.py",
+        "tests/workflows/test_workflow.py",
+        "tests/templates/test_workflow.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/utils.py",
+      "candidate_test_paths": [
+        "couler/core/tests/test_utils.py",
+        "tests/core/test_utils.py",
+        "couler/core/tests/test_core.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/core/workflow_validation_utils.py",
+      "candidate_test_paths": [
+        "couler/core/tests/test_workflow_validation_utils.py",
+        "tests/core/test_workflow_validation_utils.py",
+        "couler/core/tests/test_core.py",
+        "test/test_workflow_validation_utils.py",
+        "tests/test_workflow_validation_utils.py",
+        "tests/workflow_validation_utils/test_workflow_validation_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/docker_submitter.py",
+      "candidate_test_paths": [
+        "couler/tests/test_docker_submitter.py",
+        "tests/test_docker_submitter.py",
+        "couler/tests/test_couler.py",
+        "test/test_docker_submitter.py",
+        "tests/docker_submitter/test_docker_submitter.py",
+        "tests/docker_submitters/test_docker_submitter.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/proto/couler_pb2.py",
+      "candidate_test_paths": [
+        "couler/proto/tests/test_couler_pb2.py",
+        "tests/proto/test_couler_pb2.py",
+        "couler/proto/tests/test_proto.py",
+        "test/test_couler_pb2.py",
+        "tests/test_couler_pb2.py",
+        "tests/couler_pb2/test_couler_pb2.py",
+        "tests/couler_pb2s/test_couler_pb2.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/steps/katib.py",
+      "candidate_test_paths": [
+        "couler/steps/tests/test_katib.py",
+        "tests/steps/test_katib.py",
+        "couler/steps/tests/test_steps.py",
+        "test/test_katib.py",
+        "tests/test_katib.py",
+        "tests/katib/test_katib.py",
+        "tests/katibs/test_katib.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/steps/mpi.py",
+      "candidate_test_paths": [
+        "couler/steps/tests/test_mpi.py",
+        "tests/steps/test_mpi.py",
+        "couler/steps/tests/test_steps.py",
+        "test/test_mpi.py",
+        "tests/test_mpi.py",
+        "tests/mpi/test_mpi.py",
+        "tests/mpis/test_mpi.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/steps/pod_utils.py",
+      "candidate_test_paths": [
+        "couler/steps/tests/test_pod_utils.py",
+        "tests/steps/test_pod_utils.py",
+        "couler/steps/tests/test_steps.py",
+        "test/test_pod_utils.py",
+        "tests/test_pod_utils.py",
+        "tests/pod_utils/test_pod_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/steps/pytorch.py",
+      "candidate_test_paths": [
+        "couler/steps/tests/test_pytorch.py",
+        "tests/steps/test_pytorch.py",
+        "couler/steps/tests/test_steps.py",
+        "test/test_pytorch.py",
+        "tests/test_pytorch.py",
+        "tests/pytorch/test_pytorch.py",
+        "tests/pytorchs/test_pytorch.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/steps/tensorflow.py",
+      "candidate_test_paths": [
+        "couler/steps/tests/test_tensorflow.py",
+        "tests/steps/test_tensorflow.py",
+        "couler/steps/tests/test_steps.py",
+        "test/test_tensorflow.py",
+        "tests/test_tensorflow.py",
+        "tests/tensorflow/test_tensorflow.py",
+        "tests/tensorflows/test_tensorflow.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "couler/_version.py",
+      "candidate_test_paths": [
+        "couler/tests/test_version.py",
+        "tests/test_version.py",
+        "couler/tests/test_couler.py",
+        "test/test_version.py",
+        "tests/version/test_version.py",
+        "tests/versions/test_version.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/coin_flip.py",
+      "candidate_test_paths": [
+        "examples/tests/test_coin_flip.py",
+        "tests/test_coin_flip.py",
+        "examples/tests/test_examples.py",
+        "test/test_coin_flip.py",
+        "tests/coin_flip/test_coin_flip.py",
+        "tests/coin_flips/test_coin_flip.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/dag.py",
+      "candidate_test_paths": [
+        "examples/tests/test_dag.py",
+        "tests/test_dag.py",
+        "examples/tests/test_examples.py",
+        "test/test_dag.py",
+        "tests/dag/test_dag.py",
+        "tests/dags/test_dag.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/default_submitter.py",
+      "candidate_test_paths": [
+        "examples/tests/test_default_submitter.py",
+        "tests/test_default_submitter.py",
+        "examples/tests/test_examples.py",
+        "test/test_default_submitter.py",
+        "tests/default_submitter/test_default_submitter.py",
+        "tests/default_submitters/test_default_submitter.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/depends.py",
+      "candidate_test_paths": [
+        "examples/tests/test_depends.py",
+        "tests/test_depends.py",
+        "examples/tests/test_examples.py",
+        "test/test_depends.py",
+        "tests/depends/test_depends.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/hello_world.py",
+      "candidate_test_paths": [
+        "examples/tests/test_hello_world.py",
+        "tests/test_hello_world.py",
+        "examples/tests/test_examples.py",
+        "test/test_hello_world.py",
+        "tests/hello_world/test_hello_world.py",
+        "tests/hello_worlds/test_hello_world.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/node_assign.py",
+      "candidate_test_paths": [
+        "examples/tests/test_node_assign.py",
+        "tests/test_node_assign.py",
+        "examples/tests/test_examples.py",
+        "test/test_node_assign.py",
+        "tests/node_assign/test_node_assign.py",
+        "tests/node_assigns/test_node_assign.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration_tests/dag_depends_example.py",
+      "candidate_test_paths": [
+        "integration_tests/tests/test_dag_depends_example.py",
+        "tests/test_dag_depends_example.py",
+        "integration_tests/tests/test_integration_tests.py",
+        "test/test_dag_depends_example.py",
+        "tests/dag_depends_example/test_dag_depends_example.py",
+        "tests/dag_depends_examples/test_dag_depends_example.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration_tests/dag_example.py",
+      "candidate_test_paths": [
+        "integration_tests/tests/test_dag_example.py",
+        "tests/test_dag_example.py",
+        "integration_tests/tests/test_integration_tests.py",
+        "test/test_dag_example.py",
+        "tests/dag_example/test_dag_example.py",
+        "tests/dag_examples/test_dag_example.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration_tests/flip_coin_example.py",
+      "candidate_test_paths": [
+        "integration_tests/tests/test_flip_coin_example.py",
+        "tests/test_flip_coin_example.py",
+        "integration_tests/tests/test_integration_tests.py",
+        "test/test_flip_coin_example.py",
+        "tests/flip_coin_example/test_flip_coin_example.py",
+        "tests/flip_coin_examples/test_flip_coin_example.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration_tests/flip_coin_security_context_example.py",
+      "candidate_test_paths": [
+        "integration_tests/tests/test_flip_coin_security_context_example.py",
+        "tests/test_flip_coin_security_context_example.py",
+        "integration_tests/tests/test_integration_tests.py",
+        "test/test_flip_coin_security_context_example.py",
+        "tests/flip_coin_security_context_example/test_flip_coin_security_context_example.py",
+        "tests/flip_coin_security_context_examples/test_flip_coin_security_context_example.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration_tests/memoization_example.py",
+      "candidate_test_paths": [
+        "integration_tests/tests/test_memoization_example.py",
+        "tests/test_memoization_example.py",
+        "integration_tests/tests/test_integration_tests.py",
+        "test/test_memoization_example.py",
+        "tests/memoization_example/test_memoization_example.py",
+        "tests/memoization_examples/test_memoization_example.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration_tests/mpi_example.py",
+      "candidate_test_paths": [
+        "integration_tests/tests/test_mpi_example.py",
+        "tests/test_mpi_example.py",
+        "integration_tests/tests/test_integration_tests.py",
+        "test/test_mpi_example.py",
+        "tests/mpi_example/test_mpi_example.py",
+        "tests/mpi_examples/test_mpi_example.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration_tests/volume_example.py",
+      "candidate_test_paths": [
+        "integration_tests/tests/test_volume_example.py",
+        "tests/test_volume_example.py",
+        "integration_tests/tests/test_integration_tests.py",
+        "test/test_volume_example.py",
+        "tests/volume_example/test_volume_example.py",
+        "tests/volume_examples/test_volume_example.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/security/**",
+      "matched_paths": [
+        "integration_tests/flip_coin_security_context_example.py"
+      ],
+      "category": "security",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"security\" found in 1 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.py"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 88,
+    "classified_count": 88,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 232,
+    "project_import_count": 139,
+    "declared_package_count": 13,
+    "undeclared_package_count": 13,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 57,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 1,
+    "sensitive_file_count": 1,
+    "manifest_count": 3,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

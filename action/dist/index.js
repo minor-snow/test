@@ -163,7 +163,7 @@ __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var _githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_8__ = __nccwpck_require__(298);
 /* harmony import */ var _githubInputParser_js__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(497);
 /* harmony import */ var _githubPrCommentRenderer_js__WEBPACK_IMPORTED_MODULE_9__ = __nccwpck_require__(34);
-/* harmony import */ var _githubRepairRunner_js__WEBPACK_IMPORTED_MODULE_7__ = __nccwpck_require__(509);
+/* harmony import */ var _githubRepairRunner_js__WEBPACK_IMPORTED_MODULE_7__ = __nccwpck_require__(881);
 
 
 
@@ -301,7 +301,7 @@ function runCli(cliEntry, args, cwd) {
     const result = (0,node_child_process__WEBPACK_IMPORTED_MODULE_3__.spawnSync)(process.execPath, [cliEntry, ...args], {
         cwd,
         encoding: "utf-8",
-        stdio: "pipe",
+        stdio: ["inherit", "pipe", "pipe"],
     });
     if (result.stdout)
         process.stdout.write(result.stdout);
@@ -496,7 +496,7 @@ async function postOrUpdatePantheonComment(input) {
             return { status: "failed", reason: `Failed to list PR comments: ${listResponse.status}` };
         }
         const comments = await listResponse.json();
-        const existing = comments.find(comment => comment.body?.includes(input.marker) && (comment.user?.login?.endsWith("[bot]") ?? true));
+        const existing = comments.find(comment => isPantheonManagedComment(comment, input.marker));
         if (existing) {
             const updateResponse = await fetch(`${apiBase}/repos/${input.prContext.owner}/${input.prContext.repo}/issues/comments/${existing.id}`, {
                 method: "PATCH",
@@ -525,6 +525,14 @@ async function postOrUpdatePantheonComment(input) {
             reason: error instanceof Error ? error.message : String(error),
         };
     }
+}
+function isPantheonManagedComment(comment, marker) {
+    if (!comment.body?.includes(marker)) {
+        return false;
+    }
+    const login = comment.user?.login?.trim();
+    const type = comment.user?.type?.trim();
+    return type === "Bot" || login === "github-actions[bot]" || login?.endsWith("[bot]") === true;
 }
 
 
@@ -659,14 +667,14 @@ function parseMultilinePatterns(raw) {
     if (!raw)
         return [];
     return raw
-        .split(/\r?\n/)
+        .split(/[\r\n,]+/)
         .map(line => line.trim())
         .filter(line => line.length > 0);
 }
 function parseFailConditions(raw) {
     const normalized = (raw ?? "forbidden,outside_scope")
         .split(",")
-        .map(token => token.trim())
+        .map(token => token.trim().toLowerCase())
         .filter(token => token.length > 0);
     if (normalized.length === 0) {
         return ["forbidden", "outside_scope"];
@@ -690,10 +698,10 @@ function parseBoolean(raw, fallback) {
     return fallback;
 }
 function parseArtifactMode(raw) {
-    return raw === "debug" ? "debug" : "public";
+    return raw?.trim().toLowerCase() === "debug" ? "debug" : "public";
 }
 function parseCommentMode(raw) {
-    return raw === "off" ? "off" : "update";
+    return raw?.trim().toLowerCase() === "off" ? "off" : "update";
 }
 function firstNonEmpty(...values) {
     for (const value of values) {
@@ -842,7 +850,7 @@ function formatAllowedActions(actions) {
 
 /***/ }),
 
-/***/ 509:
+/***/ 881:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -1286,9 +1294,10 @@ function readGitDiffSummary(input) {
     }
     const warnings = [];
     const files = [];
+    const diffArgs = ["diff", "--name-status", ...(baseRef ? [baseRef] : [])];
     // 1. Read name-status diff
     try {
-        const nameStatus = (0,external_node_child_process_.execSync)(`git diff --name-status ${baseRef}`, {
+        const nameStatus = (0,external_node_child_process_.execFileSync)("git", diffArgs, {
             cwd: repoRoot,
             encoding: "utf-8",
             timeout: 10_000,
@@ -1321,7 +1330,7 @@ function readGitDiffSummary(input) {
     // only and should not be polluted by local bootstrap artifacts like node_modules/.
     if (!baseRef) {
         try {
-            const untracked = (0,external_node_child_process_.execSync)("git ls-files --others --exclude-standard", {
+            const untracked = (0,external_node_child_process_.execFileSync)("git", ["ls-files", "--others", "--exclude-standard"], {
                 cwd: repoRoot,
                 encoding: "utf-8",
                 timeout: 10_000,
@@ -1418,6 +1427,7 @@ const DEFAULT_PANTHEON_CONFIG = {
 function loadPantheonConfig(repoRoot, configPathInput = "pantheon.json") {
     const configPath = (0,external_node_path_.join)(repoRoot, configPathInput);
     const warnings = [];
+    const errors = [];
     if (!(0,external_node_fs_.existsSync)(configPath)) {
         return { config: DEFAULT_PANTHEON_CONFIG, warnings: [], loaded_from: null };
     }
@@ -1426,14 +1436,12 @@ function loadPantheonConfig(repoRoot, configPathInput = "pantheon.json") {
         raw = JSON.parse((0,external_node_fs_.readFileSync)(configPath, "utf-8"));
     }
     catch (e) {
-        warnings.push(`Failed to parse pantheon.json: ${e.message}`);
-        return { config: DEFAULT_PANTHEON_CONFIG, warnings, loaded_from: configPathInput };
+        throw new Error(`Failed to parse ${configPathInput}: ${e.message}`);
     }
     if (typeof raw !== "object" || raw === null) {
-        warnings.push("pantheon.json must be a JSON object");
-        return { config: DEFAULT_PANTHEON_CONFIG, warnings, loaded_from: configPathInput };
+        throw new Error(`${configPathInput} must be a JSON object`);
     }
-    return parseConfigJson(raw, warnings, configPathInput);
+    return parseConfigJson(raw, warnings, errors, configPathInput);
 }
 /**
  * Generate default pantheon.json content for `pantheon init`.
@@ -1456,17 +1464,17 @@ function generateDefaultConfigJson() {
 // ---------------------------------------------------------------------------
 // JSON parser
 // ---------------------------------------------------------------------------
-function parseConfigJson(root, warnings, loadedFrom = "pantheon.json") {
+function parseConfigJson(root, warnings, errors, loadedFrom = "pantheon.json") {
     const version = typeof root.version === "number" ? root.version : 1;
     if (version !== 1) {
         warnings.push(`pantheon.json: unsupported version ${version}, using 1`);
     }
-    const protectedList = parseStringArray(root, "protected", warnings);
-    const reviewRequired = parseStringArray(root, "review_required", warnings);
-    const generated = parseStringArray(root, "generated", warnings);
-    const pathRoles = parseStringMap(root, "path_roles", warnings);
+    const protectedList = parseStringArray(root, "protected", warnings, errors);
+    const reviewRequired = parseStringArray(root, "review_required", warnings, errors);
+    const generated = parseStringArray(root, "generated", warnings, errors);
+    const pathRoles = parseStringMap(root, "path_roles", warnings, errors);
     // Python observation config (optional)
-    const pythonConfig = parsePythonConfig(root, warnings);
+    const pythonConfig = parsePythonConfig(root, warnings, errors);
     // Warn on unknown top-level keys
     const knownKeys = new Set([
         "version", "protected", "review_required", "generated",
@@ -1476,6 +1484,9 @@ function parseConfigJson(root, warnings, loadedFrom = "pantheon.json") {
         if (!knownKeys.has(key)) {
             warnings.push(`pantheon.json: unknown key "${key}" (ignored)`);
         }
+    }
+    if (errors.length > 0) {
+        throw new Error(`${loadedFrom} is invalid:\n${errors.join("\n")}`);
     }
     const finalProtected = protectedList.length > 0
         ? protectedList
@@ -1493,12 +1504,12 @@ function parseConfigJson(root, warnings, loadedFrom = "pantheon.json") {
         loaded_from: loadedFrom,
     };
 }
-function parseStringArray(root, key, warnings) {
+function parseStringArray(root, key, warnings, errors) {
     const val = root[key];
     if (val === undefined)
         return [];
     if (!Array.isArray(val)) {
-        warnings.push(`pantheon.json: "${key}" must be an array`);
+        errors.push(`pantheon.json: "${key}" must be an array`);
         return [];
     }
     const result = [];
@@ -1507,17 +1518,17 @@ function parseStringArray(root, key, warnings) {
             result.push(item);
         }
         else {
-            warnings.push(`pantheon.json: ${key} contains invalid entry: ${JSON.stringify(item)}`);
+            errors.push(`pantheon.json: ${key} contains invalid entry: ${JSON.stringify(item)}`);
         }
     }
     return result;
 }
-function parseStringMap(root, key, warnings) {
+function parseStringMap(root, key, warnings, errors) {
     const val = root[key];
     if (val === undefined)
         return {};
     if (typeof val !== "object" || val === null || Array.isArray(val)) {
-        warnings.push(`pantheon.json: "${key}" must be an object`);
+        errors.push(`pantheon.json: "${key}" must be an object`);
         return {};
     }
     const result = {};
@@ -1526,17 +1537,17 @@ function parseStringMap(root, key, warnings) {
             result[k] = v;
         }
         else {
-            warnings.push(`pantheon.json: ${key}["${k}"] must be a string`);
+            errors.push(`pantheon.json: ${key}["${k}"] must be a string`);
         }
     }
     return result;
 }
-function parsePythonConfig(root, warnings) {
+function parsePythonConfig(root, warnings, errors) {
     const section = root.python;
     if (section === undefined)
         return undefined;
     if (typeof section !== "object" || section === null || Array.isArray(section)) {
-        warnings.push('pantheon.json: "python" must be an object');
+        errors.push('pantheon.json: "python" must be an object');
         return undefined;
     }
     const pyObj = section;
@@ -1548,11 +1559,13 @@ function parsePythonConfig(root, warnings) {
             for (const item of pyObj.project_packages) {
                 if (typeof item === "string" && item.length > 0)
                     valid.push(item);
+                else
+                    errors.push(`pantheon.json: python.project_packages contains invalid entry: ${JSON.stringify(item)}`);
             }
             result.project_packages = valid;
         }
         else {
-            warnings.push('pantheon.json: python.project_packages must be an array of strings');
+            errors.push('pantheon.json: python.project_packages must be an array of strings');
         }
     }
     // sensitive_overrides: Record<string, string>
@@ -1563,12 +1576,12 @@ function parsePythonConfig(root, warnings) {
                 if (typeof v === "string")
                     map[k] = v;
                 else
-                    warnings.push(`pantheon.json: python.sensitive_overrides["${k}"] must be a string`);
+                    errors.push(`pantheon.json: python.sensitive_overrides["${k}"] must be a string`);
             }
             result.sensitive_overrides = map;
         }
         else {
-            warnings.push('pantheon.json: python.sensitive_overrides must be an object');
+            errors.push('pantheon.json: python.sensitive_overrides must be an object');
         }
     }
     return Object.keys(result).length > 0 ? result : undefined;
@@ -1982,20 +1995,21 @@ function findTestCandidates(srcPath, testPaths) {
     const basename = getBasename(srcPath);
     const dirParts = srcPath.split("/").slice(1, -1); // remove bucket prefix and filename
     const subPath = dirParts.join("/");
-    // Convention 1: test/<subpath>/<basename>.test.ts
-    tryCandidate(candidates, testPaths, `test/${subPath ? subPath + "/" : ""}${basename}.test.ts`, "parallel_test_dir", "high");
-    // Convention 2: tests/<subpath>/<basename>.test.ts
-    tryCandidate(candidates, testPaths, `tests/${subPath ? subPath + "/" : ""}${basename}.test.ts`, "parallel_test_dir", "high");
-    // Convention 3: src/<subpath>/<basename>.test.ts (co-located)
-    tryCandidate(candidates, testPaths, `src/${subPath ? subPath + "/" : ""}${basename}.test.ts`, "same_basename", "high");
-    // Convention 4: __tests__/<subpath>/<basename>.test.ts
-    tryCandidate(candidates, testPaths, `__tests__/${subPath ? subPath + "/" : ""}${basename}.test.ts`, "parallel_test_dir", "medium");
-    // Convention 5: test/<subpath>/<basename>.spec.ts
-    tryCandidate(candidates, testPaths, `test/${subPath ? subPath + "/" : ""}${basename}.spec.ts`, "suffix_spec", "medium");
-    // Convention 6: tests/<subpath>/<basename>.spec.ts
-    tryCandidate(candidates, testPaths, `tests/${subPath ? subPath + "/" : ""}${basename}.spec.ts`, "suffix_spec", "medium");
-    // Convention 7: src/<subpath>/<basename>.spec.ts (co-located)
-    tryCandidate(candidates, testPaths, `src/${subPath ? subPath + "/" : ""}${basename}.spec.ts`, "suffix_spec", "medium");
+    const extensions = ["ts", "tsx", "js", "jsx"];
+    for (const extension of extensions) {
+        // Convention 1: test/<subpath>/<basename>.test.tsx|ts|js|jsx
+        tryCandidate(candidates, testPaths, `test/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "parallel_test_dir", extension === "ts" ? "high" : "medium");
+        // Convention 2: tests/<subpath>/<basename>.test.*
+        tryCandidate(candidates, testPaths, `tests/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "parallel_test_dir", extension === "ts" ? "high" : "medium");
+        // Convention 3: src/<subpath>/<basename>.test.* (co-located)
+        tryCandidate(candidates, testPaths, `src/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "same_basename", extension === "ts" ? "high" : "medium");
+        // Convention 4: __tests__/<subpath>/<basename>.test.*
+        tryCandidate(candidates, testPaths, `__tests__/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "parallel_test_dir", "medium");
+        // Convention 5/6/7: *.spec.*
+        tryCandidate(candidates, testPaths, `test/${subPath ? subPath + "/" : ""}${basename}.spec.${extension}`, "suffix_spec", "medium");
+        tryCandidate(candidates, testPaths, `tests/${subPath ? subPath + "/" : ""}${basename}.spec.${extension}`, "suffix_spec", "medium");
+        tryCandidate(candidates, testPaths, `src/${subPath ? subPath + "/" : ""}${basename}.spec.${extension}`, "suffix_spec", "medium");
+    }
     return candidates;
 }
 function tryCandidate(out, testPaths, testPath, kind, confidence) {
@@ -2009,6 +2023,29 @@ function getBasename(filePath) {
     return fileName.replace(/\.[tj]sx?$/, "");
 }
 
+;// CONCATENATED MODULE: ./src/repoObservation/pathKeywordMatcher.ts
+function normalizeSegmentTokens(segment) {
+    return segment
+        .toLowerCase()
+        .replace(/\.[a-z0-9]+$/i, "")
+        .split(/[^a-z0-9]+/)
+        .filter(Boolean);
+}
+function pathContainsKeyword(path, keyword) {
+    const normalizedKeyword = keyword.toLowerCase();
+    for (const segment of path.split("/")) {
+        const tokens = normalizeSegmentTokens(segment);
+        if (tokens.some(token => token === normalizedKeyword || token === `${normalizedKeyword}s`)) {
+            return true;
+        }
+    }
+    return false;
+}
+function filenameContainsToken(path, token) {
+    const filename = path.split("/").pop() ?? "";
+    return normalizeSegmentTokens(filename).includes(token.toLowerCase());
+}
+
 ;// CONCATENATED MODULE: ./src/repoObservation/sensitivePathDetector.ts
 /**
  * P20a: Sensitive Path Detector
@@ -2016,6 +2053,7 @@ function getBasename(filePath) {
  * Detects sensitive paths by keyword matching in path segments.
  * No content inspection — path-only analysis.
  */
+
 // ---------------------------------------------------------------------------
 // Public API
 // ---------------------------------------------------------------------------
@@ -2041,7 +2079,7 @@ function detectSensitivePaths(files) {
     for (const file of files) {
         const segments = file.path.toLowerCase().split("/");
         for (const { keyword, reason } of SENSITIVE_KEYWORDS) {
-            if (segments.some(seg => seg === keyword)) {
+            if (pathContainsKeyword(file.path, keyword)) {
                 const key = `${file.path}:${reason}`;
                 if (!seen.has(key)) {
                     seen.add(key);
@@ -2095,22 +2133,25 @@ function parseCodeowners(repoRoot) {
             const owners = parts.slice(1).filter(p => p.startsWith("@"));
             if (owners.length === 0)
                 continue;
-            const isComplex = isComplexPattern(pattern);
             const source = loc.includes(".github")
                 ? "CODEOWNERS:.github"
                 : loc.includes("docs")
                     ? "CODEOWNERS:docs"
                     : "CODEOWNERS";
-            if (isComplex) {
-                unresolved.push(pattern);
+            const expandedPatterns = expandBracePatterns(pattern);
+            for (const expandedPattern of expandedPatterns) {
+                const isComplex = isComplexPattern(expandedPattern);
+                if (isComplex) {
+                    unresolved.push(expandedPattern);
+                }
+                hints.push({
+                    path_pattern: expandedPattern,
+                    owners,
+                    source,
+                    match_status: isComplex ? "unresolved_complex_pattern" : "simple_pattern",
+                    evidence: [{ type: "codeowners", source_path: loc.replace(repoRoot, "").replace(/\\/g, "/").replace(/^\//, ""), value: line }],
+                });
             }
-            hints.push({
-                path_pattern: pattern,
-                owners,
-                source,
-                match_status: isComplex ? "unresolved_complex_pattern" : "simple_pattern",
-                evidence: [{ type: "codeowners", source_path: loc.replace(repoRoot, "").replace(/\\/g, "/").replace(/^\//, ""), value: line }],
-            });
         }
     }
     return { owner_hints: hints, unresolved_patterns: unresolved };
@@ -2139,6 +2180,22 @@ function isComplexPattern(pattern) {
     if (pattern.startsWith("!"))
         return true;
     return false;
+}
+function expandBracePatterns(pattern) {
+    const match = /\{([^{}]+)\}/.exec(pattern);
+    if (!match || match.index === undefined) {
+        return [pattern];
+    }
+    const before = pattern.slice(0, match.index);
+    const after = pattern.slice(match.index + match[0].length);
+    const options = match[1]
+        .split(",")
+        .map(option => option.trim())
+        .filter(option => option.length > 0);
+    if (options.length === 0) {
+        return [pattern];
+    }
+    return options.flatMap(option => expandBracePatterns(`${before}${option}${after}`));
 }
 
 ;// CONCATENATED MODULE: external "node:crypto"
@@ -2905,8 +2962,16 @@ function detectGitStatus(repoRoot) {
         };
     }
     try {
-        const headHash = (0,external_node_child_process_.execSync)("git rev-parse HEAD", { cwd: repoRoot, encoding: "utf-8", stdio: ["ignore", "pipe", "ignore"] }).trim();
-        const statusOutput = (0,external_node_child_process_.execSync)("git status --porcelain", { cwd: repoRoot, encoding: "utf-8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+        const headHash = (0,external_node_child_process_.execFileSync)("git", ["rev-parse", "HEAD"], {
+            cwd: repoRoot,
+            encoding: "utf-8",
+            stdio: ["ignore", "pipe", "ignore"],
+        }).trim();
+        const statusOutput = (0,external_node_child_process_.execFileSync)("git", ["status", "--porcelain"], {
+            cwd: repoRoot,
+            encoding: "utf-8",
+            stdio: ["ignore", "pipe", "ignore"],
+        }).trim();
         const dirtyFiles = statusOutput ? statusOutput.split("\n").length : 0;
         return {
             repo_root_label: repoRoot.split(/[/\\]/).pop() ?? "repo",
@@ -4193,6 +4258,7 @@ function extractFromNoxfile(filePath, content) {
  *   - All mappings carry confidence + reason
  *   - High confidence requires path convention + framework context evidence
  */
+
 function mapPythonTests(input) {
     const results = [];
     const context = buildMappingContext(input);
@@ -4261,18 +4327,19 @@ function generateCandidates(sourcePath, ctx) {
     const cleanName = nameNoExt.startsWith("_") && nameNoExt !== "__init__" && nameNoExt !== "__main__"
         ? nameNoExt.slice(1)
         : nameNoExt;
+    const candidateName = cleanName;
     // === Django-style patterns (always included for backward compat) ===
     // Pattern 1: Sibling tests/ directory — Django app convention
     // saleor/checkout/actions.py → saleor/checkout/tests/test_actions.py
     if (parts.length >= 2) {
         const dirParts = parts.slice(0, -1);
-        candidates.push([...dirParts, "tests", `test_${nameNoExt}.py`].join("/"));
+        candidates.push([...dirParts, "tests", `test_${candidateName}.py`].join("/"));
     }
     // Pattern 2: Top-level tests/ mirror
     // saleor/checkout/actions.py → tests/checkout/test_actions.py
     if (parts.length >= 2) {
         const relativeParts = parts.slice(1, -1); // skip top-level package
-        candidates.push(["tests", ...relativeParts, `test_${nameNoExt}.py`].join("/"));
+        candidates.push(["tests", ...relativeParts, `test_${candidateName}.py`].join("/"));
     }
     // Pattern 3: Module-level test file
     // saleor/checkout/actions.py → saleor/checkout/tests/test_checkout.py
@@ -4282,8 +4349,8 @@ function generateCandidates(sourcePath, ctx) {
         candidates.push([...dirParts, "tests", `test_${moduleName}.py`].join("/"));
     }
     // Pattern 4: Root test mirror with test_ prefix
-    candidates.push(`test/test_${nameNoExt}.py`);
-    candidates.push(`tests/test_${nameNoExt}.py`);
+    candidates.push(`test/test_${candidateName}.py`);
+    candidates.push(`tests/test_${candidateName}.py`);
     // === P27-1d: Library/SDK patterns ===
     if (ctx.isLibrary) {
         // Library pattern: <package>/_module.py → tests/test_module.py
@@ -4368,6 +4435,8 @@ function assessConfidence(source, candidates, existing, ctx) {
     const cleanSourceName = sourceFilename.startsWith("_") && sourceFilename !== "__init__" && sourceFilename !== "__main__"
         ? sourceFilename.slice(1)
         : sourceFilename;
+    const sourceParentDir = source.split("/").slice(-2, -1)[0] ?? "";
+    const isGenericUtilityModule = ["util", "utils", "helper", "helpers", "common"].includes(cleanSourceName);
     for (const ex of existing) {
         const testFilename = ex.split("/").pop().replace(/\.py$/, "");
         // === High confidence: exact match in expected location ===
@@ -4382,6 +4451,9 @@ function assessConfidence(source, candidates, existing, ctx) {
         }
         // Library: _module → tests/test_module (strip underscore match)
         if (ctx.isLibrary && testFilename === `test_${cleanSourceName}` && ex.startsWith("tests/")) {
+            if (isGenericUtilityModule && !ex.includes(`/${sourceParentDir}/`)) {
+                return { level: "medium", reason: `Generic library helper match without directory context: ${ex}` };
+            }
             const contextNote = ctx.primaryLayout === "library_package" ? " [library_package layout]" : "";
             return { level: "high", reason: `Library module match: ${ex}${contextNote}` };
         }
@@ -4403,12 +4475,33 @@ function assessConfidence(source, candidates, existing, ctx) {
         const testFilename = ex.split("/").pop().replace(/\.py$/, "");
         // Check if test name contains the source module name (partial domain match)
         const singularSource = sourceFilename.endsWith("s") ? sourceFilename.slice(0, -1) : sourceFilename;
-        if (testFilename.includes(singularSource) && ex.startsWith("tests/")) {
+        if (filenameContainsToken(ex, singularSource) && ex.startsWith("tests/")) {
             return { level: "medium", reason: `Domain test match: ${ex} (contains ${singularSource})` };
         }
     }
     // Module-level match
     return { level: "medium", reason: `Module-level test file found: ${existing[0]}` };
+}
+
+;// CONCATENATED MODULE: ./src/globMatch.ts
+const globRegexCache = new Map();
+function globToRegex(glob) {
+    const cached = globRegexCache.get(glob);
+    if (cached)
+        return cached;
+    const regex = glob
+        .replace(/[.+^${}()|[\]\\]/g, "\\$&")
+        .replace(/\*\*/g, "___DOUBLESTAR___")
+        .replace(/\*/g, "[^/]*")
+        .replace(/___DOUBLESTAR___/g, ".*");
+    const compiled = new RegExp(`^${regex}$`);
+    if (globRegexCache.size < 2_000) {
+        globRegexCache.set(glob, compiled);
+    }
+    return compiled;
+}
+function matchesGlob(path, pattern) {
+    return globToRegex(pattern).test(path);
 }
 
 ;// CONCATENATED MODULE: ./src/repoObservation/python/pythonSensitiveZoneDetector.ts
@@ -4417,6 +4510,8 @@ function assessConfidence(source, candidates, existing, ctx) {
  *
  * Keyword matching + config overrides for identifying high-risk code areas.
  */
+
+
 // ---------------------------------------------------------------------------
 // Public API
 // ---------------------------------------------------------------------------
@@ -4480,18 +4575,10 @@ const pythonSensitiveZoneDetector_SENSITIVE_KEYWORDS = [
 // Matching
 // ---------------------------------------------------------------------------
 function matchesKeyword(path, keyword) {
-    const lower = path.toLowerCase();
-    // Match as directory segment or filename segment
-    const segments = lower.split("/");
-    return segments.some(seg => seg.includes(keyword));
+    return pathContainsKeyword(path, keyword);
 }
 function matchGlob(path, pattern) {
-    const regex = pattern
-        .replace(/[.+^${}()|[\]\\]/g, "\\$&")
-        .replace(/\*\*/g, "___DOUBLESTAR___")
-        .replace(/\*/g, "[^/]*")
-        .replace(/___DOUBLESTAR___/g, ".*");
-    return new RegExp(`^${regex}$`).test(path);
+    return matchesGlob(path, pattern);
 }
 // ---------------------------------------------------------------------------
 // Deduplication
@@ -4654,6 +4741,7 @@ function extractStructuralFacts(allPaths, files, manifests) {
     // Detect root-level __init__.py packages (flat_package indicator)
     const rootInitPyPackages = [];
     const srcInitPyPackages = [];
+    const srcNamespacePackages = new Set();
     for (const p of allPaths) {
         const match = /^([^/]+)\/__init__\.py$/.exec(p);
         if (match && match[1] !== "tests" && match[1] !== "test" && match[1] !== "docs") {
@@ -4662,6 +4750,10 @@ function extractStructuralFacts(allPaths, files, manifests) {
         const srcMatch = /^src\/([^/]+)\/__init__\.py$/.exec(p);
         if (srcMatch) {
             srcInitPyPackages.push(srcMatch[1]);
+        }
+        const srcNamespaceMatch = /^src\/([^/]+)\/.+\.pyi?$/.exec(p);
+        if (srcNamespaceMatch && !p.endsWith("/__init__.py")) {
+            srcNamespacePackages.add(srcNamespaceMatch[1]);
         }
     }
     // Top-level .py files (not inside any subdirectory)
@@ -4703,6 +4795,7 @@ function extractStructuralFacts(allPaths, files, manifests) {
         hasConftest: pathSet.has("conftest.py") || allPaths.some(p => p.endsWith("/conftest.py")),
         rootInitPyPackages,
         srcInitPyPackages,
+        srcNamespacePackages: [...srcNamespacePackages].filter(name => !srcInitPyPackages.includes(name)).sort(),
         topLevelPyFiles,
         migrationCount,
         testCount,
@@ -4729,6 +4822,14 @@ function classifyPackageLayout(facts) {
             evidence: `src/ directory with package(s): ${facts.srcInitPyPackages.join(", ")}`,
         });
         return { packageLayout: "src_layout", packageSignals: signals, packageUnknowns: unknowns };
+    }
+    if (facts.hasSrcDir && facts.srcNamespacePackages.length > 0) {
+        signals.push({
+            signal: "namespace_package_detected",
+            weight: "strong",
+            evidence: `src/ namespace package(s) without __init__.py: ${facts.srcNamespacePackages.join(", ")}`,
+        });
+        return { packageLayout: "namespace_package", packageSignals: signals, packageUnknowns: unknowns };
     }
     // Django app layout: multiple top-level packages with migrations
     if (facts.hasDjangoMigrations && facts.hasManagePy && facts.rootInitPyPackages.length >= 1) {
@@ -5110,7 +5211,7 @@ function detectFrameworks(ev) {
         if (ev.importedModules.has("airflow"))
             evidence.push({ dimension: "import_pattern", detail: "airflow imported in source files" });
         if (evidence.length > 0)
-            candidates.push({ name: "airflow", kind: "async_framework", evidence });
+            candidates.push({ name: "airflow", kind: "workflow_orchestration", evidence });
     }
     // --- Prefect ---
     {
@@ -5120,7 +5221,7 @@ function detectFrameworks(ev) {
         if (ev.importedModules.has("prefect"))
             evidence.push({ dimension: "import_pattern", detail: "prefect imported in source files" });
         if (evidence.length > 0)
-            candidates.push({ name: "prefect", kind: "async_framework", evidence });
+            candidates.push({ name: "prefect", kind: "workflow_orchestration", evidence });
     }
     // Apply confidence rules
     return candidates.map(c => ({
@@ -5273,6 +5374,23 @@ function detectProjectRoles(ev, layout) {
             });
         }
     }
+    // Workflow orchestration detection
+    {
+        const evidence = [];
+        if (frameworksInclude(ev, "airflow", "prefect")) {
+            evidence.push({ dimension: "dependency_manifest", detail: "Workflow orchestration framework dependency found" });
+        }
+        if (ev.importedModules.has("airflow") || ev.importedModules.has("prefect")) {
+            evidence.push({ dimension: "import_pattern", detail: "Workflow orchestration framework imported in source files" });
+        }
+        if (evidence.length > 0) {
+            roles.push({
+                role: "workflow_orchestration",
+                confidence: computeRoleConfidence(evidence),
+                evidence,
+            });
+        }
+    }
     return roles;
 }
 /**
@@ -5287,6 +5405,9 @@ function computeRoleConfidence(evidence) {
     if (dimensions.size === 1)
         return "medium";
     return "low";
+}
+function frameworksInclude(ev, ...packages) {
+    return packages.some(pkg => ev.declaredPackages.has(pkg) || ev.declaredPackages.has(`apache-${pkg}`));
 }
 
 ;// CONCATENATED MODULE: ./src/repoObservation/python/pythonRiskPresetValidator.ts
@@ -5304,6 +5425,7 @@ function computeRoleConfidence(evidence) {
  *   - Unvalidated presets cannot produce strong recommendations
  *   - Does NOT modify test mapper, layout, or framework detector
  */
+
 function validatePythonRiskPreset(input) {
     // 1. Select preset based on project role + layout
     const presetName = selectPreset(input);
@@ -5355,7 +5477,8 @@ function validatePythonRiskPreset(input) {
     // 4. Determine validation status
     const totalRules = presetRules.length;
     const activeRules = totalRules - dormantPatterns.length;
-    const validation = activeRules >= totalRules * 0.6 ? "validated" :
+    const minimumValidatedRules = Math.max(3, Math.ceil(totalRules * 0.6));
+    const validation = activeRules >= minimumValidatedRules ? "validated" :
         activeRules > 0 ? "partial" :
             "unvalidated";
     // 5. Confidence from matched signals
@@ -5435,12 +5558,7 @@ function collectMatchedSignals(input) {
 // Pattern matching
 // ---------------------------------------------------------------------------
 function matchPattern(path, pattern) {
-    const regex = pattern
-        .replace(/[.+^${}()|[\]\\]/g, "\\$&")
-        .replace(/\*\*/g, "___DOUBLESTAR___")
-        .replace(/\*/g, "[^/]*")
-        .replace(/___DOUBLESTAR___/g, ".*");
-    return new RegExp(`^${regex}$`).test(path);
+    return matchesGlob(path, pattern);
 }
 function getPresetRules(presetName) {
     switch (presetName) {
@@ -5448,7 +5566,7 @@ function getPresetRules(presetName) {
         case "fastapi_service": return FASTAPI_SERVICE_RULES;
         case "python_sdk_library": return PYTHON_SDK_LIBRARY_RULES;
         case "django_generic": return DJANGO_GENERIC_RULES;
-        case "flask_service": return FASTAPI_SERVICE_RULES; // similar patterns
+        case "flask_service": return FLASK_SERVICE_RULES;
         case "generic_service": return GENERIC_SERVICE_RULES;
         case "cli_application": return CLI_APPLICATION_RULES;
         default: return GENERIC_RULES;
@@ -5609,6 +5727,45 @@ const FASTAPI_SERVICE_RULES = [
         suggestedLevel: "review",
         frameworkEvidence: "FastAPI dependency injection pattern",
         dormantReason: "No deps files observed",
+    },
+];
+const FLASK_SERVICE_RULES = [
+    {
+        pattern: "**/auth*",
+        reason: "Authentication logic requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "authentication",
+        dormantReason: "No auth files observed",
+    },
+    {
+        pattern: "**/security*",
+        reason: "Security module requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "security",
+        dormantReason: "No security files observed",
+    },
+    {
+        pattern: "**/blueprints/**",
+        reason: "Flask blueprint routing affects request behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No Flask blueprint directory observed",
+    },
+    {
+        pattern: "**/config*",
+        reason: "Application configuration affects runtime behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No config files observed",
+    },
+    {
+        pattern: "**/extensions*",
+        reason: "Flask extensions influence app wiring and security hooks",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No extensions files observed",
     },
 ];
 // ---------------------------------------------------------------------------
@@ -6051,9 +6208,12 @@ function repairArtifactLayout_repairRunPaths(repoRoot, repairId) {
 ;// CONCATENATED MODULE: ./src/repair/repairAuditLog.ts
 
 
+
 function repairAuditLog_appendRepairAuditEvent(repoRoot, repairId, event) {
+    const target = repairArtifactLayout_repairRunPaths(repoRoot, repairId).auditLog;
+    (0,external_node_fs_.mkdirSync)((0,external_node_path_.dirname)(target), { recursive: true });
     const line = JSON.stringify(event) + "\n";
-    (0,external_node_fs_.appendFileSync)(repairArtifactLayout_repairRunPaths(repoRoot, repairId).auditLog, line);
+    (0,external_node_fs_.appendFileSync)(target, line);
 }
 function loadRepairAuditLog(repoRoot, repairId) {
     const path = repairRunPaths(repoRoot, repairId).auditLog;
@@ -6066,6 +6226,7 @@ function loadRepairAuditLog(repoRoot, repairId) {
 }
 function writeRepairAuditLog(repoRoot, repairId, events) {
     const path = repairRunPaths(repoRoot, repairId).auditLog;
+    mkdirSync(dirname(path), { recursive: true });
     const text = events.map(event => JSON.stringify(event)).join("\n");
     writeFileSync(path, text ? `${text}\n` : "");
 }
@@ -19901,17 +20062,34 @@ const syntheticRepairDiffSchema = object({
     })),
 });
 
+;// CONCATENATED MODULE: ./src/deterministic.ts
+
+
+const SHA256_PREFIX = "sha256:";
+function stableHash(value) {
+    return `${SHA256_PREFIX}${stableHexDigest(value)}`;
+}
+function stableHexDigest(value) {
+    return (0,external_node_crypto_namespaceObject.createHash)("sha256")
+        .update(stableSerialize_stableSerialize(value), "utf8")
+        .digest("hex");
+}
+function stableTextHash(text) {
+    return `${SHA256_PREFIX}${createHash("sha256").update(text, "utf8").digest("hex")}`;
+}
+function shortStableId(prefix, value, length = 16) {
+    const safeLength = Math.max(8, Math.min(length, 64));
+    return `${prefix}_${stableHexDigest(value).slice(0, safeLength)}`;
+}
+
 ;// CONCATENATED MODULE: ./src/repair/repairUtils.ts
 
 
 
 
+
 function deterministicId(prefix, payload) {
-    const hash = (0,external_node_crypto_namespaceObject.createHash)("sha1")
-        .update(JSON.stringify(payload))
-        .digest("hex")
-        .slice(0, 12);
-    return `${prefix}_${hash}`;
+    return shortStableId(prefix, payload, 16);
 }
 function normalizeRepairPath(path) {
     try {
@@ -19928,30 +20106,22 @@ function pathExistsInRepo(repoRoot, repoPath) {
     return (0,external_node_fs_.existsSync)((0,external_node_path_.join)(repoRoot, normalized));
 }
 function readJsonFile(path) {
-    return JSON.parse((0,external_node_fs_.readFileSync)(path, "utf-8"));
+    try {
+        return JSON.parse((0,external_node_fs_.readFileSync)(path, "utf-8"));
+    }
+    catch (error) {
+        const reason = error instanceof Error ? error.message : String(error);
+        throw new Error(`Failed to read JSON file ${path}: ${reason}`);
+    }
 }
 function uniqueSorted(values) {
     return [...new Set(values)].sort((a, b) => a.localeCompare(b));
 }
-const globRegexCache = new Map();
-function globToRegex(glob) {
-    const cached = globRegexCache.get(glob);
-    if (cached)
-        return cached;
-    const regex = glob
-        .replace(/[.+^${}()|[\]\\]/g, "\\$&")
-        .replace(/\*\*/g, "___DOUBLESTAR___")
-        .replace(/\*/g, "[^/]*")
-        .replace(/___DOUBLESTAR___/g, ".*");
-    const compiled = new RegExp(`^${regex}$`);
-    // Cap cache size to avoid unbounded growth from dynamic patterns
-    if (globRegexCache.size < 2000) {
-        globRegexCache.set(glob, compiled);
-    }
-    return compiled;
+function repairUtils_globToRegex(glob) {
+    return sharedGlobToRegex(glob);
 }
 function matchesPattern(path, pattern) {
-    return globToRegex(pattern).test(path);
+    return matchesGlob(path, pattern);
 }
 
 ;// CONCATENATED MODULE: ./src/repair/agentBugReportValidator.ts
@@ -19978,6 +20148,7 @@ function validateRepairSourceReport(report, repoRoot) {
     const validPathReferences = new Set();
     let validEvidenceCount = 0;
     for (const evidence of report.evidence) {
+        let evidenceValidated = false;
         if (evidence.path) {
             const normalized = normalizeRepairPath(evidence.path);
             if (!normalized || !pathExistsInRepo(repoRoot, normalized)) {
@@ -19986,16 +20157,26 @@ function validateRepairSourceReport(report, repoRoot) {
             }
             validPathReferences.add(normalized);
             confirmedFacts.push(`${normalized} exists`);
+            evidenceValidated = true;
         }
-        validEvidenceCount++;
         if (evidence.kind === "failing_test" && evidence.path) {
             unverifiedClaims.push(`Reported failing test: ${evidence.path}${evidence.test_name ? ` (${evidence.test_name})` : ""}`);
+            evidenceValidated = true;
         }
         if (evidence.kind === "code_observation" && evidence.summary) {
             unverifiedClaims.push(evidence.summary);
+            evidenceValidated = true;
         }
         if (evidence.kind === "stack_trace" && evidence.excerpt) {
             unverifiedClaims.push(`Stack trace excerpt: ${evidence.excerpt}`);
+            evidenceValidated = true;
+        }
+        if (evidence.kind === "user_reference" && evidence.summary) {
+            unverifiedClaims.push(evidence.summary);
+            evidenceValidated = true;
+        }
+        if (evidenceValidated) {
+            validEvidenceCount++;
         }
     }
     for (const suspect of report.suspected_files) {
@@ -20527,8 +20708,18 @@ function dedupeRiskAreas(input) {
     const seen = new Map();
     for (const area of input) {
         const key = `${area.pattern}|${area.bucket}|${area.source}`;
-        if (!seen.has(key))
+        const existing = seen.get(key);
+        if (!existing) {
             seen.set(key, area);
+            continue;
+        }
+        seen.set(key, {
+            ...existing,
+            severity: strongerSeverity(existing.severity, area.severity),
+            evidence: uniqueSorted([...existing.evidence, ...area.evidence]),
+            matched_paths: uniqueSorted([...existing.matched_paths, ...area.matched_paths]),
+            reason: existing.reason === area.reason ? existing.reason : `${existing.reason} ${area.reason}`.trim(),
+        });
     }
     return [...seen.values()].sort((a, b) => a.pattern.localeCompare(b.pattern));
 }
@@ -20559,6 +20750,10 @@ function sensitiveReasonToBucket(reason) {
 }
 function formatSensitiveReason(reason) {
     return reason.replace(/_/g, " ");
+}
+function strongerSeverity(left, right) {
+    const rank = { medium: 0, high: 1, critical: 2 };
+    return rank[left] >= rank[right] ? left : right;
 }
 
 ;// CONCATENATED MODULE: ./src/repair/repairScopeBuilder.ts
@@ -20775,6 +20970,9 @@ function buildRepairContract(input) {
         finding: input.finding,
         observations: input.observations,
     });
+    if (suspectSurface.files.length === 0) {
+        throw new Error("RepairContract cannot be generated without a non-empty suspect surface.");
+    }
     const relationGraphResult = buildRepairRelationGraph({
         report: input.report,
         suspectSurface,
@@ -21070,6 +21268,7 @@ function renderConsistencyChecklistMarkdown(contract) {
 
 
 
+
 function buildHumanAuditDecision(input) {
     const createdAt = new Date().toISOString();
     return humanAuditDecisionSchema.parse({
@@ -21097,6 +21296,7 @@ function buildHumanAuditDecision(input) {
 }
 function writeHumanAuditDecision(repoRoot, decision) {
     const target = repairArtifactLayout_repairRunPaths(repoRoot, decision.repair_id).humanAuditDecision(decision.decision_id);
+    (0,external_node_fs_.mkdirSync)((0,external_node_path_.dirname)(target), { recursive: true });
     (0,external_node_fs_.writeFileSync)(target, JSON.stringify(decision, null, 2));
     return target;
 }
@@ -21415,11 +21615,37 @@ function renderRepairReportMarkdown(input) {
 function atomicWriteText(target, text) {
     (0,external_node_fs_.mkdirSync)((0,external_node_path_.dirname)(target), { recursive: true });
     const temp = (0,external_node_path_.join)((0,external_node_path_.dirname)(target), `.${Date.now().toString(36)}.${Math.random().toString(36).slice(2)}.${target.split(/[\\/]/).pop()}.tmp`);
-    (0,external_node_fs_.writeFileSync)(temp, text);
-    (0,external_node_fs_.renameSync)(temp, target);
+    try {
+        (0,external_node_fs_.writeFileSync)(temp, text);
+        replaceFileWithRetry(temp, target);
+    }
+    catch (error) {
+        (0,external_node_fs_.rmSync)(temp, { force: true });
+        throw error;
+    }
 }
 function atomicWriteJson(target, value) {
     atomicWriteText(target, `${JSON.stringify(value, null, 2)}\n`);
+}
+function replaceFileWithRetry(temp, target) {
+    const maxAttempts = 5;
+    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+        try {
+            (0,external_node_fs_.renameSync)(temp, target);
+            return;
+        }
+        catch (error) {
+            const code = error?.code;
+            if (code !== "EPERM" && code !== "EEXIST") {
+                throw error;
+            }
+            (0,external_node_fs_.rmSync)(target, { force: true });
+            if (attempt === maxAttempts - 1) {
+                throw error;
+            }
+            Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 15 * (attempt + 1));
+        }
+    }
 }
 
 ;// CONCATENATED MODULE: ./src/repair/session/repairSessionIndex.ts
@@ -21456,15 +21682,51 @@ function upsertRepairSessionInIndex(index, session) {
 
 const LOCK_TIMEOUT_MS = 5_000;
 const LOCK_POLL_MS = 25;
+let repairSessionNonce = 0;
+const ALLOWED_SESSION_TRANSITIONS = {
+    intake_created: ["intake_created", "intake_accepted", "intake_rejected", "plan_generated", "plan_pending_audit", "manual_repair_required"],
+    intake_accepted: ["intake_accepted", "plan_generated", "plan_pending_audit", "manual_repair_required", "closed", "abandoned"],
+    intake_rejected: ["intake_rejected", "closed", "abandoned"],
+    plan_generated: ["plan_generated", "plan_pending_audit", "plan_approved", "plan_restricted", "manual_repair_required", "closed", "abandoned"],
+    plan_pending_audit: ["plan_pending_audit", "plan_approved", "plan_restricted", "manual_repair_required", "repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "closed", "abandoned"],
+    plan_approved: ["plan_approved", "plan_pending_audit", "plan_restricted", "manual_repair_required", "repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "closed", "abandoned"],
+    plan_restricted: ["plan_restricted", "plan_pending_audit", "plan_approved", "manual_repair_required", "repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "closed", "abandoned"],
+    manual_repair_required: ["manual_repair_required", "plan_pending_audit", "plan_approved", "plan_restricted", "closed", "abandoned"],
+    repair_checked_pass: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "plan_approved", "plan_restricted", "closed", "abandoned"],
+    repair_checked_requires_review: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "plan_approved", "plan_restricted", "manual_repair_required", "closed", "abandoned"],
+    repair_checked_requires_scope_expansion: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "manual_repair_required", "closed", "abandoned"],
+    repair_checked_requires_replan: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "plan_approved", "plan_restricted", "manual_repair_required", "closed", "abandoned"],
+    repair_checked_fail: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "manual_repair_required", "closed", "abandoned"],
+    closed: [],
+    abandoned: [],
+};
+const VALID_SESSION_STATUSES = new Set([
+    "intake_created",
+    "intake_accepted",
+    "intake_rejected",
+    "plan_generated",
+    "plan_pending_audit",
+    "plan_approved",
+    "plan_restricted",
+    "manual_repair_required",
+    "repair_checked_pass",
+    "repair_checked_requires_review",
+    "repair_checked_requires_scope_expansion",
+    "repair_checked_requires_replan",
+    "repair_checked_fail",
+    "closed",
+    "abandoned",
+]);
 function createRepairSession(input) {
     const repoRoot = input.repoRoot;
     ensureRepairDirs(repoRoot);
     const createdAt = new Date().toISOString();
+    repairSessionNonce += 1;
     const repairId = deterministicId("repair", {
         source: input.source,
         agent_id: input.agentId ?? null,
         created_at: createdAt,
-        nonce: Math.random().toString(36).slice(2),
+        nonce: repairSessionNonce,
     });
     const session = {
         schema_version: "repair_session@0.1.0",
@@ -21495,26 +21757,18 @@ function repairSessionStore_loadRepairSession(repoRoot, repairId) {
     if (!(0,external_node_fs_.existsSync)(path)) {
         throw new Error(`Unknown repair session: ${repairId}`);
     }
-    return readJsonFile(path);
+    return validateRepairSession(readJsonFile(path), repairId, path);
 }
 function saveRepairSession(repoRoot, session) {
-    withRepairIndexLock(repoRoot, "save_repair_session", () => {
-        const paths = repairArtifactLayout_repairRunPaths(repoRoot, session.repair_id);
-        ensureRepairRunDir(paths);
-        atomicWriteJson(paths.session, session);
-        writeLatestPointer(paths.root, session.repair_id);
-        const currentIndex = loadRepairSessionIndex(repoRoot);
-        const updatedIndex = upsertRepairSessionInIndex(currentIndex, session);
-        atomicWriteJson(paths.root.sessionsIndex, updatedIndex);
-    });
+    persistRepairSession(repoRoot, session);
 }
 function updateRepairSession(repoRoot, repairId, updater) {
-    return withRepairSessionLock(repoRoot, repairId, "update_repair_session", () => {
+    return withRepairIndexLock(repoRoot, "update_repair_session", () => withRepairSessionLock(repoRoot, repairId, "update_repair_session", () => {
         const current = repairSessionStore_loadRepairSession(repoRoot, repairId);
-        const next = updater(current);
-        saveRepairSession(repoRoot, next);
+        const next = validateNextSession(current, updater(current));
+        persistRepairSession(repoRoot, next);
         return next;
-    });
+    }));
 }
 function repairSessionStore_closeRepairSession(input) {
     return updateRepairSession(input.repoRoot, input.repairId, session => ({
@@ -21530,23 +21784,24 @@ function loadRepairSessionIndex(repoRoot) {
     if (!(0,external_node_fs_.existsSync)(paths.sessionsIndex)) {
         return createEmptyRepairSessionIndex();
     }
-    return readJsonFile(paths.sessionsIndex);
+    return validateRepairSessionIndex(readJsonFile(paths.sessionsIndex), paths.sessionsIndex);
 }
 function repairSessionStore_listRepairSessions(repoRoot) {
     return loadRepairSessionIndex(repoRoot);
 }
 function repairSessionStore_loadLatestRepairId(repoRoot) {
     const path = repairRootPaths(repoRoot).latestPointer;
-    if (!existsSync(path))
-        return null;
-    const text = readFileSync(path, "utf-8").trim();
-    if (!text)
-        return null;
     try {
+        const text = readFileSync(path, "utf-8").trim();
+        if (!text)
+            return null;
         const parsed = JSON.parse(text);
         return parsed.repair_id ?? null;
     }
-    catch {
+    catch (error) {
+        if (isErrnoException(error) && error.code === "ENOENT") {
+            return null;
+        }
         return null;
     }
 }
@@ -21569,12 +21824,21 @@ function updateSessionFromContract(input) {
     return updateRepairSession(input.repoRoot, input.repairId, session => ({
         ...session,
         status: input.status,
-        current_revision: input.revision,
+        current_revision: Math.max(session.current_revision, input.revision),
         scope_summary: input.scopeSummary,
         risk_level: input.riskLevel,
         base_sha: input.baseSha ?? null,
         updated_at: new Date().toISOString(),
     }));
+}
+function persistRepairSession(repoRoot, session) {
+    const paths = repairArtifactLayout_repairRunPaths(repoRoot, session.repair_id);
+    ensureRepairRunDir(paths);
+    atomicWriteJson(paths.session, session);
+    writeLatestPointer(paths.root, session.repair_id);
+    const currentIndex = loadRepairSessionIndex(repoRoot);
+    const updatedIndex = upsertRepairSessionInIndex(currentIndex, session);
+    atomicWriteJson(paths.root.sessionsIndex, updatedIndex);
 }
 function ensureRepairRunDir(paths) {
     (0,external_node_fs_.mkdirSync)(paths.dir, { recursive: true });
@@ -21603,7 +21867,10 @@ function withFileLock(lockPath, input, fn) {
             }
             break;
         }
-        catch {
+        catch (error) {
+            if (!isErrnoException(error) || error.code !== "EEXIST") {
+                throw error;
+            }
             if (Date.now() >= deadline) {
                 throw new Error("Another Pantheon repair operation is active. Retry after it completes, or remove a stale lock if no process is running.");
             }
@@ -21620,6 +21887,74 @@ function withFileLock(lockPath, input, fn) {
 function sleepSync(ms) {
     Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
 }
+function validateNextSession(current, next) {
+    if (current.repair_id !== next.repair_id) {
+        throw new Error("Repair session update cannot change repair_id.");
+    }
+    if (next.current_revision < current.current_revision) {
+        throw new Error(`Repair session revision regression for ${current.repair_id}: ${next.current_revision} < ${current.current_revision}.`);
+    }
+    if (current.status !== next.status) {
+        const allowed = ALLOWED_SESSION_TRANSITIONS[current.status];
+        if (!allowed.includes(next.status)) {
+            throw new Error(`Invalid repair session transition: ${current.status} -> ${next.status} for ${current.repair_id}.`);
+        }
+    }
+    return next;
+}
+function isErrnoException(error) {
+    return typeof error === "object" && error !== null && "code" in error;
+}
+function validateRepairSession(value, expectedRepairId, sourcePath) {
+    if (typeof value !== "object" || value === null || Array.isArray(value)) {
+        throw new Error(`Invalid repair session at ${sourcePath}: expected object.`);
+    }
+    const session = value;
+    if (session.schema_version !== "repair_session@0.1.0") {
+        throw new Error(`Invalid repair session schema at ${sourcePath}: expected repair_session@0.1.0, got ${String(session.schema_version)}.`);
+    }
+    if (session.repair_id !== expectedRepairId) {
+        throw new Error(`Invalid repair session at ${sourcePath}: expected repair_id ${expectedRepairId}, got ${String(session.repair_id)}.`);
+    }
+    if (typeof session.current_revision !== "number" || !Number.isInteger(session.current_revision) || session.current_revision < 0) {
+        throw new Error(`Invalid repair session at ${sourcePath}: current_revision must be a non-negative integer.`);
+    }
+    if (!VALID_SESSION_STATUSES.has(session.status)) {
+        throw new Error(`Invalid repair session at ${sourcePath}: unknown status ${String(session.status)}.`);
+    }
+    const scopeSummary = session.scope_summary;
+    if (typeof scopeSummary !== "object" || scopeSummary === null || Array.isArray(scopeSummary)) {
+        throw new Error(`Invalid repair session at ${sourcePath}: scope_summary must be an object.`);
+    }
+    const scope = scopeSummary;
+    if (!Array.isArray(scope.allowed) || !Array.isArray(scope.review_required) || !Array.isArray(scope.forbidden)) {
+        throw new Error(`Invalid repair session at ${sourcePath}: scope_summary arrays are missing.`);
+    }
+    return session;
+}
+function validateRepairSessionIndex(value, sourcePath) {
+    if (typeof value !== "object" || value === null || Array.isArray(value)) {
+        throw new Error(`Invalid repair session index at ${sourcePath}: expected object.`);
+    }
+    const index = value;
+    if (index.schema_version !== "repair_session_index@0.1.0") {
+        throw new Error(`Invalid repair session index schema at ${sourcePath}: expected repair_session_index@0.1.0, got ${String(index.schema_version)}.`);
+    }
+    if (!Array.isArray(index.active_repairs) || !Array.isArray(index.closed_repairs)) {
+        throw new Error(`Invalid repair session index at ${sourcePath}: active_repairs and closed_repairs must be arrays.`);
+    }
+    for (const session of [...index.active_repairs, ...index.closed_repairs]) {
+        if (typeof session !== "object" || session === null || Array.isArray(session)) {
+            throw new Error(`Invalid repair session index at ${sourcePath}: session entry must be an object.`);
+        }
+        const repairId = session.repair_id;
+        if (typeof repairId !== "string" || repairId.length === 0) {
+            throw new Error(`Invalid repair session index at ${sourcePath}: session entry missing repair_id.`);
+        }
+        validateRepairSession(session, repairId, sourcePath);
+    }
+    return index;
+}
 
 ;// CONCATENATED MODULE: ./src/repair/session/repoStateSnapshot.ts
 
@@ -21635,13 +21970,13 @@ function captureRepoStateSnapshot(input) {
         };
     }
     try {
-        const headSha = (0,external_node_child_process_.execSync)("git rev-parse HEAD", {
+        const headSha = (0,external_node_child_process_.execFileSync)("git", ["rev-parse", "HEAD"], {
             cwd: input.repoRoot,
             encoding: "utf-8",
             timeout: 10_000,
             stdio: ["pipe", "pipe", "pipe"],
         }).trim();
-        const status = (0,external_node_child_process_.execSync)("git status --porcelain", {
+        const status = (0,external_node_child_process_.execFileSync)("git", ["status", "--porcelain"], {
             cwd: input.repoRoot,
             encoding: "utf-8",
             timeout: 10_000,
@@ -21656,7 +21991,8 @@ function captureRepoStateSnapshot(input) {
             source: input.source ?? "git",
         };
     }
-    catch {
+    catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
         return {
             base_sha: null,
             head_sha: null,
@@ -21664,6 +22000,7 @@ function captureRepoStateSnapshot(input) {
             working_tree_status: "unknown",
             created_at: new Date().toISOString(),
             source: input.source ?? "unknown",
+            error: message,
         };
     }
 }
@@ -21673,6 +22010,16 @@ function detectStaleRepairPlan(input) {
     const findings = [];
     const { contractState, currentState } = input;
     const effectiveCurrentBase = currentState.diff_base ?? currentState.base_sha;
+    if (currentState.error || (contractState.base_sha && !effectiveCurrentBase)) {
+        findings.push({
+            kind: "stale_repair_contract",
+            severity: "blocking",
+            reason: currentState.error
+                ? `Unable to capture current repository state: ${currentState.error}`
+                : "Unable to determine the current repository base for this repair contract.",
+            recommended_action: "request_replan",
+        });
+    }
     if (contractState.base_sha &&
         effectiveCurrentBase &&
         contractState.base_sha !== effectiveCurrentBase) {
@@ -21837,7 +22184,571 @@ function strongerBucket(left, right) {
     return rank[left] >= rank[right] ? left : right;
 }
 
+;// CONCATENATED MODULE: ./src/artifacts/artifactSanitizer.ts
+/**
+ * P18.5-B: Artifact Sanitizer
+ *
+ * Scans artifact content for sensitive patterns that must not appear
+ * in public-facing outputs. Returns a list of violations.
+ *
+ * Usage:
+ *   const violations = sanitizeArtifact(content, "public");
+ *   if (violations.length > 0) { reject or redact }
+ *
+ * ref: P18.5-B
+ */
+const SANITIZATION_RULES = [
+    // Windows absolute paths
+    {
+        kind: "windows_absolute_path",
+        severity: "critical",
+        pattern: /[A-Z]:\\[^\s"']+/g,
+        message: "Windows absolute path detected — must not appear in public artifacts.",
+    },
+    // Unix home/user paths
+    {
+        kind: "unix_absolute_path",
+        severity: "critical",
+        pattern: /\/(?:Users|home|root)\/[^\s"']+/g,
+        message: "Unix user path detected — must not appear in public artifacts.",
+    },
+    // Workspace temp paths
+    {
+        kind: "workspace_temp_path",
+        severity: "high",
+        pattern: /\/tmp\/[^\s"']+|\\temp\\[^\s"']+/gi,
+        message: "Temporary workspace path detected.",
+    },
+    // node_modules stack traces
+    {
+        kind: "stack_trace",
+        severity: "high",
+        pattern: /at\s+[^\s]+\s+\(.*node_modules.*\)/g,
+        message: "Internal stack trace from node_modules detected.",
+    },
+    // Debug payload markers
+    {
+        kind: "debug_payload",
+        severity: "medium",
+        pattern: /\[DEBUG\]|__DEBUG__|"debug":\s*true/g,
+        message: "Debug payload marker detected.",
+    },
+    // .env file references
+    {
+        kind: "env_reference",
+        severity: "high",
+        pattern: /\.env(?:\.local|\.production|\.development)?(?:\b|$)/g,
+        message: ".env file reference detected — may leak environment config.",
+    },
+    // Secret-like keys (generic)
+    {
+        kind: "secret_like_key",
+        severity: "critical",
+        pattern: /(?:api[_-]?key|secret[_-]?key|access[_-]?token|private[_-]?key)\s*[:=]\s*["'][^"']{8,}/gi,
+        message: "Potential secret or API key detected.",
+    },
+    // Internal observation dump (very large JSON blocks)
+    {
+        kind: "internal_observation_dump",
+        severity: "medium",
+        pattern: /"python_observations":\s*\{/g,
+        message: "Internal observation dump detected — should not be in public artifacts.",
+    },
+];
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+/**
+ * Scan artifact content for sensitive patterns.
+ *
+ * @param content - The text content of the artifact
+ * @param mode - "public" checks all rules; "debug" is a no-op (always clean)
+ * @returns A SanitizationResult with any violations found
+ */
+function sanitizeArtifact(content, mode = "public") {
+    if (mode === "debug") {
+        return { clean: true, violations: [], scanned_lines: 0 };
+    }
+    const lines = content.split("\n");
+    const violations = [];
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        for (const rule of SANITIZATION_RULES) {
+            // Reset lastIndex for global regexes
+            rule.pattern.lastIndex = 0;
+            let match;
+            while ((match = rule.pattern.exec(line)) !== null) {
+                violations.push({
+                    kind: rule.kind,
+                    severity: rule.severity,
+                    match: match[0].substring(0, 80), // Truncate long matches
+                    line: i + 1,
+                    message: rule.message,
+                });
+            }
+        }
+    }
+    return {
+        clean: violations.length === 0,
+        violations,
+        scanned_lines: lines.length,
+    };
+}
+/**
+ * Returns only critical and high severity violations.
+ */
+function getCriticalViolations(result) {
+    return result.violations.filter(v => v.severity === "critical" || v.severity === "high");
+}
+
+;// CONCATENATED MODULE: ./src/governanceLog/governanceEventSanitizer.ts
+
+const DIFF_HUNK_PATTERNS = [
+    /^@@ /m,
+    /^diff --git /m,
+    /^\+\+\+ /m,
+    /^--- /m,
+];
+function sanitizeGovernanceEvent(event) {
+    const text = JSON.stringify(event, null, 2);
+    const violations = [];
+    const artifactScan = sanitizeArtifact(text, "public");
+    for (const violation of artifactScan.violations) {
+        violations.push({
+            kind: violation.kind === "stack_trace"
+                ? "stack_trace"
+                : violation.kind === "secret_like_key"
+                    ? "secret_like_value"
+                    : "absolute_path",
+            message: violation.message,
+            match: violation.match,
+        });
+    }
+    for (const pattern of DIFF_HUNK_PATTERNS) {
+        const match = text.match(pattern);
+        if (match) {
+            violations.push({
+                kind: "diff_hunk",
+                message: "Diff hunk content must not be recorded in governance events.",
+                match: match[0],
+            });
+        }
+    }
+    for (const value of walkStringValues(event)) {
+        if (containsDiffHunkFragment(value)) {
+            violations.push({
+                kind: "diff_hunk",
+                message: "Diff hunk content must not be recorded in governance events.",
+                match: value.slice(0, 80),
+            });
+        }
+    }
+    return {
+        clean: violations.length === 0,
+        violations,
+    };
+}
+function walkStringValues(value) {
+    if (typeof value === "string") {
+        return [value];
+    }
+    if (Array.isArray(value)) {
+        return value.flatMap(item => walkStringValues(item));
+    }
+    if (value && typeof value === "object") {
+        return Object.values(value).flatMap(item => walkStringValues(item));
+    }
+    return [];
+}
+function containsDiffHunkFragment(value) {
+    return value
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .some(line => line.startsWith("@@ ")
+        || line.startsWith("diff --git ")
+        || line.startsWith("+++ ")
+        || line.startsWith("--- "));
+}
+
+;// CONCATENATED MODULE: ./src/governanceLog/governanceEventWriter.ts
+
+
+
+
+function governancePaths(repoRoot) {
+    const dir = (0,external_node_path_.join)((0,artifactLayout/* resolvePantheonDir */.NJ)(repoRoot), "governance");
+    return {
+        dir,
+        events: (0,external_node_path_.join)(dir, "events.jsonl"),
+    };
+}
+function ensureGovernanceDirs(repoRoot) {
+    const paths = governancePaths(repoRoot);
+    (0,external_node_fs_.mkdirSync)(paths.dir, { recursive: true });
+    return paths;
+}
+function tryAppendGovernanceEvent(repoRoot, event) {
+    const paths = ensureGovernanceDirs(repoRoot);
+    const sanitized = sanitizeGovernanceEvent(event);
+    if (!sanitized.clean) {
+        const detail = sanitized.violations.map(violation => violation.message).join("; ");
+        return {
+            ok: false,
+            error_kind: "invalid_event",
+            path: paths.events,
+            message: `Governance event sanitizer rejected event ${event.event_type}: ${detail}`,
+        };
+    }
+    try {
+        if (!(0,external_node_fs_.existsSync)(paths.events)) {
+            (0,external_node_fs_.appendFileSync)(paths.events, "");
+        }
+        (0,external_node_fs_.appendFileSync)(paths.events, `${JSON.stringify(event)}\n`);
+        return {
+            ok: true,
+            event_id: event.event_id,
+            path: paths.events,
+        };
+    }
+    catch (error) {
+        const code = error?.code;
+        return {
+            ok: false,
+            error_kind: code === "EACCES" || code === "EPERM" ? "permission_denied" : "io_error",
+            path: paths.events,
+            message: error instanceof Error ? error.message : String(error),
+        };
+    }
+}
+function appendGovernanceEvent(repoRoot, event) {
+    const result = tryAppendGovernanceEvent(repoRoot, event);
+    if (!result.ok) {
+        throw new Error(result.message);
+    }
+    return result;
+}
+
+;// CONCATENATED MODULE: ./src/review/reviewAttentionPolicy.ts
+function attentionLevelForVerdict(verdict, sanitizerViolations = 0) {
+    if (sanitizerViolations > 0) {
+        return "urgent";
+    }
+    switch (verdict) {
+        case "requires_review":
+            return "human_review";
+        case "requires_scope_expansion":
+        case "requires_replan":
+            return "blocking";
+        case "fail":
+            return "urgent";
+        case "pass":
+            return null;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/review/reviewRequestBuilder.ts
+
+function buildReviewRequest(input) {
+    if (input.check.verdict === "pass" && (input.sanitizerViolations ?? 0) === 0) {
+        return null;
+    }
+    const effectiveVerdict = deriveReviewVerdict(input.check.verdict, input.sanitizerViolations ?? 0);
+    const attentionLevel = attentionLevelForVerdict(effectiveVerdict, input.sanitizerViolations ?? 0);
+    if (!attentionLevel) {
+        return null;
+    }
+    const files = input.check.findings
+        .flatMap(finding => isFileScopedFinding(finding) ? [{
+            path: finding.file,
+            bucket: (finding.kind === "review_required_file"
+                ? "review_required"
+                : finding.kind === "forbidden_file"
+                    ? "forbidden"
+                    : "outside_scope"),
+            reason: finding.message,
+        }] : []);
+    const recommendedActions = dedupeActions([
+        ...input.check.findings.flatMap(toReviewActions),
+        ...(effectiveVerdict === "requires_review"
+            ? ["human_review"]
+            : []),
+        ...(effectiveVerdict === "requires_replan"
+            ? ["request_replan"]
+            : []),
+        ...(effectiveVerdict === "requires_scope_expansion"
+            ? ["request_scope_expansion"]
+            : []),
+        ...(effectiveVerdict === "fail"
+            ? ["revert_file"]
+            : []),
+    ]);
+    return {
+        schema_version: "pantheon_review_request@0.1.0",
+        review_id: `review_${input.repairId}`,
+        repair_id: input.repairId,
+        contract_revision: input.contractRevision,
+        source: input.source,
+        status: "open",
+        attention_level: attentionLevel,
+        verdict: effectiveVerdict,
+        reason: buildReviewReason(effectiveVerdict, input.check, input.sanitizerViolations ?? 0),
+        files,
+        recommended_actions: recommendedActions,
+        pr: input.pr,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+    };
+}
+function deriveReviewVerdict(verdict, sanitizerViolations) {
+    if (sanitizerViolations > 0) {
+        return "fail";
+    }
+    return verdict === "pass" ? "requires_review" : verdict;
+}
+function buildReviewReason(verdict, check, sanitizerViolations) {
+    if (sanitizerViolations > 0) {
+        return "Pantheon withheld one or more public artifacts because the sanitizer found blocked content.";
+    }
+    switch (verdict) {
+        case "requires_review":
+            return "This repair touched files that require human review.";
+        case "requires_scope_expansion":
+            return "This repair touched files outside the approved repair scope.";
+        case "requires_replan":
+            return "This repair plan is stale and must be regenerated for the current repository state.";
+        case "fail":
+            if (check.findings.some(finding => finding.kind === "forbidden_file")) {
+                return "This repair touched forbidden files under the current repair contract.";
+            }
+            return "Pantheon blocked this repair under the current repair contract.";
+    }
+}
+function isFileScopedFinding(finding) {
+    return ((finding.kind === "review_required_file"
+        || finding.kind === "outside_scope_file"
+        || finding.kind === "forbidden_file")
+        && typeof finding.file === "string");
+}
+function toReviewActions(finding) {
+    return finding.allowed_actions.flatMap(action => {
+        switch (action) {
+            case "keep_for_human_review":
+                return ["human_review"];
+            case "request_scope_expansion":
+                return ["request_scope_expansion"];
+            case "request_replan":
+                return ["request_replan"];
+            case "revert_file":
+                return ["revert_file"];
+            default:
+                return [];
+        }
+    });
+}
+function dedupeActions(actions) {
+    return [...new Set(actions)];
+}
+
+;// CONCATENATED MODULE: ./src/review/reviewRequestRenderer.ts
+function renderReviewRequestMarkdown(request) {
+    const lines = [];
+    lines.push("# Pantheon Review Request");
+    lines.push("");
+    lines.push(`- Review ID: \`${request.review_id}\``);
+    lines.push(`- Repair ID: \`${request.repair_id}\``);
+    lines.push(`- Contract revision: \`v${request.contract_revision}\``);
+    lines.push(`- Verdict: \`${request.verdict}\``);
+    lines.push(`- Attention: \`${request.attention_level}\``);
+    lines.push(`- Status: \`${request.status}\``);
+    lines.push("");
+    lines.push("## Reason");
+    lines.push("");
+    lines.push(request.reason);
+    lines.push("");
+    if (request.files.length > 0) {
+        lines.push("## Files");
+        lines.push("");
+        lines.push("| File | Bucket | Reason |");
+        lines.push("|---|---|---|");
+        for (const file of request.files.slice(0, 20)) {
+            lines.push(`| \`${file.path}\` | ${file.bucket} | ${escapeTableCell(file.reason)} |`);
+        }
+        if (request.files.length > 20) {
+            lines.push("");
+            lines.push(`Showing 20 files. ${request.files.length - 20} additional files omitted.`);
+        }
+        lines.push("");
+    }
+    lines.push("## Recommended actions");
+    lines.push("");
+    for (const action of request.recommended_actions) {
+        lines.push(`- ${renderAction(action)}`);
+    }
+    lines.push("");
+    if (request.pr?.number) {
+        lines.push("## PR");
+        lines.push("");
+        lines.push(`- Provider: ${request.pr.provider}`);
+        lines.push(`- Number: ${request.pr.number}`);
+        if (request.pr.url) {
+            lines.push(`- URL: ${request.pr.url}`);
+        }
+        lines.push("");
+    }
+    lines.push("Local-only note: this review request contains repair metadata only. It does not include source code content or diff hunks.");
+    lines.push("");
+    return lines.join("\n");
+}
+function renderAction(action) {
+    switch (action) {
+        case "approve_repair":
+            return "Record a human approval for the repair.";
+        case "human_review":
+            return "A human reviewer should inspect the flagged files.";
+        case "request_replan":
+            return "Re-run repair plan for the current repository base.";
+        case "request_scope_expansion":
+            return "Request scope expansion before modifying additional files.";
+        case "revert_file":
+            return "Revert forbidden or unsafe file changes before continuing.";
+    }
+}
+function escapeTableCell(value) {
+    return value.replace(/\|/g, "\\|");
+}
+
+;// CONCATENATED MODULE: ./src/review/reviewQueueStore.ts
+
+
+
+
+
+const REVIEW_QUEUE_LOCK_TIMEOUT_MS = 5_000;
+const REVIEW_QUEUE_LOCK_POLL_MS = 25;
+function reviewPaths(repoRoot) {
+    const dir = (0,external_node_path_.join)((0,artifactLayout/* resolvePantheonDir */.NJ)(repoRoot), "reviews");
+    return {
+        dir,
+        requestsDir: (0,external_node_path_.join)(dir, "review_requests"),
+        queue: (0,external_node_path_.join)(dir, "review_queue.json"),
+    };
+}
+function ensureReviewDirs(repoRoot) {
+    const paths = reviewPaths(repoRoot);
+    (0,external_node_fs_.mkdirSync)(paths.dir, { recursive: true });
+    (0,external_node_fs_.mkdirSync)(paths.requestsDir, { recursive: true });
+    return paths;
+}
+function reviewRequestPaths(repoRoot, repairId) {
+    const paths = ensureReviewDirs(repoRoot);
+    return {
+        json: (0,external_node_path_.join)(paths.requestsDir, `review_${repairId}.json`),
+        markdown: (0,external_node_path_.join)(paths.requestsDir, `review_${repairId}.md`),
+    };
+}
+function writeReviewRequest(repoRoot, request) {
+    withReviewQueueLock(repoRoot, "write_review_request", () => {
+        const requestPaths = reviewRequestPaths(repoRoot, request.repair_id);
+        atomicWriteJson(requestPaths.json, request);
+        atomicWriteText(requestPaths.markdown, renderReviewRequestMarkdown(request));
+        refreshReviewQueueUnlocked(repoRoot);
+    });
+}
+function loadReviewRequest(repoRoot, repairId) {
+    const jsonPath = reviewRequestPaths(repoRoot, repairId).json;
+    if (!(0,external_node_fs_.existsSync)(jsonPath)) {
+        return null;
+    }
+    return JSON.parse((0,external_node_fs_.readFileSync)(jsonPath, "utf-8"));
+}
+function closeReviewRequest(repoRoot, repairId, status = "closed") {
+    return withReviewQueueLock(repoRoot, "close_review_request", () => {
+        const current = loadReviewRequest(repoRoot, repairId);
+        if (!current) {
+            return null;
+        }
+        const updated = {
+            ...current,
+            status,
+            updated_at: new Date().toISOString(),
+            resolved_at: new Date().toISOString(),
+        };
+        const requestPaths = reviewRequestPaths(repoRoot, updated.repair_id);
+        atomicWriteJson(requestPaths.json, updated);
+        atomicWriteText(requestPaths.markdown, renderReviewRequestMarkdown(updated));
+        refreshReviewQueueUnlocked(repoRoot);
+        return updated;
+    });
+}
+function loadReviewQueue(repoRoot) {
+    const paths = ensureReviewDirs(repoRoot);
+    if (!existsSync(paths.queue)) {
+        return refreshReviewQueue(repoRoot);
+    }
+    return JSON.parse(readFileSync(paths.queue, "utf-8"));
+}
+function refreshReviewQueue(repoRoot) {
+    return withReviewQueueLock(repoRoot, "refresh_review_queue", () => refreshReviewQueueUnlocked(repoRoot));
+}
+function refreshReviewQueueUnlocked(repoRoot) {
+    const paths = ensureReviewDirs(repoRoot);
+    const requests = (0,external_node_fs_.readdirSync)(paths.requestsDir)
+        .filter(name => name.endsWith(".json"))
+        .map(name => JSON.parse((0,external_node_fs_.readFileSync)((0,external_node_path_.join)(paths.requestsDir, name), "utf-8")))
+        .sort((a, b) => a.created_at.localeCompare(b.created_at));
+    const queue = {
+        schema_version: "pantheon_review_queue@0.1.0",
+        open: requests.filter(request => request.status === "open"),
+        closed: requests.filter(request => request.status !== "open"),
+        updated_at: new Date().toISOString(),
+    };
+    atomicWriteJson(paths.queue, queue);
+    return queue;
+}
+function withReviewQueueLock(repoRoot, operation, fn) {
+    const lockPath = (0,external_node_path_.join)(reviewPaths(repoRoot).dir, ".queue.lock");
+    const createdAt = new Date().toISOString();
+    const deadline = Date.now() + REVIEW_QUEUE_LOCK_TIMEOUT_MS;
+    while (true) {
+        try {
+            (0,external_node_fs_.mkdirSync)(reviewPaths(repoRoot).dir, { recursive: true });
+            const fd = (0,external_node_fs_.openSync)(lockPath, "wx");
+            try {
+                (0,external_node_fs_.writeFileSync)(fd, `${JSON.stringify({ pid: process.pid, created_at: createdAt, operation }, null, 2)}\n`);
+            }
+            finally {
+                (0,external_node_fs_.closeSync)(fd);
+            }
+            break;
+        }
+        catch (error) {
+            if (!reviewQueueStore_isErrnoException(error) || error.code !== "EEXIST") {
+                throw error;
+            }
+            if (Date.now() >= deadline) {
+                throw new Error("Another Pantheon review queue operation is active. Retry after it completes, or remove a stale lock if no process is running.");
+            }
+            reviewQueueStore_sleepSync(REVIEW_QUEUE_LOCK_POLL_MS);
+        }
+    }
+    try {
+        return fn();
+    }
+    finally {
+        (0,external_node_fs_.rmSync)(lockPath, { force: true });
+    }
+}
+function reviewQueueStore_isErrnoException(error) {
+    return typeof error === "object" && error !== null && "code" in error;
+}
+function reviewQueueStore_sleepSync(ms) {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+}
+
 ;// CONCATENATED MODULE: ./src/cli/cmdRepair.ts
+
+
+
 
 
 
@@ -21883,6 +22794,10 @@ function cmdRepair(args) {
                 repoRoot: getFlag(args, "repo") ?? ".",
                 repairId: requireRepairId(args, getFlag(args, "repo") ?? "."),
                 configPath: getFlag(args, "config"),
+                overrideBaseSha: getFlag(args, "override-base-sha"),
+                overrideHeadSha: getFlag(args, "override-head-sha"),
+                overrideCheckoutSha: getFlag(args, "override-checkout-sha"),
+                overrideSource: normalizeRepoStateSource(getFlag(args, "override-source")),
             });
             return;
         case "audit":
@@ -22005,11 +22920,18 @@ function cmdRepairPlan(input) {
         throw new Error(`Repair plan requires an accepted BugFinding. Current status: ${finding.status}`);
     }
     const context = loadRepairPlanningContext(repoRoot, input.configPath);
-    const repoState = captureRepoStateSnapshot({
+    const rawRepoState = captureRepoStateSnapshot({
         repoRoot,
         diffBase: null,
         source: "git",
     });
+    const repoState = {
+        ...rawRepoState,
+        ...(input.overrideBaseSha ? { base_sha: input.overrideBaseSha, diff_base: input.overrideBaseSha } : {}),
+        ...(input.overrideHeadSha ? { head_sha: input.overrideHeadSha } : {}),
+        ...(input.overrideCheckoutSha ? { checkout_sha: input.overrideCheckoutSha } : {}),
+        ...(input.overrideSource ? { source: input.overrideSource } : {}),
+    };
     const contract = buildRepairContract({
         repairId: session.repair_id,
         report,
@@ -22055,6 +22977,16 @@ function cmdRepairPlan(input) {
         event: "repair_task_rendered",
         repair_id: contract.repair_id,
         detail: paths.task,
+    });
+    appendGovernanceEvent(repoRoot, {
+        schema_version: "pantheon_governance_event@0.1.0",
+        event_id: `gov_${contract.repair_id}_plan_${Date.now().toString(36)}`,
+        timestamp: new Date().toISOString(),
+        source: input.sourceOverride ?? "local_cli",
+        event_type: "repair_plan_generated",
+        repair_id: contract.repair_id,
+        contract_revision: contract.revision,
+        attention_level: "none",
     });
     console.log("Pantheon Repair Plan\n");
     console.log(`  Repair: ${contract.repair_id}`);
@@ -22146,7 +23078,8 @@ function cmdRepairCheck(input) {
     });
     const filteredDiff = {
         ...diff,
-        changed_files: diff.changed_files.filter((file) => !file.path.startsWith(".pantheon/repair/")),
+        // Pantheon-generated local state must never cause a repair to fail itself.
+        changed_files: diff.changed_files.filter((file) => !file.path.startsWith(".pantheon/")),
     };
     const baseResult = verifyRepairDiff({
         contract,
@@ -22210,6 +23143,17 @@ function cmdRepairCheck(input) {
         event: "agent_repair_checked",
         repair_id: contract.repair_id,
         detail: finalCheck.verdict,
+    });
+    syncHumanAttention(repoRoot, {
+        source: input.sourceOverride ?? "local_cli",
+        repairId: contract.repair_id,
+        contract,
+        check: finalCheck,
+        prNumber: input.prNumber,
+        prBaseSha: input.prBaseSha,
+        prHeadSha: input.prHeadSha,
+        artifactDir: input.artifactDir,
+        sanitizerViolations: input.sanitizerViolations ?? 0,
     });
     console.log("Pantheon Repair Check\n");
     console.log(`  Repair: ${contract.repair_id}`);
@@ -22440,6 +23384,104 @@ function readRepairDiff(input) {
         changedFilesOverride: input.changedFilesOverride,
     });
 }
+function syncHumanAttention(repoRoot, input) {
+    const event = buildGovernanceEventFromCheck(input);
+    appendGovernanceEvent(repoRoot, event);
+    const reviewRequest = buildReviewRequest({
+        repairId: input.repairId,
+        contractRevision: input.contract.revision,
+        source: input.source,
+        check: input.check,
+        contract: input.contract,
+        sanitizerViolations: input.sanitizerViolations,
+        pr: input.prNumber
+            ? {
+                provider: "github",
+                number: input.prNumber,
+            }
+            : undefined,
+    });
+    if (reviewRequest) {
+        writeReviewRequest(repoRoot, reviewRequest);
+        appendGovernanceEvent(repoRoot, {
+            schema_version: "pantheon_governance_event@0.1.0",
+            event_id: `gov_${input.repairId}_review_${Date.now().toString(36)}`,
+            timestamp: new Date().toISOString(),
+            source: input.source,
+            event_type: "review_requested",
+            repair_id: input.repairId,
+            contract_revision: input.contract.revision,
+            verdict: reviewRequest.verdict,
+            attention_level: reviewRequest.attention_level,
+            reasons: buildGovernanceReasons(input.check),
+            artifact_dir: input.artifactDir,
+            sanitizer_violations: input.sanitizerViolations,
+        });
+    }
+    else {
+        const closed = closeReviewRequest(repoRoot, input.repairId);
+        if (closed) {
+            appendGovernanceEvent(repoRoot, {
+                schema_version: "pantheon_governance_event@0.1.0",
+                event_id: `gov_${input.repairId}_review_resolved_${Date.now().toString(36)}`,
+                timestamp: new Date().toISOString(),
+                source: input.source,
+                event_type: "review_resolved",
+                repair_id: input.repairId,
+                contract_revision: input.contract.revision,
+                verdict: input.check.verdict,
+                attention_level: "none",
+            });
+        }
+    }
+    if (input.check.verdict === "requires_replan") {
+        appendGovernanceEvent(repoRoot, {
+            schema_version: "pantheon_governance_event@0.1.0",
+            event_id: `gov_${input.repairId}_replan_${Date.now().toString(36)}`,
+            timestamp: new Date().toISOString(),
+            source: input.source,
+            event_type: "repair_replanned",
+            repair_id: input.repairId,
+            contract_revision: input.contract.revision,
+            verdict: input.check.verdict,
+            attention_level: "blocking",
+            reasons: buildGovernanceReasons(input.check),
+        });
+    }
+    else if (input.check.verdict === "fail" || input.check.verdict === "requires_scope_expansion") {
+        appendGovernanceEvent(repoRoot, {
+            schema_version: "pantheon_governance_event@0.1.0",
+            event_id: `gov_${input.repairId}_blocked_${Date.now().toString(36)}`,
+            timestamp: new Date().toISOString(),
+            source: input.source,
+            event_type: "repair_blocked",
+            repair_id: input.repairId,
+            contract_revision: input.contract.revision,
+            verdict: input.check.verdict,
+            attention_level: input.check.verdict === "fail" ? "urgent" : "blocking",
+            reasons: buildGovernanceReasons(input.check),
+        });
+    }
+    if (input.sanitizerViolations > 0) {
+        appendGovernanceEvent(repoRoot, {
+            schema_version: "pantheon_governance_event@0.1.0",
+            event_id: `gov_${input.repairId}_sanitizer_${Date.now().toString(36)}`,
+            timestamp: new Date().toISOString(),
+            source: input.source,
+            event_type: "artifact_sanitizer_violation",
+            repair_id: input.repairId,
+            contract_revision: input.contract.revision,
+            verdict: "fail",
+            attention_level: "urgent",
+            sanitizer_violations: input.sanitizerViolations,
+            artifact_dir: input.artifactDir,
+            reasons: [{
+                    kind: "artifact_sanitizer_violation",
+                    action: "block_merge",
+                }],
+        });
+    }
+}
 function buildScopeSummary(contract) {
     return {
         allowed: contract.repair_scope.allowed.map(entry => entry.pattern),
@@ -22460,6 +23502,109 @@ function deriveRiskLevel(contract) {
         return "low";
     }
     return "unknown";
+}
+function buildGovernanceEventFromCheck(input) {
+    return {
+        schema_version: "pantheon_governance_event@0.1.0",
+        event_id: `gov_${input.repairId}_check_${Date.now().toString(36)}`,
+        timestamp: new Date().toISOString(),
+        source: input.source,
+        event_type: "repair_check_completed",
+        repair_id: input.repairId,
+        contract_revision: input.contract.revision,
+        pr: input.prNumber
+            ? {
+                provider: "github",
+                number: input.prNumber,
+                base_sha: input.prBaseSha,
+                head_sha: input.prHeadSha,
+            }
+            : undefined,
+        verdict: input.check.verdict,
+        attention_level: governanceAttentionForVerdict(input.check.verdict, input.sanitizerViolations),
+        changed_files_count: input.check.summary.changed_files,
+        bucket_counts: {
+            allowed: input.check.summary.allowed,
+            review_required: input.check.summary.review_required,
+            forbidden: input.check.summary.forbidden,
+            outside_scope: input.check.summary.outside_scope,
+        },
+        reasons: buildGovernanceReasons(input.check),
+        sanitizer_violations: input.sanitizerViolations,
+        artifact_dir: input.artifactDir,
+    };
+}
+function buildGovernanceReasons(check) {
+    const reasons = [];
+    for (const finding of check.findings) {
+        switch (finding.kind) {
+            case "review_required_file":
+                reasons.push({
+                    kind: "review_required",
+                    file: finding.file,
+                    action: "human_review",
+                });
+                break;
+            case "outside_scope_file":
+                reasons.push({
+                    kind: "outside_scope",
+                    file: finding.file,
+                    action: "request_scope_expansion",
+                });
+                break;
+            case "forbidden_file":
+                reasons.push({
+                    kind: "forbidden_file_touched",
+                    file: finding.file,
+                    action: "revert_file",
+                });
+                break;
+            case "stale_repair_contract":
+                reasons.push({
+                    kind: "stale_repair_contract",
+                    action: "request_replan",
+                });
+                break;
+            case "active_scope_pattern_overlap":
+            case "actual_changed_file_overlap":
+                reasons.push({
+                    kind: "concurrent_repair_overlap",
+                    file: finding.file,
+                    action: finding.severity === "blocking" ? "block_merge" : "human_review",
+                });
+                break;
+            default:
+                break;
+        }
+    }
+    return dedupeGovernanceReasons(reasons);
+}
+function dedupeGovernanceReasons(reasons) {
+    const seen = new Set();
+    const result = [];
+    for (const reason of reasons) {
+        const key = `${reason.kind}:${reason.file ?? ""}:${reason.pattern ?? ""}:${reason.action}`;
+        if (seen.has(key))
+            continue;
+        seen.add(key);
+        result.push(reason);
+    }
+    return result;
+}
+function governanceAttentionForVerdict(verdict, sanitizerViolations) {
+    if (sanitizerViolations > 0)
+        return "urgent";
+    switch (verdict) {
+        case "pass":
+            return "none";
+        case "requires_review":
+            return "human_review";
+        case "requires_scope_expansion":
+        case "requires_replan":
+            return "blocking";
+        case "fail":
+            return "urgent";
+    }
 }
 function mapFindingStatusToSessionStatus(status) {
     switch (status) {
@@ -22590,7 +23735,28 @@ function normalizeDecision(gate, value) {
             close_as_invalid: "close_as_invalid",
         },
     };
-    return aliases[gate][normalized] ?? normalized;
+    const directValues = new Set(Object.values(aliases[gate]));
+    if (directValues.has(normalized)) {
+        return normalized;
+    }
+    const resolved = aliases[gate][normalized];
+    if (!resolved) {
+        throw new Error(`Unknown repair audit decision for ${gate}: ${value}`);
+    }
+    return resolved;
+}
+function normalizeRepoStateSource(value) {
+    if (!value)
+        return undefined;
+    const normalized = value.trim().toLowerCase();
+    if (normalized === "git"
+        || normalized === "github"
+        || normalized === "synthetic"
+        || normalized === "unknown"
+        || normalized === "github_pull_request") {
+        return normalized;
+    }
+    throw new Error(`Unknown repo_state source: ${value}`);
 }
 function requireRepairId(args, repoRoot) {
     const explicit = getFlag(args, "repair-id");
@@ -22640,12 +23806,39 @@ function renderGitHubRepairComment(result) {
     lines.push("");
     lines.push(`\`${result.verdict}\``);
     lines.push("");
-    if (result.verdict !== "pass") {
-        lines.push("## Required action");
+    if (result.verdict === "requires_review") {
+        lines.push("## Human review required");
+        lines.push("");
+        lines.push("This PR touched files that the repair contract marks as review-required.");
+        lines.push("");
+        const reviewFindings = check?.findings.filter(finding => finding.kind === "review_required_file") ?? [];
+        if (reviewFindings.length > 0) {
+            lines.push("| File | Reason |");
+            lines.push("|---|---|");
+            for (const finding of reviewFindings.slice(0, 20)) {
+                lines.push(`| \`${finding.file}\` | ${githubRepairCommentRenderer_escapeTableCell(finding.message)} |`);
+            }
+            if (reviewFindings.length > 20) {
+                lines.push("");
+                lines.push(`Showing 20 files. ${reviewFindings.length - 20} additional review-required files omitted.`);
+            }
+            lines.push("");
+        }
+        lines.push("");
+        lines.push("## Agent next steps");
+        lines.push("");
+        lines.push("- A human reviewer should inspect these changes.");
+        lines.push("- The agent should stop modifying review-required files.");
+        lines.push("- If additional files are needed, request scope expansion.");
+        lines.push("");
+    }
+    else if (result.verdict !== "pass") {
+        lines.push("## Blocked");
         lines.push("");
         lines.push("This PR cannot be accepted under the current repair contract.");
         lines.push("");
         lines.push("Why:");
+        lines.push("");
         let reasonCount = 1;
         if (check?.concurrent_findings.some(f => f.kind === "stale_repair_contract")) {
             lines.push(`${reasonCount++}. The repair contract is stale because the PR base changed after the plan was created.`);
@@ -22661,16 +23854,16 @@ function renderGitHubRepairComment(result) {
         }
         const forbiddenFiles = check?.findings.filter(f => f.kind === "forbidden_file") ?? [];
         if (forbiddenFiles.length > 0) {
-            lines.push(`${reasonCount++}. Modified files that are forbidden by the repair scope.`);
+            lines.push(`${reasonCount++}. Modified files are forbidden by the current repair scope.`);
         }
         if (result.runPhase === "intake_pending_audit" || result.runPhase === "plan_pending_audit") {
-            lines.push(`${reasonCount++}. The repair plan requires human audit approval.`);
+            lines.push(`${reasonCount++}. The repair plan requires human audit approval before the agent can continue.`);
         }
         if (reasonCount === 1) {
             lines.push("1. The repair governance checks failed.");
         }
         lines.push("");
-        lines.push("Next:");
+        lines.push("## Agent next steps");
         const nextSteps = buildNextSteps(result);
         for (const step of nextSteps) {
             lines.push(`- ${step}`);
@@ -22758,7 +23951,7 @@ function renderGitHubRepairComment(result) {
         lines.push("| Severity | Finding | Other repair | Action |");
         lines.push("|---|---|---|---|");
         for (const finding of check.concurrent_findings.slice(0, 12)) {
-            lines.push(`| ${finding.severity} | ${escapeTableCell(finding.kind)} | ${finding.other_repair_id ?? "-"} | ${finding.recommended_action} |`);
+            lines.push(`| ${finding.severity} | ${githubRepairCommentRenderer_escapeTableCell(finding.kind)} | ${finding.other_repair_id ?? "-"} | ${finding.recommended_action} |`);
         }
         if (check.concurrent_findings.length > 12) {
             lines.push("");
@@ -22771,6 +23964,9 @@ function renderGitHubRepairComment(result) {
     lines.push("- `repair_task.md`");
     lines.push("- `repair_report.md`");
     lines.push("- `repair_feedback.md`");
+    if (result.verdict !== "pass") {
+        lines.push("- `review_request.md`");
+    }
     lines.push("- `artifact_manifest.json`");
     lines.push("");
     return {
@@ -22852,128 +24048,12 @@ function buildNextSteps(result) {
     }
     return [...steps];
 }
-function escapeTableCell(value) {
+function githubRepairCommentRenderer_escapeTableCell(value) {
     return value.replace(/\|/g, "\\|");
 }
 
-;// CONCATENATED MODULE: ./src/artifacts/artifactSanitizer.ts
-/**
- * P18.5-B: Artifact Sanitizer
- *
- * Scans artifact content for sensitive patterns that must not appear
- * in public-facing outputs. Returns a list of violations.
- *
- * Usage:
- *   const violations = sanitizeArtifact(content, "public");
- *   if (violations.length > 0) { reject or redact }
- *
- * ref: P18.5-B
- */
-const SANITIZATION_RULES = [
-    // Windows absolute paths
-    {
-        kind: "windows_absolute_path",
-        severity: "critical",
-        pattern: /[A-Z]:\\[^\s"']+/g,
-        message: "Windows absolute path detected — must not appear in public artifacts.",
-    },
-    // Unix home/user paths
-    {
-        kind: "unix_absolute_path",
-        severity: "critical",
-        pattern: /\/(?:Users|home|root)\/[^\s"']+/g,
-        message: "Unix user path detected — must not appear in public artifacts.",
-    },
-    // Workspace temp paths
-    {
-        kind: "workspace_temp_path",
-        severity: "high",
-        pattern: /\/tmp\/[^\s"']+|\\temp\\[^\s"']+/gi,
-        message: "Temporary workspace path detected.",
-    },
-    // node_modules stack traces
-    {
-        kind: "stack_trace",
-        severity: "high",
-        pattern: /at\s+[^\s]+\s+\(.*node_modules.*\)/g,
-        message: "Internal stack trace from node_modules detected.",
-    },
-    // Debug payload markers
-    {
-        kind: "debug_payload",
-        severity: "medium",
-        pattern: /\[DEBUG\]|__DEBUG__|"debug":\s*true/g,
-        message: "Debug payload marker detected.",
-    },
-    // .env file references
-    {
-        kind: "env_reference",
-        severity: "high",
-        pattern: /\.env(?:\.local|\.production|\.development)?(?:\b|$)/g,
-        message: ".env file reference detected — may leak environment config.",
-    },
-    // Secret-like keys (generic)
-    {
-        kind: "secret_like_key",
-        severity: "critical",
-        pattern: /(?:api[_-]?key|secret[_-]?key|access[_-]?token|private[_-]?key)\s*[:=]\s*["'][^"']{8,}/gi,
-        message: "Potential secret or API key detected.",
-    },
-    // Internal observation dump (very large JSON blocks)
-    {
-        kind: "internal_observation_dump",
-        severity: "medium",
-        pattern: /"python_observations":\s*\{/g,
-        message: "Internal observation dump detected — should not be in public artifacts.",
-    },
-];
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-/**
- * Scan artifact content for sensitive patterns.
- *
- * @param content - The text content of the artifact
- * @param mode - "public" checks all rules; "debug" is a no-op (always clean)
- * @returns A SanitizationResult with any violations found
- */
-function sanitizeArtifact(content, mode = "public") {
-    if (mode === "debug") {
-        return { clean: true, violations: [], scanned_lines: 0 };
-    }
-    const lines = content.split("\n");
-    const violations = [];
-    for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-        for (const rule of SANITIZATION_RULES) {
-            // Reset lastIndex for global regexes
-            rule.pattern.lastIndex = 0;
-            let match;
-            while ((match = rule.pattern.exec(line)) !== null) {
-                violations.push({
-                    kind: rule.kind,
-                    severity: rule.severity,
-                    match: match[0].substring(0, 80), // Truncate long matches
-                    line: i + 1,
-                    message: rule.message,
-                });
-            }
-        }
-    }
-    return {
-        clean: violations.length === 0,
-        violations,
-        scanned_lines: lines.length,
-    };
-}
-/**
- * Returns only critical and high severity violations.
- */
-function getCriticalViolations(result) {
-    return result.violations.filter(v => v.severity === "critical" || v.severity === "high");
-}
-
 ;// CONCATENATED MODULE: ./src/github/githubRepairArtifactCollector.ts
+
 
 
 
@@ -22997,6 +24077,13 @@ function collectGitHubRepairArtifacts(input) {
         [runPaths.report, "repair_report.md", "text"],
         [runPaths.feedback, "repair_feedback.md", "text"],
     ];
+    const reviewPaths = reviewRequestPaths(repoRoot, input.repairId);
+    if ((0,external_node_fs_.existsSync)(reviewPaths.markdown)) {
+        publicArtifacts.push([reviewPaths.markdown, "review_request.md", "text"]);
+    }
+    if ((0,external_node_fs_.existsSync)(reviewPaths.json)) {
+        publicArtifacts.push([reviewPaths.json, "review_request.json", "json"]);
+    }
     for (const [source, target, kind] of publicArtifacts) {
         if (!(0,external_node_fs_.existsSync)(source))
             continue;
@@ -23202,7 +24289,7 @@ function parseRepairFailConditions(raw) {
     ];
     const normalized = (raw ?? fallback.join(","))
         .split(",")
-        .map(token => token.trim())
+        .map(token => token.trim().toLowerCase())
         .filter(token => token.length > 0);
     if (normalized.length === 0)
         return fallback;
@@ -23229,13 +24316,14 @@ function resolveSourceKind(input) {
     return "inline_action_inputs";
 }
 function parseAuditMode(raw) {
-    if (raw === "auto" || raw === "require_plan_approval" || raw === "require_all") {
-        return raw;
+    const normalized = raw?.trim().toLowerCase();
+    if (normalized === "auto" || normalized === "require_plan_approval" || normalized === "require_all") {
+        return normalized;
     }
     return "require_plan_approval";
 }
 function parseArtifactMode(raw) {
-    return raw === "debug" ? "debug" : "public";
+    return raw?.trim().toLowerCase() === "debug" ? "debug" : "public";
 }
 function firstNonEmpty(...values) {
     for (const value of values) {
@@ -23269,6 +24357,14 @@ function renderGitHubRepairStepSummary(result) {
     }
     lines.push(`Artifact sanitizer violations: ${result.artifactCollection.sanitizerViolations.length}`);
     lines.push("");
+    if (result.verdict === "requires_review") {
+        lines.push("Human review required. See review_request.md in pantheon-repair-report/.");
+        lines.push("");
+    }
+    else if (result.verdict === "requires_replan" || result.verdict === "requires_scope_expansion" || result.verdict === "fail") {
+        lines.push("Blocked. See the PR comment, repair_feedback.md, and review_request.md for the next action.");
+        lines.push("");
+    }
     lines.push("See PR comment and artifacts for details.");
     lines.push("");
     return {
@@ -23277,6 +24373,7 @@ function renderGitHubRepairStepSummary(result) {
 }
 
 ;// CONCATENATED MODULE: ./src/github/githubRepairRunner.ts
+
 
 
 
@@ -23306,6 +24403,11 @@ async function runGitHubRepairAction(env = process.env) {
                 repoRoot,
                 repairId,
                 configPath: inputs.configPath,
+                overrideBaseSha: inputs.baseSha,
+                overrideHeadSha: inputs.headSha,
+                overrideCheckoutSha: env.GITHUB_SHA,
+                overrideSource: "github_pull_request",
+                sourceOverride: "github_action",
             });
             if (inputs.auditMode === "require_plan_approval") {
                 runPhase = "plan_pending_audit";
@@ -23332,6 +24434,10 @@ async function runGitHubRepairAction(env = process.env) {
                 repoRoot,
                 repairId,
                 baseRef: inputs.baseSha,
+                sourceOverride: "github_action",
+                prNumber: prContext?.prNumber,
+                prBaseSha: inputs.baseSha,
+                prHeadSha: inputs.headSha,
             });
         }
         if (runPhase !== "checked" && latestSession.status === "intake_rejected") {
@@ -23343,6 +24449,10 @@ async function runGitHubRepairAction(env = process.env) {
             repoRoot,
             repairId,
             baseRef: inputs.baseSha,
+            sourceOverride: "github_action",
+            prNumber: prContext?.prNumber,
+            prBaseSha: inputs.baseSha,
+            prHeadSha: inputs.headSha,
         });
         runPhase = "checked";
     }
@@ -23357,6 +24467,34 @@ async function runGitHubRepairAction(env = process.env) {
         repairId,
         artifactMode: inputs.artifactMode,
     });
+    if (artifactCollection.sanitizerViolations.length > 0) {
+        const governanceResult = tryAppendGovernanceEvent(repoRoot, {
+            schema_version: "pantheon_governance_event@0.1.0",
+            event_id: `gov_${repairId}_github_sanitizer_${Date.now().toString(36)}`,
+            timestamp: new Date().toISOString(),
+            source: "github_action",
+            event_type: "artifact_sanitizer_violation",
+            repair_id: repairId,
+            contract_revision: contract?.revision,
+            pr: prContext ? {
+                provider: "github",
+                number: prContext.prNumber,
+                base_sha: inputs.baseSha,
+                head_sha: inputs.headSha,
+            } : undefined,
+            verdict: "fail",
+            attention_level: "urgent",
+            sanitizer_violations: artifactCollection.sanitizerViolations.length,
+            artifact_dir: artifactCollection.outputDirRelative,
+            reasons: [{
+                    kind: "artifact_sanitizer_violation",
+                    action: "block_merge",
+                }],
+        });
+        if (!governanceResult.ok) {
+            console.warn(`[Pantheon Repair Action] Failed to record governance event: ${governanceResult.message}`);
+        }
+    }
     const exitDecision = decideGitHubRepairExit({
         verdict,
         sanitizerViolations: artifactCollection.sanitizerViolations.length,
@@ -23426,12 +24564,12 @@ async function runGitHubRepairAction(env = process.env) {
 }
 function resolveRepairSession(repoRoot, inputs) {
     if (inputs.sourceKind === "existing_repair_id") {
-        return repairSessionStore_loadRepairSession(repoRoot, inputs.repairId);
+        return repairSessionStore_loadRepairSession(repoRoot, requireExistingRepairId(inputs));
     }
     if (inputs.sourceKind === "agent_bug_report") {
         return cmdRepairIntake({
             repoRoot,
-            fromPath: (0,external_node_path_.resolve)(repoRoot, inputs.agentBugReport),
+            fromPath: (0,external_node_path_.resolve)(repoRoot, requireAgentBugReportPath(inputs)),
             agentId: "github-action",
             operatorId: "github-action",
         });
@@ -23481,6 +24619,18 @@ function deriveRunVerdict(runPhase, check, session) {
         return "fail";
     return "requires_review";
 }
+function requireExistingRepairId(inputs) {
+    if (inputs.repairId) {
+        return inputs.repairId;
+    }
+    throw new Error("GitHub repair mode expected an existing repair_id.");
+}
+function requireAgentBugReportPath(inputs) {
+    if (inputs.agentBugReport) {
+        return inputs.agentBugReport;
+    }
+    throw new Error("GitHub repair mode expected an agent_bug_report path.");
+}
 
 
 /***/ }),
@@ -23488,7 +24638,7 @@ function deriveRunVerdict(runPhase, check, session) {
 /***/ 812:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__.p + "87754f10f24c8c766933.ts";
+module.exports = __nccwpck_require__.p + "f59df3819cee5d0f8817.ts";
 
 /***/ }),
 

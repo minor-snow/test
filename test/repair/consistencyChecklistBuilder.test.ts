@@ -193,6 +193,7 @@ describe("consistencyChecklistBuilder", () => {
     });
 
     expect(result.length).toBeGreaterThan(0);
-    expect(result.every(c => c.evidence.length >= 0)).toBe(true);
+    expect(result.every(c => Array.isArray(c.evidence))).toBe(true);
+    expect(result.some(c => c.severity === "advisory" || c.severity === "review")).toBe(true);
   });
 });

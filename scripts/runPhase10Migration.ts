@@ -22,13 +22,13 @@ import { evaluateDraftQuality } from "../src/domainQualityEvaluator.js";
 import { saveToQuarantine, loadCanonicalPointer } from "../src/artifactStore.js";
 import type { Artifact } from "../src/types.js";
 import type { StoreConfig } from "../src/artifactStore.js";
+import { requireDeepSeekApiKey } from "../src/trial/requireEnv.js";
 
 // ---------------------------------------------------------------------------
 // Config
 // ---------------------------------------------------------------------------
 
-const DEEPSEEK_API_KEY =
-  process.env.DEEPSEEK_API_KEY ?? "sk-90b71c8c415b41ac93f7ff4e24a08a7c";
+const DEEPSEEK_API_KEY = requireDeepSeekApiKey();
 const MODEL = "deepseek-chat";
 const TEMPERATURE = 0.4;
 const MAX_TOKENS = 8192; // migration drafts are larger

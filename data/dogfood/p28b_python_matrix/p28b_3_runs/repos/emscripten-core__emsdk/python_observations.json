@@ -1,0 +1,581 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "emscripten-core__emsdk",
+    "observed_file_count": 137,
+    "python_file_count": 14
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "loose_scripts_only",
+        "weight": "weak",
+        "evidence": "1 top-level .py files without package __init__.py"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "No package structure detected; only loose scripts"
+      }
+    ],
+    "bucket_summary": {
+      "config": 3,
+      "source": 3,
+      "script": 7,
+      "test": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No framework could be detected from dependencies, paths, or imports"
+      }
+    ]
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "unvalidated",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / unknown (low)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/__init__.py",
+        "reason": "No __init__.py observed (unusual)"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".flake8",
+      "bucket": "config",
+      "extension": ".flake8",
+      "size_bytes": 401,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "bazel/emscripten_toolchain/link_wrapper.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6066,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "bazel/emscripten_toolchain/wasm_binary.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1905,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "emsdk.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 128590,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 1516,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "requirements-dev.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 29,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "scripts/create_release.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 2929,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/get_emscripten_revision_info.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 1581,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/get_release_info.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 557,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/update_bazel_workspace.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 2823,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/update_node.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 1972,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/update_python.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 7501,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/zip.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 580,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "test/test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11602,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "bazel/emscripten_toolchain/link_wrapper.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "bazel/emscripten_toolchain/link_wrapper.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "bazel/emscripten_toolchain/link_wrapper.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "bazel/emscripten_toolchain/link_wrapper.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "bazel/emscripten_toolchain/wasm_binary.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "bazel/emscripten_toolchain/wasm_binary.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "bazel/emscripten_toolchain/wasm_binary.py",
+      "raw_specifier": "tarfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tarfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "errno",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "errno",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "multiprocessing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "multiprocessing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "os.path",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "stat",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "stat",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "sysconfig",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sysconfig",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "tarfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tarfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "zipfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "zipfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "ctypes.wintypes",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "winreg",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "winreg",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "from urllib.parse import urljoin",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "from urllib.request import urlopen",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "from mozdownload import FactoryScraper",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mozdownload",
+      "confidence": "low"
+    },
+    {
+      "from_file": "emsdk.py",
+      "raw_specifier": "from mozdownload import FactoryScraper",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mozdownload",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "requirements-dev.txt",
+      "source_type": "requirements-dev.txt",
+      "packages": [],
+      "dev_packages": [
+        "flake8",
+        "ruff"
+      ],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "bazel/emscripten_toolchain/link_wrapper.py",
+      "candidate_test_paths": [
+        "bazel/emscripten_toolchain/tests/test_link_wrapper.py",
+        "tests/emscripten_toolchain/test_link_wrapper.py",
+        "bazel/emscripten_toolchain/tests/test_emscripten_toolchain.py",
+        "test/test_link_wrapper.py",
+        "tests/test_link_wrapper.py",
+        "tests/link_wrapper/test_link_wrapper.py",
+        "tests/link_wrappers/test_link_wrapper.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "bazel/emscripten_toolchain/wasm_binary.py",
+      "candidate_test_paths": [
+        "bazel/emscripten_toolchain/tests/test_wasm_binary.py",
+        "tests/emscripten_toolchain/test_wasm_binary.py",
+        "bazel/emscripten_toolchain/tests/test_emscripten_toolchain.py",
+        "test/test_wasm_binary.py",
+        "tests/test_wasm_binary.py",
+        "tests/wasm_binary/test_wasm_binary.py",
+        "tests/wasm_binarys/test_wasm_binary.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "emsdk.py",
+      "candidate_test_paths": [
+        "test/test_emsdk.py",
+        "tests/test_emsdk.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "pyproject.toml"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 11,
+    "classified_count": 11,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 29,
+    "project_import_count": 0,
+    "declared_package_count": 0,
+    "undeclared_package_count": 4,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 3,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

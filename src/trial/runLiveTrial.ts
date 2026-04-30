@@ -11,11 +11,11 @@
 import { join } from "node:path";
 import { createTrialArtifact } from "./trialArtifact.js";
 import { createDeepSeekClient } from "./deepseekAdapter.js";
+import { requireDeepSeekApiKey } from "./requireEnv.js";
 import { runTrial, type TrialConfig } from "./trialRunner.js";
 import { validateTrial } from "./trialValidation.js";
 
-const DEEPSEEK_API_KEY =
-  process.env.DEEPSEEK_API_KEY ?? "sk-90b71c8c415b41ac93f7ff4e24a08a7c";
+const DEEPSEEK_API_KEY = requireDeepSeekApiKey();
 
 async function main() {
   console.log("╔══════════════════════════════════════════╗");

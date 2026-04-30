@@ -458,10 +458,23 @@ describe("HARD-007 #10: Direct canonical write rejected", () => {
 // ===========================================================================
 
 describe("HARD-007 META", () => {
-  it("this file contains only rejection tests (by design)", () => {
+  it("covers all ten documented rejection categories", () => {
     // This is a documentation-as-test.
     // HARD-007 first batch is "只看拒绝能力" — rejection only.
     // If you need to add acceptance tests, create a separate file.
-    expect(true).toBe(true);
+    const documentedCategories = [
+      "Bad JSON",
+      "Unknown block",
+      "Unauthorized skill",
+      "Wrong hash",
+      "L1 skill impersonation",
+      "Missing fields",
+      "Empty operations",
+      "Oversized text",
+      "Stale revision",
+      "Direct canonical write",
+    ];
+    expect(documentedCategories).toHaveLength(10);
+    expect(new Set(documentedCategories).size).toBe(documentedCategories.length);
   });
 });

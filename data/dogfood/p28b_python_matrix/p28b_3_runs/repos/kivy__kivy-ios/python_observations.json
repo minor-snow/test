@@ -1,0 +1,2571 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "kivy__kivy-ios",
+    "observed_file_count": 144,
+    "python_file_count": 70
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: kivy_ios"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "source": 61,
+      "unsupported": 1,
+      "config": 5,
+      "test": 3
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No framework could be detected from dependencies, paths, or imports"
+      }
+    ]
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 51,
+        "evidence": [
+          "51 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".ci/constants.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 171,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": ".ci/rebuild_updated_recipes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1449,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/context_managers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1163,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/angle/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1253,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/audiostream/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 378,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/click/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 824,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/curly/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 365,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/cymunk/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 634,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/ffmpeg/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3396,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/ffpyplayer/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1304,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/flask/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 870,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/freetype/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1259,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/hostopenssl/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1480,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/hostpython.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 998,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/hostpython3/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4384,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/ios/src/ios.pyx",
+      "bucket": "unsupported",
+      "extension": ".pyx",
+      "size_bytes": 7396,
+      "evidence": [
+        "Cython extension — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/ios/src/setup.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 386,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/ios/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 452,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/itsdangerous/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 880,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/jinja2/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 842,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/kivent_core/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3874,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/kivy/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6701,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/kiwisolver/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 556,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/libcurl/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1150,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/libffi/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1908,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/libjpeg/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1030,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/libpng/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1053,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/libzbar/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1793,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/markupsafe/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1177,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/materialyoucolor/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 327,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/matplotlib/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4764,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/netifaces/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1215,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/numpy/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2440,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/openssl/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 849,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/photolibrary/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 490,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/pillow/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2078,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/plyer/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 237,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/py3dns/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 482,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/pycrypto/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1716,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/pykka/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 266,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/pyobjus/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 288,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/python.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 636,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/python3/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7892,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/pyyaml/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 855,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/sdl2/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1225,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/sdl2_image/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 982,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/sdl2_mixer/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1139,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/sdl2_ttf/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1415,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/sdl3/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2397,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/sdl3_image/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2070,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/sdl3_mixer/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2115,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/sdl3_ttf/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2095,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/werkzeug/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 844,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/zbarlight/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2013,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/recipes/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/toolchain.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 63154,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/tools/cythonize.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1598,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/tools/external/xcassets.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17245,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/tools/external/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/tools/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kivy_ios/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 85,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 75,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "setup.cfg",
+      "bucket": "config",
+      "extension": ".cfg",
+      "size_bytes": 1378,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 41,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/test_libs/main.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1853,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_python3/main.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1127,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/tools/external/test_xcassets.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5938,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "toolchain.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 47,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 606,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": ".ci/rebuild_updated_recipes.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": ".ci/rebuild_updated_recipes.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": ".ci/rebuild_updated_recipes.py",
+      "raw_specifier": "from fnmatch import fnmatch",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "fnmatch",
+      "confidence": "high"
+    },
+    {
+      "from_file": ".ci/rebuild_updated_recipes.py",
+      "raw_specifier": "from constants import CORE_RECIPES, BROKEN_RECIPES",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "constants",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kivy_ios/context_managers.py",
+      "raw_specifier": "from logging import getLogger",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/context_managers.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/context_managers.py",
+      "raw_specifier": "from os import getcwd, chdir, environ",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/context_managers.py",
+      "raw_specifier": "from os.path import expanduser",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/angle/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/angle/__init__.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/angle/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import GenericPlatform, Recipe, cache_execution",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/audiostream/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/click/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import PythonRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/click/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/click/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/click/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/curly/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/cymunk/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/ffmpeg/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/ffmpeg/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/ffmpeg/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/ffpyplayer/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/ffpyplayer/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/flask/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import PythonRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/flask/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/flask/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/flask/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/freetype/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/freetype/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/freetype/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostopenssl/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import HostRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostopenssl/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostopenssl/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostopenssl/__init__.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostpython.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostpython.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostpython.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostpython3/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import HostRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostpython3/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostpython3/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostpython3/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostpython3/__init__.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostpython3/__init__.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/hostpython3/__init__.py",
+      "raw_specifier": "from kivy_ios.context_managers import cd",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/ios/src/setup.py",
+      "raw_specifier": "from distutils.core import setup, Extension",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "distutils",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/ios/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/itsdangerous/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import PythonRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/itsdangerous/__init__.py",
+      "raw_specifier": "from kivy_ios.context_managers import cd",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/itsdangerous/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/itsdangerous/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/jinja2/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import PythonRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/jinja2/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/jinja2/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/jinja2/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivent_core/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivent_core/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivent_core/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivent_core/__init__.py",
+      "raw_specifier": "from os import chdir",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivent_core/__init__.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivy/__init__.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivy/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivy/__init__.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivy/__init__.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivy/__init__.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivy/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivy/__init__.py",
+      "raw_specifier": "packaging.version",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivy/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kivy/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/kiwisolver/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libcurl/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libcurl/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libcurl/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libffi/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libffi/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libjpeg/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libjpeg/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libjpeg/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libpng/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libpng/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libpng/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libzbar/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libzbar/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/libzbar/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/markupsafe/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import PythonRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/markupsafe/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/markupsafe/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/markupsafe/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/materialyoucolor/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import PythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/matplotlib/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe, ensure_dir",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/matplotlib/__init__.py",
+      "raw_specifier": "from os.path import join, abspath, dirname",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/matplotlib/__init__.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/matplotlib/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/netifaces/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/netifaces/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/netifaces/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/netifaces/__init__.py",
+      "raw_specifier": "from kivy_ios.context_managers import cd",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/numpy/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/numpy/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/numpy/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/numpy/__init__.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/openssl/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/openssl/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/openssl/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/photolibrary/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pillow/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pillow/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pillow/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pillow/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/plyer/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import PythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/py3dns/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import PythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pycrypto/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pycrypto/__init__.py",
+      "raw_specifier": "from kivy_ios.context_managers import cd",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pycrypto/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pycrypto/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pykka/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import PythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pyobjus/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import CythonRecipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/python.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/python.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/python.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/python3/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/python3/__init__.py",
+      "raw_specifier": "from kivy_ios.context_managers import cd",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/python3/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/python3/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/python3/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/python3/__init__.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pyyaml/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pyyaml/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/pyyaml/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import PythonRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl2/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl2/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl2_image/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl2_image/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl2_image/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl2_mixer/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl2_mixer/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl2_ttf/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl2_ttf/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl2_ttf/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl3/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl3/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl3/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl3_image/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl3_image/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl3_image/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl3_mixer/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl3_mixer/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl3_mixer/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl3_ttf/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl3_ttf/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/sdl3_ttf/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/werkzeug/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import PythonRecipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/werkzeug/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/werkzeug/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/werkzeug/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/zbarlight/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/zbarlight/__init__.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/zbarlight/__init__.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/zbarlight/__init__.py",
+      "raw_specifier": "from kivy_ios.toolchain import Recipe, shprint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/zbarlight/__init__.py",
+      "raw_specifier": "from os.path import join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/zbarlight/__init__.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/recipes/zbarlight/__init__.py",
+      "raw_specifier": "fnmatch",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "fnmatch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "from sys import stdout",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "from os.path import join, dirname, realpath, exists, isdir, basename",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "from os import listdir, unlink, makedirs, environ, chdir, getcwd, walk",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "zipfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "zipfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "tarfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tarfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "importlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "fnmatch",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "fnmatch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "from contextlib import suppress",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "from pprint import pformat",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pprint",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "urllib.request",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "from pbxproj import XcodeProject",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pbxproj",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "from pbxproj.pbxextensions.ProjectFiles import FileOptions",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pbxproj",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "from glob import glob",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "glob",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "from cookiecutter.main import cookiecutter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "from .tools.external import xcassets",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".tools.external",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "kivy_ios/toolchain.py",
+      "raw_specifier": "from .tools.external import xcassets",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".tools.external",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "kivy_ios/tools/cythonize.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/tools/cythonize.py",
+      "raw_specifier": "from Cython.Build.Cythonize import main as cythonize_main",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "Cython",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kivy_ios/tools/external/xcassets.py",
+      "raw_specifier": "sh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/tools/external/xcassets.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/tools/external/xcassets.py",
+      "raw_specifier": "from PIL import Image",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "PIL",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kivy_ios/tools/external/xcassets.py",
+      "raw_specifier": "from os.path import join, exists",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kivy_ios/tools/external/xcassets.py",
+      "raw_specifier": "from os import makedirs",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "toolchain.py",
+      "raw_specifier": "from kivy_ios.toolchain import main",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "kivy_ios",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "kivy_ios/recipes/ios/src/setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "pbxproj",
+        "pillow",
+        "cookiecutter",
+        "sh",
+        "packaging"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [
+        "cookiecutter"
+      ],
+      "dev_packages": [],
+      "confidence": "medium",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [
+        "flake8"
+      ],
+      "confidence": "medium",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": ".ci/constants.py",
+      "candidate_test_paths": [
+        ".ci/tests/test_constants.py",
+        "tests/test_constants.py",
+        ".ci/tests/test_.ci.py",
+        "test/test_constants.py",
+        "tests/constants/test_constants.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": ".ci/rebuild_updated_recipes.py",
+      "candidate_test_paths": [
+        ".ci/tests/test_rebuild_updated_recipes.py",
+        "tests/test_rebuild_updated_recipes.py",
+        ".ci/tests/test_.ci.py",
+        "test/test_rebuild_updated_recipes.py",
+        "tests/rebuild_updated_recipes/test_rebuild_updated_recipes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "kivy_ios/context_managers.py",
+      "candidate_test_paths": [
+        "kivy_ios/tests/test_context_managers.py",
+        "tests/test_context_managers.py",
+        "kivy_ios/tests/test_kivy_ios.py",
+        "test/test_context_managers.py",
+        "tests/context_managers/test_context_managers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "kivy_ios/recipes/hostpython.py",
+      "candidate_test_paths": [
+        "kivy_ios/recipes/tests/test_hostpython.py",
+        "tests/recipes/test_hostpython.py",
+        "kivy_ios/recipes/tests/test_recipes.py",
+        "test/test_hostpython.py",
+        "tests/test_hostpython.py",
+        "tests/hostpython/test_hostpython.py",
+        "tests/hostpythons/test_hostpython.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "kivy_ios/recipes/ios/src/setup.py",
+      "candidate_test_paths": [
+        "kivy_ios/recipes/ios/src/tests/test_setup.py",
+        "tests/recipes/ios/src/test_setup.py",
+        "kivy_ios/recipes/ios/src/tests/test_src.py",
+        "test/test_setup.py",
+        "tests/test_setup.py",
+        "tests/setup/test_setup.py",
+        "tests/setups/test_setup.py",
+        "tests/src/test_setup.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "kivy_ios/recipes/python.py",
+      "candidate_test_paths": [
+        "kivy_ios/recipes/tests/test_python.py",
+        "tests/recipes/test_python.py",
+        "kivy_ios/recipes/tests/test_recipes.py",
+        "test/test_python.py",
+        "tests/test_python.py",
+        "tests/python/test_python.py",
+        "tests/pythons/test_python.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "kivy_ios/toolchain.py",
+      "candidate_test_paths": [
+        "kivy_ios/tests/test_toolchain.py",
+        "tests/test_toolchain.py",
+        "kivy_ios/tests/test_kivy_ios.py",
+        "test/test_toolchain.py",
+        "tests/toolchain/test_toolchain.py",
+        "tests/toolchains/test_toolchain.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "kivy_ios/tools/cythonize.py",
+      "candidate_test_paths": [
+        "kivy_ios/tools/tests/test_cythonize.py",
+        "tests/tools/test_cythonize.py",
+        "kivy_ios/tools/tests/test_tools.py",
+        "test/test_cythonize.py",
+        "tests/test_cythonize.py",
+        "tests/cythonize/test_cythonize.py",
+        "tests/cythonizes/test_cythonize.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "kivy_ios/tools/external/xcassets.py",
+      "candidate_test_paths": [
+        "kivy_ios/tools/external/tests/test_xcassets.py",
+        "tests/tools/external/test_xcassets.py",
+        "kivy_ios/tools/external/tests/test_external.py",
+        "test/test_xcassets.py",
+        "tests/test_xcassets.py",
+        "tests/xcassets/test_xcassets.py",
+        "tests/external/test_xcassets.py"
+      ],
+      "existing_test_paths": [
+        "tests/tools/external/test_xcassets.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/tools/external/test_xcassets.py [library_package layout]"
+    },
+    {
+      "source_path": "toolchain.py",
+      "candidate_test_paths": [
+        "test/test_toolchain.py",
+        "tests/test_toolchain.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "kivy_ios/recipes/ios/src/ios.pyx"
+      ],
+      "count": 1,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "kivy_ios/recipes/ios/src/setup.py",
+        "pyproject.toml",
+        "setup.py"
+      ],
+      "count": 3,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 65,
+    "classified_count": 65,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 195,
+    "project_import_count": 55,
+    "declared_package_count": 41,
+    "undeclared_package_count": 4,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 10,
+    "high_confidence_test_count": 1,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 6,
+    "low_confidence_manifest_count": 3
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

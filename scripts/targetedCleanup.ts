@@ -26,9 +26,9 @@ import { generatePatchProposal } from "../src/trial/llmPatchAgent.js";
 import { applyOverridePatch } from "../src/applyOverridePatch.js";
 import type { Artifact, CanonicalPointer, Issue, OverridePatch } from "../src/types.js";
 import { saveProjection } from "../src/artifactStore.js";
+import { requireDeepSeekApiKey } from "../src/trial/requireEnv.js";
 
-const DEEPSEEK_API_KEY =
-  process.env.DEEPSEEK_API_KEY ?? "sk-90b71c8c415b41ac93f7ff4e24a08a7c";
+const DEEPSEEK_API_KEY = requireDeepSeekApiKey();
 
 const dataDir = join(process.cwd(), "data", "trial");
 const config: StoreConfig = { dataDir };

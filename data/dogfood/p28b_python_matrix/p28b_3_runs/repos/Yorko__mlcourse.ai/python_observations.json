@@ -1,0 +1,4688 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "Yorko__mlcourse.ai",
+    "observed_file_count": 1066,
+    "python_file_count": 396
+  },
+  "layout": {
+    "primary_layout": "mixed",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "jupyter_notebooks",
+        "weight": "weak",
+        "evidence": "Jupyter notebooks present"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: library_package=1, ml_project=1"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "Unable to determine package layout from file paths"
+      },
+      {
+        "aspect": "primary_layout",
+        "reason": "Tied between library_package and ml_project"
+      }
+    ],
+    "bucket_summary": {
+      "config": 3,
+      "notebook": 383,
+      "source": 9,
+      "unknown": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "sqlalchemy found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "httpx",
+        "kind": "http_client",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpx found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: mixed / unknown (low)",
+      "framework: click / cli_framework (medium)",
+      "framework: sqlalchemy / orm (medium)",
+      "framework: httpx / http_client (medium)",
+      "project_role: python_sdk_library (medium)",
+      "sensitive_zone: financial_transactions (critical, 2 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/_config*",
+        "reason": "Configuration affects default behavior for all consumers",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/_config*"
+        ]
+      },
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 2,
+        "evidence": [
+          "2 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 1385,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/assignments_demo/assignment01-人口收入普查数据探索.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 6169,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/assignments_demo/assignment02-心血管疾病数据探索分析.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 22662,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/assignments_demo/assignment03-决策树和随机森林分析应用.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 26685,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/assignments_demo/assignment04-逻辑回归用于讽刺文本检测.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 18802,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/assignments_demo/assignment05-构建信用评分预测分类模型.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 15965,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/assignments_demo/assignment06-红酒质量数据回归探索.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 11005,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/assignments_demo/assignment07-非监督学习应用练习.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 15574,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/assignments_demo/assignment08-线性回归和随机梯度下降.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 10044,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/assignments_demo/assignment09-时间序列分析应用练习.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 6991,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/topic01-使用-Pandas-进行数据探索.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 151853,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/topic02-Python-数据可视化分析.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 2557354,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/topic03-决策树和-K-近邻分类.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 532438,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/topic04-线性回归和线性分类器.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 539516,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/topic05-集成学习和随机森林方法.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 703180,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/topic06-特征工程和特征选择.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 1820742,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/topic07-主成分分析和聚类.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 988462,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/topic08-随机梯度下降和独热编码.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 100530,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_chinese/topic09-时间序列处理与应用.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 4034593,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment01_pandas_uci_adult.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 8217,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment01_pandas_uci_adult_solution.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 10798,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment02_analyzing_cardiovascular_desease_data.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 20045,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment02_analyzing_cardiovascular_desease_data_solution.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 29758,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment03_decision_trees.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 27113,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment03_decision_trees_solution.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 32786,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment04_linreg_optimization.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 15049,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment04_sarcasm_detection_with_logit.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 6568,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment04_sarcasm_detection_with_logit_solution.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21300,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment05_logit_rf_credit_scoring.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 18233,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment05_logit_rf_credit_scoring_solution.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 25324,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment06_regression_wine.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 11207,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment06_regression_wine_solution.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 13411,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment07_unsupervised_learning.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 19218,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment07_unsupervised_learning_solution.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 24382,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment08_implement_sgd_regressor.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 8546,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment08_implement_sgd_regressor_solution.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 10353,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment09_time_series.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 7073,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment09_time_series_solution.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 1938415,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/assignments_demo/assignment10_flight_delays_kaggle.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 6419,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/airlines_cancellation_flights_nikita_simonov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21762,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/attrition_of_employees_Pisarev_Ivan.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 59569,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/boston.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 62908,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/California_housing_value_prediction_Ilya_Larchenko.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 65163,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/cancer_benign_or_malignant_nikolai_timonin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 42506,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/Classification_on_zakupkigovru_contracts_Mikhail_Korshchikov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 20471,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/Diabetes_readmission_Samokhvalov_Mikhail.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 104398,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/diabetic_retinopathy_detection_Kirill_Panin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 83068,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/Dmitry_Girdyuk_indiv_proj.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 52431,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/elo_merchant_recommendation_tbb.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 35230,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/Forecasting_stock_returns_with_ARIMA,_and_prices_with_Ridge_and_Lasso.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 81803,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/Happiness_and_Turnover.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 72329,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/heart_deseases_Varkentin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 31887,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/html_markup_product_card_detection_Danila.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 74184,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/indiv_project_aego.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 123811,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/Indiv_project_Sergei_Bulaev-2.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 41320,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/kickstarter_voskresenskii.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 34032,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/lenta_ru_currency_rate_prediction_Maxim_Kashirin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 51346,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/Melbourne_final.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 101609,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/mobile_price_classification_trefilov_andrew.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 53178,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/pragadeesh_indiv_project.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 871867,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/predicting-wine-expert-rating_maxim-klyuchnikov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 65154,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/predicting_pulsar_aleksei_demin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 33347,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/predicting_the_onset_of_diabetes_based_on_diagnostic_measures_altprof.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 38879,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/prediction_of_online_shoppers'_purchasing_intention_Georgy_Lazarev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 72973,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/Predict_bike_sharing_Kozlov_Maxim.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 32830,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/project_australia_rains_classification_kovalev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 31329,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/project_car_insurance_nichiporenko.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 38803,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/project_Georgy_Surin_quora_insincere_questions.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 34051,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/project_IgoSorokin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 50965,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/project_ods_student_perfomance_Chebeneva_Ekaterina.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 24935,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/project_template.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 4296,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/Pubg_finish_placement_prediction.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 57771,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/Recognising_authors_using_ML_methods_Sergey_Ustyantsev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 66810,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/Rossman_store_sales_Syrovatskiy_Ilya.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 94441,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/sberbank_housing_market_i_kalininskii.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 102176,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/shelter_by_Julia_Mochalova.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 23098,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/Solar_flares_forecasting_Knyazeva.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 56139,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/stackoverflow_career_satisfaction_Kseniia.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 136522,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/stock_prices_abhiklha.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 43139,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/ted_talks_proj_indiv_artem_kuznetsov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 73702,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/telco-customer-churn-prediction_pavel-taiga.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 37725,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/tweets_agressiveness_ezhova_darya.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 28995,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/will_you_have_a_success_in_speed_dating_tatyana_kudasova.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 40235,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/projects_indiv/wines_sudarkova.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 22614,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic01_pandas_data_analysis/topic1_pandas_data_analysis.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 29635,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic01_pandas_data_analysis/topic1_practice_pandas_titanic.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 9409,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic01_pandas_data_analysis/topic1_practice_pandas_titanic_solution.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 14635,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic02_visual_data_analysis/topic2_additional_seaborn_matplotlib_plotly.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21497,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic02_visual_data_analysis/topic2_practice_visual_titanic.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 6159,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic02_visual_data_analysis/topic2_practice_visual_titanic_solution.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 8787,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic02_visual_data_analysis/topic2_visual_data_analysis.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 45257,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic03_decision_trees_kNN/topic3_decision_trees_kNN.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 75104,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic04_linear_models/topic4_linear_models_part1_mse_likelihood_bias_variance.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 28657,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic04_linear_models/topic4_linear_models_part2_logit_likelihood_learning.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 18621,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic04_linear_models/topic4_linear_models_part3_regul_example.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 17746,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic04_linear_models/topic4_linear_models_part4_good_bad_logit_movie_reviews_XOR.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 23338,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic04_linear_models/topic4_linear_models_part5_valid_learning_curves.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 13778,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic05_ensembles_random_forests/topic5_part1_bagging.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21344,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic05_ensembles_random_forests/topic5_part2_random_forest.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 44257,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic05_ensembles_random_forests/topic5_part3_feature_importance.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 24705,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic06_features_regression/lesson6_lasso_ridge.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 12292,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic06_features_regression/topic6_feature_engineering_feature_selection.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 57912,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic07_unsupervised/lesson7_part1_PCA.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 17554,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic07_unsupervised/lesson7_part2_kmeans.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 9003,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic07_unsupervised/topic7_pca_clustering.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 39840,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic08_sgd_hashing_vowpal_wabbit/topic8_sgd_hashing_vowpal_wabbit.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 65484,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic09_time_series/topic9_part1_time_series_python.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 12109905,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic09_time_series/topic9_part2_facebook_prophet.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 43279,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/topic10_boosting/topic10_gradient_boosting.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 45996,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/anomaly_detection_isolation_forest_alexander_nichiporenko.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 29459,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/basic_semi-supervised_learning_models_altprof.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 35421,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/bring_your_plots_to_life_with_matplotlib_animations_kyriacos_kyriacou.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 25768,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/Catastrophic_Events_with_Scipy.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 19890,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/custom_vectorizer_tutorial.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 31080,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/dask_objects_and_little_dask_ml_tutorial_iknyazeva.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 33040,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/deploying-your-machine-learning-model_maxim-klyuchnikov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 63671,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/Epidemics_on_networks_with_NetworkX_and_EoN_Syrovatskiy_Ilya.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 86587,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/Feature_engineering_is_all_you_need_ tutorial_Georgy_Surin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 37710,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/handling_categorical_data_Danila.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 35591,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/hyperparameters_tunning_ilya_larchenko.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 32217,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/Imputing_missing_data_with_fancyimpute_archit_rungta.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21315,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/Insights_of_Monty_Hall_paradox_with_Plotly_dmironov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 50239,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/Intitutive_Explanation_of_Expectation_Maximization_Algorithm_MagnIeeT.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 20206,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/Introduction_to_Network_Analysis_with_NetworkX_Georgy_Lazarev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 45655,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/kaggle_leaderboard_probing_nikolai_timonin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 19558,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/Keras_easy_way_to_construct_the_Neural_Networks_fixed.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21066,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/lda_pca_and_topic_modelling_shivam_panwar.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 14292,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/learn_regex_the_easy_way_aditya_soni.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 36690,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/LSTM_tutorial_Sergei_Bulaev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 28638,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/merging_dataframes_tutorial_max_palko.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 19176,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/Mlxtend_SFS_an_easy_way_to_select_features.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 36477,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/more_info_about_numpy_kseniia_terekhova.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 39566,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/nested_cross_validation_tatyana_kudasova.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 10001,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/parsing_and_grabbing_tutorial_aleksandr_laskorunsky.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 34689,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/plotly_tutorial_for_interactive_plots_sankovalev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 16383,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/Risk_management_with_Python_Andrey_Varkentin2.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 30221,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/self_organizing_map_nikita_simonov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 19468,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/something_else_about_ensemble_tbb.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 26963,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/some_details_in_matplotlib_pisarev_ivan.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 33210,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/statistical_hypothesis_testing_in_python_panin_kirill.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 31338,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/tutorial_lda_pyldavis_kovalevvyu.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 12519,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/tutorial_ML_with_VM_Mikhail Korshchikov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 15165,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/tutorial_spaCy_chatbot.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 27853,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/tutorial_template.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 4692,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/Useful_Google_Colab_snippets.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 14349,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/Voskresenskii_selenium_tutorial.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 36801,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/webscraping_ecommerce_website_with_scrapy.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 32919,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_english/tutorials/yet_another_ensemble_learning_helper_aleksandr_korotkov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 15682,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/assignments_demo/a1-demo-pandas-and-uci-adult-dataset-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 13224,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/assignments_demo/a1-demo-pandas-and-uci-adult-dataset-solution_fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 12976,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/assignments_demo/a3-demo-decision-trees-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 31022,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/assignments_demo/a4-demo-sarcasm-detection-with-logit-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 7303,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/assignments_demo/a4-demo-sarcasm-detection-with-logit-solution-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21538,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/assignments_demo/a5-demo-logit-and-rf-for-credit-scoring-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 22529,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/assignments_demo/a6-demo-linear-models-and-rf-for-regression-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 14451,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/assignments_demo/a6-demo-regression-solution-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 16827,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/assignments_fall2019/assignment1_pandas_olympic_fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 15158,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/assignments_fall2019/assignment2_part1_decision_trees-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 26614,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/assignments_fall2019/mlcourse-ai-fall-2019-catboost-starter-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 12711,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/quizzes_fall2019/quiz1_trees_forests-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 11824,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic01_pandas_data_analysis/topic1_pandas_data_analysis-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 35764,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic02_visual_data_analysis/topic2_additional_seaborn_matplotlib_plotly-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 27213,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic02_visual_data_analysis/topic2_visual_data_analysis-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 59728,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic03_decision_trees_kNN/topic3_decision_trees_kNN-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 95570,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic04_linear_models/topic4_linear_models_part1_mse_likelihood_bias_variance-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 29810,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic04_linear_models/topic4_linear_models_part2_logit_likelihood_learning-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 20613,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic04_linear_models/topic4_linear_models_part3_regul_example-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 20173,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic04_linear_models/topic4_linear_models_part4_good_bad_logit_movie_reviews_XOR-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 24691,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic04_linear_models/topic4_linear_models_part5_valid_learning_curves-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 15911,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic05_ensembles_random_forests/topic5_part1_bagging-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 24993,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic05_ensembles_random_forests/topic5_part2_random_forest-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 51093,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic05_ensembles_random_forests/topic5_part3_feature_importance-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 13846,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic06_features_regression/lesson6_lasso_ridge-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 14733,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic07_unsupervised/topic7_lesson7_part1_PCA-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 19979,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic07_unsupervised/topic7_lesson7_part2_kmeans-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 10733,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic07_unsupervised/topic7_pca_clustering-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 45277,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic08_sgd_hashing_vowpal_wabbit/topic8_sgd_hashing_vowpal_wabbit-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 65624,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic09_time_series/topic9_part1_time_series_python-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 102771,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic09_time_series/topic9_part2_facebook_prophet-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 50261,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/topic10_boosting/topic10_gradient_boosting-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 54047,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/tutorials/python-data-pre-processing-handy-tips-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 26152,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_french/tutorials/tutorial-categorical-encoding-fr_def.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 33600,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/assignments_demo/assignment01_adult_pandas.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 8669,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/assignments_demo/assignment02_habr_visual_analysis.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 10394,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/assignments_demo/assignment03_decision_trees.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 36725,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/assignments_demo/assignment04_habr_popularity_ridge.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 26900,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/assignments_demo/assignment05_logit_rf_credit_scoring.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 19663,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/assignments_demo/assignment06_regression_wine.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 14464,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/assignments_demo/assignment07_unsupervised_learning.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 24272,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/assignments_demo/assignment08_implement_sgd.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 28262,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/assignments_demo/assignment09_time_series.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 7465,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/assignments_demo/assignment10_flight_delays_kaggle.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 7769,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/competitions/kaggle_medium_ridge_baseline.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 12970,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/competitions/kaggle_QR_codes_simple_EDA.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 5222,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/competitions/kaggle_QR_codes_simple_starter.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 8311,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/Credit_individual.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 23933,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/IBM_churn_prediction.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 52790,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/keystroke_dynamics_nikt.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 36264,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/Musical_key_recognition.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 43413,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project Bank Marketing WOE.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 52447,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_Agora_Price_Prediction.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 36828,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_airbnb_booking_melnik.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 86731,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_animal_center_outcomes_zoya_osipova.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 56233,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_area_bike_share_tbb.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 49103,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_automatic_incident_classifier.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 88843,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_avito.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 37205,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_bank_marketing_artgor.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 50673,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_brazil_rains_aborisihin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 78010,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_breast_cancer_sohi.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 26790,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_broken_machine_eda_and_classification.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 27010,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_candy_production_prediction_EvgeniyLatyshev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 35975,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_cars_MPG_city_predict.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21933,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_churn_Nichiporenko.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 44581,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_ckd_diagnostics_kudin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 51385,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_creditscore_kuznetsov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 33185,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_credit_card_fraud_detection.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 47835,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_default_payment_masha_noiseless.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 41273,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_demo_openpowerlifting.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 29717,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_DengAI_tetelias.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 76142,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_detection_of_default_credits_asmolovskij.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 35451,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_detect_malicious_sites_Eremina.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 49972,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_dft-accident-data_zabkov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 42380,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_diamonds_kamenev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 43869,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_Dow_Jones_daily_news_malugina.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 55758,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_env_sound_classification_cnn_fremis.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 66910,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_example_banks.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 25228,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_example_billboard.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 30997,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_example_instagram.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 27484,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_example_telecom_churn.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 37059,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_fears_prediction_josdas.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 83000,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_garpenlov_thyroid.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 51233,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_geohack_lopuhova.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 124623,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_gibdd_kulikovpavel.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 62739,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_horse_colic_qovaxx.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 122560,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_hotels_review_krasnov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 60871,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_human_resources_analytics_waniz.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 46521,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_IMDb_ratings_Ilya_Chernov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 62695,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_imt_biryukova.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 50035,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_jigsaw_petukhov_dmitrii.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 109918,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_justicehunter_devyataykina.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 22921,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_keystroke_owner_identification_emashkin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 76289,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_kickstarter_bolshagin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 59117,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_KingCountry_house_pred_price_belyaev_aleksandr.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 99354,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_Melbourne_house_price.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 34317,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_mm_billing_uvarov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 38226,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_modulbank_msk_trubanev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 82093,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_movielens_spirin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 42308,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_museum_research_vlasov_kirill.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 50277,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_NYC_taxi_BadamshinBI.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 86246,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_okcupid_vitaliylo.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 67089,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_polish_bankruptcy_stanislavleet.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 62475,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_prolongation_service_akhmetov_danil.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 38922,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_sales_prediction_ad_ilyas.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 97794,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_school_grades_prediction_anti111.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 43665,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_seismic_waves_airat.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 56984,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_spam_classifier_eldar_kochshegulov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 37317,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_spooky_authors_mvsamsonov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 37550,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_spooky_writer_denismoroz.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21190,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_telecom_response_prediction_MdScntst.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 50021,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_template.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 5595,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_text-analysis-with-BigARTM_ldinka.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 40355,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_tmdb_ivanlipko.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 60672,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_tripadvisor_score_chigin_sergey.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 66088,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_usa_national_parks_anastasia_romanova.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 50952,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_used_cars_yuliya_klimushina.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 55115,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_US_flights_delay.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 46526,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_us_railway_accident_analysis.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 36676,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_well_logs_autointerpretation.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 76807,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_wiki_katrenko.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 86573,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_women_clothing_review.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 25530,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_world_of_warcraft_battlegrounds.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 16610,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_YandexML_track.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 62026,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/project_yandex_click_edvard2901.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 38617,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/projects_individual/san_francisco_building_permits.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21990,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/project_alice/week1_prepare_dataset.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 38733,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/project_alice/week2_analysis_hypotheses.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 25016,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/project_alice/week3_visual_analysis_and_fe.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 30176,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/project_alice/week4_training.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 44461,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/project_alice/week5_sgd_kaggle.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21175,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/project_alice/week6_vowpal_wabbit.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 26483,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic01_pandas_data_analysis/lesson1_pandas_intro_inclass_dirty.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 6280,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic01_pandas_data_analysis/lesson1_part0_numpy.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 23343,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic01_pandas_data_analysis/lesson1_part1_pandas_intro.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21264,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic01_pandas_data_analysis/lesson1_practice_pandas_titanic.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 10983,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic01_pandas_data_analysis/topic1_habr_pandas.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 35331,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic02_visual_analysis/lesson2_poll_data_inclass_as_is.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 5526,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic02_visual_analysis/lesson2_practice_visual_titanic.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 7476,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic02_visual_analysis/lesson2_telecom_churn_inclass_as_is.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 8962,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic02_visual_analysis/topic2_part1_seaborn_matplotlib_plotly.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 19243,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic02_visual_analysis/topic2_part2_telecom_churn_tsne.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 26109,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic03_decision_trees_knn/lesson3_decision_trees_dirty_inclass.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 7778,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic03_decision_trees_knn/lesson3_practice_trees_titanic.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 14751,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic03_decision_trees_knn/topic3_trees_knn.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 110312,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic04_linear_models/arktur_medium_ridge_baseline_inclass_dirty.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 16342,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic04_linear_models/lesson4_practice_alice_benchmarks.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21187,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic04_linear_models/lesson6_lasso_ridge.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 16001,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic04_linear_models/lesson6_practice_linreg_optimization.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21093,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic04_linear_models/topic4_linear_models_part1_mse_likelihood_bias_variance.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 35899,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic04_linear_models/topic4_linear_models_part2_logit_likelihood_learning.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 23196,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic04_linear_models/topic4_linear_models_part3_regul_example.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 20417,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic04_linear_models/topic4_linear_models_part4_good_bad_logit_movie_reviews_XOR.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21643,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic04_linear_models/topic4_linear_models_part5_valid_learning_curves.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 15406,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic05_bagging_rf/lesson5_practice_credit_scoring_trees.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 15309,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic05_bagging_rf/lesson5_quality_metrics_classification.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 18292,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic05_bagging_rf/topic5_part1_bagging.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 23617,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic05_bagging_rf/topic5_part2_random_forest.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 53876,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic05_bagging_rf/topic5_part3_feature_importance.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 11349,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic06_features/demo.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5006,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic06_features/lesson6_regression_bikes_inclass_march19.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 8230,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic06_features/topic6_feature_engineering_feature_selection_russian.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 1801400,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic07_unsupervised/lesson7_part1_PCA.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 31761,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic07_unsupervised/lesson7_part2_clustering_metrics.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 13436,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic07_unsupervised/lesson7_part3_kmeans.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 15576,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic07_unsupervised/topic7_bonus_PCA_toy_example.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 13511,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic07_unsupervised/topic7_pca_clustering.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 62853,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic08_sgd_hashing_vowpal_wabbit/lesson8_part1_encoding.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 18425,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic08_sgd_hashing_vowpal_wabbit/lesson8_part2_movie_reviews_SVM.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 16382,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic08_sgd_hashing_vowpal_wabbit/sparse_matrix_sgd_movies_inclass_as_is_20180402.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 5654,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic08_sgd_hashing_vowpal_wabbit/topic8_sgd_hashing_vowpal_wabbit.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 72533,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic09_time_series/topic9_part1_time_series_python.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 87255,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic09_time_series/topic9_part2_arima_time_series_deaths.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 11933,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic09_time_series/topic9_part3_facebook_prophet.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 19582,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic10_boosting/lesson10_part10_cat_features.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 25375,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic10_boosting/lesson10_part1_boosting.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 27064,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic10_boosting/lesson10_part2_xgboost_scikit_gboost.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 19158,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic10_boosting/lesson10_part3_standard_interface.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 9265,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic10_boosting/lesson10_part4_sklearn_interface.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 6736,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic10_boosting/lesson10_part5_feature_importance.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 6931,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic10_boosting/lesson10_part6_bias_variance.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 12275,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic10_boosting/lesson10_part7_xgboost_tuning_params.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 15511,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic10_boosting/lesson10_part8_evaluation.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 11826,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/topic10_boosting/lesson10_part9_imbalance.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 17783,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/amber4eg_telegram_send.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 5148,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/artgor_ipywidgets.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 114374,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/arules_shared/apriori.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14997,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/arules_shared/Association Rules Learning with Python and R.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 181038,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/bokeh_tutorial_nikt.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 28957,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/boruta_tutorial_Izmajlovkonstantin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 20189,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/CLOPE_hedgehogues_urvanov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 175349,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/CNTK_tutorial.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 32743,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/cv2_tutorial_MdScntst.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 60611,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/dask_dataframe_avt.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 18468,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/dl_sentiment_analysis_radchenko.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 47301,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/factorization_machines_sygorbatyuk.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 25723,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/filtering_signals_airat.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 29665,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/folium_shlur.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 11936,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/Gini_coefficient.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 57773,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/gmm_tutorial_edevyataykina.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 17828,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/h2o_lib_katyashiryaeva.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 53720,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/hyperopt_tutorial_stalkermustang .ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 19035,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/imbalanced_problems_labintcev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 38004,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/isotonic_kamenev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 41462,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/iterative_stratification_of_multilabel_data_vfdev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 26708,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/jumps_method_vdyashin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 25401,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/LOF_algorithm_for_outlier_detection.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 20875,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/LogisticRegression improve using NB-SVM.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 12319,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/make_it_beautiful_myltykritik.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 38777,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/mlxtend_tetelias.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 16939,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/multi-armed_bandits_ololo/graph_utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 882,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/multi-armed_bandits_ololo/multi-armed_bandits_ololo.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 524703,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/Nichiporenko_Tutorial_SVD.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 18244,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/Optimization.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 39885,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/Oracle_and_Pandas.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 39222,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/Pandas_and_databases_sergey.danila.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 23970,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/Pandas_and_SQL_server_oleg.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 35482,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/pipeline_featureunion_datamove.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 30343,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/Python_R_Collab_shakhova.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 16246,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/random_forest_interpretation_ostroukhov/random_forest_interpretation_ostroukhov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 228885,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/recommendation_system_spirin.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 24662,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/relativity_classifier_alexander_lazarev.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 22576,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/Scraping with BeautifulSoup and RegExps.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 21410,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/pipelines.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 833,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/settings.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 256,
+      "evidence": [
+        "Settings module"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/beach_spider_0.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 375,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/beach_spider_1.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 622,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/beach_spider_2.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1528,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 165,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tutorial.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 179824,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/svm_tutorial_pavelvpster.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 25903,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/TeaPOT_ekaterina.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 18150,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/tensorflow_hub_vitaliylo.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 19097,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/Texts processing peculiarities ( on example of the sentiment analysis).ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 24257,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/tf_kmeans_miklgr500.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 40184,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/traffic_signs_cnn_georguy.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 44377,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/tsfresh_Levka.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 13841,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/tutorial_eli5_kulikovpavel.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 16730,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/tutorial_ensemble_methods_qovaxx.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 83351,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/tutorial_statsmodels.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 22926,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/tutorial_template.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 8357,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/umap_thepowerfuldeez.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 30094,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/vectorizers_tutorial_mvsamsonov.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 34167,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/visualization_of_a_large_amount_of_geo-data/visualization-of-a-large-amout-of-geo-data.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 706028,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "jupyter_russian/tutorials/word2vec_demonzheg.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 61658,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 1089,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "uv.lock",
+      "bucket": "unknown",
+      "extension": ".lock",
+      "size_bytes": 303274,
+      "evidence": []
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "jupyter_russian/topic06_features/demo.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/topic06_features/demo.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pandas",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/topic06_features/demo.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/topic06_features/demo.py",
+      "raw_specifier": "from sklearn.base import TransformerMixin",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/arules_shared/apriori.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/arules_shared/apriori.py",
+      "raw_specifier": "csv",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "csv",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/arules_shared/apriori.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/arules_shared/apriori.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/arules_shared/apriori.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/arules_shared/apriori.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/arules_shared/apriori.py",
+      "raw_specifier": "from itertools import combinations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/arules_shared/apriori.py",
+      "raw_specifier": "from itertools import chain",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/multi-armed_bandits_ololo/graph_utils.py",
+      "raw_specifier": "pydot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pydot",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/multi-armed_bandits_ololo/graph_utils.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/pipelines.py",
+      "raw_specifier": "urllib.request",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/pipelines.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/beach_spider_0.py",
+      "raw_specifier": "scrapy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "scrapy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/beach_spider_1.py",
+      "raw_specifier": "scrapy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "scrapy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/beach_spider_2.py",
+      "raw_specifier": "scrapy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "scrapy",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "eli5",
+        "holidays",
+        "ipywidgets",
+        "jupyter",
+        "jupyter_book",
+        "matplotlib",
+        "numpy",
+        "pandas",
+        "pillow",
+        "plotly",
+        "prophet",
+        "pydot",
+        "pydotplus",
+        "pytesseract",
+        "reverse_geocoder",
+        "scikit_learn",
+        "scipy",
+        "seaborn",
+        "statsmodels",
+        "ua_parser",
+        "user_agents",
+        "wordcloud",
+        "xgboost"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "uv.lock",
+      "source_type": "uv.lock",
+      "packages": [
+        "accessible_pygments",
+        "alabaster",
+        "anyio",
+        "appnope",
+        "argon2_cffi",
+        "argon2_cffi_bindings",
+        "arrow",
+        "astroid",
+        "asttokens",
+        "async_lru",
+        "attrs",
+        "babel",
+        "beautifulsoup4",
+        "black",
+        "bleach",
+        "certifi",
+        "cffi",
+        "cfgv",
+        "charset_normalizer",
+        "click",
+        "cmdstanpy",
+        "colorama",
+        "comm",
+        "contourpy",
+        "cycler",
+        "debugpy",
+        "decorator",
+        "defusedxml",
+        "dill",
+        "distlib",
+        "docutils",
+        "eli5",
+        "executing",
+        "fastjsonschema",
+        "filelock",
+        "fonttools",
+        "fqdn",
+        "gdown",
+        "ghp_import",
+        "graphviz",
+        "greenlet",
+        "h11",
+        "holidays",
+        "httpcore",
+        "httpx",
+        "identify",
+        "idna",
+        "imagesize",
+        "importlib_metadata",
+        "importlib_resources",
+        "ipykernel",
+        "ipython",
+        "ipython_pygments_lexers",
+        "ipywidgets",
+        "isoduration",
+        "isort",
+        "jedi",
+        "jinja2",
+        "joblib",
+        "json5",
+        "jsonpointer",
+        "jsonschema",
+        "jsonschema_specifications",
+        "jupyter",
+        "jupyter_book",
+        "jupyter_cache",
+        "jupyter_client",
+        "jupyter_console",
+        "jupyter_core",
+        "jupyter_events",
+        "jupyter_lsp",
+        "jupyter_server",
+        "jupyter_server_terminals",
+        "jupyterlab",
+        "jupyterlab_pygments",
+        "jupyterlab_server",
+        "jupyterlab_widgets",
+        "kiwisolver",
+        "lark",
+        "latexcodec",
+        "linkify_it_py",
+        "markdown_it_py",
+        "markupsafe",
+        "matplotlib",
+        "matplotlib_inline",
+        "mccabe",
+        "mdit_py_plugins",
+        "mdurl",
+        "mistune",
+        "mypy_extensions",
+        "myst_nb",
+        "myst_parser",
+        "narwhals",
+        "nbclient",
+        "nbconvert",
+        "nbformat",
+        "nest_asyncio",
+        "nodeenv",
+        "notebook",
+        "notebook_shim",
+        "numpy",
+        "nvidia_nccl_cu12",
+        "packaging",
+        "pandas",
+        "pandocfilters",
+        "parso",
+        "pathspec",
+        "patsy",
+        "pexpect",
+        "pillow",
+        "platformdirs",
+        "plotly",
+        "pre_commit",
+        "prometheus_client",
+        "prompt_toolkit",
+        "prophet",
+        "psutil",
+        "ptyprocess",
+        "pure_eval",
+        "pybtex",
+        "pybtex_docutils",
+        "pycparser",
+        "pydata_sphinx_theme",
+        "pydot",
+        "pydotplus",
+        "pygments",
+        "pylatexenc",
+        "pylint",
+        "pyparsing",
+        "pysocks",
+        "pytesseract",
+        "python_dateutil",
+        "python_json_logger",
+        "pytokens",
+        "pytz",
+        "pywinpty",
+        "pyyaml",
+        "pyzmq",
+        "referencing",
+        "requests",
+        "reverse_geocoder",
+        "rfc3339_validator",
+        "rfc3986_validator",
+        "rfc3987_syntax",
+        "rpds_py",
+        "scikit_learn",
+        "scipy",
+        "seaborn",
+        "send2trash",
+        "setuptools",
+        "six",
+        "snowballstemmer",
+        "soupsieve",
+        "sphinx",
+        "sphinx_book_theme",
+        "sphinx_comments",
+        "sphinx_copybutton",
+        "sphinx_design",
+        "sphinx_external_toc",
+        "sphinx_jupyterbook_latex",
+        "sphinx_multitoc_numbering",
+        "sphinx_thebe",
+        "sphinx_togglebutton",
+        "sphinxcontrib_applehelp",
+        "sphinxcontrib_bibtex",
+        "sphinxcontrib_devhelp",
+        "sphinxcontrib_htmlhelp",
+        "sphinxcontrib_jsmath",
+        "sphinxcontrib_qthelp",
+        "sphinxcontrib_serializinghtml",
+        "sqlalchemy",
+        "stack_data",
+        "stanio",
+        "statsmodels",
+        "tabulate",
+        "terminado",
+        "threadpoolctl",
+        "tinycss2",
+        "tomlkit",
+        "tornado",
+        "tqdm",
+        "traitlets",
+        "typing_extensions",
+        "tzdata",
+        "ua_parser",
+        "ua_parser_builtins",
+        "uc_micro_py",
+        "uri_template",
+        "urllib3",
+        "user_agents",
+        "virtualenv",
+        "wcwidth",
+        "webcolors",
+        "webencodings",
+        "websocket_client",
+        "wheel",
+        "widgetsnbextension",
+        "wordcloud",
+        "xgboost",
+        "zipp"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "jupyter_russian/topic06_features/demo.py",
+      "candidate_test_paths": [
+        "jupyter_russian/topic06_features/tests/test_demo.py",
+        "tests/topic06_features/test_demo.py",
+        "jupyter_russian/topic06_features/tests/test_topic06_features.py",
+        "test/test_demo.py",
+        "tests/test_demo.py",
+        "tests/demo/test_demo.py",
+        "tests/demos/test_demo.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "jupyter_russian/tutorials/arules_shared/apriori.py",
+      "candidate_test_paths": [
+        "jupyter_russian/tutorials/arules_shared/tests/test_apriori.py",
+        "tests/tutorials/arules_shared/test_apriori.py",
+        "jupyter_russian/tutorials/arules_shared/tests/test_arules_shared.py",
+        "test/test_apriori.py",
+        "tests/test_apriori.py",
+        "tests/apriori/test_apriori.py",
+        "tests/aprioris/test_apriori.py",
+        "tests/arules_shared/test_apriori.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "jupyter_russian/tutorials/multi-armed_bandits_ololo/graph_utils.py",
+      "candidate_test_paths": [
+        "jupyter_russian/tutorials/multi-armed_bandits_ololo/tests/test_graph_utils.py",
+        "tests/tutorials/multi-armed_bandits_ololo/test_graph_utils.py",
+        "jupyter_russian/tutorials/multi-armed_bandits_ololo/tests/test_multi-armed_bandits_ololo.py",
+        "test/test_graph_utils.py",
+        "tests/test_graph_utils.py",
+        "tests/graph_utils/test_graph_utils.py",
+        "tests/multi-armed_bandits_ololo/test_graph_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/pipelines.py",
+      "candidate_test_paths": [
+        "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/tests/test_pipelines.py",
+        "tests/tutorials/scrapy_tourism/scrapy_tourism/test_pipelines.py",
+        "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/tests/test_scrapy_tourism.py",
+        "test/test_pipelines.py",
+        "tests/test_pipelines.py",
+        "tests/pipelines/test_pipelines.py",
+        "tests/scrapy_tourism/test_pipelines.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/beach_spider_0.py",
+      "candidate_test_paths": [
+        "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/tests/test_beach_spider_0.py",
+        "tests/tutorials/scrapy_tourism/scrapy_tourism/spiders/test_beach_spider_0.py",
+        "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/tests/test_spiders.py",
+        "test/test_beach_spider_0.py",
+        "tests/test_beach_spider_0.py",
+        "tests/beach_spider_0/test_beach_spider_0.py",
+        "tests/beach_spider_0s/test_beach_spider_0.py",
+        "tests/spiders/test_beach_spider_0.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/beach_spider_1.py",
+      "candidate_test_paths": [
+        "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/tests/test_beach_spider_1.py",
+        "tests/tutorials/scrapy_tourism/scrapy_tourism/spiders/test_beach_spider_1.py",
+        "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/tests/test_spiders.py",
+        "test/test_beach_spider_1.py",
+        "tests/test_beach_spider_1.py",
+        "tests/beach_spider_1/test_beach_spider_1.py",
+        "tests/beach_spider_1s/test_beach_spider_1.py",
+        "tests/spiders/test_beach_spider_1.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/beach_spider_2.py",
+      "candidate_test_paths": [
+        "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/tests/test_beach_spider_2.py",
+        "tests/tutorials/scrapy_tourism/scrapy_tourism/spiders/test_beach_spider_2.py",
+        "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/spiders/tests/test_spiders.py",
+        "test/test_beach_spider_2.py",
+        "tests/test_beach_spider_2.py",
+        "tests/beach_spider_2/test_beach_spider_2.py",
+        "tests/beach_spider_2s/test_beach_spider_2.py",
+        "tests/spiders/test_beach_spider_2.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/payment/**",
+      "matched_paths": [
+        "jupyter_russian/projects_individual/project_default_payment_masha_noiseless.ipynb",
+        "jupyter_russian/projects_individual/project_mm_billing_uvarov.ipynb"
+      ],
+      "category": "financial_transactions",
+      "severity": "critical",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"payment\" found in 1 paths",
+        "Keyword \"billing\" found in 1 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/settings/**",
+      "matched_paths": [
+        "jupyter_russian/tutorials/scrapy_tourism/scrapy_tourism/settings.py"
+      ],
+      "category": "infrastructure_config",
+      "severity": "medium",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"settings\" found in 1 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "uv.lock"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "jupyter_chinese/assignments_demo/assignment01-人口收入普查数据探索.ipynb",
+        "jupyter_chinese/assignments_demo/assignment02-心血管疾病数据探索分析.ipynb",
+        "jupyter_chinese/assignments_demo/assignment03-决策树和随机森林分析应用.ipynb",
+        "jupyter_chinese/assignments_demo/assignment04-逻辑回归用于讽刺文本检测.ipynb",
+        "jupyter_chinese/assignments_demo/assignment05-构建信用评分预测分类模型.ipynb",
+        "jupyter_chinese/assignments_demo/assignment06-红酒质量数据回归探索.ipynb",
+        "jupyter_chinese/assignments_demo/assignment07-非监督学习应用练习.ipynb",
+        "jupyter_chinese/assignments_demo/assignment08-线性回归和随机梯度下降.ipynb",
+        "jupyter_chinese/assignments_demo/assignment09-时间序列分析应用练习.ipynb",
+        "jupyter_chinese/topic01-使用-Pandas-进行数据探索.ipynb",
+        "jupyter_chinese/topic02-Python-数据可视化分析.ipynb",
+        "jupyter_chinese/topic03-决策树和-K-近邻分类.ipynb",
+        "jupyter_chinese/topic04-线性回归和线性分类器.ipynb",
+        "jupyter_chinese/topic05-集成学习和随机森林方法.ipynb",
+        "jupyter_chinese/topic06-特征工程和特征选择.ipynb",
+        "jupyter_chinese/topic07-主成分分析和聚类.ipynb",
+        "jupyter_chinese/topic08-随机梯度下降和独热编码.ipynb",
+        "jupyter_chinese/topic09-时间序列处理与应用.ipynb",
+        "jupyter_english/assignments_demo/assignment01_pandas_uci_adult.ipynb",
+        "jupyter_english/assignments_demo/assignment01_pandas_uci_adult_solution.ipynb",
+        "jupyter_english/assignments_demo/assignment02_analyzing_cardiovascular_desease_data.ipynb",
+        "jupyter_english/assignments_demo/assignment02_analyzing_cardiovascular_desease_data_solution.ipynb",
+        "jupyter_english/assignments_demo/assignment03_decision_trees.ipynb",
+        "jupyter_english/assignments_demo/assignment03_decision_trees_solution.ipynb",
+        "jupyter_english/assignments_demo/assignment04_linreg_optimization.ipynb",
+        "jupyter_english/assignments_demo/assignment04_sarcasm_detection_with_logit.ipynb",
+        "jupyter_english/assignments_demo/assignment04_sarcasm_detection_with_logit_solution.ipynb",
+        "jupyter_english/assignments_demo/assignment05_logit_rf_credit_scoring.ipynb",
+        "jupyter_english/assignments_demo/assignment05_logit_rf_credit_scoring_solution.ipynb",
+        "jupyter_english/assignments_demo/assignment06_regression_wine.ipynb",
+        "jupyter_english/assignments_demo/assignment06_regression_wine_solution.ipynb",
+        "jupyter_english/assignments_demo/assignment07_unsupervised_learning.ipynb",
+        "jupyter_english/assignments_demo/assignment07_unsupervised_learning_solution.ipynb",
+        "jupyter_english/assignments_demo/assignment08_implement_sgd_regressor.ipynb",
+        "jupyter_english/assignments_demo/assignment08_implement_sgd_regressor_solution.ipynb",
+        "jupyter_english/assignments_demo/assignment09_time_series.ipynb",
+        "jupyter_english/assignments_demo/assignment09_time_series_solution.ipynb",
+        "jupyter_english/assignments_demo/assignment10_flight_delays_kaggle.ipynb",
+        "jupyter_english/projects_indiv/airlines_cancellation_flights_nikita_simonov.ipynb",
+        "jupyter_english/projects_indiv/attrition_of_employees_Pisarev_Ivan.ipynb",
+        "jupyter_english/projects_indiv/boston.ipynb",
+        "jupyter_english/projects_indiv/California_housing_value_prediction_Ilya_Larchenko.ipynb",
+        "jupyter_english/projects_indiv/cancer_benign_or_malignant_nikolai_timonin.ipynb",
+        "jupyter_english/projects_indiv/Classification_on_zakupkigovru_contracts_Mikhail_Korshchikov.ipynb",
+        "jupyter_english/projects_indiv/Diabetes_readmission_Samokhvalov_Mikhail.ipynb",
+        "jupyter_english/projects_indiv/diabetic_retinopathy_detection_Kirill_Panin.ipynb",
+        "jupyter_english/projects_indiv/Dmitry_Girdyuk_indiv_proj.ipynb",
+        "jupyter_english/projects_indiv/elo_merchant_recommendation_tbb.ipynb",
+        "jupyter_english/projects_indiv/Forecasting_stock_returns_with_ARIMA,_and_prices_with_Ridge_and_Lasso.ipynb",
+        "jupyter_english/projects_indiv/Happiness_and_Turnover.ipynb",
+        "jupyter_english/projects_indiv/heart_deseases_Varkentin.ipynb",
+        "jupyter_english/projects_indiv/html_markup_product_card_detection_Danila.ipynb",
+        "jupyter_english/projects_indiv/indiv_project_aego.ipynb",
+        "jupyter_english/projects_indiv/Indiv_project_Sergei_Bulaev-2.ipynb",
+        "jupyter_english/projects_indiv/kickstarter_voskresenskii.ipynb",
+        "jupyter_english/projects_indiv/lenta_ru_currency_rate_prediction_Maxim_Kashirin.ipynb",
+        "jupyter_english/projects_indiv/Melbourne_final.ipynb",
+        "jupyter_english/projects_indiv/mobile_price_classification_trefilov_andrew.ipynb",
+        "jupyter_english/projects_indiv/pragadeesh_indiv_project.ipynb",
+        "jupyter_english/projects_indiv/predicting-wine-expert-rating_maxim-klyuchnikov.ipynb",
+        "jupyter_english/projects_indiv/predicting_pulsar_aleksei_demin.ipynb",
+        "jupyter_english/projects_indiv/predicting_the_onset_of_diabetes_based_on_diagnostic_measures_altprof.ipynb",
+        "jupyter_english/projects_indiv/prediction_of_online_shoppers'_purchasing_intention_Georgy_Lazarev.ipynb",
+        "jupyter_english/projects_indiv/Predict_bike_sharing_Kozlov_Maxim.ipynb",
+        "jupyter_english/projects_indiv/project_australia_rains_classification_kovalev.ipynb",
+        "jupyter_english/projects_indiv/project_car_insurance_nichiporenko.ipynb",
+        "jupyter_english/projects_indiv/project_Georgy_Surin_quora_insincere_questions.ipynb",
+        "jupyter_english/projects_indiv/project_IgoSorokin.ipynb",
+        "jupyter_english/projects_indiv/project_ods_student_perfomance_Chebeneva_Ekaterina.ipynb",
+        "jupyter_english/projects_indiv/project_template.ipynb",
+        "jupyter_english/projects_indiv/Pubg_finish_placement_prediction.ipynb",
+        "jupyter_english/projects_indiv/Recognising_authors_using_ML_methods_Sergey_Ustyantsev.ipynb",
+        "jupyter_english/projects_indiv/Rossman_store_sales_Syrovatskiy_Ilya.ipynb",
+        "jupyter_english/projects_indiv/sberbank_housing_market_i_kalininskii.ipynb",
+        "jupyter_english/projects_indiv/shelter_by_Julia_Mochalova.ipynb",
+        "jupyter_english/projects_indiv/Solar_flares_forecasting_Knyazeva.ipynb",
+        "jupyter_english/projects_indiv/stackoverflow_career_satisfaction_Kseniia.ipynb",
+        "jupyter_english/projects_indiv/stock_prices_abhiklha.ipynb",
+        "jupyter_english/projects_indiv/ted_talks_proj_indiv_artem_kuznetsov.ipynb",
+        "jupyter_english/projects_indiv/telco-customer-churn-prediction_pavel-taiga.ipynb",
+        "jupyter_english/projects_indiv/tweets_agressiveness_ezhova_darya.ipynb",
+        "jupyter_english/projects_indiv/will_you_have_a_success_in_speed_dating_tatyana_kudasova.ipynb",
+        "jupyter_english/projects_indiv/wines_sudarkova.ipynb",
+        "jupyter_english/topic01_pandas_data_analysis/topic1_pandas_data_analysis.ipynb",
+        "jupyter_english/topic01_pandas_data_analysis/topic1_practice_pandas_titanic.ipynb",
+        "jupyter_english/topic01_pandas_data_analysis/topic1_practice_pandas_titanic_solution.ipynb",
+        "jupyter_english/topic02_visual_data_analysis/topic2_additional_seaborn_matplotlib_plotly.ipynb",
+        "jupyter_english/topic02_visual_data_analysis/topic2_practice_visual_titanic.ipynb",
+        "jupyter_english/topic02_visual_data_analysis/topic2_practice_visual_titanic_solution.ipynb",
+        "jupyter_english/topic02_visual_data_analysis/topic2_visual_data_analysis.ipynb",
+        "jupyter_english/topic03_decision_trees_kNN/topic3_decision_trees_kNN.ipynb",
+        "jupyter_english/topic04_linear_models/topic4_linear_models_part1_mse_likelihood_bias_variance.ipynb",
+        "jupyter_english/topic04_linear_models/topic4_linear_models_part2_logit_likelihood_learning.ipynb",
+        "jupyter_english/topic04_linear_models/topic4_linear_models_part3_regul_example.ipynb",
+        "jupyter_english/topic04_linear_models/topic4_linear_models_part4_good_bad_logit_movie_reviews_XOR.ipynb",
+        "jupyter_english/topic04_linear_models/topic4_linear_models_part5_valid_learning_curves.ipynb",
+        "jupyter_english/topic05_ensembles_random_forests/topic5_part1_bagging.ipynb",
+        "jupyter_english/topic05_ensembles_random_forests/topic5_part2_random_forest.ipynb",
+        "jupyter_english/topic05_ensembles_random_forests/topic5_part3_feature_importance.ipynb",
+        "jupyter_english/topic06_features_regression/lesson6_lasso_ridge.ipynb",
+        "jupyter_english/topic06_features_regression/topic6_feature_engineering_feature_selection.ipynb",
+        "jupyter_english/topic07_unsupervised/lesson7_part1_PCA.ipynb",
+        "jupyter_english/topic07_unsupervised/lesson7_part2_kmeans.ipynb",
+        "jupyter_english/topic07_unsupervised/topic7_pca_clustering.ipynb",
+        "jupyter_english/topic08_sgd_hashing_vowpal_wabbit/topic8_sgd_hashing_vowpal_wabbit.ipynb",
+        "jupyter_english/topic09_time_series/topic9_part1_time_series_python.ipynb",
+        "jupyter_english/topic09_time_series/topic9_part2_facebook_prophet.ipynb",
+        "jupyter_english/topic10_boosting/topic10_gradient_boosting.ipynb",
+        "jupyter_english/tutorials/anomaly_detection_isolation_forest_alexander_nichiporenko.ipynb",
+        "jupyter_english/tutorials/basic_semi-supervised_learning_models_altprof.ipynb",
+        "jupyter_english/tutorials/bring_your_plots_to_life_with_matplotlib_animations_kyriacos_kyriacou.ipynb",
+        "jupyter_english/tutorials/Catastrophic_Events_with_Scipy.ipynb",
+        "jupyter_english/tutorials/custom_vectorizer_tutorial.ipynb",
+        "jupyter_english/tutorials/dask_objects_and_little_dask_ml_tutorial_iknyazeva.ipynb",
+        "jupyter_english/tutorials/deploying-your-machine-learning-model_maxim-klyuchnikov.ipynb",
+        "jupyter_english/tutorials/Epidemics_on_networks_with_NetworkX_and_EoN_Syrovatskiy_Ilya.ipynb",
+        "jupyter_english/tutorials/Feature_engineering_is_all_you_need_ tutorial_Georgy_Surin.ipynb",
+        "jupyter_english/tutorials/handling_categorical_data_Danila.ipynb",
+        "jupyter_english/tutorials/hyperparameters_tunning_ilya_larchenko.ipynb",
+        "jupyter_english/tutorials/Imputing_missing_data_with_fancyimpute_archit_rungta.ipynb",
+        "jupyter_english/tutorials/Insights_of_Monty_Hall_paradox_with_Plotly_dmironov.ipynb",
+        "jupyter_english/tutorials/Intitutive_Explanation_of_Expectation_Maximization_Algorithm_MagnIeeT.ipynb",
+        "jupyter_english/tutorials/Introduction_to_Network_Analysis_with_NetworkX_Georgy_Lazarev.ipynb",
+        "jupyter_english/tutorials/kaggle_leaderboard_probing_nikolai_timonin.ipynb",
+        "jupyter_english/tutorials/Keras_easy_way_to_construct_the_Neural_Networks_fixed.ipynb",
+        "jupyter_english/tutorials/lda_pca_and_topic_modelling_shivam_panwar.ipynb",
+        "jupyter_english/tutorials/learn_regex_the_easy_way_aditya_soni.ipynb",
+        "jupyter_english/tutorials/LSTM_tutorial_Sergei_Bulaev.ipynb",
+        "jupyter_english/tutorials/merging_dataframes_tutorial_max_palko.ipynb",
+        "jupyter_english/tutorials/Mlxtend_SFS_an_easy_way_to_select_features.ipynb",
+        "jupyter_english/tutorials/more_info_about_numpy_kseniia_terekhova.ipynb",
+        "jupyter_english/tutorials/nested_cross_validation_tatyana_kudasova.ipynb",
+        "jupyter_english/tutorials/parsing_and_grabbing_tutorial_aleksandr_laskorunsky.ipynb",
+        "jupyter_english/tutorials/plotly_tutorial_for_interactive_plots_sankovalev.ipynb",
+        "jupyter_english/tutorials/Risk_management_with_Python_Andrey_Varkentin2.ipynb",
+        "jupyter_english/tutorials/self_organizing_map_nikita_simonov.ipynb",
+        "jupyter_english/tutorials/something_else_about_ensemble_tbb.ipynb",
+        "jupyter_english/tutorials/some_details_in_matplotlib_pisarev_ivan.ipynb",
+        "jupyter_english/tutorials/statistical_hypothesis_testing_in_python_panin_kirill.ipynb",
+        "jupyter_english/tutorials/tutorial_lda_pyldavis_kovalevvyu.ipynb",
+        "jupyter_english/tutorials/tutorial_ML_with_VM_Mikhail Korshchikov.ipynb",
+        "jupyter_english/tutorials/tutorial_spaCy_chatbot.ipynb",
+        "jupyter_english/tutorials/tutorial_template.ipynb",
+        "jupyter_english/tutorials/Useful_Google_Colab_snippets.ipynb",
+        "jupyter_english/tutorials/Voskresenskii_selenium_tutorial.ipynb",
+        "jupyter_english/tutorials/webscraping_ecommerce_website_with_scrapy.ipynb",
+        "jupyter_english/tutorials/yet_another_ensemble_learning_helper_aleksandr_korotkov.ipynb",
+        "jupyter_french/assignments_demo/a1-demo-pandas-and-uci-adult-dataset-fr_def.ipynb",
+        "jupyter_french/assignments_demo/a1-demo-pandas-and-uci-adult-dataset-solution_fr_def.ipynb",
+        "jupyter_french/assignments_demo/a3-demo-decision-trees-fr_def.ipynb",
+        "jupyter_french/assignments_demo/a4-demo-sarcasm-detection-with-logit-fr_def.ipynb",
+        "jupyter_french/assignments_demo/a4-demo-sarcasm-detection-with-logit-solution-fr_def.ipynb",
+        "jupyter_french/assignments_demo/a5-demo-logit-and-rf-for-credit-scoring-fr_def.ipynb",
+        "jupyter_french/assignments_demo/a6-demo-linear-models-and-rf-for-regression-fr_def.ipynb",
+        "jupyter_french/assignments_demo/a6-demo-regression-solution-fr_def.ipynb",
+        "jupyter_french/assignments_fall2019/assignment1_pandas_olympic_fr_def.ipynb",
+        "jupyter_french/assignments_fall2019/assignment2_part1_decision_trees-fr_def.ipynb",
+        "jupyter_french/assignments_fall2019/mlcourse-ai-fall-2019-catboost-starter-fr_def.ipynb",
+        "jupyter_french/quizzes_fall2019/quiz1_trees_forests-fr_def.ipynb",
+        "jupyter_french/topic01_pandas_data_analysis/topic1_pandas_data_analysis-fr_def.ipynb",
+        "jupyter_french/topic02_visual_data_analysis/topic2_additional_seaborn_matplotlib_plotly-fr_def.ipynb",
+        "jupyter_french/topic02_visual_data_analysis/topic2_visual_data_analysis-fr_def.ipynb",
+        "jupyter_french/topic03_decision_trees_kNN/topic3_decision_trees_kNN-fr_def.ipynb",
+        "jupyter_french/topic04_linear_models/topic4_linear_models_part1_mse_likelihood_bias_variance-fr_def.ipynb",
+        "jupyter_french/topic04_linear_models/topic4_linear_models_part2_logit_likelihood_learning-fr_def.ipynb",
+        "jupyter_french/topic04_linear_models/topic4_linear_models_part3_regul_example-fr_def.ipynb",
+        "jupyter_french/topic04_linear_models/topic4_linear_models_part4_good_bad_logit_movie_reviews_XOR-fr_def.ipynb",
+        "jupyter_french/topic04_linear_models/topic4_linear_models_part5_valid_learning_curves-fr_def.ipynb",
+        "jupyter_french/topic05_ensembles_random_forests/topic5_part1_bagging-fr_def.ipynb",
+        "jupyter_french/topic05_ensembles_random_forests/topic5_part2_random_forest-fr_def.ipynb",
+        "jupyter_french/topic05_ensembles_random_forests/topic5_part3_feature_importance-fr_def.ipynb",
+        "jupyter_french/topic06_features_regression/lesson6_lasso_ridge-fr_def.ipynb",
+        "jupyter_french/topic07_unsupervised/topic7_lesson7_part1_PCA-fr_def.ipynb",
+        "jupyter_french/topic07_unsupervised/topic7_lesson7_part2_kmeans-fr_def.ipynb",
+        "jupyter_french/topic07_unsupervised/topic7_pca_clustering-fr_def.ipynb",
+        "jupyter_french/topic08_sgd_hashing_vowpal_wabbit/topic8_sgd_hashing_vowpal_wabbit-fr_def.ipynb",
+        "jupyter_french/topic09_time_series/topic9_part1_time_series_python-fr_def.ipynb",
+        "jupyter_french/topic09_time_series/topic9_part2_facebook_prophet-fr_def.ipynb",
+        "jupyter_french/topic10_boosting/topic10_gradient_boosting-fr_def.ipynb",
+        "jupyter_french/tutorials/python-data-pre-processing-handy-tips-fr_def.ipynb",
+        "jupyter_french/tutorials/tutorial-categorical-encoding-fr_def.ipynb",
+        "jupyter_russian/assignments_demo/assignment01_adult_pandas.ipynb",
+        "jupyter_russian/assignments_demo/assignment02_habr_visual_analysis.ipynb",
+        "jupyter_russian/assignments_demo/assignment03_decision_trees.ipynb",
+        "jupyter_russian/assignments_demo/assignment04_habr_popularity_ridge.ipynb",
+        "jupyter_russian/assignments_demo/assignment05_logit_rf_credit_scoring.ipynb",
+        "jupyter_russian/assignments_demo/assignment06_regression_wine.ipynb",
+        "jupyter_russian/assignments_demo/assignment07_unsupervised_learning.ipynb",
+        "jupyter_russian/assignments_demo/assignment08_implement_sgd.ipynb",
+        "jupyter_russian/assignments_demo/assignment09_time_series.ipynb",
+        "jupyter_russian/assignments_demo/assignment10_flight_delays_kaggle.ipynb",
+        "jupyter_russian/competitions/kaggle_medium_ridge_baseline.ipynb",
+        "jupyter_russian/competitions/kaggle_QR_codes_simple_EDA.ipynb",
+        "jupyter_russian/competitions/kaggle_QR_codes_simple_starter.ipynb",
+        "jupyter_russian/projects_individual/Credit_individual.ipynb",
+        "jupyter_russian/projects_individual/IBM_churn_prediction.ipynb",
+        "jupyter_russian/projects_individual/keystroke_dynamics_nikt.ipynb",
+        "jupyter_russian/projects_individual/Musical_key_recognition.ipynb",
+        "jupyter_russian/projects_individual/project Bank Marketing WOE.ipynb",
+        "jupyter_russian/projects_individual/project_Agora_Price_Prediction.ipynb",
+        "jupyter_russian/projects_individual/project_airbnb_booking_melnik.ipynb",
+        "jupyter_russian/projects_individual/project_animal_center_outcomes_zoya_osipova.ipynb",
+        "jupyter_russian/projects_individual/project_area_bike_share_tbb.ipynb",
+        "jupyter_russian/projects_individual/project_automatic_incident_classifier.ipynb",
+        "jupyter_russian/projects_individual/project_avito.ipynb",
+        "jupyter_russian/projects_individual/project_bank_marketing_artgor.ipynb",
+        "jupyter_russian/projects_individual/project_brazil_rains_aborisihin.ipynb",
+        "jupyter_russian/projects_individual/project_breast_cancer_sohi.ipynb",
+        "jupyter_russian/projects_individual/project_broken_machine_eda_and_classification.ipynb",
+        "jupyter_russian/projects_individual/project_candy_production_prediction_EvgeniyLatyshev.ipynb",
+        "jupyter_russian/projects_individual/project_cars_MPG_city_predict.ipynb",
+        "jupyter_russian/projects_individual/project_churn_Nichiporenko.ipynb",
+        "jupyter_russian/projects_individual/project_ckd_diagnostics_kudin.ipynb",
+        "jupyter_russian/projects_individual/project_creditscore_kuznetsov.ipynb",
+        "jupyter_russian/projects_individual/project_credit_card_fraud_detection.ipynb",
+        "jupyter_russian/projects_individual/project_default_payment_masha_noiseless.ipynb",
+        "jupyter_russian/projects_individual/project_demo_openpowerlifting.ipynb",
+        "jupyter_russian/projects_individual/project_DengAI_tetelias.ipynb",
+        "jupyter_russian/projects_individual/project_detection_of_default_credits_asmolovskij.ipynb",
+        "jupyter_russian/projects_individual/project_detect_malicious_sites_Eremina.ipynb",
+        "jupyter_russian/projects_individual/project_dft-accident-data_zabkov.ipynb",
+        "jupyter_russian/projects_individual/project_diamonds_kamenev.ipynb",
+        "jupyter_russian/projects_individual/project_Dow_Jones_daily_news_malugina.ipynb",
+        "jupyter_russian/projects_individual/project_env_sound_classification_cnn_fremis.ipynb",
+        "jupyter_russian/projects_individual/project_example_banks.ipynb",
+        "jupyter_russian/projects_individual/project_example_billboard.ipynb",
+        "jupyter_russian/projects_individual/project_example_instagram.ipynb",
+        "jupyter_russian/projects_individual/project_example_telecom_churn.ipynb",
+        "jupyter_russian/projects_individual/project_fears_prediction_josdas.ipynb",
+        "jupyter_russian/projects_individual/project_garpenlov_thyroid.ipynb",
+        "jupyter_russian/projects_individual/project_geohack_lopuhova.ipynb",
+        "jupyter_russian/projects_individual/project_gibdd_kulikovpavel.ipynb",
+        "jupyter_russian/projects_individual/project_horse_colic_qovaxx.ipynb",
+        "jupyter_russian/projects_individual/project_hotels_review_krasnov.ipynb",
+        "jupyter_russian/projects_individual/project_human_resources_analytics_waniz.ipynb",
+        "jupyter_russian/projects_individual/project_IMDb_ratings_Ilya_Chernov.ipynb",
+        "jupyter_russian/projects_individual/project_imt_biryukova.ipynb",
+        "jupyter_russian/projects_individual/project_jigsaw_petukhov_dmitrii.ipynb",
+        "jupyter_russian/projects_individual/project_justicehunter_devyataykina.ipynb",
+        "jupyter_russian/projects_individual/project_keystroke_owner_identification_emashkin.ipynb",
+        "jupyter_russian/projects_individual/project_kickstarter_bolshagin.ipynb",
+        "jupyter_russian/projects_individual/project_KingCountry_house_pred_price_belyaev_aleksandr.ipynb",
+        "jupyter_russian/projects_individual/project_Melbourne_house_price.ipynb",
+        "jupyter_russian/projects_individual/project_mm_billing_uvarov.ipynb",
+        "jupyter_russian/projects_individual/project_modulbank_msk_trubanev.ipynb",
+        "jupyter_russian/projects_individual/project_movielens_spirin.ipynb",
+        "jupyter_russian/projects_individual/project_museum_research_vlasov_kirill.ipynb",
+        "jupyter_russian/projects_individual/project_NYC_taxi_BadamshinBI.ipynb",
+        "jupyter_russian/projects_individual/project_okcupid_vitaliylo.ipynb",
+        "jupyter_russian/projects_individual/project_polish_bankruptcy_stanislavleet.ipynb",
+        "jupyter_russian/projects_individual/project_prolongation_service_akhmetov_danil.ipynb",
+        "jupyter_russian/projects_individual/project_sales_prediction_ad_ilyas.ipynb",
+        "jupyter_russian/projects_individual/project_school_grades_prediction_anti111.ipynb",
+        "jupyter_russian/projects_individual/project_seismic_waves_airat.ipynb",
+        "jupyter_russian/projects_individual/project_spam_classifier_eldar_kochshegulov.ipynb",
+        "jupyter_russian/projects_individual/project_spooky_authors_mvsamsonov.ipynb",
+        "jupyter_russian/projects_individual/project_spooky_writer_denismoroz.ipynb",
+        "jupyter_russian/projects_individual/project_telecom_response_prediction_MdScntst.ipynb",
+        "jupyter_russian/projects_individual/project_template.ipynb",
+        "jupyter_russian/projects_individual/project_text-analysis-with-BigARTM_ldinka.ipynb",
+        "jupyter_russian/projects_individual/project_tmdb_ivanlipko.ipynb",
+        "jupyter_russian/projects_individual/project_tripadvisor_score_chigin_sergey.ipynb",
+        "jupyter_russian/projects_individual/project_usa_national_parks_anastasia_romanova.ipynb",
+        "jupyter_russian/projects_individual/project_used_cars_yuliya_klimushina.ipynb",
+        "jupyter_russian/projects_individual/project_US_flights_delay.ipynb",
+        "jupyter_russian/projects_individual/project_us_railway_accident_analysis.ipynb",
+        "jupyter_russian/projects_individual/project_well_logs_autointerpretation.ipynb",
+        "jupyter_russian/projects_individual/project_wiki_katrenko.ipynb",
+        "jupyter_russian/projects_individual/project_women_clothing_review.ipynb",
+        "jupyter_russian/projects_individual/project_world_of_warcraft_battlegrounds.ipynb",
+        "jupyter_russian/projects_individual/project_YandexML_track.ipynb",
+        "jupyter_russian/projects_individual/project_yandex_click_edvard2901.ipynb",
+        "jupyter_russian/projects_individual/san_francisco_building_permits.ipynb",
+        "jupyter_russian/project_alice/week1_prepare_dataset.ipynb",
+        "jupyter_russian/project_alice/week2_analysis_hypotheses.ipynb",
+        "jupyter_russian/project_alice/week3_visual_analysis_and_fe.ipynb",
+        "jupyter_russian/project_alice/week4_training.ipynb",
+        "jupyter_russian/project_alice/week5_sgd_kaggle.ipynb",
+        "jupyter_russian/project_alice/week6_vowpal_wabbit.ipynb",
+        "jupyter_russian/topic01_pandas_data_analysis/lesson1_pandas_intro_inclass_dirty.ipynb",
+        "jupyter_russian/topic01_pandas_data_analysis/lesson1_part0_numpy.ipynb",
+        "jupyter_russian/topic01_pandas_data_analysis/lesson1_part1_pandas_intro.ipynb",
+        "jupyter_russian/topic01_pandas_data_analysis/lesson1_practice_pandas_titanic.ipynb",
+        "jupyter_russian/topic01_pandas_data_analysis/topic1_habr_pandas.ipynb",
+        "jupyter_russian/topic02_visual_analysis/lesson2_poll_data_inclass_as_is.ipynb",
+        "jupyter_russian/topic02_visual_analysis/lesson2_practice_visual_titanic.ipynb",
+        "jupyter_russian/topic02_visual_analysis/lesson2_telecom_churn_inclass_as_is.ipynb",
+        "jupyter_russian/topic02_visual_analysis/topic2_part1_seaborn_matplotlib_plotly.ipynb",
+        "jupyter_russian/topic02_visual_analysis/topic2_part2_telecom_churn_tsne.ipynb",
+        "jupyter_russian/topic03_decision_trees_knn/lesson3_decision_trees_dirty_inclass.ipynb",
+        "jupyter_russian/topic03_decision_trees_knn/lesson3_practice_trees_titanic.ipynb",
+        "jupyter_russian/topic03_decision_trees_knn/topic3_trees_knn.ipynb",
+        "jupyter_russian/topic04_linear_models/arktur_medium_ridge_baseline_inclass_dirty.ipynb",
+        "jupyter_russian/topic04_linear_models/lesson4_practice_alice_benchmarks.ipynb",
+        "jupyter_russian/topic04_linear_models/lesson6_lasso_ridge.ipynb",
+        "jupyter_russian/topic04_linear_models/lesson6_practice_linreg_optimization.ipynb",
+        "jupyter_russian/topic04_linear_models/topic4_linear_models_part1_mse_likelihood_bias_variance.ipynb",
+        "jupyter_russian/topic04_linear_models/topic4_linear_models_part2_logit_likelihood_learning.ipynb",
+        "jupyter_russian/topic04_linear_models/topic4_linear_models_part3_regul_example.ipynb",
+        "jupyter_russian/topic04_linear_models/topic4_linear_models_part4_good_bad_logit_movie_reviews_XOR.ipynb",
+        "jupyter_russian/topic04_linear_models/topic4_linear_models_part5_valid_learning_curves.ipynb",
+        "jupyter_russian/topic05_bagging_rf/lesson5_practice_credit_scoring_trees.ipynb",
+        "jupyter_russian/topic05_bagging_rf/lesson5_quality_metrics_classification.ipynb",
+        "jupyter_russian/topic05_bagging_rf/topic5_part1_bagging.ipynb",
+        "jupyter_russian/topic05_bagging_rf/topic5_part2_random_forest.ipynb",
+        "jupyter_russian/topic05_bagging_rf/topic5_part3_feature_importance.ipynb",
+        "jupyter_russian/topic06_features/lesson6_regression_bikes_inclass_march19.ipynb",
+        "jupyter_russian/topic06_features/topic6_feature_engineering_feature_selection_russian.ipynb",
+        "jupyter_russian/topic07_unsupervised/lesson7_part1_PCA.ipynb",
+        "jupyter_russian/topic07_unsupervised/lesson7_part2_clustering_metrics.ipynb",
+        "jupyter_russian/topic07_unsupervised/lesson7_part3_kmeans.ipynb",
+        "jupyter_russian/topic07_unsupervised/topic7_bonus_PCA_toy_example.ipynb",
+        "jupyter_russian/topic07_unsupervised/topic7_pca_clustering.ipynb",
+        "jupyter_russian/topic08_sgd_hashing_vowpal_wabbit/lesson8_part1_encoding.ipynb",
+        "jupyter_russian/topic08_sgd_hashing_vowpal_wabbit/lesson8_part2_movie_reviews_SVM.ipynb",
+        "jupyter_russian/topic08_sgd_hashing_vowpal_wabbit/sparse_matrix_sgd_movies_inclass_as_is_20180402.ipynb",
+        "jupyter_russian/topic08_sgd_hashing_vowpal_wabbit/topic8_sgd_hashing_vowpal_wabbit.ipynb",
+        "jupyter_russian/topic09_time_series/topic9_part1_time_series_python.ipynb",
+        "jupyter_russian/topic09_time_series/topic9_part2_arima_time_series_deaths.ipynb",
+        "jupyter_russian/topic09_time_series/topic9_part3_facebook_prophet.ipynb",
+        "jupyter_russian/topic10_boosting/lesson10_part10_cat_features.ipynb",
+        "jupyter_russian/topic10_boosting/lesson10_part1_boosting.ipynb",
+        "jupyter_russian/topic10_boosting/lesson10_part2_xgboost_scikit_gboost.ipynb",
+        "jupyter_russian/topic10_boosting/lesson10_part3_standard_interface.ipynb",
+        "jupyter_russian/topic10_boosting/lesson10_part4_sklearn_interface.ipynb",
+        "jupyter_russian/topic10_boosting/lesson10_part5_feature_importance.ipynb",
+        "jupyter_russian/topic10_boosting/lesson10_part6_bias_variance.ipynb",
+        "jupyter_russian/topic10_boosting/lesson10_part7_xgboost_tuning_params.ipynb",
+        "jupyter_russian/topic10_boosting/lesson10_part8_evaluation.ipynb",
+        "jupyter_russian/topic10_boosting/lesson10_part9_imbalance.ipynb",
+        "jupyter_russian/tutorials/amber4eg_telegram_send.ipynb",
+        "jupyter_russian/tutorials/artgor_ipywidgets.ipynb",
+        "jupyter_russian/tutorials/arules_shared/Association Rules Learning with Python and R.ipynb",
+        "jupyter_russian/tutorials/bokeh_tutorial_nikt.ipynb",
+        "jupyter_russian/tutorials/boruta_tutorial_Izmajlovkonstantin.ipynb",
+        "jupyter_russian/tutorials/CLOPE_hedgehogues_urvanov.ipynb",
+        "jupyter_russian/tutorials/CNTK_tutorial.ipynb",
+        "jupyter_russian/tutorials/cv2_tutorial_MdScntst.ipynb",
+        "jupyter_russian/tutorials/dask_dataframe_avt.ipynb",
+        "jupyter_russian/tutorials/dl_sentiment_analysis_radchenko.ipynb",
+        "jupyter_russian/tutorials/factorization_machines_sygorbatyuk.ipynb",
+        "jupyter_russian/tutorials/filtering_signals_airat.ipynb",
+        "jupyter_russian/tutorials/folium_shlur.ipynb",
+        "jupyter_russian/tutorials/Gini_coefficient.ipynb",
+        "jupyter_russian/tutorials/gmm_tutorial_edevyataykina.ipynb",
+        "jupyter_russian/tutorials/h2o_lib_katyashiryaeva.ipynb",
+        "jupyter_russian/tutorials/hyperopt_tutorial_stalkermustang .ipynb",
+        "jupyter_russian/tutorials/imbalanced_problems_labintcev.ipynb",
+        "jupyter_russian/tutorials/isotonic_kamenev.ipynb",
+        "jupyter_russian/tutorials/iterative_stratification_of_multilabel_data_vfdev.ipynb",
+        "jupyter_russian/tutorials/jumps_method_vdyashin.ipynb",
+        "jupyter_russian/tutorials/LOF_algorithm_for_outlier_detection.ipynb",
+        "jupyter_russian/tutorials/LogisticRegression improve using NB-SVM.ipynb",
+        "jupyter_russian/tutorials/make_it_beautiful_myltykritik.ipynb",
+        "jupyter_russian/tutorials/mlxtend_tetelias.ipynb",
+        "jupyter_russian/tutorials/multi-armed_bandits_ololo/multi-armed_bandits_ololo.ipynb",
+        "jupyter_russian/tutorials/Nichiporenko_Tutorial_SVD.ipynb",
+        "jupyter_russian/tutorials/Optimization.ipynb",
+        "jupyter_russian/tutorials/Oracle_and_Pandas.ipynb",
+        "jupyter_russian/tutorials/Pandas_and_databases_sergey.danila.ipynb",
+        "jupyter_russian/tutorials/Pandas_and_SQL_server_oleg.ipynb",
+        "jupyter_russian/tutorials/pipeline_featureunion_datamove.ipynb",
+        "jupyter_russian/tutorials/Python_R_Collab_shakhova.ipynb",
+        "jupyter_russian/tutorials/random_forest_interpretation_ostroukhov/random_forest_interpretation_ostroukhov.ipynb",
+        "jupyter_russian/tutorials/recommendation_system_spirin.ipynb",
+        "jupyter_russian/tutorials/relativity_classifier_alexander_lazarev.ipynb",
+        "jupyter_russian/tutorials/Scraping with BeautifulSoup and RegExps.ipynb",
+        "jupyter_russian/tutorials/scrapy_tourism/scrapy_tutorial.ipynb",
+        "jupyter_russian/tutorials/svm_tutorial_pavelvpster.ipynb",
+        "jupyter_russian/tutorials/TeaPOT_ekaterina.ipynb",
+        "jupyter_russian/tutorials/tensorflow_hub_vitaliylo.ipynb",
+        "jupyter_russian/tutorials/Texts processing peculiarities ( on example of the sentiment analysis).ipynb",
+        "jupyter_russian/tutorials/tf_kmeans_miklgr500.ipynb",
+        "jupyter_russian/tutorials/traffic_signs_cnn_georguy.ipynb",
+        "jupyter_russian/tutorials/tsfresh_Levka.ipynb",
+        "jupyter_russian/tutorials/tutorial_eli5_kulikovpavel.ipynb",
+        "jupyter_russian/tutorials/tutorial_ensemble_methods_qovaxx.ipynb",
+        "jupyter_russian/tutorials/tutorial_statsmodels.ipynb",
+        "jupyter_russian/tutorials/tutorial_template.ipynb",
+        "jupyter_russian/tutorials/umap_thepowerfuldeez.ipynb",
+        "jupyter_russian/tutorials/vectorizers_tutorial_mvsamsonov.ipynb",
+        "jupyter_russian/tutorials/visualization_of_a_large_amount_of_geo-data/visualization-of-a-large-amout-of-geo-data.ipynb",
+        "jupyter_russian/tutorials/word2vec_demonzheg.ipynb"
+      ],
+      "count": 383,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 10,
+    "classified_count": 10,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 19,
+    "project_import_count": 0,
+    "declared_package_count": 4,
+    "undeclared_package_count": 5,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 7,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 2,
+    "sensitive_file_count": 3,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

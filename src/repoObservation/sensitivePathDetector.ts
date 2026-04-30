@@ -7,6 +7,7 @@
 
 import type { SensitivePath, SensitiveReason } from "./types.js";
 import type { ObservedFile } from "./types.js";
+import { pathContainsKeyword } from "./pathKeywordMatcher.js";
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -37,7 +38,7 @@ export function detectSensitivePaths(files: ObservedFile[]): SensitivePath[] {
     const segments = file.path.toLowerCase().split("/");
 
     for (const { keyword, reason } of SENSITIVE_KEYWORDS) {
-      if (segments.some(seg => seg === keyword)) {
+      if (pathContainsKeyword(file.path, keyword)) {
         const key = `${file.path}:${reason}`;
         if (!seen.has(key)) {
           seen.add(key);

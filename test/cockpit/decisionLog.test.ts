@@ -11,8 +11,11 @@ import { tmpdir } from "node:os";
 import {
   appendDecisionEntry,
   readDecisionLog,
+  type DecisionLogPathOptions,
   type DecisionEntry,
 } from "../../src/cockpit/decisionLog.js";
+
+const TRUSTED_ABSOLUTE: DecisionLogPathOptions = { trustedAbsolute: true };
 
 function makeTmpDir(): string {
   return join(tmpdir(), `pantheon_test_dl_${Date.now()}_${Math.random().toString(36).slice(2)}`);
@@ -39,30 +42,30 @@ describe("P7b-004: DecisionLog", () => {
   });
 
   it("returns empty array when no log exists", async () => {
-    const entries = await readDecisionLog(dataDir);
+    const entries = await readDecisionLog(dataDir, TRUSTED_ABSOLUTE);
     expect(entries).toEqual([]);
   });
 
   it("appends and reads a single entry", async () => {
     const entry = makeEntry("dec_001");
-    await appendDecisionEntry(dataDir, entry);
-    const entries = await readDecisionLog(dataDir);
+    await appendDecisionEntry(dataDir, entry, TRUSTED_ABSOLUTE);
+    const entries = await readDecisionLog(dataDir, TRUSTED_ABSOLUTE);
     expect(entries.length).toBe(1);
     expect(entries[0].decision_id).toBe("dec_001");
   });
 
   it("appends multiple entries preserving order", async () => {
-    await appendDecisionEntry(dataDir, makeEntry("dec_001"));
-    await appendDecisionEntry(dataDir, makeEntry("dec_002"));
-    await appendDecisionEntry(dataDir, makeEntry("dec_003"));
-    const entries = await readDecisionLog(dataDir);
+    await appendDecisionEntry(dataDir, makeEntry("dec_001"), TRUSTED_ABSOLUTE);
+    await appendDecisionEntry(dataDir, makeEntry("dec_002"), TRUSTED_ABSOLUTE);
+    await appendDecisionEntry(dataDir, makeEntry("dec_003"), TRUSTED_ABSOLUTE);
+    const entries = await readDecisionLog(dataDir, TRUSTED_ABSOLUTE);
     expect(entries.length).toBe(3);
     expect(entries.map(e => e.decision_id)).toEqual(["dec_001", "dec_002", "dec_003"]);
   });
 
   it("stores as JSONL format", async () => {
-    await appendDecisionEntry(dataDir, makeEntry("dec_001"));
-    await appendDecisionEntry(dataDir, makeEntry("dec_002"));
+    await appendDecisionEntry(dataDir, makeEntry("dec_001"), TRUSTED_ABSOLUTE);
+    await appendDecisionEntry(dataDir, makeEntry("dec_002"), TRUSTED_ABSOLUTE);
     const content = await fs.readFile(
       join(dataDir, "decisions", "decisions.jsonl"), "utf8"
     );
@@ -78,11 +81,15 @@ describe("P7b-004: DecisionLog", () => {
     const entry = makeEntry("dec_full");
     entry.affected_artifacts = ["x", "y", "z"];
     entry.canonical_revision_ids = { x: "r1", y: "r2", z: "r3" };
-    await appendDecisionEntry(dataDir, entry);
-    const [read] = await readDecisionLog(dataDir);
+    await appendDecisionEntry(dataDir, entry, TRUSTED_ABSOLUTE);
+    const [read] = await readDecisionLog(dataDir, TRUSTED_ABSOLUTE);
     expect(read.affected_artifacts).toEqual(["x", "y", "z"]);
     expect(read.canonical_revision_ids).toEqual({ x: "r1", y: "r2", z: "r3" });
     expect(read.operator_id).toBe("test_operator");
     expect(read.release_decision_id).toBe("rel_dec_full");
+  });
+
+  it("rejects directory traversal by default", async () => {
+    await expect(appendDecisionEntry("../outside", makeEntry("dec_escape"))).rejects.toThrow(/escapes trusted root/i);
   });
 });

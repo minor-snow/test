@@ -76,4 +76,13 @@ describe("validateChangeContractLite", () => {
     expect(result.status).toBe("invalid");
     expect(result.errors.some(e => e.includes("reason"))).toBe(true);
   });
+
+  it("accepts changed_files when raw paths normalize to observed status paths", () => {
+    const contract = {
+      ...makeValidLite(),
+      changed_files: ["./src/utils/format.ts"],
+    };
+    const result = validateChangeContractLite(contract);
+    expect(result.status).toBe("valid");
+  });
 });

@@ -53,9 +53,9 @@ declare const ArchitectureDraftV010Schema: z.ZodObject<{
             linked_interface_blocks: z.ZodOptional<z.ZodArray<z.ZodString>>;
             status: z.ZodEnum<{
                 suspect: "suspect";
+                approved: "approved";
                 draft: "draft";
                 candidate: "candidate";
-                approved: "approved";
                 revoked: "revoked";
             }>;
             content_hash: z.ZodString;
@@ -106,9 +106,9 @@ declare const InterfaceSpecV010Schema: z.ZodObject<{
             linked_interface_blocks: z.ZodOptional<z.ZodArray<z.ZodString>>;
             status: z.ZodEnum<{
                 suspect: "suspect";
+                approved: "approved";
                 draft: "draft";
                 candidate: "candidate";
-                approved: "approved";
                 revoked: "revoked";
             }>;
             content_hash: z.ZodString;
@@ -159,9 +159,9 @@ declare const ModuleSpecV010Schema: z.ZodObject<{
             linked_interface_blocks: z.ZodOptional<z.ZodArray<z.ZodString>>;
             status: z.ZodEnum<{
                 suspect: "suspect";
+                approved: "approved";
                 draft: "draft";
                 candidate: "candidate";
-                approved: "approved";
                 revoked: "revoked";
             }>;
             content_hash: z.ZodString;
@@ -247,9 +247,9 @@ declare const OverridePatchV010Schema: z.ZodObject<{
             linked_interface_blocks: z.ZodOptional<z.ZodArray<z.ZodString>>;
             status: z.ZodEnum<{
                 suspect: "suspect";
+                approved: "approved";
                 draft: "draft";
                 candidate: "candidate";
-                approved: "approved";
                 revoked: "revoked";
             }>;
             content_hash: z.ZodString;

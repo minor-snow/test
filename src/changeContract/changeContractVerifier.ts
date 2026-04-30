@@ -26,7 +26,7 @@
  * ref: P19d
  */
 
-import { createHash } from "node:crypto";
+import { stableHash } from "../deterministic.js";
 import type { ChangeContract, VerificationObligation } from "./types.js";
 import type { ScopeDiffReport } from "../scopeDiff/types.js";
 import { transitionChangeContract, createResultEvent } from "./lifecycle.js";
@@ -93,7 +93,7 @@ export function verifyChangeContract(
     );
   }
 
-  const reportHash = hashString(JSON.stringify(scopeDiffReport));
+  const reportHash = stableHash(scopeDiffReport);
   const passed = scopeDiffReport.status === "pass";
 
   // --- Update obligations ---
@@ -215,6 +215,3 @@ function buildEscalationSummary(report: ScopeDiffReport): string {
   return parts.join(", ");
 }
 
-function hashString(s: string): string {
-  return "sha256:" + createHash("sha256").update(s).digest("hex");
-}

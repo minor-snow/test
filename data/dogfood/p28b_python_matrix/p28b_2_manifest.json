@@ -1,0 +1,418 @@
+{
+  "schema_version": "p28b_2_manifest@0.1.0",
+  "cases": [
+    {
+      "repo_id": "saleor-django-commerce",
+      "case_id": "1A_django_pass",
+      "category": "django_commerce",
+      "support_level_from_p28b_1": "validated",
+      "intent": "Fix a missing null=True on a model field migration",
+      "agent_bug_report": {
+        "summary": "Fix missing null=True on product model",
+        "suspected_files": ["saleor/product/migrations/0001_synthetic.py"],
+        "evidence_kind": "traceback"
+      },
+      "changed_files_override": ["saleor/product/migrations/0001_synthetic.py"],
+      "file_mutations": [
+        {
+          "path": "saleor/product/migrations/0001_synthetic.py",
+          "operation": "touch",
+          "content": "# synthetic migration\n"
+        }
+      ],
+      "expected_verdict": "fail",
+      "expected_attention_level": "none",
+      "special_checks": [
+        "must_write_governance_event",
+        "must_sanitize_public_artifacts"
+      ]
+    },
+    {
+      "repo_id": "django-oscar",
+      "case_id": "1B_django_review",
+      "category": "django_commerce",
+      "known_gap": ["test_mapping_gap"],
+      "support_level_from_p28b_1": "supported",
+      "intent": "Add payment method validation in checkout",
+      "agent_bug_report": {
+        "summary": "Add payment validation to checkout flow",
+        "suspected_files": ["src/oscar/apps/checkout/views.py"],
+        "evidence_kind": "user_report"
+      },
+      "changed_files_override": ["src/oscar/apps/checkout/views.py"],
+      "file_mutations": [
+        {
+          "path": "src/oscar/apps/checkout/views.py",
+          "operation": "touch",
+          "content": "# synthetic modification\n"
+        }
+      ],
+      "expected_verdict": "requires_review",
+      "expected_attention_level": "requires_review",
+      "special_checks": [
+        "must_generate_review_request",
+        "known_gap_did_not_cause_false_forbidden"
+      ]
+    },
+    {
+      "repo_id": "fastapi-realworld",
+      "case_id": "2A_fastapi_pass",
+      "category": "fastapi_service",
+      "support_level_from_p28b_1": "validated",
+      "intent": "Fix a pydantic validation error on user endpoint",
+      "agent_bug_report": {
+        "summary": "Fix pydantic validation on user creation",
+        "suspected_files": ["backend/api/routes/users.py"],
+        "evidence_kind": "traceback"
+      },
+      "changed_files_override": ["backend/api/routes/users.py"],
+      "file_mutations": [
+        {
+          "path": "backend/api/routes/users.py",
+          "operation": "touch",
+          "content": "# synthetic fix\n"
+        }
+      ],
+      "expected_verdict": "pass",
+      "expected_attention_level": "none",
+      "special_checks": []
+    },
+    {
+      "repo_id": "litestar",
+      "case_id": "2B_fastapi_scope_expansion",
+      "category": "fastapi_starlette",
+      "known_gap": ["test_mapping_gap"],
+      "support_level_from_p28b_1": "supported",
+      "intent": "Add rate limiting middleware",
+      "agent_bug_report": {
+        "summary": "Add rate limiting middleware",
+        "suspected_files": ["litestar/middleware/rate_limit/middleware.py"],
+        "evidence_kind": "feature_request"
+      },
+      "changed_files_override": ["litestar/middleware/rate_limit/middleware.py", "litestar/app.py"],
+      "file_mutations": [
+        {
+          "path": "litestar/middleware/rate_limit/middleware.py",
+          "operation": "touch",
+          "content": "# new middleware\n"
+        },
+        {
+          "path": "litestar/app.py",
+          "operation": "touch",
+          "content": "# modified app\n"
+        }
+      ],
+      "expected_verdict": "requires_scope_expansion",
+      "expected_attention_level": "none",
+      "special_checks": [
+        "feedback_asks_for_scope_clarification"
+      ]
+    },
+    {
+      "repo_id": "flask",
+      "case_id": "3A_flask_pass",
+      "category": "flask_framework",
+      "support_level_from_p28b_1": "validated",
+      "intent": "Fix incorrect status code return in error handler",
+      "agent_bug_report": {
+        "summary": "Fix status code in error handler",
+        "suspected_files": ["src/flask/app.py"],
+        "evidence_kind": "traceback"
+      },
+      "changed_files_override": ["src/flask/app.py"],
+      "file_mutations": [
+        {
+          "path": "src/flask/app.py",
+          "operation": "touch",
+          "content": "# synthetic fix\n"
+        }
+      ],
+      "expected_verdict": "pass",
+      "expected_attention_level": "none",
+      "special_checks": []
+    },
+    {
+      "repo_id": "flaskbb-flask-app",
+      "case_id": "3B_flask_review",
+      "category": "flask_web_app",
+      "known_gap": ["test_mapping_gap"],
+      "support_level_from_p28b_1": "supported",
+      "intent": "Add email verification to registration",
+      "agent_bug_report": {
+        "summary": "Add email verification to auth",
+        "suspected_files": ["flaskbb/auth/views.py"],
+        "evidence_kind": "feature_request"
+      },
+      "changed_files_override": ["flaskbb/auth/views.py"],
+      "file_mutations": [
+        {
+          "path": "flaskbb/auth/views.py",
+          "operation": "touch",
+          "content": "# auth logic modified\n"
+        }
+      ],
+      "expected_verdict": "requires_review",
+      "expected_attention_level": "requires_review",
+      "special_checks": [
+        "must_generate_review_request"
+      ]
+    },
+    {
+      "repo_id": "requests",
+      "case_id": "4A_sdk_pass",
+      "category": "python_sdk_library",
+      "support_level_from_p28b_1": "validated",
+      "intent": "Fix incorrect timeout behavior in Session.get()",
+      "agent_bug_report": {
+        "summary": "Fix timeout behavior",
+        "suspected_files": ["src/requests/sessions.py"],
+        "evidence_kind": "traceback"
+      },
+      "changed_files_override": ["src/requests/sessions.py"],
+      "file_mutations": [
+        {
+          "path": "src/requests/sessions.py",
+          "operation": "touch",
+          "content": "# synthetic fix\n"
+        }
+      ],
+      "expected_verdict": "pass",
+      "expected_attention_level": "none",
+      "special_checks": []
+    },
+    {
+      "repo_id": "loguru",
+      "case_id": "4B_sdk_review",
+      "category": "python_sdk_library",
+      "known_gap": ["framework_detection_gap", "risk_preset_gap"],
+      "support_level_from_p28b_1": "supported",
+      "intent": "Modify sink rotation behavior",
+      "agent_bug_report": {
+        "summary": "Fix sink rotation IO",
+        "suspected_files": ["loguru/_logger.py"],
+        "evidence_kind": "user_report"
+      },
+      "changed_files_override": ["loguru/_logger.py"],
+      "file_mutations": [
+        {
+          "path": "loguru/_logger.py",
+          "operation": "touch",
+          "content": "# modified io\n"
+        }
+      ],
+      "expected_verdict": "pass",
+      "expected_attention_level": "none",
+      "special_checks": [
+        "known_gap_did_not_cause_false_forbidden"
+      ],
+      "cli_smoke": true
+    },
+    {
+      "repo_id": "black",
+      "case_id": "5A_cli_pass",
+      "category": "python_cli_tool",
+      "support_level_from_p28b_1": "validated",
+      "intent": "Fix a line-too-long false positive in string formatting",
+      "agent_bug_report": {
+        "summary": "Fix line length parsing",
+        "suspected_files": ["src/black/strings.py"],
+        "evidence_kind": "traceback"
+      },
+      "changed_files_override": ["src/black/strings.py"],
+      "file_mutations": [
+        {
+          "path": "src/black/strings.py",
+          "operation": "touch",
+          "content": "# synthetic change\n"
+        }
+      ],
+      "expected_verdict": "pass",
+      "expected_attention_level": "none",
+      "special_checks": []
+    },
+    {
+      "repo_id": "invoke",
+      "case_id": "5B_cli_scope",
+      "category": "python_cli_tool",
+      "known_gap": ["test_mapping_gap"],
+      "support_level_from_p28b_1": "supported",
+      "intent": "Add a --dry-run flag to a task runner",
+      "agent_bug_report": {
+        "summary": "Add dry run flag",
+        "suspected_files": ["invoke/tasks.py"],
+        "evidence_kind": "feature_request"
+      },
+      "changed_files_override": ["invoke/tasks.py", "invoke/runners.py"],
+      "file_mutations": [
+        {
+          "path": "invoke/tasks.py",
+          "operation": "touch",
+          "content": "# modified task\n"
+        },
+        {
+          "path": "invoke/runners.py",
+          "operation": "touch",
+          "content": "# modified runner\n"
+        }
+      ],
+      "expected_verdict": "requires_scope_expansion",
+      "expected_attention_level": "none",
+      "special_checks": [
+        "feedback_asks_for_scope_clarification"
+      ]
+    },
+    {
+      "repo_id": "celery",
+      "case_id": "6A_pipeline_pass",
+      "category": "data_pipeline",
+      "support_level_from_p28b_1": "validated",
+      "intent": "Fix a race condition in task retry logic",
+      "agent_bug_report": {
+        "summary": "Fix task retry",
+        "suspected_files": ["celery/app/task.py"],
+        "evidence_kind": "traceback"
+      },
+      "changed_files_override": ["celery/app/task.py"],
+      "file_mutations": [
+        {
+          "path": "celery/app/task.py",
+          "operation": "touch",
+          "content": "# synthetic fix\n"
+        }
+      ],
+      "expected_verdict": "pass",
+      "expected_attention_level": "none",
+      "special_checks": []
+    },
+    {
+      "repo_id": "airflow",
+      "case_id": "6B_pipeline_review",
+      "category": "workflow_orchestration",
+      "support_level_from_p28b_1": "validated",
+      "intent": "Add a new DAG operator",
+      "agent_bug_report": {
+        "summary": "Add new DAG operator",
+        "suspected_files": ["airflow/providers/synthetic/operators/new_op.py"],
+        "evidence_kind": "feature_request"
+      },
+      "changed_files_override": ["airflow/providers/synthetic/operators/new_op.py"],
+      "file_mutations": [
+        {
+          "path": "airflow/providers/synthetic/operators/new_op.py",
+          "operation": "touch",
+          "content": "# new op\n"
+        }
+      ],
+      "expected_verdict": "pass",
+      "expected_attention_level": "none",
+      "special_checks": []
+    },
+    {
+      "repo_id": "scikit-learn",
+      "case_id": "7A_ml_pass",
+      "category": "ml_scientific",
+      "support_level_from_p28b_1": "validated",
+      "intent": "Fix a deprecation warning in a transformer's fit() method",
+      "agent_bug_report": {
+        "summary": "Fix deprecation in preprocessing",
+        "suspected_files": ["sklearn/preprocessing/_data.py"],
+        "evidence_kind": "user_report"
+      },
+      "changed_files_override": ["sklearn/preprocessing/_data.py"],
+      "file_mutations": [
+        {
+          "path": "sklearn/preprocessing/_data.py",
+          "operation": "touch",
+          "content": "# synthetic fix\n"
+        }
+      ],
+      "expected_verdict": "pass",
+      "expected_attention_level": "none",
+      "special_checks": []
+    },
+    {
+      "repo_id": "tiktoken-ml",
+      "case_id": "7B_ml_replan",
+      "category": "ml_tooling_tokenizer",
+      "known_gap": ["framework_detection_gap", "test_mapping_gap"],
+      "support_level_from_p28b_1": "supported",
+      "intent": "Change encoding table loading behavior",
+      "agent_bug_report": {
+        "summary": "Fix encoding load",
+        "suspected_files": ["tiktoken/load.py"],
+        "evidence_kind": "user_report"
+      },
+      "changed_files_override": ["tiktoken/load.py"],
+      "file_mutations": [
+        {
+          "path": "tiktoken/load.py",
+          "operation": "touch",
+          "content": "# synthetic fix\n"
+        }
+      ],
+      "repo_state_override": {
+        "plan_base_sha": "old",
+        "check_base_sha": "new"
+      },
+      "expected_verdict": "requires_replan",
+      "expected_attention_level": "none",
+      "special_checks": [
+        "feedback_asks_for_replan"
+      ]
+    },
+    {
+      "repo_id": "nameko",
+      "case_id": "8A_monorepo_pass",
+      "category": "python_monorepo",
+      "support_level_from_p28b_1": "validated",
+      "intent": "Fix a service dependency injection error",
+      "agent_bug_report": {
+        "summary": "Fix DI error",
+        "suspected_files": ["nameko/dependency_providers.py"],
+        "evidence_kind": "traceback"
+      },
+      "changed_files_override": ["nameko/dependency_providers.py"],
+      "file_mutations": [
+        {
+          "path": "nameko/dependency_providers.py",
+          "operation": "touch",
+          "content": "# synthetic fix\n"
+        }
+      ],
+      "expected_verdict": "pass",
+      "expected_attention_level": "none",
+      "special_checks": []
+    },
+    {
+      "repo_id": "python-monorepo",
+      "case_id": "8B_monorepo_scope",
+      "category": "python_monorepo",
+      "known_gap": ["framework_detection_gap", "test_mapping_gap"],
+      "support_level_from_p28b_1": "supported",
+      "intent": "Add a new sub-package",
+      "agent_bug_report": {
+        "summary": "Add new package",
+        "suspected_files": ["new_package/setup.py"],
+        "evidence_kind": "feature_request"
+      },
+      "changed_files_override": ["new_package/setup.py", "new_package/foo.py"],
+      "file_mutations": [
+        {
+          "path": "new_package/setup.py",
+          "operation": "touch",
+          "content": "# new package\n"
+        },
+        {
+          "path": "new_package/foo.py",
+          "operation": "touch",
+          "content": "# new file\n"
+        }
+      ],
+      "expected_verdict": "pass",
+      "expected_attention_level": "none",
+      "special_checks": [
+        "does_not_hallucinate_single_root"
+      ]
+    }
+  ]
+}

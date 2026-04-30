@@ -1,0 +1,117 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "341c20c7003fa57f8e5f2182327dc6f4cfd5a8196f9c78e94fcb26fb75dbf905",
+  "pinned_commit": "858de706468493f86266c2202c020233ad5c224a",
+  "completed_at": "2026-04-30T11:54:12.230Z",
+  "repo_id": "Azure/azure-cli",
+  "category_expected": "python_cli_tool",
+  "category_observed": "generic_service",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 5187,
+  "python_files": 5265,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "pytest/high",
+    "click/high",
+    "httpx/medium"
+  ],
+  "project_role_signals": [
+    "service_backend/medium",
+    "cli_application/high"
+  ],
+  "test_mapping_count": 3731,
+  "risk_preset": "generic_service",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "Azure/azure-cli",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected python_cli_tool, got generic_service",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "src/azure-cli/requirements.py3.Darwin.txt",
+        "src/azure-cli/requirements.py3.Linux.txt",
+        "src/azure-cli/requirements.py3.windows.txt",
+        "src/azure-cli/setup.cfg",
+        "src/azure-cli-core/setup.cfg",
+        "src/azure-cli-core/tox.ini",
+        "src/azure-cli-telemetry/setup.cfg",
+        "src/azure-cli-telemetry/tox.ini",
+        "src/azure-cli-testsdk/setup.cfg"
+      ],
+      "count": 9,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "dynamic_or_unresolved_import",
+      "classification": "intrinsic",
+      "paths": [
+        "src/azure-cli/azure/cli/command_modules/ams/operations/sp.py",
+        "src/azure-cli/azure/cli/command_modules/ams/_sdk_utils.py",
+        "src/azure-cli/azure/cli/command_modules/apim/generated/__init__.py",
+        "src/azure-cli/azure/cli/command_modules/apim/manual/__init__.py",
+        "src/azure-cli/azure/cli/command_modules/batch/_command_type.py",
+        "src/azure-cli/azure/cli/command_modules/billing/generated/__init__.py",
+        "src/azure-cli/azure/cli/command_modules/billing/manual/__init__.py",
+        "src/azure-cli/azure/cli/command_modules/marketplaceordering/generated/__init__.py",
+        "src/azure-cli/azure/cli/command_modules/marketplaceordering/manual/__init__.py",
+        "src/azure-cli/azure/cli/command_modules/synapse/generated/__init__.py",
+        "src/azure-cli/azure/cli/command_modules/synapse/manual/__init__.py",
+        "src/azure-cli/azure/cli/command_modules/vm/generated/__init__.py",
+        "src/azure-cli/azure/cli/command_modules/vm/manual/__init__.py",
+        "src/azure-cli/azure/cli/__init__.py",
+        "src/azure-cli/azure/__init__.py",
+        "src/azure-cli-core/azure/cli/__init__.py",
+        "src/azure-cli-core/azure/__init__.py",
+        "src/azure-cli-telemetry/azure/cli/__init__.py",
+        "src/azure-cli-telemetry/azure/__init__.py",
+        "src/azure-cli-testsdk/azure/cli/__init__.py",
+        "src/azure-cli-testsdk/azure/__init__.py"
+      ],
+      "count": 21,
+      "note": "Imports using __import__(), importlib.import_module(), or computed paths. Cannot be statically resolved — this is inherent to Python."
+    },
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "src/azure-cli/azure/cli/command_modules/synapse/tests/latest/assets/notebook.ipynb"
+      ],
+      "count": 1,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "src/azure-cli/setup.cfg",
+        "src/azure-cli/setup.py",
+        "src/azure-cli-core/setup.cfg",
+        "src/azure-cli-core/setup.py",
+        "src/azure-cli-telemetry/setup.cfg",
+        "src/azure-cli-testsdk/setup.cfg",
+        "src/azure-cli-testsdk/setup.py",
+        "tools/setup.py"
+      ],
+      "count": 8,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

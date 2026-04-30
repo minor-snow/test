@@ -4,6 +4,9 @@
   "description": "JSON-first, auditable, rollback-capable software engineering compiler",
   "main": "dist/src/index.js",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "files": [
     "dist",
     "action",
@@ -20,7 +23,7 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "build": "tsc",
+    "build": "node -e \"require('node:fs').rmSync('dist',{ recursive: true, force: true });\" && tsc",
     "build:action": "ncc build src/github/githubActionEntry.ts -o action/dist --license licenses.txt",
     "serve": "npx tsx src/server.ts",
     "pantheon": "npx tsx src/cli/pantheon.ts",

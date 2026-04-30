@@ -11,6 +11,8 @@ import type { BacklogItem, ResidualSnapshot, ReleaseDecision } from "./types.js"
 export declare function generateBacklogItems(residual: ResidualSnapshot, canonicalRevisionId: string, releaseDecisionId: string, overrides?: Record<string, string>): BacklogItem[];
 export declare function exportBacklogMarkdown(items: BacklogItem[]): string;
 export declare const ALLOWED_DECISIONS: readonly ["accepted_clean", "accepted_with_residual_issues", "rejected_requires_cleanup"];
+export type AllowedReleaseDecision = (typeof ALLOWED_DECISIONS)[number];
+export declare function isAllowedReleaseDecision(value: unknown): value is AllowedReleaseDecision;
 export declare function validateReleaseDecision(decision: ReleaseDecision): {
     valid: boolean;
     errors: string[];

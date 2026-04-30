@@ -174,24 +174,29 @@ export function generatePantheonAlphaJson(overrides?: Partial<PantheonAlphaConfi
 export function generateAgentBugReportTemplate(): string {
   return JSON.stringify({
     schema_version: "agent_bug_report@0.1.0",
-    summary: "",
-    observed_behavior: "",
-    expected_behavior: "",
+    report_id: "bug_report_example",
+    reported_by: {
+      agent: "agent-name",
+      session_id: "session-id",
+    },
+    summary: "Describe the bug in one sentence.",
+    observed_behavior: "Describe the observed behavior.",
+    expected_behavior: "Describe the expected behavior.",
     evidence: [
       {
         kind: "failing_test",
-        path: "",
-        test_name: "",
+        path: "tests/example.test.ts",
+        test_name: "preserves_example_behavior",
       },
     ],
     suspected_files: [
       {
-        path: "",
+        path: "src/example.ts",
         confidence: "low",
-        reason: "",
+        reason: "Explain why this file is suspected.",
       },
     ],
-    agent_hypothesis: "",
+    agent_hypothesis: "Optional unverified hypothesis about the root cause.",
     requested_action: "repair_analysis",
   }, null, 2);
 }

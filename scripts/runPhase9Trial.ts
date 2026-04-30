@@ -21,13 +21,13 @@ import { evaluateDraftQuality, type DraftQualityReport } from "../src/domainQual
 import { computeBlockContentHash, computeRevisionId } from "../src/hash.js";
 import { buildDraftPrompt, buildDraftPromptV2 } from "../src/trial/draftAgent.js";
 import type { Artifact } from "../src/types.js";
+import { requireDeepSeekApiKey } from "../src/trial/requireEnv.js";
 
 // ---------------------------------------------------------------------------
 // Config — locked variables
 // ---------------------------------------------------------------------------
 
-const DEEPSEEK_API_KEY =
-  process.env.DEEPSEEK_API_KEY ?? "sk-90b71c8c415b41ac93f7ff4e24a08a7c";
+const DEEPSEEK_API_KEY = requireDeepSeekApiKey();
 
 const MODEL = "deepseek-chat";
 const TEMPERATURE = 0.4;

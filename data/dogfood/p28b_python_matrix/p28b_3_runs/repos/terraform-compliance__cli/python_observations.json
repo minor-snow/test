@@ -1,0 +1,2971 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "terraform-compliance__cli",
+    "observed_file_count": 697,
+    "python_file_count": 68
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: terraform_compliance"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: library_package=3, cli_app=2"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 6,
+      "source": 43,
+      "test": 19
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (medium)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: security (high, 3 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/_config*",
+        "reason": "Configuration affects default behavior for all consumers",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/_config*"
+        ]
+      },
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 12,
+        "evidence": [
+          "12 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 435,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 200,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "requirements_dev.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 279,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "setup.cfg",
+      "bucket": "config",
+      "extension": ".cfg",
+      "size_bytes": 24,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 1926,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "terraform_compliance/common/bdd_tags.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3606,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/common/defaults.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2440,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/common/error_handling.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4631,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/common/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 383,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/common/helper.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 23896,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/common/pip_helper.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 698,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/common/readable_dir.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1563,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/common/readable_plan.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3732,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/common/terraform_files.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6245,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/common/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/extensions/cache.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 516,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/extensions/ext_radish_bdd.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3245,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/extensions/override_radish_hookerrors.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2699,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/extensions/override_radish_step.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6915,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/extensions/security_groups.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 16718,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/extensions/silent_formatter.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2702,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/extensions/terraform.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 35155,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/extensions/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8023,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/given/i_have_name_section_configured.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7892,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/given/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/steps.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14839,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/terrain.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5017,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/then/interpolations.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 487,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/then/its_key_condition_be_value.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2971,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/then/its_value_condition_be_null.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2270,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/then/its_value_condition_contain.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2637,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/then/its_value_condition_match_the_search_regex.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6733,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/then/it_must_be_in.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1130,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/then/it_must_contain_something.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11900,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/then/it_must_have_reference_address_referenced.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1172,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/then/it_must_not_be_in.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1109,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/then/property_is_enabled.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1356,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/then/security_group_related.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1227,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/then/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/when/its_key_is_value.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6553,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/when/its_key_metadata_has_something.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1287,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/when/it_contains_something.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14781,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/when/maths.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4094,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/when/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/steps/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1638,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 118,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "terraform_compliance/__main__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 56,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/functional/run_functional_tests.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4898,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/mocks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 18778,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/common/test_bdd_tags.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 657,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/common/test_helper.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12749,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/common/test_pip_helper.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 365,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/common/test_readable_dir.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1548,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/common/test_readable_plan.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2578,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/common/test_terraform_files.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1502,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/common/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/extensions/test_ext_radish_bdd.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 839,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/extensions/test_security_groups.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 13686,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/extensions/test_terraform.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 42340,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/extensions/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/steps/test_its_key_value_step.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2565,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/steps/test_main_steps.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 55462,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/steps/test_types.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 624,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/steps/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terraform_compliance/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 659,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "terraform_compliance/common/bdd_tags.py",
+      "raw_specifier": "from terraform_compliance.common.defaults import Defaults",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/bdd_tags.py",
+      "raw_specifier": "from terraform_compliance.common.helper import Match",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/bdd_tags.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/bdd_tags.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/defaults.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/defaults.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/defaults.py",
+      "raw_specifier": "colorful",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "colorful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/defaults.py",
+      "raw_specifier": "from emoji import emojize",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "emoji",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/defaults.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/error_handling.py",
+      "raw_specifier": "from terraform_compliance.common.exceptions import Failure",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/error_handling.py",
+      "raw_specifier": "from radish import world",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/common/error_handling.py",
+      "raw_specifier": "from radish.utils import console_write",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/common/error_handling.py",
+      "raw_specifier": "from terraform_compliance.main import Step",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/error_handling.py",
+      "raw_specifier": "colorful",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "colorful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/error_handling.py",
+      "raw_specifier": "from ast import literal_eval",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ast",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/error_handling.py",
+      "raw_specifier": "from unittest.mock import MagicMock",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "unittest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/error_handling.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/helper.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/helper.py",
+      "raw_specifier": "from netaddr import IPNetwork",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "netaddr",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/helper.py",
+      "raw_specifier": "from terraform_compliance.steps import resource_name",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/helper.py",
+      "raw_specifier": "from collections.abc import Iterable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/helper.py",
+      "raw_specifier": "from copy import deepcopy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/helper.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/helper.py",
+      "raw_specifier": "from terraform_compliance.common.exceptions import TerraformComplianceInternalFailure",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/helper.py",
+      "raw_specifier": "from semver import VersionInfo, compare",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "semver",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/helper.py",
+      "raw_specifier": "from terraform_compliance.common.defaults import Defaults",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/helper.py",
+      "raw_specifier": "from radish.utils import console_write",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/common/helper.py",
+      "raw_specifier": "orjson",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "orjson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/helper.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/pip_helper.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/pip_helper.py",
+      "raw_specifier": "from sys import exit, executable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/readable_dir.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/readable_dir.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/readable_dir.py",
+      "raw_specifier": "from argparse import Action",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/common/readable_plan.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/readable_plan.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/readable_plan.py",
+      "raw_specifier": "from argparse import Action",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/common/readable_plan.py",
+      "raw_specifier": "filetype",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "filetype",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/readable_plan.py",
+      "raw_specifier": "from terraform_compliance.common.terraform_files import convert_terraform_plan_to_json",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/readable_plan.py",
+      "raw_specifier": "from terraform_compliance.common.exceptions import TerraformComplianceInternalFailure",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/readable_plan.py",
+      "raw_specifier": "orjson",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "orjson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/readable_plan.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/terraform_files.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/terraform_files.py",
+      "raw_specifier": "stat",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "stat",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/terraform_files.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/terraform_files.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/terraform_files.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/terraform_files.py",
+      "raw_specifier": "urllib.request",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/terraform_files.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/terraform_files.py",
+      "raw_specifier": "from shutil import unpack_archive",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/common/terraform_files.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/cache.py",
+      "raw_specifier": "diskcache",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "diskcache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/cache.py",
+      "raw_specifier": "from terraform_compliance.common.defaults import Defaults",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/ext_radish_bdd.py",
+      "raw_specifier": "colorful",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "colorful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/ext_radish_bdd.py",
+      "raw_specifier": "from radish.utils import console_write",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/ext_radish_bdd.py",
+      "raw_specifier": "from radish import custom_type",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/ext_radish_bdd.py",
+      "raw_specifier": "from radish import world",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/ext_radish_bdd.py",
+      "raw_specifier": "from terraform_compliance.common.defaults import Defaults",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/ext_radish_bdd.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_hookerrors.py",
+      "raw_specifier": "from __future__ import unicode_literals",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_hookerrors.py",
+      "raw_specifier": "colorful",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "colorful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_hookerrors.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_hookerrors.py",
+      "raw_specifier": "from radish.exceptions import ( RadishError, HookError, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_hookerrors.py",
+      "raw_specifier": "from radish.utils import Failure, console_write",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_hookerrors.py",
+      "raw_specifier": "from terraform_compliance.common.defaults import Defaults",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_hookerrors.py",
+      "raw_specifier": "from radish.exceptions import ( LanguageNotSupportedError, FeatureFileNotFoundError, FeatureFileSyntaxError, StepDefinitionNotFoundError, StepPatternError, StepRegexError, SameStepError, ScenarioNotFoundError, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_step.py",
+      "raw_specifier": "from __future__ import unicode_literals",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_step.py",
+      "raw_specifier": "base64",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_step.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_step.py",
+      "raw_specifier": "from radish.model import Model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_step.py",
+      "raw_specifier": "from radish.exceptions import RadishError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_step.py",
+      "raw_specifier": "from radish.terrain import world",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_step.py",
+      "raw_specifier": "from radish.stepregistry import StepRegistry",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_step.py",
+      "raw_specifier": "from radish.matcher import merge_step",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/override_radish_step.py",
+      "raw_specifier": "from radish import utils",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/security_groups.py",
+      "raw_specifier": "from terraform_compliance.common.helper import ( check_if_cidr, is_ip_in_cidr )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/security_groups.py",
+      "raw_specifier": "from terraform_compliance.common.exceptions import ( TerraformComplianceInvalidData, TerraformComplianceInternalFailure )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/silent_formatter.py",
+      "raw_specifier": "colorful",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "colorful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/silent_formatter.py",
+      "raw_specifier": "from radish.hookregistry import after",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/silent_formatter.py",
+      "raw_specifier": "from radish.extensionregistry import extension",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/silent_formatter.py",
+      "raw_specifier": "from radish.utils import console_write",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/silent_formatter.py",
+      "raw_specifier": "from radish.extensions.formatters.gherkin import ConsoleWriter",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/terraform.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/terraform.py",
+      "raw_specifier": "from terraform_compliance.common.helper import seek_key_in_dict, flatten_list, Match, merge_dicts, remove_constant_values",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/terraform.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/terraform.py",
+      "raw_specifier": "from copy import deepcopy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/terraform.py",
+      "raw_specifier": "from radish.utils import console_write",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/terraform.py",
+      "raw_specifier": "from terraform_compliance.common.defaults import Defaults",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/terraform.py",
+      "raw_specifier": "from terraform_compliance.extensions.cache import Cache",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/extensions/terraform.py",
+      "raw_specifier": "from terraform_compliance.common.helper import recursive_jsonify, strip_iterations, get_most_child_module",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "atexit",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "atexit",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from argparse import ArgumentParser",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from tempfile import mkdtemp",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from git import Repo",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "git",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from terraform_compliance import __app_name__, __version__",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from terraform_compliance.common.readable_dir import ReadableDir",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from terraform_compliance.common.readable_plan import ReadablePlan",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from radish.main import main as call_radish",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from radish.utils import console_write",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from radish.loader import load_module",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from terraform_compliance.common.defaults import Defaults",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from terraform_compliance.common.helper import python_version_check",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from terraform_compliance.extensions.override_radish_step import Step as StepOverride",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from radish.stepmodel import Step",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from terraform_compliance.extensions.override_radish_hookerrors import handle_exception as handle_exception_override",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/main.py",
+      "raw_specifier": "from radish import errororacle",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/steps/given/i_have_name_section_configured.py",
+      "raw_specifier": "from radish import world",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/steps/given/i_have_name_section_configured.py",
+      "raw_specifier": "from terraform_compliance.common.bdd_tags import look_for_bdd_tags",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/given/i_have_name_section_configured.py",
+      "raw_specifier": "from terraform_compliance.common.helper import ( get_resource_address_list_from_stash, find_root_by_key, remove_mounted_resources, transform_asg_style_tags, convert_resource_type, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/given/i_have_name_section_configured.py",
+      "raw_specifier": "from terraform_compliance.extensions.ext_radish_bdd import skip_step",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/given/i_have_name_section_configured.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from radish import ( world, given, when, then )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.common.helper import ( Null, EmptyStash )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.given.i_have_name_section_configured import i_have_name_section_configured",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.when.its_key_metadata_has_something import its_key_metadata_has_something",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.when.its_key_is_value import ( its_key_is_value, its_key_is_not_value )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.when.maths import ( i_action_them, i_expect_the_result_is_operator_than_number )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.when.it_contains_something import ( it_contains_something_old, it_has_something, it_does_not_have_something )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.it_must_contain_something import ( it_must_contain_something, it_must_not_contain_something, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.property_is_enabled import property_is_enabled",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.security_group_related import it_condition_have_proto_protocol_and_port_port_for_cidr",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.its_value_condition_match_the_search_regex import its_value_condition_match_the_search_regex_regex",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.its_value_condition_match_the_search_regex import its_singular_value_condition_match_the_search_regex_regex",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.its_value_condition_match_the_search_regex import any_of_its_values_condition_match_the_search_regex_regex",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.its_value_condition_contain import its_value_condition_contain",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.it_must_have_reference_address_referenced import it_must_have_reference_address_referenced",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.its_key_condition_be_value import its_key_condition_be_value",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.interpolations import i_flatten_everything_found",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.it_must_be_in import it_must_be_in",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.it_must_not_be_in import it_must_not_be_in",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/steps.py",
+      "raw_specifier": "from terraform_compliance.steps.then.its_value_condition_be_null import its_value_condition_be_null",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/terrain.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/terrain.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/terrain.py",
+      "raw_specifier": "from IPython import embed",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "IPython",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/terrain.py",
+      "raw_specifier": "from radish import before, after, world",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/steps/terrain.py",
+      "raw_specifier": "from terraform_compliance.extensions.terraform import TerraformParser",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/terrain.py",
+      "raw_specifier": "from terraform_compliance.common.helper import Null",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/terrain.py",
+      "raw_specifier": "from terraform_compliance.extensions.ext_radish_bdd import skip_step",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_key_condition_be_value.py",
+      "raw_specifier": "from terraform_compliance.common.helper import ( Null, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_key_condition_be_value.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_key_condition_be_value.py",
+      "raw_specifier": "from terraform_compliance.common.exceptions import TerraformComplianceNotImplemented",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_value_condition_be_null.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_value_condition_be_null.py",
+      "raw_specifier": "from terraform_compliance.common.helper import Null",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_value_condition_be_null.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_value_condition_contain.py",
+      "raw_specifier": "from terraform_compliance.common.helper import ( EmptyStash, get_resource_name_from_stash )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_value_condition_contain.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_value_condition_contain.py",
+      "raw_specifier": "from terraform_compliance.common.exceptions import TerraformComplianceNotImplemented",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_value_condition_contain.py",
+      "raw_specifier": "from terraform_compliance.common.exceptions import TerraformComplianceInternalFailure",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_value_condition_match_the_search_regex.py",
+      "raw_specifier": "from terraform_compliance.common.helper import ( EmptyStash, get_resource_name_from_stash )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_value_condition_match_the_search_regex.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/its_value_condition_match_the_search_regex.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/it_must_be_in.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/it_must_be_in.py",
+      "raw_specifier": "from terraform_compliance.common.helper import Null",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/it_must_contain_something.py",
+      "raw_specifier": "from terraform_compliance.common.helper import ( seek_key_in_dict,  # importing this purely because the unit tests require it to exist in global scope Null )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/it_must_contain_something.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/it_must_have_reference_address_referenced.py",
+      "raw_specifier": "from terraform_compliance.common.helper import ( search_regex_in_list )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/it_must_have_reference_address_referenced.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/it_must_have_reference_address_referenced.py",
+      "raw_specifier": "from terraform_compliance.common.exceptions import TerraformComplianceInternalFailure",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/it_must_have_reference_address_referenced.py",
+      "raw_specifier": "from terraform_compliance.common.defaults import Defaults",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/it_must_not_be_in.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/it_must_not_be_in.py",
+      "raw_specifier": "from terraform_compliance.common.helper import Null",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/property_is_enabled.py",
+      "raw_specifier": "from terraform_compliance.steps import property_match_list",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/property_is_enabled.py",
+      "raw_specifier": "from terraform_compliance.common.helper import ( Null )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/property_is_enabled.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/security_group_related.py",
+      "raw_specifier": "from terraform_compliance.extensions.security_groups import SecurityGroup",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/security_group_related.py",
+      "raw_specifier": "from terraform_compliance.common.exceptions import TerraformComplianceInternalFailure",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/then/security_group_related.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/its_key_is_value.py",
+      "raw_specifier": "from terraform_compliance.common.defaults import Defaults",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/its_key_is_value.py",
+      "raw_specifier": "from terraform_compliance.common.helper import ( get_resource_address_list_from_stash, Null )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/its_key_is_value.py",
+      "raw_specifier": "from terraform_compliance.extensions.ext_radish_bdd import skip_step",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/its_key_metadata_has_something.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/its_key_metadata_has_something.py",
+      "raw_specifier": "from terraform_compliance.extensions.ext_radish_bdd import skip_step",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/it_contains_something.py",
+      "raw_specifier": "from terraform_compliance.common.helper import ( Null )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/it_contains_something.py",
+      "raw_specifier": "from terraform_compliance.extensions.ext_radish_bdd import skip_step",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/it_contains_something.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/it_contains_something.py",
+      "raw_specifier": "from terraform_compliance.main import Step",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/it_contains_something.py",
+      "raw_specifier": "from radish.utils import console_write",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "radish",
+      "confidence": "low"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/it_contains_something.py",
+      "raw_specifier": "from terraform_compliance.common.defaults import Defaults",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/maths.py",
+      "raw_specifier": "from terraform_compliance.common.defaults import Defaults",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/maths.py",
+      "raw_specifier": "from terraform_compliance.common.helper import ( EmptyStash, Null )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/maths.py",
+      "raw_specifier": "from terraform_compliance.common.exceptions import TerraformComplianceNotImplemented",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/steps/when/maths.py",
+      "raw_specifier": "from terraform_compliance.common.error_handling import Error",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "terraform_compliance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/__main__.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "terraform_compliance/__main__.py",
+      "raw_specifier": "from .main import cli",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".main",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "radish_bdd",
+        "gitpython",
+        "netaddr",
+        "colorful",
+        "filetype",
+        "junit_xml",
+        "lxml",
+        "emoji",
+        "semver",
+        "ipython",
+        "orjson",
+        "diskcache"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements_dev.txt",
+      "source_type": "requirements-dev.txt",
+      "packages": [],
+      "dev_packages": [
+        "radish_bdd",
+        "mock",
+        "gitpython",
+        "netaddr",
+        "colorful",
+        "filetype",
+        "junit_xml",
+        "lxml",
+        "emoji",
+        "ddt",
+        "pytest",
+        "nose",
+        "semver",
+        "ipython",
+        "diskcache",
+        "setuptools",
+        "wheel",
+        "twine",
+        "orjson"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No deps found in tox.ini — may use requirements file references"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "terraform_compliance/common/bdd_tags.py",
+      "candidate_test_paths": [
+        "terraform_compliance/common/tests/test_bdd_tags.py",
+        "tests/common/test_bdd_tags.py",
+        "terraform_compliance/common/tests/test_common.py",
+        "test/test_bdd_tags.py",
+        "tests/test_bdd_tags.py",
+        "tests/bdd_tags/test_bdd_tags.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/common/defaults.py",
+      "candidate_test_paths": [
+        "terraform_compliance/common/tests/test_defaults.py",
+        "tests/common/test_defaults.py",
+        "terraform_compliance/common/tests/test_common.py",
+        "test/test_defaults.py",
+        "tests/test_defaults.py",
+        "tests/defaults/test_defaults.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/common/error_handling.py",
+      "candidate_test_paths": [
+        "terraform_compliance/common/tests/test_error_handling.py",
+        "tests/common/test_error_handling.py",
+        "terraform_compliance/common/tests/test_common.py",
+        "test/test_error_handling.py",
+        "tests/test_error_handling.py",
+        "tests/error_handling/test_error_handling.py",
+        "tests/error_handlings/test_error_handling.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/common/exceptions.py",
+      "candidate_test_paths": [
+        "terraform_compliance/common/tests/test_exceptions.py",
+        "tests/common/test_exceptions.py",
+        "terraform_compliance/common/tests/test_common.py",
+        "test/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/common/helper.py",
+      "candidate_test_paths": [
+        "terraform_compliance/common/tests/test_helper.py",
+        "tests/common/test_helper.py",
+        "terraform_compliance/common/tests/test_common.py",
+        "test/test_helper.py",
+        "tests/test_helper.py",
+        "tests/helper/test_helper.py",
+        "tests/helpers/test_helper.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/common/pip_helper.py",
+      "candidate_test_paths": [
+        "terraform_compliance/common/tests/test_pip_helper.py",
+        "tests/common/test_pip_helper.py",
+        "terraform_compliance/common/tests/test_common.py",
+        "test/test_pip_helper.py",
+        "tests/test_pip_helper.py",
+        "tests/pip_helper/test_pip_helper.py",
+        "tests/pip_helpers/test_pip_helper.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/common/readable_dir.py",
+      "candidate_test_paths": [
+        "terraform_compliance/common/tests/test_readable_dir.py",
+        "tests/common/test_readable_dir.py",
+        "terraform_compliance/common/tests/test_common.py",
+        "test/test_readable_dir.py",
+        "tests/test_readable_dir.py",
+        "tests/readable_dir/test_readable_dir.py",
+        "tests/readable_dirs/test_readable_dir.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/common/readable_plan.py",
+      "candidate_test_paths": [
+        "terraform_compliance/common/tests/test_readable_plan.py",
+        "tests/common/test_readable_plan.py",
+        "terraform_compliance/common/tests/test_common.py",
+        "test/test_readable_plan.py",
+        "tests/test_readable_plan.py",
+        "tests/readable_plan/test_readable_plan.py",
+        "tests/readable_plans/test_readable_plan.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/common/terraform_files.py",
+      "candidate_test_paths": [
+        "terraform_compliance/common/tests/test_terraform_files.py",
+        "tests/common/test_terraform_files.py",
+        "terraform_compliance/common/tests/test_common.py",
+        "test/test_terraform_files.py",
+        "tests/test_terraform_files.py",
+        "tests/terraform_files/test_terraform_files.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/extensions/cache.py",
+      "candidate_test_paths": [
+        "terraform_compliance/extensions/tests/test_cache.py",
+        "tests/extensions/test_cache.py",
+        "terraform_compliance/extensions/tests/test_extensions.py",
+        "test/test_cache.py",
+        "tests/test_cache.py",
+        "tests/cache/test_cache.py",
+        "tests/caches/test_cache.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/extensions/ext_radish_bdd.py",
+      "candidate_test_paths": [
+        "terraform_compliance/extensions/tests/test_ext_radish_bdd.py",
+        "tests/extensions/test_ext_radish_bdd.py",
+        "terraform_compliance/extensions/tests/test_extensions.py",
+        "test/test_ext_radish_bdd.py",
+        "tests/test_ext_radish_bdd.py",
+        "tests/ext_radish_bdd/test_ext_radish_bdd.py",
+        "tests/ext_radish_bdds/test_ext_radish_bdd.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/extensions/override_radish_hookerrors.py",
+      "candidate_test_paths": [
+        "terraform_compliance/extensions/tests/test_override_radish_hookerrors.py",
+        "tests/extensions/test_override_radish_hookerrors.py",
+        "terraform_compliance/extensions/tests/test_extensions.py",
+        "test/test_override_radish_hookerrors.py",
+        "tests/test_override_radish_hookerrors.py",
+        "tests/override_radish_hookerrors/test_override_radish_hookerrors.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/extensions/override_radish_step.py",
+      "candidate_test_paths": [
+        "terraform_compliance/extensions/tests/test_override_radish_step.py",
+        "tests/extensions/test_override_radish_step.py",
+        "terraform_compliance/extensions/tests/test_extensions.py",
+        "test/test_override_radish_step.py",
+        "tests/test_override_radish_step.py",
+        "tests/override_radish_step/test_override_radish_step.py",
+        "tests/override_radish_steps/test_override_radish_step.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/extensions/security_groups.py",
+      "candidate_test_paths": [
+        "terraform_compliance/extensions/tests/test_security_groups.py",
+        "tests/extensions/test_security_groups.py",
+        "terraform_compliance/extensions/tests/test_extensions.py",
+        "test/test_security_groups.py",
+        "tests/test_security_groups.py",
+        "tests/security_groups/test_security_groups.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/extensions/silent_formatter.py",
+      "candidate_test_paths": [
+        "terraform_compliance/extensions/tests/test_silent_formatter.py",
+        "tests/extensions/test_silent_formatter.py",
+        "terraform_compliance/extensions/tests/test_extensions.py",
+        "test/test_silent_formatter.py",
+        "tests/test_silent_formatter.py",
+        "tests/silent_formatter/test_silent_formatter.py",
+        "tests/silent_formatters/test_silent_formatter.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/extensions/terraform.py",
+      "candidate_test_paths": [
+        "terraform_compliance/extensions/tests/test_terraform.py",
+        "tests/extensions/test_terraform.py",
+        "terraform_compliance/extensions/tests/test_extensions.py",
+        "test/test_terraform.py",
+        "tests/test_terraform.py",
+        "tests/terraform/test_terraform.py",
+        "tests/terraforms/test_terraform.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/main.py",
+      "candidate_test_paths": [
+        "terraform_compliance/tests/test_main.py",
+        "tests/test_main.py",
+        "terraform_compliance/tests/test_terraform_compliance.py",
+        "test/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/given/i_have_name_section_configured.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/given/tests/test_i_have_name_section_configured.py",
+        "tests/steps/given/test_i_have_name_section_configured.py",
+        "terraform_compliance/steps/given/tests/test_given.py",
+        "test/test_i_have_name_section_configured.py",
+        "tests/test_i_have_name_section_configured.py",
+        "tests/i_have_name_section_configured/test_i_have_name_section_configured.py",
+        "tests/i_have_name_section_configureds/test_i_have_name_section_configured.py",
+        "tests/given/test_i_have_name_section_configured.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/steps.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/tests/test_steps.py",
+        "tests/steps/test_steps.py",
+        "test/test_steps.py",
+        "tests/test_steps.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/terrain.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/tests/test_terrain.py",
+        "tests/steps/test_terrain.py",
+        "terraform_compliance/steps/tests/test_steps.py",
+        "test/test_terrain.py",
+        "tests/test_terrain.py",
+        "tests/terrain/test_terrain.py",
+        "tests/terrains/test_terrain.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/then/interpolations.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/then/tests/test_interpolations.py",
+        "tests/steps/then/test_interpolations.py",
+        "terraform_compliance/steps/then/tests/test_then.py",
+        "test/test_interpolations.py",
+        "tests/test_interpolations.py",
+        "tests/interpolations/test_interpolations.py",
+        "tests/then/test_interpolations.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/then/its_key_condition_be_value.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/then/tests/test_its_key_condition_be_value.py",
+        "tests/steps/then/test_its_key_condition_be_value.py",
+        "terraform_compliance/steps/then/tests/test_then.py",
+        "test/test_its_key_condition_be_value.py",
+        "tests/test_its_key_condition_be_value.py",
+        "tests/its_key_condition_be_value/test_its_key_condition_be_value.py",
+        "tests/its_key_condition_be_values/test_its_key_condition_be_value.py",
+        "tests/then/test_its_key_condition_be_value.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/then/its_value_condition_be_null.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/then/tests/test_its_value_condition_be_null.py",
+        "tests/steps/then/test_its_value_condition_be_null.py",
+        "terraform_compliance/steps/then/tests/test_then.py",
+        "test/test_its_value_condition_be_null.py",
+        "tests/test_its_value_condition_be_null.py",
+        "tests/its_value_condition_be_null/test_its_value_condition_be_null.py",
+        "tests/its_value_condition_be_nulls/test_its_value_condition_be_null.py",
+        "tests/then/test_its_value_condition_be_null.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/then/its_value_condition_contain.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/then/tests/test_its_value_condition_contain.py",
+        "tests/steps/then/test_its_value_condition_contain.py",
+        "terraform_compliance/steps/then/tests/test_then.py",
+        "test/test_its_value_condition_contain.py",
+        "tests/test_its_value_condition_contain.py",
+        "tests/its_value_condition_contain/test_its_value_condition_contain.py",
+        "tests/its_value_condition_contains/test_its_value_condition_contain.py",
+        "tests/then/test_its_value_condition_contain.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/then/its_value_condition_match_the_search_regex.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/then/tests/test_its_value_condition_match_the_search_regex.py",
+        "tests/steps/then/test_its_value_condition_match_the_search_regex.py",
+        "terraform_compliance/steps/then/tests/test_then.py",
+        "test/test_its_value_condition_match_the_search_regex.py",
+        "tests/test_its_value_condition_match_the_search_regex.py",
+        "tests/its_value_condition_match_the_search_regex/test_its_value_condition_match_the_search_regex.py",
+        "tests/its_value_condition_match_the_search_regexs/test_its_value_condition_match_the_search_regex.py",
+        "tests/then/test_its_value_condition_match_the_search_regex.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/then/it_must_be_in.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/then/tests/test_it_must_be_in.py",
+        "tests/steps/then/test_it_must_be_in.py",
+        "terraform_compliance/steps/then/tests/test_then.py",
+        "test/test_it_must_be_in.py",
+        "tests/test_it_must_be_in.py",
+        "tests/it_must_be_in/test_it_must_be_in.py",
+        "tests/it_must_be_ins/test_it_must_be_in.py",
+        "tests/then/test_it_must_be_in.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/then/it_must_contain_something.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/then/tests/test_it_must_contain_something.py",
+        "tests/steps/then/test_it_must_contain_something.py",
+        "terraform_compliance/steps/then/tests/test_then.py",
+        "test/test_it_must_contain_something.py",
+        "tests/test_it_must_contain_something.py",
+        "tests/it_must_contain_something/test_it_must_contain_something.py",
+        "tests/it_must_contain_somethings/test_it_must_contain_something.py",
+        "tests/then/test_it_must_contain_something.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/then/it_must_have_reference_address_referenced.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/then/tests/test_it_must_have_reference_address_referenced.py",
+        "tests/steps/then/test_it_must_have_reference_address_referenced.py",
+        "terraform_compliance/steps/then/tests/test_then.py",
+        "test/test_it_must_have_reference_address_referenced.py",
+        "tests/test_it_must_have_reference_address_referenced.py",
+        "tests/it_must_have_reference_address_referenced/test_it_must_have_reference_address_referenced.py",
+        "tests/it_must_have_reference_address_referenceds/test_it_must_have_reference_address_referenced.py",
+        "tests/then/test_it_must_have_reference_address_referenced.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/then/it_must_not_be_in.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/then/tests/test_it_must_not_be_in.py",
+        "tests/steps/then/test_it_must_not_be_in.py",
+        "terraform_compliance/steps/then/tests/test_then.py",
+        "test/test_it_must_not_be_in.py",
+        "tests/test_it_must_not_be_in.py",
+        "tests/it_must_not_be_in/test_it_must_not_be_in.py",
+        "tests/it_must_not_be_ins/test_it_must_not_be_in.py",
+        "tests/then/test_it_must_not_be_in.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/then/property_is_enabled.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/then/tests/test_property_is_enabled.py",
+        "tests/steps/then/test_property_is_enabled.py",
+        "terraform_compliance/steps/then/tests/test_then.py",
+        "test/test_property_is_enabled.py",
+        "tests/test_property_is_enabled.py",
+        "tests/property_is_enabled/test_property_is_enabled.py",
+        "tests/property_is_enableds/test_property_is_enabled.py",
+        "tests/then/test_property_is_enabled.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/then/security_group_related.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/then/tests/test_security_group_related.py",
+        "tests/steps/then/test_security_group_related.py",
+        "terraform_compliance/steps/then/tests/test_then.py",
+        "test/test_security_group_related.py",
+        "tests/test_security_group_related.py",
+        "tests/security_group_related/test_security_group_related.py",
+        "tests/security_group_relateds/test_security_group_related.py",
+        "tests/then/test_security_group_related.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/when/its_key_is_value.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/when/tests/test_its_key_is_value.py",
+        "tests/steps/when/test_its_key_is_value.py",
+        "terraform_compliance/steps/when/tests/test_when.py",
+        "test/test_its_key_is_value.py",
+        "tests/test_its_key_is_value.py",
+        "tests/its_key_is_value/test_its_key_is_value.py",
+        "tests/its_key_is_values/test_its_key_is_value.py",
+        "tests/when/test_its_key_is_value.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/when/its_key_metadata_has_something.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/when/tests/test_its_key_metadata_has_something.py",
+        "tests/steps/when/test_its_key_metadata_has_something.py",
+        "terraform_compliance/steps/when/tests/test_when.py",
+        "test/test_its_key_metadata_has_something.py",
+        "tests/test_its_key_metadata_has_something.py",
+        "tests/its_key_metadata_has_something/test_its_key_metadata_has_something.py",
+        "tests/its_key_metadata_has_somethings/test_its_key_metadata_has_something.py",
+        "tests/when/test_its_key_metadata_has_something.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/when/it_contains_something.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/when/tests/test_it_contains_something.py",
+        "tests/steps/when/test_it_contains_something.py",
+        "terraform_compliance/steps/when/tests/test_when.py",
+        "test/test_it_contains_something.py",
+        "tests/test_it_contains_something.py",
+        "tests/it_contains_something/test_it_contains_something.py",
+        "tests/it_contains_somethings/test_it_contains_something.py",
+        "tests/when/test_it_contains_something.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/steps/when/maths.py",
+      "candidate_test_paths": [
+        "terraform_compliance/steps/when/tests/test_maths.py",
+        "tests/steps/when/test_maths.py",
+        "terraform_compliance/steps/when/tests/test_when.py",
+        "test/test_maths.py",
+        "tests/test_maths.py",
+        "tests/maths/test_maths.py",
+        "tests/when/test_maths.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "terraform_compliance/__main__.py",
+      "candidate_test_paths": [
+        "terraform_compliance/tests/test___main__.py",
+        "tests/test___main__.py",
+        "terraform_compliance/tests/test_terraform_compliance.py",
+        "test/test___main__.py",
+        "tests/__main__/test___main__.py",
+        "tests/__main__s/test___main__.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/security/**",
+      "matched_paths": [
+        "terraform_compliance/extensions/security_groups.py",
+        "terraform_compliance/steps/then/security_group_related.py",
+        "tests/terraform_compliance/extensions/test_security_groups.py"
+      ],
+      "category": "security",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"security\" found in 3 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.cfg",
+        "setup.py",
+        "tox.ini"
+      ],
+      "count": 3,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 63,
+    "classified_count": 63,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 189,
+    "project_import_count": 94,
+    "declared_package_count": 13,
+    "undeclared_package_count": 33,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 36,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 1,
+    "sensitive_file_count": 3,
+    "manifest_count": 5,
+    "low_confidence_manifest_count": 3
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

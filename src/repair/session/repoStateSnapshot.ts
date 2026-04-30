@@ -1,4 +1,4 @@
-import { execSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import type { RepoStateSnapshot } from "./repairSessionTypes.js";
 
 export function captureRepoStateSnapshot(input: {
@@ -18,14 +18,14 @@ export function captureRepoStateSnapshot(input: {
   }
 
   try {
-    const headSha = execSync("git rev-parse HEAD", {
+    const headSha = execFileSync("git", ["rev-parse", "HEAD"], {
       cwd: input.repoRoot,
       encoding: "utf-8",
       timeout: 10_000,
       stdio: ["pipe", "pipe", "pipe"],
     }).trim();
 
-    const status = execSync("git status --porcelain", {
+    const status = execFileSync("git", ["status", "--porcelain"], {
       cwd: input.repoRoot,
       encoding: "utf-8",
       timeout: 10_000,
@@ -40,7 +40,8 @@ export function captureRepoStateSnapshot(input: {
       created_at: new Date().toISOString(),
       source: input.source ?? "git",
     };
-  } catch {
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
     return {
       base_sha: null,
       head_sha: null,
@@ -48,6 +49,7 @@ export function captureRepoStateSnapshot(input: {
       working_tree_status: "unknown",
       created_at: new Date().toISOString(),
       source: input.source ?? "unknown",
+      error: message,
     };
   }
 }

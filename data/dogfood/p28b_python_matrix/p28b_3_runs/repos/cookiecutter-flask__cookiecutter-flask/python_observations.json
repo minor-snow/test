@@ -1,0 +1,1254 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "cookiecutter-flask__cookiecutter-flask",
+    "observed_file_count": 87,
+    "python_file_count": 34
+  },
+  "layout": {
+    "primary_layout": "unknown",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: hooks"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "primary_layout",
+        "reason": "No structural signals matched known project forms"
+      }
+    ],
+    "bucket_summary": {
+      "source": 20,
+      "config": 2,
+      "unknown": 4,
+      "test": 8
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "flask",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "flask found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "flask imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "pytest imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "click imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "sqlalchemy found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "sqlalchemy imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "flask_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: unknown / flat_package (medium)",
+      "framework: flask / web_framework (high)",
+      "framework: pytest / test_framework (high)",
+      "framework: click / cli_framework (high)",
+      "framework: sqlalchemy / orm (high)",
+      "project_role: service_backend (medium)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/config*",
+        "reason": "Application configuration affects runtime behavior",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/config*"
+        ]
+      },
+      {
+        "pattern": "**/extensions*",
+        "reason": "Flask extensions influence app wiring and security hooks",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/extensions*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/blueprints/**",
+        "reason": "No Flask blueprint directory observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "cookiecutter_spec.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3381,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hooks/post_gen_project.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1204,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hooks/pre_gen_project.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1822,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hooks/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 70,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "tasks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2793,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/autoapp.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 140,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/Pipfile",
+      "bucket": "unknown",
+      "extension": ".app_name}}/pipfile",
+      "size_bytes": 1310,
+      "evidence": []
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 63,
+      "evidence": []
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 156,
+      "evidence": []
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/setup.cfg",
+      "bucket": "unknown",
+      "extension": ".cfg",
+      "size_bytes": 110,
+      "evidence": []
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1054,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/tests/factories.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 716,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/tests/settings.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 466,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/tests/test_database.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2441,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/tests/test_forms.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2532,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/tests/test_functional.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4137,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/tests/test_models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2376,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 26,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2483,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/commands.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2220,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/compat.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 419,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/database.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2602,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/extensions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 668,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/forms.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1277,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2322,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 118,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/settings.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 756,
+      "evidence": [
+        "Settings module"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/forms.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1512,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2082,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 356,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 78,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 333,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 33,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "cookiecutter_spec.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "cookiecutter_spec.py",
+      "raw_specifier": "from typing import List",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter_spec.py",
+      "raw_specifier": "columbo",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "columbo",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter_spec.py",
+      "raw_specifier": "from cookiecutter.main import cookiecutter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter_spec.py",
+      "raw_specifier": "from packaging.utils import canonicalize_name",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hooks/post_gen_project.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hooks/post_gen_project.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hooks/post_gen_project.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hooks/post_gen_project.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hooks/pre_gen_project.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hooks/pre_gen_project.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hooks/pre_gen_project.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "from typing import Iterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "from invoke import task",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/app.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/app.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/app.py",
+      "raw_specifier": "from flask import Flask, render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/commands.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/commands.py",
+      "raw_specifier": "from glob import glob",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "glob",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/commands.py",
+      "raw_specifier": "from subprocess import call",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/commands.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/commands.py",
+      "raw_specifier": "pytest",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pytest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/compat.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/database.py",
+      "raw_specifier": "from typing import Optional, Type, TypeVar",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/database.py",
+      "raw_specifier": "from .compat import basestring",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/database.py",
+      "raw_specifier": "from .extensions import db",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".extensions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/extensions.py",
+      "raw_specifier": "from flask_bcrypt import Bcrypt",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_bcrypt",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/extensions.py",
+      "raw_specifier": "from flask_caching import Cache",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_caching",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/extensions.py",
+      "raw_specifier": "from flask_debugtoolbar import DebugToolbarExtension",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_debugtoolbar",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/extensions.py",
+      "raw_specifier": "from flask_login import LoginManager",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_login",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/extensions.py",
+      "raw_specifier": "from flask_migrate import Migrate",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_migrate",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/extensions.py",
+      "raw_specifier": "from flask_sqlalchemy import SQLAlchemy",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/extensions.py",
+      "raw_specifier": "from flask_static_digest import FlaskStaticDigest",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_static_digest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/extensions.py",
+      "raw_specifier": "from flask_wtf.csrf import CSRFProtect",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/forms.py",
+      "raw_specifier": "from flask_wtf import FlaskForm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/forms.py",
+      "raw_specifier": "from wtforms import PasswordField, StringField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/forms.py",
+      "raw_specifier": "from wtforms.validators import DataRequired",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/views.py",
+      "raw_specifier": "from flask import ( Blueprint, current_app, flash, redirect, render_template, request, url_for, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/views.py",
+      "raw_specifier": "from flask_login import login_required, login_user, logout_user",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_login",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/__init__.py",
+      "raw_specifier": "from . import views  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/forms.py",
+      "raw_specifier": "from flask_wtf import FlaskForm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/forms.py",
+      "raw_specifier": "from wtforms import PasswordField, StringField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/forms.py",
+      "raw_specifier": "from wtforms.validators import DataRequired, Email, EqualTo, Length",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/forms.py",
+      "raw_specifier": "from .models import User",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/models.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/models.py",
+      "raw_specifier": "from flask_login import UserMixin",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_login",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/models.py",
+      "raw_specifier": "from sqlalchemy.ext.hybrid import hybrid_property",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/views.py",
+      "raw_specifier": "from flask import Blueprint, render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/views.py",
+      "raw_specifier": "from flask_login import login_required",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_login",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/__init__.py",
+      "raw_specifier": "from . import views  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/utils.py",
+      "raw_specifier": "from flask import flash",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "columbo",
+        "cookiecutter",
+        "invoke",
+        "packaging"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/Pipfile",
+      "source_type": "Pipfile",
+      "packages": [
+        "click",
+        "flask",
+        "werkzeug",
+        "flask_sqlalchemy",
+        "psycopg2_binary",
+        "sqlalchemy",
+        "flask_migrate",
+        "email_validator",
+        "flask_wtf",
+        "wtforms",
+        "gevent",
+        "gunicorn",
+        "supervisor",
+        "flask_static_digest",
+        "flask_bcrypt",
+        "flask_login",
+        "flask_caching",
+        "flask_debugtoolbar",
+        "environs"
+      ],
+      "dev_packages": [
+        "factory_boy",
+        "pytest",
+        "pytest_cov",
+        "webtest",
+        "black",
+        "flake8",
+        "flake8_blind_except",
+        "flake8_debugger",
+        "flake8_docstrings",
+        "flake8_isort",
+        "isort",
+        "pep8_naming"
+      ],
+      "confidence": "medium",
+      "warnings": []
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "cookiecutter_spec.py",
+      "candidate_test_paths": [
+        "test/test_cookiecutter_spec.py",
+        "tests/test_cookiecutter_spec.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "hooks/post_gen_project.py",
+      "candidate_test_paths": [
+        "hooks/tests/test_post_gen_project.py",
+        "tests/test_post_gen_project.py",
+        "hooks/tests/test_hooks.py",
+        "test/test_post_gen_project.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "hooks/pre_gen_project.py",
+      "candidate_test_paths": [
+        "hooks/tests/test_pre_gen_project.py",
+        "tests/test_pre_gen_project.py",
+        "hooks/tests/test_hooks.py",
+        "test/test_pre_gen_project.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tasks.py",
+      "candidate_test_paths": [
+        "test/test_tasks.py",
+        "tests/test_tasks.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/autoapp.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.app_name}}/tests/test_autoapp.py",
+        "tests/test_autoapp.py",
+        "{{cookiecutter.app_name}}/tests/test_{{cookiecutter.app_name}}.py",
+        "test/test_autoapp.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/app.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/tests/test_app.py",
+        "tests/{{cookiecutter.app_name}}/test_app.py",
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/tests/test_{{cookiecutter.app_name}}.py",
+        "test/test_app.py",
+        "tests/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/commands.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/tests/test_commands.py",
+        "tests/{{cookiecutter.app_name}}/test_commands.py",
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/tests/test_{{cookiecutter.app_name}}.py",
+        "test/test_commands.py",
+        "tests/test_commands.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/compat.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/tests/test_compat.py",
+        "tests/{{cookiecutter.app_name}}/test_compat.py",
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/tests/test_{{cookiecutter.app_name}}.py",
+        "test/test_compat.py",
+        "tests/test_compat.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/database.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/tests/test_database.py",
+        "tests/{{cookiecutter.app_name}}/test_database.py",
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/tests/test_{{cookiecutter.app_name}}.py",
+        "test/test_database.py",
+        "tests/test_database.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/extensions.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/tests/test_extensions.py",
+        "tests/{{cookiecutter.app_name}}/test_extensions.py",
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/tests/test_{{cookiecutter.app_name}}.py",
+        "test/test_extensions.py",
+        "tests/test_extensions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/forms.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/tests/test_forms.py",
+        "tests/{{cookiecutter.app_name}}/public/test_forms.py",
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/tests/test_public.py",
+        "test/test_forms.py",
+        "tests/test_forms.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/views.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/tests/test_views.py",
+        "tests/{{cookiecutter.app_name}}/public/test_views.py",
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/public/tests/test_public.py",
+        "test/test_views.py",
+        "tests/test_views.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/forms.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/tests/test_forms.py",
+        "tests/{{cookiecutter.app_name}}/user/test_forms.py",
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/tests/test_user.py",
+        "test/test_forms.py",
+        "tests/test_forms.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/models.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/tests/test_models.py",
+        "tests/{{cookiecutter.app_name}}/user/test_models.py",
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/tests/test_user.py",
+        "test/test_models.py",
+        "tests/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/views.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/tests/test_views.py",
+        "tests/{{cookiecutter.app_name}}/user/test_views.py",
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/user/tests/test_user.py",
+        "test/test_views.py",
+        "tests/test_views.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/utils.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/tests/test_utils.py",
+        "tests/{{cookiecutter.app_name}}/test_utils.py",
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/tests/test_{{cookiecutter.app_name}}.py",
+        "test/test_utils.py",
+        "tests/test_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/settings/**",
+      "matched_paths": [
+        "{{cookiecutter.app_name}}/tests/settings.py",
+        "{{cookiecutter.app_name}}/{{cookiecutter.app_name}}/settings.py"
+      ],
+      "category": "infrastructure_config",
+      "severity": "medium",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"settings\" found in 2 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "{{cookiecutter.app_name}}/Pipfile",
+        "{{cookiecutter.app_name}}/pyproject.toml",
+        "{{cookiecutter.app_name}}/requirements.txt",
+        "{{cookiecutter.app_name}}/setup.cfg"
+      ],
+      "count": 4,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "{{cookiecutter.app_name}}/pyproject.toml",
+        "{{cookiecutter.app_name}}/setup.cfg"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 29,
+    "classified_count": 29,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 54,
+    "project_import_count": 0,
+    "declared_package_count": 28,
+    "undeclared_package_count": 1,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 16,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 1,
+    "sensitive_file_count": 2,
+    "manifest_count": 5,
+    "low_confidence_manifest_count": 2
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

@@ -30,6 +30,9 @@ export function buildRepairContract(input: {
     finding: input.finding,
     observations: input.observations,
   });
+  if (suspectSurface.files.length === 0) {
+    throw new Error("RepairContract cannot be generated without a non-empty suspect surface.");
+  }
 
   const relationGraphResult = buildRepairRelationGraph({
     report: input.report,

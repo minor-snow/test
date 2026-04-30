@@ -1,0 +1,62 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "0654a1f05eac368b3d3a4d9108634c1fdfaaf3807985db781cbd3c14718abb67",
+  "pinned_commit": "966bbd2c423dc730d88b3169c79f65b48ba207bc",
+  "completed_at": "2026-04-30T11:54:34.514Z",
+  "repo_id": "pypa/packaging",
+  "category_expected": "packaging",
+  "category_observed": "python_sdk_library",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 215,
+  "python_files": 69,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "httpx/medium"
+  ],
+  "project_role_signals": [
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 33,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "pypa/packaging",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected packaging, got python_sdk_library",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "tasks/requirements.txt"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "noxfile.py",
+        "pyproject.toml"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

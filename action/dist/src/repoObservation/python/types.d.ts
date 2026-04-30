@@ -127,7 +127,7 @@ export type PythonProjectLayout = {
 export type PythonEvidenceDimension = "dependency_manifest" | "layout_classification" | "path_pattern" | "import_pattern";
 export type PythonFrameworkSignal = {
     readonly name: string;
-    readonly kind: "web_framework" | "test_framework" | "cli_framework" | "async_framework" | "orm" | "task_queue" | "http_client";
+    readonly kind: "web_framework" | "test_framework" | "cli_framework" | "workflow_orchestration" | "orm" | "task_queue" | "http_client";
     readonly confidence: "high" | "medium" | "low";
     readonly evidence: readonly {
         readonly dimension: PythonEvidenceDimension;

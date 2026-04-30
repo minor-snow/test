@@ -63,6 +63,7 @@ export function cmdAlphaDoctor(input: AlphaDoctorInput): void {
       githubEnabled = config.github.enabled;
       return true;
     } catch (e) {
+      githubEnabled = false;
       return `Schema validation failed: ${e instanceof Error ? e.message : String(e)}`;
     }
   });

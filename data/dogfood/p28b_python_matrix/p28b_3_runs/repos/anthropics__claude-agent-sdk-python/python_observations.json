@@ -1,0 +1,4151 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "anthropics__claude-agent-sdk-python",
+    "observed_file_count": 125,
+    "python_file_count": 90
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "src_layout",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "src_layout_detected",
+        "weight": "strong",
+        "evidence": "src/ directory with package(s): claude_agent_sdk"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "test": 40,
+      "source": 44,
+      "config": 1,
+      "script": 5
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "pytest imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / src_layout (high)",
+      "framework: pytest / test_framework (high)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: authorization (high, 2 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 5,
+        "evidence": [
+          "5 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "e2e-tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 822,
+      "evidence": [
+        "pytest conftest"
+      ]
+    },
+    {
+      "path": "e2e-tests/test_agents_and_settings.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 14729,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "e2e-tests/test_dynamic_control.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3049,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "e2e-tests/test_hooks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5291,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "e2e-tests/test_hook_events.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6801,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "e2e-tests/test_include_partial_messages.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5812,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "e2e-tests/test_sdk_mcp_tools.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5871,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "e2e-tests/test_stderr_callback.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 787,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "e2e-tests/test_structured_output.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6876,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "e2e-tests/test_tool_permissions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2199,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "examples/agents.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4385,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/filesystem_agents.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3575,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/hooks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 12486,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/include_partial_messages.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1731,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/max_budget_usd.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3163,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/mcp_calculator.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6063,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/plugin_example.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2235,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/quick_start.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2151,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/session_stores/postgres_session_store.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10011,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/session_stores/redis_session_store.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7344,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/session_stores/s3_session_store.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 16369,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/session_stores/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/setting_sources.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6921,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/stderr_callback_example.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1424,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/streaming_mode.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 18464,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/streaming_mode_ipython.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8258,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/streaming_mode_trio.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2438,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/system_prompt.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2639,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/tools_option.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3683,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/tool_permission_callback.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5575,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 3327,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "scripts/build_wheel.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 11448,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/check_pypi_quota.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 4312,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/download_cli.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 5418,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/update_cli_version.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 843,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/update_version.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 1311,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/client.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 27160,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/query.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4811,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/testing/session_store_conformance.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14060,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/testing/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 308,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/types.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 62702,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_cli_version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 71,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_errors.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1635,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/client.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9672,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/message_parser.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 12131,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/query.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 36269,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/sessions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 68796,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/session_import.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6768,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 35442,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/session_resume.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 20295,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/session_store.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7695,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/session_store_validation.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1708,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/session_summary.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8637,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/transcript_mirror_batcher.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9734,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 30599,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/transport/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2046,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6374,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_internal/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 40,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/_version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 75,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/claude_agent_sdk/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 22437,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 115,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_build_wheel.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2336,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_changelog.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3300,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_client.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 13081,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_errors.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1831,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_example_postgres_session_store.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9059,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_example_redis_session_store.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 14014,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_example_redis_session_store_live.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5793,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_example_s3_session_store.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 22906,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_example_s3_session_store_live.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7621,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_integration.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12136,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_mcp_large_output.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 14919,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_message_parser.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 38949,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_query.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 34088,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_rate_limit_event_repro.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4387,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_sdk_mcp_integration.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 40415,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_sessions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 73063,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_session_helpers_store.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 33297,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_session_import.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11952,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_session_mutations.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 33587,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_session_resume.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 49534,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_session_store_conformance.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10512,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_session_summary.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 37087,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_streaming_client.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 56828,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_subprocess_buffering.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 14798,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_task_compat.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6417,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_tool_callbacks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 30241,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_transcript_mirror.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 32029,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_transport.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 78574,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_types.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 23901,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/agents.py",
+      "raw_specifier": "anyio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "anyio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/agents.py",
+      "raw_specifier": "from claude_agent_sdk import ( AgentDefinition, AssistantMessage, ClaudeAgentOptions, ResultMessage, TextBlock, query, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/filesystem_agents.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/filesystem_agents.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/filesystem_agents.py",
+      "raw_specifier": "from claude_agent_sdk import ( AssistantMessage, ClaudeAgentOptions, ClaudeSDKClient, ResultMessage, SystemMessage, TextBlock, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/hooks.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/hooks.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/hooks.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/hooks.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/hooks.py",
+      "raw_specifier": "from claude_agent_sdk import ClaudeAgentOptions, ClaudeSDKClient",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/hooks.py",
+      "raw_specifier": "from claude_agent_sdk.types import ( AssistantMessage, HookContext, HookInput, HookJSONOutput, HookMatcher, Message, ResultMessage, TextBlock, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/include_partial_messages.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/include_partial_messages.py",
+      "raw_specifier": "from claude_agent_sdk import ClaudeSDKClient",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/include_partial_messages.py",
+      "raw_specifier": "from claude_agent_sdk.types import ( ClaudeAgentOptions, StreamEvent, AssistantMessage, UserMessage, SystemMessage, ResultMessage, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/max_budget_usd.py",
+      "raw_specifier": "anyio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "anyio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/max_budget_usd.py",
+      "raw_specifier": "from claude_agent_sdk import ( AssistantMessage, ClaudeAgentOptions, ResultMessage, TextBlock, query, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/mcp_calculator.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/mcp_calculator.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/mcp_calculator.py",
+      "raw_specifier": "from claude_agent_sdk import ( ClaudeAgentOptions, create_sdk_mcp_server, tool, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/mcp_calculator.py",
+      "raw_specifier": "math",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "math",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/mcp_calculator.py",
+      "raw_specifier": "from claude_agent_sdk import ( AssistantMessage, ResultMessage, SystemMessage, TextBlock, ToolResultBlock, ToolUseBlock, UserMessage, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/mcp_calculator.py",
+      "raw_specifier": "from claude_agent_sdk import ClaudeSDKClient",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/plugin_example.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/plugin_example.py",
+      "raw_specifier": "anyio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "anyio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/plugin_example.py",
+      "raw_specifier": "from claude_agent_sdk import ( ClaudeAgentOptions, SystemMessage, query, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/quick_start.py",
+      "raw_specifier": "anyio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "anyio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/quick_start.py",
+      "raw_specifier": "from claude_agent_sdk import ( AssistantMessage, ClaudeAgentOptions, ResultMessage, TextBlock, query, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/postgres_session_store.py",
+      "raw_specifier": "asyncpg",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "asyncpg",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/postgres_session_store.py",
+      "raw_specifier": "from claude_agent_sdk import ClaudeAgentOptions, query",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/postgres_session_store.py",
+      "raw_specifier": "from postgres_session_store import PostgresSessionStore",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "postgres_session_store",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/postgres_session_store.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/postgres_session_store.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/postgres_session_store.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/postgres_session_store.py",
+      "raw_specifier": "from dataclasses import dataclass",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/postgres_session_store.py",
+      "raw_specifier": "from typing import TYPE_CHECKING",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/postgres_session_store.py",
+      "raw_specifier": "from claude_agent_sdk import ( SessionKey, SessionListSubkeysKey, SessionStore, SessionStoreEntry, SessionStoreListEntry, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/postgres_session_store.py",
+      "raw_specifier": "asyncpg",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "asyncpg",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/redis_session_store.py",
+      "raw_specifier": "redis.asyncio",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "redis",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/redis_session_store.py",
+      "raw_specifier": "from claude_agent_sdk import ClaudeAgentOptions, query",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/redis_session_store.py",
+      "raw_specifier": "from redis_session_store import RedisSessionStore",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "redis_session_store",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/redis_session_store.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/redis_session_store.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/redis_session_store.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/redis_session_store.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/redis_session_store.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/redis_session_store.py",
+      "raw_specifier": "from typing import TYPE_CHECKING",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/redis_session_store.py",
+      "raw_specifier": "from claude_agent_sdk import ( SessionKey, SessionListSubkeysKey, SessionStore, SessionStoreEntry, SessionStoreListEntry, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/redis_session_store.py",
+      "raw_specifier": "redis.asyncio",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "redis",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "boto3",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "from claude_agent_sdk import ClaudeAgentOptions, query",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "secrets",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "secrets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "from dataclasses import dataclass, field",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "from claude_agent_sdk.types import ( SessionKey, SessionListSubkeysKey, SessionStore, SessionStoreEntry, SessionStoreListEntry, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/session_stores/s3_session_store.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/setting_sources.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/setting_sources.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/setting_sources.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/setting_sources.py",
+      "raw_specifier": "from claude_agent_sdk import ( ClaudeAgentOptions, ClaudeSDKClient, SystemMessage, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/stderr_callback_example.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/stderr_callback_example.py",
+      "raw_specifier": "from claude_agent_sdk import ClaudeAgentOptions, query",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/streaming_mode.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/streaming_mode.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/streaming_mode.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/streaming_mode.py",
+      "raw_specifier": "from claude_agent_sdk import ( AssistantMessage, ClaudeAgentOptions, ClaudeSDKClient, CLIConnectionError, ResultMessage, SystemMessage, TextBlock, ToolResultBlock, ToolUseBlock, UserMessage, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/streaming_mode_ipython.py",
+      "raw_specifier": "from claude_agent_sdk import AssistantMessage, ClaudeSDKClient, ResultMessage, TextBlock",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/streaming_mode_ipython.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/streaming_mode_ipython.py",
+      "raw_specifier": "from claude_agent_sdk import AssistantMessage, ClaudeSDKClient, TextBlock",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/streaming_mode_ipython.py",
+      "raw_specifier": "from claude_agent_sdk import AssistantMessage, ClaudeSDKClient, TextBlock",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/streaming_mode_ipython.py",
+      "raw_specifier": "from claude_agent_sdk import AssistantMessage, ClaudeSDKClient, TextBlock",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/streaming_mode_ipython.py",
+      "raw_specifier": "from claude_agent_sdk import AssistantMessage, ClaudeSDKClient, TextBlock",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/streaming_mode_ipython.py",
+      "raw_specifier": "from claude_agent_sdk import AssistantMessage, ClaudeSDKClient, TextBlock",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/streaming_mode_ipython.py",
+      "raw_specifier": "from claude_agent_sdk import AssistantMessage, ClaudeSDKClient, TextBlock",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/streaming_mode_trio.py",
+      "raw_specifier": "trio",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "trio",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/streaming_mode_trio.py",
+      "raw_specifier": "from claude_agent_sdk import ( AssistantMessage, ClaudeAgentOptions, ClaudeSDKClient, ResultMessage, SystemMessage, TextBlock, UserMessage, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/system_prompt.py",
+      "raw_specifier": "anyio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "anyio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/system_prompt.py",
+      "raw_specifier": "from claude_agent_sdk import ( AssistantMessage, ClaudeAgentOptions, TextBlock, query, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/tools_option.py",
+      "raw_specifier": "anyio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "anyio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tools_option.py",
+      "raw_specifier": "from claude_agent_sdk import ( AssistantMessage, ClaudeAgentOptions, ResultMessage, SystemMessage, TextBlock, query, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/tool_permission_callback.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tool_permission_callback.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tool_permission_callback.py",
+      "raw_specifier": "from claude_agent_sdk import ( AssistantMessage, ClaudeAgentOptions, ClaudeSDKClient, PermissionResultAllow, PermissionResultDeny, ResultMessage, TextBlock, ToolPermissionContext, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from collections.abc import AsyncIterable, AsyncIterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from dataclasses import asdict, replace",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from . import Transport",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from ._errors import CLIConnectionError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._errors",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from ._internal.session_resume import MaterializedResume",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.session_resume",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from .types import ( ClaudeAgentOptions, ContextUsageResponse, HookEvent, HookMatcher, McpStatusResponse, Message, PermissionMode, ResultMessage, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from ._internal.session_resume import materialize_resume_session",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.session_resume",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from ._internal.session_store_validation import validate_session_store_options",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.session_store_validation",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from ._internal.query import Query",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.query",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from ._internal.session_resume import ( apply_materialized_options, build_mirror_batcher, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.session_resume",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from ._internal.transport.subprocess_cli import SubprocessCLITransport",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.transport.subprocess_cli",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/client.py",
+      "raw_specifier": "from ._internal.message_parser import parse_message",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.message_parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/query.py",
+      "raw_specifier": "from collections.abc import AsyncIterable, AsyncIterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/query.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/query.py",
+      "raw_specifier": "from ._internal.client import InternalClient",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.client",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/query.py",
+      "raw_specifier": "from ._internal.transport import Transport",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.transport",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/query.py",
+      "raw_specifier": "from .types import ClaudeAgentOptions, Message",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/query.py",
+      "raw_specifier": "from claude_agent_sdk import query, Transport",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/testing/session_store_conformance.py",
+      "raw_specifier": "pytest",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pytest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/testing/session_store_conformance.py",
+      "raw_specifier": "from claude_agent_sdk.testing import run_session_store_conformance",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "claude_agent_sdk",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/testing/session_store_conformance.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/testing/session_store_conformance.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/testing/session_store_conformance.py",
+      "raw_specifier": "math",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "math",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/testing/session_store_conformance.py",
+      "raw_specifier": "from collections.abc import Awaitable, Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/testing/session_store_conformance.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/testing/session_store_conformance.py",
+      "raw_specifier": "from ..types import SessionKey, SessionStore",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/testing/session_store_conformance.py",
+      "raw_specifier": "from .._internal.session_summary import fold_session_summary",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".._internal.session_summary",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/testing/__init__.py",
+      "raw_specifier": "from .session_store_conformance import run_session_store_conformance",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session_store_conformance",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/types.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/types.py",
+      "raw_specifier": "from collections.abc import Awaitable, Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/types.py",
+      "raw_specifier": "from dataclasses import dataclass, field",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/types.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/types.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, Literal, Protocol",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/types.py",
+      "raw_specifier": "from typing import NotRequired, Required, TypedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/types.py",
+      "raw_specifier": "from typing_extensions import NotRequired, Required, TypedDict",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/types.py",
+      "raw_specifier": "from mcp.server import Server as McpServer",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mcp",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_errors.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/client.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/client.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/client.py",
+      "raw_specifier": "from collections.abc import AsyncGenerator, AsyncIterable, AsyncIterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/client.py",
+      "raw_specifier": "from dataclasses import asdict, replace",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/client.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/client.py",
+      "raw_specifier": "from ..types import ( ClaudeAgentOptions, HookEvent, HookMatcher, Message, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/client.py",
+      "raw_specifier": "from .message_parser import parse_message",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".message_parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/client.py",
+      "raw_specifier": "from .query import Query",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".query",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/client.py",
+      "raw_specifier": "from .session_resume import ( MaterializedResume, apply_materialized_options, build_mirror_batcher, materialize_resume_session, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session_resume",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/client.py",
+      "raw_specifier": "from .session_store_validation import validate_session_store_options",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session_store_validation",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/client.py",
+      "raw_specifier": "from .transport import Transport",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".transport",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/client.py",
+      "raw_specifier": "from .transport.subprocess_cli import SubprocessCLITransport",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".transport.subprocess_cli",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/message_parser.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/message_parser.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/message_parser.py",
+      "raw_specifier": "from .._errors import MessageParseError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".._errors",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/message_parser.py",
+      "raw_specifier": "from ..types import ( AssistantMessage, ContentBlock, Message, MirrorErrorMessage, RateLimitEvent, RateLimitInfo, ResultMessage, ServerToolResultBlock, ServerToolUseBlock, StreamEvent, SystemMessage, TaskNotificationMessage, TaskProgressMessage, TaskStartedMessage, TextBlock, ThinkingBlock, ToolResultBlock, ToolUseBlock, UserMessage, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "from collections.abc import AsyncIterable, AsyncIterator, Awaitable, Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "from contextlib import suppress",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "anyio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "anyio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "from mcp.types import ( CallToolRequest, CallToolRequestParams, ListToolsRequest, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mcp",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "from ..types import ( PermissionMode, PermissionResultAllow, PermissionResultDeny, SDKControlPermissionRequest, SDKControlRequest, SDKControlResponse, SDKHookCallbackRequest, ToolPermissionContext, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "from ._task_compat import TaskHandle, spawn_detached",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._task_compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "from .transport import Transport",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".transport",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "from mcp.server import Server as McpServer",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mcp",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "from ..types import SessionKey",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/query.py",
+      "raw_specifier": "from .transcript_mirror_batcher import TranscriptMirrorBatcher",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".transcript_mirror_batcher",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "unicodedata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "unicodedata",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "from ..types import SDKSessionInfo, SessionKey, SessionMessage, SessionStore",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "from .session_store_validation import _store_implements",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session_store_validation",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/sessions.py",
+      "raw_specifier": "from .session_summary import summary_entry_to_sdk_info",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session_summary",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_import.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_import.py",
+      "raw_specifier": "errno",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "errno",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_import.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_import.py",
+      "raw_specifier": "from collections.abc import Iterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_import.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_import.py",
+      "raw_specifier": "from ..types import SessionKey, SessionStore, SessionStoreEntry",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_import.py",
+      "raw_specifier": "from .sessions import ( _resolve_session_file_path, _validate_uuid, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sessions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_import.py",
+      "raw_specifier": "from .transcript_mirror_batcher import MAX_PENDING_BYTES, MAX_PENDING_ENTRIES",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".transcript_mirror_batcher",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "errno",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "errno",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "unicodedata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "unicodedata",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "from collections.abc import Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "from dataclasses import dataclass",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "from datetime import datetime, timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "from typing import Any, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "from ..types import SessionKey, SessionStore, SessionStoreEntry",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "from .session_store_validation import _store_implements",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session_store_validation",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "raw_specifier": "from .sessions import ( LITE_READ_BUF_SIZE, _canonicalize_path, _extract_first_prompt_from_head, _extract_last_json_string_field, _find_project_dir, _get_projects_dir, _get_worktree_paths, _validate_uuid, project_key_for_directory, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sessions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "errno",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "errno",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "getpass",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "getpass",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "ntpath",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "ntpath",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "from collections.abc import Awaitable, Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "from contextlib import suppress",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "from dataclasses import dataclass, replace",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "from ..types import ClaudeAgentOptions, SessionKey, SessionStore",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "from .session_store_validation import _store_implements",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session_store_validation",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "from .sessions import _get_projects_dir, _validate_uuid, project_key_for_directory",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sessions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_resume.py",
+      "raw_specifier": "from .transcript_mirror_batcher import TranscriptMirrorBatcher",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".transcript_mirror_batcher",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_store.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_store.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_store.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_store.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_store.py",
+      "raw_specifier": "from ..types import ( SessionKey, SessionListSubkeysKey, SessionStore, SessionStoreEntry, SessionStoreListEntry, SessionSummaryEntry, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_store.py",
+      "raw_specifier": "from .session_summary import fold_session_summary",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session_summary",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_store.py",
+      "raw_specifier": "from .sessions import project_key_for_directory",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sessions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_store_validation.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_store_validation.py",
+      "raw_specifier": "from ..types import ClaudeAgentOptions, SessionStore",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_summary.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_summary.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_summary.py",
+      "raw_specifier": "from typing import Any, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_summary.py",
+      "raw_specifier": "from ..types import ( SDKSessionInfo, SessionKey, SessionStoreEntry, SessionSummaryEntry, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/session_summary.py",
+      "raw_specifier": "from .sessions import _COMMAND_NAME_RE, _SKIP_FIRST_PROMPT_PATTERN",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sessions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transcript_mirror_batcher.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transcript_mirror_batcher.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transcript_mirror_batcher.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transcript_mirror_batcher.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transcript_mirror_batcher.py",
+      "raw_specifier": "from collections.abc import Awaitable, Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transcript_mirror_batcher.py",
+      "raw_specifier": "from dataclasses import dataclass, field",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transcript_mirror_batcher.py",
+      "raw_specifier": "from ..types import SessionKey, SessionStore, SessionStoreEntry",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transcript_mirror_batcher.py",
+      "raw_specifier": "from .session_store import file_path_to_session_key",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session_store",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from collections.abc import AsyncIterable, AsyncIterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from contextlib import suppress",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from subprocess import PIPE",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from typing import Any, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "anyio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "anyio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from anyio.abc import Process",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "anyio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from anyio.streams.text import TextReceiveStream, TextSendStream",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "anyio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from ..._errors import CLIConnectionError, CLINotFoundError, ProcessError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..._errors",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from ..._errors import CLIJSONDecodeError as SDKJSONDecodeError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..._errors",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from ..._version import __version__",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..._version",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from ...types import ClaudeAgentOptions, SystemPromptFile, SystemPromptPreset",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "...types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from .._task_compat import TaskHandle, spawn_detached",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".._task_compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from . import Transport",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "raw_specifier": "from opentelemetry import propagate",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "opentelemetry",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/__init__.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/__init__.py",
+      "raw_specifier": "from collections.abc import AsyncIterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/transport/__init__.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "contextvars",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextvars",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "from collections.abc import Callable, Coroutine",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "from contextlib import suppress",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "sniffio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sniffio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "trio",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "trio",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "trio",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "trio",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "trio",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "trio",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "raw_specifier": "trio",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "trio",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from collections.abc import Awaitable, Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from dataclasses import dataclass",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from typing import Annotated, Any, Generic, TypeVar, Union, get_args, get_origin",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from typing import get_type_hints as _get_type_hints",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from typing import is_typeddict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from typing_extensions import get_type_hints as _get_type_hints",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from typing_extensions import is_typeddict",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from mcp.types import ToolAnnotations",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mcp",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from ._errors import ( ClaudeSDKError, CLIConnectionError, CLIJSONDecodeError, CLINotFoundError, ProcessError, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._errors",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from ._internal.session_import import import_session_to_store",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.session_import",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from ._internal.session_mutations import ( ForkSessionResult, delete_session, delete_session_via_store, fork_session, fork_session_via_store, rename_session, rename_session_via_store, tag_session, tag_session_via_store, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.session_mutations",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from ._internal.session_store import InMemorySessionStore, project_key_for_directory",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.session_store",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from ._internal.session_summary import fold_session_summary",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.session_summary",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from ._internal.sessions import ( get_session_info, get_session_info_from_store, get_session_messages, get_session_messages_from_store, get_subagent_messages, get_subagent_messages_from_store, list_sessions, list_sessions_from_store, list_subagents, list_subagents_from_store, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.sessions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from ._internal.transport import Transport",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal.transport",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from ._version import __version__",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._version",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from .client import ClaudeSDKClient",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".client",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from .query import query",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".query",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from .types import ( AgentDefinition, AssistantMessage, BaseHookInput, CanUseTool, ClaudeAgentOptions, ContentBlock, ContextUsageCategory, ContextUsageResponse, HookCallback, HookContext, HookInput, HookJSONOutput, HookMatcher, McpSdkServerConfig, McpServerConfig, McpServerConnectionStatus, McpServerInfo, McpServerStatus, McpServerStatusConfig, McpStatusResponse, McpToolAnnotations, McpToolInfo, Message, MirrorErrorMessage, NotificationHookInput, NotificationHookSpecificOutput, PermissionMode, PermissionRequestHookInput, PermissionRequestHookSpecificOutput, PermissionResult, PermissionResultAllow, PermissionResultDeny, PermissionUpdate, PostToolUseFailureHookInput, PostToolUseFailureHookSpecificOutput, PostToolUseHookInput, PreCompactHookInput, PreToolUseHookInput, RateLimitEvent, RateLimitInfo, RateLimitStatus, RateLimitType, ResultMessage, SandboxIgnoreViolations, SandboxNetworkConfig, SandboxSettings, SdkBeta, SdkPluginConfig, SDKSessionInfo, ServerToolName, ServerToolResultBlock, ServerToolUseBlock, SessionKey, SessionListSubkeysKey, SessionMessage, SessionStore, SessionStoreEntry, SessionStoreListEntry, SessionSummaryEntry, SettingSource, StopHookInput, StreamEvent, SubagentStartHookInput, SubagentStartHookSpecificOutput, SubagentStopHookInput, SystemMessage, TaskBudget, TaskNotificationMessage, TaskNotificationStatus, TaskProgressMessage, TaskStartedMessage, TaskUsage, TextBlock, ThinkingBlock, ThinkingConfig, ThinkingConfigAdaptive, ThinkingConfigDisabled, ThinkingConfigEnabled, ToolPermissionContext, ToolResultBlock, ToolUseBlock, UserMessage, UserPromptSubmitHookInput, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from mcp.server import Server",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mcp",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/claude_agent_sdk/__init__.py",
+      "raw_specifier": "from mcp.types import ( AudioContent, CallToolResult, EmbeddedResource, ImageContent, ResourceLink, TextContent, Tool, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mcp",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "anyio",
+        "sniffio",
+        "typing_extensions",
+        ",",
+        "opentelemetry_api",
+        "t installed_"
+      ],
+      "dev_packages": [
+        "pytest",
+        "pytest_asyncio"
+      ],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/agents.py",
+      "candidate_test_paths": [
+        "examples/tests/test_agents.py",
+        "tests/test_agents.py",
+        "examples/tests/test_examples.py",
+        "test/test_agents.py",
+        "tests/agents/test_agents.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/filesystem_agents.py",
+      "candidate_test_paths": [
+        "examples/tests/test_filesystem_agents.py",
+        "tests/test_filesystem_agents.py",
+        "examples/tests/test_examples.py",
+        "test/test_filesystem_agents.py",
+        "tests/filesystem_agents/test_filesystem_agents.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/hooks.py",
+      "candidate_test_paths": [
+        "examples/tests/test_hooks.py",
+        "tests/test_hooks.py",
+        "examples/tests/test_examples.py",
+        "test/test_hooks.py",
+        "tests/hooks/test_hooks.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/include_partial_messages.py",
+      "candidate_test_paths": [
+        "examples/tests/test_include_partial_messages.py",
+        "tests/test_include_partial_messages.py",
+        "examples/tests/test_examples.py",
+        "test/test_include_partial_messages.py",
+        "tests/include_partial_messages/test_include_partial_messages.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/max_budget_usd.py",
+      "candidate_test_paths": [
+        "examples/tests/test_max_budget_usd.py",
+        "tests/test_max_budget_usd.py",
+        "examples/tests/test_examples.py",
+        "test/test_max_budget_usd.py",
+        "tests/max_budget_usd/test_max_budget_usd.py",
+        "tests/max_budget_usds/test_max_budget_usd.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/mcp_calculator.py",
+      "candidate_test_paths": [
+        "examples/tests/test_mcp_calculator.py",
+        "tests/test_mcp_calculator.py",
+        "examples/tests/test_examples.py",
+        "test/test_mcp_calculator.py",
+        "tests/mcp_calculator/test_mcp_calculator.py",
+        "tests/mcp_calculators/test_mcp_calculator.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/plugin_example.py",
+      "candidate_test_paths": [
+        "examples/tests/test_plugin_example.py",
+        "tests/test_plugin_example.py",
+        "examples/tests/test_examples.py",
+        "test/test_plugin_example.py",
+        "tests/plugin_example/test_plugin_example.py",
+        "tests/plugin_examples/test_plugin_example.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/quick_start.py",
+      "candidate_test_paths": [
+        "examples/tests/test_quick_start.py",
+        "tests/test_quick_start.py",
+        "examples/tests/test_examples.py",
+        "test/test_quick_start.py",
+        "tests/quick_start/test_quick_start.py",
+        "tests/quick_starts/test_quick_start.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/session_stores/postgres_session_store.py",
+      "candidate_test_paths": [
+        "examples/session_stores/tests/test_postgres_session_store.py",
+        "tests/session_stores/test_postgres_session_store.py",
+        "examples/session_stores/tests/test_session_stores.py",
+        "test/test_postgres_session_store.py",
+        "tests/test_postgres_session_store.py",
+        "tests/postgres_session_store/test_postgres_session_store.py",
+        "tests/postgres_session_stores/test_postgres_session_store.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/session_stores/redis_session_store.py",
+      "candidate_test_paths": [
+        "examples/session_stores/tests/test_redis_session_store.py",
+        "tests/session_stores/test_redis_session_store.py",
+        "examples/session_stores/tests/test_session_stores.py",
+        "test/test_redis_session_store.py",
+        "tests/test_redis_session_store.py",
+        "tests/redis_session_store/test_redis_session_store.py",
+        "tests/redis_session_stores/test_redis_session_store.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/session_stores/s3_session_store.py",
+      "candidate_test_paths": [
+        "examples/session_stores/tests/test_s3_session_store.py",
+        "tests/session_stores/test_s3_session_store.py",
+        "examples/session_stores/tests/test_session_stores.py",
+        "test/test_s3_session_store.py",
+        "tests/test_s3_session_store.py",
+        "tests/s3_session_store/test_s3_session_store.py",
+        "tests/s3_session_stores/test_s3_session_store.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/setting_sources.py",
+      "candidate_test_paths": [
+        "examples/tests/test_setting_sources.py",
+        "tests/test_setting_sources.py",
+        "examples/tests/test_examples.py",
+        "test/test_setting_sources.py",
+        "tests/setting_sources/test_setting_sources.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/stderr_callback_example.py",
+      "candidate_test_paths": [
+        "examples/tests/test_stderr_callback_example.py",
+        "tests/test_stderr_callback_example.py",
+        "examples/tests/test_examples.py",
+        "test/test_stderr_callback_example.py",
+        "tests/stderr_callback_example/test_stderr_callback_example.py",
+        "tests/stderr_callback_examples/test_stderr_callback_example.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/streaming_mode.py",
+      "candidate_test_paths": [
+        "examples/tests/test_streaming_mode.py",
+        "tests/test_streaming_mode.py",
+        "examples/tests/test_examples.py",
+        "test/test_streaming_mode.py",
+        "tests/streaming_mode/test_streaming_mode.py",
+        "tests/streaming_modes/test_streaming_mode.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/streaming_mode_ipython.py",
+      "candidate_test_paths": [
+        "examples/tests/test_streaming_mode_ipython.py",
+        "tests/test_streaming_mode_ipython.py",
+        "examples/tests/test_examples.py",
+        "test/test_streaming_mode_ipython.py",
+        "tests/streaming_mode_ipython/test_streaming_mode_ipython.py",
+        "tests/streaming_mode_ipythons/test_streaming_mode_ipython.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/streaming_mode_trio.py",
+      "candidate_test_paths": [
+        "examples/tests/test_streaming_mode_trio.py",
+        "tests/test_streaming_mode_trio.py",
+        "examples/tests/test_examples.py",
+        "test/test_streaming_mode_trio.py",
+        "tests/streaming_mode_trio/test_streaming_mode_trio.py",
+        "tests/streaming_mode_trios/test_streaming_mode_trio.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/system_prompt.py",
+      "candidate_test_paths": [
+        "examples/tests/test_system_prompt.py",
+        "tests/test_system_prompt.py",
+        "examples/tests/test_examples.py",
+        "test/test_system_prompt.py",
+        "tests/system_prompt/test_system_prompt.py",
+        "tests/system_prompts/test_system_prompt.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/tools_option.py",
+      "candidate_test_paths": [
+        "examples/tests/test_tools_option.py",
+        "tests/test_tools_option.py",
+        "examples/tests/test_examples.py",
+        "test/test_tools_option.py",
+        "tests/tools_option/test_tools_option.py",
+        "tests/tools_options/test_tools_option.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/tool_permission_callback.py",
+      "candidate_test_paths": [
+        "examples/tests/test_tool_permission_callback.py",
+        "tests/test_tool_permission_callback.py",
+        "examples/tests/test_examples.py",
+        "test/test_tool_permission_callback.py",
+        "tests/tool_permission_callback/test_tool_permission_callback.py",
+        "tests/tool_permission_callbacks/test_tool_permission_callback.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/client.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/tests/test_client.py",
+        "tests/claude_agent_sdk/test_client.py",
+        "src/claude_agent_sdk/tests/test_claude_agent_sdk.py",
+        "test/test_client.py",
+        "tests/test_client.py",
+        "tests/client/test_client.py",
+        "tests/clients/test_client.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_client.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_client.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/query.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/tests/test_query.py",
+        "tests/claude_agent_sdk/test_query.py",
+        "src/claude_agent_sdk/tests/test_claude_agent_sdk.py",
+        "test/test_query.py",
+        "tests/test_query.py",
+        "tests/query/test_query.py",
+        "tests/querys/test_query.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_query.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_query.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/testing/session_store_conformance.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/testing/tests/test_session_store_conformance.py",
+        "tests/claude_agent_sdk/testing/test_session_store_conformance.py",
+        "src/claude_agent_sdk/testing/tests/test_testing.py",
+        "test/test_session_store_conformance.py",
+        "tests/test_session_store_conformance.py",
+        "tests/session_store_conformance/test_session_store_conformance.py",
+        "tests/session_store_conformances/test_session_store_conformance.py",
+        "tests/testing/test_session_store_conformance.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_session_store_conformance.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_session_store_conformance.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/types.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/tests/test_types.py",
+        "tests/claude_agent_sdk/test_types.py",
+        "src/claude_agent_sdk/tests/test_claude_agent_sdk.py",
+        "test/test_types.py",
+        "tests/test_types.py",
+        "tests/types/test_types.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_types.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_types.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_cli_version.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/tests/test_cli_version.py",
+        "tests/claude_agent_sdk/test_cli_version.py",
+        "src/claude_agent_sdk/tests/test_claude_agent_sdk.py",
+        "test/test_cli_version.py",
+        "tests/test_cli_version.py",
+        "tests/cli_version/test_cli_version.py",
+        "tests/cli_versions/test_cli_version.py",
+        "tests/test__cli_version.py",
+        "tests/claude_agent_sdk/test__cli_version.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_errors.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/tests/test_errors.py",
+        "tests/claude_agent_sdk/test_errors.py",
+        "src/claude_agent_sdk/tests/test_claude_agent_sdk.py",
+        "test/test_errors.py",
+        "tests/test_errors.py",
+        "tests/errors/test_errors.py",
+        "tests/test__errors.py",
+        "tests/claude_agent_sdk/test__errors.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_errors.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_errors.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/client.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/tests/test_client.py",
+        "tests/claude_agent_sdk/_internal/test_client.py",
+        "src/claude_agent_sdk/_internal/tests/test__internal.py",
+        "test/test_client.py",
+        "tests/test_client.py",
+        "tests/client/test_client.py",
+        "tests/clients/test_client.py",
+        "tests/internal/test_client.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_client.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_client.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/message_parser.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/tests/test_message_parser.py",
+        "tests/claude_agent_sdk/_internal/test_message_parser.py",
+        "src/claude_agent_sdk/_internal/tests/test__internal.py",
+        "test/test_message_parser.py",
+        "tests/test_message_parser.py",
+        "tests/message_parser/test_message_parser.py",
+        "tests/message_parsers/test_message_parser.py",
+        "tests/internal/test_message_parser.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_message_parser.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_message_parser.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/query.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/tests/test_query.py",
+        "tests/claude_agent_sdk/_internal/test_query.py",
+        "src/claude_agent_sdk/_internal/tests/test__internal.py",
+        "test/test_query.py",
+        "tests/test_query.py",
+        "tests/query/test_query.py",
+        "tests/querys/test_query.py",
+        "tests/internal/test_query.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_query.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_query.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/sessions.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/tests/test_sessions.py",
+        "tests/claude_agent_sdk/_internal/test_sessions.py",
+        "src/claude_agent_sdk/_internal/tests/test__internal.py",
+        "test/test_sessions.py",
+        "tests/test_sessions.py",
+        "tests/sessions/test_sessions.py",
+        "tests/internal/test_sessions.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_sessions.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_sessions.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/session_import.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/tests/test_session_import.py",
+        "tests/claude_agent_sdk/_internal/test_session_import.py",
+        "src/claude_agent_sdk/_internal/tests/test__internal.py",
+        "test/test_session_import.py",
+        "tests/test_session_import.py",
+        "tests/session_import/test_session_import.py",
+        "tests/session_imports/test_session_import.py",
+        "tests/internal/test_session_import.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_session_import.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_session_import.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/session_mutations.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/tests/test_session_mutations.py",
+        "tests/claude_agent_sdk/_internal/test_session_mutations.py",
+        "src/claude_agent_sdk/_internal/tests/test__internal.py",
+        "test/test_session_mutations.py",
+        "tests/test_session_mutations.py",
+        "tests/session_mutations/test_session_mutations.py",
+        "tests/internal/test_session_mutations.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_session_mutations.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_session_mutations.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/session_resume.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/tests/test_session_resume.py",
+        "tests/claude_agent_sdk/_internal/test_session_resume.py",
+        "src/claude_agent_sdk/_internal/tests/test__internal.py",
+        "test/test_session_resume.py",
+        "tests/test_session_resume.py",
+        "tests/session_resume/test_session_resume.py",
+        "tests/session_resumes/test_session_resume.py",
+        "tests/internal/test_session_resume.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_session_resume.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_session_resume.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/session_store.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/tests/test_session_store.py",
+        "tests/claude_agent_sdk/_internal/test_session_store.py",
+        "src/claude_agent_sdk/_internal/tests/test__internal.py",
+        "test/test_session_store.py",
+        "tests/test_session_store.py",
+        "tests/session_store/test_session_store.py",
+        "tests/session_stores/test_session_store.py",
+        "tests/internal/test_session_store.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/session_store_validation.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/tests/test_session_store_validation.py",
+        "tests/claude_agent_sdk/_internal/test_session_store_validation.py",
+        "src/claude_agent_sdk/_internal/tests/test__internal.py",
+        "test/test_session_store_validation.py",
+        "tests/test_session_store_validation.py",
+        "tests/session_store_validation/test_session_store_validation.py",
+        "tests/session_store_validations/test_session_store_validation.py",
+        "tests/internal/test_session_store_validation.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/session_summary.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/tests/test_session_summary.py",
+        "tests/claude_agent_sdk/_internal/test_session_summary.py",
+        "src/claude_agent_sdk/_internal/tests/test__internal.py",
+        "test/test_session_summary.py",
+        "tests/test_session_summary.py",
+        "tests/session_summary/test_session_summary.py",
+        "tests/session_summarys/test_session_summary.py",
+        "tests/internal/test_session_summary.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_session_summary.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_session_summary.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/transcript_mirror_batcher.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/tests/test_transcript_mirror_batcher.py",
+        "tests/claude_agent_sdk/_internal/test_transcript_mirror_batcher.py",
+        "src/claude_agent_sdk/_internal/tests/test__internal.py",
+        "test/test_transcript_mirror_batcher.py",
+        "tests/test_transcript_mirror_batcher.py",
+        "tests/transcript_mirror_batcher/test_transcript_mirror_batcher.py",
+        "tests/transcript_mirror_batchers/test_transcript_mirror_batcher.py",
+        "tests/internal/test_transcript_mirror_batcher.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/transport/subprocess_cli.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/transport/tests/test_subprocess_cli.py",
+        "tests/claude_agent_sdk/_internal/transport/test_subprocess_cli.py",
+        "src/claude_agent_sdk/_internal/transport/tests/test_transport.py",
+        "test/test_subprocess_cli.py",
+        "tests/test_subprocess_cli.py",
+        "tests/subprocess_cli/test_subprocess_cli.py",
+        "tests/subprocess_clis/test_subprocess_cli.py",
+        "tests/transport/test_subprocess_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_internal/_task_compat.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/_internal/tests/test_task_compat.py",
+        "tests/claude_agent_sdk/_internal/test_task_compat.py",
+        "src/claude_agent_sdk/_internal/tests/test__internal.py",
+        "test/test_task_compat.py",
+        "tests/test_task_compat.py",
+        "tests/task_compat/test_task_compat.py",
+        "tests/task_compats/test_task_compat.py",
+        "tests/test__task_compat.py",
+        "tests/internal/test__task_compat.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_task_compat.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_task_compat.py [library_package layout]"
+    },
+    {
+      "source_path": "src/claude_agent_sdk/_version.py",
+      "candidate_test_paths": [
+        "src/claude_agent_sdk/tests/test_version.py",
+        "tests/claude_agent_sdk/test_version.py",
+        "src/claude_agent_sdk/tests/test_claude_agent_sdk.py",
+        "test/test_version.py",
+        "tests/test_version.py",
+        "tests/version/test_version.py",
+        "tests/versions/test_version.py",
+        "tests/test__version.py",
+        "tests/claude_agent_sdk/test__version.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/permission/**",
+      "matched_paths": [
+        "e2e-tests/test_tool_permissions.py",
+        "examples/tool_permission_callback.py"
+      ],
+      "category": "authorization",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"permission\" found in 2 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/plugin/**",
+      "matched_paths": [
+        "examples/plugin_example.py"
+      ],
+      "category": "runtime_extension",
+      "severity": "medium",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"plugin\" found in 1 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/settings/**",
+      "matched_paths": [
+        "e2e-tests/test_agents_and_settings.py"
+      ],
+      "category": "infrastructure_config",
+      "severity": "medium",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"settings\" found in 1 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 89,
+    "classified_count": 89,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 304,
+    "project_import_count": 0,
+    "declared_package_count": 15,
+    "undeclared_package_count": 54,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 39,
+    "high_confidence_test_count": 14,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 3,
+    "sensitive_file_count": 4,
+    "manifest_count": 1,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

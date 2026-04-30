@@ -1,0 +1,79 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "85b65de6e9e166040a0595845bc48fac0742dc79322450b7cd1722211209eeaa",
+  "pinned_commit": "9fd9ea2835973981e3f5dc5b8eb76f2ded46aa61",
+  "completed_at": "2026-04-30T11:11:26.547Z",
+  "repo_id": "black",
+  "category_expected": "python_cli_tool",
+  "category_observed": "python_sdk_library",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 333,
+  "python_files": 349,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "click/high"
+  ],
+  "project_role_signals": [
+    "python_sdk_library/high",
+    "cli_application/high"
+  ],
+  "test_mapping_count": 44,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "black",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected python_cli_tool, got python_sdk_library",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "tests/data/jupyter/non_python_notebook.ipynb",
+        "tests/data/jupyter/notebook_empty_metadata.ipynb",
+        "tests/data/jupyter/notebook_no_trailing_newline.ipynb",
+        "tests/data/jupyter/notebook_trailing_newline.ipynb",
+        "tests/data/jupyter/notebook_which_cant_be_parsed.ipynb",
+        "tests/data/jupyter/notebook_without_changes.ipynb"
+      ],
+      "count": 6,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "docs/compatible_configs/flake8/setup.cfg",
+        "docs/compatible_configs/flake8/tox.ini",
+        "docs/compatible_configs/isort/pyproject.toml",
+        "docs/compatible_configs/isort/setup.cfg",
+        "docs/compatible_configs/pycodestyle/setup.cfg",
+        "docs/compatible_configs/pycodestyle/tox.ini",
+        "docs/compatible_configs/pylint/pyproject.toml",
+        "docs/compatible_configs/pylint/setup.cfg",
+        "tests/data/include_exclude_tests/pyproject.toml",
+        "tests/data/invalid_gitignore_tests/pyproject.toml",
+        "tests/data/invalid_nested_gitignore_tests/pyproject.toml",
+        "tests/data/nested_gitignore_tests/pyproject.toml",
+        "tox.ini"
+      ],
+      "count": 13,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

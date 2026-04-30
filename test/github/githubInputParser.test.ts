@@ -13,6 +13,10 @@ describe("githubInputParser", () => {
       "saleor/checkout/**",
       "saleor/order/**",
     ]);
+    expect(parseMultilinePatterns("saleor/checkout/**, saleor/order/**")).toEqual([
+      "saleor/checkout/**",
+      "saleor/order/**",
+    ]);
   });
 
   it("parses booleans with github-style defaults", () => {
@@ -25,6 +29,7 @@ describe("githubInputParser", () => {
     expect(parseFailConditions("forbidden,outside_scope")).toEqual(["forbidden", "outside_scope"]);
     expect(parseFailConditions("all")).toEqual(["all"]);
     expect(parseFailConditions("none")).toEqual(["none"]);
+    expect(parseFailConditions(" FORBIDDEN , REVIEW_REQUIRED ")).toEqual(["forbidden", "review_required"]);
   });
 
   it("extracts pull request context from a github event", () => {
@@ -54,8 +59,8 @@ describe("githubInputParser", () => {
       INPUT_FAIL_ON: "forbidden,outside_scope",
       INPUT_POST_COMMENT: "false",
       INPUT_UPLOAD_ARTIFACTS: "true",
-      INPUT_ARTIFACT_MODE: "debug",
-      INPUT_COMMENT_MODE: "off",
+      INPUT_ARTIFACT_MODE: " DEBUG ",
+      INPUT_COMMENT_MODE: " OFF ",
     });
 
     expect(config.intent).toBe("Add eco fee");
@@ -68,5 +73,10 @@ describe("githubInputParser", () => {
     expect(config.uploadArtifacts).toBe(true);
     expect(config.artifactMode).toBe("debug");
     expect(config.commentMode).toBe("off");
+  });
+
+  it("treats fail_on=all as blocking every non-pass category", () => {
+    const decision = parseFailConditions("all");
+    expect(decision).toEqual(["all"]);
   });
 });

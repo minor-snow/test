@@ -160,9 +160,11 @@ describe("verifyDiffAgainstScope", () => {
       scope: makeScope(),
     });
     expect(result.schema_version).toBe("diff_verification_result.v1");
-    expect(result).toHaveProperty("verdict");
-    expect(result).toHaveProperty("reasons");
-    expect(result).toHaveProperty("required_actions");
-    expect(result).toHaveProperty("file_statuses");
+    expect(result.verdict).toBe("pass");
+    expect(result.reasons).toEqual([]);
+    expect(result.required_actions).toEqual([]);
+    expect(result.file_statuses).toEqual([
+      { path: "src/a.ts", status: "allowed", reasons: ["Within authorized scope."] },
+    ]);
   });
 });

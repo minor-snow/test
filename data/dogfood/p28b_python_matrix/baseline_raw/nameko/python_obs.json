@@ -1,0 +1,4367 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "nameko",
+    "observed_file_count": 165,
+    "python_file_count": 126
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: nameko"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: library_package=3, cli_app=2"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "docs": 26,
+      "test": 54,
+      "source": 43,
+      "config": 3
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "pytest imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (medium)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: authentication (high, 1 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 15,
+        "evidence": [
+          "15 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 9385,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/advanced_http.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 496,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/anatomy.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 304,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/async_rpc.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 299,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/auth.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 2359,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/config_dependency_provider.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 426,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/events.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 524,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/event_broadcast.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 331,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/expected_exceptions.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 364,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/helloworld.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 168,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/http.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 486,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/http_exceptions.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 1089,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/rpc.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 382,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/sensitive_arguments.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 384,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/service_container.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 358,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/service_runner.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 519,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/sqs_receive.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 1502,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/sqs_send.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 727,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/sqs_service.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 386,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/standalone_events.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 227,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/standalone_rpc.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 250,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/test/test_examples.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 19664,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "docs/examples/test/__init__.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/testing/alternative_dependency_unit_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1373,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "docs/examples/testing/entrypoint_hook_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 992,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "docs/examples/testing/entrypoint_waiter_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 766,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "docs/examples/testing/integration_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1075,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "docs/examples/testing/large_integration_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10309,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "docs/examples/testing/unit_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1107,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "docs/examples/timer.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 181,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/travis.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 1064,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/websocket_rpc.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 260,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/examples/__init__.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "nameko/amqp/publish.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7754,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/amqp/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 125,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/cli/actions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1294,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/cli/backdoor.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1069,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/cli/code.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1193,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/cli/commands.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4844,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/cli/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4636,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/cli/run.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5523,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/cli/shell.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2883,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/cli/show_config.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 209,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/cli/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/constants.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1050,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/containers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17997,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/contextdata.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 691,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/dependency_providers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 295,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/events.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10926,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4752,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/extensions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 12392,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/log_helpers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1015,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/messaging.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17153,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/rpc.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 15689,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/runners.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4780,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/serialization.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1069,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/standalone/events.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1840,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/standalone/rpc.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11998,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/standalone/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 834,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/testing/pytest.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14755,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/testing/rabbit.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4250,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/testing/services.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17058,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/testing/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6476,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/testing/waiting.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1659,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/testing/websocket.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2089,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/testing/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/timer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2993,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/utils/concurrency/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3316,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/utils/retry.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1333,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4399,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/web/handlers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3038,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/web/server.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6358,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/web/websocket.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8923,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/web/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "nameko/__main__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 84,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "setup.cfg",
+      "bucket": "config",
+      "extension": ".cfg",
+      "size_bytes": 343,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 3744,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "test/amqp/test_publish.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 19893,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/amqp/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/broken_sample.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 35,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/cli/test_backdoor.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2886,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/cli/test_main.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 13828,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/cli/test_run.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7718,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/cli/test_shell.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7202,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/cli/test_show_config.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 809,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/cli/test_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1454,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5230,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/sample.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 200,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/standalone/test_event_dispatcher.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6751,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/standalone/test_rpc_proxy.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 27401,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/standalone/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/testing/test_pytest_plugin.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 18462,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/testing/test_services.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 23631,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/testing/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10063,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/testing/test_waiting.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11345,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/testing/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_broker.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10092,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_call_id_stack.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8254,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_container.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 16067,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_contextdata.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2034,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_dependency_providers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 773,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_entrypoints.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5493,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_errors.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6885,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_events.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 32722,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_exceptions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5064,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_extensions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7089,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_extension_sharing.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4102,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_handle_result.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2457,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_log_helpers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1303,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_messaging.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 44429,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_provider_collector.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 940,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_queue_consumer.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 15590,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_rpc.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 59637,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_rpc_responder.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4004,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_serialization.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12824,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_service_runner.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7837,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_timers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4819,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/utils/test_retry.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3300,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/utils/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7631,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/utils/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/web/test_http_handler.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3693,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/web/test_server.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5798,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/web/test_websocket.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6681,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 428,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 1974,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "nameko/amqp/publish.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/amqp/publish.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/amqp/publish.py",
+      "raw_specifier": "from kombu import Connection",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/amqp/publish.py",
+      "raw_specifier": "from kombu.exceptions import ChannelError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/amqp/publish.py",
+      "raw_specifier": "from kombu.pools import connections, producers",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/amqp/publish.py",
+      "raw_specifier": "from nameko.constants import ( DEFAULT_RETRY_POLICY, DEFAULT_TRANSPORT_OPTIONS, PERSISTENT )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/amqp/__init__.py",
+      "raw_specifier": "from .publish import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".publish",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "nameko/cli/actions.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/actions.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/backdoor.py",
+      "raw_specifier": "from __future__ import print_function",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/backdoor.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/backdoor.py",
+      "raw_specifier": "from subprocess import call",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/backdoor.py",
+      "raw_specifier": "from nameko.exceptions import CommandError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/code.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/code.py",
+      "raw_specifier": "from code import InteractiveConsole",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "code",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/code.py",
+      "raw_specifier": "readline",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "readline",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/commands.py",
+      "raw_specifier": "from .actions import FlagAction",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".actions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "nameko/cli/commands.py",
+      "raw_specifier": "from .backdoor import main",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".backdoor",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "nameko/cli/commands.py",
+      "raw_specifier": "from .show_config import main",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".show_config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "nameko/cli/commands.py",
+      "raw_specifier": "eventlet",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/commands.py",
+      "raw_specifier": "from .run import main",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".run",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "nameko/cli/commands.py",
+      "raw_specifier": "from .shell import main",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".shell",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "nameko/cli/commands.py",
+      "raw_specifier": "eventlet",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/commands.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/commands.py",
+      "raw_specifier": "pytest",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pytest",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/main.py",
+      "raw_specifier": "from __future__ import print_function",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/main.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/main.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/main.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/main.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/main.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/main.py",
+      "raw_specifier": "from pkg_resources import get_distribution",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pkg_resources",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/main.py",
+      "raw_specifier": "from nameko.exceptions import CommandError, ConfigurationError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/main.py",
+      "raw_specifier": "from . import commands",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "nameko/cli/main.py",
+      "raw_specifier": "regex",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "regex",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "from __future__ import print_function",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "errno",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "errno",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "logging.config",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "signal",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "signal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "six",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "eventlet",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "from eventlet import backdoor",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "from nameko.constants import AMQP_URI_CONFIG_KEY",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "from nameko.exceptions import CommandError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "from nameko.extensions import ENTRYPOINT_EXTENSIONS_ATTR",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/run.py",
+      "raw_specifier": "from nameko.runners import ServiceRunner",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/shell.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/shell.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/shell.py",
+      "raw_specifier": "from types import ModuleType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/shell.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/shell.py",
+      "raw_specifier": "nameko.cli.code",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/shell.py",
+      "raw_specifier": "from nameko.constants import AMQP_URI_CONFIG_KEY",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/shell.py",
+      "raw_specifier": "from nameko.standalone.events import event_dispatcher",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/shell.py",
+      "raw_specifier": "from nameko.standalone.rpc import ClusterRpcProxy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/shell.py",
+      "raw_specifier": "from .commands import Shell",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".commands",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "nameko/cli/shell.py",
+      "raw_specifier": "bpython",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpython",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/shell.py",
+      "raw_specifier": "from IPython import embed  # pylint: disable=E0401",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "IPython",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/cli/show_config.py",
+      "raw_specifier": "from __future__ import print_function",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/cli/show_config.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from __future__ import absolute_import, unicode_literals",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from collections import deque",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from logging import getLogger",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "eventlet",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "six",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from eventlet.event import Event",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from eventlet.greenpool import GreenPool",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from greenlet import GreenletExit  # pylint: disable=E0611",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "greenlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from nameko import serialization",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from nameko.constants import ( CALL_ID_STACK_CONTEXT_KEY, DEFAULT_MAX_WORKERS, DEFAULT_PARENT_CALLS_TRACKED, MAX_WORKERS_CONFIG_KEY, PARENT_CALLS_CONFIG_KEY )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from nameko.exceptions import ConfigurationError, ContainerBeingKilled",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from nameko.extensions import ( ENTRYPOINT_EXTENSIONS_ATTR, is_dependency, iter_extensions )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from nameko.log_helpers import make_timing_logger",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from nameko.utils import import_from_path",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/containers.py",
+      "raw_specifier": "from nameko.utils.concurrency import SpawningSet",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/contextdata.py",
+      "raw_specifier": "from nameko.constants import ( AUTH_TOKEN_CONTEXT_KEY, LANGUAGE_CONTEXT_KEY, USER_AGENT_CONTEXT_KEY, USER_ID_CONTEXT_KEY )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/contextdata.py",
+      "raw_specifier": "from nameko.extensions import DependencyProvider",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/dependency_providers.py",
+      "raw_specifier": "from nameko.extensions import DependencyProvider",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/events.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/events.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/events.py",
+      "raw_specifier": "from logging import getLogger",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/events.py",
+      "raw_specifier": "from kombu import Queue",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/events.py",
+      "raw_specifier": "from nameko.messaging import Consumer, Publisher",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/events.py",
+      "raw_specifier": "from nameko.standalone.events import get_event_exchange",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/exceptions.py",
+      "raw_specifier": "from __future__ import unicode_literals",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/exceptions.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/exceptions.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/exceptions.py",
+      "raw_specifier": "six",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/exceptions.py",
+      "raw_specifier": "from collections.abc import Iterable  # pylint: disable=E0611,E0401",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/exceptions.py",
+      "raw_specifier": "from collections import Iterable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/extensions.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/extensions.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/extensions.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/extensions.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/extensions.py",
+      "raw_specifier": "weakref",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "weakref",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/extensions.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/extensions.py",
+      "raw_specifier": "from logging import getLogger",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/extensions.py",
+      "raw_specifier": "from eventlet.event import Event",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/extensions.py",
+      "raw_specifier": "from nameko.exceptions import IncorrectSignature",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/log_helpers.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/log_helpers.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/log_helpers.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/log_helpers.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from logging import getLogger",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "six",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from amqp.exceptions import ConnectionError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "amqp",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from eventlet.event import Event",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from kombu import Connection",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from kombu.common import maybe_declare",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from kombu.mixins import ConsumerMixin",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from nameko.amqp.publish import Publisher as PublisherCore",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from nameko.amqp.publish import get_connection",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from nameko.constants import ( AMQP_SSL_CONFIG_KEY, AMQP_URI_CONFIG_KEY, DEFAULT_HEARTBEAT, DEFAULT_TRANSPORT_OPTIONS, HEADER_PREFIX, HEARTBEAT_CONFIG_KEY, LOGIN_METHOD_CONFIG_KEY, TRANSPORT_OPTIONS_CONFIG_KEY )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from nameko.exceptions import ContainerBeingKilled",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from nameko.extensions import ( DependencyProvider, Entrypoint, ProviderCollector, SharedExtension )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/messaging.py",
+      "raw_specifier": "from nameko.utils import sanitize_url",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "from __future__ import absolute_import, unicode_literals",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "from logging import getLogger",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "kombu.serialization",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "from eventlet.event import Event",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "from kombu import Exchange, Queue",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "from nameko.amqp.publish import Publisher, UndeliverableMessage",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "from nameko.constants import ( AMQP_SSL_CONFIG_KEY, AMQP_URI_CONFIG_KEY, DEFAULT_SERIALIZER, LOGIN_METHOD_CONFIG_KEY, RPC_EXCHANGE_CONFIG_KEY, SERIALIZER_CONFIG_KEY )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "from nameko.exceptions import ( ContainerBeingKilled, MalformedRequest, MethodNotFound, UnknownService, UnserializableValueError, deserialize, serialize )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "from nameko.extensions import ( DependencyProvider, Entrypoint, ProviderCollector, SharedExtension )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/rpc.py",
+      "raw_specifier": "from nameko.messaging import HeaderDecoder, HeaderEncoder, QueueConsumer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/runners.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/runners.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/runners.py",
+      "raw_specifier": "from logging import getLogger",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/runners.py",
+      "raw_specifier": "from nameko.containers import get_container_cls, get_service_name",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/runners.py",
+      "raw_specifier": "from nameko.utils.concurrency import SpawningProxy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/serialization.py",
+      "raw_specifier": "from copy import deepcopy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/serialization.py",
+      "raw_specifier": "kombu.serialization",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/serialization.py",
+      "raw_specifier": "from nameko.constants import ( ACCEPT_CONFIG_KEY, DEFAULT_SERIALIZER, SERIALIZER_CONFIG_KEY, SERIALIZERS_CONFIG_KEY )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/serialization.py",
+      "raw_specifier": "from nameko.exceptions import ConfigurationError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/serialization.py",
+      "raw_specifier": "from nameko.utils import import_from_path",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/standalone/events.py",
+      "raw_specifier": "from kombu import Exchange",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/standalone/events.py",
+      "raw_specifier": "from nameko import serialization",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/standalone/events.py",
+      "raw_specifier": "from nameko.amqp.publish import Publisher",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/standalone/events.py",
+      "raw_specifier": "from nameko.constants import ( AMQP_SSL_CONFIG_KEY, AMQP_URI_CONFIG_KEY, LOGIN_METHOD_CONFIG_KEY, PERSISTENT )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "socket",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "socket",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "from amqp.exceptions import ConnectionError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "amqp",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "from kombu import Connection",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "from kombu.common import maybe_declare",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "from kombu.messaging import Consumer",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "from nameko import serialization",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "from nameko.constants import ( AMQP_SSL_CONFIG_KEY, AMQP_URI_CONFIG_KEY, LOGIN_METHOD_CONFIG_KEY )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "from nameko.containers import WorkerContext",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "from nameko.exceptions import RpcTimeout",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "from nameko.extensions import Entrypoint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/standalone/rpc.py",
+      "raw_specifier": "from nameko.rpc import ReplyListener, ServiceProxy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "pytest",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pytest",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "ssl",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ssl",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from eventlet import debug",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from eventlet import patcher",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from mock import create_autospec",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mock",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.constants import DEFAULT_SERIALIZER, SERIALIZER_CONFIG_KEY",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.containers import ServiceContainer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.testing import rabbit",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from collections.abc import Iterable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from collections import Iterable  # pylint: disable=E0611",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "socket",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "socket",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "string",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "string",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from kombu.pools import connections",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from requests.exceptions import HTTPError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "requests",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from six.moves.urllib.parse import urlparse  # pylint: disable=E0401",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.testing.utils import ResourcePipeline",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.utils.retry import retry",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from six.moves.urllib.parse import urlparse  # pylint: disable=E0401",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from six.moves.urllib.parse import urlparse  # pylint: disable=E0401",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.constants import AMQP_URI_CONFIG_KEY",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from kombu.mixins import ConsumerMixin",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kombu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.amqp import get_connection",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.containers import get_container_cls",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.runners import ServiceRunner",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from mock import patch",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mock",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.constants import WEB_SERVER_CONFIG_KEY",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.testing.utils import find_free_port",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.constants import WEB_SERVER_CONFIG_KEY",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.web.server import parse_address",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from requests import Session",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "requests",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from werkzeug.urls import url_join",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "eventlet",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/pytest.py",
+      "raw_specifier": "from nameko.testing.websocket import make_virtual_socket",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/rabbit.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/rabbit.py",
+      "raw_specifier": "six",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/rabbit.py",
+      "raw_specifier": "from requests import ConnectionError, HTTPError, Session",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "requests",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/rabbit.py",
+      "raw_specifier": "from requests.auth import HTTPBasicAuth",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "requests",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/rabbit.py",
+      "raw_specifier": "from requests.utils import get_auth_from_url, urldefragauth",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "requests",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/rabbit.py",
+      "raw_specifier": "from six.moves.urllib.parse import quote  # pylint: disable=E0401",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "eventlet",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "from eventlet import event",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "from mock import MagicMock",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mock",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "from nameko.exceptions import ExtensionNotFound",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "from nameko.extensions import DependencyProvider, Entrypoint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "from nameko.testing.utils import get_extension",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "from nameko.testing.waiting import WaitResult, wait_for_call",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "from nameko.rpc import RpcProxy, rpc",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "from nameko.rpc import RpcProxy, rpc",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/services.py",
+      "raw_specifier": "from nameko.standalone.rpc import ServiceRpcProxy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/utils.py",
+      "raw_specifier": "socket",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "socket",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/utils.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/utils.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/utils.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/utils.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/utils.py",
+      "raw_specifier": "eventlet",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/utils.py",
+      "raw_specifier": "from nameko.extensions import Entrypoint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/utils.py",
+      "raw_specifier": "from nameko.testing.rabbit import HTTPError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/waiting.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/waiting.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/waiting.py",
+      "raw_specifier": "from threading import Semaphore",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/waiting.py",
+      "raw_specifier": "six",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/waiting.py",
+      "raw_specifier": "from mock import patch",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mock",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/websocket.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/websocket.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/websocket.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/websocket.py",
+      "raw_specifier": "from collections import defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/websocket.py",
+      "raw_specifier": "from eventlet.event import Event",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/websocket.py",
+      "raw_specifier": "from eventlet.queue import Queue",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/testing/websocket.py",
+      "raw_specifier": "from nameko.exceptions import deserialize",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/testing/websocket.py",
+      "raw_specifier": "from websocket import WebSocketApp",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "websocket",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/timer.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/timer.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/timer.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/timer.py",
+      "raw_specifier": "from logging import getLogger",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/timer.py",
+      "raw_specifier": "from eventlet import Timeout",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/timer.py",
+      "raw_specifier": "from eventlet.event import Event",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/timer.py",
+      "raw_specifier": "from nameko.extensions import Entrypoint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/utils/concurrency/__init__.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/utils/concurrency/__init__.py",
+      "raw_specifier": "eventlet",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/utils/concurrency/__init__.py",
+      "raw_specifier": "from eventlet.queue import LightQueue",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/utils/retry.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/utils/retry.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/utils/retry.py",
+      "raw_specifier": "from time import sleep",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/utils/retry.py",
+      "raw_specifier": "wrapt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "wrapt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/utils/__init__.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/utils/__init__.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/utils/__init__.py",
+      "raw_specifier": "from copy import deepcopy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/utils/__init__.py",
+      "raw_specifier": "from pydoc import locate",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pydoc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/utils/__init__.py",
+      "raw_specifier": "six",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/utils/__init__.py",
+      "raw_specifier": "from six.moves.urllib.parse import urlparse",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/handlers.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/handlers.py",
+      "raw_specifier": "from logging import getLogger",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/handlers.py",
+      "raw_specifier": "six",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/handlers.py",
+      "raw_specifier": "from eventlet.event import Event",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/handlers.py",
+      "raw_specifier": "from werkzeug.routing import Rule",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/handlers.py",
+      "raw_specifier": "from werkzeug.wrappers import Response",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/handlers.py",
+      "raw_specifier": "from nameko.exceptions import BadRequest, serialize",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/handlers.py",
+      "raw_specifier": "from nameko.extensions import Entrypoint",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/handlers.py",
+      "raw_specifier": "from nameko.web.server import WebServer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "socket",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "socket",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "from logging import getLogger",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "eventlet",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "from eventlet import wsgi",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "from eventlet.support import get_errno",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "from eventlet.wsgi import BROKEN_SOCK, BaseHTTPServer, HttpProtocol",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "from werkzeug.exceptions import HTTPException",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "from werkzeug.routing import Map",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "from werkzeug.wrappers import Request",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "from nameko.constants import WEB_SERVER_CONFIG_KEY",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "from nameko.exceptions import ConfigurationError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/server.py",
+      "raw_specifier": "from nameko.extensions import ProviderCollector, SharedExtension",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "from logging import getLogger",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "six",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "werkzeug",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "from eventlet.event import Event",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "from eventlet.websocket import WebSocketWSGI",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "from packaging import version",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "packaging",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "from werkzeug.routing import Rule",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "from nameko.exceptions import ( ConnectionNotFound, MalformedRequest, MethodNotFound, serialize )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "from nameko.extensions import ( DependencyProvider, Entrypoint, ProviderCollector, SharedExtension )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/web/websocket.py",
+      "raw_specifier": "from nameko.web.server import WebServer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    },
+    {
+      "from_file": "nameko/__main__.py",
+      "raw_specifier": "nameko.cli.main",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "nameko",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [
+        "dnspython",
+        ",",
+        "3_6",
+        "3_7",
+        "3_10",
+        ",  # https://github_com/celery/celery/issues/7783"
+      ],
+      "dev_packages": [],
+      "confidence": "medium",
+      "warnings": [
+        "setup.py parsing is weak detection — consider using pyproject.toml"
+      ]
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No deps found in tox.ini — may use requirements file references"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "nameko/amqp/publish.py",
+      "candidate_test_paths": [
+        "nameko/amqp/tests/test_publish.py",
+        "tests/amqp/test_publish.py",
+        "nameko/amqp/tests/test_amqp.py",
+        "test/test_publish.py",
+        "tests/test_publish.py",
+        "tests/publish/test_publish.py",
+        "tests/publishs/test_publish.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/cli/actions.py",
+      "candidate_test_paths": [
+        "nameko/cli/tests/test_actions.py",
+        "tests/cli/test_actions.py",
+        "nameko/cli/tests/test_cli.py",
+        "test/test_actions.py",
+        "tests/test_actions.py",
+        "tests/actions/test_actions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/cli/backdoor.py",
+      "candidate_test_paths": [
+        "nameko/cli/tests/test_backdoor.py",
+        "tests/cli/test_backdoor.py",
+        "nameko/cli/tests/test_cli.py",
+        "test/test_backdoor.py",
+        "tests/test_backdoor.py",
+        "tests/backdoor/test_backdoor.py",
+        "tests/backdoors/test_backdoor.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/cli/code.py",
+      "candidate_test_paths": [
+        "nameko/cli/tests/test_code.py",
+        "tests/cli/test_code.py",
+        "nameko/cli/tests/test_cli.py",
+        "test/test_code.py",
+        "tests/test_code.py",
+        "tests/code/test_code.py",
+        "tests/codes/test_code.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/cli/commands.py",
+      "candidate_test_paths": [
+        "nameko/cli/tests/test_commands.py",
+        "tests/cli/test_commands.py",
+        "nameko/cli/tests/test_cli.py",
+        "test/test_commands.py",
+        "tests/test_commands.py",
+        "tests/commands/test_commands.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/cli/main.py",
+      "candidate_test_paths": [
+        "nameko/cli/tests/test_main.py",
+        "tests/cli/test_main.py",
+        "nameko/cli/tests/test_cli.py",
+        "test/test_main.py",
+        "tests/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/cli/run.py",
+      "candidate_test_paths": [
+        "nameko/cli/tests/test_run.py",
+        "tests/cli/test_run.py",
+        "nameko/cli/tests/test_cli.py",
+        "test/test_run.py",
+        "tests/test_run.py",
+        "tests/run/test_run.py",
+        "tests/runs/test_run.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/cli/shell.py",
+      "candidate_test_paths": [
+        "nameko/cli/tests/test_shell.py",
+        "tests/cli/test_shell.py",
+        "nameko/cli/tests/test_cli.py",
+        "test/test_shell.py",
+        "tests/test_shell.py",
+        "tests/shell/test_shell.py",
+        "tests/shells/test_shell.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/cli/show_config.py",
+      "candidate_test_paths": [
+        "nameko/cli/tests/test_show_config.py",
+        "tests/cli/test_show_config.py",
+        "nameko/cli/tests/test_cli.py",
+        "test/test_show_config.py",
+        "tests/test_show_config.py",
+        "tests/show_config/test_show_config.py",
+        "tests/show_configs/test_show_config.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/constants.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_constants.py",
+        "tests/test_constants.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_constants.py",
+        "tests/constants/test_constants.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/containers.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_containers.py",
+        "tests/test_containers.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_containers.py",
+        "tests/containers/test_containers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/contextdata.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_contextdata.py",
+        "tests/test_contextdata.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_contextdata.py",
+        "tests/contextdata/test_contextdata.py",
+        "tests/contextdatas/test_contextdata.py"
+      ],
+      "existing_test_paths": [
+        "test/test_contextdata.py"
+      ],
+      "confidence": "medium",
+      "reason": "Name match in tests/ directory: test/test_contextdata.py [library context]"
+    },
+    {
+      "source_path": "nameko/dependency_providers.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_dependency_providers.py",
+        "tests/test_dependency_providers.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_dependency_providers.py",
+        "tests/dependency_providers/test_dependency_providers.py"
+      ],
+      "existing_test_paths": [
+        "test/test_dependency_providers.py"
+      ],
+      "confidence": "medium",
+      "reason": "Name match in tests/ directory: test/test_dependency_providers.py [library context]"
+    },
+    {
+      "source_path": "nameko/events.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_events.py",
+        "tests/test_events.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_events.py",
+        "tests/events/test_events.py"
+      ],
+      "existing_test_paths": [
+        "test/test_events.py"
+      ],
+      "confidence": "medium",
+      "reason": "Name match in tests/ directory: test/test_events.py [library context]"
+    },
+    {
+      "source_path": "nameko/exceptions.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py"
+      ],
+      "existing_test_paths": [
+        "test/test_exceptions.py"
+      ],
+      "confidence": "medium",
+      "reason": "Name match in tests/ directory: test/test_exceptions.py [library context]"
+    },
+    {
+      "source_path": "nameko/extensions.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_extensions.py",
+        "tests/test_extensions.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_extensions.py",
+        "tests/extensions/test_extensions.py"
+      ],
+      "existing_test_paths": [
+        "test/test_extensions.py"
+      ],
+      "confidence": "medium",
+      "reason": "Name match in tests/ directory: test/test_extensions.py [library context]"
+    },
+    {
+      "source_path": "nameko/log_helpers.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_log_helpers.py",
+        "tests/test_log_helpers.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_log_helpers.py",
+        "tests/log_helpers/test_log_helpers.py"
+      ],
+      "existing_test_paths": [
+        "test/test_log_helpers.py"
+      ],
+      "confidence": "medium",
+      "reason": "Name match in tests/ directory: test/test_log_helpers.py [library context]"
+    },
+    {
+      "source_path": "nameko/messaging.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_messaging.py",
+        "tests/test_messaging.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_messaging.py",
+        "tests/messaging/test_messaging.py",
+        "tests/messagings/test_messaging.py"
+      ],
+      "existing_test_paths": [
+        "test/test_messaging.py"
+      ],
+      "confidence": "medium",
+      "reason": "Name match in tests/ directory: test/test_messaging.py [library context]"
+    },
+    {
+      "source_path": "nameko/rpc.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_rpc.py",
+        "tests/test_rpc.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_rpc.py",
+        "tests/rpc/test_rpc.py",
+        "tests/rpcs/test_rpc.py"
+      ],
+      "existing_test_paths": [
+        "test/test_rpc.py"
+      ],
+      "confidence": "medium",
+      "reason": "Name match in tests/ directory: test/test_rpc.py [library context]"
+    },
+    {
+      "source_path": "nameko/runners.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_runners.py",
+        "tests/test_runners.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_runners.py",
+        "tests/runners/test_runners.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/serialization.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_serialization.py",
+        "tests/test_serialization.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_serialization.py",
+        "tests/serialization/test_serialization.py",
+        "tests/serializations/test_serialization.py"
+      ],
+      "existing_test_paths": [
+        "test/test_serialization.py"
+      ],
+      "confidence": "medium",
+      "reason": "Name match in tests/ directory: test/test_serialization.py [library context]"
+    },
+    {
+      "source_path": "nameko/standalone/events.py",
+      "candidate_test_paths": [
+        "nameko/standalone/tests/test_events.py",
+        "tests/standalone/test_events.py",
+        "nameko/standalone/tests/test_standalone.py",
+        "test/test_events.py",
+        "tests/test_events.py",
+        "tests/events/test_events.py"
+      ],
+      "existing_test_paths": [
+        "test/test_events.py"
+      ],
+      "confidence": "medium",
+      "reason": "Name match in tests/ directory: test/test_events.py [library context]"
+    },
+    {
+      "source_path": "nameko/standalone/rpc.py",
+      "candidate_test_paths": [
+        "nameko/standalone/tests/test_rpc.py",
+        "tests/standalone/test_rpc.py",
+        "nameko/standalone/tests/test_standalone.py",
+        "test/test_rpc.py",
+        "tests/test_rpc.py",
+        "tests/rpc/test_rpc.py",
+        "tests/rpcs/test_rpc.py"
+      ],
+      "existing_test_paths": [
+        "test/test_rpc.py"
+      ],
+      "confidence": "medium",
+      "reason": "Name match in tests/ directory: test/test_rpc.py [library context]"
+    },
+    {
+      "source_path": "nameko/testing/pytest.py",
+      "candidate_test_paths": [
+        "nameko/testing/tests/test_pytest.py",
+        "tests/testing/test_pytest.py",
+        "nameko/testing/tests/test_testing.py",
+        "test/test_pytest.py",
+        "tests/test_pytest.py",
+        "tests/pytest/test_pytest.py",
+        "tests/pytests/test_pytest.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/testing/rabbit.py",
+      "candidate_test_paths": [
+        "nameko/testing/tests/test_rabbit.py",
+        "tests/testing/test_rabbit.py",
+        "nameko/testing/tests/test_testing.py",
+        "test/test_rabbit.py",
+        "tests/test_rabbit.py",
+        "tests/rabbit/test_rabbit.py",
+        "tests/rabbits/test_rabbit.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/testing/services.py",
+      "candidate_test_paths": [
+        "nameko/testing/tests/test_services.py",
+        "tests/testing/test_services.py",
+        "nameko/testing/tests/test_testing.py",
+        "test/test_services.py",
+        "tests/test_services.py",
+        "tests/services/test_services.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/testing/utils.py",
+      "candidate_test_paths": [
+        "nameko/testing/tests/test_utils.py",
+        "tests/testing/test_utils.py",
+        "nameko/testing/tests/test_testing.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/testing/waiting.py",
+      "candidate_test_paths": [
+        "nameko/testing/tests/test_waiting.py",
+        "tests/testing/test_waiting.py",
+        "nameko/testing/tests/test_testing.py",
+        "test/test_waiting.py",
+        "tests/test_waiting.py",
+        "tests/waiting/test_waiting.py",
+        "tests/waitings/test_waiting.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/testing/websocket.py",
+      "candidate_test_paths": [
+        "nameko/testing/tests/test_websocket.py",
+        "tests/testing/test_websocket.py",
+        "nameko/testing/tests/test_testing.py",
+        "test/test_websocket.py",
+        "tests/test_websocket.py",
+        "tests/websocket/test_websocket.py",
+        "tests/websockets/test_websocket.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/timer.py",
+      "candidate_test_paths": [
+        "nameko/tests/test_timer.py",
+        "tests/test_timer.py",
+        "nameko/tests/test_nameko.py",
+        "test/test_timer.py",
+        "tests/timer/test_timer.py",
+        "tests/timers/test_timer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/utils/retry.py",
+      "candidate_test_paths": [
+        "nameko/utils/tests/test_retry.py",
+        "tests/utils/test_retry.py",
+        "nameko/utils/tests/test_utils.py",
+        "test/test_retry.py",
+        "tests/test_retry.py",
+        "tests/retry/test_retry.py",
+        "tests/retrys/test_retry.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/web/handlers.py",
+      "candidate_test_paths": [
+        "nameko/web/tests/test_handlers.py",
+        "tests/web/test_handlers.py",
+        "nameko/web/tests/test_web.py",
+        "test/test_handlers.py",
+        "tests/test_handlers.py",
+        "tests/handlers/test_handlers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/web/server.py",
+      "candidate_test_paths": [
+        "nameko/web/tests/test_server.py",
+        "tests/web/test_server.py",
+        "nameko/web/tests/test_web.py",
+        "test/test_server.py",
+        "tests/test_server.py",
+        "tests/server/test_server.py",
+        "tests/servers/test_server.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/web/websocket.py",
+      "candidate_test_paths": [
+        "nameko/web/tests/test_websocket.py",
+        "tests/web/test_websocket.py",
+        "nameko/web/tests/test_web.py",
+        "test/test_websocket.py",
+        "tests/test_websocket.py",
+        "tests/websocket/test_websocket.py",
+        "tests/websockets/test_websocket.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "nameko/__main__.py",
+      "candidate_test_paths": [
+        "nameko/tests/test___main__.py",
+        "tests/test___main__.py",
+        "nameko/tests/test_nameko.py",
+        "test/test___main__.py",
+        "tests/__main__/test___main__.py",
+        "tests/__main__s/test___main__.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/auth/**",
+      "matched_paths": [
+        "docs/examples/auth.py"
+      ],
+      "category": "authentication",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"auth\" found in 1 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/plugin/**",
+      "matched_paths": [
+        "test/testing/test_pytest_plugin.py"
+      ],
+      "category": "runtime_extension",
+      "severity": "medium",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"plugin\" found in 1 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.cfg",
+        "tox.ini"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 124,
+    "classified_count": 124,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 305,
+    "project_import_count": 84,
+    "declared_package_count": 0,
+    "undeclared_package_count": 95,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 35,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 11,
+    "sensitive_zone_count": 2,
+    "sensitive_file_count": 2,
+    "manifest_count": 3,
+    "low_confidence_manifest_count": 2
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

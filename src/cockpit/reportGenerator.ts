@@ -28,6 +28,12 @@ import type {
 } from "./types.js";
 import type { TrialReport } from "../trial/trialRunner.js";
 
+const INTEGRITY_CACHE_TTL_MS = 1_000;
+const integrityCache = new Map<string, {
+  readonly promise: Promise<Awaited<ReturnType<typeof integrityCheck>>>;
+  readonly createdAt: number;
+}>();
+
 // ---------------------------------------------------------------------------
 // Build residual snapshot from canonical artifact
 // ---------------------------------------------------------------------------
@@ -143,7 +149,7 @@ export async function generateTrialReportData(
   const residual = buildResidualSnapshot(artifact);
 
   // Run integrity check
-  const integrityReport = await integrityCheck(config);
+  const integrityReport = await getCachedIntegrityReport(config);
   const integrityClean = integrityReport.summary.corruptions === 0;
 
   // Three-layer status
@@ -203,7 +209,7 @@ export async function generateReportFromStore(
 
   const { artifact, revisionId } = canonical;
   const residual = buildResidualSnapshot(artifact);
-  const integrityReport = await integrityCheck(config);
+  const integrityReport = await getCachedIntegrityReport(config);
   const integrityClean = integrityReport.summary.corruptions === 0;
 
   const three_layer_status: ThreeLayerStatus = {
@@ -254,7 +260,7 @@ export async function generateMultiArtifactReport(
   config: StoreConfig,
   artifactIds: string[]
 ): Promise<MultiArtifactReportData> {
-  const integrityReport = await integrityCheck(config);
+  const integrityReport = await getCachedIntegrityReport(config);
   const integrityClean = integrityReport.summary.corruptions === 0;
 
   const artifacts: Artifact[] = [];
@@ -323,4 +329,26 @@ export async function generateMultiArtifactReport(
     integrity_corruptions: integrityReport.summary.corruptions,
     integrity_warnings: integrityReport.summary.warnings,
   };
+}
+
+export function clearReportGeneratorCaches(): void {
+  integrityCache.clear();
+}
+
+async function getCachedIntegrityReport(
+  config: StoreConfig,
+): Promise<Awaited<ReturnType<typeof integrityCheck>>> {
+  const cacheKey = config.dataDir;
+  const now = Date.now();
+  const cached = integrityCache.get(cacheKey);
+  if (cached && now - cached.createdAt <= INTEGRITY_CACHE_TTL_MS) {
+    return cached.promise;
+  }
+
+  const promise = integrityCheck(config);
+  integrityCache.set(cacheKey, {
+    promise,
+    createdAt: now,
+  });
+  return promise;
 }

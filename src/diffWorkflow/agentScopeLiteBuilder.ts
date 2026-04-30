@@ -11,11 +11,11 @@
  * projection, not a full governed handoff package.
  */
 
-import { createHash } from "node:crypto";
 import type { ChangeContractLite } from "../changeContract/lite/types.js";
 import type { RepoObservations } from "../repoObservation/types.js";
 import type { AgentScopeLite, AgentScopeLiteReviewFile, AgentScopeLiteForbiddenPattern, AgentScopeViolationHint } from "./types.js";
 import { generateObservationRecommendations } from "../repoObservation/observationQuality.js";
+import { shortStableId } from "../deterministic.js";
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -27,7 +27,11 @@ export function buildAgentScopeLite(input: {
 }): AgentScopeLite {
   const { contract, observations } = input;
 
-  const scopeId = `scope-lite-${hashShort(contract.contract_id + contract.created_at)}`;
+  const scopeId = shortStableId("scope-lite", {
+    contract_id: contract.contract_id,
+    created_at: contract.created_at,
+    repo_observations_hash: contract.refs.repo_observations_hash,
+  });
 
   // Allowed files: observed changed files (not excluded, not invalid)
   const allowedFiles: string[] = [];
@@ -315,6 +319,3 @@ function buildInstructions(
   return instructions;
 }
 
-function hashShort(s: string): string {
-  return createHash("sha256").update(s).digest("hex").slice(0, 12);
-}

@@ -1,0 +1,1485 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "long2ice__fastapi-cache",
+    "observed_file_count": 41,
+    "python_file_count": 24
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: examples, fastapi_cache"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "test": 5,
+      "source": 15,
+      "unknown": 1,
+      "config": 3
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "fastapi",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "fastapi found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "fastapi imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "httpx",
+        "kind": "http_client",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpx found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      },
+      {
+        "role": "http_client_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpcore dependency (HTTP transport layer)"
+          },
+          {
+            "dimension": "layout_classification",
+            "detail": "Library package with HTTP core dependency"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "fastapi_service",
+    "validation": "unvalidated",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (high)",
+      "framework: fastapi / web_framework (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (medium)",
+      "framework: httpx / http_client (medium)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)",
+      "project_role: http_client_library (high)"
+    ],
+    "suggested_review": [],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "alembic/**",
+        "reason": "No alembic directory observed"
+      },
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      },
+      {
+        "pattern": "**/db/**",
+        "reason": "No db directory observed"
+      },
+      {
+        "pattern": "**/middleware*",
+        "reason": "No middleware files observed"
+      },
+      {
+        "pattern": "**/deps*",
+        "reason": "No deps files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "pytest conftest"
+      ]
+    },
+    {
+      "path": "examples/in_memory/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3455,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/in_memory/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 45,
+      "evidence": []
+    },
+    {
+      "path": "examples/redis/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2588,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/redis/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_cache/backends/dynamodb.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3533,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_cache/backends/inmemory.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1702,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_cache/backends/memcached.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 744,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_cache/backends/redis.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1387,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_cache/backends/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 653,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_cache/coder.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3810,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_cache/decorator.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8367,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_cache/key_builder.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 575,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_cache/types.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1174,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_cache/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3223,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "poetry.lock",
+      "bucket": "config",
+      "extension": ".lock",
+      "size_bytes": 263337,
+      "evidence": [
+        "Lock/manifest"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 3226,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 191,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_codecs.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1949,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_decorator.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4993,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 1243,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/in_memory/main.py",
+      "raw_specifier": "from contextlib import asynccontextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/in_memory/main.py",
+      "raw_specifier": "from typing import AsyncIterator, Dict, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/in_memory/main.py",
+      "raw_specifier": "pendulum",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pendulum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/in_memory/main.py",
+      "raw_specifier": "uvicorn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "uvicorn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/in_memory/main.py",
+      "raw_specifier": "from fastapi import FastAPI",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/in_memory/main.py",
+      "raw_specifier": "from fastapi_cache import FastAPICache",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/in_memory/main.py",
+      "raw_specifier": "from fastapi_cache.backends.inmemory import InMemoryBackend",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/in_memory/main.py",
+      "raw_specifier": "from fastapi_cache.decorator import cache",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/in_memory/main.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/in_memory/main.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/in_memory/main.py",
+      "raw_specifier": "from starlette.responses import JSONResponse, Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from contextlib import asynccontextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from typing import AsyncIterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "pendulum",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pendulum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "uvicorn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "uvicorn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from fastapi import FastAPI",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from fastapi.responses import HTMLResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from fastapi.staticfiles import StaticFiles",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from fastapi.templating import Jinja2Templates",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from fastapi_cache import FastAPICache",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from fastapi_cache.backends.redis import RedisBackend",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from fastapi_cache.coder import PickleCoder",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from fastapi_cache.decorator import cache",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from starlette.responses import JSONResponse, Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "redis.asyncio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "redis",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/redis/main.py",
+      "raw_specifier": "from redis.asyncio.connection import ConnectionPool",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "redis",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/dynamodb.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/dynamodb.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Optional, Tuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/dynamodb.py",
+      "raw_specifier": "from aiobotocore.client import AioBaseClient",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "aiobotocore",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/dynamodb.py",
+      "raw_specifier": "from aiobotocore.session import AioSession, get_session",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "aiobotocore",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/dynamodb.py",
+      "raw_specifier": "from fastapi_cache.types import Backend",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/dynamodb.py",
+      "raw_specifier": "from types_aiobotocore_dynamodb import DynamoDBClient",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "types_aiobotocore_dynamodb",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/inmemory.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/inmemory.py",
+      "raw_specifier": "from asyncio import Lock",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/inmemory.py",
+      "raw_specifier": "from dataclasses import dataclass",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/inmemory.py",
+      "raw_specifier": "from typing import Dict, Optional, Tuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/inmemory.py",
+      "raw_specifier": "from fastapi_cache.types import Backend",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/memcached.py",
+      "raw_specifier": "from typing import Optional, Tuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/memcached.py",
+      "raw_specifier": "from aiomcache import Client",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "aiomcache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/memcached.py",
+      "raw_specifier": "from fastapi_cache.types import Backend",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/redis.py",
+      "raw_specifier": "from typing import Optional, Tuple, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/redis.py",
+      "raw_specifier": "from redis.asyncio.client import Redis",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "redis",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/redis.py",
+      "raw_specifier": "from redis.asyncio.cluster import RedisCluster",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "redis",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/redis.py",
+      "raw_specifier": "from fastapi_cache.types import Backend",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/__init__.py",
+      "raw_specifier": "from fastapi_cache.backends import inmemory",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/__init__.py",
+      "raw_specifier": "from fastapi_cache.types import Backend",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/__init__.py",
+      "raw_specifier": "from fastapi_cache.backends import dynamodb",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/__init__.py",
+      "raw_specifier": "from fastapi_cache.backends import memcached",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/backends/__init__.py",
+      "raw_specifier": "from fastapi_cache.backends import redis",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/coder.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/coder.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/coder.py",
+      "raw_specifier": "pickle",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pickle",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/coder.py",
+      "raw_specifier": "from decimal import Decimal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/coder.py",
+      "raw_specifier": "from typing import ( Any, Callable, ClassVar, Dict, Optional, TypeVar, Union, overload, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/coder.py",
+      "raw_specifier": "pendulum",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pendulum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/coder.py",
+      "raw_specifier": "from fastapi.encoders import jsonable_encoder",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/coder.py",
+      "raw_specifier": "from starlette.responses import JSONResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/coder.py",
+      "raw_specifier": "from starlette.templating import ( _TemplateResponse as TemplateResponse,  # pyright: ignore[reportPrivateUsage] )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from functools import wraps",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from inspect import Parameter, Signature, isawaitable, iscoroutinefunction",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from typing import ( Awaitable, Callable, List, Optional, Type, TypeVar, Union, cast, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from typing import ParamSpec",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from typing_extensions import ParamSpec",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from fastapi.concurrency import run_in_threadpool",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from fastapi.dependencies.utils import ( get_typed_return_annotation, get_typed_signature, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from starlette.responses import Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from starlette.status import HTTP_304_NOT_MODIFIED",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from fastapi_cache import FastAPICache",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from fastapi_cache.coder import Coder",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/decorator.py",
+      "raw_specifier": "from fastapi_cache.types import KeyBuilder",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/key_builder.py",
+      "raw_specifier": "hashlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/key_builder.py",
+      "raw_specifier": "from typing import Any, Callable, Dict, Optional, Tuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/key_builder.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/key_builder.py",
+      "raw_specifier": "from starlette.responses import Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/types.py",
+      "raw_specifier": "abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/types.py",
+      "raw_specifier": "from typing import Any, Awaitable, Callable, Dict, Optional, Tuple, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/types.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/types.py",
+      "raw_specifier": "from starlette.responses import Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/types.py",
+      "raw_specifier": "from typing_extensions import Protocol",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/__init__.py",
+      "raw_specifier": "from importlib.metadata import version",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/__init__.py",
+      "raw_specifier": "from typing import ClassVar, Optional, Type",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/__init__.py",
+      "raw_specifier": "from fastapi_cache.coder import Coder, JsonCoder",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/__init__.py",
+      "raw_specifier": "from fastapi_cache.key_builder import default_key_builder",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_cache/__init__.py",
+      "raw_specifier": "from fastapi_cache.types import Backend, KeyBuilder",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_cache",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "examples/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "poetry.lock",
+      "source_type": "poetry.lock",
+      "packages": [
+        "aiobotocore",
+        "aiohappyeyeballs",
+        "aiohttp",
+        "aioitertools",
+        "aiomcache",
+        "aiosignal",
+        "annotated_types",
+        "anyio",
+        "async_timeout",
+        "attrs",
+        "backports_tarfile",
+        "backports_zoneinfo",
+        "botocore",
+        "botocore_stubs",
+        "cachetools",
+        "certifi",
+        "cffi",
+        "chardet",
+        "charset_normalizer",
+        "click",
+        "click_default_group",
+        "colorama",
+        "coverage",
+        "cryptography",
+        "distlib",
+        "docutils",
+        "exceptiongroup",
+        "fastapi",
+        "filelock",
+        "frozenlist",
+        "h11",
+        "httpcore",
+        "httpx",
+        "idna",
+        "importlib_metadata",
+        "importlib_resources",
+        "incremental",
+        "iniconfig",
+        "jaraco_classes",
+        "jaraco_context",
+        "jaraco_functools",
+        "jeepney",
+        "jinja2",
+        "jmespath",
+        "keyring",
+        "markdown_it_py",
+        "markupsafe",
+        "mdurl",
+        "more_itertools",
+        "multidict",
+        "mypy",
+        "mypy_extensions",
+        "nh3",
+        "nodeenv",
+        "packaging",
+        "pendulum",
+        "pkginfo",
+        "platformdirs",
+        "pluggy",
+        "pycparser",
+        "pydantic",
+        "pydantic_core",
+        "pygments",
+        "pyproject_api",
+        "pyright",
+        "pytest",
+        "python_dateutil",
+        "pywin32_ctypes",
+        "readme_renderer",
+        "redis",
+        "requests",
+        "requests_toolbelt",
+        "rfc3986",
+        "rich",
+        "ruff",
+        "secretstorage",
+        "setuptools",
+        "six",
+        "sniffio",
+        "starlette",
+        "tomli",
+        "towncrier",
+        "tox",
+        "twine",
+        "types_aiobotocore",
+        "types_aiobotocore_dynamodb",
+        "types_awscrt",
+        "types_cffi",
+        "types_pyopenssl",
+        "types_redis",
+        "types_setuptools",
+        "typing_extensions",
+        "tzdata",
+        "urllib3",
+        "uvicorn",
+        "virtualenv",
+        "wrapt",
+        "yarl",
+        "zipp"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "fastapi",
+        "uvicorn",
+        "typing_extensions",
+        "importlib_metadata",
+        "pendulum",
+        "aiomcache",
+        "aiobotocore",
+        "redis"
+      ],
+      "dev_packages": [
+        "pytest",
+        "requests",
+        "coverage",
+        "httpx",
+        "tox",
+        "towncrier"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tests/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No deps found in tox.ini — may use requirements file references"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/in_memory/main.py",
+      "candidate_test_paths": [
+        "examples/in_memory/tests/test_main.py",
+        "tests/in_memory/test_main.py",
+        "examples/in_memory/tests/test_in_memory.py",
+        "test/test_main.py",
+        "tests/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/redis/main.py",
+      "candidate_test_paths": [
+        "examples/redis/tests/test_main.py",
+        "tests/redis/test_main.py",
+        "examples/redis/tests/test_redis.py",
+        "test/test_main.py",
+        "tests/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_cache/backends/dynamodb.py",
+      "candidate_test_paths": [
+        "fastapi_cache/backends/tests/test_dynamodb.py",
+        "tests/backends/test_dynamodb.py",
+        "fastapi_cache/backends/tests/test_backends.py",
+        "test/test_dynamodb.py",
+        "tests/test_dynamodb.py",
+        "tests/dynamodb/test_dynamodb.py",
+        "tests/dynamodbs/test_dynamodb.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_cache/backends/inmemory.py",
+      "candidate_test_paths": [
+        "fastapi_cache/backends/tests/test_inmemory.py",
+        "tests/backends/test_inmemory.py",
+        "fastapi_cache/backends/tests/test_backends.py",
+        "test/test_inmemory.py",
+        "tests/test_inmemory.py",
+        "tests/inmemory/test_inmemory.py",
+        "tests/inmemorys/test_inmemory.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_cache/backends/memcached.py",
+      "candidate_test_paths": [
+        "fastapi_cache/backends/tests/test_memcached.py",
+        "tests/backends/test_memcached.py",
+        "fastapi_cache/backends/tests/test_backends.py",
+        "test/test_memcached.py",
+        "tests/test_memcached.py",
+        "tests/memcached/test_memcached.py",
+        "tests/memcacheds/test_memcached.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_cache/backends/redis.py",
+      "candidate_test_paths": [
+        "fastapi_cache/backends/tests/test_redis.py",
+        "tests/backends/test_redis.py",
+        "fastapi_cache/backends/tests/test_backends.py",
+        "test/test_redis.py",
+        "tests/test_redis.py",
+        "tests/redis/test_redis.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_cache/coder.py",
+      "candidate_test_paths": [
+        "fastapi_cache/tests/test_coder.py",
+        "tests/test_coder.py",
+        "fastapi_cache/tests/test_fastapi_cache.py",
+        "test/test_coder.py",
+        "tests/coder/test_coder.py",
+        "tests/coders/test_coder.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_cache/decorator.py",
+      "candidate_test_paths": [
+        "fastapi_cache/tests/test_decorator.py",
+        "tests/test_decorator.py",
+        "fastapi_cache/tests/test_fastapi_cache.py",
+        "test/test_decorator.py",
+        "tests/decorator/test_decorator.py",
+        "tests/decorators/test_decorator.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_decorator.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_decorator.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_cache/key_builder.py",
+      "candidate_test_paths": [
+        "fastapi_cache/tests/test_key_builder.py",
+        "tests/test_key_builder.py",
+        "fastapi_cache/tests/test_fastapi_cache.py",
+        "test/test_key_builder.py",
+        "tests/key_builder/test_key_builder.py",
+        "tests/key_builders/test_key_builder.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_cache/types.py",
+      "candidate_test_paths": [
+        "fastapi_cache/tests/test_types.py",
+        "tests/test_types.py",
+        "fastapi_cache/tests/test_fastapi_cache.py",
+        "test/test_types.py",
+        "tests/types/test_types.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "examples/pyproject.toml"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "examples/pyproject.toml",
+        "tests/pyproject.toml",
+        "tox.ini"
+      ],
+      "count": 3,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 19,
+    "classified_count": 19,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 89,
+    "project_import_count": 22,
+    "declared_package_count": 37,
+    "undeclared_package_count": 0,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 10,
+    "high_confidence_test_count": 1,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 5,
+    "low_confidence_manifest_count": 3
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

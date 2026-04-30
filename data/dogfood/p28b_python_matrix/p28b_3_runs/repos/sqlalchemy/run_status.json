@@ -1,0 +1,72 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "dc8ea4ca62a4386f0251d6248a489793b4a273aab4c371cae1f003728f83ce55",
+  "pinned_commit": "65192be2a46964e6934f54aab4a05218f9c4c871",
+  "completed_at": "2026-04-30T11:14:22.521Z",
+  "repo_id": "sqlalchemy",
+  "category_expected": "python_sdk_library",
+  "category_observed": "python_sdk_library",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 560,
+  "python_files": 671,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "pytest/high",
+    "click/medium",
+    "sqlalchemy/medium"
+  ],
+  "project_role_signals": [
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 274,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [],
+  "unknowns": [
+    {
+      "category": "dynamic_or_unresolved_import",
+      "classification": "intrinsic",
+      "paths": [
+        "lib/sqlalchemy/connectors/aioodbc.py",
+        "lib/sqlalchemy/connectors/pyodbc.py",
+        "lib/sqlalchemy/dialects/mssql/mssqlpython.py",
+        "lib/sqlalchemy/dialects/mssql/pymssql.py",
+        "lib/sqlalchemy/dialects/mysql/aiomysql.py",
+        "lib/sqlalchemy/dialects/mysql/asyncmy.py",
+        "lib/sqlalchemy/dialects/mysql/cymysql.py",
+        "lib/sqlalchemy/dialects/mysql/mariadbconnector.py",
+        "lib/sqlalchemy/dialects/mysql/mysqlconnector.py",
+        "lib/sqlalchemy/dialects/mysql/mysqldb.py",
+        "lib/sqlalchemy/dialects/mysql/pymysql.py",
+        "lib/sqlalchemy/dialects/postgresql/asyncpg.py",
+        "lib/sqlalchemy/dialects/postgresql/pg8000.py",
+        "lib/sqlalchemy/dialects/postgresql/psycopg2cffi.py",
+        "lib/sqlalchemy/dialects/sqlite/aiosqlite.py",
+        "lib/sqlalchemy/engine/interfaces.py",
+        "lib/sqlalchemy/testing/requirements.py"
+      ],
+      "count": 21,
+      "note": "Imports using __import__(), importlib.import_module(), or computed paths. Cannot be statically resolved — this is inherent to Python."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "noxfile.py",
+        "setup.cfg",
+        "setup.py"
+      ],
+      "count": 3,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

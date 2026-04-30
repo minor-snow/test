@@ -1,0 +1,76 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "3518b3a3f40d0c4a109861de9f9ac783fe5aec12264645aa1451c3daefa61c0e",
+  "pinned_commit": "f58093747ab4f0859a9065d75230d107ad3dc002",
+  "completed_at": "2026-04-30T11:54:29.859Z",
+  "repo_id": "instillai/machine-learning-course",
+  "category_expected": "ml_scientific",
+  "category_observed": "python_sdk_library",
+  "support_level": "supported",
+  "status": "completed",
+  "duration_ms": 236,
+  "python_files": 44,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [],
+  "project_role_signals": [
+    "python_sdk_library/medium"
+  ],
+  "test_mapping_count": 34,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "instillai/machine-learning-course",
+      "gap_kind": "layout_low_confidence",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Primary layout missing or low confidence",
+      "recommended_phase": "P28b-later"
+    },
+    {
+      "repo_id": "instillai/machine-learning-course",
+      "gap_kind": "framework_detection_gap",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "No frameworks detected",
+      "recommended_phase": "P28b-later"
+    },
+    {
+      "repo_id": "instillai/machine-learning-course",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected ml_scientific, got python_sdk_library",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "code/deep_learning/cnn/requirements.txt"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "code/deep_learning/mlp/code/train_mlp.ipynb",
+        "code/overview/linear_regression/linearRegressionOneVariable.ipynb"
+      ],
+      "count": 2,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

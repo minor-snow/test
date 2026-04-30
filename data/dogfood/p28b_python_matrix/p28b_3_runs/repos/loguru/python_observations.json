@@ -1,0 +1,3154 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "loguru",
+    "observed_file_count": 317,
+    "python_file_count": 173
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: loguru"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 3,
+      "docs": 1,
+      "source": 20,
+      "test": 149
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "api/ directory present"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No framework could be detected from dependencies, paths, or imports"
+      }
+    ]
+  },
+  "risk_preset_validation": {
+    "preset": "generic_service",
+    "validation": "unvalidated",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (high)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: authorization (high, 1 paths)"
+    ],
+    "suggested_review": [],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 882,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 5838,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "loguru/_asyncio_loop.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 624,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_better_exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 22309,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_colorama.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2457,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_colorizer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 16776,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_contextvars.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 336,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_ctime_functions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1584,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_datetime.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6315,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_defaults.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3084,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_error_interceptor.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1141,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_file_sink.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 15393,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_filters.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 642,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_get_frame.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 481,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_handler.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13897,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_locks_machinery.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1357,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_logger.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 104845,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_recattrs.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7626,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_simple_sinks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6999,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/_string_parsers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9684,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 661,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "loguru/__init__.pyi",
+      "bucket": "source",
+      "extension": ".pyi",
+      "size_bytes": 12428,
+      "evidence": []
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 5196,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11122,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/chained_expression_direct.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 684,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/chained_expression_indirect.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 389,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/chaining_first.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 428,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/chaining_second.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 556,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/chaining_third.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 672,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/enqueue.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 234,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/enqueue_with_others_handlers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 646,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/frame_values_backward.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 261,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/frame_values_forward.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 261,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/function.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 347,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/head_recursion.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 508,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/missing_attributes_traceback_objects.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1178,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/missing_lineno_frame_objects.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1105,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/nested.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 498,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/nested_chained_catch_up.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 445,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/nested_decorator_catch_up.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 362,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/nested_explicit_catch_up.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 391,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/nested_wrapping.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 442,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/not_enough_arguments.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 379,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/no_tb.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 354,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/raising_recursion.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 506,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/suppressed_expression_direct.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 739,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/suppressed_expression_indirect.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 517,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/tail_recursion.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 447,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/backtrace/too_many_arguments.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 365,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/assertion_error.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 277,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/assertion_error_custom.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 301,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/assertion_error_in_string.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 285,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/attributes.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 458,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/chained_both.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 497,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/encoding.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 290,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/global_variable.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 317,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/indentation_error.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 335,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/keyword_argument.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 267,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/multilines_repr.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 363,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/no_error_message.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 278,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/parenthesis.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 673,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/source_multilines.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 831,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/source_strings.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 275,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/syntax_error.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 270,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/syntax_highlighting.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 536,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/truncating.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 265,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/diagnose/unprintable_object.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 325,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/decorate_async_generator.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2805,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/exception_formatting_async_generator.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 545,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/exception_group_catch.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 435,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/f_string.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 368,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/grouped_as_cause_and_context.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 871,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/grouped_max_depth.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 806,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/grouped_max_length.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 360,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/grouped_nested.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 884,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/grouped_simple.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 759,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/grouped_with_cause_and_context.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 980,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/match_statement.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 339,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/notes.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 977,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/positional_only_argument.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 269,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/type_hints.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 375,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/modern/walrus_operator.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 368,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/assertionerror_without_traceback.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 438,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/broken_but_decorated_repr.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 565,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/catch_as_context_manager.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 181,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/catch_as_decorator_without_parentheses.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 200,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/catch_as_decorator_with_parentheses.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 205,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/catch_as_function.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 201,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/catch_message.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 307,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/exception_formatting_coroutine.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 522,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/exception_formatting_function.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 449,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/exception_formatting_generator.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 517,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/exception_in_property.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 395,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/handler_formatting_with_context_manager.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 273,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/handler_formatting_with_decorator.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 258,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/level_name.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 254,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/level_number.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 249,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/message_formatting_with_context_manager.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 311,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/message_formatting_with_decorator.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 282,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/nested_with_reraise.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 655,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/one_liner_recursion.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 536,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/recursion_error.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 539,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/repeated_lines.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 693,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/syntaxerror_without_traceback.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 436,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/sys_tracebacklimit.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 730,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/sys_tracebacklimit_negative.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 731,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/sys_tracebacklimit_none.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 733,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/sys_tracebacklimit_unset.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 774,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/others/zerodivisionerror_without_traceback.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 434,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/assertion_from_lib.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 653,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/assertion_from_local.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 646,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/callback.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 676,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/catch_decorator.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 596,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/catch_decorator_from_lib.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 620,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/decorated_callback.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 634,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/direct.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 620,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/indirect.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 638,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/string_lib.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 617,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/string_source.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 609,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/syntaxerror.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 619,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/usersite/somelib/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 262,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/exceptions/source/ownership/_init.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 215,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_activation.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3846,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_add_option_backtrace.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 631,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_add_option_catch.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3981,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_add_option_colorize.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3326,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_add_option_context.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2630,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_add_option_diagnose.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 628,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_add_option_enqueue.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8774,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_add_option_filter.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4490,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_add_option_format.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2772,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_add_option_kwargs.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2622,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_add_option_level.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1041,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_add_option_serialize.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4342,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_add_sinks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6193,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_ansimarkup_basic.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7163,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_ansimarkup_extended.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8265,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_bind.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2132,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_colorama.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 14101,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_configure.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5576,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_contextualize.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5888,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_coroutine_sink.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 17643,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_datetime.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9742,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_deepcopy.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1234,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_defaults.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2050,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_exceptions_catch.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 17336,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_exceptions_formatting.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10884,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_filesink_compression.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9983,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_filesink_delay.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3552,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_filesink_permissions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1349,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_filesink_retention.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10596,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_filesink_rotation.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 38539,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_filesink_watch.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4650,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_formatting.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9357,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_get_frame.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 949,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_interception.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5609,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_levels.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9303,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_locks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3925,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_multiprocessing.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 17532,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_opt.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 22714,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_parse.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4598,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_patch.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2797,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_pickling.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11006,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_propagation.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2842,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_recattr.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2241,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_reinstall.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2438,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_remove.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2782,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_repr.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5175,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_standard_handler.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7134,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_threading.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5221,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_type_hinting.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 586,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 728,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "loguru/_asyncio_loop.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_asyncio_loop.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_better_exceptions.py",
+      "raw_specifier": "builtins",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "builtins",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_better_exceptions.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_better_exceptions.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_better_exceptions.py",
+      "raw_specifier": "keyword",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "keyword",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_better_exceptions.py",
+      "raw_specifier": "linecache",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "linecache",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_better_exceptions.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_better_exceptions.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_better_exceptions.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_better_exceptions.py",
+      "raw_specifier": "sysconfig",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sysconfig",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_better_exceptions.py",
+      "raw_specifier": "tokenize",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tokenize",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_better_exceptions.py",
+      "raw_specifier": "traceback",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "traceback",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_better_exceptions.py",
+      "raw_specifier": "from exceptiongroup import ExceptionGroup",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "exceptiongroup",
+      "confidence": "low"
+    },
+    {
+      "from_file": "loguru/_colorama.py",
+      "raw_specifier": "builtins",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "builtins",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_colorama.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_colorama.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_colorama.py",
+      "raw_specifier": "ipykernel",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "ipykernel",
+      "confidence": "low"
+    },
+    {
+      "from_file": "loguru/_colorama.py",
+      "raw_specifier": "IPython",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "IPython",
+      "confidence": "low"
+    },
+    {
+      "from_file": "loguru/_colorama.py",
+      "raw_specifier": "from colorama.win32 import winapi_test",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "colorama",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_colorama.py",
+      "raw_specifier": "from colorama.winterm import enable_vt_processing",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "colorama",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_colorama.py",
+      "raw_specifier": "from colorama import AnsiToWin32",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "colorama",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_colorizer.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_colorizer.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_colorizer.py",
+      "raw_specifier": "from string import Formatter",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "string",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_contextvars.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_contextvars.py",
+      "raw_specifier": "from contextvars import ContextVar",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextvars",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_contextvars.py",
+      "raw_specifier": "from aiocontextvars import ContextVar",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "aiocontextvars",
+      "confidence": "low"
+    },
+    {
+      "from_file": "loguru/_contextvars.py",
+      "raw_specifier": "from contextvars import ContextVar",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextvars",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_ctime_functions.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_ctime_functions.py",
+      "raw_specifier": "win32_setctime",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "win32_setctime",
+      "confidence": "low"
+    },
+    {
+      "from_file": "loguru/_datetime.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_datetime.py",
+      "raw_specifier": "from calendar import day_abbr, day_name, month_abbr, month_name",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "calendar",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_datetime.py",
+      "raw_specifier": "from datetime import datetime as datetime_",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_datetime.py",
+      "raw_specifier": "from datetime import timedelta, timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_datetime.py",
+      "raw_specifier": "from functools import lru_cache, partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_datetime.py",
+      "raw_specifier": "from time import localtime, strftime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_defaults.py",
+      "raw_specifier": "from os import environ",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_error_interceptor.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_error_interceptor.py",
+      "raw_specifier": "traceback",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "traceback",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "decimal",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "glob",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "glob",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "numbers",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "numbers",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "string",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "string",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "from stat import ST_DEV, ST_INO",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "stat",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "from . import _string_parsers as string_parsers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "from ._ctime_functions import get_ctime, set_ctime",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._ctime_functions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "from ._datetime import aware_now",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._datetime",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "gzip",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "gzip",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "bz2",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bz2",
+      "confidence": "low"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "lzma",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "lzma",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "lzma",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "lzma",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "tarfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tarfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "gzip",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "gzip",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "tarfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tarfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "bz2",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bz2",
+      "confidence": "low"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "tarfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tarfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "lzma",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "lzma",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "tarfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tarfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_file_sink.py",
+      "raw_specifier": "zipfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "zipfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_get_frame.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_get_frame.py",
+      "raw_specifier": "from sys import exc_info",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_handler.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_handler.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_handler.py",
+      "raw_specifier": "multiprocessing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "multiprocessing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_handler.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_handler.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_handler.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_handler.py",
+      "raw_specifier": "from threading import Thread",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_handler.py",
+      "raw_specifier": "from ._colorizer import Colorizer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._colorizer",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_handler.py",
+      "raw_specifier": "from ._locks_machinery import create_handler_lock",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._locks_machinery",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_locks_machinery.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_locks_machinery.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_locks_machinery.py",
+      "raw_specifier": "weakref",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "weakref",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "builtins",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "builtins",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from inspect import isclass, iscoroutinefunction, isgeneratorfunction",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from multiprocessing import current_process, get_context",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "multiprocessing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from multiprocessing.context import BaseContext",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "multiprocessing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from os.path import basename, splitext",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from threading import current_thread",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from . import _asyncio_loop, _colorama, _defaults, _filters",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from ._better_exceptions import ExceptionFormatter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._better_exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from ._colorizer import Colorizer, try_formatting",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._colorizer",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from ._contextvars import ContextVar",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._contextvars",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from ._datetime import aware_now",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._datetime",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from ._error_interceptor import ErrorInterceptor",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._error_interceptor",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from ._file_sink import FileSink",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._file_sink",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from ._get_frame import get_frame",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._get_frame",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from ._handler import Handler",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._handler",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from ._locks_machinery import create_logger_lock",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._locks_machinery",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from ._recattrs import RecordException, RecordFile, RecordLevel, RecordProcess, RecordThread",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._recattrs",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from ._simple_sinks import AsyncSink, CallableSink, StandardSink, StreamSink",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._simple_sinks",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from collections.abc import AsyncGenerator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from inspect import isasyncgenfunction",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from os import PathLike",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from pathlib import PurePath as PathLike",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_logger.py",
+      "raw_specifier": "from . import logger",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_recattrs.py",
+      "raw_specifier": "pickle",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pickle",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_recattrs.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_simple_sinks.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_simple_sinks.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_simple_sinks.py",
+      "raw_specifier": "weakref",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "weakref",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_simple_sinks.py",
+      "raw_specifier": "from ._asyncio_loop import get_running_loop, get_task_loop",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._asyncio_loop",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/_string_parsers.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_string_parsers.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/_string_parsers.py",
+      "raw_specifier": "from typing import Optional, Tuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.py",
+      "raw_specifier": "atexit",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "atexit",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.py",
+      "raw_specifier": "from . import _defaults",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/__init__.py",
+      "raw_specifier": "from ._logger import Core as _Core",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._logger",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/__init__.py",
+      "raw_specifier": "from ._logger import Logger as _Logger",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._logger",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from asyncio import AbstractEventLoop",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from datetime import datetime, time, timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from logging import Handler",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from multiprocessing.context import BaseContext",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "multiprocessing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from typing import ( Any, BinaryIO, Callable, Dict, Generator, Generic, List, NamedTuple, NewType, Optional, Pattern, Sequence, TextIO, Tuple, Type, TypeVar, Union, overload, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from typing import Awaitable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from typing_extensions import Awaitable",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "low"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from os import PathLike",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from typing import ContextManager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from pathlib import PurePath as PathLikeStr",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from typing_extensions import ContextManager",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "low"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from typing import Protocol, TypedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "loguru/__init__.pyi",
+      "raw_specifier": "from typing_extensions import Protocol, TypedDict",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "colorama",
+        ",",
+        "3_7",
+        "win32"
+      ],
+      "dev_packages": [
+        "pre_commit",
+        ",",
+        "3_8",
+        "3_9",
+        ",\r  # testing framework_",
+        "3_12",
+        ",\r  # testing utils_",
+        "3_7",
+        "3_11",
+        ",\r  # type checking_",
+        "3_6",
+        ",\r  # docs_",
+        ",\r  # packaging_"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No deps found in tox.ini — may use requirements file references"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "loguru/_asyncio_loop.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_asyncio_loop.py",
+        "tests/test_asyncio_loop.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_asyncio_loop.py",
+        "tests/asyncio_loop/test_asyncio_loop.py",
+        "tests/asyncio_loops/test_asyncio_loop.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_better_exceptions.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_better_exceptions.py",
+        "tests/test_better_exceptions.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_better_exceptions.py",
+        "tests/better_exceptions/test_better_exceptions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_colorama.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_colorama.py",
+        "tests/test_colorama.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_colorama.py",
+        "tests/colorama/test_colorama.py",
+        "tests/coloramas/test_colorama.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_colorama.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_colorama.py [library_package layout]"
+    },
+    {
+      "source_path": "loguru/_colorizer.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_colorizer.py",
+        "tests/test_colorizer.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_colorizer.py",
+        "tests/colorizer/test_colorizer.py",
+        "tests/colorizers/test_colorizer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_contextvars.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_contextvars.py",
+        "tests/test_contextvars.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_contextvars.py",
+        "tests/contextvars/test_contextvars.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_ctime_functions.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_ctime_functions.py",
+        "tests/test_ctime_functions.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_ctime_functions.py",
+        "tests/ctime_functions/test_ctime_functions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_datetime.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_datetime.py",
+        "tests/test_datetime.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_datetime.py",
+        "tests/datetime/test_datetime.py",
+        "tests/datetimes/test_datetime.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_datetime.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_datetime.py [library_package layout]"
+    },
+    {
+      "source_path": "loguru/_defaults.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_defaults.py",
+        "tests/test_defaults.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_defaults.py",
+        "tests/defaults/test_defaults.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_defaults.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_defaults.py [library_package layout]"
+    },
+    {
+      "source_path": "loguru/_error_interceptor.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_error_interceptor.py",
+        "tests/test_error_interceptor.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_error_interceptor.py",
+        "tests/error_interceptor/test_error_interceptor.py",
+        "tests/error_interceptors/test_error_interceptor.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_file_sink.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_file_sink.py",
+        "tests/test_file_sink.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_file_sink.py",
+        "tests/file_sink/test_file_sink.py",
+        "tests/file_sinks/test_file_sink.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_filters.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_filters.py",
+        "tests/test_filters.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_filters.py",
+        "tests/filters/test_filters.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_get_frame.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_get_frame.py",
+        "tests/test_get_frame.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_get_frame.py",
+        "tests/get_frame/test_get_frame.py",
+        "tests/get_frames/test_get_frame.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_get_frame.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_get_frame.py [library_package layout]"
+    },
+    {
+      "source_path": "loguru/_handler.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_handler.py",
+        "tests/test_handler.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_handler.py",
+        "tests/handler/test_handler.py",
+        "tests/handlers/test_handler.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_locks_machinery.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_locks_machinery.py",
+        "tests/test_locks_machinery.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_locks_machinery.py",
+        "tests/locks_machinery/test_locks_machinery.py",
+        "tests/locks_machinerys/test_locks_machinery.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_logger.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_logger.py",
+        "tests/test_logger.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_logger.py",
+        "tests/logger/test_logger.py",
+        "tests/loggers/test_logger.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_recattrs.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_recattrs.py",
+        "tests/test_recattrs.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_recattrs.py",
+        "tests/recattrs/test_recattrs.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_simple_sinks.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_simple_sinks.py",
+        "tests/test_simple_sinks.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_simple_sinks.py",
+        "tests/simple_sinks/test_simple_sinks.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "loguru/_string_parsers.py",
+      "candidate_test_paths": [
+        "loguru/tests/test_string_parsers.py",
+        "tests/test_string_parsers.py",
+        "loguru/tests/test_loguru.py",
+        "test/test_string_parsers.py",
+        "tests/string_parsers/test_string_parsers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/permission/**",
+      "matched_paths": [
+        "tests/test_filesink_permissions.py"
+      ],
+      "category": "authorization",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"permission\" found in 1 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "tox.ini"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 170,
+    "classified_count": 170,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 138,
+    "project_import_count": 0,
+    "declared_package_count": 3,
+    "undeclared_package_count": 10,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 18,
+    "high_confidence_test_count": 4,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 1,
+    "sensitive_file_count": 1,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

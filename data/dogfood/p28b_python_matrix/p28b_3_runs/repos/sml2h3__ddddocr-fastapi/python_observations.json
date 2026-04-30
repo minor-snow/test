@@ -1,0 +1,357 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "sml2h3__ddddocr-fastapi",
+    "observed_file_count": 9,
+    "python_file_count": 6
+  },
+  "layout": {
+    "primary_layout": "api_service",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: app"
+      },
+      {
+        "signal": "app_dir_without_manage_py",
+        "weight": "moderate",
+        "evidence": "app/ directory without Django manage.py"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "source": 4,
+      "config": 1,
+      "test": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "fastapi",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "fastapi found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "fastapi imported in source files"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "app/ directory without manage.py (service pattern)"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as api_service"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "app/ directory without manage.py (service layout)"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "fastapi_service",
+    "validation": "unvalidated",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: api_service / flat_package (medium)",
+      "framework: fastapi / web_framework (high)",
+      "project_role: service_backend (high)"
+    ],
+    "suggested_review": [],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "alembic/**",
+        "reason": "No alembic directory observed"
+      },
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      },
+      {
+        "pattern": "**/db/**",
+        "reason": "No db directory observed"
+      },
+      {
+        "pattern": "**/middleware*",
+        "reason": "No middleware files observed"
+      },
+      {
+        "pattern": "**/deps*",
+        "reason": "No deps files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "app/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3510,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "app/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 835,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "app/services.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 957,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "app/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 73,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "tests/test_main.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "app/main.py",
+      "raw_specifier": "uvicorn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "uvicorn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "app/main.py",
+      "raw_specifier": "from fastapi import FastAPI, File, UploadFile, HTTPException, Form",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "app/main.py",
+      "raw_specifier": "from typing import Optional, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "app/main.py",
+      "raw_specifier": "base64",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "app/main.py",
+      "raw_specifier": "from .models import OCRRequest, SlideMatchRequest, DetectionRequest, APIResponse",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "app/main.py",
+      "raw_specifier": "from .services import ocr_service",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".services",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "app/main.py",
+      "raw_specifier": "from starlette.datastructures import UploadFile as StarletteUploadFile",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "starlette",
+      "confidence": "low"
+    },
+    {
+      "from_file": "app/models.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pydantic",
+      "confidence": "low"
+    },
+    {
+      "from_file": "app/models.py",
+      "raw_specifier": "from typing import Optional, List, Union, Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "app/services.py",
+      "raw_specifier": "ddddocr",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "ddddocr",
+      "confidence": "high"
+    },
+    {
+      "from_file": "app/services.py",
+      "raw_specifier": "from typing import Union, List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "fastapi",
+        "uvicorn",
+        "ddddocr",
+        "python_multipart"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "app/main.py",
+      "candidate_test_paths": [
+        "app/tests/test_main.py",
+        "tests/test_main.py",
+        "app/tests/test_app.py",
+        "test/test_main.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_main.py"
+      ],
+      "confidence": "medium",
+      "reason": "Name match in tests/ directory: tests/test_main.py [service context]"
+    },
+    {
+      "source_path": "app/models.py",
+      "candidate_test_paths": [
+        "app/tests/test_models.py",
+        "tests/test_models.py",
+        "app/tests/test_app.py",
+        "test/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "app/services.py",
+      "candidate_test_paths": [
+        "app/tests/test_services.py",
+        "tests/test_services.py",
+        "app/tests/test_app.py",
+        "test/test_services.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 5,
+    "classified_count": 5,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 11,
+    "project_import_count": 0,
+    "declared_package_count": 3,
+    "undeclared_package_count": 2,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 3,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 1,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 1,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

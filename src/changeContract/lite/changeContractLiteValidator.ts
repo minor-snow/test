@@ -6,6 +6,7 @@
  */
 
 import type { ChangeContractLite, LiteValidationResult } from "./types.js";
+import { normalizeRepoRelativePath } from "../../repoObservation/pathUtils.js";
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -15,27 +16,22 @@ export function validateChangeContractLite(contract: ChangeContractLite): LiteVa
   const errors: string[] = [];
   const warnings: string[] = [];
 
-  // Schema version
   if (contract.schema_version !== "change_contract_lite.v1") {
     errors.push(`Invalid schema_version: ${contract.schema_version}`);
   }
 
-  // Mode
   if (contract.mode !== "bootstrap") {
     errors.push(`Invalid mode: ${contract.mode}; must be 'bootstrap'`);
   }
 
-  // Contract ID
   if (!contract.contract_id) {
     errors.push("Missing contract_id");
   }
 
-  // Created at
   if (!contract.created_at) {
     errors.push("Missing created_at");
   }
 
-  // Refs
   if (!contract.refs.repo_observations_hash) {
     errors.push("Missing refs.repo_observations_hash");
   }
@@ -50,20 +46,14 @@ export function validateChangeContractLite(contract: ChangeContractLite): LiteVa
     errors.push("Missing refs.has_uncommitted_changes field");
   }
 
-  // Changed file statuses coverage
   const statusPaths = new Set(contract.observed_scope.changed_file_statuses.map(s => s.path));
-  for (const cf of contract.changed_files) {
-    // Allow for normalization differences — check both raw and potential normalized
-    if (!statusPaths.has(cf)) {
-      // Check if a normalized version exists
-      const found = contract.observed_scope.changed_file_statuses.some(s => s.path === cf || contract.changed_files.includes(s.path));
-      if (!found) {
-        errors.push(`Changed file '${cf}' has no corresponding changed_file_status`);
-      }
+  for (const changedFile of contract.changed_files) {
+    const normalized = normalizeChangedFileForComparison(changedFile);
+    if (!statusPaths.has(normalized)) {
+      errors.push(`Changed file '${changedFile}' has no corresponding changed_file_status`);
     }
   }
 
-  // Decision
   const validVerdicts = ["pass", "requires_review", "requires_reverse_issue", "fail"];
   if (!validVerdicts.includes(contract.decision.verdict)) {
     errors.push(`Invalid decision.verdict: ${contract.decision.verdict}`);
@@ -81,7 +71,6 @@ export function validateChangeContractLite(contract: ChangeContractLite): LiteVa
     warnings.push("Non-pass verdict has no required_actions");
   }
 
-  // Reject full ChangeContract fields that should NOT be in Lite
   const raw = contract as Record<string, unknown>;
   if ("lifecycle_status" in raw) {
     errors.push("ChangeContract Lite must not have lifecycle_status");
@@ -101,4 +90,12 @@ export function validateChangeContractLite(contract: ChangeContractLite): LiteVa
     errors,
     warnings,
   };
+}
+
+function normalizeChangedFileForComparison(path: string): string {
+  try {
+    return normalizeRepoRelativePath(path);
+  } catch {
+    return path;
+  }
 }

@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { existsSync, readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
-import { appendGovernanceEvent, governancePaths } from "../../src/governanceLog/governanceEventWriter.js";
+import { appendGovernanceEvent, governancePaths, tryAppendGovernanceEvent } from "../../src/governanceLog/governanceEventWriter.js";
 
 describe("governanceEventWriter", () => {
   const tmpDir = join("test", "governanceLog", "__tmp_writer__");
@@ -59,5 +59,28 @@ describe("governanceEventWriter", () => {
         action: "block_merge",
       }],
     })).toThrow(/sanitizer/i);
+  });
+
+  it("returns a structured error result for invalid events", () => {
+    const result = tryAppendGovernanceEvent(tmpDir, {
+      schema_version: "pantheon_governance_event@0.1.0",
+      event_id: "gov_invalid",
+      timestamp: "2026-04-29T00:00:00.000Z",
+      source: "local_cli",
+      event_type: "review_requested",
+      repair_id: "repair_1",
+      verdict: "requires_review",
+      attention_level: "human_review",
+      reasons: [{
+        kind: "review_required",
+        file: "C:\\secret\\bad.ts",
+        action: "human_review",
+      }],
+    });
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.error_kind).toBe("invalid_event");
+    }
   });
 });

@@ -200,7 +200,7 @@ describe("buildChangeContract", () => {
     const { contract, diagnostics } = buildChangeContract(makeInput());
 
     expect(contract.lifecycle_status).toBe("draft");
-    expect(contract.contract_id).toMatch(/^cc_[a-f0-9]{12}$/);
+    expect(contract.contract_id).toMatch(/^cc_[a-f0-9]{16}$/);
     expect(contract.created_at).toBe("2026-04-27T00:00:00Z");
     expect(contract.updated_at).toBe("2026-04-27T00:00:00Z");
     expect(diagnostics).toEqual([]);

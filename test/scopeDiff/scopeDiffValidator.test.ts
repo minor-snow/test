@@ -462,7 +462,7 @@ describe("scopeDiffValidator", () => {
   });
 
   // Scenario 5: Missing human review
-  it("missing human review scenario", () => {
+  it("missing human review still preserves reverse-issue signal", () => {
     const r = validateScopeDiff({
       scope,
       requiredTestsFile,
@@ -475,7 +475,7 @@ describe("scopeDiffValidator", () => {
       scopeHash,
       requiredTestsHash,
     });
-    expect(r.status).toBe("requires_human_review");
+    expect(r.status).toBe("requires_reverse_issue");
     expect(r.violations.some(v => v.violation_type === "human_review_missing")).toBe(true);
   });
 
@@ -521,7 +521,7 @@ describe("scopeDiffValidator", () => {
   });
 
   // Status precedence
-  it("requires_human_review takes precedence over requires_reverse_issue", () => {
+  it("requires_reverse_issue takes precedence while keeping human review visible", () => {
     const r = validateScopeDiff({
       scope,
       requiredTestsFile,
@@ -535,7 +535,8 @@ describe("scopeDiffValidator", () => {
       scopeHash,
       requiredTestsHash,
     });
-    expect(r.status).toBe("requires_human_review");
+    expect(r.status).toBe("requires_reverse_issue");
+    expect(r.violations.some(v => v.violation_type === "human_review_missing")).toBe(true);
   });
 
   // Reverse issue aggregation

@@ -1,67 +1,72 @@
 {
   "trial_id": "p20a1-pantheon-self",
   "repo_label": "pantheon",
-  "repo_state": "working_tree_only",
-  "head_commit_hash": null,
-  "scan_time_ms": 544,
-  "observation_hash": "sha256:d06de3f5092684323b33500bc28a75505be74bd1259d0cd440c6e06e3fd68597",
+  "repo_state": "git_dirty",
+  "head_commit_hash": "f000ea27f47b2bc5464bd9617b5b34730baff086",
+  "scan_time_ms": 2258,
+  "observation_hash": "sha256:2b909c8990b7b9418a42f02055aa4be11d5341df4fa1b32e5c37508c2ceb9383",
   "hash_stable": true,
   "absolute_path_violations": 0,
-  "partial_scan": false,
+  "partial_scan": true,
   "observation_validation": "valid",
   "lite_validation": "valid",
   "metrics": {
-    "file_count": 5076,
-    "unknown_count": 989,
-    "unknown_ratio_pct": 19.5,
-    "excluded_count": 5,
-    "excluded_ratio_pct": 0.1,
-    "import_edge_count": 1690,
-    "unresolved_import_count": 7,
-    "test_mapping_count": 109,
-    "unmapped_source_count": 80,
-    "sensitive_path_count": 11,
-    "config_hint_count": 3,
+    "file_count": 10000,
+    "unknown_count": 8264,
+    "unknown_ratio_pct": 82.6,
+    "excluded_count": 20,
+    "excluded_ratio_pct": 0.2,
+    "import_edge_count": 3997,
+    "unresolved_import_count": 14,
+    "test_mapping_count": 0,
+    "unmapped_source_count": 0,
+    "sensitive_path_count": 430,
+    "config_hint_count": 4,
     "owner_hint_count": 0,
     "bucket_summary": {
-      "generated": 4478,
-      "config": 9,
-      "docs": 28,
-      "asset": 15,
-      "script": 51,
-      "src": 189,
-      "test": 306
+      "config": 2,
+      "unknown": 8369,
+      "generated": 73,
+      "docs": 346,
+      "asset": 1143,
+      "test": 67
     }
   },
   "lite_verdict": "requires_review",
   "lite_reasons": [
-    "No Git repository detected; observations are working-tree-only",
-    "Changed file(s) import undeclared package(s): @org/pkg, express, my-internal-pkg, lodash, d-pkg, some-private-pkg"
+    "Changed file not observed: src/repoObservation/importExtractor.ts",
+    "Changed file not observed: src/repoObservation/repoScanner.ts",
+    "Changed file not observed: src/changeContract/lite/changeContractLiteBuilder.ts",
+    "Changed file not observed: test/repoObservation/importExtractor.test.ts",
+    "Repository has uncommitted changes"
   ],
   "lite_required_actions": [
-    "Consider initializing a Git repository for full audit trail",
-    "Add undeclared package(s) to package.json or review imports: @org/pkg, express, my-internal-pkg, lodash, d-pkg, some-private-pkg"
+    "Verify unobserved changed file: src/repoObservation/importExtractor.ts",
+    "Verify unobserved changed file: src/repoObservation/repoScanner.ts",
+    "Verify unobserved changed file: src/changeContract/lite/changeContractLiteBuilder.ts",
+    "Verify unobserved changed file: test/repoObservation/importExtractor.test.ts",
+    "Commit or stash uncommitted changes before proceeding"
   ],
   "changed_file_statuses": [
     {
       "path": "src/repoObservation/importExtractor.ts",
-      "status": "observed",
-      "reason": "File found in observations"
+      "status": "not_observed",
+      "reason": "File not found in observations; manual verification recommended"
     },
     {
       "path": "src/repoObservation/repoScanner.ts",
-      "status": "observed",
-      "reason": "File found in observations"
+      "status": "not_observed",
+      "reason": "File not found in observations; manual verification recommended"
     },
     {
       "path": "src/changeContract/lite/changeContractLiteBuilder.ts",
-      "status": "observed",
-      "reason": "File found in observations"
+      "status": "not_observed",
+      "reason": "File not found in observations; manual verification recommended"
     },
     {
       "path": "test/repoObservation/importExtractor.test.ts",
-      "status": "observed",
-      "reason": "File found in observations"
+      "status": "not_observed",
+      "reason": "File not found in observations; manual verification recommended"
     }
   ]
 }

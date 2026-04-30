@@ -1,0 +1,3313 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "boto__boto3",
+    "observed_file_count": 2282,
+    "python_file_count": 113
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: boto3"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 10,
+      "source": 39,
+      "docs": 1,
+      "test": 63
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (medium)",
+      "framework: pytest / test_framework (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 17,
+        "evidence": [
+          "17 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 527,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "boto3/compat.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3299,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/crt.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7471,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/action.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8336,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/attr.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2572,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/base.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2154,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/client.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1027,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/collection.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11586,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/docstring.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2588,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/method.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2802,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/resource.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 15488,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/service.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8715,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/subresource.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5911,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5582,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/waiter.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5295,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/docs/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1895,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/dynamodb/conditions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 15489,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/dynamodb/table.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6507,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/dynamodb/transform.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13252,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/dynamodb/types.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9851,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/dynamodb/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 574,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/ec2/createtags.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1617,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/ec2/deletetags.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1254,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/ec2/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 574,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4317,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/resources/action.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9857,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/resources/base.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5078,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/resources/collection.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19679,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/resources/factory.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 23308,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/resources/model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 20970,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/resources/params.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6274,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/resources/response.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11954,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/resources/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/s3/constants.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 736,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/s3/inject.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 31587,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/s3/transfer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19526,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/s3/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 574,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/session.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 22680,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3095,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "boto3/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3473,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "docs/source/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 10621,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 1550,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "requirements-dev-lock.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 7612,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "requirements-dev.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 288,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "requirements-docs-lock.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 21495,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "requirements-docs.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 90,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 202,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "setup.cfg",
+      "bucket": "config",
+      "extension": ".cfg",
+      "size_bytes": 215,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 1720,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/functional/docs/test_cloudwatch.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1896,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/docs/test_dynamodb.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6262,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/docs/test_ec2.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2145,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/docs/test_s3.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2297,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/docs/test_smoke.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7521,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/docs/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4185,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/dynamodb/test_stubber_conditions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2440,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/dynamodb/test_table.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4505,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/dynamodb/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 574,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/test_collection.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1343,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/test_crt.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5457,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/test_dynamodb.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2878,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/test_ec2.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2328,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/test_resource.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2025,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/test_s3.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 21165,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/test_session.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1809,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/test_smoke.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3057,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1467,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/functional/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 574,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/integration/test_collections.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2257,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/integration/test_dynamodb.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8471,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/integration/test_s3.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 28178,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/integration/test_session.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1959,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/integration/test_sqs.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1448,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/integration/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 574,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/docs/test_action.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6085,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/docs/test_attr.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3432,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/docs/test_client.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3943,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/docs/test_collection.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6026,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/docs/test_docstring.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11739,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/docs/test_method.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12459,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/docs/test_resource.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6684,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/docs/test_service.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11661,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/docs/test_subresource.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2024,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/docs/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1801,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/docs/test_waiter.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2543,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/docs/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 13625,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/dynamodb/test_conditions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 22485,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/dynamodb/test_table.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 19330,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/dynamodb/test_transform.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 22002,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/dynamodb/test_types.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7444,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/dynamodb/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 574,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/ec2/test_createtags.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2427,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/ec2/test_deletetags.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1374,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/ec2/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 574,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/resources/test_action.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10463,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/resources/test_collection.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 22662,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/resources/test_collection_smoke.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5383,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/resources/test_factory.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 28483,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/resources/test_model.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 14869,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/resources/test_params.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8787,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/resources/test_response.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12099,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/resources/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/s3/test_inject.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10589,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/s3/test_transfer.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 16391,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/s3/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/test_boto3.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3350,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/test_changelog.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1462,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/test_crt.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8727,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/test_session.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 17161,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2254,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2093,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 292,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "boto3/compat.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/compat.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/compat.py",
+      "raw_specifier": "errno",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "errno",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/compat.py",
+      "raw_specifier": "socket",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "socket",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/compat.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/compat.py",
+      "raw_specifier": "from boto3.exceptions import PythonDeprecationWarning",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/compat.py",
+      "raw_specifier": "from s3transfer.manager import TransferConfig",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "s3transfer",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/compat.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/crt.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/crt.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/crt.py",
+      "raw_specifier": "botocore.exceptions",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/crt.py",
+      "raw_specifier": "from botocore.session import Session",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/crt.py",
+      "raw_specifier": "from s3transfer.crt import ( BotocoreCRTCredentialsWrapper, BotocoreCRTRequestSerializer, CRTTransferManager, acquire_crt_s3_process_lock, create_s3_crt_client, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "s3transfer",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/crt.py",
+      "raw_specifier": "from boto3.compat import TRANSFER_CONFIG_SUPPORTS_CRT",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/crt.py",
+      "raw_specifier": "from boto3.exceptions import InvalidCrtTransferConfigError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/crt.py",
+      "raw_specifier": "from boto3.s3.constants import CRT_TRANSFER_CLIENT",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/action.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/action.py",
+      "raw_specifier": "from botocore import xform_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/action.py",
+      "raw_specifier": "from botocore.docs.bcdoc.restdoc import DocumentStructure",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/action.py",
+      "raw_specifier": "from botocore.docs.method import ( document_custom_method, document_model_driven_method, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/action.py",
+      "raw_specifier": "from botocore.model import OperationModel",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/action.py",
+      "raw_specifier": "from botocore.utils import get_service_module_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/action.py",
+      "raw_specifier": "from boto3.docs.base import NestedDocumenter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/action.py",
+      "raw_specifier": "from boto3.docs.method import document_model_driven_resource_method",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/action.py",
+      "raw_specifier": "from boto3.docs.utils import ( add_resource_type_overview, get_resource_ignore_params, get_resource_public_actions, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/attr.py",
+      "raw_specifier": "from botocore.docs.params import ResponseParamsDocumenter",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/attr.py",
+      "raw_specifier": "from boto3.docs.utils import get_identifier_description",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/base.py",
+      "raw_specifier": "from botocore.compat import OrderedDict",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/client.py",
+      "raw_specifier": "from botocore.docs.client import ClientDocumenter",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/collection.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/collection.py",
+      "raw_specifier": "from botocore import xform_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/collection.py",
+      "raw_specifier": "from botocore.docs.bcdoc.restdoc import DocumentStructure",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/collection.py",
+      "raw_specifier": "from botocore.docs.method import get_instance_public_methods",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/collection.py",
+      "raw_specifier": "from botocore.docs.utils import DocumentedShape",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/collection.py",
+      "raw_specifier": "from boto3.docs.base import NestedDocumenter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/collection.py",
+      "raw_specifier": "from boto3.docs.method import document_model_driven_resource_method",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/collection.py",
+      "raw_specifier": "from boto3.docs.utils import ( add_resource_type_overview, get_resource_ignore_params, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/docstring.py",
+      "raw_specifier": "from botocore.docs.docstring import LazyLoadedDocstring",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/docstring.py",
+      "raw_specifier": "from boto3.docs.action import document_action, document_load_reload_action",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/docstring.py",
+      "raw_specifier": "from boto3.docs.attr import ( document_attribute, document_identifier, document_reference, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/docstring.py",
+      "raw_specifier": "from boto3.docs.collection import ( document_batch_action, document_collection_method, document_collection_object, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/docstring.py",
+      "raw_specifier": "from boto3.docs.subresource import document_sub_resource",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/docstring.py",
+      "raw_specifier": "from boto3.docs.waiter import document_resource_waiter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/method.py",
+      "raw_specifier": "from botocore.docs.method import document_model_driven_method",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/resource.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/resource.py",
+      "raw_specifier": "from botocore import xform_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/resource.py",
+      "raw_specifier": "from botocore.docs.bcdoc.restdoc import DocumentStructure",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/resource.py",
+      "raw_specifier": "from botocore.docs.utils import get_official_service_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/resource.py",
+      "raw_specifier": "from boto3.docs.action import ActionDocumenter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/resource.py",
+      "raw_specifier": "from boto3.docs.attr import ( document_attribute, document_identifier, document_reference, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/resource.py",
+      "raw_specifier": "from boto3.docs.base import BaseDocumenter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/resource.py",
+      "raw_specifier": "from boto3.docs.collection import CollectionDocumenter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/resource.py",
+      "raw_specifier": "from boto3.docs.subresource import SubResourceDocumenter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/resource.py",
+      "raw_specifier": "from boto3.docs.utils import ( add_resource_type_overview, get_identifier_args_for_signature, get_identifier_description, get_identifier_values_for_example, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/resource.py",
+      "raw_specifier": "from boto3.docs.waiter import WaiterResourceDocumenter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/service.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/service.py",
+      "raw_specifier": "from botocore.docs.bcdoc.restdoc import DocumentStructure",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/service.py",
+      "raw_specifier": "from botocore.docs.service import ServiceDocumenter as BaseServiceDocumenter",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/service.py",
+      "raw_specifier": "from botocore.exceptions import DataNotFoundError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/service.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/service.py",
+      "raw_specifier": "from boto3.docs.client import Boto3ClientDocumenter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/service.py",
+      "raw_specifier": "from boto3.docs.resource import ResourceDocumenter, ServiceResourceDocumenter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/service.py",
+      "raw_specifier": "from boto3.utils import ServiceContext",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/subresource.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/subresource.py",
+      "raw_specifier": "from botocore import xform_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/subresource.py",
+      "raw_specifier": "from botocore.docs.bcdoc.restdoc import DocumentStructure",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/subresource.py",
+      "raw_specifier": "from botocore.utils import get_service_module_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/subresource.py",
+      "raw_specifier": "from boto3.docs.base import NestedDocumenter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/subresource.py",
+      "raw_specifier": "from boto3.docs.utils import ( add_resource_type_overview, get_identifier_args_for_signature, get_identifier_description, get_identifier_values_for_example, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/utils.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/utils.py",
+      "raw_specifier": "jmespath",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "jmespath",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/waiter.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/waiter.py",
+      "raw_specifier": "from botocore import xform_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/waiter.py",
+      "raw_specifier": "from botocore.docs.bcdoc.restdoc import DocumentStructure",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/waiter.py",
+      "raw_specifier": "from botocore.docs.method import document_model_driven_method",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/waiter.py",
+      "raw_specifier": "from botocore.utils import get_service_module_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/waiter.py",
+      "raw_specifier": "from boto3.docs.base import NestedDocumenter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/waiter.py",
+      "raw_specifier": "from boto3.docs.utils import ( add_resource_type_overview, get_resource_ignore_params, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/docs/__init__.py",
+      "raw_specifier": "from botocore.docs import DEPRECATED_SERVICE_NAMES",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/docs/__init__.py",
+      "raw_specifier": "from boto3.docs.service import ServiceDocumenter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/dynamodb/conditions.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/dynamodb/conditions.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/dynamodb/conditions.py",
+      "raw_specifier": "from boto3.exceptions import ( DynamoDBNeedsConditionError, DynamoDBNeedsKeyConditionError, DynamoDBOperationNotSupportedError, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/dynamodb/table.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/dynamodb/transform.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/dynamodb/transform.py",
+      "raw_specifier": "from boto3.compat import collections_abc",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/dynamodb/transform.py",
+      "raw_specifier": "from boto3.docs.utils import DocumentModifiedShape",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/dynamodb/transform.py",
+      "raw_specifier": "from boto3.dynamodb.conditions import ConditionBase, ConditionExpressionBuilder",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/dynamodb/transform.py",
+      "raw_specifier": "from boto3.dynamodb.types import TypeDeserializer, TypeSerializer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/dynamodb/types.py",
+      "raw_specifier": "from decimal import ( Clamped, Context, Decimal, Inexact, Overflow, Rounded, Underflow, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/dynamodb/types.py",
+      "raw_specifier": "from boto3.compat import collections_abc",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/ec2/deletetags.py",
+      "raw_specifier": "from boto3.resources.action import CustomModeledAction",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/exceptions.py",
+      "raw_specifier": "botocore.exceptions",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/resources/action.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/resources/action.py",
+      "raw_specifier": "from botocore import xform_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/resources/action.py",
+      "raw_specifier": "from boto3.docs.docstring import ActionDocstring",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/resources/action.py",
+      "raw_specifier": "from boto3.utils import inject_attribute",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/resources/action.py",
+      "raw_specifier": "from .model import Action",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/action.py",
+      "raw_specifier": "from .params import create_request_parameters",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".params",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/action.py",
+      "raw_specifier": "from .response import RawHandler, ResourceHandler",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".response",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/base.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/resources/base.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/resources/collection.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/resources/collection.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/resources/collection.py",
+      "raw_specifier": "from botocore import xform_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/resources/collection.py",
+      "raw_specifier": "from botocore.utils import merge_dicts",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/resources/collection.py",
+      "raw_specifier": "from ..docs import docstring",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..docs",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/collection.py",
+      "raw_specifier": "from .action import BatchAction",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".action",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/collection.py",
+      "raw_specifier": "from .params import create_request_parameters",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".params",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/collection.py",
+      "raw_specifier": "from .response import ResourceHandler",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".response",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/factory.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/resources/factory.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/resources/factory.py",
+      "raw_specifier": "from ..docs import docstring",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..docs",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/factory.py",
+      "raw_specifier": "from ..exceptions import ResourceLoadException",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/factory.py",
+      "raw_specifier": "from .action import ServiceAction, WaiterAction",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".action",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/factory.py",
+      "raw_specifier": "from .base import ResourceMeta, ServiceResource",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/factory.py",
+      "raw_specifier": "from .collection import CollectionFactory",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".collection",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/factory.py",
+      "raw_specifier": "from .model import ResourceModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/factory.py",
+      "raw_specifier": "from .response import ResourceHandler, build_identifiers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".response",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/model.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/resources/model.py",
+      "raw_specifier": "from botocore import xform_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/resources/params.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/resources/params.py",
+      "raw_specifier": "jmespath",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "jmespath",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/resources/params.py",
+      "raw_specifier": "from botocore import xform_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/resources/params.py",
+      "raw_specifier": "from ..exceptions import ResourceLoadException",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/resources/response.py",
+      "raw_specifier": "jmespath",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "jmespath",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/resources/response.py",
+      "raw_specifier": "from botocore import xform_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/resources/response.py",
+      "raw_specifier": "from .params import get_data_member",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".params",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "from botocore.exceptions import ClientError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "from boto3 import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "from boto3.compat import is_append_mode",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "from boto3.s3.transfer import ( ProgressCallbackInvoker, S3Transfer, TransferConfig, create_transfer_manager, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "from botocore.context import with_current_context",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "from functools import wraps",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "from botocore.useragent import register_feature_id",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/inject.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "from os import PathLike, fspath, getpid",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "from botocore.compat import HAS_CRT",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "from botocore.exceptions import ClientError, MissingDependencyException",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "from s3transfer.exceptions import ( RetriesExceededError as S3TransferRetriesExceededError, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "s3transfer",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "from s3transfer.futures import NonThreadedExecutor",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "s3transfer",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "from s3transfer.manager import TransferConfig as S3TransferConfig",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "s3transfer",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "from s3transfer.manager import TransferManager",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "s3transfer",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "from s3transfer.subscribers import BaseSubscriber",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "s3transfer",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "from s3transfer.utils import OSUtils",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "s3transfer",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "boto3.s3.constants",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "from boto3.compat import TRANSFER_CONFIG_SUPPORTS_CRT",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "from boto3.exceptions import ( RetriesExceededError, S3UploadFailedError, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "awscrt.s3",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "awscrt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/s3/transfer.py",
+      "raw_specifier": "from boto3.crt import create_crt_transfer_manager",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/session.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/session.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/session.py",
+      "raw_specifier": "botocore.session",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/session.py",
+      "raw_specifier": "from botocore.client import Config",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/session.py",
+      "raw_specifier": "from botocore.exceptions import ( DataNotFoundError, NoCredentialsError, UnknownServiceError, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "boto3/session.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/session.py",
+      "raw_specifier": "boto3.utils",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/session.py",
+      "raw_specifier": "from boto3.exceptions import ResourceNotExistsError, UnknownAPIVersionError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/session.py",
+      "raw_specifier": "from .resources.factory import ResourceFactory",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".resources.factory",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "boto3/utils.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/utils.py",
+      "raw_specifier": "from importlib import import_module",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/__init__.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/__init__.py",
+      "raw_specifier": "from logging import NullHandler",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/__init__.py",
+      "raw_specifier": "from boto3.compat import _warn_deprecated_python",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "boto3/__init__.py",
+      "raw_specifier": "from boto3.session import Session",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "boto3",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "requirements-dev-lock.txt",
+      "source_type": "requirements-dev.txt",
+      "packages": [],
+      "dev_packages": [
+        "atomicwrites",
+        "colorama",
+        "coverage",
+        "exceptiongroup",
+        "iniconfig",
+        "packaging",
+        "pluggy",
+        "pytest",
+        "pytest_cov",
+        "tomli",
+        "wheel"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements-dev.txt",
+      "source_type": "requirements-dev.txt",
+      "packages": [],
+      "dev_packages": [
+        "wheel",
+        "coverage",
+        "setuptools",
+        "packaging",
+        "pytest",
+        "pytest_cov",
+        "atomicwrites",
+        "colorama"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements-docs-lock.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "alabaster",
+        "babel",
+        "beautifulsoup4",
+        "certifi",
+        "charset_normalizer",
+        "docutils",
+        "furo",
+        "idna",
+        "imagesize",
+        "jinja2",
+        "markupsafe",
+        "packaging",
+        "pygments",
+        "requests",
+        "snowballstemmer",
+        "soupsieve",
+        "sphinx",
+        "sphinx_basic_ng",
+        "sphinx_copybutton",
+        "sphinx_remove_toctrees",
+        "sphinxcontrib_applehelp",
+        "sphinxcontrib_devhelp",
+        "sphinxcontrib_htmlhelp",
+        "sphinxcontrib_jsmath",
+        "sphinxcontrib_qthelp",
+        "sphinxcontrib_serializinghtml",
+        "tomli",
+        "urllib3"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements-docs.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "sphinx",
+        "furo",
+        "sphinx_copybutton",
+        "sphinx_remove_toctrees"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No deps found in tox.ini — may use requirements file references"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "boto3/compat.py",
+      "candidate_test_paths": [
+        "boto3/tests/test_compat.py",
+        "tests/test_compat.py",
+        "boto3/tests/test_boto3.py",
+        "test/test_compat.py",
+        "tests/compat/test_compat.py",
+        "tests/compats/test_compat.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/crt.py",
+      "candidate_test_paths": [
+        "boto3/tests/test_crt.py",
+        "tests/test_crt.py",
+        "boto3/tests/test_boto3.py",
+        "test/test_crt.py",
+        "tests/crt/test_crt.py",
+        "tests/crts/test_crt.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/docs/action.py",
+      "candidate_test_paths": [
+        "boto3/docs/tests/test_action.py",
+        "tests/docs/test_action.py",
+        "boto3/docs/tests/test_docs.py",
+        "test/test_action.py",
+        "tests/test_action.py",
+        "tests/action/test_action.py",
+        "tests/actions/test_action.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/docs/attr.py",
+      "candidate_test_paths": [
+        "boto3/docs/tests/test_attr.py",
+        "tests/docs/test_attr.py",
+        "boto3/docs/tests/test_docs.py",
+        "test/test_attr.py",
+        "tests/test_attr.py",
+        "tests/attr/test_attr.py",
+        "tests/attrs/test_attr.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/docs/base.py",
+      "candidate_test_paths": [
+        "boto3/docs/tests/test_base.py",
+        "tests/docs/test_base.py",
+        "boto3/docs/tests/test_docs.py",
+        "test/test_base.py",
+        "tests/test_base.py",
+        "tests/base/test_base.py",
+        "tests/bases/test_base.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/docs/client.py",
+      "candidate_test_paths": [
+        "boto3/docs/tests/test_client.py",
+        "tests/docs/test_client.py",
+        "boto3/docs/tests/test_docs.py",
+        "test/test_client.py",
+        "tests/test_client.py",
+        "tests/client/test_client.py",
+        "tests/clients/test_client.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/docs/collection.py",
+      "candidate_test_paths": [
+        "boto3/docs/tests/test_collection.py",
+        "tests/docs/test_collection.py",
+        "boto3/docs/tests/test_docs.py",
+        "test/test_collection.py",
+        "tests/test_collection.py",
+        "tests/collection/test_collection.py",
+        "tests/collections/test_collection.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/docs/docstring.py",
+      "candidate_test_paths": [
+        "boto3/docs/tests/test_docstring.py",
+        "tests/docs/test_docstring.py",
+        "boto3/docs/tests/test_docs.py",
+        "test/test_docstring.py",
+        "tests/test_docstring.py",
+        "tests/docstring/test_docstring.py",
+        "tests/docstrings/test_docstring.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/docs/method.py",
+      "candidate_test_paths": [
+        "boto3/docs/tests/test_method.py",
+        "tests/docs/test_method.py",
+        "boto3/docs/tests/test_docs.py",
+        "test/test_method.py",
+        "tests/test_method.py",
+        "tests/method/test_method.py",
+        "tests/methods/test_method.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/docs/resource.py",
+      "candidate_test_paths": [
+        "boto3/docs/tests/test_resource.py",
+        "tests/docs/test_resource.py",
+        "boto3/docs/tests/test_docs.py",
+        "test/test_resource.py",
+        "tests/test_resource.py",
+        "tests/resource/test_resource.py",
+        "tests/resources/test_resource.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/docs/service.py",
+      "candidate_test_paths": [
+        "boto3/docs/tests/test_service.py",
+        "tests/docs/test_service.py",
+        "boto3/docs/tests/test_docs.py",
+        "test/test_service.py",
+        "tests/test_service.py",
+        "tests/service/test_service.py",
+        "tests/services/test_service.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/docs/subresource.py",
+      "candidate_test_paths": [
+        "boto3/docs/tests/test_subresource.py",
+        "tests/docs/test_subresource.py",
+        "boto3/docs/tests/test_docs.py",
+        "test/test_subresource.py",
+        "tests/test_subresource.py",
+        "tests/subresource/test_subresource.py",
+        "tests/subresources/test_subresource.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/docs/utils.py",
+      "candidate_test_paths": [
+        "boto3/docs/tests/test_utils.py",
+        "tests/docs/test_utils.py",
+        "boto3/docs/tests/test_docs.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/docs/waiter.py",
+      "candidate_test_paths": [
+        "boto3/docs/tests/test_waiter.py",
+        "tests/docs/test_waiter.py",
+        "boto3/docs/tests/test_docs.py",
+        "test/test_waiter.py",
+        "tests/test_waiter.py",
+        "tests/waiter/test_waiter.py",
+        "tests/waiters/test_waiter.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/dynamodb/conditions.py",
+      "candidate_test_paths": [
+        "boto3/dynamodb/tests/test_conditions.py",
+        "tests/dynamodb/test_conditions.py",
+        "boto3/dynamodb/tests/test_dynamodb.py",
+        "test/test_conditions.py",
+        "tests/test_conditions.py",
+        "tests/conditions/test_conditions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/dynamodb/table.py",
+      "candidate_test_paths": [
+        "boto3/dynamodb/tests/test_table.py",
+        "tests/dynamodb/test_table.py",
+        "boto3/dynamodb/tests/test_dynamodb.py",
+        "test/test_table.py",
+        "tests/test_table.py",
+        "tests/table/test_table.py",
+        "tests/tables/test_table.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/dynamodb/transform.py",
+      "candidate_test_paths": [
+        "boto3/dynamodb/tests/test_transform.py",
+        "tests/dynamodb/test_transform.py",
+        "boto3/dynamodb/tests/test_dynamodb.py",
+        "test/test_transform.py",
+        "tests/test_transform.py",
+        "tests/transform/test_transform.py",
+        "tests/transforms/test_transform.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/dynamodb/types.py",
+      "candidate_test_paths": [
+        "boto3/dynamodb/tests/test_types.py",
+        "tests/dynamodb/test_types.py",
+        "boto3/dynamodb/tests/test_dynamodb.py",
+        "test/test_types.py",
+        "tests/test_types.py",
+        "tests/types/test_types.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/ec2/createtags.py",
+      "candidate_test_paths": [
+        "boto3/ec2/tests/test_createtags.py",
+        "tests/ec2/test_createtags.py",
+        "boto3/ec2/tests/test_ec2.py",
+        "test/test_createtags.py",
+        "tests/test_createtags.py",
+        "tests/createtags/test_createtags.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/ec2/deletetags.py",
+      "candidate_test_paths": [
+        "boto3/ec2/tests/test_deletetags.py",
+        "tests/ec2/test_deletetags.py",
+        "boto3/ec2/tests/test_ec2.py",
+        "test/test_deletetags.py",
+        "tests/test_deletetags.py",
+        "tests/deletetags/test_deletetags.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/exceptions.py",
+      "candidate_test_paths": [
+        "boto3/tests/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "boto3/tests/test_boto3.py",
+        "test/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/resources/action.py",
+      "candidate_test_paths": [
+        "boto3/resources/tests/test_action.py",
+        "tests/resources/test_action.py",
+        "boto3/resources/tests/test_resources.py",
+        "test/test_action.py",
+        "tests/test_action.py",
+        "tests/action/test_action.py",
+        "tests/actions/test_action.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/resources/base.py",
+      "candidate_test_paths": [
+        "boto3/resources/tests/test_base.py",
+        "tests/resources/test_base.py",
+        "boto3/resources/tests/test_resources.py",
+        "test/test_base.py",
+        "tests/test_base.py",
+        "tests/base/test_base.py",
+        "tests/bases/test_base.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/resources/collection.py",
+      "candidate_test_paths": [
+        "boto3/resources/tests/test_collection.py",
+        "tests/resources/test_collection.py",
+        "boto3/resources/tests/test_resources.py",
+        "test/test_collection.py",
+        "tests/test_collection.py",
+        "tests/collection/test_collection.py",
+        "tests/collections/test_collection.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/resources/factory.py",
+      "candidate_test_paths": [
+        "boto3/resources/tests/test_factory.py",
+        "tests/resources/test_factory.py",
+        "boto3/resources/tests/test_resources.py",
+        "test/test_factory.py",
+        "tests/test_factory.py",
+        "tests/factory/test_factory.py",
+        "tests/factorys/test_factory.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/resources/model.py",
+      "candidate_test_paths": [
+        "boto3/resources/tests/test_model.py",
+        "tests/resources/test_model.py",
+        "boto3/resources/tests/test_resources.py",
+        "test/test_model.py",
+        "tests/test_model.py",
+        "tests/model/test_model.py",
+        "tests/models/test_model.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/resources/params.py",
+      "candidate_test_paths": [
+        "boto3/resources/tests/test_params.py",
+        "tests/resources/test_params.py",
+        "boto3/resources/tests/test_resources.py",
+        "test/test_params.py",
+        "tests/test_params.py",
+        "tests/params/test_params.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/resources/response.py",
+      "candidate_test_paths": [
+        "boto3/resources/tests/test_response.py",
+        "tests/resources/test_response.py",
+        "boto3/resources/tests/test_resources.py",
+        "test/test_response.py",
+        "tests/test_response.py",
+        "tests/response/test_response.py",
+        "tests/responses/test_response.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/s3/constants.py",
+      "candidate_test_paths": [
+        "boto3/s3/tests/test_constants.py",
+        "tests/s3/test_constants.py",
+        "boto3/s3/tests/test_s3.py",
+        "test/test_constants.py",
+        "tests/test_constants.py",
+        "tests/constants/test_constants.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/s3/inject.py",
+      "candidate_test_paths": [
+        "boto3/s3/tests/test_inject.py",
+        "tests/s3/test_inject.py",
+        "boto3/s3/tests/test_s3.py",
+        "test/test_inject.py",
+        "tests/test_inject.py",
+        "tests/inject/test_inject.py",
+        "tests/injects/test_inject.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/s3/transfer.py",
+      "candidate_test_paths": [
+        "boto3/s3/tests/test_transfer.py",
+        "tests/s3/test_transfer.py",
+        "boto3/s3/tests/test_s3.py",
+        "test/test_transfer.py",
+        "tests/test_transfer.py",
+        "tests/transfer/test_transfer.py",
+        "tests/transfers/test_transfer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/session.py",
+      "candidate_test_paths": [
+        "boto3/tests/test_session.py",
+        "tests/test_session.py",
+        "boto3/tests/test_boto3.py",
+        "test/test_session.py",
+        "tests/session/test_session.py",
+        "tests/sessions/test_session.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "boto3/utils.py",
+      "candidate_test_paths": [
+        "boto3/tests/test_utils.py",
+        "tests/test_utils.py",
+        "boto3/tests/test_boto3.py",
+        "test/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "pyproject.toml",
+        "setup.cfg",
+        "setup.py",
+        "tox.ini"
+      ],
+      "count": 4,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 104,
+    "classified_count": 104,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 185,
+    "project_import_count": 69,
+    "declared_package_count": 0,
+    "undeclared_package_count": 57,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 33,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 9,
+    "low_confidence_manifest_count": 4
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

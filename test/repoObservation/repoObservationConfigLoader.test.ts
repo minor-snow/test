@@ -115,8 +115,8 @@ describe("loadRepoObservationConfig", () => {
   });
 
   // Cleanup after all
-  it("cleanup", () => {
+  it("cleanup removes the temporary config root", () => {
     cleanup();
-    expect(true).toBe(true);
+    expect(existsSync(TMP_ROOT)).toBe(false);
   });
 });

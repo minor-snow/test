@@ -61,7 +61,7 @@ export function extractPullRequestContext(event: GitHubActionEvent | null): GitH
 export function parseMultilinePatterns(raw: string | undefined): string[] {
   if (!raw) return [];
   return raw
-    .split(/\r?\n/)
+    .split(/[\r\n,]+/)
     .map(line => line.trim())
     .filter(line => line.length > 0);
 }
@@ -69,7 +69,7 @@ export function parseMultilinePatterns(raw: string | undefined): string[] {
 export function parseFailConditions(raw: string | undefined): GitHubFailCondition[] {
   const normalized = (raw ?? "forbidden,outside_scope")
     .split(",")
-    .map(token => token.trim())
+    .map(token => token.trim().toLowerCase())
     .filter(token => token.length > 0) as GitHubFailCondition[];
 
   if (normalized.length === 0) {
@@ -92,11 +92,11 @@ export function parseBoolean(raw: string | undefined, fallback: boolean): boolea
 }
 
 function parseArtifactMode(raw: string | undefined): GitHubActionConfig["artifactMode"] {
-  return raw === "debug" ? "debug" : "public";
+  return raw?.trim().toLowerCase() === "debug" ? "debug" : "public";
 }
 
 function parseCommentMode(raw: string | undefined): GitHubActionConfig["commentMode"] {
-  return raw === "off" ? "off" : "update";
+  return raw?.trim().toLowerCase() === "off" ? "off" : "update";
 }
 
 function firstNonEmpty(...values: Array<string | undefined>): string {

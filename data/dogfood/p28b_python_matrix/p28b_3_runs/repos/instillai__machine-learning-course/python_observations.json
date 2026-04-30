@@ -1,0 +1,2317 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "instillai__machine-learning-course",
+    "observed_file_count": 198,
+    "python_file_count": 44
+  },
+  "layout": {
+    "primary_layout": "mixed",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "jupyter_notebooks",
+        "weight": "weak",
+        "evidence": "Jupyter notebooks present"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: library_package=1, ml_project=1"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "Unable to determine package layout from file paths"
+      },
+      {
+        "aspect": "primary_layout",
+        "reason": "Tied between library_package and ml_project"
+      }
+    ],
+    "bucket_summary": {
+      "source": 38,
+      "test": 2,
+      "unknown": 1,
+      "notebook": 2,
+      "docs": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          }
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No framework could be detected from dependencies, paths, or imports"
+      }
+    ]
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: mixed / unknown (low)",
+      "project_role: python_sdk_library (medium)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 4,
+        "evidence": [
+          "4 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "code/deep_learning/autoencoder/ae.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3599,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/deep_learning/cnn/code/auxiliary/progress_bar.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1188,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/deep_learning/cnn/code/auxiliary/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/deep_learning/cnn/code/input_function/input.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4486,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/deep_learning/cnn/code/input_function/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/deep_learning/cnn/code/net_structure/net.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3977,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/deep_learning/cnn/code/net_structure/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/deep_learning/cnn/code/test_classifier.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11145,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "code/deep_learning/cnn/code/train_classifier.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11168,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/deep_learning/cnn/code/train_evaluation.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9409,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/deep_learning/cnn/code/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/deep_learning/cnn/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 27,
+      "evidence": []
+    },
+    {
+      "path": "code/deep_learning/mlp/code/test_classifier.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9889,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "code/deep_learning/mlp/code/train_mlp.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 14541,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "code/deep_learning/mlp/code/train_mlp.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 15086,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/deep_learning/rnn/rnn.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3398,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/cross-validation/holdout.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1501,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/cross-validation/k-fold.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1388,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/cross-validation/leave-p-out.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1729,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/linear_regression/exponential_regression.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 692,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/linear_regression/exponential_regression_transformed.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 749,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/linear_regression/linearRegressionOneVariable.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 86950,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "code/overview/linear_regression/linear_regression.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 635,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/linear_regression/linear_regression_cost.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1456,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/linear_regression/linear_regression_lobf.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 934,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/linear_regression/not_linear_regression.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 647,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/overfitting/overfitting.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1039,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/regularization/regularization_lasso.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1228,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/regularization/regularization_linear.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 892,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/regularization/regularization_polynomial.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1080,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/regularization/regularization_quadratic.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1077,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/overview/regularization/regularization_ridge.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1284,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/supervised/DecisionTree/decisiontrees.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3232,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/supervised/KNN/knn.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2479,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/supervised/Linear_SVM/linear_svm.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2630,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/supervised/Logistic_Regression/logistic_ex1.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2366,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/supervised/Naive_Bayes/bell_curve.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 363,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/supervised/Naive_Bayes/bernoulli.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1056,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/supervised/Naive_Bayes/gaussian.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 864,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/supervised/Naive_Bayes/multinomial.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1006,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/unsupervised/Clustering/clustering_hierarchical.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1874,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/unsupervised/Clustering/clustering_kmeans.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1402,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "code/unsupervised/PCA/pca.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2546,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "docs/source/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 2306,
+      "evidence": [
+        "Documentation directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "code/deep_learning/autoencoder/ae.py",
+      "raw_specifier": "from __future__ import division, print_function, absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/deep_learning/autoencoder/ae.py",
+      "raw_specifier": "tensorflow.contrib.layers",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "tensorflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/autoencoder/ae.py",
+      "raw_specifier": "tensorflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "tensorflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/autoencoder/ae.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/autoencoder/ae.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/autoencoder/ae.py",
+      "raw_specifier": "from skimage import transform",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "skimage",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/autoencoder/ae.py",
+      "raw_specifier": "from tensorflow.examples.tutorials.mnist import input_data",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tensorflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/auxiliary/progress_bar.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/input_function/input.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/input_function/input.py",
+      "raw_specifier": "collections",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/net_structure/net.py",
+      "raw_specifier": "tensorflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "tensorflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_classifier.py",
+      "raw_specifier": "from __future__ import print_function",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_classifier.py",
+      "raw_specifier": "from tensorflow.examples.tutorials.mnist import input_data",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tensorflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_classifier.py",
+      "raw_specifier": "tensorflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "tensorflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_classifier.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_classifier.py",
+      "raw_specifier": "from net_structure import net",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "net_structure",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_classifier.py",
+      "raw_specifier": "from input_function import input",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "input_function",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_classifier.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_classifier.py",
+      "raw_specifier": "train_evaluation",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "train_evaluation",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_evaluation.py",
+      "raw_specifier": "from __future__ import print_function",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_evaluation.py",
+      "raw_specifier": "tensorflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "tensorflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_evaluation.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_evaluation.py",
+      "raw_specifier": "from auxiliary import progress_bar",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "auxiliary",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_evaluation.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/deep_learning/cnn/code/train_evaluation.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/deep_learning/mlp/code/train_mlp.py",
+      "raw_specifier": "from __future__ import print_function",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/deep_learning/mlp/code/train_mlp.py",
+      "raw_specifier": "from tensorflow.examples.tutorials.mnist import input_data",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tensorflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/mlp/code/train_mlp.py",
+      "raw_specifier": "tensorflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "tensorflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/mlp/code/train_mlp.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/mlp/code/train_mlp.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/deep_learning/rnn/rnn.py",
+      "raw_specifier": "tensorflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "tensorflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/rnn/rnn.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/rnn/rnn.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/rnn/rnn.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/deep_learning/rnn/rnn.py",
+      "raw_specifier": "from tensorflow.examples.tutorials.mnist import input_data",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tensorflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/cross-validation/holdout.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pandas",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/cross-validation/holdout.py",
+      "raw_specifier": "from sklearn import datasets",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/cross-validation/holdout.py",
+      "raw_specifier": "from sklearn.model_selection import train_test_split",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/cross-validation/k-fold.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/cross-validation/k-fold.py",
+      "raw_specifier": "from sklearn.model_selection import KFold",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/cross-validation/leave-p-out.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/cross-validation/leave-p-out.py",
+      "raw_specifier": "from sklearn.model_selection import LeaveOneOut, LeavePOut",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/exponential_regression.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/exponential_regression.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/exponential_regression.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/exponential_regression.py",
+      "raw_specifier": "from sklearn import datasets, linear_model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/exponential_regression.py",
+      "raw_specifier": "from sklearn.datasets import make_regression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/exponential_regression.py",
+      "raw_specifier": "from sklearn.model_selection import train_test_split",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/exponential_regression_transformed.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/exponential_regression_transformed.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/exponential_regression_transformed.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/exponential_regression_transformed.py",
+      "raw_specifier": "from sklearn import datasets, linear_model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/exponential_regression_transformed.py",
+      "raw_specifier": "from sklearn.datasets import make_regression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/exponential_regression_transformed.py",
+      "raw_specifier": "from sklearn.model_selection import train_test_split",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression.py",
+      "raw_specifier": "from sklearn import datasets, linear_model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression.py",
+      "raw_specifier": "from sklearn.datasets import make_regression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression.py",
+      "raw_specifier": "from sklearn.model_selection import train_test_split",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression_cost.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression_cost.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression_cost.py",
+      "raw_specifier": "from sklearn import datasets, linear_model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression_cost.py",
+      "raw_specifier": "from sklearn.datasets import make_regression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression_cost.py",
+      "raw_specifier": "from sklearn.model_selection import train_test_split",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression_lobf.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression_lobf.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression_lobf.py",
+      "raw_specifier": "from sklearn import datasets, linear_model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression_lobf.py",
+      "raw_specifier": "from sklearn.datasets import make_regression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/linear_regression_lobf.py",
+      "raw_specifier": "from sklearn.model_selection import train_test_split",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/not_linear_regression.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/not_linear_regression.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/not_linear_regression.py",
+      "raw_specifier": "from sklearn import datasets, linear_model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/not_linear_regression.py",
+      "raw_specifier": "from sklearn.datasets import make_regression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/linear_regression/not_linear_regression.py",
+      "raw_specifier": "from sklearn.model_selection import train_test_split",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/overfitting/overfitting.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_lasso.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_lasso.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_lasso.py",
+      "raw_specifier": "from sklearn.preprocessing import PolynomialFeatures",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_lasso.py",
+      "raw_specifier": "from sklearn.datasets import make_regression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_lasso.py",
+      "raw_specifier": "from sklearn.linear_model import LinearRegression, Lasso",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_lasso.py",
+      "raw_specifier": "from sklearn.pipeline import Pipeline",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_lasso.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_linear.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_linear.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_linear.py",
+      "raw_specifier": "from sklearn.preprocessing import PolynomialFeatures",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_linear.py",
+      "raw_specifier": "from sklearn.datasets import make_regression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_linear.py",
+      "raw_specifier": "from sklearn.linear_model import LinearRegression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_linear.py",
+      "raw_specifier": "from sklearn.pipeline import Pipeline",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_linear.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_polynomial.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_polynomial.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_polynomial.py",
+      "raw_specifier": "from sklearn.preprocessing import PolynomialFeatures",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_polynomial.py",
+      "raw_specifier": "from sklearn.datasets import make_regression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_polynomial.py",
+      "raw_specifier": "from sklearn.linear_model import LinearRegression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_polynomial.py",
+      "raw_specifier": "from sklearn.pipeline import Pipeline",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_polynomial.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_quadratic.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_quadratic.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_quadratic.py",
+      "raw_specifier": "from sklearn.preprocessing import PolynomialFeatures",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_quadratic.py",
+      "raw_specifier": "from sklearn.datasets import make_regression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_quadratic.py",
+      "raw_specifier": "from sklearn.linear_model import LinearRegression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_quadratic.py",
+      "raw_specifier": "from sklearn.pipeline import Pipeline",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_quadratic.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_ridge.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_ridge.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_ridge.py",
+      "raw_specifier": "from sklearn.preprocessing import PolynomialFeatures",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_ridge.py",
+      "raw_specifier": "from sklearn.datasets import make_regression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_ridge.py",
+      "raw_specifier": "from sklearn.linear_model import LinearRegression, Ridge",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_ridge.py",
+      "raw_specifier": "from sklearn.pipeline import Pipeline",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/overview/regularization/regularization_ridge.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/DecisionTree/decisiontrees.py",
+      "raw_specifier": "graphviz",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "graphviz",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/DecisionTree/decisiontrees.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/supervised/DecisionTree/decisiontrees.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/supervised/DecisionTree/decisiontrees.py",
+      "raw_specifier": "from sklearn.tree import DecisionTreeClassifier, export_graphviz",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/DecisionTree/decisiontrees.py",
+      "raw_specifier": "from sklearn.preprocessing import OneHotEncoder",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/KNN/knn.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/KNN/knn.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/KNN/knn.py",
+      "raw_specifier": "from sklearn.neighbors import KNeighborsClassifier",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/KNN/knn.py",
+      "raw_specifier": "from sklearn.datasets import load_breast_cancer",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Linear_SVM/linear_svm.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Linear_SVM/linear_svm.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Linear_SVM/linear_svm.py",
+      "raw_specifier": "from sklearn import svm",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Linear_SVM/linear_svm.py",
+      "raw_specifier": "from sklearn.datasets import load_breast_cancer",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Logistic_Regression/logistic_ex1.py",
+      "raw_specifier": "from sklearn.linear_model import LogisticRegression",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Logistic_Regression/logistic_ex1.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Logistic_Regression/logistic_ex1.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/supervised/Naive_Bayes/bell_curve.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Naive_Bayes/bell_curve.py",
+      "raw_specifier": "from scipy.stats import norm",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "scipy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Naive_Bayes/bell_curve.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Naive_Bayes/bell_curve.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Naive_Bayes/bernoulli.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Naive_Bayes/bernoulli.py",
+      "raw_specifier": "from sklearn.naive_bayes import BernoulliNB",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Naive_Bayes/gaussian.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Naive_Bayes/gaussian.py",
+      "raw_specifier": "from sklearn.naive_bayes import GaussianNB",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Naive_Bayes/multinomial.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/supervised/Naive_Bayes/multinomial.py",
+      "raw_specifier": "from sklearn.naive_bayes import MultinomialNB",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/Clustering/clustering_hierarchical.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/Clustering/clustering_hierarchical.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/Clustering/clustering_hierarchical.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/Clustering/clustering_hierarchical.py",
+      "raw_specifier": "from sklearn.cluster import AgglomerativeClustering",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/Clustering/clustering_hierarchical.py",
+      "raw_specifier": "from collections import defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "code/unsupervised/Clustering/clustering_hierarchical.py",
+      "raw_specifier": "from scipy.spatial import ConvexHull",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "scipy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/Clustering/clustering_kmeans.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/Clustering/clustering_kmeans.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "seaborn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/Clustering/clustering_kmeans.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/Clustering/clustering_kmeans.py",
+      "raw_specifier": "from sklearn.cluster import KMeans",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/Clustering/clustering_kmeans.py",
+      "raw_specifier": "from scipy.spatial import Voronoi, voronoi_plot_2d",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "scipy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/PCA/pca.py",
+      "raw_specifier": "from sklearn.decomposition import PCA",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/PCA/pca.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "low"
+    },
+    {
+      "from_file": "code/unsupervised/PCA/pca.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "code/deep_learning/cnn/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "code/deep_learning/autoencoder/ae.py",
+      "candidate_test_paths": [
+        "code/deep_learning/autoencoder/tests/test_ae.py",
+        "tests/deep_learning/autoencoder/test_ae.py",
+        "code/deep_learning/autoencoder/tests/test_autoencoder.py",
+        "test/test_ae.py",
+        "tests/test_ae.py",
+        "tests/ae/test_ae.py",
+        "tests/aes/test_ae.py",
+        "tests/autoencoder/test_ae.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/deep_learning/cnn/code/auxiliary/progress_bar.py",
+      "candidate_test_paths": [
+        "code/deep_learning/cnn/code/auxiliary/tests/test_progress_bar.py",
+        "tests/deep_learning/cnn/code/auxiliary/test_progress_bar.py",
+        "code/deep_learning/cnn/code/auxiliary/tests/test_auxiliary.py",
+        "test/test_progress_bar.py",
+        "tests/test_progress_bar.py",
+        "tests/progress_bar/test_progress_bar.py",
+        "tests/progress_bars/test_progress_bar.py",
+        "tests/auxiliary/test_progress_bar.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/deep_learning/cnn/code/input_function/input.py",
+      "candidate_test_paths": [
+        "code/deep_learning/cnn/code/input_function/tests/test_input.py",
+        "tests/deep_learning/cnn/code/input_function/test_input.py",
+        "code/deep_learning/cnn/code/input_function/tests/test_input_function.py",
+        "test/test_input.py",
+        "tests/test_input.py",
+        "tests/input/test_input.py",
+        "tests/inputs/test_input.py",
+        "tests/input_function/test_input.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/deep_learning/cnn/code/net_structure/net.py",
+      "candidate_test_paths": [
+        "code/deep_learning/cnn/code/net_structure/tests/test_net.py",
+        "tests/deep_learning/cnn/code/net_structure/test_net.py",
+        "code/deep_learning/cnn/code/net_structure/tests/test_net_structure.py",
+        "test/test_net.py",
+        "tests/test_net.py",
+        "tests/net/test_net.py",
+        "tests/nets/test_net.py",
+        "tests/net_structure/test_net.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/deep_learning/cnn/code/train_classifier.py",
+      "candidate_test_paths": [
+        "code/deep_learning/cnn/code/tests/test_train_classifier.py",
+        "tests/deep_learning/cnn/code/test_train_classifier.py",
+        "code/deep_learning/cnn/code/tests/test_code.py",
+        "test/test_train_classifier.py",
+        "tests/test_train_classifier.py",
+        "tests/train_classifier/test_train_classifier.py",
+        "tests/train_classifiers/test_train_classifier.py",
+        "tests/code/test_train_classifier.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/deep_learning/cnn/code/train_evaluation.py",
+      "candidate_test_paths": [
+        "code/deep_learning/cnn/code/tests/test_train_evaluation.py",
+        "tests/deep_learning/cnn/code/test_train_evaluation.py",
+        "code/deep_learning/cnn/code/tests/test_code.py",
+        "test/test_train_evaluation.py",
+        "tests/test_train_evaluation.py",
+        "tests/train_evaluation/test_train_evaluation.py",
+        "tests/train_evaluations/test_train_evaluation.py",
+        "tests/code/test_train_evaluation.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/deep_learning/mlp/code/train_mlp.py",
+      "candidate_test_paths": [
+        "code/deep_learning/mlp/code/tests/test_train_mlp.py",
+        "tests/deep_learning/mlp/code/test_train_mlp.py",
+        "code/deep_learning/mlp/code/tests/test_code.py",
+        "test/test_train_mlp.py",
+        "tests/test_train_mlp.py",
+        "tests/train_mlp/test_train_mlp.py",
+        "tests/train_mlps/test_train_mlp.py",
+        "tests/code/test_train_mlp.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/deep_learning/rnn/rnn.py",
+      "candidate_test_paths": [
+        "code/deep_learning/rnn/tests/test_rnn.py",
+        "tests/deep_learning/rnn/test_rnn.py",
+        "test/test_rnn.py",
+        "tests/test_rnn.py",
+        "tests/rnn/test_rnn.py",
+        "tests/rnns/test_rnn.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/cross-validation/holdout.py",
+      "candidate_test_paths": [
+        "code/overview/cross-validation/tests/test_holdout.py",
+        "tests/overview/cross-validation/test_holdout.py",
+        "code/overview/cross-validation/tests/test_cross-validation.py",
+        "test/test_holdout.py",
+        "tests/test_holdout.py",
+        "tests/holdout/test_holdout.py",
+        "tests/holdouts/test_holdout.py",
+        "tests/cross-validation/test_holdout.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/cross-validation/k-fold.py",
+      "candidate_test_paths": [
+        "code/overview/cross-validation/tests/test_k-fold.py",
+        "tests/overview/cross-validation/test_k-fold.py",
+        "code/overview/cross-validation/tests/test_cross-validation.py",
+        "test/test_k-fold.py",
+        "tests/test_k-fold.py",
+        "tests/k-fold/test_k-fold.py",
+        "tests/k-folds/test_k-fold.py",
+        "tests/cross-validation/test_k-fold.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/cross-validation/leave-p-out.py",
+      "candidate_test_paths": [
+        "code/overview/cross-validation/tests/test_leave-p-out.py",
+        "tests/overview/cross-validation/test_leave-p-out.py",
+        "code/overview/cross-validation/tests/test_cross-validation.py",
+        "test/test_leave-p-out.py",
+        "tests/test_leave-p-out.py",
+        "tests/leave-p-out/test_leave-p-out.py",
+        "tests/leave-p-outs/test_leave-p-out.py",
+        "tests/cross-validation/test_leave-p-out.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/linear_regression/exponential_regression.py",
+      "candidate_test_paths": [
+        "code/overview/linear_regression/tests/test_exponential_regression.py",
+        "tests/overview/linear_regression/test_exponential_regression.py",
+        "code/overview/linear_regression/tests/test_linear_regression.py",
+        "test/test_exponential_regression.py",
+        "tests/test_exponential_regression.py",
+        "tests/exponential_regression/test_exponential_regression.py",
+        "tests/exponential_regressions/test_exponential_regression.py",
+        "tests/linear_regression/test_exponential_regression.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/linear_regression/exponential_regression_transformed.py",
+      "candidate_test_paths": [
+        "code/overview/linear_regression/tests/test_exponential_regression_transformed.py",
+        "tests/overview/linear_regression/test_exponential_regression_transformed.py",
+        "code/overview/linear_regression/tests/test_linear_regression.py",
+        "test/test_exponential_regression_transformed.py",
+        "tests/test_exponential_regression_transformed.py",
+        "tests/exponential_regression_transformed/test_exponential_regression_transformed.py",
+        "tests/exponential_regression_transformeds/test_exponential_regression_transformed.py",
+        "tests/linear_regression/test_exponential_regression_transformed.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/linear_regression/linear_regression.py",
+      "candidate_test_paths": [
+        "code/overview/linear_regression/tests/test_linear_regression.py",
+        "tests/overview/linear_regression/test_linear_regression.py",
+        "test/test_linear_regression.py",
+        "tests/test_linear_regression.py",
+        "tests/linear_regression/test_linear_regression.py",
+        "tests/linear_regressions/test_linear_regression.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/linear_regression/linear_regression_cost.py",
+      "candidate_test_paths": [
+        "code/overview/linear_regression/tests/test_linear_regression_cost.py",
+        "tests/overview/linear_regression/test_linear_regression_cost.py",
+        "code/overview/linear_regression/tests/test_linear_regression.py",
+        "test/test_linear_regression_cost.py",
+        "tests/test_linear_regression_cost.py",
+        "tests/linear_regression_cost/test_linear_regression_cost.py",
+        "tests/linear_regression_costs/test_linear_regression_cost.py",
+        "tests/linear_regression/test_linear_regression_cost.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/linear_regression/linear_regression_lobf.py",
+      "candidate_test_paths": [
+        "code/overview/linear_regression/tests/test_linear_regression_lobf.py",
+        "tests/overview/linear_regression/test_linear_regression_lobf.py",
+        "code/overview/linear_regression/tests/test_linear_regression.py",
+        "test/test_linear_regression_lobf.py",
+        "tests/test_linear_regression_lobf.py",
+        "tests/linear_regression_lobf/test_linear_regression_lobf.py",
+        "tests/linear_regression_lobfs/test_linear_regression_lobf.py",
+        "tests/linear_regression/test_linear_regression_lobf.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/linear_regression/not_linear_regression.py",
+      "candidate_test_paths": [
+        "code/overview/linear_regression/tests/test_not_linear_regression.py",
+        "tests/overview/linear_regression/test_not_linear_regression.py",
+        "code/overview/linear_regression/tests/test_linear_regression.py",
+        "test/test_not_linear_regression.py",
+        "tests/test_not_linear_regression.py",
+        "tests/not_linear_regression/test_not_linear_regression.py",
+        "tests/not_linear_regressions/test_not_linear_regression.py",
+        "tests/linear_regression/test_not_linear_regression.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/overfitting/overfitting.py",
+      "candidate_test_paths": [
+        "code/overview/overfitting/tests/test_overfitting.py",
+        "tests/overview/overfitting/test_overfitting.py",
+        "test/test_overfitting.py",
+        "tests/test_overfitting.py",
+        "tests/overfitting/test_overfitting.py",
+        "tests/overfittings/test_overfitting.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/regularization/regularization_lasso.py",
+      "candidate_test_paths": [
+        "code/overview/regularization/tests/test_regularization_lasso.py",
+        "tests/overview/regularization/test_regularization_lasso.py",
+        "code/overview/regularization/tests/test_regularization.py",
+        "test/test_regularization_lasso.py",
+        "tests/test_regularization_lasso.py",
+        "tests/regularization_lasso/test_regularization_lasso.py",
+        "tests/regularization_lassos/test_regularization_lasso.py",
+        "tests/regularization/test_regularization_lasso.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/regularization/regularization_linear.py",
+      "candidate_test_paths": [
+        "code/overview/regularization/tests/test_regularization_linear.py",
+        "tests/overview/regularization/test_regularization_linear.py",
+        "code/overview/regularization/tests/test_regularization.py",
+        "test/test_regularization_linear.py",
+        "tests/test_regularization_linear.py",
+        "tests/regularization_linear/test_regularization_linear.py",
+        "tests/regularization_linears/test_regularization_linear.py",
+        "tests/regularization/test_regularization_linear.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/regularization/regularization_polynomial.py",
+      "candidate_test_paths": [
+        "code/overview/regularization/tests/test_regularization_polynomial.py",
+        "tests/overview/regularization/test_regularization_polynomial.py",
+        "code/overview/regularization/tests/test_regularization.py",
+        "test/test_regularization_polynomial.py",
+        "tests/test_regularization_polynomial.py",
+        "tests/regularization_polynomial/test_regularization_polynomial.py",
+        "tests/regularization_polynomials/test_regularization_polynomial.py",
+        "tests/regularization/test_regularization_polynomial.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/regularization/regularization_quadratic.py",
+      "candidate_test_paths": [
+        "code/overview/regularization/tests/test_regularization_quadratic.py",
+        "tests/overview/regularization/test_regularization_quadratic.py",
+        "code/overview/regularization/tests/test_regularization.py",
+        "test/test_regularization_quadratic.py",
+        "tests/test_regularization_quadratic.py",
+        "tests/regularization_quadratic/test_regularization_quadratic.py",
+        "tests/regularization_quadratics/test_regularization_quadratic.py",
+        "tests/regularization/test_regularization_quadratic.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/overview/regularization/regularization_ridge.py",
+      "candidate_test_paths": [
+        "code/overview/regularization/tests/test_regularization_ridge.py",
+        "tests/overview/regularization/test_regularization_ridge.py",
+        "code/overview/regularization/tests/test_regularization.py",
+        "test/test_regularization_ridge.py",
+        "tests/test_regularization_ridge.py",
+        "tests/regularization_ridge/test_regularization_ridge.py",
+        "tests/regularization_ridges/test_regularization_ridge.py",
+        "tests/regularization/test_regularization_ridge.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/supervised/DecisionTree/decisiontrees.py",
+      "candidate_test_paths": [
+        "code/supervised/DecisionTree/tests/test_decisiontrees.py",
+        "tests/supervised/DecisionTree/test_decisiontrees.py",
+        "code/supervised/DecisionTree/tests/test_DecisionTree.py",
+        "test/test_decisiontrees.py",
+        "tests/test_decisiontrees.py",
+        "tests/decisiontrees/test_decisiontrees.py",
+        "tests/DecisionTree/test_decisiontrees.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/supervised/KNN/knn.py",
+      "candidate_test_paths": [
+        "code/supervised/KNN/tests/test_knn.py",
+        "tests/supervised/KNN/test_knn.py",
+        "code/supervised/KNN/tests/test_KNN.py",
+        "test/test_knn.py",
+        "tests/test_knn.py",
+        "tests/knn/test_knn.py",
+        "tests/knns/test_knn.py",
+        "tests/KNN/test_knn.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/supervised/Linear_SVM/linear_svm.py",
+      "candidate_test_paths": [
+        "code/supervised/Linear_SVM/tests/test_linear_svm.py",
+        "tests/supervised/Linear_SVM/test_linear_svm.py",
+        "code/supervised/Linear_SVM/tests/test_Linear_SVM.py",
+        "test/test_linear_svm.py",
+        "tests/test_linear_svm.py",
+        "tests/linear_svm/test_linear_svm.py",
+        "tests/linear_svms/test_linear_svm.py",
+        "tests/Linear_SVM/test_linear_svm.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/supervised/Logistic_Regression/logistic_ex1.py",
+      "candidate_test_paths": [
+        "code/supervised/Logistic_Regression/tests/test_logistic_ex1.py",
+        "tests/supervised/Logistic_Regression/test_logistic_ex1.py",
+        "code/supervised/Logistic_Regression/tests/test_Logistic_Regression.py",
+        "test/test_logistic_ex1.py",
+        "tests/test_logistic_ex1.py",
+        "tests/logistic_ex1/test_logistic_ex1.py",
+        "tests/logistic_ex1s/test_logistic_ex1.py",
+        "tests/Logistic_Regression/test_logistic_ex1.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/supervised/Naive_Bayes/bell_curve.py",
+      "candidate_test_paths": [
+        "code/supervised/Naive_Bayes/tests/test_bell_curve.py",
+        "tests/supervised/Naive_Bayes/test_bell_curve.py",
+        "code/supervised/Naive_Bayes/tests/test_Naive_Bayes.py",
+        "test/test_bell_curve.py",
+        "tests/test_bell_curve.py",
+        "tests/bell_curve/test_bell_curve.py",
+        "tests/bell_curves/test_bell_curve.py",
+        "tests/Naive_Bayes/test_bell_curve.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/supervised/Naive_Bayes/bernoulli.py",
+      "candidate_test_paths": [
+        "code/supervised/Naive_Bayes/tests/test_bernoulli.py",
+        "tests/supervised/Naive_Bayes/test_bernoulli.py",
+        "code/supervised/Naive_Bayes/tests/test_Naive_Bayes.py",
+        "test/test_bernoulli.py",
+        "tests/test_bernoulli.py",
+        "tests/bernoulli/test_bernoulli.py",
+        "tests/bernoullis/test_bernoulli.py",
+        "tests/Naive_Bayes/test_bernoulli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/supervised/Naive_Bayes/gaussian.py",
+      "candidate_test_paths": [
+        "code/supervised/Naive_Bayes/tests/test_gaussian.py",
+        "tests/supervised/Naive_Bayes/test_gaussian.py",
+        "code/supervised/Naive_Bayes/tests/test_Naive_Bayes.py",
+        "test/test_gaussian.py",
+        "tests/test_gaussian.py",
+        "tests/gaussian/test_gaussian.py",
+        "tests/gaussians/test_gaussian.py",
+        "tests/Naive_Bayes/test_gaussian.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/supervised/Naive_Bayes/multinomial.py",
+      "candidate_test_paths": [
+        "code/supervised/Naive_Bayes/tests/test_multinomial.py",
+        "tests/supervised/Naive_Bayes/test_multinomial.py",
+        "code/supervised/Naive_Bayes/tests/test_Naive_Bayes.py",
+        "test/test_multinomial.py",
+        "tests/test_multinomial.py",
+        "tests/multinomial/test_multinomial.py",
+        "tests/multinomials/test_multinomial.py",
+        "tests/Naive_Bayes/test_multinomial.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/unsupervised/Clustering/clustering_hierarchical.py",
+      "candidate_test_paths": [
+        "code/unsupervised/Clustering/tests/test_clustering_hierarchical.py",
+        "tests/unsupervised/Clustering/test_clustering_hierarchical.py",
+        "code/unsupervised/Clustering/tests/test_Clustering.py",
+        "test/test_clustering_hierarchical.py",
+        "tests/test_clustering_hierarchical.py",
+        "tests/clustering_hierarchical/test_clustering_hierarchical.py",
+        "tests/clustering_hierarchicals/test_clustering_hierarchical.py",
+        "tests/Clustering/test_clustering_hierarchical.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/unsupervised/Clustering/clustering_kmeans.py",
+      "candidate_test_paths": [
+        "code/unsupervised/Clustering/tests/test_clustering_kmeans.py",
+        "tests/unsupervised/Clustering/test_clustering_kmeans.py",
+        "code/unsupervised/Clustering/tests/test_Clustering.py",
+        "test/test_clustering_kmeans.py",
+        "tests/test_clustering_kmeans.py",
+        "tests/clustering_kmeans/test_clustering_kmeans.py",
+        "tests/Clustering/test_clustering_kmeans.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "code/unsupervised/PCA/pca.py",
+      "candidate_test_paths": [
+        "code/unsupervised/PCA/tests/test_pca.py",
+        "tests/unsupervised/PCA/test_pca.py",
+        "code/unsupervised/PCA/tests/test_PCA.py",
+        "test/test_pca.py",
+        "tests/test_pca.py",
+        "tests/pca/test_pca.py",
+        "tests/pcas/test_pca.py",
+        "tests/PCA/test_pca.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "code/deep_learning/cnn/requirements.txt"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "code/deep_learning/mlp/code/train_mlp.ipynb",
+        "code/overview/linear_regression/linearRegressionOneVariable.ipynb"
+      ],
+      "count": 2,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 41,
+    "classified_count": 41,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 150,
+    "project_import_count": 0,
+    "declared_package_count": 0,
+    "undeclared_package_count": 136,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 34,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 1,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

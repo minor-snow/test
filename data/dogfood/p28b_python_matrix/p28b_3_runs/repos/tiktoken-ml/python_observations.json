@@ -1,0 +1,823 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "tiktoken",
+    "observed_file_count": 38,
+    "python_file_count": 19
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: tiktoken"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 2,
+      "script": 3,
+      "test": 7,
+      "source": 7
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No framework could be detected from dependencies, paths, or imports"
+      }
+    ]
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (high)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 2,
+        "evidence": [
+          "2 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 1446,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "scripts/benchmark.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 1039,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/redact.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 1813,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/wheel_download.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 2096,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 591,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/test_encoding.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9018,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_helpers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 499,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_misc.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 916,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_offsets.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2724,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_pickle.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 738,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_simple_public.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1481,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tiktoken/core.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17904,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tiktoken/load.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6058,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tiktoken/model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4179,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tiktoken/registry.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3352,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tiktoken/_educational.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8452,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tiktoken/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 354,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tiktoken_ext/openai_public.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5775,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "from concurrent.futures import ThreadPoolExecutor",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "concurrent",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, AbstractSet, Collection, Literal, NoReturn, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "from tiktoken import _tiktoken",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tiktoken",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "numpy.typing",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "regex",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "regex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "tiktoken.registry",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "tiktoken",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "tiktoken.registry",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "tiktoken",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "regex",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "regex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/core.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/load.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/load.py",
+      "raw_specifier": "base64",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/load.py",
+      "raw_specifier": "hashlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/load.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/load.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/load.py",
+      "raw_specifier": "blobfile",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "blobfile",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tiktoken/load.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/load.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/load.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/load.py",
+      "raw_specifier": "blobfile",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "blobfile",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tiktoken/model.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/model.py",
+      "raw_specifier": "from .core import Encoding",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "tiktoken/model.py",
+      "raw_specifier": "from .registry import get_encoding",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".registry",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "tiktoken/registry.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/registry.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/registry.py",
+      "raw_specifier": "importlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/registry.py",
+      "raw_specifier": "pkgutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pkgutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/registry.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/registry.py",
+      "raw_specifier": "from typing import Any, Callable, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/registry.py",
+      "raw_specifier": "tiktoken_ext",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "tiktoken_ext",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tiktoken/registry.py",
+      "raw_specifier": "tiktoken",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "tiktoken",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/registry.py",
+      "raw_specifier": "from tiktoken.core import Encoding",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tiktoken",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/_educational.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/_educational.py",
+      "raw_specifier": "collections",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/_educational.py",
+      "raw_specifier": "regex",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "regex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/_educational.py",
+      "raw_specifier": "tiktoken",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "tiktoken",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tiktoken/__init__.py",
+      "raw_specifier": "from .core import Encoding as Encoding",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "tiktoken/__init__.py",
+      "raw_specifier": "from .model import encoding_for_model as encoding_for_model",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "tiktoken/__init__.py",
+      "raw_specifier": "from .model import encoding_name_for_model as encoding_name_for_model",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "tiktoken/__init__.py",
+      "raw_specifier": "from .registry import get_encoding as get_encoding",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".registry",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "tiktoken/__init__.py",
+      "raw_specifier": "from .registry import list_encoding_names as list_encoding_names",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".registry",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "tiktoken_ext/openai_public.py",
+      "raw_specifier": "from tiktoken.load import data_gym_to_mergeable_bpe_ranks, load_tiktoken_bpe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tiktoken",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "regex",
+        "requests"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "tiktoken/core.py",
+      "candidate_test_paths": [
+        "tiktoken/tests/test_core.py",
+        "tests/test_core.py",
+        "tiktoken/tests/test_tiktoken.py",
+        "test/test_core.py",
+        "tests/core/test_core.py",
+        "tests/cores/test_core.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tiktoken/load.py",
+      "candidate_test_paths": [
+        "tiktoken/tests/test_load.py",
+        "tests/test_load.py",
+        "tiktoken/tests/test_tiktoken.py",
+        "test/test_load.py",
+        "tests/load/test_load.py",
+        "tests/loads/test_load.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tiktoken/model.py",
+      "candidate_test_paths": [
+        "tiktoken/tests/test_model.py",
+        "tests/test_model.py",
+        "tiktoken/tests/test_tiktoken.py",
+        "test/test_model.py",
+        "tests/model/test_model.py",
+        "tests/models/test_model.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tiktoken/registry.py",
+      "candidate_test_paths": [
+        "tiktoken/tests/test_registry.py",
+        "tests/test_registry.py",
+        "tiktoken/tests/test_tiktoken.py",
+        "test/test_registry.py",
+        "tests/registry/test_registry.py",
+        "tests/registrys/test_registry.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tiktoken/_educational.py",
+      "candidate_test_paths": [
+        "tiktoken/tests/test_educational.py",
+        "tests/test_educational.py",
+        "tiktoken/tests/test_tiktoken.py",
+        "test/test_educational.py",
+        "tests/educational/test_educational.py",
+        "tests/educationals/test_educational.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tiktoken_ext/openai_public.py",
+      "candidate_test_paths": [
+        "tiktoken_ext/tests/test_openai_public.py",
+        "tests/test_openai_public.py",
+        "tiktoken_ext/tests/test_tiktoken_ext.py",
+        "test/test_openai_public.py",
+        "tests/openai_public/test_openai_public.py",
+        "tests/openai_publics/test_openai_public.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.py"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 18,
+    "classified_count": 18,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 46,
+    "project_import_count": 7,
+    "declared_package_count": 4,
+    "undeclared_package_count": 6,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 6,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

@@ -125,7 +125,7 @@ describe("generateContractId", () => {
     const id2 = generateContractId(intent, refs);
 
     expect(id1).toBe(id2);
-    expect(id1).toMatch(/^cc_[a-f0-9]{12}$/);
+    expect(id1).toMatch(/^cc_[a-f0-9]{16}$/);
   });
 
   it("produces different IDs for different intents", () => {

@@ -264,7 +264,7 @@ function detectFrameworks(ev: Evidence): PythonFrameworkSignal[] {
       evidence.push({ dimension: "dependency_manifest", detail: "airflow found in dependency manifests" });
     }
     if (ev.importedModules.has("airflow")) evidence.push({ dimension: "import_pattern", detail: "airflow imported in source files" });
-    if (evidence.length > 0) candidates.push({ name: "airflow", kind: "async_framework", evidence });
+    if (evidence.length > 0) candidates.push({ name: "airflow", kind: "workflow_orchestration", evidence });
   }
 
   // --- Prefect ---
@@ -272,7 +272,7 @@ function detectFrameworks(ev: Evidence): PythonFrameworkSignal[] {
     const evidence: EvidenceItem[] = [];
     if (ev.declaredPackages.has("prefect")) evidence.push({ dimension: "dependency_manifest", detail: "prefect found in dependency manifests" });
     if (ev.importedModules.has("prefect")) evidence.push({ dimension: "import_pattern", detail: "prefect imported in source files" });
-    if (evidence.length > 0) candidates.push({ name: "prefect", kind: "async_framework", evidence });
+    if (evidence.length > 0) candidates.push({ name: "prefect", kind: "workflow_orchestration", evidence });
   }
 
   // Apply confidence rules
@@ -438,6 +438,24 @@ function detectProjectRoles(
     }
   }
 
+  // Workflow orchestration detection
+  {
+    const evidence: EvidenceItem[] = [];
+    if (frameworksInclude(ev, "airflow", "prefect")) {
+      evidence.push({ dimension: "dependency_manifest", detail: "Workflow orchestration framework dependency found" });
+    }
+    if (ev.importedModules.has("airflow") || ev.importedModules.has("prefect")) {
+      evidence.push({ dimension: "import_pattern", detail: "Workflow orchestration framework imported in source files" });
+    }
+    if (evidence.length > 0) {
+      roles.push({
+        role: "workflow_orchestration",
+        confidence: computeRoleConfidence(evidence),
+        evidence,
+      });
+    }
+  }
+
   return roles;
 }
 
@@ -451,4 +469,8 @@ function computeRoleConfidence(evidence: EvidenceItem[]): "high" | "medium" | "l
   if (dimensions.size >= 2) return "high";
   if (dimensions.size === 1) return "medium";
   return "low";
+}
+
+function frameworksInclude(ev: Evidence, ...packages: string[]): boolean {
+  return packages.some(pkg => ev.declaredPackages.has(pkg) || ev.declaredPackages.has(`apache-${pkg}`));
 }

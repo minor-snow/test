@@ -1,0 +1,1607 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "fastapiutils__fastapi-utils",
+    "observed_file_count": 91,
+    "python_file_count": 50
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: fastapi_utils"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "docs": 19,
+      "config": 5,
+      "source": 12,
+      "test": 14
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "fastapi",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "fastapi found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "fastapi imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "sqlalchemy found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "sqlalchemy imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "httpx",
+        "kind": "http_client",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpx found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      },
+      {
+        "role": "http_client_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpcore dependency (HTTP transport layer)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "API-related paths in library package"
+          },
+          {
+            "dimension": "layout_classification",
+            "detail": "Library package with HTTP core dependency"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "fastapi_service",
+    "validation": "unvalidated",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (high)",
+      "framework: fastapi / web_framework (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (medium)",
+      "framework: sqlalchemy / orm (high)",
+      "framework: httpx / http_client (medium)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)",
+      "project_role: http_client_library (high)"
+    ],
+    "suggested_review": [],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "alembic/**",
+        "reason": "No alembic directory observed"
+      },
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      },
+      {
+        "pattern": "**/db/**",
+        "reason": "No db directory observed"
+      },
+      {
+        "pattern": "**/middleware*",
+        "reason": "No middleware files observed"
+      },
+      {
+        "pattern": "**/deps*",
+        "reason": "No deps files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/src/api_model.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 592,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/api_settings.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 312,
+      "evidence": [
+        "Settings module"
+      ]
+    },
+    {
+      "path": "docs/src/camelcase1.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 333,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/camelcase2.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 277,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/class_based_views1.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 2875,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/class_based_views2.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 2974,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/class_resource_view1.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 107,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/class_resource_view2.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 278,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/class_resource_view3.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 384,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/class_resource_view4.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 996,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/enums1.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 280,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/enums2.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 292,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/guid1.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 350,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/guid2.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 219,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/inferring_router1.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 511,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/openapi1.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 359,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/openapi2.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 416,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/repeated_tasks1.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 630,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/session1.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 1355,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/timing1.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 1531,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "fastapi_utils/api_model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1297,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_utils/api_settings.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 2933,
+      "evidence": [
+        "Settings module"
+      ]
+    },
+    {
+      "path": "fastapi_utils/camelcase.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 908,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_utils/cbv.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7261,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_utils/cbv_base.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1083,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_utils/enums.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1263,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_utils/guid_type.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2324,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_utils/inferring_router.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 256,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_utils/openapi.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 380,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_utils/session.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5355,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_utils/tasks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5281,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_utils/timing.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7304,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 456,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "poetry.lock",
+      "bucket": "config",
+      "extension": ".lock",
+      "size_bytes": 155250,
+      "evidence": [
+        "Lock/manifest"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 3845,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 69857,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1435,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_api_model.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 730,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_api_settings.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 823,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_camelcase.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2117,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_cbv.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4843,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_cbv_base.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2394,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_enums.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 661,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_guid_type.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1069,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_inferring_router.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1475,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_openapi.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 668,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_session.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1197,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_tasks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8112,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_timing.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2754,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "fastapi_utils/api_model.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/api_model.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/api_model.py",
+      "raw_specifier": "pydantic",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/api_model.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/api_model.py",
+      "raw_specifier": "from .camelcase import snake2camel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".camelcase",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "fastapi_utils/api_model.py",
+      "raw_specifier": "from pydantic import ConfigDict",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/api_model.py",
+      "raw_specifier": "from pydantic import BaseConfig",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/camelcase.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/camelcase.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/cbv.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/cbv.py",
+      "raw_specifier": "from typing import ( Any, Callable, List, Tuple, Type, TypeVar, Union, cast, get_type_hints, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/cbv.py",
+      "raw_specifier": "pydantic",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/cbv.py",
+      "raw_specifier": "from fastapi import APIRouter, Depends",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/cbv.py",
+      "raw_specifier": "from fastapi.routing import APIRoute",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/cbv.py",
+      "raw_specifier": "from starlette.routing import Route, WebSocketRoute",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/cbv.py",
+      "raw_specifier": "from typing_inspect import is_classvar",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "typing_inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/cbv.py",
+      "raw_specifier": "from pydantic.typing import is_classvar  # type: ignore[no-redef]",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/cbv_base.py",
+      "raw_specifier": "from typing import Any, Dict, Optional, Tuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/cbv_base.py",
+      "raw_specifier": "from fastapi import APIRouter, FastAPI",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/cbv_base.py",
+      "raw_specifier": "from .cbv import INCLUDE_INIT_PARAMS_KEY, RETURN_TYPES_FUNC_KEY, _cbv",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cbv",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "fastapi_utils/enums.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/enums.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/enums.py",
+      "raw_specifier": "from typing import List",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/enums.py",
+      "raw_specifier": "from .camelcase import snake2camel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".camelcase",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "fastapi_utils/guid_type.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/guid_type.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/guid_type.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, no_type_check",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/guid_type.py",
+      "raw_specifier": "sqlalchemy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/guid_type.py",
+      "raw_specifier": "from sqlalchemy.dialects.postgresql.base import UUID",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/guid_type.py",
+      "raw_specifier": "from sqlalchemy.sql.sqltypes import CHAR",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/guid_type.py",
+      "raw_specifier": "from sqlalchemy.sql.type_api import TypeDecorator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/inferring_router.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/inferring_router.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/inferring_router.py",
+      "raw_specifier": "from fastapi import APIRouter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/openapi.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/openapi.py",
+      "raw_specifier": "from fastapi import FastAPI",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/openapi.py",
+      "raw_specifier": "from fastapi.routing import APIRoute",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/session.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/session.py",
+      "raw_specifier": "from collections.abc import Iterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/session.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/session.py",
+      "raw_specifier": "sqlalchemy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/session.py",
+      "raw_specifier": "from sqlalchemy.orm import Session",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/tasks.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/tasks.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/tasks.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/tasks.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/tasks.py",
+      "raw_specifier": "from functools import wraps",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/tasks.py",
+      "raw_specifier": "from traceback import format_exception",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "traceback",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/tasks.py",
+      "raw_specifier": "from typing import Any, Callable, Coroutine, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/tasks.py",
+      "raw_specifier": "from starlette.concurrency import run_in_threadpool",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/timing.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/timing.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/timing.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/timing.py",
+      "raw_specifier": "from collections.abc import Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/timing.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/timing.py",
+      "raw_specifier": "psutil",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "psutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/timing.py",
+      "raw_specifier": "from fastapi import FastAPI",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/timing.py",
+      "raw_specifier": "from starlette.middleware.base import RequestResponseEndpoint",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/timing.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/timing.py",
+      "raw_specifier": "from starlette.responses import Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/timing.py",
+      "raw_specifier": "from starlette.routing import Match, Mount",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/timing.py",
+      "raw_specifier": "from starlette.types import Scope",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/__init__.py",
+      "raw_specifier": "importlib.metadata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/__init__.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_utils/__init__.py",
+      "raw_specifier": "from .cbv_base import Api, Resource, set_responses, take_init_parameters",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cbv_base",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "poetry.lock",
+      "source_type": "poetry.lock",
+      "packages": [
+        "aiofiles",
+        "annotated_types",
+        "anyio",
+        "autoflake",
+        "babel",
+        "black",
+        "certifi",
+        "charset_normalizer",
+        "click",
+        "codecov",
+        "colorama",
+        "coverage",
+        "exceptiongroup",
+        "fastapi",
+        "ghp_import",
+        "greenlet",
+        "h11",
+        "httpcore",
+        "httpx",
+        "idna",
+        "importlib_metadata",
+        "iniconfig",
+        "jinja2",
+        "markdown",
+        "markdown_include",
+        "markupsafe",
+        "mergedeep",
+        "mkdocs",
+        "mkdocs_get_deps",
+        "mkdocs_material",
+        "mkdocs_material_extensions",
+        "mypy",
+        "mypy_extensions",
+        "packaging",
+        "paginate",
+        "pathspec",
+        "platformdirs",
+        "pluggy",
+        "psutil",
+        "pydantic",
+        "pydantic_core",
+        "pydantic_settings",
+        "pyflakes",
+        "pygments",
+        "pymdown_extensions",
+        "pytest",
+        "pytest_asyncio",
+        "pytest_cov",
+        "pytest_timeout",
+        "python_dateutil",
+        "python_dotenv",
+        "pytz",
+        "pyyaml",
+        "pyyaml_env_tag",
+        "regex",
+        "requests",
+        "ruff",
+        "six",
+        "sniffio",
+        "sqlalchemy",
+        "sqlalchemy_stubs",
+        "starlette",
+        "tomli",
+        "types_setuptools",
+        "typing_extensions",
+        "typing_inspect",
+        "urllib3",
+        "watchdog",
+        "zipp"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "fastapi",
+        "pydantic",
+        "sqlalchemy",
+        "psutil",
+        "pydantic_settings",
+        "typing_inspect"
+      ],
+      "dev_packages": [
+        "aiofiles",
+        "httpx",
+        "pytest",
+        "pytest_cov",
+        "pytest_asyncio",
+        "coverage",
+        "codecov",
+        "pytest_timeout",
+        "mkdocs",
+        "mkdocs_material",
+        "markdown_include",
+        "autoflake",
+        "ruff",
+        "black",
+        "mypy",
+        "sqlalchemy_stubs",
+        "types_setuptools"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "aiofiles",
+        "annotated_types",
+        "anyio",
+        "autoflake",
+        "babel",
+        "black",
+        "certifi",
+        "charset_normalizer",
+        "click",
+        "colorama",
+        "coverage",
+        "exceptiongroup",
+        "fastapi",
+        "ghp_import",
+        "h11",
+        "httpcore",
+        "httpx",
+        "idna",
+        "importlib_metadata",
+        "iniconfig",
+        "jinja2",
+        "markdown_include",
+        "markdown",
+        "markupsafe",
+        "mergedeep",
+        "mkdocs_material_extensions",
+        "mkdocs_material",
+        "mkdocs",
+        "mock",
+        "mypy_extensions",
+        "mypy",
+        "packaging",
+        "paginate",
+        "pathspec",
+        "platformdirs",
+        "pluggy",
+        "psutil",
+        "pydantic_core",
+        "pydantic",
+        "pyflakes",
+        "pygments",
+        "pymdown_extensions",
+        "pytest_asyncio",
+        "pytest_cov",
+        "pytest",
+        "python_dateutil",
+        "pytz",
+        "pyyaml_env_tag",
+        "pyyaml",
+        "regex",
+        "requests",
+        "ruff",
+        "six",
+        "sniffio",
+        "sqlalchemy_stubs",
+        "starlette",
+        "tomli",
+        "typed_ast",
+        "types_mock",
+        "types_setuptools",
+        "typing_extensions",
+        "urllib3",
+        "watchdog",
+        "zipp"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "fastapi_utils/api_model.py",
+      "candidate_test_paths": [
+        "fastapi_utils/tests/test_api_model.py",
+        "tests/test_api_model.py",
+        "fastapi_utils/tests/test_fastapi_utils.py",
+        "test/test_api_model.py",
+        "tests/api_model/test_api_model.py",
+        "tests/api_models/test_api_model.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_api_model.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_api_model.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_utils/camelcase.py",
+      "candidate_test_paths": [
+        "fastapi_utils/tests/test_camelcase.py",
+        "tests/test_camelcase.py",
+        "fastapi_utils/tests/test_fastapi_utils.py",
+        "test/test_camelcase.py",
+        "tests/camelcase/test_camelcase.py",
+        "tests/camelcases/test_camelcase.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_camelcase.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_camelcase.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_utils/cbv.py",
+      "candidate_test_paths": [
+        "fastapi_utils/tests/test_cbv.py",
+        "tests/test_cbv.py",
+        "fastapi_utils/tests/test_fastapi_utils.py",
+        "test/test_cbv.py",
+        "tests/cbv/test_cbv.py",
+        "tests/cbvs/test_cbv.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cbv.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_cbv.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_utils/cbv_base.py",
+      "candidate_test_paths": [
+        "fastapi_utils/tests/test_cbv_base.py",
+        "tests/test_cbv_base.py",
+        "fastapi_utils/tests/test_fastapi_utils.py",
+        "test/test_cbv_base.py",
+        "tests/cbv_base/test_cbv_base.py",
+        "tests/cbv_bases/test_cbv_base.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cbv_base.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_cbv_base.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_utils/enums.py",
+      "candidate_test_paths": [
+        "fastapi_utils/tests/test_enums.py",
+        "tests/test_enums.py",
+        "fastapi_utils/tests/test_fastapi_utils.py",
+        "test/test_enums.py",
+        "tests/enums/test_enums.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_enums.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_enums.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_utils/guid_type.py",
+      "candidate_test_paths": [
+        "fastapi_utils/tests/test_guid_type.py",
+        "tests/test_guid_type.py",
+        "fastapi_utils/tests/test_fastapi_utils.py",
+        "test/test_guid_type.py",
+        "tests/guid_type/test_guid_type.py",
+        "tests/guid_types/test_guid_type.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_guid_type.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_guid_type.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_utils/inferring_router.py",
+      "candidate_test_paths": [
+        "fastapi_utils/tests/test_inferring_router.py",
+        "tests/test_inferring_router.py",
+        "fastapi_utils/tests/test_fastapi_utils.py",
+        "test/test_inferring_router.py",
+        "tests/inferring_router/test_inferring_router.py",
+        "tests/inferring_routers/test_inferring_router.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_inferring_router.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_inferring_router.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_utils/openapi.py",
+      "candidate_test_paths": [
+        "fastapi_utils/tests/test_openapi.py",
+        "tests/test_openapi.py",
+        "fastapi_utils/tests/test_fastapi_utils.py",
+        "test/test_openapi.py",
+        "tests/openapi/test_openapi.py",
+        "tests/openapis/test_openapi.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_openapi.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_openapi.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_utils/session.py",
+      "candidate_test_paths": [
+        "fastapi_utils/tests/test_session.py",
+        "tests/test_session.py",
+        "fastapi_utils/tests/test_fastapi_utils.py",
+        "test/test_session.py",
+        "tests/session/test_session.py",
+        "tests/sessions/test_session.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_session.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_session.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_utils/tasks.py",
+      "candidate_test_paths": [
+        "fastapi_utils/tests/test_tasks.py",
+        "tests/test_tasks.py",
+        "fastapi_utils/tests/test_fastapi_utils.py",
+        "test/test_tasks.py",
+        "tests/tasks/test_tasks.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_tasks.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_tasks.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_utils/timing.py",
+      "candidate_test_paths": [
+        "fastapi_utils/tests/test_timing.py",
+        "tests/test_timing.py",
+        "fastapi_utils/tests/test_fastapi_utils.py",
+        "test/test_timing.py",
+        "tests/timing/test_timing.py",
+        "tests/timings/test_timing.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_timing.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_timing.py [library_package layout]"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/settings/**",
+      "matched_paths": [
+        "docs/src/api_settings.py",
+        "fastapi_utils/api_settings.py",
+        "tests/test_api_settings.py"
+      ],
+      "category": "infrastructure_config",
+      "severity": "medium",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"settings\" found in 3 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 47,
+    "classified_count": 47,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 65,
+    "project_import_count": 0,
+    "declared_package_count": 28,
+    "undeclared_package_count": 0,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 11,
+    "high_confidence_test_count": 11,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 1,
+    "sensitive_file_count": 3,
+    "manifest_count": 3,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

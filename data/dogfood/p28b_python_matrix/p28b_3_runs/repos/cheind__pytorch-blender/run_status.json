@@ -1,0 +1,71 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "a1824e29cf3ef08f7253812519c5eb94571376610ac4f8bd3b3cd0365eb87815",
+  "pinned_commit": "a5b819f04ff5c7145b7164b48abd1a3fe69f0db4",
+  "completed_at": "2026-04-30T11:54:42.460Z",
+  "repo_id": "cheind/pytorch-blender",
+  "category_expected": "data_pipeline",
+  "category_observed": "python_sdk_library",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 205,
+  "python_files": 70,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "pytest/medium"
+  ],
+  "project_role_signals": [
+    "python_sdk_library/medium"
+  ],
+  "test_mapping_count": 43,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "cheind/pytorch-blender",
+      "gap_kind": "layout_low_confidence",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Primary layout missing or low confidence",
+      "recommended_phase": "P28b-later"
+    },
+    {
+      "repo_id": "cheind/pytorch-blender",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected data_pipeline, got python_sdk_library",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "pkg_blender/requirements.txt",
+        "pkg_pytorch/requirements.txt"
+      ],
+      "count": 2,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "pkg_blender/setup.py",
+        "pkg_pytorch/setup.py"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

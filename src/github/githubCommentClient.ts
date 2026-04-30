@@ -32,11 +32,9 @@ export async function postOrUpdatePantheonComment(input: {
     const comments = await listResponse.json() as Array<{
       id: number;
       body?: string;
-      user?: { login?: string };
+      user?: { login?: string; type?: string };
     }>;
-    const existing = comments.find(comment =>
-      comment.body?.includes(input.marker) && (comment.user?.login?.endsWith("[bot]") ?? true),
-    );
+    const existing = comments.find(comment => isPantheonManagedComment(comment, input.marker));
 
     if (existing) {
       const updateResponse = await fetch(`${apiBase}/repos/${input.prContext.owner}/${input.prContext.repo}/issues/comments/${existing.id}`, {
@@ -66,4 +64,20 @@ export async function postOrUpdatePantheonComment(input: {
       reason: error instanceof Error ? error.message : String(error),
     };
   }
+}
+
+function isPantheonManagedComment(
+  comment: {
+    body?: string;
+    user?: { login?: string; type?: string };
+  },
+  marker: string,
+): boolean {
+  if (!comment.body?.includes(marker)) {
+    return false;
+  }
+
+  const login = comment.user?.login?.trim();
+  const type = comment.user?.type?.trim();
+  return type === "Bot" || login === "github-actions[bot]" || login?.endsWith("[bot]") === true;
 }

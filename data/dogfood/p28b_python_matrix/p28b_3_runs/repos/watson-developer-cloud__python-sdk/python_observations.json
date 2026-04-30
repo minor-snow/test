@@ -1,0 +1,2082 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "watson-developer-cloud__python-sdk",
+    "observed_file_count": 122,
+    "python_file_count": 49
+  },
+  "layout": {
+    "primary_layout": "mixed",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: examples, ibm_watson"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "ml_project_structure",
+        "weight": "moderate",
+        "evidence": "ML-related paths (train/predict/experiments)"
+      },
+      {
+        "signal": "jupyter_notebooks",
+        "weight": "weak",
+        "evidence": "Jupyter notebooks present"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: library_package=3, ml_project=3"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "primary_layout",
+        "reason": "Tied between library_package and ml_project"
+      }
+    ],
+    "bucket_summary": {
+      "docs": 1,
+      "source": 26,
+      "notebook": 2,
+      "config": 4,
+      "test": 16
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: mixed / flat_package (medium)",
+      "framework: pytest / test_framework (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 5,
+        "evidence": [
+          "5 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 9334,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "examples/assistant_v1.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11101,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/assistant_v2.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1055,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/discovery_v2.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3338,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/microphone-speech-to-text.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3998,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/natural_language_understanding_v1.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1054,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/notebooks/assistant_v1.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 51722,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "examples/notebooks/natural_language_understanding_v1.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 3178,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "examples/speaker_text_to_speech.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3443,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/speech_to_text_v1.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1979,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/text_to_speech_v1.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3271,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 598,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/assistant_v1.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 652003,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/assistant_v2.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1011184,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/common.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2460,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/discovery_v2.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 621182,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/natural_language_understanding_v1.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 242231,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/speech_to_text_v1.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 511613,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/speech_to_text_v1_adapter.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 26958,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/text_to_speech_adapter_v1.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9288,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/text_to_speech_v1.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 167954,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 24,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/websocket/audio_source.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1335,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/websocket/recognize_abstract_callback.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1699,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/websocket/recognize_listener.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8624,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/websocket/synthesize_callback.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1670,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/websocket/synthesize_listener.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4238,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/websocket/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 875,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "ibm_watson/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1186,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 503,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "requirements-dev.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 367,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 104,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 2483,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "test/integration/test_assistant_v1.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4174,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/integration/test_assistant_v2.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2733,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/integration/test_discovery_v2.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5132,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/integration/test_examples.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1234,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/integration/test_natural_language_understanding_v1.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1249,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/integration/test_speech_to_text_v1.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10500,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/integration/test_text_to_speech_v1.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6674,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/integration/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 231,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/unit/test_assistant_v1.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 699976,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/unit/test_assistant_v2.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1006927,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/unit/test_common.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1247,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/unit/test_discovery_v2.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 455155,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/unit/test_natural_language_understanding_v1.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 175995,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/unit/test_speech_to_text_v1.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 250439,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/unit/test_text_to_speech_v1.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 105707,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/unit/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 231,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/assistant_v1.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/assistant_v1.py",
+      "raw_specifier": "from ibm_watson import AssistantV1",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/assistant_v2.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/assistant_v2.py",
+      "raw_specifier": "from ibm_watson import AssistantV2",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/assistant_v2.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.authenticators import IAMAuthenticator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/discovery_v2.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/discovery_v2.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/discovery_v2.py",
+      "raw_specifier": "from ibm_watson import DiscoveryV2",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/discovery_v2.py",
+      "raw_specifier": "from ibm_watson.discovery_v2 import TrainingExample",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/discovery_v2.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.authenticators import CloudPakForDataAuthenticator, BearerTokenAuthenticator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/microphone-speech-to-text.py",
+      "raw_specifier": "pyaudio",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pyaudio",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/microphone-speech-to-text.py",
+      "raw_specifier": "from ibm_watson import SpeechToTextV1",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/microphone-speech-to-text.py",
+      "raw_specifier": "from ibm_watson.websocket import RecognizeCallback, AudioSource",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/microphone-speech-to-text.py",
+      "raw_specifier": "from threading import Thread",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/microphone-speech-to-text.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.authenticators import IAMAuthenticator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/microphone-speech-to-text.py",
+      "raw_specifier": "from Queue import Queue, Full",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "Queue",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/microphone-speech-to-text.py",
+      "raw_specifier": "from queue import Queue, Full",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "queue",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/natural_language_understanding_v1.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/natural_language_understanding_v1.py",
+      "raw_specifier": "from ibm_watson import NaturalLanguageUnderstandingV1",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/natural_language_understanding_v1.py",
+      "raw_specifier": "from ibm_watson.natural_language_understanding_v1 import Features, EntitiesOptions, KeywordsOptions",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/speaker_text_to_speech.py",
+      "raw_specifier": "from ibm_watson import TextToSpeechV1",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/speaker_text_to_speech.py",
+      "raw_specifier": "from ibm_watson.websocket import SynthesizeCallback",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/speaker_text_to_speech.py",
+      "raw_specifier": "pyaudio",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pyaudio",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/speaker_text_to_speech.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.authenticators import IAMAuthenticator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/speech_to_text_v1.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/speech_to_text_v1.py",
+      "raw_specifier": "from os.path import join, dirname",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/speech_to_text_v1.py",
+      "raw_specifier": "from ibm_watson import SpeechToTextV1",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/speech_to_text_v1.py",
+      "raw_specifier": "from ibm_watson.websocket import RecognizeCallback, AudioSource",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/speech_to_text_v1.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/speech_to_text_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.authenticators import IAMAuthenticator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/text_to_speech_v1.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/text_to_speech_v1.py",
+      "raw_specifier": "from os.path import join, dirname",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/text_to_speech_v1.py",
+      "raw_specifier": "from ibm_watson import TextToSpeechV1",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/text_to_speech_v1.py",
+      "raw_specifier": "from ibm_watson.websocket import SynthesizeCallback",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/text_to_speech_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.authenticators import IAMAuthenticator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v1.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v1.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v1.py",
+      "raw_specifier": "from typing import Dict, List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v1.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v1.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core import BaseService, DetailedResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.authenticators.authenticator import Authenticator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.get_authenticator import get_authenticator_from_environment",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.utils import convert_model, datetime_to_string, string_to_datetime",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v1.py",
+      "raw_specifier": "from .common import get_sdk_headers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".common",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v2.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v2.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v2.py",
+      "raw_specifier": "from typing import BinaryIO, Dict, List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v2.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v2.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v2.py",
+      "raw_specifier": "from ibm_cloud_sdk_core import BaseService, DetailedResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v2.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.authenticators.authenticator import Authenticator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v2.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.get_authenticator import get_authenticator_from_environment",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v2.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.utils import convert_model, datetime_to_string, string_to_datetime",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/assistant_v2.py",
+      "raw_specifier": "from .common import get_sdk_headers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".common",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/common.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/common.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/common.py",
+      "raw_specifier": "from .version import __version__",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".version",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/common.py",
+      "raw_specifier": "from typing import Iterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/discovery_v2.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/discovery_v2.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/discovery_v2.py",
+      "raw_specifier": "from os.path import basename",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/discovery_v2.py",
+      "raw_specifier": "from typing import BinaryIO, Dict, List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/discovery_v2.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/discovery_v2.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/discovery_v2.py",
+      "raw_specifier": "from ibm_cloud_sdk_core import BaseService, DetailedResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/discovery_v2.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.authenticators.authenticator import Authenticator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/discovery_v2.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.get_authenticator import get_authenticator_from_environment",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/discovery_v2.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.utils import convert_list, convert_model, datetime_to_string, string_to_datetime",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/discovery_v2.py",
+      "raw_specifier": "from .common import get_sdk_headers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".common",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/natural_language_understanding_v1.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/natural_language_understanding_v1.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/natural_language_understanding_v1.py",
+      "raw_specifier": "from typing import BinaryIO, Dict, List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/natural_language_understanding_v1.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/natural_language_understanding_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core import BaseService, DetailedResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/natural_language_understanding_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.authenticators.authenticator import Authenticator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/natural_language_understanding_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.get_authenticator import get_authenticator_from_environment",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/natural_language_understanding_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.utils import convert_model, datetime_to_string, string_to_datetime",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/natural_language_understanding_v1.py",
+      "raw_specifier": "from .common import get_sdk_headers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".common",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/speech_to_text_v1.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/speech_to_text_v1.py",
+      "raw_specifier": "from typing import BinaryIO, Dict, List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/speech_to_text_v1.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/speech_to_text_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core import BaseService, DetailedResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/speech_to_text_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.authenticators.authenticator import Authenticator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/speech_to_text_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.get_authenticator import get_authenticator_from_environment",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/speech_to_text_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.utils import convert_list, convert_model",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/speech_to_text_v1.py",
+      "raw_specifier": "from .common import get_sdk_headers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".common",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/speech_to_text_v1_adapter.py",
+      "raw_specifier": "from ibm_watson.websocket import RecognizeCallback, RecognizeListener, AudioSource",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/speech_to_text_v1_adapter.py",
+      "raw_specifier": "from .speech_to_text_v1 import SpeechToTextV1",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".speech_to_text_v1",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/speech_to_text_v1_adapter.py",
+      "raw_specifier": "from urllib.parse import urlencode",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/text_to_speech_adapter_v1.py",
+      "raw_specifier": "from ibm_watson.websocket import SynthesizeCallback, SynthesizeListener",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "ibm_watson",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/text_to_speech_adapter_v1.py",
+      "raw_specifier": "from .text_to_speech_v1 import TextToSpeechV1",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".text_to_speech_v1",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/text_to_speech_adapter_v1.py",
+      "raw_specifier": "from urllib.parse import urlencode",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/text_to_speech_v1.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/text_to_speech_v1.py",
+      "raw_specifier": "from typing import BinaryIO, Dict, List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/text_to_speech_v1.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/text_to_speech_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core import BaseService, DetailedResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/text_to_speech_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.authenticators.authenticator import Authenticator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/text_to_speech_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.get_authenticator import get_authenticator_from_environment",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/text_to_speech_v1.py",
+      "raw_specifier": "from ibm_cloud_sdk_core.utils import convert_model",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/text_to_speech_v1.py",
+      "raw_specifier": "from .common import get_sdk_headers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".common",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/websocket/recognize_listener.py",
+      "raw_specifier": "websocket",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "websocket",
+      "confidence": "low"
+    },
+    {
+      "from_file": "ibm_watson/websocket/recognize_listener.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/websocket/recognize_listener.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/websocket/recognize_listener.py",
+      "raw_specifier": "ssl",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ssl",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/websocket/recognize_listener.py",
+      "raw_specifier": "thread",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "thread",
+      "confidence": "low"
+    },
+    {
+      "from_file": "ibm_watson/websocket/recognize_listener.py",
+      "raw_specifier": "_thread",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "_thread",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/websocket/synthesize_listener.py",
+      "raw_specifier": "websocket",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "websocket",
+      "confidence": "low"
+    },
+    {
+      "from_file": "ibm_watson/websocket/synthesize_listener.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/websocket/synthesize_listener.py",
+      "raw_specifier": "ssl",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ssl",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/websocket/synthesize_listener.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/websocket/synthesize_listener.py",
+      "raw_specifier": "thread",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "thread",
+      "confidence": "low"
+    },
+    {
+      "from_file": "ibm_watson/websocket/synthesize_listener.py",
+      "raw_specifier": "_thread",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "_thread",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/websocket/__init__.py",
+      "raw_specifier": "from .recognize_abstract_callback import RecognizeCallback",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".recognize_abstract_callback",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/websocket/__init__.py",
+      "raw_specifier": "from .recognize_listener import RecognizeListener",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".recognize_listener",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/websocket/__init__.py",
+      "raw_specifier": "from .audio_source import AudioSource",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".audio_source",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/websocket/__init__.py",
+      "raw_specifier": "from .synthesize_callback import SynthesizeCallback",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".synthesize_callback",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/websocket/__init__.py",
+      "raw_specifier": "from .synthesize_listener import SynthesizeListener",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".synthesize_listener",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/__init__.py",
+      "raw_specifier": "from ibm_cloud_sdk_core import IAMTokenManager, DetailedResponse, BaseService, ApiException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "ibm_cloud_sdk_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "ibm_watson/__init__.py",
+      "raw_specifier": "from .assistant_v1 import AssistantV1",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".assistant_v1",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/__init__.py",
+      "raw_specifier": "from .assistant_v2 import AssistantV2",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".assistant_v2",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/__init__.py",
+      "raw_specifier": "from .natural_language_understanding_v1 import NaturalLanguageUnderstandingV1",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".natural_language_understanding_v1",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/__init__.py",
+      "raw_specifier": "from .text_to_speech_v1 import TextToSpeechV1",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".text_to_speech_v1",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/__init__.py",
+      "raw_specifier": "from .discovery_v2 import DiscoveryV2",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".discovery_v2",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/__init__.py",
+      "raw_specifier": "from .version import __version__",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".version",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/__init__.py",
+      "raw_specifier": "from .common import get_sdk_headers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".common",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/__init__.py",
+      "raw_specifier": "from .speech_to_text_v1_adapter import SpeechToTextV1Adapter as SpeechToTextV1",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".speech_to_text_v1_adapter",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "ibm_watson/__init__.py",
+      "raw_specifier": "from .text_to_speech_adapter_v1 import TextToSpeechV1Adapter as TextToSpeechV1",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".text_to_speech_adapter_v1",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "requirements-dev.txt",
+      "source_type": "requirements-dev.txt",
+      "packages": [],
+      "dev_packages": [
+        "pytest",
+        "responses",
+        "python_dotenv",
+        "pylint",
+        "pytest_rerunfailures",
+        "ibm_cloud_sdk_core",
+        "coverage",
+        "codecov",
+        "pytest_cov",
+        "recommonmark",
+        "sphinx",
+        "bumpversion",
+        "websocket_client"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "requests",
+        "python_dateutil",
+        "websocket_client",
+        "ibm_cloud_sdk_core"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [
+        "requests",
+        "python_dateutil",
+        "websocket_client",
+        "ibm_cloud_sdk_core"
+      ],
+      "dev_packages": [],
+      "confidence": "medium",
+      "warnings": [
+        "setup.py parsing is weak detection — consider using pyproject.toml"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/assistant_v1.py",
+      "candidate_test_paths": [
+        "examples/tests/test_assistant_v1.py",
+        "tests/test_assistant_v1.py",
+        "examples/tests/test_examples.py",
+        "test/test_assistant_v1.py",
+        "tests/assistant_v1/test_assistant_v1.py",
+        "tests/assistant_v1s/test_assistant_v1.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/assistant_v2.py",
+      "candidate_test_paths": [
+        "examples/tests/test_assistant_v2.py",
+        "tests/test_assistant_v2.py",
+        "examples/tests/test_examples.py",
+        "test/test_assistant_v2.py",
+        "tests/assistant_v2/test_assistant_v2.py",
+        "tests/assistant_v2s/test_assistant_v2.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/discovery_v2.py",
+      "candidate_test_paths": [
+        "examples/tests/test_discovery_v2.py",
+        "tests/test_discovery_v2.py",
+        "examples/tests/test_examples.py",
+        "test/test_discovery_v2.py",
+        "tests/discovery_v2/test_discovery_v2.py",
+        "tests/discovery_v2s/test_discovery_v2.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/microphone-speech-to-text.py",
+      "candidate_test_paths": [
+        "examples/tests/test_microphone-speech-to-text.py",
+        "tests/test_microphone-speech-to-text.py",
+        "examples/tests/test_examples.py",
+        "test/test_microphone-speech-to-text.py",
+        "tests/microphone-speech-to-text/test_microphone-speech-to-text.py",
+        "tests/microphone-speech-to-texts/test_microphone-speech-to-text.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/natural_language_understanding_v1.py",
+      "candidate_test_paths": [
+        "examples/tests/test_natural_language_understanding_v1.py",
+        "tests/test_natural_language_understanding_v1.py",
+        "examples/tests/test_examples.py",
+        "test/test_natural_language_understanding_v1.py",
+        "tests/natural_language_understanding_v1/test_natural_language_understanding_v1.py",
+        "tests/natural_language_understanding_v1s/test_natural_language_understanding_v1.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/speaker_text_to_speech.py",
+      "candidate_test_paths": [
+        "examples/tests/test_speaker_text_to_speech.py",
+        "tests/test_speaker_text_to_speech.py",
+        "examples/tests/test_examples.py",
+        "test/test_speaker_text_to_speech.py",
+        "tests/speaker_text_to_speech/test_speaker_text_to_speech.py",
+        "tests/speaker_text_to_speechs/test_speaker_text_to_speech.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/speech_to_text_v1.py",
+      "candidate_test_paths": [
+        "examples/tests/test_speech_to_text_v1.py",
+        "tests/test_speech_to_text_v1.py",
+        "examples/tests/test_examples.py",
+        "test/test_speech_to_text_v1.py",
+        "tests/speech_to_text_v1/test_speech_to_text_v1.py",
+        "tests/speech_to_text_v1s/test_speech_to_text_v1.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/text_to_speech_v1.py",
+      "candidate_test_paths": [
+        "examples/tests/test_text_to_speech_v1.py",
+        "tests/test_text_to_speech_v1.py",
+        "examples/tests/test_examples.py",
+        "test/test_text_to_speech_v1.py",
+        "tests/text_to_speech_v1/test_text_to_speech_v1.py",
+        "tests/text_to_speech_v1s/test_text_to_speech_v1.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/assistant_v1.py",
+      "candidate_test_paths": [
+        "ibm_watson/tests/test_assistant_v1.py",
+        "tests/test_assistant_v1.py",
+        "ibm_watson/tests/test_ibm_watson.py",
+        "test/test_assistant_v1.py",
+        "tests/assistant_v1/test_assistant_v1.py",
+        "tests/assistant_v1s/test_assistant_v1.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/assistant_v2.py",
+      "candidate_test_paths": [
+        "ibm_watson/tests/test_assistant_v2.py",
+        "tests/test_assistant_v2.py",
+        "ibm_watson/tests/test_ibm_watson.py",
+        "test/test_assistant_v2.py",
+        "tests/assistant_v2/test_assistant_v2.py",
+        "tests/assistant_v2s/test_assistant_v2.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/common.py",
+      "candidate_test_paths": [
+        "ibm_watson/tests/test_common.py",
+        "tests/test_common.py",
+        "ibm_watson/tests/test_ibm_watson.py",
+        "test/test_common.py",
+        "tests/common/test_common.py",
+        "tests/commons/test_common.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/discovery_v2.py",
+      "candidate_test_paths": [
+        "ibm_watson/tests/test_discovery_v2.py",
+        "tests/test_discovery_v2.py",
+        "ibm_watson/tests/test_ibm_watson.py",
+        "test/test_discovery_v2.py",
+        "tests/discovery_v2/test_discovery_v2.py",
+        "tests/discovery_v2s/test_discovery_v2.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/natural_language_understanding_v1.py",
+      "candidate_test_paths": [
+        "ibm_watson/tests/test_natural_language_understanding_v1.py",
+        "tests/test_natural_language_understanding_v1.py",
+        "ibm_watson/tests/test_ibm_watson.py",
+        "test/test_natural_language_understanding_v1.py",
+        "tests/natural_language_understanding_v1/test_natural_language_understanding_v1.py",
+        "tests/natural_language_understanding_v1s/test_natural_language_understanding_v1.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/speech_to_text_v1.py",
+      "candidate_test_paths": [
+        "ibm_watson/tests/test_speech_to_text_v1.py",
+        "tests/test_speech_to_text_v1.py",
+        "ibm_watson/tests/test_ibm_watson.py",
+        "test/test_speech_to_text_v1.py",
+        "tests/speech_to_text_v1/test_speech_to_text_v1.py",
+        "tests/speech_to_text_v1s/test_speech_to_text_v1.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/speech_to_text_v1_adapter.py",
+      "candidate_test_paths": [
+        "ibm_watson/tests/test_speech_to_text_v1_adapter.py",
+        "tests/test_speech_to_text_v1_adapter.py",
+        "ibm_watson/tests/test_ibm_watson.py",
+        "test/test_speech_to_text_v1_adapter.py",
+        "tests/speech_to_text_v1_adapter/test_speech_to_text_v1_adapter.py",
+        "tests/speech_to_text_v1_adapters/test_speech_to_text_v1_adapter.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/text_to_speech_adapter_v1.py",
+      "candidate_test_paths": [
+        "ibm_watson/tests/test_text_to_speech_adapter_v1.py",
+        "tests/test_text_to_speech_adapter_v1.py",
+        "ibm_watson/tests/test_ibm_watson.py",
+        "test/test_text_to_speech_adapter_v1.py",
+        "tests/text_to_speech_adapter_v1/test_text_to_speech_adapter_v1.py",
+        "tests/text_to_speech_adapter_v1s/test_text_to_speech_adapter_v1.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/text_to_speech_v1.py",
+      "candidate_test_paths": [
+        "ibm_watson/tests/test_text_to_speech_v1.py",
+        "tests/test_text_to_speech_v1.py",
+        "ibm_watson/tests/test_ibm_watson.py",
+        "test/test_text_to_speech_v1.py",
+        "tests/text_to_speech_v1/test_text_to_speech_v1.py",
+        "tests/text_to_speech_v1s/test_text_to_speech_v1.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/version.py",
+      "candidate_test_paths": [
+        "ibm_watson/tests/test_version.py",
+        "tests/test_version.py",
+        "ibm_watson/tests/test_ibm_watson.py",
+        "test/test_version.py",
+        "tests/version/test_version.py",
+        "tests/versions/test_version.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/websocket/audio_source.py",
+      "candidate_test_paths": [
+        "ibm_watson/websocket/tests/test_audio_source.py",
+        "tests/websocket/test_audio_source.py",
+        "ibm_watson/websocket/tests/test_websocket.py",
+        "test/test_audio_source.py",
+        "tests/test_audio_source.py",
+        "tests/audio_source/test_audio_source.py",
+        "tests/audio_sources/test_audio_source.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/websocket/recognize_abstract_callback.py",
+      "candidate_test_paths": [
+        "ibm_watson/websocket/tests/test_recognize_abstract_callback.py",
+        "tests/websocket/test_recognize_abstract_callback.py",
+        "ibm_watson/websocket/tests/test_websocket.py",
+        "test/test_recognize_abstract_callback.py",
+        "tests/test_recognize_abstract_callback.py",
+        "tests/recognize_abstract_callback/test_recognize_abstract_callback.py",
+        "tests/recognize_abstract_callbacks/test_recognize_abstract_callback.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/websocket/recognize_listener.py",
+      "candidate_test_paths": [
+        "ibm_watson/websocket/tests/test_recognize_listener.py",
+        "tests/websocket/test_recognize_listener.py",
+        "ibm_watson/websocket/tests/test_websocket.py",
+        "test/test_recognize_listener.py",
+        "tests/test_recognize_listener.py",
+        "tests/recognize_listener/test_recognize_listener.py",
+        "tests/recognize_listeners/test_recognize_listener.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/websocket/synthesize_callback.py",
+      "candidate_test_paths": [
+        "ibm_watson/websocket/tests/test_synthesize_callback.py",
+        "tests/websocket/test_synthesize_callback.py",
+        "ibm_watson/websocket/tests/test_websocket.py",
+        "test/test_synthesize_callback.py",
+        "tests/test_synthesize_callback.py",
+        "tests/synthesize_callback/test_synthesize_callback.py",
+        "tests/synthesize_callbacks/test_synthesize_callback.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "ibm_watson/websocket/synthesize_listener.py",
+      "candidate_test_paths": [
+        "ibm_watson/websocket/tests/test_synthesize_listener.py",
+        "tests/websocket/test_synthesize_listener.py",
+        "ibm_watson/websocket/tests/test_websocket.py",
+        "test/test_synthesize_listener.py",
+        "tests/test_synthesize_listener.py",
+        "tests/synthesize_listener/test_synthesize_listener.py",
+        "tests/synthesize_listeners/test_synthesize_listener.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "examples/notebooks/assistant_v1.ipynb",
+        "examples/notebooks/natural_language_understanding_v1.ipynb"
+      ],
+      "count": 2,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "pyproject.toml"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 44,
+    "classified_count": 44,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 128,
+    "project_import_count": 16,
+    "declared_package_count": 31,
+    "undeclared_package_count": 7,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 23,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 4,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

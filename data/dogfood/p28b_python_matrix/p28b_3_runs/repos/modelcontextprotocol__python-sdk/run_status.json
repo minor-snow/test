@@ -1,0 +1,77 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "35eb1d6dac8a87916639121732d2680a0d090f38b2f7742d5adf1ee6f1703743",
+  "pinned_commit": "3d7b311de07aade1281d18aa7b04689a81ab8793",
+  "completed_at": "2026-04-30T11:54:04.335Z",
+  "repo_id": "modelcontextprotocol/python-sdk",
+  "category_expected": "python_cli_tool",
+  "category_observed": "generic_service",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 330,
+  "python_files": 378,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "pytest/medium",
+    "click/high",
+    "typer/high",
+    "httpx/high"
+  ],
+  "project_role_signals": [
+    "service_backend/medium",
+    "python_sdk_library/high",
+    "http_client_library/high",
+    "cli_application/high"
+  ],
+  "test_mapping_count": 179,
+  "risk_preset": "generic_service",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "modelcontextprotocol/python-sdk",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected python_cli_tool, got generic_service",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "examples/clients/simple-auth-client/pyproject.toml",
+        "examples/clients/simple-chatbot/mcp_simple_chatbot/requirements.txt",
+        "examples/clients/simple-chatbot/pyproject.toml",
+        "examples/clients/simple-task-client/pyproject.toml",
+        "examples/clients/simple-task-interactive-client/pyproject.toml",
+        "examples/clients/sse-polling-client/pyproject.toml",
+        "examples/servers/everything-server/pyproject.toml",
+        "examples/servers/simple-auth/pyproject.toml",
+        "examples/servers/simple-pagination/pyproject.toml",
+        "examples/servers/simple-prompt/pyproject.toml",
+        "examples/servers/simple-resource/pyproject.toml",
+        "examples/servers/simple-streamablehttp/pyproject.toml",
+        "examples/servers/simple-streamablehttp-stateless/pyproject.toml",
+        "examples/servers/simple-task/pyproject.toml",
+        "examples/servers/simple-task-interactive/pyproject.toml",
+        "examples/servers/simple-tool/pyproject.toml",
+        "examples/servers/sse-polling-demo/pyproject.toml",
+        "examples/servers/structured-output-lowlevel/pyproject.toml",
+        "examples/snippets/pyproject.toml",
+        "uv.lock"
+      ],
+      "count": 20,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

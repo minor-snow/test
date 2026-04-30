@@ -1,0 +1,114 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "27f0e4f6d127849824df69d37ca62aea38a02cfde7bc3a75424ac5efc091074c",
+  "pinned_commit": "3d131ad2cbbe36047ef1b8beb47a038ec6a5262c",
+  "completed_at": "2026-04-30T11:11:30.070Z",
+  "repo_id": "pandas",
+  "category_expected": "ml_scientific",
+  "category_observed": "generic_service",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 748,
+  "python_files": 1596,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "pytest/high",
+    "sqlalchemy/high"
+  ],
+  "project_role_signals": [
+    "service_backend/medium",
+    "python_sdk_library/medium"
+  ],
+  "test_mapping_count": 308,
+  "risk_preset": "generic_service",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "pandas",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected ml_scientific, got generic_service",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "environment.yml"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "dynamic_or_unresolved_import",
+      "classification": "intrinsic",
+      "paths": [
+        "doc/make.py",
+        "pandas/plotting/_core.py"
+      ],
+      "count": 2,
+      "note": "Imports using __import__(), importlib.import_module(), or computed paths. Cannot be statically resolved — this is inherent to Python."
+    },
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "doc/source/user_guide/style.ipynb",
+        "pandas/_libs/algos.pyx",
+        "pandas/_libs/arrays.pyx",
+        "pandas/_libs/byteswap.pyx",
+        "pandas/_libs/groupby.pyx",
+        "pandas/_libs/hashing.pyx",
+        "pandas/_libs/hashtable.pyx",
+        "pandas/_libs/index.pyx",
+        "pandas/_libs/indexing.pyx",
+        "pandas/_libs/internals.pyx",
+        "pandas/_libs/interval.pyx",
+        "pandas/_libs/join.pyx",
+        "pandas/_libs/lib.pyx",
+        "pandas/_libs/missing.pyx",
+        "pandas/_libs/ops.pyx",
+        "pandas/_libs/ops_dispatch.pyx",
+        "pandas/_libs/parsers.pyx",
+        "pandas/_libs/properties.pyx",
+        "pandas/_libs/reshape.pyx",
+        "pandas/_libs/sas.pyx",
+        "pandas/_libs/sparse.pyx",
+        "pandas/_libs/testing.pyx",
+        "pandas/_libs/tslib.pyx",
+        "pandas/_libs/tslibs/base.pyx",
+        "pandas/_libs/tslibs/ccalendar.pyx",
+        "pandas/_libs/tslibs/conversion.pyx",
+        "pandas/_libs/tslibs/dtypes.pyx",
+        "pandas/_libs/tslibs/fields.pyx",
+        "pandas/_libs/tslibs/nattype.pyx",
+        "pandas/_libs/tslibs/np_datetime.pyx",
+        "pandas/_libs/tslibs/offsets.pyx",
+        "pandas/_libs/tslibs/parsing.pyx",
+        "pandas/_libs/tslibs/period.pyx",
+        "pandas/_libs/tslibs/strptime.pyx",
+        "pandas/_libs/tslibs/timedeltas.pyx",
+        "pandas/_libs/tslibs/timestamps.pyx",
+        "pandas/_libs/tslibs/timezones.pyx",
+        "pandas/_libs/tslibs/tzconversion.pyx",
+        "pandas/_libs/tslibs/vectorized.pyx",
+        "pandas/_libs/window/aggregations.pyx",
+        "pandas/_libs/window/indexers.pyx",
+        "pandas/_libs/writers.pyx"
+      ],
+      "count": 42,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

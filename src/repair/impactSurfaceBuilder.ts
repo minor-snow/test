@@ -215,7 +215,18 @@ function dedupeRiskAreas(input: readonly RepairRiskArea[]): RepairRiskArea[] {
   const seen = new Map<string, RepairRiskArea>();
   for (const area of input) {
     const key = `${area.pattern}|${area.bucket}|${area.source}`;
-    if (!seen.has(key)) seen.set(key, area);
+    const existing = seen.get(key);
+    if (!existing) {
+      seen.set(key, area);
+      continue;
+    }
+    seen.set(key, {
+      ...existing,
+      severity: strongerSeverity(existing.severity, area.severity),
+      evidence: uniqueSorted([...existing.evidence, ...area.evidence]),
+      matched_paths: uniqueSorted([...existing.matched_paths, ...area.matched_paths]),
+      reason: existing.reason === area.reason ? existing.reason : `${existing.reason} ${area.reason}`.trim(),
+    });
   }
   return [...seen.values()].sort((a, b) => a.pattern.localeCompare(b.pattern));
 }
@@ -250,4 +261,12 @@ function sensitiveReasonToBucket(reason: SensitiveReason): "review_required" | "
 
 function formatSensitiveReason(reason: SensitiveReason): string {
   return reason.replace(/_/g, " ");
+}
+
+function strongerSeverity(
+  left: RepairRiskArea["severity"],
+  right: RepairRiskArea["severity"],
+): RepairRiskArea["severity"] {
+  const rank = { medium: 0, high: 1, critical: 2 } as const;
+  return rank[left] >= rank[right] ? left : right;
 }

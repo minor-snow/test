@@ -19,3 +19,4 @@ export declare function loadCanonicalArtifact(config: StoreConfig, artifactId: s
 export declare function generateTrialReportData(config: StoreConfig, artifactId: string, trialReport: TrialReport): Promise<TrialReportData>;
 export declare function generateReportFromStore(config: StoreConfig, artifactId: string): Promise<TrialReportData>;
 export declare function generateMultiArtifactReport(config: StoreConfig, artifactIds: string[]): Promise<MultiArtifactReportData>;
+export declare function clearReportGeneratorCaches(): void;

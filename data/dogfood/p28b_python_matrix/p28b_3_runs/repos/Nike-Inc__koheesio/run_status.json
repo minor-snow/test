@@ -1,0 +1,58 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "babb0152a41ead1641446488fe4a7437244039ac5297a63b22605f38047d0ac7",
+  "pinned_commit": "d96a71edf471fc5ec52d50f883ab0726d922b824",
+  "completed_at": "2026-04-30T11:54:45.798Z",
+  "repo_id": "Nike-Inc/koheesio",
+  "category_expected": "data_pipeline",
+  "category_observed": "python_sdk_library",
+  "support_level": "supported",
+  "status": "completed",
+  "duration_ms": 300,
+  "python_files": 196,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [],
+  "project_role_signals": [
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 83,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "Nike-Inc/koheesio",
+      "gap_kind": "framework_detection_gap",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "No frameworks detected",
+      "recommended_phase": "P28b-later"
+    },
+    {
+      "repo_id": "Nike-Inc/koheesio",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected data_pipeline, got python_sdk_library",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "dynamic_or_unresolved_import",
+      "classification": "intrinsic",
+      "paths": [
+        "src/koheesio/spark/utils/common.py"
+      ],
+      "count": 2,
+      "note": "Imports using __import__(), importlib.import_module(), or computed paths. Cannot be statically resolved — this is inherent to Python."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

@@ -67,7 +67,11 @@ describe("HARD-006: Cockpit Pressure Fixtures", () => {
         );
 
         expect(state.phase).toBe(fixture.expectedPhase);
-        expect(state.error).toBeNull();
+        if (fixture.expectedErrorIncludes) {
+          expect(state.error).toContain(fixture.expectedErrorIncludes);
+        } else {
+          expect(state.error).toBeNull();
+        }
       });
 
       if (fixture.expectedFailedGates && fixture.expectedFailedGates.length > 0) {

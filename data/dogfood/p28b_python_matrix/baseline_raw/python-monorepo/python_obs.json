@@ -1,0 +1,379 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "python-monorepo",
+    "observed_file_count": 25,
+    "python_file_count": 11
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "namespace_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "namespace_package_detected",
+        "weight": "strong",
+        "evidence": "src/ namespace package(s) without __init__.py: common, service1, service2"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 2,
+      "source": 6,
+      "unknown": 3
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No framework could be detected from dependencies, paths, or imports"
+      }
+    ]
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / namespace_package (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 3,
+        "evidence": [
+          "3 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "poetry.lock",
+      "bucket": "config",
+      "extension": ".lock",
+      "size_bytes": 988,
+      "evidence": [
+        "Lock/manifest"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 478,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "src/common/common/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 57,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/common/common/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/common/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 308,
+      "evidence": []
+    },
+    {
+      "path": "src/service1/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 360,
+      "evidence": []
+    },
+    {
+      "path": "src/service1/service1/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 82,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/service1/service1/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/service2/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 362,
+      "evidence": []
+    },
+    {
+      "path": "src/service2/service2/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 82,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/service2/service2/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "src/service1/service1/main.py",
+      "raw_specifier": "from common.main import print_hello",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "common",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/service2/service2/main.py",
+      "raw_specifier": "from common.main import print_hello",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "common",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "poetry.lock",
+      "source_type": "poetry.lock",
+      "packages": [
+        "common",
+        "service1",
+        "service2"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "common",
+        "service1",
+        "service2"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "src/common/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "src/service1/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "common"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "src/service2/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "common"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "src/common/common/main.py",
+      "candidate_test_paths": [
+        "src/common/common/tests/test_main.py",
+        "tests/common/common/test_main.py",
+        "src/common/common/tests/test_common.py",
+        "test/test_main.py",
+        "tests/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py",
+        "tests/common/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/service1/service1/main.py",
+      "candidate_test_paths": [
+        "src/service1/service1/tests/test_main.py",
+        "tests/service1/service1/test_main.py",
+        "src/service1/service1/tests/test_service1.py",
+        "test/test_main.py",
+        "tests/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py",
+        "tests/service1/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/service2/service2/main.py",
+      "candidate_test_paths": [
+        "src/service2/service2/tests/test_main.py",
+        "tests/service2/service2/test_main.py",
+        "src/service2/service2/tests/test_service2.py",
+        "test/test_main.py",
+        "tests/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py",
+        "tests/service2/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "src/common/pyproject.toml",
+        "src/service1/pyproject.toml",
+        "src/service2/pyproject.toml"
+      ],
+      "count": 3,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "src/common/pyproject.toml"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 6,
+    "classified_count": 6,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 2,
+    "project_import_count": 0,
+    "declared_package_count": 2,
+    "undeclared_package_count": 0,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 3,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 5,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

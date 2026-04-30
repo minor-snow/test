@@ -26,6 +26,9 @@ import { loadDomainProfile } from "../src/domainProfile.js";
 import { appendDecisionEntry } from "../src/cockpit/decisionLog.js";
 import { loadFromQuarantine } from "../src/artifactStore.js";
 import type { LlmClient } from "../src/trial/llmClient.js";
+import type { DecisionLogPathOptions } from "../src/cockpit/decisionLog.js";
+
+const TRUSTED_ABSOLUTE: DecisionLogPathOptions = { trustedAbsolute: true };
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -121,7 +124,7 @@ async function simulateIntake(
     rationale,
     created_at: new Date().toISOString(),
     quality_snapshot: qualitySnapshot,
-  });
+  }, TRUSTED_ABSOLUTE);
 
   return { valid: true, decision_id: decisionId };
 }
@@ -161,7 +164,7 @@ describe("P9-005: Draft Intake", () => {
   it("reject_draft writes to DecisionLog", async () => {
     await simulateIntake(dataDir, quarantineId, "reject_draft", "reviewer", "too vague");
 
-    const log = await readDecisionLog(dataDir);
+    const log = await readDecisionLog(dataDir, TRUSTED_ABSOLUTE);
     expect(log.length).toBe(1);
     expect(log[0].decision_type).toBe("draft_intake:reject_draft");
     expect(log[0].operator_id).toBe("reviewer");
@@ -171,7 +174,7 @@ describe("P9-005: Draft Intake", () => {
   it("accept_for_cleanup writes to DecisionLog", async () => {
     await simulateIntake(dataDir, quarantineId, "accept_for_cleanup", "op", "needs work");
 
-    const log = await readDecisionLog(dataDir);
+    const log = await readDecisionLog(dataDir, TRUSTED_ABSOLUTE);
     expect(log.length).toBe(1);
     expect(log[0].decision_type).toBe("draft_intake:accept_for_cleanup");
   });
@@ -179,7 +182,7 @@ describe("P9-005: Draft Intake", () => {
   it("accept_as_seed writes to DecisionLog with quality snapshot", async () => {
     await simulateIntake(dataDir, quarantineId, "accept_as_seed", "op", "ready");
 
-    const log = await readDecisionLog(dataDir);
+    const log = await readDecisionLog(dataDir, TRUSTED_ABSOLUTE);
     expect(log.length).toBe(1);
     expect(log[0].decision_type).toBe("draft_intake:accept_as_seed");
     expect(log[0].quality_snapshot).toBeDefined();

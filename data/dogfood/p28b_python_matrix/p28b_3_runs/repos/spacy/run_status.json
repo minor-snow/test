@@ -1,0 +1,142 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "c1c5b515656732aa25311ae96e81484ca0ddb43d047cd63b1b1f277d4962a037",
+  "pinned_commit": "0069cf99b60023363ba5f47404819f59c8a39b3e",
+  "completed_at": "2026-04-30T11:14:42.823Z",
+  "repo_id": "spacy",
+  "category_expected": "ml_scientific",
+  "category_observed": "generic_service",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 656,
+  "python_files": 942,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "pytest/medium",
+    "click/high",
+    "typer/high"
+  ],
+  "project_role_signals": [
+    "service_backend/medium",
+    "python_sdk_library/high",
+    "cli_application/high"
+  ],
+  "test_mapping_count": 428,
+  "risk_preset": "generic_service",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "spacy",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected ml_scientific, got generic_service",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "website/setup/requirements.txt"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "dynamic_or_unresolved_import",
+      "classification": "intrinsic",
+      "paths": [
+        "spacy/pipeline/attributeruler.py",
+        "spacy/pipeline/edit_tree_lemmatizer.py",
+        "spacy/pipeline/entityruler.py",
+        "spacy/pipeline/entity_linker.py",
+        "spacy/pipeline/functions.py",
+        "spacy/pipeline/lemmatizer.py",
+        "spacy/pipeline/spancat.py",
+        "spacy/pipeline/span_finder.py",
+        "spacy/pipeline/span_ruler.py",
+        "spacy/pipeline/textcat.py",
+        "spacy/pipeline/textcat_multilabel.py",
+        "spacy/pipeline/tok2vec.py"
+      ],
+      "count": 15,
+      "note": "Imports using __import__(), importlib.import_module(), or computed paths. Cannot be statically resolved — this is inherent to Python."
+    },
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "spacy/attrs.pyx",
+        "spacy/kb/candidate.pyx",
+        "spacy/kb/kb.pyx",
+        "spacy/kb/kb_in_memory.pyx",
+        "spacy/lexeme.pyx",
+        "spacy/matcher/dependencymatcher.pyx",
+        "spacy/matcher/levenshtein.pyx",
+        "spacy/matcher/matcher.pyx",
+        "spacy/matcher/phrasematcher.pyx",
+        "spacy/ml/parser_model.pyx",
+        "spacy/morphology.pyx",
+        "spacy/parts_of_speech.pyx",
+        "spacy/pipeline/dep_parser.pyx",
+        "spacy/pipeline/morphologizer.pyx",
+        "spacy/pipeline/multitask.pyx",
+        "spacy/pipeline/ner.pyx",
+        "spacy/pipeline/pipe.pyx",
+        "spacy/pipeline/sentencizer.pyx",
+        "spacy/pipeline/senter.pyx",
+        "spacy/pipeline/tagger.pyx",
+        "spacy/pipeline/trainable_pipe.pyx",
+        "spacy/pipeline/transition_parser.pyx",
+        "spacy/pipeline/_edit_tree_internals/edit_trees.pyx",
+        "spacy/pipeline/_parser_internals/arc_eager.pyx",
+        "spacy/pipeline/_parser_internals/ner.pyx",
+        "spacy/pipeline/_parser_internals/nonproj.pyx",
+        "spacy/pipeline/_parser_internals/stateclass.pyx",
+        "spacy/pipeline/_parser_internals/transition_system.pyx",
+        "spacy/pipeline/_parser_internals/_beam_utils.pyx",
+        "spacy/pipeline/_parser_internals/_state.pyx",
+        "spacy/strings.pyx",
+        "spacy/symbols.pyx",
+        "spacy/tokenizer.pyx",
+        "spacy/tokens/doc.pyx",
+        "spacy/tokens/graph.pyx",
+        "spacy/tokens/morphanalysis.pyx",
+        "spacy/tokens/span.pyx",
+        "spacy/tokens/span_group.pyx",
+        "spacy/tokens/token.pyx",
+        "spacy/tokens/_retokenize.pyx",
+        "spacy/training/align.pyx",
+        "spacy/training/alignment_array.pyx",
+        "spacy/training/example.pyx",
+        "spacy/training/gold_io.pyx",
+        "spacy/typedefs.pyx",
+        "spacy/vectors.pyx",
+        "spacy/vocab.pyx"
+      ],
+      "count": 47,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "pyproject.toml",
+        "setup.cfg",
+        "setup.py"
+      ],
+      "count": 3,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

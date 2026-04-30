@@ -17,5 +17,9 @@ export declare function resolveUncertainty(register: UncertaintyRegister, uncert
  */
 export declare function hasBlockingUncertainties(register: UncertaintyRegister): boolean;
 export declare function getBlockingUncertainties(register: UncertaintyRegister): UncertaintyEntry[];
-export declare function loadRegister(path: string): Promise<UncertaintyRegister>;
-export declare function saveRegister(path: string, register: UncertaintyRegister): Promise<void>;
+export type UncertaintyRegisterPathOptions = {
+    readonly repoRoot?: string;
+    readonly trustedAbsolute?: boolean;
+};
+export declare function loadRegister(path: string, options?: UncertaintyRegisterPathOptions): Promise<UncertaintyRegister>;
+export declare function saveRegister(path: string, register: UncertaintyRegister, options?: UncertaintyRegisterPathOptions): Promise<void>;

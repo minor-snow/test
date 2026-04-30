@@ -73,7 +73,7 @@ export function parseRepairFailConditions(raw: string | undefined): GitHubRepair
   ];
   const normalized = (raw ?? fallback.join(","))
     .split(",")
-    .map(token => token.trim())
+    .map(token => token.trim().toLowerCase())
     .filter(token => token.length > 0) as GitHubRepairFailCondition[];
 
   if (normalized.length === 0) return fallback;
@@ -103,14 +103,15 @@ function resolveSourceKind(input: {
 }
 
 function parseAuditMode(raw: string | undefined): GitHubRepairAuditMode {
-  if (raw === "auto" || raw === "require_plan_approval" || raw === "require_all") {
-    return raw;
+  const normalized = raw?.trim().toLowerCase();
+  if (normalized === "auto" || normalized === "require_plan_approval" || normalized === "require_all") {
+    return normalized;
   }
   return "require_plan_approval";
 }
 
 function parseArtifactMode(raw: string | undefined): GitHubArtifactMode {
-  return raw === "debug" ? "debug" : "public";
+  return raw?.trim().toLowerCase() === "debug" ? "debug" : "public";
 }
 
 function firstNonEmpty(...values: Array<string | undefined>): string | undefined {

@@ -1,0 +1,100 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "1b2186bd4505244bfec91232d6adc8836067eadae0b482adc6c6051da30fdcf3",
+  "pinned_commit": "53b92b94ed7e48ff5db11b88a271cb8941c2df9e",
+  "completed_at": "2026-04-30T11:14:30.302Z",
+  "repo_id": "transformers",
+  "category_expected": "ml_inference",
+  "category_observed": "fastapi_service",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 3394,
+  "python_files": 4310,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "fastapi/medium",
+    "pytest/medium",
+    "click/medium",
+    "typer/medium",
+    "httpx/medium"
+  ],
+  "project_role_signals": [
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 2341,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "transformers",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected ml_inference, got fastapi_service",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "benchmark/requirements.txt",
+        "benchmark_v2/requirements.txt",
+        "examples/pytorch/audio-classification/requirements.txt",
+        "examples/pytorch/contrastive-image-text/requirements.txt",
+        "examples/pytorch/image-classification/requirements.txt",
+        "examples/pytorch/image-pretraining/requirements.txt",
+        "examples/pytorch/instance-segmentation/requirements.txt",
+        "examples/pytorch/language-modeling/requirements.txt",
+        "examples/pytorch/multiple-choice/requirements.txt",
+        "examples/pytorch/object-detection/requirements.txt",
+        "examples/pytorch/question-answering/requirements.txt",
+        "examples/pytorch/semantic-segmentation/requirements.txt",
+        "examples/pytorch/speech-pretraining/requirements.txt",
+        "examples/pytorch/speech-recognition/requirements.txt",
+        "examples/pytorch/summarization/requirements.txt",
+        "examples/pytorch/text-classification/requirements.txt",
+        "examples/pytorch/text-generation/requirements.txt",
+        "examples/pytorch/token-classification/requirements.txt",
+        "examples/pytorch/translation/requirements.txt"
+      ],
+      "count": 19,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "dynamic_or_unresolved_import",
+      "classification": "intrinsic",
+      "paths": [
+        "src/transformers/models/auto/auto_factory.py",
+        "src/transformers/models/auto/configuration_auto.py",
+        "src/transformers/models/auto/feature_extraction_auto.py",
+        "src/transformers/models/auto/image_processing_auto.py",
+        "src/transformers/models/auto/processing_auto.py",
+        "src/transformers/models/auto/tokenization_auto.py",
+        "src/transformers/models/auto/video_processing_auto.py",
+        "src/transformers/pipelines/base.py",
+        "src/transformers/testing_utils.py"
+      ],
+      "count": 9,
+      "note": "Imports using __import__(), importlib.import_module(), or computed paths. Cannot be statically resolved — this is inherent to Python."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "pyproject.toml"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

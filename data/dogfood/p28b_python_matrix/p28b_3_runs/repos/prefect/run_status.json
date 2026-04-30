@@ -1,0 +1,95 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "b6702887fe2e6baf4022291cea617643b9e0cc3d22d796558d14ee78dc684296",
+  "pinned_commit": "cd6132b8bd88cae6267d3fee2d9628d1ea9da11c",
+  "completed_at": "2026-04-30T11:14:16.683Z",
+  "repo_id": "prefect",
+  "category_expected": "workflow_orchestration",
+  "category_observed": "fastapi_service",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 2578,
+  "python_files": 1800,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "fastapi/high",
+    "pytest/high",
+    "click/high",
+    "typer/high",
+    "sqlalchemy/high",
+    "httpx/high",
+    "prefect/high"
+  ],
+  "project_role_signals": [
+    "service_backend/high",
+    "python_sdk_library/high",
+    "http_client_library/high",
+    "cli_application/high",
+    "workflow_orchestration/high"
+  ],
+  "test_mapping_count": 827,
+  "risk_preset": "fastapi_service",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "prefect",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected workflow_orchestration, got fastapi_service",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "client/pyproject.toml",
+        "src/integrations/prefect-aws/pyproject.toml",
+        "src/integrations/prefect-azure/pyproject.toml",
+        "src/integrations/prefect-bitbucket/pyproject.toml",
+        "src/integrations/prefect-dask/pyproject.toml",
+        "src/integrations/prefect-databricks/pyproject.toml",
+        "src/integrations/prefect-dbt/pyproject.toml",
+        "src/integrations/prefect-docker/pyproject.toml",
+        "src/integrations/prefect-email/pyproject.toml",
+        "src/integrations/prefect-gcp/pyproject.toml",
+        "src/integrations/prefect-github/pyproject.toml",
+        "src/integrations/prefect-gitlab/pyproject.toml",
+        "src/integrations/prefect-kubernetes/integration_tests/pyproject.toml",
+        "src/integrations/prefect-kubernetes/pyproject.toml",
+        "src/integrations/prefect-ray/pyproject.toml",
+        "src/integrations/prefect-redis/pyproject.toml",
+        "src/integrations/prefect-shell/pyproject.toml",
+        "src/integrations/prefect-slack/pyproject.toml",
+        "src/integrations/prefect-snowflake/pyproject.toml",
+        "src/integrations/prefect-sqlalchemy/pyproject.toml",
+        "uv.lock"
+      ],
+      "count": 21,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "dynamic_or_unresolved_import",
+      "classification": "intrinsic",
+      "paths": [
+        "src/prefect/cli/shell.py",
+        "src/prefect/infrastructure/provisioners/coiled.py",
+        "src/prefect/infrastructure/provisioners/ecs.py",
+        "src/prefect/infrastructure/provisioners/modal.py",
+        "src/prefect/_internal/installation.py"
+      ],
+      "count": 9,
+      "note": "Imports using __import__(), importlib.import_module(), or computed paths. Cannot be statically resolved — this is inherent to Python."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

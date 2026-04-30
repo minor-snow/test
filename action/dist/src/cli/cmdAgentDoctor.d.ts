@@ -1,5 +1,5 @@
 export type AgentDoctorCheck = {
-    readonly id: "agents_md" | "pantheon_agent_json" | "bug_report_template" | "repair_inbox_dir" | "repair_runs_dir" | "dist_cli" | "workflow_example" | "agent_quickstart";
+    readonly id: "agents_md" | "pantheon_agent_json" | "bug_report_template" | "repair_inbox_dir" | "repair_runs_dir" | "governance_dir" | "reviews_dir" | "metrics_dir" | "dist_cli" | "workflow_example" | "agent_quickstart";
     readonly label: string;
     readonly ok: boolean;
     readonly path: string;

@@ -15,6 +15,17 @@ export function detectStaleRepairPlan(input: {
   const { contractState, currentState } = input;
   const effectiveCurrentBase = currentState.diff_base ?? currentState.base_sha;
 
+  if (currentState.error || (contractState.base_sha && !effectiveCurrentBase)) {
+    findings.push({
+      kind: "stale_repair_contract",
+      severity: "blocking",
+      reason: currentState.error
+        ? `Unable to capture current repository state: ${currentState.error}`
+        : "Unable to determine the current repository base for this repair contract.",
+      recommended_action: "request_replan",
+    });
+  }
+
   if (
     contractState.base_sha &&
     effectiveCurrentBase &&

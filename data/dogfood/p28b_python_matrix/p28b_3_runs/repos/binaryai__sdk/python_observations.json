@@ -1,0 +1,3292 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "binaryai__sdk",
+    "observed_file_count": 87,
+    "python_file_count": 55
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "src_layout",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "src_layout_detected",
+        "weight": "strong",
+        "evidence": "src/ directory with package(s): binaryai"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "jupyter_notebooks",
+        "weight": "weak",
+        "evidence": "Jupyter notebooks present"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 3,
+      "docs": 1,
+      "notebook": 1,
+      "source": 49,
+      "test": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "httpx",
+        "kind": "http_client",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpx found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "httpx imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      },
+      {
+        "role": "http_client_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpcore dependency (HTTP transport layer)"
+          },
+          {
+            "dimension": "layout_classification",
+            "detail": "Library package with HTTP core dependency"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / src_layout (medium)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (medium)",
+      "framework: httpx / http_client (high)",
+      "project_role: python_sdk_library (high)",
+      "project_role: http_client_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 2,
+        "evidence": [
+          "2 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".flake8",
+      "bucket": "config",
+      "extension": ".flake8",
+      "size_bytes": 344,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 1397,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/quick_start.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 8401,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "examples/binaryai_file.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 780,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/decompile.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1581,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/decompress.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 838,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/info.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1153,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/md5_sha256.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 334,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/multithreads.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1120,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sca.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 796,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/strings.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 795,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/upload_and_analysis.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1103,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "poetry.lock",
+      "bucket": "config",
+      "extension": ".lock",
+      "size_bytes": 207355,
+      "evidence": [
+        "Lock/manifest"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 1355,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "src/binaryai/binaryai_file.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6525,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 22410,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/ascii_string.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1509,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/base_client.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6870,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/base_model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 649,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/check_or_upload.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1486,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/check_state.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1274,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/client.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19318,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/compressed_file.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1082,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/create_file.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 505,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/cve_name.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 547,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/download_link.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 384,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/enums.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2474,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2496,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/filename.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 301,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/file_k_hash.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 935,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/file_malware_probability.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 903,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/file_size.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 289,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/functions_info.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1246,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/function_info.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1215,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/function_list.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 741,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/function_match.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1167,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/input_types.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2959,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/license.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1700,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/license_short_name.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 489,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/mime_type.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 350,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/overview.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 929,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/reanalyze.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 772,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/sca.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 570,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/sha_256.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 338,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/client_stub/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8694,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/component.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 468,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/compressed_file.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 326,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/cve.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 145,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 520,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/function.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 955,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/license.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1415,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/upload.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6287,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9095,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/binaryai/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 700,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6062,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/binaryai_file.py",
+      "raw_specifier": "from binaryai import BinaryAI, BinaryAIFile",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/decompile.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/decompile.py",
+      "raw_specifier": "from binaryai import BinaryAI",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/decompress.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/decompress.py",
+      "raw_specifier": "from binaryai import BinaryAI",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/info.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/info.py",
+      "raw_specifier": "from binaryai import BinaryAI",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/md5_sha256.py",
+      "raw_specifier": "from binaryai import BinaryAI",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/multithreads.py",
+      "raw_specifier": "from multiprocessing.pool import ThreadPool",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "multiprocessing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/multithreads.py",
+      "raw_specifier": "from typing import List, Tuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/multithreads.py",
+      "raw_specifier": "from binaryai import BinaryAI, Function",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sca.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sca.py",
+      "raw_specifier": "from binaryai import BinaryAI",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/strings.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/strings.py",
+      "raw_specifier": "from binaryai import BinaryAI",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/upload_and_analysis.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/upload_and_analysis.py",
+      "raw_specifier": "from binaryai import BinaryAI",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/binaryai_file.py",
+      "raw_specifier": "from typing import Dict, Iterator, List",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/binaryai_file.py",
+      "raw_specifier": "from binaryai.client import BinaryAI",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/binaryai_file.py",
+      "raw_specifier": "from binaryai.component import Component",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/binaryai_file.py",
+      "raw_specifier": "from binaryai.compressed_file import CompressedFile",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/binaryai_file.py",
+      "raw_specifier": "from binaryai.cve import CVE",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/binaryai_file.py",
+      "raw_specifier": "from binaryai.function import Function, MatchedFunction",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/binaryai_file.py",
+      "raw_specifier": "from binaryai.license import License",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "binascii",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "binascii",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "from importlib.metadata import version",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "from typing import Dict, Iterator, List, Optional, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "from urllib.parse import urlparse",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "httpx",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "httpx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "from binaryai import client_stub",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "from binaryai.component import Component",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "from binaryai.compressed_file import CompressedFile",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "from binaryai.exceptions import FileNotExistError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "from binaryai.function import Function, MatchedFunction",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "from binaryai.license import License",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "from binaryai.upload import Uploader",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/client.py",
+      "raw_specifier": "from binaryai.utils import QCloudHttpxAuth",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/ascii_string.py",
+      "raw_specifier": "from typing import Annotated, List, Literal, Optional, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/ascii_string.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/ascii_string.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/base_client.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/base_client.py",
+      "raw_specifier": "from typing import IO, Any, Dict, List, Optional, Tuple, TypeVar, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/base_client.py",
+      "raw_specifier": "httpx",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "httpx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/base_client.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/base_client.py",
+      "raw_specifier": "from pydantic_core import to_jsonable_python",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic_core",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/base_client.py",
+      "raw_specifier": "from .base_model import UNSET, Upload",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/base_client.py",
+      "raw_specifier": "from .exceptions import ( GraphQLClientGraphQLMultiError, GraphQLClientHttpError, GraphQLClientInvalidResponseError, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/base_model.py",
+      "raw_specifier": "from io import IOBase",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/base_model.py",
+      "raw_specifier": "from pydantic import BaseModel as PydanticBaseModel, ConfigDict",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/check_or_upload.py",
+      "raw_specifier": "from typing import List, Literal, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/check_or_upload.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/check_or_upload.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/check_state.py",
+      "raw_specifier": "from typing import Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/check_state.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/check_state.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/check_state.py",
+      "raw_specifier": "from .enums import Status",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".enums",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from typing import Any, Dict, List, Optional, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .ascii_string import ASCIIString",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".ascii_string",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .base_client import BaseClient",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_client",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .base_model import UNSET, UnsetType",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .check_or_upload import CheckOrUpload",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".check_or_upload",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .check_state import CheckState",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".check_state",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .compressed_file import CompressedFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compressed_file",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .create_file import CreateFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".create_file",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .cve_name import CVEName",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cve_name",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .download_link import DownloadLink",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".download_link",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .file_k_hash import FileKHash",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".file_k_hash",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .file_malware_probability import FileMalwareProbability",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".file_malware_probability",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .file_size import FileSize",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".file_size",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .filename import Filename",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".filename",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .function_info import FunctionInfo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".function_info",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .function_list import FunctionList",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".function_list",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .function_match import FunctionMatch",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".function_match",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .functions_info import FunctionsInfo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".functions_info",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .input_types import CreateFileInput, CreateUploadTicketInput, ReanalyzeInput",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".input_types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .license import License",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".license",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .license_short_name import LicenseShortName",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".license_short_name",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .mime_type import MIMEType",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".mime_type",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .overview import Overview",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".overview",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .reanalyze import Reanalyze",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".reanalyze",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .sca import SCA",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sca",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/client.py",
+      "raw_specifier": "from .sha_256 import Sha256",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sha_256",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/compressed_file.py",
+      "raw_specifier": "from typing import Annotated, List, Literal, Optional, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/compressed_file.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/compressed_file.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/create_file.py",
+      "raw_specifier": "from typing import List",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/create_file.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/create_file.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/cve_name.py",
+      "raw_specifier": "from typing import List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/cve_name.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/download_link.py",
+      "raw_specifier": "from typing import Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/download_link.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/download_link.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/enums.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/exceptions.py",
+      "raw_specifier": "from typing import Any, Dict, List, Optional, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/exceptions.py",
+      "raw_specifier": "httpx",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "httpx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/filename.py",
+      "raw_specifier": "from typing import List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/filename.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/file_k_hash.py",
+      "raw_specifier": "from typing import Any, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/file_k_hash.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/file_k_hash.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/file_malware_probability.py",
+      "raw_specifier": "from typing import Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/file_malware_probability.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/file_malware_probability.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/file_malware_probability.py",
+      "raw_specifier": "from .enums import Status",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".enums",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/file_size.py",
+      "raw_specifier": "from typing import Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/file_size.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/functions_info.py",
+      "raw_specifier": "from typing import Any, List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/functions_info.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/functions_info.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/function_info.py",
+      "raw_specifier": "from typing import Any, List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/function_info.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/function_info.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/function_list.py",
+      "raw_specifier": "from typing import Any, List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/function_list.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/function_list.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/function_match.py",
+      "raw_specifier": "from typing import List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/function_match.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/function_match.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/input_types.py",
+      "raw_specifier": "from typing import List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/input_types.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/input_types.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/input_types.py",
+      "raw_specifier": "from .enums import FileType, SearchBinaryStatisticKey, SymbolType",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".enums",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/license.py",
+      "raw_specifier": "from typing import List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/license.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/license.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/license_short_name.py",
+      "raw_specifier": "from typing import List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/license_short_name.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/mime_type.py",
+      "raw_specifier": "from typing import Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/mime_type.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/mime_type.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/overview.py",
+      "raw_specifier": "from typing import Any, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/overview.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/overview.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/reanalyze.py",
+      "raw_specifier": "from typing import Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/reanalyze.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/reanalyze.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/reanalyze.py",
+      "raw_specifier": "from .enums import NoopReason, Status",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".enums",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/sca.py",
+      "raw_specifier": "from typing import List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/sca.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/sca.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/sha_256.py",
+      "raw_specifier": "from typing import Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/sha_256.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/sha_256.py",
+      "raw_specifier": "from .base_model import BaseModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .ascii_string import ( ASCIIString, ASCIIStringFile, ASCIIStringFileExecutableCOFFInfo, ASCIIStringFileExecutableELFInfo, ASCIIStringFileExecutableMachoInfo, ASCIIStringFileExecutablePEInfo, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".ascii_string",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .base_client import BaseClient",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_client",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .base_model import BaseModel, Upload",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".base_model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .check_or_upload import ( CheckOrUpload, CheckOrUploadCreateUploadTicketFile, CheckOrUploadCreateUploadTicketOwnershipTicket, CheckOrUploadCreateUploadTicketUploadTicket, CheckOrUploadCreateUploadTicketUploadTicketRequestHeaders, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".check_or_upload",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .check_state import ( CheckState, CheckStateFile, CheckStateFileDecompileResult, CheckStateFileDecompileResultBasicInfo, CheckStateFileSmartBeatStatus, CheckStateFileSmartBinaryStatus, CheckStateFileText, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".check_state",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .client import Client",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".client",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .compressed_file import ( CompressedFile, CompressedFileFile, CompressedFileFileDecompressedCompressedDirectory, CompressedFileFileDecompressedCompressedFile, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compressed_file",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .create_file import CreateFile, CreateFileCreateFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".create_file",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .cve_name import CVEName, CVENameFile, CVENameFileScainfo, CVENameFileScainfoCves",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cve_name",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .download_link import DownloadLink, DownloadLinkFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".download_link",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .enums import ( AnalyzeProgressStep, AntivirusSafeLevel, ExecuteType, FileType, MalwareFamilyTag, MatchAlgorithm, NoopReason, PseudoCodeAnnotationType, RelroLevel, SCAAlgo, SearchBinaryStatisticKey, Status, SymbolType, VulnerabilitySourceStatus, XRefType, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".enums",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .exceptions import ( GraphQLClientError, GraphQLClientGraphQLError, GraphQLClientGraphQLMultiError, GraphQLClientHttpError, GraphQLClientInvalidResponseError, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .file_k_hash import ( FileKHash, FileKHashFile, FileKHashFileDecompileResult, FileKHashFileDecompileResultKHashInfo, FileKHashFileDecompileResultKHashInfoHash, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".file_k_hash",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .file_malware_probability import ( FileMalwareProbability, FileMalwareProbabilityFile, FileMalwareProbabilityFileAnalyzeStatus, FileMalwareProbabilityFileDecompileResult, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".file_malware_probability",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .file_size import FileSize, FileSizeFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".file_size",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .filename import Filename, FilenameFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".filename",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .function_info import ( FunctionInfo, FunctionInfoFile, FunctionInfoFileDecompileResult, FunctionInfoFileDecompileResultFunction, FunctionInfoFileDecompileResultFunctionEmbedding, FunctionInfoFileDecompileResultFunctionPseudoCode, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".function_info",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .function_list import ( FunctionList, FunctionListFile, FunctionListFileDecompileResult, FunctionListFileDecompileResultFunctions, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".function_list",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .function_match import ( FunctionMatch, FunctionMatchFile, FunctionMatchFileDecompileResult, FunctionMatchFileDecompileResultFunction, FunctionMatchFileDecompileResultFunctionMatch, FunctionMatchFileDecompileResultFunctionMatchFunction, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".function_match",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .functions_info import ( FunctionsInfo, FunctionsInfoFile, FunctionsInfoFileDecompileResult, FunctionsInfoFileDecompileResultFunctions, FunctionsInfoFileDecompileResultFunctionsEmbedding, FunctionsInfoFileDecompileResultFunctionsPseudoCode, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".functions_info",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .input_types import ( BindiffMatchInput, CreateFileInput, CreateMatchInput, CreateUploadTicketInput, KHashInput, MatchTargetInput, OSSMatchInput, ReanalyzeInput, SearchBinaryInput, SearchBinaryStatisticInput, SearchCVESec, SearchFileInput, SearchThirdLib, SessionLoginInput, SymbolTableFilter, UpdateAccessKeyInput, WeixinSessionLoginInput, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".input_types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .license import ( License, LicenseFile, LicenseFileScainfo, LicenseFileScainfoLicenselist, LicenseFileScainfoLicenselistTags, LicenseFileScainfoLicenselistTagsCondition, LicenseFileScainfoLicenselistTagsForbidden, LicenseFileScainfoLicenselistTagsPermission, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".license",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .license_short_name import ( LicenseShortName, LicenseShortNameFile, LicenseShortNameFileScainfo, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".license_short_name",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .mime_type import MIMEType, MIMETypeFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".mime_type",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .overview import ( Overview, OverviewFile, OverviewFileDecompileResult, OverviewFileDecompileResultBasicInfo, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".overview",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .reanalyze import ( Reanalyze, ReanalyzeReanalyze, ReanalyzeReanalyzeFile, ReanalyzeReanalyzeFileAnalyzeStatus, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".reanalyze",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .sca import SCA, SCAFile, SCAFileScainfo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sca",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/client_stub/__init__.py",
+      "raw_specifier": "from .sha_256 import Sha256, Sha256File",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sha_256",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/function.py",
+      "raw_specifier": "from typing import List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/license.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/license.py",
+      "raw_specifier": "from typing import List",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/upload.py",
+      "raw_specifier": "hashlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/upload.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/upload.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/upload.py",
+      "raw_specifier": "from typing import Dict, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/upload.py",
+      "raw_specifier": "httpx",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "httpx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/upload.py",
+      "raw_specifier": "from binaryai import client_stub",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/upload.py",
+      "raw_specifier": "from binaryai.exceptions import FileRequiredError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/upload.py",
+      "raw_specifier": "from binaryai.utils import sha256sum",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "binaryai",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/binaryai/utils.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/utils.py",
+      "raw_specifier": "hashlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/utils.py",
+      "raw_specifier": "hmac",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hmac",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/utils.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/utils.py",
+      "raw_specifier": "from hashlib import sha256",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/utils.py",
+      "raw_specifier": "httpx",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "httpx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/__init__.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/binaryai/__init__.py",
+      "raw_specifier": "from .binaryai_file import BinaryAIFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".binaryai_file",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/__init__.py",
+      "raw_specifier": "from .client import SDK_VERSION, BinaryAI",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".client",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/__init__.py",
+      "raw_specifier": "from .component import Component",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".component",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/__init__.py",
+      "raw_specifier": "from .compressed_file import CompressedFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compressed_file",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/__init__.py",
+      "raw_specifier": "from .cve import CVE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cve",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/__init__.py",
+      "raw_specifier": "from .exceptions import FileNotExistError, FileRequiredError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/__init__.py",
+      "raw_specifier": "from .function import Function",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".function",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/binaryai/__init__.py",
+      "raw_specifier": "from .license import License",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".license",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "poetry.lock",
+      "source_type": "poetry.lock",
+      "packages": [
+        "alabaster",
+        "annotated_types",
+        "anyio",
+        "appnope",
+        "ariadne_codegen",
+        "astroid",
+        "asttokens",
+        "attrs",
+        "autoflake",
+        "babel",
+        "beautifulsoup4",
+        "black",
+        "bleach",
+        "certifi",
+        "cffi",
+        "charset_normalizer",
+        "click",
+        "colorama",
+        "comm",
+        "debugpy",
+        "decorator",
+        "defusedxml",
+        "deprecated",
+        "docutils",
+        "exceptiongroup",
+        "executing",
+        "fastjsonschema",
+        "flake8",
+        "graphql_core",
+        "h11",
+        "httpcore",
+        "httpx",
+        "idna",
+        "imagesize",
+        "importlib_metadata",
+        "iniconfig",
+        "ipykernel",
+        "ipython",
+        "isort",
+        "jedi",
+        "jinja2",
+        "jsonschema",
+        "jsonschema_specifications",
+        "jupyter_client",
+        "jupyter_core",
+        "jupyterlab_pygments",
+        "markdown_it_py",
+        "markupsafe",
+        "matplotlib_inline",
+        "mccabe",
+        "mdit_py_plugins",
+        "mdurl",
+        "mistune",
+        "mypy_extensions",
+        "myst_parser",
+        "nbclient",
+        "nbconvert",
+        "nbformat",
+        "nbsphinx",
+        "nest_asyncio",
+        "numpy",
+        "packaging",
+        "pandocfilters",
+        "parso",
+        "pathspec",
+        "pexpect",
+        "platformdirs",
+        "pluggy",
+        "prompt_toolkit",
+        "psutil",
+        "ptyprocess",
+        "pure_eval",
+        "pycodestyle",
+        "pycparser",
+        "pydantic",
+        "pydantic_core",
+        "pyflakes",
+        "pygments",
+        "pytest",
+        "python_dateutil",
+        "pywin32",
+        "pyyaml",
+        "pyzmq",
+        "referencing",
+        "requests",
+        "rpds_py",
+        "scipy",
+        "setuptools",
+        "six",
+        "sniffio",
+        "snowballstemmer",
+        "soupsieve",
+        "sphinx",
+        "sphinx_autoapi",
+        "sphinx_intl",
+        "sphinx_rtd_theme",
+        "sphinxcontrib_applehelp",
+        "sphinxcontrib_devhelp",
+        "sphinxcontrib_htmlhelp",
+        "sphinxcontrib_jquery",
+        "sphinxcontrib_jsmath",
+        "sphinxcontrib_qthelp",
+        "sphinxcontrib_serializinghtml",
+        "stack_data",
+        "stdlib_list",
+        "tinycss2",
+        "toml",
+        "tomli",
+        "tornado",
+        "traitlets",
+        "typing_extensions",
+        "typing_inspection",
+        "urllib3",
+        "wcwidth",
+        "webencodings",
+        "wrapt",
+        "zipp"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "deprecated",
+        "httpx",
+        "pydantic"
+      ],
+      "dev_packages": [
+        "flake8",
+        "black",
+        "isort",
+        "ariadne_codegen",
+        "pytest",
+        "scipy"
+      ],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/binaryai_file.py",
+      "candidate_test_paths": [
+        "examples/tests/test_binaryai_file.py",
+        "tests/test_binaryai_file.py",
+        "examples/tests/test_examples.py",
+        "test/test_binaryai_file.py",
+        "tests/binaryai_file/test_binaryai_file.py",
+        "tests/binaryai_files/test_binaryai_file.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/decompile.py",
+      "candidate_test_paths": [
+        "examples/tests/test_decompile.py",
+        "tests/test_decompile.py",
+        "examples/tests/test_examples.py",
+        "test/test_decompile.py",
+        "tests/decompile/test_decompile.py",
+        "tests/decompiles/test_decompile.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/decompress.py",
+      "candidate_test_paths": [
+        "examples/tests/test_decompress.py",
+        "tests/test_decompress.py",
+        "examples/tests/test_examples.py",
+        "test/test_decompress.py",
+        "tests/decompress/test_decompress.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/info.py",
+      "candidate_test_paths": [
+        "examples/tests/test_info.py",
+        "tests/test_info.py",
+        "examples/tests/test_examples.py",
+        "test/test_info.py",
+        "tests/info/test_info.py",
+        "tests/infos/test_info.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/md5_sha256.py",
+      "candidate_test_paths": [
+        "examples/tests/test_md5_sha256.py",
+        "tests/test_md5_sha256.py",
+        "examples/tests/test_examples.py",
+        "test/test_md5_sha256.py",
+        "tests/md5_sha256/test_md5_sha256.py",
+        "tests/md5_sha256s/test_md5_sha256.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/multithreads.py",
+      "candidate_test_paths": [
+        "examples/tests/test_multithreads.py",
+        "tests/test_multithreads.py",
+        "examples/tests/test_examples.py",
+        "test/test_multithreads.py",
+        "tests/multithreads/test_multithreads.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/sca.py",
+      "candidate_test_paths": [
+        "examples/tests/test_sca.py",
+        "tests/test_sca.py",
+        "examples/tests/test_examples.py",
+        "test/test_sca.py",
+        "tests/sca/test_sca.py",
+        "tests/scas/test_sca.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/strings.py",
+      "candidate_test_paths": [
+        "examples/tests/test_strings.py",
+        "tests/test_strings.py",
+        "examples/tests/test_examples.py",
+        "test/test_strings.py",
+        "tests/strings/test_strings.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/upload_and_analysis.py",
+      "candidate_test_paths": [
+        "examples/tests/test_upload_and_analysis.py",
+        "tests/test_upload_and_analysis.py",
+        "examples/tests/test_examples.py",
+        "test/test_upload_and_analysis.py",
+        "tests/upload_and_analysis/test_upload_and_analysis.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/binaryai_file.py",
+      "candidate_test_paths": [
+        "src/binaryai/tests/test_binaryai_file.py",
+        "tests/binaryai/test_binaryai_file.py",
+        "src/binaryai/tests/test_binaryai.py",
+        "test/test_binaryai_file.py",
+        "tests/test_binaryai_file.py",
+        "tests/binaryai_file/test_binaryai_file.py",
+        "tests/binaryai_files/test_binaryai_file.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client.py",
+      "candidate_test_paths": [
+        "src/binaryai/tests/test_client.py",
+        "tests/binaryai/test_client.py",
+        "src/binaryai/tests/test_binaryai.py",
+        "test/test_client.py",
+        "tests/test_client.py",
+        "tests/client/test_client.py",
+        "tests/clients/test_client.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/ascii_string.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_ascii_string.py",
+        "tests/binaryai/client_stub/test_ascii_string.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_ascii_string.py",
+        "tests/test_ascii_string.py",
+        "tests/ascii_string/test_ascii_string.py",
+        "tests/ascii_strings/test_ascii_string.py",
+        "tests/client_stub/test_ascii_string.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/base_client.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_base_client.py",
+        "tests/binaryai/client_stub/test_base_client.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_base_client.py",
+        "tests/test_base_client.py",
+        "tests/base_client/test_base_client.py",
+        "tests/base_clients/test_base_client.py",
+        "tests/client_stub/test_base_client.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/base_model.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_base_model.py",
+        "tests/binaryai/client_stub/test_base_model.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_base_model.py",
+        "tests/test_base_model.py",
+        "tests/base_model/test_base_model.py",
+        "tests/base_models/test_base_model.py",
+        "tests/client_stub/test_base_model.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/check_or_upload.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_check_or_upload.py",
+        "tests/binaryai/client_stub/test_check_or_upload.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_check_or_upload.py",
+        "tests/test_check_or_upload.py",
+        "tests/check_or_upload/test_check_or_upload.py",
+        "tests/check_or_uploads/test_check_or_upload.py",
+        "tests/client_stub/test_check_or_upload.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/check_state.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_check_state.py",
+        "tests/binaryai/client_stub/test_check_state.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_check_state.py",
+        "tests/test_check_state.py",
+        "tests/check_state/test_check_state.py",
+        "tests/check_states/test_check_state.py",
+        "tests/client_stub/test_check_state.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/client.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_client.py",
+        "tests/binaryai/client_stub/test_client.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_client.py",
+        "tests/test_client.py",
+        "tests/client/test_client.py",
+        "tests/clients/test_client.py",
+        "tests/client_stub/test_client.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/compressed_file.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_compressed_file.py",
+        "tests/binaryai/client_stub/test_compressed_file.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_compressed_file.py",
+        "tests/test_compressed_file.py",
+        "tests/compressed_file/test_compressed_file.py",
+        "tests/compressed_files/test_compressed_file.py",
+        "tests/client_stub/test_compressed_file.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/create_file.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_create_file.py",
+        "tests/binaryai/client_stub/test_create_file.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_create_file.py",
+        "tests/test_create_file.py",
+        "tests/create_file/test_create_file.py",
+        "tests/create_files/test_create_file.py",
+        "tests/client_stub/test_create_file.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/cve_name.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_cve_name.py",
+        "tests/binaryai/client_stub/test_cve_name.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_cve_name.py",
+        "tests/test_cve_name.py",
+        "tests/cve_name/test_cve_name.py",
+        "tests/cve_names/test_cve_name.py",
+        "tests/client_stub/test_cve_name.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/download_link.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_download_link.py",
+        "tests/binaryai/client_stub/test_download_link.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_download_link.py",
+        "tests/test_download_link.py",
+        "tests/download_link/test_download_link.py",
+        "tests/download_links/test_download_link.py",
+        "tests/client_stub/test_download_link.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/enums.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_enums.py",
+        "tests/binaryai/client_stub/test_enums.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_enums.py",
+        "tests/test_enums.py",
+        "tests/enums/test_enums.py",
+        "tests/client_stub/test_enums.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/exceptions.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_exceptions.py",
+        "tests/binaryai/client_stub/test_exceptions.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py",
+        "tests/client_stub/test_exceptions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/filename.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_filename.py",
+        "tests/binaryai/client_stub/test_filename.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_filename.py",
+        "tests/test_filename.py",
+        "tests/filename/test_filename.py",
+        "tests/filenames/test_filename.py",
+        "tests/client_stub/test_filename.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/file_k_hash.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_file_k_hash.py",
+        "tests/binaryai/client_stub/test_file_k_hash.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_file_k_hash.py",
+        "tests/test_file_k_hash.py",
+        "tests/file_k_hash/test_file_k_hash.py",
+        "tests/file_k_hashs/test_file_k_hash.py",
+        "tests/client_stub/test_file_k_hash.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/file_malware_probability.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_file_malware_probability.py",
+        "tests/binaryai/client_stub/test_file_malware_probability.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_file_malware_probability.py",
+        "tests/test_file_malware_probability.py",
+        "tests/file_malware_probability/test_file_malware_probability.py",
+        "tests/file_malware_probabilitys/test_file_malware_probability.py",
+        "tests/client_stub/test_file_malware_probability.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/file_size.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_file_size.py",
+        "tests/binaryai/client_stub/test_file_size.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_file_size.py",
+        "tests/test_file_size.py",
+        "tests/file_size/test_file_size.py",
+        "tests/file_sizes/test_file_size.py",
+        "tests/client_stub/test_file_size.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/functions_info.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_functions_info.py",
+        "tests/binaryai/client_stub/test_functions_info.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_functions_info.py",
+        "tests/test_functions_info.py",
+        "tests/functions_info/test_functions_info.py",
+        "tests/functions_infos/test_functions_info.py",
+        "tests/client_stub/test_functions_info.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/function_info.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_function_info.py",
+        "tests/binaryai/client_stub/test_function_info.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_function_info.py",
+        "tests/test_function_info.py",
+        "tests/function_info/test_function_info.py",
+        "tests/function_infos/test_function_info.py",
+        "tests/client_stub/test_function_info.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/function_list.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_function_list.py",
+        "tests/binaryai/client_stub/test_function_list.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_function_list.py",
+        "tests/test_function_list.py",
+        "tests/function_list/test_function_list.py",
+        "tests/function_lists/test_function_list.py",
+        "tests/client_stub/test_function_list.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/function_match.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_function_match.py",
+        "tests/binaryai/client_stub/test_function_match.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_function_match.py",
+        "tests/test_function_match.py",
+        "tests/function_match/test_function_match.py",
+        "tests/function_matchs/test_function_match.py",
+        "tests/client_stub/test_function_match.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/input_types.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_input_types.py",
+        "tests/binaryai/client_stub/test_input_types.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_input_types.py",
+        "tests/test_input_types.py",
+        "tests/input_types/test_input_types.py",
+        "tests/client_stub/test_input_types.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/license.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_license.py",
+        "tests/binaryai/client_stub/test_license.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_license.py",
+        "tests/test_license.py",
+        "tests/license/test_license.py",
+        "tests/licenses/test_license.py",
+        "tests/client_stub/test_license.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/license_short_name.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_license_short_name.py",
+        "tests/binaryai/client_stub/test_license_short_name.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_license_short_name.py",
+        "tests/test_license_short_name.py",
+        "tests/license_short_name/test_license_short_name.py",
+        "tests/license_short_names/test_license_short_name.py",
+        "tests/client_stub/test_license_short_name.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/mime_type.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_mime_type.py",
+        "tests/binaryai/client_stub/test_mime_type.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_mime_type.py",
+        "tests/test_mime_type.py",
+        "tests/mime_type/test_mime_type.py",
+        "tests/mime_types/test_mime_type.py",
+        "tests/client_stub/test_mime_type.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/overview.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_overview.py",
+        "tests/binaryai/client_stub/test_overview.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_overview.py",
+        "tests/test_overview.py",
+        "tests/overview/test_overview.py",
+        "tests/overviews/test_overview.py",
+        "tests/client_stub/test_overview.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/reanalyze.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_reanalyze.py",
+        "tests/binaryai/client_stub/test_reanalyze.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_reanalyze.py",
+        "tests/test_reanalyze.py",
+        "tests/reanalyze/test_reanalyze.py",
+        "tests/reanalyzes/test_reanalyze.py",
+        "tests/client_stub/test_reanalyze.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/sca.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_sca.py",
+        "tests/binaryai/client_stub/test_sca.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_sca.py",
+        "tests/test_sca.py",
+        "tests/sca/test_sca.py",
+        "tests/scas/test_sca.py",
+        "tests/client_stub/test_sca.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/client_stub/sha_256.py",
+      "candidate_test_paths": [
+        "src/binaryai/client_stub/tests/test_sha_256.py",
+        "tests/binaryai/client_stub/test_sha_256.py",
+        "src/binaryai/client_stub/tests/test_client_stub.py",
+        "test/test_sha_256.py",
+        "tests/test_sha_256.py",
+        "tests/sha_256/test_sha_256.py",
+        "tests/sha_256s/test_sha_256.py",
+        "tests/client_stub/test_sha_256.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/component.py",
+      "candidate_test_paths": [
+        "src/binaryai/tests/test_component.py",
+        "tests/binaryai/test_component.py",
+        "src/binaryai/tests/test_binaryai.py",
+        "test/test_component.py",
+        "tests/test_component.py",
+        "tests/component/test_component.py",
+        "tests/components/test_component.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/compressed_file.py",
+      "candidate_test_paths": [
+        "src/binaryai/tests/test_compressed_file.py",
+        "tests/binaryai/test_compressed_file.py",
+        "src/binaryai/tests/test_binaryai.py",
+        "test/test_compressed_file.py",
+        "tests/test_compressed_file.py",
+        "tests/compressed_file/test_compressed_file.py",
+        "tests/compressed_files/test_compressed_file.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/cve.py",
+      "candidate_test_paths": [
+        "src/binaryai/tests/test_cve.py",
+        "tests/binaryai/test_cve.py",
+        "src/binaryai/tests/test_binaryai.py",
+        "test/test_cve.py",
+        "tests/test_cve.py",
+        "tests/cve/test_cve.py",
+        "tests/cves/test_cve.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/exceptions.py",
+      "candidate_test_paths": [
+        "src/binaryai/tests/test_exceptions.py",
+        "tests/binaryai/test_exceptions.py",
+        "src/binaryai/tests/test_binaryai.py",
+        "test/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/function.py",
+      "candidate_test_paths": [
+        "src/binaryai/tests/test_function.py",
+        "tests/binaryai/test_function.py",
+        "src/binaryai/tests/test_binaryai.py",
+        "test/test_function.py",
+        "tests/test_function.py",
+        "tests/function/test_function.py",
+        "tests/functions/test_function.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/license.py",
+      "candidate_test_paths": [
+        "src/binaryai/tests/test_license.py",
+        "tests/binaryai/test_license.py",
+        "src/binaryai/tests/test_binaryai.py",
+        "test/test_license.py",
+        "tests/test_license.py",
+        "tests/license/test_license.py",
+        "tests/licenses/test_license.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/upload.py",
+      "candidate_test_paths": [
+        "src/binaryai/tests/test_upload.py",
+        "tests/binaryai/test_upload.py",
+        "src/binaryai/tests/test_binaryai.py",
+        "test/test_upload.py",
+        "tests/test_upload.py",
+        "tests/upload/test_upload.py",
+        "tests/uploads/test_upload.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/binaryai/utils.py",
+      "candidate_test_paths": [
+        "src/binaryai/tests/test_utils.py",
+        "tests/binaryai/test_utils.py",
+        "src/binaryai/tests/test_binaryai.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_utils.py"
+      ],
+      "confidence": "medium",
+      "reason": "Generic library helper match without directory context: tests/test_utils.py"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "docs/quick_start.ipynb"
+      ],
+      "count": 1,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 51,
+    "classified_count": 51,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 202,
+    "project_import_count": 0,
+    "declared_package_count": 27,
+    "undeclared_package_count": 33,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 47,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 1,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

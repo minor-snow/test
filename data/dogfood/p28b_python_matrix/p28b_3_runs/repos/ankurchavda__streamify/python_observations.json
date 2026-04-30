@@ -1,0 +1,700 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "ankurchavda__streamify",
+    "observed_file_count": 82,
+    "python_file_count": 12
+  },
+  "layout": {
+    "primary_layout": "data_pipeline",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "pipeline_structure",
+        "weight": "moderate",
+        "evidence": "Pipeline/DAG/ETL directory structure"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "Unable to determine package layout from file paths"
+      }
+    ],
+    "bucket_summary": {
+      "source": 10,
+      "unknown": 1,
+      "config": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "sqlalchemy found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "airflow",
+        "kind": "workflow_orchestration",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "airflow imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "workflow_orchestration",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "Workflow orchestration framework imported in source files"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "unknown",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: data_pipeline / unknown (low)",
+      "framework: sqlalchemy / orm (medium)",
+      "framework: airflow / workflow_orchestration (medium)",
+      "project_role: workflow_orchestration (medium)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/auth*",
+        "reason": "Authentication logic requires human review",
+        "severity": "high",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/auth*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "airflow/dags/dbt_test_dag.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 596,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "airflow/dags/load_songs_dag.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3785,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "airflow/dags/schema.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3345,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "airflow/dags/streamify_dag.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4025,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "airflow/dags/task_templates.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3891,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "airflow/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 98,
+      "evidence": []
+    },
+    {
+      "path": "kafka/test_connection/produce_taxi_json.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1115,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 40,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "spark_streaming/schema.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3434,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "spark_streaming/streaming_functions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4458,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "spark_streaming/stream_all_events.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2508,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "spark_streaming/test_connection/stream_taxi_json.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1498,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "airflow/dags/dbt_test_dag.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "airflow/dags/dbt_test_dag.py",
+      "raw_specifier": "from airflow import DAG",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "airflow/dags/dbt_test_dag.py",
+      "raw_specifier": "from airflow.operators.bash import BashOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "airflow/dags/load_songs_dag.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "airflow/dags/load_songs_dag.py",
+      "raw_specifier": "pyarrow.csv",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pyarrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "airflow/dags/load_songs_dag.py",
+      "raw_specifier": "pyarrow.parquet",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pyarrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "airflow/dags/load_songs_dag.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "airflow/dags/load_songs_dag.py",
+      "raw_specifier": "from airflow import DAG",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "airflow/dags/load_songs_dag.py",
+      "raw_specifier": "from airflow.operators.bash import BashOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "airflow/dags/load_songs_dag.py",
+      "raw_specifier": "from airflow.operators.python import PythonOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "airflow/dags/load_songs_dag.py",
+      "raw_specifier": "from airflow.providers.google.cloud.operators.bigquery import BigQueryCreateExternalTableOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "airflow/dags/load_songs_dag.py",
+      "raw_specifier": "from google.cloud import storage",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "google",
+      "confidence": "low"
+    },
+    {
+      "from_file": "airflow/dags/load_songs_dag.py",
+      "raw_specifier": "from schema import schema",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "schema",
+      "confidence": "low"
+    },
+    {
+      "from_file": "airflow/dags/streamify_dag.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "airflow/dags/streamify_dag.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "airflow/dags/streamify_dag.py",
+      "raw_specifier": "from airflow import DAG",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "airflow/dags/streamify_dag.py",
+      "raw_specifier": "from airflow.operators.bash import BashOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "airflow/dags/streamify_dag.py",
+      "raw_specifier": "from schema import schema",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "schema",
+      "confidence": "low"
+    },
+    {
+      "from_file": "airflow/dags/streamify_dag.py",
+      "raw_specifier": "from task_templates import (create_external_table,",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "task_templates",
+      "confidence": "low"
+    },
+    {
+      "from_file": "airflow/dags/task_templates.py",
+      "raw_specifier": "from airflow.providers.google.cloud.operators.bigquery import (BigQueryCreateExternalTableOperator,",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kafka/test_connection/produce_taxi_json.py",
+      "raw_specifier": "csv",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "csv",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kafka/test_connection/produce_taxi_json.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kafka/test_connection/produce_taxi_json.py",
+      "raw_specifier": "from json import dumps",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kafka/test_connection/produce_taxi_json.py",
+      "raw_specifier": "from kafka import KafkaProducer",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kafka",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kafka/test_connection/produce_taxi_json.py",
+      "raw_specifier": "from time import sleep",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kafka/test_connection/produce_taxi_json.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "spark_streaming/schema.py",
+      "raw_specifier": "from pyspark.sql.types import (IntegerType,",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pyspark",
+      "confidence": "low"
+    },
+    {
+      "from_file": "spark_streaming/streaming_functions.py",
+      "raw_specifier": "from pyspark.sql import SparkSession",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pyspark",
+      "confidence": "low"
+    },
+    {
+      "from_file": "spark_streaming/streaming_functions.py",
+      "raw_specifier": "from pyspark.sql.functions import from_json, col, month, hour, dayofmonth, col, year, udf",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pyspark",
+      "confidence": "low"
+    },
+    {
+      "from_file": "spark_streaming/stream_all_events.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "spark_streaming/stream_all_events.py",
+      "raw_specifier": "from streaming_functions import *",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "streaming_functions",
+      "confidence": "low"
+    },
+    {
+      "from_file": "spark_streaming/stream_all_events.py",
+      "raw_specifier": "from schema import schema",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "schema",
+      "confidence": "low"
+    },
+    {
+      "from_file": "spark_streaming/test_connection/stream_taxi_json.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "spark_streaming/test_connection/stream_taxi_json.py",
+      "raw_specifier": "from pyspark.sql import SparkSession",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pyspark",
+      "confidence": "low"
+    },
+    {
+      "from_file": "spark_streaming/test_connection/stream_taxi_json.py",
+      "raw_specifier": "from pyspark.sql.types import IntegerType, StringType, FloatType, TimestampType, StructField, StructType",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pyspark",
+      "confidence": "low"
+    },
+    {
+      "from_file": "spark_streaming/test_connection/stream_taxi_json.py",
+      "raw_specifier": "from pyspark.sql.functions import from_json, col, expr, struct",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pyspark",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "airflow/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "apache_airflow_providers_google",
+        "pyarrow",
+        "pandas",
+        "sqlalchemy",
+        "psycopg2_binary",
+        "dbt_bigquery"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "kafka_python",
+        "dbt_bigquery"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "airflow/dags/dbt_test_dag.py",
+      "candidate_test_paths": [
+        "airflow/dags/tests/test_dbt_test_dag.py",
+        "tests/dags/test_dbt_test_dag.py",
+        "airflow/dags/tests/test_dags.py",
+        "test/test_dbt_test_dag.py",
+        "tests/test_dbt_test_dag.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "airflow/dags/load_songs_dag.py",
+      "candidate_test_paths": [
+        "airflow/dags/tests/test_load_songs_dag.py",
+        "tests/dags/test_load_songs_dag.py",
+        "airflow/dags/tests/test_dags.py",
+        "test/test_load_songs_dag.py",
+        "tests/test_load_songs_dag.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "airflow/dags/schema.py",
+      "candidate_test_paths": [
+        "airflow/dags/tests/test_schema.py",
+        "tests/dags/test_schema.py",
+        "airflow/dags/tests/test_dags.py",
+        "test/test_schema.py",
+        "tests/test_schema.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "airflow/dags/streamify_dag.py",
+      "candidate_test_paths": [
+        "airflow/dags/tests/test_streamify_dag.py",
+        "tests/dags/test_streamify_dag.py",
+        "airflow/dags/tests/test_dags.py",
+        "test/test_streamify_dag.py",
+        "tests/test_streamify_dag.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "airflow/dags/task_templates.py",
+      "candidate_test_paths": [
+        "airflow/dags/tests/test_task_templates.py",
+        "tests/dags/test_task_templates.py",
+        "airflow/dags/tests/test_dags.py",
+        "test/test_task_templates.py",
+        "tests/test_task_templates.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "kafka/test_connection/produce_taxi_json.py",
+      "candidate_test_paths": [
+        "kafka/test_connection/tests/test_produce_taxi_json.py",
+        "tests/test_connection/test_produce_taxi_json.py",
+        "kafka/test_connection/tests/test_test_connection.py",
+        "test/test_produce_taxi_json.py",
+        "tests/test_produce_taxi_json.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "spark_streaming/schema.py",
+      "candidate_test_paths": [
+        "spark_streaming/tests/test_schema.py",
+        "tests/test_schema.py",
+        "spark_streaming/tests/test_spark_streaming.py",
+        "test/test_schema.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "spark_streaming/streaming_functions.py",
+      "candidate_test_paths": [
+        "spark_streaming/tests/test_streaming_functions.py",
+        "tests/test_streaming_functions.py",
+        "spark_streaming/tests/test_spark_streaming.py",
+        "test/test_streaming_functions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "spark_streaming/stream_all_events.py",
+      "candidate_test_paths": [
+        "spark_streaming/tests/test_stream_all_events.py",
+        "tests/test_stream_all_events.py",
+        "spark_streaming/tests/test_spark_streaming.py",
+        "test/test_stream_all_events.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "spark_streaming/test_connection/stream_taxi_json.py",
+      "candidate_test_paths": [
+        "spark_streaming/test_connection/tests/test_stream_taxi_json.py",
+        "tests/test_connection/test_stream_taxi_json.py",
+        "spark_streaming/test_connection/tests/test_test_connection.py",
+        "test/test_stream_taxi_json.py",
+        "tests/test_stream_taxi_json.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "airflow/requirements.txt"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 10,
+    "classified_count": 10,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 36,
+    "project_import_count": 0,
+    "declared_package_count": 2,
+    "undeclared_package_count": 22,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 10,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

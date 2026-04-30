@@ -196,14 +196,15 @@ describe("export guards", () => {
     );
   });
 
-  it("throws for exported contract", () => {
+  it("allows idempotent re-export for exported contract", () => {
     const input = makeExportInput({
       contract: makeScopedContract({ lifecycle_status: "exported" }),
     });
 
-    expect(() => exportAgentScope(input)).toThrow(
-      "Cannot export agent scope: contract is in 'exported' status",
-    );
+    const result = exportAgentScope(input);
+    expect(result.contract.lifecycle_status).toBe("exported");
+    expect(result.contract.agent.exported).toBe(true);
+    expect(result.contract.agent.instructions_path).toBe(".cursor/rules/pantheon-boundaries.md");
   });
 
   it("throws for verified contract", () => {

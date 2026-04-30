@@ -20,9 +20,9 @@ import { promises as fs } from "node:fs";
 import { createDeepSeekClient } from "../src/trial/deepseekAdapter.js";
 import { runIdeaToDraft } from "../src/ideaToDraft.js";
 import { computeBlockContentHash } from "../src/hash.js";
+import { requireDeepSeekApiKey } from "../src/trial/requireEnv.js";
 
-const DEEPSEEK_API_KEY =
-  process.env.DEEPSEEK_API_KEY ?? "sk-90b71c8c415b41ac93f7ff4e24a08a7c";
+const DEEPSEEK_API_KEY = requireDeepSeekApiKey();
 
 const TEST_IDEAS = [
   `A content moderation pipeline for a social media platform.

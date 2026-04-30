@@ -1,0 +1,116 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "ca791a1126386e59b5385d68b316321470edc8fa23ceda3d2f2c8118563e71ea",
+  "pinned_commit": "f1cc4e79929384a8ab53984452bf683ac3315bfa",
+  "completed_at": "2026-04-30T11:11:30.189Z",
+  "repo_id": "scikit-learn",
+  "category_expected": "ml_scientific",
+  "category_observed": "generic_service",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 844,
+  "python_files": 1055,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "pytest/high",
+    "click/medium"
+  ],
+  "project_role_signals": [
+    "service_backend/medium",
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 626,
+  "risk_preset": "generic_service",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "scikit-learn",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected ml_scientific, got generic_service",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        ".binder/requirements.txt",
+        "doc/binder/requirements.txt"
+      ],
+      "count": 2,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "sklearn/cluster/_dbscan_inner.pyx",
+        "sklearn/cluster/_hdbscan/_linkage.pyx",
+        "sklearn/cluster/_hdbscan/_reachability.pyx",
+        "sklearn/cluster/_hdbscan/_tree.pyx",
+        "sklearn/cluster/_hierarchical_fast.pyx",
+        "sklearn/cluster/_k_means_common.pyx",
+        "sklearn/cluster/_k_means_elkan.pyx",
+        "sklearn/cluster/_k_means_lloyd.pyx",
+        "sklearn/cluster/_k_means_minibatch.pyx",
+        "sklearn/datasets/_svmlight_format_fast.pyx",
+        "sklearn/decomposition/_cdnmf_fast.pyx",
+        "sklearn/decomposition/_online_lda_fast.pyx",
+        "sklearn/ensemble/_gradient_boosting.pyx",
+        "sklearn/ensemble/_hist_gradient_boosting/common.pyx",
+        "sklearn/ensemble/_hist_gradient_boosting/histogram.pyx",
+        "sklearn/ensemble/_hist_gradient_boosting/splitting.pyx",
+        "sklearn/ensemble/_hist_gradient_boosting/_binning.pyx",
+        "sklearn/ensemble/_hist_gradient_boosting/_bitset.pyx",
+        "sklearn/ensemble/_hist_gradient_boosting/_gradient_boosting.pyx",
+        "sklearn/ensemble/_hist_gradient_boosting/_predictor.pyx",
+        "sklearn/feature_extraction/_hashing_fast.pyx",
+        "sklearn/linear_model/_cd_fast.pyx",
+        "sklearn/manifold/_barnes_hut_tsne.pyx",
+        "sklearn/manifold/_utils.pyx",
+        "sklearn/metrics/cluster/_expected_mutual_info_fast.pyx",
+        "sklearn/metrics/_pairwise_fast.pyx",
+        "sklearn/neighbors/_partition_nodes.pyx",
+        "sklearn/neighbors/_quad_tree.pyx",
+        "sklearn/preprocessing/_csr_polynomial_expansion.pyx",
+        "sklearn/preprocessing/_target_encoder_fast.pyx",
+        "sklearn/svm/_liblinear.pyx",
+        "sklearn/svm/_libsvm.pyx",
+        "sklearn/svm/_libsvm_sparse.pyx",
+        "sklearn/svm/_newrand.pyx",
+        "sklearn/tree/_criterion.pyx",
+        "sklearn/tree/_partitioner.pyx",
+        "sklearn/tree/_splitter.pyx",
+        "sklearn/tree/_tree.pyx",
+        "sklearn/tree/_utils.pyx",
+        "sklearn/utils/arrayfuncs.pyx",
+        "sklearn/utils/murmurhash.pyx",
+        "sklearn/utils/sparsefuncs_fast.pyx",
+        "sklearn/utils/_cython_blas.pyx",
+        "sklearn/utils/_fast_dict.pyx",
+        "sklearn/utils/_heap.pyx",
+        "sklearn/utils/_isfinite.pyx",
+        "sklearn/utils/_openmp_helpers.pyx",
+        "sklearn/utils/_random.pyx",
+        "sklearn/utils/_sorting.pyx",
+        "sklearn/utils/_typedefs.pyx",
+        "sklearn/utils/_vector_sentinel.pyx",
+        "sklearn/_isotonic.pyx",
+        "sklearn/__check_build/_check_build.pyx"
+      ],
+      "count": 53,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

@@ -24,6 +24,7 @@
 import { promises as fs } from "node:fs";
 import { join, dirname } from "node:path";
 import { computeBlockContentHash, computeRevisionId, getHashMeta } from "./hash.js";
+import { sanitizeFileNameSegment } from "./safePath.js";
 import type {
   Artifact,
   CanonicalPointer,
@@ -44,7 +45,7 @@ export type StoreConfig = {
 // ---------------------------------------------------------------------------
 
 function revisionsDir(config: StoreConfig, artifactId: string): string {
-  return join(config.dataDir, "revisions", artifactId);
+  return join(config.dataDir, "revisions", sanitizeFileNameSegment(artifactId));
 }
 
 function revisionPath(
@@ -52,19 +53,19 @@ function revisionPath(
   artifactId: string,
   revisionId: string
 ): string {
-  return join(revisionsDir(config, artifactId), `${revisionId}.json`);
+  return join(revisionsDir(config, artifactId), `${sanitizeFileNameSegment(revisionId)}.json`);
 }
 
 function canonicalPath(config: StoreConfig, artifactId: string): string {
-  return join(config.dataDir, "canonical", `${artifactId}.json`);
+  return join(config.dataDir, "canonical", `${sanitizeFileNameSegment(artifactId)}.json`);
 }
 
 function auditPath(config: StoreConfig, artifactId: string): string {
-  return join(config.dataDir, "audit", `${artifactId}.jsonl`);
+  return join(config.dataDir, "audit", `${sanitizeFileNameSegment(artifactId)}.jsonl`);
 }
 
 function projectionPath(config: StoreConfig, artifactId: string): string {
-  return join(config.dataDir, "projections", `${artifactId}.md`);
+  return join(config.dataDir, "projections", `${sanitizeFileNameSegment(artifactId)}.md`);
 }
 
 // ---------------------------------------------------------------------------
@@ -73,34 +74,52 @@ function projectionPath(config: StoreConfig, artifactId: string): string {
 
 async function atomicWriteJson(filePath: string, data: unknown): Promise<void> {
   await fs.mkdir(dirname(filePath), { recursive: true });
-  const tmpPath = `${filePath}.tmp`;
+  const tmpPath = `${filePath}.${process.pid}.${Date.now().toString(36)}.tmp`;
   const content = JSON.stringify(data, null, 2);
   await fs.writeFile(tmpPath, content, "utf8");
-  try {
-    await fs.rename(tmpPath, filePath);
-  } catch (error: unknown) {
-    const code = (error as NodeJS.ErrnoException)?.code;
-    if (code !== "EPERM" && code !== "EEXIST") {
-      throw error;
-    }
-    await fs.rm(filePath, { force: true });
-    await fs.rename(tmpPath, filePath);
-  }
+  await replaceFileAtomically(tmpPath, filePath);
 }
 
 async function atomicWriteText(filePath: string, text: string): Promise<void> {
   await fs.mkdir(dirname(filePath), { recursive: true });
-  const tmpPath = `${filePath}.tmp`;
+  const tmpPath = `${filePath}.${process.pid}.${Date.now().toString(36)}.tmp`;
   await fs.writeFile(tmpPath, text, "utf8");
+  await replaceFileAtomically(tmpPath, filePath);
+}
+
+async function replaceFileAtomically(tmpPath: string, filePath: string): Promise<void> {
   try {
     await fs.rename(tmpPath, filePath);
   } catch (error: unknown) {
     const code = (error as NodeJS.ErrnoException)?.code;
     if (code !== "EPERM" && code !== "EEXIST") {
+      await fs.rm(tmpPath, { force: true }).catch(() => undefined);
       throw error;
     }
-    await fs.rm(filePath, { force: true });
-    await fs.rename(tmpPath, filePath);
+
+    const backupPath = `${filePath}.${process.pid}.bak`;
+    try {
+      const targetExists = await fs
+        .access(filePath)
+        .then(() => true)
+        .catch(() => false);
+      if (targetExists) {
+        await fs.rm(backupPath, { force: true }).catch(() => undefined);
+        await fs.rename(filePath, backupPath);
+      }
+      await fs.rename(tmpPath, filePath);
+      await fs.rm(backupPath, { force: true }).catch(() => undefined);
+    } catch (fallbackError) {
+      const backupExists = await fs
+        .access(backupPath)
+        .then(() => true)
+        .catch(() => false);
+      if (backupExists) {
+        await fs.rename(backupPath, filePath).catch(() => undefined);
+      }
+      await fs.rm(tmpPath, { force: true }).catch(() => undefined);
+      throw fallbackError;
+    }
   }
 }
 
@@ -356,7 +375,8 @@ export async function saveToQuarantine(
   filename: string,
   data: unknown
 ): Promise<void> {
-  const path = join(config.dataDir, "quarantine", `${filename}.json`);
+  const safeName = sanitizeFileNameSegment(filename);
+  const path = join(config.dataDir, "quarantine", `${safeName}.json`);
   await atomicWriteJson(path, data);
 }
 
@@ -367,7 +387,8 @@ export async function loadFromQuarantine(
   config: StoreConfig,
   filename: string
 ): Promise<unknown | null> {
-  const path = join(config.dataDir, "quarantine", `${filename}.json`);
+  const safeName = sanitizeFileNameSegment(filename);
+  const path = join(config.dataDir, "quarantine", `${safeName}.json`);
   try {
     const content = await fs.readFile(path, "utf8");
     return JSON.parse(content);
@@ -392,7 +413,8 @@ export async function promoteToEvidence(
   filename: string,
   data: unknown
 ): Promise<void> {
-  const path = join(config.dataDir, "evidence", `${filename}.json`);
+  const safeName = sanitizeFileNameSegment(filename);
+  const path = join(config.dataDir, "evidence", `${safeName}.json`);
   await atomicWriteJson(path, data);
 }
 
@@ -403,7 +425,8 @@ export async function loadFromEvidence(
   config: StoreConfig,
   filename: string
 ): Promise<unknown | null> {
-  const path = join(config.dataDir, "evidence", `${filename}.json`);
+  const safeName = sanitizeFileNameSegment(filename);
+  const path = join(config.dataDir, "evidence", `${safeName}.json`);
   try {
     const content = await fs.readFile(path, "utf8");
     return JSON.parse(content);

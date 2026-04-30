@@ -1,0 +1,2175 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "requests",
+    "observed_file_count": 134,
+    "python_file_count": 41
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "src_layout",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "src_layout_detected",
+        "weight": "strong",
+        "evidence": "src/ directory with package(s): requests"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 5,
+      "docs": 3,
+      "source": 18,
+      "test": 15
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / src_layout (medium)",
+      "framework: pytest / test_framework (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: authentication (high, 1 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 3,
+        "evidence": [
+          "3 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 506,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 12533,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/requirements.txt",
+      "bucket": "docs",
+      "extension": ".txt",
+      "size_bytes": 90,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/_themes/flask_theme_support.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 4961,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 3017,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "requirements-dev.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 100,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 188,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "src/requests/adapters.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 26869,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/api.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6606,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/auth.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10599,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/certs.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 448,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/compat.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2248,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/cookies.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19151,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4413,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/help.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3933,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/hooks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 768,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 36752,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/packages.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 927,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/sessions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 31404,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/status_codes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4450,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/structures.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3011,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 34049,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/_internal_utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1553,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5231,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/requests/__version__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 449,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/compat.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 503,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1639,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/testserver/server.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5323,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/testserver/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_adapters.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 319,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_help.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 866,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_hooks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 446,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_lowlevel.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 15771,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_packages.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 242,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_requests.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 110133,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_structures.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2357,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_testserver.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5712,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 31607,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 383,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 483,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 303,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "os.path",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "socket",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "socket",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from urllib3.exceptions import ( ClosedPoolError, ConnectTimeoutError, LocationValueError, MaxRetryError, NewConnectionError, ProtocolError, ReadTimeoutError, ResponseError, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from urllib3.exceptions import HTTPError as _HTTPError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from urllib3.exceptions import InvalidHeader as _InvalidHeader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from urllib3.exceptions import ProxyError as _ProxyError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from urllib3.exceptions import SSLError as _SSLError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from urllib3.poolmanager import PoolManager, proxy_from_url",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from urllib3.util import Timeout as TimeoutSauce",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from urllib3.util import parse_url",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from urllib3.util.retry import Retry",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from .auth import _basic_auth_str",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".auth",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from .compat import basestring, urlparse",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from .cookies import extract_cookies_to_jar",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cookies",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from .exceptions import ( ConnectionError, ConnectTimeout, InvalidHeader, InvalidProxyURL, InvalidSchema, InvalidURL, ProxyError, ReadTimeout, RetryError, SSLError, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from .models import Response",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from .structures import CaseInsensitiveDict",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".structures",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from .utils import ( DEFAULT_CA_BUNDLE_PATH, get_auth_from_url, get_encoding_from_headers, prepend_scheme_if_needed, select_proxy, urldefragauth, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from urllib3.contrib.socks import SOCKSProxyManager",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/adapters.py",
+      "raw_specifier": "from .models import PreparedRequest",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/api.py",
+      "raw_specifier": "from . import sessions",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/auth.py",
+      "raw_specifier": "hashlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/auth.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/auth.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/auth.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/auth.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/auth.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/auth.py",
+      "raw_specifier": "from base64 import b64encode",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/auth.py",
+      "raw_specifier": "from ._internal_utils import to_native_string",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal_utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/auth.py",
+      "raw_specifier": "from .compat import basestring, str, urlparse",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/auth.py",
+      "raw_specifier": "from .cookies import extract_cookies_to_jar",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cookies",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/auth.py",
+      "raw_specifier": "from .utils import parse_dict_header",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/certs.py",
+      "raw_specifier": "from certifi import where",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "certifi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "importlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "from urllib3 import __version__ as urllib3_version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "simplejson",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "simplejson",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "from simplejson import JSONDecodeError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "simplejson",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "from json import JSONDecodeError",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "from collections.abc import Callable, Mapping, MutableMapping",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "from http import cookiejar as cookielib",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "http",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "from http.cookies import Morsel",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "http",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "from io import StringIO",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "from urllib.parse import ( quote, quote_plus, unquote, unquote_plus, urldefrag, urlencode, urljoin, urlparse, urlsplit, urlunparse, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/compat.py",
+      "raw_specifier": "from urllib.request import ( getproxies, getproxies_environment, parse_http_list, proxy_bypass, proxy_bypass_environment, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/cookies.py",
+      "raw_specifier": "calendar",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "calendar",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/cookies.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/cookies.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/cookies.py",
+      "raw_specifier": "from ._internal_utils import to_native_string",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal_utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/cookies.py",
+      "raw_specifier": "from .compat import Morsel, MutableMapping, cookielib, urlparse, urlunparse",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/cookies.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/cookies.py",
+      "raw_specifier": "dummy_threading",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "dummy_threading",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/requests/exceptions.py",
+      "raw_specifier": "from urllib3.exceptions import HTTPError as BaseHTTPError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/exceptions.py",
+      "raw_specifier": "from .compat import JSONDecodeError as CompatJSONDecodeError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/help.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/help.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/help.py",
+      "raw_specifier": "ssl",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ssl",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/help.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/help.py",
+      "raw_specifier": "idna",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "idna",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/help.py",
+      "raw_specifier": "urllib3",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/help.py",
+      "raw_specifier": "from . import __version__ as requests_version",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/help.py",
+      "raw_specifier": "charset_normalizer",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "charset_normalizer",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/help.py",
+      "raw_specifier": "chardet",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "chardet",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/help.py",
+      "raw_specifier": "from urllib3.contrib import pyopenssl",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/help.py",
+      "raw_specifier": "cryptography",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "cryptography",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/requests/help.py",
+      "raw_specifier": "OpenSSL",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "OpenSSL",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "encodings.idna",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "encodings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from io import UnsupportedOperation",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from urllib3.exceptions import ( DecodeError, LocationParseError, ProtocolError, ReadTimeoutError, SSLError, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from urllib3.fields import RequestField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from urllib3.filepost import encode_multipart_formdata",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from urllib3.util import parse_url",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from ._internal_utils import to_native_string, unicode_is_ascii",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal_utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from .auth import HTTPBasicAuth",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".auth",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from .compat import ( Callable, JSONDecodeError, Mapping, basestring, builtin_str, chardet, cookielib, urlencode, urlsplit, urlunparse, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from .compat import json as complexjson",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from .cookies import _copy_cookie_jar, cookiejar_from_dict, get_cookie_header",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cookies",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from .exceptions import ( ChunkedEncodingError, ConnectionError, ContentDecodingError, HTTPError, InvalidJSONError, InvalidURL, MissingSchema, StreamConsumedError, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from .exceptions import JSONDecodeError as RequestsJSONDecodeError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from .exceptions import SSLError as RequestsSSLError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from .hooks import default_hooks",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".hooks",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from .status_codes import codes",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".status_codes",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from .structures import CaseInsensitiveDict",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".structures",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "from .utils import ( check_header_validity, get_auth_from_url, guess_filename, guess_json_utf, iter_slices, parse_header_links, requote_uri, stream_decode_response_unicode, super_len, to_key_val_list, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/models.py",
+      "raw_specifier": "idna",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "idna",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/packages.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/packages.py",
+      "raw_specifier": "from .compat import chardet",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from ._internal_utils import to_native_string",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal_utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from .adapters import HTTPAdapter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".adapters",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from .auth import _basic_auth_str",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".auth",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from .compat import Mapping, cookielib, urljoin, urlparse",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from .cookies import ( RequestsCookieJar, cookiejar_from_dict, extract_cookies_to_jar, merge_cookies, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cookies",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from .exceptions import ( ChunkedEncodingError, ContentDecodingError, InvalidSchema, TooManyRedirects, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from .hooks import default_hooks, dispatch_hook",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".hooks",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from .models import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from .status_codes import codes",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".status_codes",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from .structures import CaseInsensitiveDict",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".structures",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/sessions.py",
+      "raw_specifier": "from .utils import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/status_codes.py",
+      "raw_specifier": "from .structures import LookupDict",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".structures",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/structures.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/structures.py",
+      "raw_specifier": "from .compat import Mapping, MutableMapping",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "codecs",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "codecs",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "socket",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "socket",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "struct",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "struct",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "zipfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "zipfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "from urllib3.util import make_headers, parse_url",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "from . import certs",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "from .__version__ import __version__",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".__version__",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "from ._internal_utils import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._internal_utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "from .compat import ( Mapping, basestring, bytes, getproxies, getproxies_environment, integer_types, is_urllib3_1, proxy_bypass, proxy_bypass_environment, quote, str, unquote, urlparse, urlunparse, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "from .compat import parse_http_list as _parse_list_header",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "from .cookies import cookiejar_from_dict",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cookies",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "from .exceptions import ( FileModeWarning, InvalidHeader, InvalidURL, UnrewindableBodyError, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "from .structures import CaseInsensitiveDict",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".structures",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "winreg",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "winreg",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/utils.py",
+      "raw_specifier": "from netrc import NetrcParseError, netrc",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "netrc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/_internal_utils.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/_internal_utils.py",
+      "raw_specifier": "from .compat import builtin_str",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "urllib3",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from .exceptions import RequestsDependencyWarning",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from charset_normalizer import __version__ as charset_normalizer_version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "charset_normalizer",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from chardet import __version__ as chardet_version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "chardet",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "ssl",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ssl",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from urllib3.contrib import pyopenssl",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from cryptography import __version__ as cryptography_version",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "cryptography",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from urllib3.exceptions import DependencyWarning",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from logging import NullHandler",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from . import packages, utils",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from .__version__ import ( __author__, __author_email__, __build__, __cake__, __copyright__, __description__, __license__, __title__, __url__, __version__, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".__version__",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from .api import delete, get, head, options, patch, post, put, request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".api",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from .exceptions import ( ConnectionError, ConnectTimeout, FileModeWarning, HTTPError, JSONDecodeError, ReadTimeout, RequestException, Timeout, TooManyRedirects, URLRequired, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from .models import PreparedRequest, Request, Response",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from .sessions import Session, session",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sessions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/requests/__init__.py",
+      "raw_specifier": "from .status_codes import codes",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".status_codes",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "docs/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "sphinx"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "charset_normalizer",
+        "idna",
+        "urllib3",
+        "certifi",
+        "pysocks",
+        "chardet"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements-dev.txt",
+      "source_type": "requirements-dev.txt",
+      "packages": [],
+      "dev_packages": [
+        "pytest",
+        "pytest_cov",
+        "pytest_httpbin",
+        "httpbin",
+        "trustme",
+        "wheel"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No deps found in tox.ini — may use requirements file references"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "src/requests/adapters.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_adapters.py",
+        "tests/requests/test_adapters.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_adapters.py",
+        "tests/test_adapters.py",
+        "tests/adapters/test_adapters.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_adapters.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_adapters.py [library_package layout]"
+    },
+    {
+      "source_path": "src/requests/api.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_api.py",
+        "tests/requests/test_api.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_api.py",
+        "tests/test_api.py",
+        "tests/api/test_api.py",
+        "tests/apis/test_api.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/requests/auth.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_auth.py",
+        "tests/requests/test_auth.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_auth.py",
+        "tests/test_auth.py",
+        "tests/auth/test_auth.py",
+        "tests/auths/test_auth.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/requests/certs.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_certs.py",
+        "tests/requests/test_certs.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_certs.py",
+        "tests/test_certs.py",
+        "tests/certs/test_certs.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/requests/compat.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_compat.py",
+        "tests/requests/test_compat.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_compat.py",
+        "tests/test_compat.py",
+        "tests/compat/test_compat.py",
+        "tests/compats/test_compat.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/requests/cookies.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_cookies.py",
+        "tests/requests/test_cookies.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_cookies.py",
+        "tests/test_cookies.py",
+        "tests/cookies/test_cookies.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/requests/exceptions.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_exceptions.py",
+        "tests/requests/test_exceptions.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/requests/help.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_help.py",
+        "tests/requests/test_help.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_help.py",
+        "tests/test_help.py",
+        "tests/help/test_help.py",
+        "tests/helps/test_help.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_help.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_help.py [library_package layout]"
+    },
+    {
+      "source_path": "src/requests/hooks.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_hooks.py",
+        "tests/requests/test_hooks.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_hooks.py",
+        "tests/test_hooks.py",
+        "tests/hooks/test_hooks.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_hooks.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_hooks.py [library_package layout]"
+    },
+    {
+      "source_path": "src/requests/models.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_models.py",
+        "tests/requests/test_models.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/requests/packages.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_packages.py",
+        "tests/requests/test_packages.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_packages.py",
+        "tests/test_packages.py",
+        "tests/packages/test_packages.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_packages.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_packages.py [library_package layout]"
+    },
+    {
+      "source_path": "src/requests/sessions.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_sessions.py",
+        "tests/requests/test_sessions.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_sessions.py",
+        "tests/test_sessions.py",
+        "tests/sessions/test_sessions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/requests/status_codes.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_status_codes.py",
+        "tests/requests/test_status_codes.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_status_codes.py",
+        "tests/test_status_codes.py",
+        "tests/status_codes/test_status_codes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/requests/structures.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_structures.py",
+        "tests/requests/test_structures.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_structures.py",
+        "tests/test_structures.py",
+        "tests/structures/test_structures.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_structures.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_structures.py [library_package layout]"
+    },
+    {
+      "source_path": "src/requests/utils.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_utils.py",
+        "tests/requests/test_utils.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_utils.py"
+      ],
+      "confidence": "medium",
+      "reason": "Generic library helper match without directory context: tests/test_utils.py"
+    },
+    {
+      "source_path": "src/requests/_internal_utils.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test_internal_utils.py",
+        "tests/requests/test_internal_utils.py",
+        "src/requests/tests/test_requests.py",
+        "test/test_internal_utils.py",
+        "tests/test_internal_utils.py",
+        "tests/internal_utils/test_internal_utils.py",
+        "tests/test__internal_utils.py",
+        "tests/requests/test__internal_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/requests/__version__.py",
+      "candidate_test_paths": [
+        "src/requests/tests/test__version__.py",
+        "tests/requests/test__version__.py",
+        "src/requests/tests/test_requests.py",
+        "test/test__version__.py",
+        "tests/test__version__.py",
+        "tests/_version__/test__version__.py",
+        "tests/_version__s/test__version__.py",
+        "tests/test___version__.py",
+        "tests/requests/test___version__.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/auth/**",
+      "matched_paths": [
+        "src/requests/auth.py"
+      ],
+      "category": "authentication",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"auth\" found in 1 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.py",
+        "tox.ini"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 36,
+    "classified_count": 36,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 154,
+    "project_import_count": 0,
+    "declared_package_count": 29,
+    "undeclared_package_count": 6,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 17,
+    "high_confidence_test_count": 5,
+    "medium_confidence_test_count": 1,
+    "sensitive_zone_count": 1,
+    "sensitive_file_count": 1,
+    "manifest_count": 5,
+    "low_confidence_manifest_count": 2
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

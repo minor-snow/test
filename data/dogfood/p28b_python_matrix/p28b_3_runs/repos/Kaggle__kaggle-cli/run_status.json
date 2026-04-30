@@ -1,0 +1,53 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "6cf972a91a94abc77b59a1271729a85d950d5df9c603d9847840f295428a0db9",
+  "pinned_commit": "68e1f95dbacc730aae665939b4cf8f8a2ba0acc6",
+  "completed_at": "2026-04-30T11:54:07.330Z",
+  "repo_id": "Kaggle/kaggle-cli",
+  "category_expected": "python_cli_tool",
+  "category_observed": "generic_service",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 274,
+  "python_files": 22,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "click/medium"
+  ],
+  "project_role_signals": [
+    "service_backend/medium",
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 5,
+  "risk_preset": "generic_service",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "Kaggle/kaggle-cli",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected python_cli_tool, got generic_service",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "tests/kernel/testing-x.ipynb"
+      ],
+      "count": 1,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

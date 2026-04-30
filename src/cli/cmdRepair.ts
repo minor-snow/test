@@ -60,6 +60,7 @@ import {
 } from "../repair/session/repairSessionStore.js";
 import type {
   ConcurrentRepairFinding,
+  RepoStateSnapshot,
   RepairSession,
   RepairSessionStatus,
 } from "../repair/session/repairSessionTypes.js";
@@ -99,7 +100,7 @@ export function cmdRepair(args: string[]): void {
         overrideBaseSha: getFlag(args, "override-base-sha"),
         overrideHeadSha: getFlag(args, "override-head-sha"),
         overrideCheckoutSha: getFlag(args, "override-checkout-sha"),
-        overrideSource: getFlag(args, "override-source"),
+        overrideSource: normalizeRepoStateSource(getFlag(args, "override-source")),
       });
       return;
 
@@ -243,7 +244,7 @@ export function cmdRepairPlan(input: {
   overrideBaseSha?: string;
   overrideHeadSha?: string;
   overrideCheckoutSha?: string;
-  overrideSource?: string;
+  overrideSource?: RepoStateSnapshot["source"];
   sourceOverride?: "local_cli" | "github_action";
 }): void {
   const repoRoot = resolve(input.repoRoot);
@@ -269,7 +270,7 @@ export function cmdRepairPlan(input: {
     ...(input.overrideBaseSha ? { base_sha: input.overrideBaseSha, diff_base: input.overrideBaseSha } : {}),
     ...(input.overrideHeadSha ? { head_sha: input.overrideHeadSha } : {}),
     ...(input.overrideCheckoutSha ? { checkout_sha: input.overrideCheckoutSha } : {}),
-    ...(input.overrideSource ? { source: input.overrideSource as any } : {}),
+    ...(input.overrideSource ? { source: input.overrideSource } : {}),
   };
   const contract = buildRepairContract({
     repairId: session.repair_id,
@@ -1207,7 +1208,30 @@ function normalizeDecision(gate: RepairAuditGate, value: string): RepairAuditDec
     },
   };
 
-  return aliases[gate][normalized] ?? (normalized as RepairAuditDecisionType);
+  const directValues = new Set(Object.values(aliases[gate]));
+  if (directValues.has(normalized as RepairAuditDecisionType)) {
+    return normalized as RepairAuditDecisionType;
+  }
+  const resolved = aliases[gate][normalized];
+  if (!resolved) {
+    throw new Error(`Unknown repair audit decision for ${gate}: ${value}`);
+  }
+  return resolved;
+}
+
+function normalizeRepoStateSource(value: string | undefined): RepoStateSnapshot["source"] | undefined {
+  if (!value) return undefined;
+  const normalized = value.trim().toLowerCase();
+  if (
+    normalized === "git"
+    || normalized === "github"
+    || normalized === "synthetic"
+    || normalized === "unknown"
+    || normalized === "github_pull_request"
+  ) {
+    return normalized;
+  }
+  throw new Error(`Unknown repo_state source: ${value}`);
 }
 
 function requireRepairId(args: readonly string[], repoRoot: string): string {

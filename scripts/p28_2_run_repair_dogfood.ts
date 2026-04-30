@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { cmdRepairIntake, cmdRepairPlan, cmdRepairAudit, cmdRepairCheck } from "../src/cli/cmdRepair.js";
 import { repairRunPaths } from "../src/repair/repairArtifactLayout.js";
@@ -38,6 +38,7 @@ export function runDogfoodCase(c: DogfoodCase): { passed: boolean; error?: strin
   
   // Set up an isolated repo fixture directory for this case
   const repoRoot = join(caseDir, "repo_fixture");
+  rmSync(repoRoot, { recursive: true, force: true });
   mkdirSync(repoRoot, { recursive: true });
   
   // Need to dynamically create pantheon.json for the project_role mapping

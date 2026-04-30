@@ -19,6 +19,7 @@ import type {
   PythonProjectLayout,
   PythonFrameworkProfile,
 } from "./types.js";
+import { filenameContainsToken } from "../pathKeywordMatcher.js";
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -130,6 +131,7 @@ function generateCandidates(sourcePath: string, ctx: MappingContext): string[] {
   const cleanName = nameNoExt.startsWith("_") && nameNoExt !== "__init__" && nameNoExt !== "__main__"
     ? nameNoExt.slice(1)
     : nameNoExt;
+  const candidateName = cleanName;
 
   // === Django-style patterns (always included for backward compat) ===
 
@@ -137,14 +139,14 @@ function generateCandidates(sourcePath: string, ctx: MappingContext): string[] {
   // saleor/checkout/actions.py → saleor/checkout/tests/test_actions.py
   if (parts.length >= 2) {
     const dirParts = parts.slice(0, -1);
-    candidates.push([...dirParts, "tests", `test_${nameNoExt}.py`].join("/"));
+    candidates.push([...dirParts, "tests", `test_${candidateName}.py`].join("/"));
   }
 
   // Pattern 2: Top-level tests/ mirror
   // saleor/checkout/actions.py → tests/checkout/test_actions.py
   if (parts.length >= 2) {
     const relativeParts = parts.slice(1, -1); // skip top-level package
-    candidates.push(["tests", ...relativeParts, `test_${nameNoExt}.py`].join("/"));
+    candidates.push(["tests", ...relativeParts, `test_${candidateName}.py`].join("/"));
   }
 
   // Pattern 3: Module-level test file
@@ -156,8 +158,8 @@ function generateCandidates(sourcePath: string, ctx: MappingContext): string[] {
   }
 
   // Pattern 4: Root test mirror with test_ prefix
-  candidates.push(`test/test_${nameNoExt}.py`);
-  candidates.push(`tests/test_${nameNoExt}.py`);
+  candidates.push(`test/test_${candidateName}.py`);
+  candidates.push(`tests/test_${candidateName}.py`);
 
   // === P27-1d: Library/SDK patterns ===
   if (ctx.isLibrary) {
@@ -260,6 +262,8 @@ function assessConfidence(
   const cleanSourceName = sourceFilename.startsWith("_") && sourceFilename !== "__init__" && sourceFilename !== "__main__"
     ? sourceFilename.slice(1)
     : sourceFilename;
+  const sourceParentDir = source.split("/").slice(-2, -1)[0] ?? "";
+  const isGenericUtilityModule = ["util", "utils", "helper", "helpers", "common"].includes(cleanSourceName);
 
   for (const ex of existing) {
     const testFilename = ex.split("/").pop()!.replace(/\.py$/, "");
@@ -278,6 +282,9 @@ function assessConfidence(
 
     // Library: _module → tests/test_module (strip underscore match)
     if (ctx.isLibrary && testFilename === `test_${cleanSourceName}` && ex.startsWith("tests/")) {
+      if (isGenericUtilityModule && !ex.includes(`/${sourceParentDir}/`)) {
+        return { level: "medium", reason: `Generic library helper match without directory context: ${ex}` };
+      }
       const contextNote = ctx.primaryLayout === "library_package" ? " [library_package layout]" : "";
       return { level: "high", reason: `Library module match: ${ex}${contextNote}` };
     }
@@ -302,7 +309,7 @@ function assessConfidence(
     const testFilename = ex.split("/").pop()!.replace(/\.py$/, "");
     // Check if test name contains the source module name (partial domain match)
     const singularSource = sourceFilename.endsWith("s") ? sourceFilename.slice(0, -1) : sourceFilename;
-    if (testFilename.includes(singularSource) && ex.startsWith("tests/")) {
+    if (filenameContainsToken(ex, singularSource) && ex.startsWith("tests/")) {
       return { level: "medium", reason: `Domain test match: ${ex} (contains ${singularSource})` };
     }
   }

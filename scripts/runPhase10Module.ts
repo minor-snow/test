@@ -15,8 +15,9 @@ import { promoteDraft } from "../src/promoteDraft.js";
 import { appendDecisionEntry } from "../src/cockpit/decisionLog.js";
 import type { Artifact } from "../src/types.js";
 import type { StoreConfig } from "../src/artifactStore.js";
+import { requireDeepSeekApiKey } from "../src/trial/requireEnv.js";
 
-const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY ?? "sk-90b71c8c415b41ac93f7ff4e24a08a7c";
+const DEEPSEEK_API_KEY = requireDeepSeekApiKey();
 const STORE_ROOT = join(process.cwd(), "data", "dogfood", "p10");
 const MOD_PROFILE_PATH = join(process.cwd(), "data", "profiles", "pet_triage_offline_first_module.json");
 

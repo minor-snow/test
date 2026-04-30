@@ -1,0 +1,5751 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "django-haystack__django-haystack",
+    "observed_file_count": 227,
+    "python_file_count": 140
+  },
+  "layout": {
+    "primary_layout": "mixed",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: example_project, haystack, test_haystack"
+      },
+      {
+        "signal": "django_migrations_found",
+        "weight": "moderate",
+        "evidence": "2 migration files"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "multiple_top_packages",
+        "weight": "moderate",
+        "evidence": "3 top-level packages: example_project, haystack, test_haystack"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: django_project=2, monorepo=2"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "primary_layout",
+        "reason": "Tied between django_project and monorepo"
+      }
+    ],
+    "bucket_summary": {
+      "config": 5,
+      "docs": 1,
+      "source": 91,
+      "test": 41,
+      "migration": 2
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "django",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "django found in dependency manifests"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "Django-style migrations/ directories found"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "django imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: mixed / flat_package (medium)",
+      "framework: django / web_framework (high)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: administration (high, 3 paths)",
+      "sensitive_zone: schema_migration (high, 2 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 27,
+        "evidence": [
+          "27 paths match pattern **/__init__.py",
+          "Sensitive zone \"schema_migration\" (high) corroborates"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 1379,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 6845,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "example_project/bare_bones_app/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 524,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "example_project/bare_bones_app/search_indexes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 406,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "example_project/bare_bones_app/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "example_project/regular_app/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1299,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "example_project/regular_app/search_indexes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1266,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "example_project/regular_app/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "example_project/settings.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 1337,
+      "evidence": [
+        "Settings module"
+      ]
+    },
+    {
+      "path": "example_project/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/admin.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6525,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/apps.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 995,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/backends/elasticsearch5_backend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17744,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/backends/elasticsearch7_backend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 21012,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/backends/elasticsearch_backend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 40409,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/backends/simple_backend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4062,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/backends/solr_backend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 36334,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/backends/whoosh_backend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 39468,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/backends/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 37732,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/constants.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1669,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1197,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/fields.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 16237,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/forms.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4129,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/generic_views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4167,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/indexes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19250,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/inputs.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4621,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/management/commands/build_solr_schema.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7505,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/management/commands/clear_index.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2332,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/management/commands/haystack_info.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 788,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/management/commands/rebuild_index.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2242,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/management/commands/update_index.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 16554,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/management/commands/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/management/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/manager.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3674,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9076,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/panels.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2912,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/query.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 26837,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/routers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 286,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/signals.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3142,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/templatetags/highlight.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4451,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/templatetags/more_like_this.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3586,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/templatetags/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/urls.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 137,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/utils/app_loading.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1064,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/utils/geo.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2107,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/utils/highlighting.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5810,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/utils/loading.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13212,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/utils/log.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 489,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2604,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7152,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "haystack/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2551,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 2732,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "test_haystack/core/admin.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 297,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/core/custom_identifier.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 364,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/core/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2846,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/core/urls.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 843,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/core/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/discovery/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 355,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/discovery/search_indexes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 410,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/discovery/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/elasticsearch5_tests/test_backend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 67525,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/elasticsearch5_tests/test_inputs.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3593,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/elasticsearch5_tests/test_query.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8592,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/elasticsearch5_tests/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1139,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/elasticsearch7_tests/test_backend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 69399,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/elasticsearch7_tests/test_inputs.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3593,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/elasticsearch7_tests/test_query.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8600,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/elasticsearch7_tests/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1139,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/elasticsearch_tests/test_elasticsearch_backend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 70817,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/elasticsearch_tests/test_elasticsearch_query.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11223,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/elasticsearch_tests/test_inputs.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3592,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/elasticsearch_tests/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1334,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/mocks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5537,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/multipleindex/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 355,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/multipleindex/routers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 232,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/multipleindex/search_indexes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 841,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/multipleindex/tests.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13116,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/multipleindex/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 295,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/results_per_page_urls.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 369,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/run_tests.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 737,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/settings.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 4124,
+      "evidence": [
+        "Settings module"
+      ]
+    },
+    {
+      "path": "test_haystack/simple_tests/search_indexes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 788,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/simple_tests/test_simple_backend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8936,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/simple_tests/test_simple_query.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1259,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/simple_tests/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 61,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/solr_tests/server/get-solr-download-url.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1739,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/solr_tests/test_admin.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2797,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/solr_tests/test_inputs.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3829,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/solr_tests/test_solr_backend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 63441,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/solr_tests/test_solr_management_commands.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 15317,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/solr_tests/test_solr_query.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10037,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/solr_tests/test_templatetags.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2560,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/solr_tests/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 295,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/spatial/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1017,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/spatial/search_indexes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 756,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/spatial/test_spatial.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11582,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/spatial/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 295,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_altered_internal_names.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3601,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_loading.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2426,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_using_appconfig/apps.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 185,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_using_appconfig/migrations/0001_initial.py",
+      "bucket": "migration",
+      "extension": ".py",
+      "size_bytes": 679,
+      "evidence": [
+        "Django/Alembic migration directory"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_using_appconfig/migrations/__init__.py",
+      "bucket": "migration",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Django/Alembic migration directory"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_using_appconfig/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 118,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_using_appconfig/search_indexes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 282,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_using_appconfig/tests.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 359,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_using_appconfig/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_without_models/urls.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 136,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_without_models/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 100,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_without_models/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_with_hierarchy/contrib/django/hierarchal_app_django/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 223,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_with_hierarchy/contrib/django/hierarchal_app_django/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_with_hierarchy/contrib/django/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_with_hierarchy/contrib/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_app_with_hierarchy/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 79,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/test_backends.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2555,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_discovery.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2176,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_django_config_detection.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 687,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_fields.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 24094,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_forms.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6506,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_generic_views.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2835,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_indexes.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 33384,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_inputs.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3606,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_loading.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 15668,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_management_commands.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5315,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_managers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9796,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8480,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_query.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 39105,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_templatetags.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5024,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 15642,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/test_views.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11195,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 487,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/whoosh_tests/testcases.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1304,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/whoosh_tests/test_forms.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1343,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/whoosh_tests/test_inputs.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3361,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/whoosh_tests/test_whoosh_backend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 56863,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/whoosh_tests/test_whoosh_management_commands.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3864,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/whoosh_tests/test_whoosh_query.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7693,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "test_haystack/whoosh_tests/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 61,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_haystack/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 1239,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "example_project/bare_bones_app/models.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example_project/bare_bones_app/models.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example_project/bare_bones_app/search_indexes.py",
+      "raw_specifier": "from bare_bones_app.models import Cat",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "bare_bones_app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "example_project/bare_bones_app/search_indexes.py",
+      "raw_specifier": "from haystack import indexes",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example_project/regular_app/models.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example_project/regular_app/models.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example_project/regular_app/search_indexes.py",
+      "raw_specifier": "from regular_app.models import Dog",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "regular_app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "example_project/regular_app/search_indexes.py",
+      "raw_specifier": "from haystack import indexes",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/admin.py",
+      "raw_specifier": "from django import VERSION as django_version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/admin.py",
+      "raw_specifier": "from django.contrib.admin.options import ModelAdmin, csrf_protect_m",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/admin.py",
+      "raw_specifier": "from django.contrib.admin.views.main import SEARCH_VAR, ChangeList",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/admin.py",
+      "raw_specifier": "from django.core.exceptions import PermissionDenied",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/admin.py",
+      "raw_specifier": "from django.core.paginator import InvalidPage, Paginator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/admin.py",
+      "raw_specifier": "from django.shortcuts import render",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/admin.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/admin.py",
+      "raw_specifier": "from django.utils.translation import ngettext",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/admin.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/admin.py",
+      "raw_specifier": "from haystack.constants import DEFAULT_ALIAS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/admin.py",
+      "raw_specifier": "from haystack.query import SearchQuerySet",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/admin.py",
+      "raw_specifier": "from haystack.utils import get_model_ct_tuple",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/apps.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/apps.py",
+      "raw_specifier": "from django.apps import AppConfig",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/apps.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/apps.py",
+      "raw_specifier": "from haystack import connection_router, connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/apps.py",
+      "raw_specifier": "from haystack.utils import loading",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "haystack",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "from haystack.backends import BaseEngine",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "from haystack.backends.elasticsearch_backend import ( ElasticsearchSearchBackend, ElasticsearchSearchQuery, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "from haystack.constants import ALL_FIELD, DEFAULT_OPERATOR, DJANGO_CT, FUZZINESS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "from haystack.exceptions import MissingDependency",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "from haystack.utils import get_identifier, get_model_ct",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "elasticsearch",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "from elasticsearch.helpers import bulk, scan",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "from haystack.utils.geo import generate_bounding_box",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch5_backend.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "haystack",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "from haystack.backends import BaseEngine",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "from haystack.backends.elasticsearch_backend import ( ElasticsearchSearchBackend, ElasticsearchSearchQuery, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "from haystack.constants import DEFAULT_OPERATOR, DJANGO_CT, DJANGO_ID, FUZZINESS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "from haystack.exceptions import MissingDependency",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "from haystack.utils import get_identifier, get_model_ct",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "elasticsearch",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "from elasticsearch.helpers import bulk, scan",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "from haystack.utils.geo import generate_bounding_box",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch7_backend.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from datetime import datetime, timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "haystack",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from haystack.backends import BaseEngine, BaseSearchBackend, BaseSearchQuery, log_query",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from haystack.constants import ( ALL_FIELD, DEFAULT_OPERATOR, DJANGO_CT, DJANGO_ID, FUZZY_MAX_EXPANSIONS, FUZZY_MIN_SIM, ID, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from haystack.exceptions import MissingDependency, MoreLikeThisError, SkipDocument",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from haystack.inputs import Clean, Exact, PythonData, Raw",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from haystack.models import SearchResult",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from haystack.utils import get_identifier, get_model_ct",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from haystack.utils import log as logging",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from haystack.utils.app_loading import haystack_get_model",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "elasticsearch",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from elasticsearch.helpers import bulk",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from elasticsearch.helpers import bulk_index as bulk",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from elasticsearch.exceptions import NotFoundError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from haystack.utils.geo import generate_bounding_box",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from django.contrib.gis.measure import Distance",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/elasticsearch_backend.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/simple_backend.py",
+      "raw_specifier": "from functools import reduce",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/simple_backend.py",
+      "raw_specifier": "from warnings import warn",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/simple_backend.py",
+      "raw_specifier": "from django.db.models import Q",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/simple_backend.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/simple_backend.py",
+      "raw_specifier": "from haystack.backends import ( BaseEngine, BaseSearchBackend, BaseSearchQuery, SearchNode, log_query, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/simple_backend.py",
+      "raw_specifier": "from haystack.inputs import PythonData",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/simple_backend.py",
+      "raw_specifier": "from haystack.models import SearchResult",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/simple_backend.py",
+      "raw_specifier": "from haystack.utils import get_model_ct_tuple",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "haystack",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from haystack.backends import ( BaseEngine, BaseSearchBackend, BaseSearchQuery, EmptyResults, log_query, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from haystack.constants import DJANGO_CT, DJANGO_ID, ID",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from haystack.exceptions import MissingDependency, MoreLikeThisError, SkipDocument",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from haystack.inputs import Clean, Exact, PythonData, Raw",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from haystack.models import SearchResult",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from haystack.utils import get_identifier, get_model_ct",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from haystack.utils import log as logging",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from haystack.utils.app_loading import haystack_get_model",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from pysolr import Solr, SolrError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pysolr",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from haystack.utils.geo import generate_bounding_box",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from django.contrib.gis.measure import Distance",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/solr_backend.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from datetime import date, datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from haystack.backends import ( BaseEngine, BaseSearchBackend, BaseSearchQuery, EmptyResults, log_query, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from haystack.constants import ( DJANGO_CT, DJANGO_ID, FUZZY_WHOOSH_MAX_EDITS, FUZZY_WHOOSH_MIN_PREFIX, ID, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from haystack.exceptions import MissingDependency, SearchBackendError, SkipDocument",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from haystack.inputs import Clean, Exact, PythonData, Raw",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from haystack.models import SearchResult",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from haystack.utils import get_identifier, get_model_ct",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from haystack.utils import log as logging",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from haystack.utils.app_loading import haystack_get_model",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "whoosh",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh import index",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh.analysis import StemmingAnalyzer",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh.fields import BOOLEAN, DATETIME",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh.fields import ID as WHOOSH_ID",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh.fields import IDLIST, KEYWORD, NGRAM, NGRAMWORDS, NUMERIC, TEXT, Schema",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh.filedb.filestore import FileStorage, RamStorage",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh.highlight import ContextFragmenter, HtmlFormatter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh.highlight import highlight as whoosh_highlight",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh.qparser import FuzzyTermPlugin, QueryParser",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh.searching import ResultsPage",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh.sorting import Count, DateRangeFacet, FieldFacet",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh.support.relativedelta import relativedelta as RelativeDelta",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from whoosh.writing import AsyncWriter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "whoosh",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/whoosh_backend.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from copy import deepcopy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from time import time",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from django.db.models import Q",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from django.db.models.base import ModelBase",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from django.utils import tree",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack.constants import DEFAULT_ALIAS, FILTER_SEPARATOR, VALID_FILTERS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack.exceptions import FacetingError, MoreLikeThisError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack.models import SearchResult",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack.utils import get_model_ct",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack.utils.loading import UnifiedIndex",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack.utils.geo import ensure_point",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack.utils.geo import ensure_distance, ensure_point",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack.utils.geo import ensure_point",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/backends/__init__.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/constants.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/fields.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/fields.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/fields.py",
+      "raw_specifier": "from inspect import ismethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/fields.py",
+      "raw_specifier": "from django.template import loader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/fields.py",
+      "raw_specifier": "from haystack.exceptions import SearchFieldError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/fields.py",
+      "raw_specifier": "from haystack.utils import get_model_ct_tuple",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/fields.py",
+      "raw_specifier": "from haystack.utils.geo import ensure_point",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/fields.py",
+      "raw_specifier": "from django.contrib.gis.geos import Point",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/fields.py",
+      "raw_specifier": "from haystack.utils.geo import ensure_point",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/forms.py",
+      "raw_specifier": "from django import forms",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/forms.py",
+      "raw_specifier": "from django.utils.encoding import smart_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/forms.py",
+      "raw_specifier": "from django.utils.text import capfirst",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/forms.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/forms.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/forms.py",
+      "raw_specifier": "from haystack.constants import DEFAULT_ALIAS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/forms.py",
+      "raw_specifier": "from haystack.query import EmptySearchQuerySet, SearchQuerySet",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/forms.py",
+      "raw_specifier": "from haystack.utils import get_model_ct",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/forms.py",
+      "raw_specifier": "from haystack.utils.app_loading import haystack_get_model",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/generic_views.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/generic_views.py",
+      "raw_specifier": "from django.core.paginator import Paginator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/generic_views.py",
+      "raw_specifier": "from django.views.generic import FormView",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/generic_views.py",
+      "raw_specifier": "from django.views.generic.edit import FormMixin",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/generic_views.py",
+      "raw_specifier": "from django.views.generic.list import MultipleObjectMixin",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/generic_views.py",
+      "raw_specifier": "from .forms import FacetedSearchForm, ModelSearchForm",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".forms",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "haystack/generic_views.py",
+      "raw_specifier": "from .query import SearchQuerySet",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".query",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "from haystack import connection_router, connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "from haystack.constants import Indexable  # NOQA — exposed as a public export",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "from haystack.constants import DEFAULT_ALIAS, DJANGO_CT, DJANGO_ID, ID",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "from haystack.fields import (  # NOQA — exposed as a public export",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "from haystack.manager import SearchIndexManager",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "from haystack.utils import get_facet_field_name, get_identifier, get_model_ct",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "from haystack import indexes",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/indexes.py",
+      "raw_specifier": "from myapp.models import Note",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "myapp",
+      "confidence": "low"
+    },
+    {
+      "from_file": "haystack/inputs.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/inputs.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/inputs.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/build_solr_schema.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/build_solr_schema.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/build_solr_schema.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/build_solr_schema.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/build_solr_schema.py",
+      "raw_specifier": "from django.core.management.base import BaseCommand, CommandError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/build_solr_schema.py",
+      "raw_specifier": "from django.template import loader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/build_solr_schema.py",
+      "raw_specifier": "from haystack import connections, constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/build_solr_schema.py",
+      "raw_specifier": "from haystack.backends.solr_backend import SolrSearchBackend",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/clear_index.py",
+      "raw_specifier": "from django.core.management.base import BaseCommand",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/clear_index.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/haystack_info.py",
+      "raw_specifier": "from django.core.management.base import BaseCommand",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/haystack_info.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/haystack_info.py",
+      "raw_specifier": "from haystack.constants import DEFAULT_ALIAS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/rebuild_index.py",
+      "raw_specifier": "from django.core.management import call_command",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/rebuild_index.py",
+      "raw_specifier": "from django.core.management.base import BaseCommand",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/rebuild_index.py",
+      "raw_specifier": "from .update_index import DEFAULT_MAX_RETRIES",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".update_index",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "multiprocessing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "multiprocessing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "from django.core.management.base import BaseCommand, CommandError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "from django.db import close_old_connections, reset_queries",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "from django.utils.encoding import force_str, smart_bytes",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "from django.utils.timezone import now",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "from haystack import connections as haystack_connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "from haystack.exceptions import NotHandled",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "from haystack.query import SearchQuerySet",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "from haystack.utils.app_loading import haystack_get_models, haystack_load_apps",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "from django.db import connections",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "from dateutil.parser import parse as dateutil_parse",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dateutil",
+      "confidence": "low"
+    },
+    {
+      "from_file": "haystack/management/commands/update_index.py",
+      "raw_specifier": "from dateutil.parser import parse as dateutil_parse",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dateutil",
+      "confidence": "low"
+    },
+    {
+      "from_file": "haystack/manager.py",
+      "raw_specifier": "from haystack.query import EmptySearchQuerySet, SearchQuerySet",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/models.py",
+      "raw_specifier": "from django.core.exceptions import ObjectDoesNotExist",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/models.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/models.py",
+      "raw_specifier": "from django.utils.text import capfirst",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/models.py",
+      "raw_specifier": "from haystack.constants import DEFAULT_ALIAS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/models.py",
+      "raw_specifier": "from haystack.exceptions import NotHandled, SpatialError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/models.py",
+      "raw_specifier": "from haystack.utils import log as logging",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/models.py",
+      "raw_specifier": "from haystack.utils.app_loading import haystack_get_model",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/models.py",
+      "raw_specifier": "from geopy import distance as geopy_distance",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "geopy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/models.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/models.py",
+      "raw_specifier": "from django.contrib.gis.measure import Distance",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/models.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/models.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/panels.py",
+      "raw_specifier": "from debug_toolbar.panels import DebugPanel",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "debug_toolbar",
+      "confidence": "low"
+    },
+    {
+      "from_file": "haystack/panels.py",
+      "raw_specifier": "from django.template.loader import render_to_string",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/panels.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/panels.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/query.py",
+      "raw_specifier": "operator",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "operator",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/query.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/query.py",
+      "raw_specifier": "from functools import reduce",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/query.py",
+      "raw_specifier": "from haystack import connection_router, connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/query.py",
+      "raw_specifier": "from haystack.backends import SQ",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/query.py",
+      "raw_specifier": "from haystack.constants import DEFAULT_OPERATOR, ITERATOR_LOAD_PER_QUERY",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/query.py",
+      "raw_specifier": "from haystack.exceptions import NotHandled",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/query.py",
+      "raw_specifier": "from haystack.inputs import AutoQuery, Raw",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/query.py",
+      "raw_specifier": "from haystack.utils import log as logging",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/routers.py",
+      "raw_specifier": "from haystack.constants import DEFAULT_ALIAS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/signals.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/signals.py",
+      "raw_specifier": "from haystack.exceptions import NotHandled",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/templatetags/highlight.py",
+      "raw_specifier": "from django import template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/templatetags/highlight.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/templatetags/highlight.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/templatetags/highlight.py",
+      "raw_specifier": "from haystack.utils import importlib",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/templatetags/highlight.py",
+      "raw_specifier": "from haystack.utils.highlighting import Highlighter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/templatetags/more_like_this.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/templatetags/more_like_this.py",
+      "raw_specifier": "from django import template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/templatetags/more_like_this.py",
+      "raw_specifier": "from haystack.query import SearchQuerySet",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/templatetags/more_like_this.py",
+      "raw_specifier": "from haystack.utils.app_loading import haystack_get_model",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/urls.py",
+      "raw_specifier": "from django.urls import path",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/urls.py",
+      "raw_specifier": "from haystack.views import SearchView",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/app_loading.py",
+      "raw_specifier": "from django.apps import apps",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/app_loading.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/geo.py",
+      "raw_specifier": "from haystack.constants import WGS_84_SRID",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/geo.py",
+      "raw_specifier": "from haystack.exceptions import SpatialError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/highlighting.py",
+      "raw_specifier": "from django.utils.html import strip_tags",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "from django.utils.module_loading import module_has_submodule",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "from haystack import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "from haystack.exceptions import NotHandled, SearchFieldError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "from haystack.utils import importlib",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "from haystack.utils.app_loading import haystack_get_app_modules",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "path",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "path",
+      "confidence": "low"
+    },
+    {
+      "from_file": "haystack/utils/loading.py",
+      "raw_specifier": "path",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "path",
+      "confidence": "low"
+    },
+    {
+      "from_file": "haystack/utils/log.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/log.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/__init__.py",
+      "raw_specifier": "importlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/__init__.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/__init__.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/__init__.py",
+      "raw_specifier": "from haystack.constants import DJANGO_CT, DJANGO_ID, ID",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/utils/__init__.py",
+      "raw_specifier": "from haystack.utils.highlighting import Highlighter  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/views.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/views.py",
+      "raw_specifier": "from django.core.paginator import InvalidPage, Paginator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/views.py",
+      "raw_specifier": "from django.http import Http404",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/views.py",
+      "raw_specifier": "from django.shortcuts import render",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/views.py",
+      "raw_specifier": "from haystack.forms import FacetedSearchForm, ModelSearchForm",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/views.py",
+      "raw_specifier": "from haystack.query import EmptySearchQuerySet",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/__init__.py",
+      "raw_specifier": "from importlib.metadata import PackageNotFoundError, version",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/__init__.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/__init__.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/__init__.py",
+      "raw_specifier": "from packaging.version import Version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/__init__.py",
+      "raw_specifier": "from haystack.constants import DEFAULT_ALIAS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/__init__.py",
+      "raw_specifier": "from haystack.utils import loading",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "haystack/__init__.py",
+      "raw_specifier": "from django.core import signals as django_signals",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/core/admin.py",
+      "raw_specifier": "from django.contrib import admin",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/core/admin.py",
+      "raw_specifier": "from haystack.admin import SearchModelAdmin",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/core/admin.py",
+      "raw_specifier": "from .models import MockModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/core/custom_identifier.py",
+      "raw_specifier": "hashlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/core/models.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/core/models.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/core/models.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/core/urls.py",
+      "raw_specifier": "from django.contrib import admin",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/core/urls.py",
+      "raw_specifier": "from django.urls import include, path",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/core/urls.py",
+      "raw_specifier": "from haystack.forms import FacetedSearchForm",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/core/urls.py",
+      "raw_specifier": "from haystack.query import SearchQuerySet",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/core/urls.py",
+      "raw_specifier": "from haystack.views import FacetedSearchView, SearchView, basic_search",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/discovery/models.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/discovery/search_indexes.py",
+      "raw_specifier": "from haystack import indexes",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/discovery/search_indexes.py",
+      "raw_specifier": "from test_haystack.discovery.models import Bar, Foo",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "test_haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch5_tests/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch5_tests/__init__.py",
+      "raw_specifier": "unittest",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "unittest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch5_tests/__init__.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch5_tests/__init__.py",
+      "raw_specifier": "from haystack.utils import log as logging",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch5_tests/__init__.py",
+      "raw_specifier": "elasticsearch",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch5_tests/__init__.py",
+      "raw_specifier": "from elasticsearch import Elasticsearch, exceptions",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch7_tests/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch7_tests/__init__.py",
+      "raw_specifier": "unittest",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "unittest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch7_tests/__init__.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch7_tests/__init__.py",
+      "raw_specifier": "from haystack.utils import log as logging",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch7_tests/__init__.py",
+      "raw_specifier": "elasticsearch",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch7_tests/__init__.py",
+      "raw_specifier": "from elasticsearch import Elasticsearch, exceptions",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch_tests/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch_tests/__init__.py",
+      "raw_specifier": "unittest",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "unittest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch_tests/__init__.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch_tests/__init__.py",
+      "raw_specifier": "from haystack.utils import log as logging",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch_tests/__init__.py",
+      "raw_specifier": "elasticsearch",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/elasticsearch_tests/__init__.py",
+      "raw_specifier": "from elasticsearch import Elasticsearch, ElasticsearchException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "elasticsearch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/mocks.py",
+      "raw_specifier": "from django.apps import apps",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/mocks.py",
+      "raw_specifier": "from haystack.backends import BaseEngine, BaseSearchBackend, BaseSearchQuery, log_query",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/mocks.py",
+      "raw_specifier": "from haystack.models import SearchResult",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/mocks.py",
+      "raw_specifier": "from haystack.routers import BaseRouter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/mocks.py",
+      "raw_specifier": "from haystack.utils import get_identifier",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/mocks.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/models.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/routers.py",
+      "raw_specifier": "from haystack.routers import BaseRouter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/search_indexes.py",
+      "raw_specifier": "from haystack import indexes",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/search_indexes.py",
+      "raw_specifier": "from haystack.indexes import Indexable, SearchIndex",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/search_indexes.py",
+      "raw_specifier": "from .models import Bar, Foo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/tests.py",
+      "raw_specifier": "from django.apps import apps",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/tests.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/tests.py",
+      "raw_specifier": "from haystack import connection_router, connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/tests.py",
+      "raw_specifier": "from haystack.exceptions import NotHandled",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/tests.py",
+      "raw_specifier": "from haystack.query import SearchQuerySet",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/tests.py",
+      "raw_specifier": "from haystack.signals import BaseSignalProcessor, RealtimeSignalProcessor",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/tests.py",
+      "raw_specifier": "from ..whoosh_tests.testcases import WhooshTestCase",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..whoosh_tests.testcases",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/tests.py",
+      "raw_specifier": "from .models import Bar, Foo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/tests.py",
+      "raw_specifier": "from .search_indexes import BarIndex, FooIndex",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".search_indexes",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/multipleindex/__init__.py",
+      "raw_specifier": "from ..utils import check_solr",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/results_per_page_urls.py",
+      "raw_specifier": "from django.urls import path",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/results_per_page_urls.py",
+      "raw_specifier": "from haystack.views import SearchView",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/run_tests.py",
+      "raw_specifier": "multiprocessing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "multiprocessing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/run_tests.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/run_tests.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/run_tests.py",
+      "raw_specifier": "django",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/run_tests.py",
+      "raw_specifier": "from django.core.management import call_command",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/simple_tests/search_indexes.py",
+      "raw_specifier": "from haystack import indexes",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/simple_tests/search_indexes.py",
+      "raw_specifier": "from ..core.models import MockModel, ScoreMockModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..core.models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/simple_tests/__init__.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/solr_tests/server/get-solr-download-url.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/solr_tests/server/get-solr-download-url.py",
+      "raw_specifier": "from itertools import chain",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/solr_tests/server/get-solr-download-url.py",
+      "raw_specifier": "from urllib.parse import urljoin",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/solr_tests/server/get-solr-download-url.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/solr_tests/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/solr_tests/__init__.py",
+      "raw_specifier": "from ..utils import check_solr",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/spatial/models.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/spatial/models.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/spatial/models.py",
+      "raw_specifier": "from django.contrib.gis.geos import Point",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/spatial/search_indexes.py",
+      "raw_specifier": "from haystack import indexes",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/spatial/search_indexes.py",
+      "raw_specifier": "from .models import Checkin",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/spatial/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/spatial/__init__.py",
+      "raw_specifier": "from ..utils import check_solr",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/test_app_using_appconfig/apps.py",
+      "raw_specifier": "from django.apps import AppConfig",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/test_app_using_appconfig/models.py",
+      "raw_specifier": "from django.db.models import CharField, Model",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/test_app_using_appconfig/search_indexes.py",
+      "raw_specifier": "from haystack import indexes",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/test_app_using_appconfig/search_indexes.py",
+      "raw_specifier": "from .models import MicroBlogPost",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/test_app_using_appconfig/tests.py",
+      "raw_specifier": "from django.test import TestCase",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/test_app_using_appconfig/tests.py",
+      "raw_specifier": "from .models import MicroBlogPost",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/test_app_using_appconfig/tests.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/test_app_without_models/urls.py",
+      "raw_specifier": "from django.urls import path",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/test_app_without_models/urls.py",
+      "raw_specifier": "from .views import simple_view",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".views",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "test_haystack/test_app_without_models/views.py",
+      "raw_specifier": "from django.http import HttpResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/test_app_with_hierarchy/contrib/django/hierarchal_app_django/models.py",
+      "raw_specifier": "from django.db.models import BooleanField, CharField, Model",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/utils.py",
+      "raw_specifier": "unittest",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "unittest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/utils.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/utils.py",
+      "raw_specifier": "from pysolr import Solr, SolrError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pysolr",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/whoosh_tests/testcases.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/whoosh_tests/testcases.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/whoosh_tests/testcases.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/whoosh_tests/testcases.py",
+      "raw_specifier": "from django.test import TestCase",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/whoosh_tests/testcases.py",
+      "raw_specifier": "from haystack import connections",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "haystack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_haystack/whoosh_tests/__init__.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "django",
+        "packaging",
+        "elasticsearch"
+      ],
+      "dev_packages": [
+        "coverage",
+        "geopy",
+        "pysolr",
+        "python_dateutil",
+        "requests",
+        "whoosh"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [
+        "pysolr",
+        "sphinx"
+      ],
+      "confidence": "medium",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "example_project/bare_bones_app/models.py",
+      "candidate_test_paths": [
+        "example_project/bare_bones_app/tests/test_models.py",
+        "tests/bare_bones_app/test_models.py",
+        "example_project/bare_bones_app/tests/test_bare_bones_app.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "example_project/bare_bones_app/search_indexes.py",
+      "candidate_test_paths": [
+        "example_project/bare_bones_app/tests/test_search_indexes.py",
+        "tests/bare_bones_app/test_search_indexes.py",
+        "example_project/bare_bones_app/tests/test_bare_bones_app.py",
+        "test/test_search_indexes.py",
+        "tests/test_search_indexes.py",
+        "tests/search_indexes/test_search_indexes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "example_project/regular_app/models.py",
+      "candidate_test_paths": [
+        "example_project/regular_app/tests/test_models.py",
+        "tests/regular_app/test_models.py",
+        "example_project/regular_app/tests/test_regular_app.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "example_project/regular_app/search_indexes.py",
+      "candidate_test_paths": [
+        "example_project/regular_app/tests/test_search_indexes.py",
+        "tests/regular_app/test_search_indexes.py",
+        "example_project/regular_app/tests/test_regular_app.py",
+        "test/test_search_indexes.py",
+        "tests/test_search_indexes.py",
+        "tests/search_indexes/test_search_indexes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/admin.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_admin.py",
+        "tests/test_admin.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_admin.py",
+        "tests/admin/test_admin.py",
+        "tests/admins/test_admin.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/apps.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_apps.py",
+        "tests/test_apps.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_apps.py",
+        "tests/apps/test_apps.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/backends/elasticsearch5_backend.py",
+      "candidate_test_paths": [
+        "haystack/backends/tests/test_elasticsearch5_backend.py",
+        "tests/backends/test_elasticsearch5_backend.py",
+        "haystack/backends/tests/test_backends.py",
+        "test/test_elasticsearch5_backend.py",
+        "tests/test_elasticsearch5_backend.py",
+        "tests/elasticsearch5_backend/test_elasticsearch5_backend.py",
+        "tests/elasticsearch5_backends/test_elasticsearch5_backend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/backends/elasticsearch7_backend.py",
+      "candidate_test_paths": [
+        "haystack/backends/tests/test_elasticsearch7_backend.py",
+        "tests/backends/test_elasticsearch7_backend.py",
+        "haystack/backends/tests/test_backends.py",
+        "test/test_elasticsearch7_backend.py",
+        "tests/test_elasticsearch7_backend.py",
+        "tests/elasticsearch7_backend/test_elasticsearch7_backend.py",
+        "tests/elasticsearch7_backends/test_elasticsearch7_backend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/backends/elasticsearch_backend.py",
+      "candidate_test_paths": [
+        "haystack/backends/tests/test_elasticsearch_backend.py",
+        "tests/backends/test_elasticsearch_backend.py",
+        "haystack/backends/tests/test_backends.py",
+        "test/test_elasticsearch_backend.py",
+        "tests/test_elasticsearch_backend.py",
+        "tests/elasticsearch_backend/test_elasticsearch_backend.py",
+        "tests/elasticsearch_backends/test_elasticsearch_backend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/backends/simple_backend.py",
+      "candidate_test_paths": [
+        "haystack/backends/tests/test_simple_backend.py",
+        "tests/backends/test_simple_backend.py",
+        "haystack/backends/tests/test_backends.py",
+        "test/test_simple_backend.py",
+        "tests/test_simple_backend.py",
+        "tests/simple_backend/test_simple_backend.py",
+        "tests/simple_backends/test_simple_backend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/backends/solr_backend.py",
+      "candidate_test_paths": [
+        "haystack/backends/tests/test_solr_backend.py",
+        "tests/backends/test_solr_backend.py",
+        "haystack/backends/tests/test_backends.py",
+        "test/test_solr_backend.py",
+        "tests/test_solr_backend.py",
+        "tests/solr_backend/test_solr_backend.py",
+        "tests/solr_backends/test_solr_backend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/backends/whoosh_backend.py",
+      "candidate_test_paths": [
+        "haystack/backends/tests/test_whoosh_backend.py",
+        "tests/backends/test_whoosh_backend.py",
+        "haystack/backends/tests/test_backends.py",
+        "test/test_whoosh_backend.py",
+        "tests/test_whoosh_backend.py",
+        "tests/whoosh_backend/test_whoosh_backend.py",
+        "tests/whoosh_backends/test_whoosh_backend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/constants.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_constants.py",
+        "tests/test_constants.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_constants.py",
+        "tests/constants/test_constants.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/exceptions.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/fields.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_fields.py",
+        "tests/test_fields.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_fields.py",
+        "tests/fields/test_fields.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/forms.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_forms.py",
+        "tests/test_forms.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_forms.py",
+        "tests/forms/test_forms.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/generic_views.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_generic_views.py",
+        "tests/test_generic_views.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_generic_views.py",
+        "tests/generic_views/test_generic_views.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/indexes.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_indexes.py",
+        "tests/test_indexes.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_indexes.py",
+        "tests/indexes/test_indexes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/inputs.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_inputs.py",
+        "tests/test_inputs.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_inputs.py",
+        "tests/inputs/test_inputs.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/management/commands/build_solr_schema.py",
+      "candidate_test_paths": [
+        "haystack/management/commands/tests/test_build_solr_schema.py",
+        "tests/management/commands/test_build_solr_schema.py",
+        "haystack/management/commands/tests/test_commands.py",
+        "test/test_build_solr_schema.py",
+        "tests/test_build_solr_schema.py",
+        "tests/build_solr_schema/test_build_solr_schema.py",
+        "tests/build_solr_schemas/test_build_solr_schema.py",
+        "tests/commands/test_build_solr_schema.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/management/commands/clear_index.py",
+      "candidate_test_paths": [
+        "haystack/management/commands/tests/test_clear_index.py",
+        "tests/management/commands/test_clear_index.py",
+        "haystack/management/commands/tests/test_commands.py",
+        "test/test_clear_index.py",
+        "tests/test_clear_index.py",
+        "tests/clear_index/test_clear_index.py",
+        "tests/clear_indexs/test_clear_index.py",
+        "tests/commands/test_clear_index.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/management/commands/haystack_info.py",
+      "candidate_test_paths": [
+        "haystack/management/commands/tests/test_haystack_info.py",
+        "tests/management/commands/test_haystack_info.py",
+        "haystack/management/commands/tests/test_commands.py",
+        "test/test_haystack_info.py",
+        "tests/test_haystack_info.py",
+        "tests/haystack_info/test_haystack_info.py",
+        "tests/haystack_infos/test_haystack_info.py",
+        "tests/commands/test_haystack_info.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/management/commands/rebuild_index.py",
+      "candidate_test_paths": [
+        "haystack/management/commands/tests/test_rebuild_index.py",
+        "tests/management/commands/test_rebuild_index.py",
+        "haystack/management/commands/tests/test_commands.py",
+        "test/test_rebuild_index.py",
+        "tests/test_rebuild_index.py",
+        "tests/rebuild_index/test_rebuild_index.py",
+        "tests/rebuild_indexs/test_rebuild_index.py",
+        "tests/commands/test_rebuild_index.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/management/commands/update_index.py",
+      "candidate_test_paths": [
+        "haystack/management/commands/tests/test_update_index.py",
+        "tests/management/commands/test_update_index.py",
+        "haystack/management/commands/tests/test_commands.py",
+        "test/test_update_index.py",
+        "tests/test_update_index.py",
+        "tests/update_index/test_update_index.py",
+        "tests/update_indexs/test_update_index.py",
+        "tests/commands/test_update_index.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/manager.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_manager.py",
+        "tests/test_manager.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_manager.py",
+        "tests/manager/test_manager.py",
+        "tests/managers/test_manager.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/models.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_models.py",
+        "tests/test_models.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/panels.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_panels.py",
+        "tests/test_panels.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_panels.py",
+        "tests/panels/test_panels.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/query.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_query.py",
+        "tests/test_query.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_query.py",
+        "tests/query/test_query.py",
+        "tests/querys/test_query.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/routers.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_routers.py",
+        "tests/test_routers.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_routers.py",
+        "tests/routers/test_routers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/signals.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_signals.py",
+        "tests/test_signals.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_signals.py",
+        "tests/signals/test_signals.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/templatetags/highlight.py",
+      "candidate_test_paths": [
+        "haystack/templatetags/tests/test_highlight.py",
+        "tests/templatetags/test_highlight.py",
+        "haystack/templatetags/tests/test_templatetags.py",
+        "test/test_highlight.py",
+        "tests/test_highlight.py",
+        "tests/highlight/test_highlight.py",
+        "tests/highlights/test_highlight.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/templatetags/more_like_this.py",
+      "candidate_test_paths": [
+        "haystack/templatetags/tests/test_more_like_this.py",
+        "tests/templatetags/test_more_like_this.py",
+        "haystack/templatetags/tests/test_templatetags.py",
+        "test/test_more_like_this.py",
+        "tests/test_more_like_this.py",
+        "tests/more_like_this/test_more_like_this.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/urls.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_urls.py",
+        "tests/test_urls.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_urls.py",
+        "tests/urls/test_urls.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/utils/app_loading.py",
+      "candidate_test_paths": [
+        "haystack/utils/tests/test_app_loading.py",
+        "tests/utils/test_app_loading.py",
+        "haystack/utils/tests/test_utils.py",
+        "test/test_app_loading.py",
+        "tests/test_app_loading.py",
+        "tests/app_loading/test_app_loading.py",
+        "tests/app_loadings/test_app_loading.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/utils/geo.py",
+      "candidate_test_paths": [
+        "haystack/utils/tests/test_geo.py",
+        "tests/utils/test_geo.py",
+        "haystack/utils/tests/test_utils.py",
+        "test/test_geo.py",
+        "tests/test_geo.py",
+        "tests/geo/test_geo.py",
+        "tests/geos/test_geo.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/utils/highlighting.py",
+      "candidate_test_paths": [
+        "haystack/utils/tests/test_highlighting.py",
+        "tests/utils/test_highlighting.py",
+        "haystack/utils/tests/test_utils.py",
+        "test/test_highlighting.py",
+        "tests/test_highlighting.py",
+        "tests/highlighting/test_highlighting.py",
+        "tests/highlightings/test_highlighting.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/utils/loading.py",
+      "candidate_test_paths": [
+        "haystack/utils/tests/test_loading.py",
+        "tests/utils/test_loading.py",
+        "haystack/utils/tests/test_utils.py",
+        "test/test_loading.py",
+        "tests/test_loading.py",
+        "tests/loading/test_loading.py",
+        "tests/loadings/test_loading.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/utils/log.py",
+      "candidate_test_paths": [
+        "haystack/utils/tests/test_log.py",
+        "tests/utils/test_log.py",
+        "haystack/utils/tests/test_utils.py",
+        "test/test_log.py",
+        "tests/test_log.py",
+        "tests/log/test_log.py",
+        "tests/logs/test_log.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "haystack/views.py",
+      "candidate_test_paths": [
+        "haystack/tests/test_views.py",
+        "tests/test_views.py",
+        "haystack/tests/test_haystack.py",
+        "test/test_views.py",
+        "tests/views/test_views.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/core/admin.py",
+      "candidate_test_paths": [
+        "test_haystack/core/tests/test_admin.py",
+        "tests/core/test_admin.py",
+        "test_haystack/core/tests/test_core.py",
+        "test/test_admin.py",
+        "tests/test_admin.py",
+        "tests/admin/test_admin.py",
+        "tests/admins/test_admin.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/core/custom_identifier.py",
+      "candidate_test_paths": [
+        "test_haystack/core/tests/test_custom_identifier.py",
+        "tests/core/test_custom_identifier.py",
+        "test_haystack/core/tests/test_core.py",
+        "test/test_custom_identifier.py",
+        "tests/test_custom_identifier.py",
+        "tests/custom_identifier/test_custom_identifier.py",
+        "tests/custom_identifiers/test_custom_identifier.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/core/models.py",
+      "candidate_test_paths": [
+        "test_haystack/core/tests/test_models.py",
+        "tests/core/test_models.py",
+        "test_haystack/core/tests/test_core.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/core/urls.py",
+      "candidate_test_paths": [
+        "test_haystack/core/tests/test_urls.py",
+        "tests/core/test_urls.py",
+        "test_haystack/core/tests/test_core.py",
+        "test/test_urls.py",
+        "tests/test_urls.py",
+        "tests/urls/test_urls.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/discovery/models.py",
+      "candidate_test_paths": [
+        "test_haystack/discovery/tests/test_models.py",
+        "tests/discovery/test_models.py",
+        "test_haystack/discovery/tests/test_discovery.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/discovery/search_indexes.py",
+      "candidate_test_paths": [
+        "test_haystack/discovery/tests/test_search_indexes.py",
+        "tests/discovery/test_search_indexes.py",
+        "test_haystack/discovery/tests/test_discovery.py",
+        "test/test_search_indexes.py",
+        "tests/test_search_indexes.py",
+        "tests/search_indexes/test_search_indexes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/mocks.py",
+      "candidate_test_paths": [
+        "test_haystack/tests/test_mocks.py",
+        "tests/test_mocks.py",
+        "test_haystack/tests/test_test_haystack.py",
+        "test/test_mocks.py",
+        "tests/mocks/test_mocks.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/multipleindex/models.py",
+      "candidate_test_paths": [
+        "test_haystack/multipleindex/tests/test_models.py",
+        "tests/multipleindex/test_models.py",
+        "test_haystack/multipleindex/tests/test_multipleindex.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/multipleindex/routers.py",
+      "candidate_test_paths": [
+        "test_haystack/multipleindex/tests/test_routers.py",
+        "tests/multipleindex/test_routers.py",
+        "test_haystack/multipleindex/tests/test_multipleindex.py",
+        "test/test_routers.py",
+        "tests/test_routers.py",
+        "tests/routers/test_routers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/multipleindex/search_indexes.py",
+      "candidate_test_paths": [
+        "test_haystack/multipleindex/tests/test_search_indexes.py",
+        "tests/multipleindex/test_search_indexes.py",
+        "test_haystack/multipleindex/tests/test_multipleindex.py",
+        "test/test_search_indexes.py",
+        "tests/test_search_indexes.py",
+        "tests/search_indexes/test_search_indexes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/multipleindex/tests.py",
+      "candidate_test_paths": [
+        "test_haystack/multipleindex/tests/test_tests.py",
+        "tests/multipleindex/test_tests.py",
+        "test_haystack/multipleindex/tests/test_multipleindex.py",
+        "test/test_tests.py",
+        "tests/test_tests.py",
+        "tests/tests/test_tests.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/results_per_page_urls.py",
+      "candidate_test_paths": [
+        "test_haystack/tests/test_results_per_page_urls.py",
+        "tests/test_results_per_page_urls.py",
+        "test_haystack/tests/test_test_haystack.py",
+        "test/test_results_per_page_urls.py",
+        "tests/results_per_page_urls/test_results_per_page_urls.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/run_tests.py",
+      "candidate_test_paths": [
+        "test_haystack/tests/test_run_tests.py",
+        "tests/test_run_tests.py",
+        "test_haystack/tests/test_test_haystack.py",
+        "test/test_run_tests.py",
+        "tests/run_tests/test_run_tests.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/simple_tests/search_indexes.py",
+      "candidate_test_paths": [
+        "test_haystack/simple_tests/tests/test_search_indexes.py",
+        "tests/simple_tests/test_search_indexes.py",
+        "test_haystack/simple_tests/tests/test_simple_tests.py",
+        "test/test_search_indexes.py",
+        "tests/test_search_indexes.py",
+        "tests/search_indexes/test_search_indexes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/solr_tests/server/get-solr-download-url.py",
+      "candidate_test_paths": [
+        "test_haystack/solr_tests/server/tests/test_get-solr-download-url.py",
+        "tests/solr_tests/server/test_get-solr-download-url.py",
+        "test_haystack/solr_tests/server/tests/test_server.py",
+        "test/test_get-solr-download-url.py",
+        "tests/test_get-solr-download-url.py",
+        "tests/get-solr-download-url/test_get-solr-download-url.py",
+        "tests/get-solr-download-urls/test_get-solr-download-url.py",
+        "tests/server/test_get-solr-download-url.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/spatial/models.py",
+      "candidate_test_paths": [
+        "test_haystack/spatial/tests/test_models.py",
+        "tests/spatial/test_models.py",
+        "test_haystack/spatial/tests/test_spatial.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/spatial/search_indexes.py",
+      "candidate_test_paths": [
+        "test_haystack/spatial/tests/test_search_indexes.py",
+        "tests/spatial/test_search_indexes.py",
+        "test_haystack/spatial/tests/test_spatial.py",
+        "test/test_search_indexes.py",
+        "tests/test_search_indexes.py",
+        "tests/search_indexes/test_search_indexes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/test_app_using_appconfig/apps.py",
+      "candidate_test_paths": [
+        "test_haystack/test_app_using_appconfig/tests/test_apps.py",
+        "tests/test_app_using_appconfig/test_apps.py",
+        "test_haystack/test_app_using_appconfig/tests/test_test_app_using_appconfig.py",
+        "test/test_apps.py",
+        "tests/test_apps.py",
+        "tests/apps/test_apps.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/test_app_using_appconfig/models.py",
+      "candidate_test_paths": [
+        "test_haystack/test_app_using_appconfig/tests/test_models.py",
+        "tests/test_app_using_appconfig/test_models.py",
+        "test_haystack/test_app_using_appconfig/tests/test_test_app_using_appconfig.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/test_app_using_appconfig/search_indexes.py",
+      "candidate_test_paths": [
+        "test_haystack/test_app_using_appconfig/tests/test_search_indexes.py",
+        "tests/test_app_using_appconfig/test_search_indexes.py",
+        "test_haystack/test_app_using_appconfig/tests/test_test_app_using_appconfig.py",
+        "test/test_search_indexes.py",
+        "tests/test_search_indexes.py",
+        "tests/search_indexes/test_search_indexes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/test_app_using_appconfig/tests.py",
+      "candidate_test_paths": [
+        "test_haystack/test_app_using_appconfig/tests/test_tests.py",
+        "tests/test_app_using_appconfig/test_tests.py",
+        "test_haystack/test_app_using_appconfig/tests/test_test_app_using_appconfig.py",
+        "test/test_tests.py",
+        "tests/test_tests.py",
+        "tests/tests/test_tests.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/test_app_without_models/urls.py",
+      "candidate_test_paths": [
+        "test_haystack/test_app_without_models/tests/test_urls.py",
+        "tests/test_app_without_models/test_urls.py",
+        "test_haystack/test_app_without_models/tests/test_test_app_without_models.py",
+        "test/test_urls.py",
+        "tests/test_urls.py",
+        "tests/urls/test_urls.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/test_app_without_models/views.py",
+      "candidate_test_paths": [
+        "test_haystack/test_app_without_models/tests/test_views.py",
+        "tests/test_app_without_models/test_views.py",
+        "test_haystack/test_app_without_models/tests/test_test_app_without_models.py",
+        "test/test_views.py",
+        "tests/test_views.py",
+        "tests/views/test_views.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/test_app_with_hierarchy/contrib/django/hierarchal_app_django/models.py",
+      "candidate_test_paths": [
+        "test_haystack/test_app_with_hierarchy/contrib/django/hierarchal_app_django/tests/test_models.py",
+        "tests/test_app_with_hierarchy/contrib/django/hierarchal_app_django/test_models.py",
+        "test_haystack/test_app_with_hierarchy/contrib/django/hierarchal_app_django/tests/test_hierarchal_app_django.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py",
+        "tests/hierarchal_app_django/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/utils.py",
+      "candidate_test_paths": [
+        "test_haystack/tests/test_utils.py",
+        "tests/test_utils.py",
+        "test_haystack/tests/test_test_haystack.py",
+        "test/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "test_haystack/whoosh_tests/testcases.py",
+      "candidate_test_paths": [
+        "test_haystack/whoosh_tests/tests/test_testcases.py",
+        "tests/whoosh_tests/test_testcases.py",
+        "test_haystack/whoosh_tests/tests/test_whoosh_tests.py",
+        "test/test_testcases.py",
+        "tests/test_testcases.py",
+        "tests/testcases/test_testcases.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/admin/**",
+      "matched_paths": [
+        "haystack/admin.py",
+        "test_haystack/core/admin.py",
+        "test_haystack/solr_tests/test_admin.py"
+      ],
+      "category": "administration",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"admin\" found in 3 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/migration/**",
+      "matched_paths": [
+        "test_haystack/test_app_using_appconfig/migrations/0001_initial.py",
+        "test_haystack/test_app_using_appconfig/migrations/__init__.py"
+      ],
+      "category": "schema_migration",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"migration\" found in 2 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/settings/**",
+      "matched_paths": [
+        "example_project/settings.py",
+        "test_haystack/settings.py"
+      ],
+      "category": "infrastructure_config",
+      "severity": "medium",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"settings\" found in 2 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 137,
+    "classified_count": 137,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 412,
+    "project_import_count": 169,
+    "declared_package_count": 144,
+    "undeclared_package_count": 8,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 65,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 3,
+    "sensitive_file_count": 7,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

@@ -90,6 +90,7 @@ type StructuralFacts = {
   readonly hasConftest: boolean;
   readonly rootInitPyPackages: readonly string[];
   readonly srcInitPyPackages: readonly string[];
+  readonly srcNamespacePackages: readonly string[];
   readonly topLevelPyFiles: readonly string[];
   readonly migrationCount: number;
   readonly testCount: number;
@@ -112,6 +113,7 @@ function extractStructuralFacts(
   // Detect root-level __init__.py packages (flat_package indicator)
   const rootInitPyPackages: string[] = [];
   const srcInitPyPackages: string[] = [];
+  const srcNamespacePackages = new Set<string>();
   for (const p of allPaths) {
     const match = /^([^/]+)\/__init__\.py$/.exec(p);
     if (match && match[1] !== "tests" && match[1] !== "test" && match[1] !== "docs") {
@@ -120,6 +122,10 @@ function extractStructuralFacts(
     const srcMatch = /^src\/([^/]+)\/__init__\.py$/.exec(p);
     if (srcMatch) {
       srcInitPyPackages.push(srcMatch[1]);
+    }
+    const srcNamespaceMatch = /^src\/([^/]+)\/.+\.pyi?$/.exec(p);
+    if (srcNamespaceMatch && !p.endsWith("/__init__.py")) {
+      srcNamespacePackages.add(srcNamespaceMatch[1]);
     }
   }
 
@@ -175,6 +181,7 @@ function extractStructuralFacts(
     hasConftest: pathSet.has("conftest.py") || allPaths.some(p => p.endsWith("/conftest.py")),
     rootInitPyPackages,
     srcInitPyPackages,
+    srcNamespacePackages: [...srcNamespacePackages].filter(name => !srcInitPyPackages.includes(name)).sort(),
     topLevelPyFiles,
     migrationCount,
     testCount,
@@ -208,6 +215,15 @@ function classifyPackageLayout(facts: StructuralFacts): {
       evidence: `src/ directory with package(s): ${facts.srcInitPyPackages.join(", ")}`,
     });
     return { packageLayout: "src_layout", packageSignals: signals, packageUnknowns: unknowns };
+  }
+
+  if (facts.hasSrcDir && facts.srcNamespacePackages.length > 0) {
+    signals.push({
+      signal: "namespace_package_detected",
+      weight: "strong",
+      evidence: `src/ namespace package(s) without __init__.py: ${facts.srcNamespacePackages.join(", ")}`,
+    });
+    return { packageLayout: "namespace_package", packageSignals: signals, packageUnknowns: unknowns };
   }
 
   // Django app layout: multiple top-level packages with migrations

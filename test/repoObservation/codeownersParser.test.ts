@@ -1,8 +1,14 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, afterEach } from "vitest";
+import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { parseCodeowners } from "../../src/repoObservation/codeownersParser.js";
 
 const FIXTURE_ROOT = join(import.meta.dirname, "..", "fixtures", "repo_fixture");
+const TMP_ROOT = join(import.meta.dirname, "..", "__tmp_codeowners__");
+
+afterEach(() => {
+  rmSync(TMP_ROOT, { recursive: true, force: true });
+});
 
 describe("parseCodeowners", () => {
   it("parses root CODEOWNERS file", () => {
@@ -64,5 +70,19 @@ describe("parseCodeowners", () => {
   it("records unresolved patterns", () => {
     const result = parseCodeowners(FIXTURE_ROOT);
     expect(result.unresolved_patterns.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it("expands simple brace patterns into concrete owner hints", () => {
+    mkdirSync(TMP_ROOT, { recursive: true });
+    writeFileSync(
+      join(TMP_ROOT, "CODEOWNERS"),
+      "src/{auth,payment}/ @team-core\n",
+      "utf-8",
+    );
+
+    const result = parseCodeowners(TMP_ROOT);
+    expect(result.owner_hints.some(h => h.path_pattern === "src/auth/")).toBe(true);
+    expect(result.owner_hints.some(h => h.path_pattern === "src/payment/")).toBe(true);
+    expect(result.unresolved_patterns).toEqual([]);
   });
 });

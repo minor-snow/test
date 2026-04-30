@@ -1,0 +1,116 @@
+{
+  "schema_version": "p28b_perf_baseline@0.1.0",
+  "generated_at": "2026-04-30T09:36:13.979Z",
+  "phase": "P28b-0",
+  "description": "Core 3 + Extended 5 wall-clock timing via pantheon guard",
+  "repos": [
+    {
+      "repo_id": "saleor-django-commerce",
+      "category": "django_commerce",
+      "local_path": "H:/Boom/salary",
+      "guard_total_ms": 3704,
+      "python_obs_available": true,
+      "python_file_count": 4248,
+      "timeout": false,
+      "exit_code": 0,
+      "notes": "ok"
+    },
+    {
+      "repo_id": "fastapi-realworld",
+      "category": "fastapi_service",
+      "local_path": "H:/Boom/benchmarks/fastapi-realworld",
+      "guard_total_ms": 2380,
+      "python_obs_available": true,
+      "python_file_count": 60,
+      "timeout": false,
+      "exit_code": 0,
+      "notes": "ok"
+    },
+    {
+      "repo_id": "httpx-sdk",
+      "category": "python_sdk_library",
+      "local_path": "H:/Boom/benchmarks/httpx",
+      "guard_total_ms": 2409,
+      "python_obs_available": true,
+      "python_file_count": 60,
+      "timeout": false,
+      "exit_code": 0,
+      "notes": "ok"
+    },
+    {
+      "repo_id": "flaskbb-flask-app",
+      "category": "flask_web_app",
+      "local_path": "H:/Boom/benchmarks/flaskbb",
+      "guard_total_ms": 2674,
+      "python_obs_available": true,
+      "python_file_count": 146,
+      "timeout": false,
+      "exit_code": 0,
+      "notes": "ok"
+    },
+    {
+      "repo_id": "httpie-cli-tool",
+      "category": "python_cli_tool",
+      "local_path": "H:/Boom/benchmarks/httpie-cli",
+      "guard_total_ms": 2509,
+      "python_obs_available": true,
+      "python_file_count": 133,
+      "timeout": false,
+      "exit_code": 0,
+      "notes": "ok"
+    },
+    {
+      "repo_id": "meltano-etl",
+      "category": "data_pipeline",
+      "local_path": "H:/Boom/benchmarks/meltano",
+      "guard_total_ms": 2701,
+      "python_obs_available": true,
+      "python_file_count": 318,
+      "timeout": false,
+      "exit_code": 0,
+      "notes": "ok"
+    },
+    {
+      "repo_id": "tiktoken-ml",
+      "category": "ml_tooling_tokenizer",
+      "local_path": "H:/Boom/benchmarks/tiktoken",
+      "guard_total_ms": 2426,
+      "python_obs_available": true,
+      "python_file_count": 18,
+      "timeout": false,
+      "exit_code": 0,
+      "notes": "ok"
+    },
+    {
+      "repo_id": "python-monorepo",
+      "category": "python_monorepo",
+      "local_path": "H:/Boom/benchmarks/python-monorepo",
+      "guard_total_ms": 2449,
+      "python_obs_available": true,
+      "python_file_count": 6,
+      "timeout": false,
+      "exit_code": 0,
+      "notes": "ok"
+    }
+  ],
+  "summary": {
+    "repo_count": 8,
+    "completed_count": 8,
+    "timeout_count": 0,
+    "p50_ms": 2509,
+    "p95_ms": 3704
+  },
+  "budget": {
+    "small_medium_repo_p95_ms": 2674,
+    "large_repo_p95_ms": 3704,
+    "monorepo_policy": "timeout_allowed -> observed_only",
+    "hard_timeout_ms": 120000,
+    "recommendation": "Budget confirmed: p95 < 30s for standard repos",
+    "category_aware": {
+      "small_medium (<200 py files)": "p95 < 30000ms",
+      "large (>=200 py files)": "p95 < 60000ms",
+      "monorepo": "timeout -> observed_only (allowed)"
+    }
+  },
+  "scanner_interface_note": "repoScanner public interface frozen after P28b-0. Changes to scanner core require restarting baseline."
+}

@@ -11,7 +11,8 @@
  */
 
 import { promises as fs } from "node:fs";
-import { join, dirname } from "node:path";
+import { join, dirname, resolve } from "node:path";
+import { resolveTrustedPath } from "../safePath.js";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -40,8 +41,19 @@ async function ensureDir(dir: string): Promise<void> {
   await fs.mkdir(dir, { recursive: true });
 }
 
-function logPath(dataDir: string): string {
-  return join(dataDir, "risks", "risks.jsonl");
+export type RiskRegisterPathOptions = {
+  readonly repoRoot?: string;
+  readonly trustedAbsolute?: boolean;
+};
+
+function resolveRiskDataDir(dataDir: string, options?: RiskRegisterPathOptions): string {
+  return resolveTrustedPath(resolve(options?.repoRoot ?? process.cwd()), dataDir, {
+    allowAbsolute: options?.trustedAbsolute === true,
+  });
+}
+
+function logPath(dataDir: string, options?: RiskRegisterPathOptions): string {
+  return join(resolveRiskDataDir(dataDir, options), "risks", "risks.jsonl");
 }
 
 /**
@@ -50,17 +62,18 @@ function logPath(dataDir: string): string {
  */
 export async function appendRiskEntries(
   dataDir: string,
-  entries: RiskEntry[]
+  entries: RiskEntry[],
+  options?: RiskRegisterPathOptions,
 ): Promise<number> {
   if (entries.length === 0) return 0;
 
-  const existing = await readRiskRegister(dataDir);
+  const existing = await readRiskRegister(dataDir, options);
   const existingIds = new Set(existing.map(e => e.source_issue_id));
 
   const newEntries = entries.filter(e => !existingIds.has(e.source_issue_id));
   if (newEntries.length === 0) return 0;
 
-  const path = logPath(dataDir);
+  const path = logPath(dataDir, options);
   await ensureDir(dirname(path));
   const lines = newEntries.map(e => JSON.stringify(e)).join("\n") + "\n";
   await fs.appendFile(path, lines, "utf8");
@@ -73,9 +86,10 @@ export async function appendRiskEntries(
  * Returns empty array if file doesn't exist.
  */
 export async function readRiskRegister(
-  dataDir: string
+  dataDir: string,
+  options?: RiskRegisterPathOptions,
 ): Promise<RiskEntry[]> {
-  const path = logPath(dataDir);
+  const path = logPath(dataDir, options);
   try {
     const content = await fs.readFile(path, "utf8");
     return content

@@ -45,24 +45,27 @@ export function parseCodeowners(repoRoot: string): {
 
       if (owners.length === 0) continue;
 
-      const isComplex = isComplexPattern(pattern);
       const source: "CODEOWNERS" | "CODEOWNERS:.github" | "CODEOWNERS:docs" = loc.includes(".github")
         ? "CODEOWNERS:.github"
         : loc.includes("docs")
           ? "CODEOWNERS:docs"
           : "CODEOWNERS";
+      const expandedPatterns = expandBracePatterns(pattern);
 
-      if (isComplex) {
-        unresolved.push(pattern);
+      for (const expandedPattern of expandedPatterns) {
+        const isComplex = isComplexPattern(expandedPattern);
+        if (isComplex) {
+          unresolved.push(expandedPattern);
+        }
+
+        hints.push({
+          path_pattern: expandedPattern,
+          owners,
+          source,
+          match_status: isComplex ? "unresolved_complex_pattern" : "simple_pattern",
+          evidence: [{ type: "codeowners", source_path: loc.replace(repoRoot, "").replace(/\\/g, "/").replace(/^\//, ""), value: line }],
+        });
       }
-
-      hints.push({
-        path_pattern: pattern,
-        owners,
-        source,
-        match_status: isComplex ? "unresolved_complex_pattern" : "simple_pattern",
-        evidence: [{ type: "codeowners", source_path: loc.replace(repoRoot, "").replace(/\\/g, "/").replace(/^\//, ""), value: line }],
-      });
     }
   }
 
@@ -91,4 +94,24 @@ function isComplexPattern(pattern: string): boolean {
   if (pattern.startsWith("!")) return true;
 
   return false;
+}
+
+function expandBracePatterns(pattern: string): string[] {
+  const match = /\{([^{}]+)\}/.exec(pattern);
+  if (!match || match.index === undefined) {
+    return [pattern];
+  }
+
+  const before = pattern.slice(0, match.index);
+  const after = pattern.slice(match.index + match[0].length);
+  const options = match[1]
+    .split(",")
+    .map(option => option.trim())
+    .filter(option => option.length > 0);
+
+  if (options.length === 0) {
+    return [pattern];
+  }
+
+  return options.flatMap(option => expandBracePatterns(`${before}${option}${after}`));
 }

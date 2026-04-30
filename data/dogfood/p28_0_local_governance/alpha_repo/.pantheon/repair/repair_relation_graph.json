@@ -1,0 +1,89 @@
+[
+  {
+    "from": "saleor/checkout/calculations.py",
+    "to": "saleor/checkout/calculations.py",
+    "relation": "suspect",
+    "confidence": "high",
+    "reason": "Primary suspect",
+    "evidence": [
+      "explicit_suspect_file"
+    ]
+  },
+  {
+    "from": "saleor/checkout/calculations.py",
+    "to": "saleor/checkout/tests/test_calculations.py",
+    "relation": "risk_preset",
+    "confidence": "low",
+    "reason": "Purchase flow logic requires human review",
+    "evidence": [
+      "2 paths match pattern **/checkout/**",
+      "Sensitive zone \"purchase_flow\" (high) corroborates"
+    ]
+  },
+  {
+    "from": "saleor/checkout/calculations.py",
+    "to": "saleor/order/models.py",
+    "relation": "risk_preset",
+    "confidence": "low",
+    "reason": "Order lifecycle logic requires human review",
+    "evidence": [
+      "1 paths match pattern **/order/**",
+      "Sensitive zone \"order_lifecycle\" (high) corroborates"
+    ]
+  },
+  {
+    "from": "saleor/checkout/calculations.py",
+    "to": "saleor/payment/gateway.py",
+    "relation": "risk_preset",
+    "confidence": "medium",
+    "reason": "Financial transaction logic requires human review",
+    "evidence": [
+      "3 paths match pattern **/payment/**",
+      "Sensitive zone \"financial_transactions\" (critical) corroborates"
+    ]
+  },
+  {
+    "from": "saleor/checkout/calculations.py",
+    "to": "src/auth/login.ts",
+    "relation": "risk_preset",
+    "confidence": "low",
+    "reason": "Authentication logic requires human review",
+    "evidence": [
+      "2 paths match pattern **/auth/**",
+      "Sensitive zone \"authentication\" (high) corroborates"
+    ]
+  },
+  {
+    "from": "saleor/checkout/calculations.py",
+    "to": "src/payment/billing.ts",
+    "relation": "risk_preset",
+    "confidence": "medium",
+    "reason": "Financial transaction logic requires human review",
+    "evidence": [
+      "3 paths match pattern **/payment/**",
+      "Sensitive zone \"financial_transactions\" (critical) corroborates"
+    ]
+  },
+  {
+    "from": "saleor/checkout/calculations.py",
+    "to": "test/auth/login.test.ts",
+    "relation": "risk_preset",
+    "confidence": "low",
+    "reason": "Authentication logic requires human review",
+    "evidence": [
+      "2 paths match pattern **/auth/**",
+      "Sensitive zone \"authentication\" (high) corroborates"
+    ]
+  },
+  {
+    "from": "saleor/checkout/calculations.py",
+    "to": "test/payment/billing.test.ts",
+    "relation": "risk_preset",
+    "confidence": "medium",
+    "reason": "Financial transaction logic requires human review",
+    "evidence": [
+      "3 paths match pattern **/payment/**",
+      "Sensitive zone \"financial_transactions\" (critical) corroborates"
+    ]
+  }
+]

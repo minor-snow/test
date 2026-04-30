@@ -1,0 +1,77 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "dc3e958da7563c15f3d83b480da2c02e58fca4a4a926f0efc96ddf26ef1e0229",
+  "pinned_commit": "e6965acd86496013d91a8916b61672e0023a6bf3",
+  "completed_at": "2026-04-30T11:11:29.814Z",
+  "repo_id": "celery",
+  "category_expected": "data_pipeline",
+  "category_observed": "django_commerce",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 429,
+  "python_files": 421,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "django/high",
+    "pytest/medium",
+    "click/high",
+    "sqlalchemy/high",
+    "celery/medium"
+  ],
+  "project_role_signals": [
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 204,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "celery",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected data_pipeline, got django_commerce",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "examples/django/requirements.txt"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "dynamic_or_unresolved_import",
+      "classification": "intrinsic",
+      "paths": [
+        "celery/app/base.py",
+        "celery/schedules.py"
+      ],
+      "count": 2,
+      "note": "Imports using __import__(), importlib.import_module(), or computed paths. Cannot be statically resolved — this is inherent to Python."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "pyproject.toml",
+        "setup.cfg",
+        "setup.py"
+      ],
+      "count": 3,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

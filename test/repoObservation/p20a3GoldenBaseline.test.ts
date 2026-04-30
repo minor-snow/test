@@ -79,7 +79,7 @@ describe("P20a.3: Golden Observation Baseline", () => {
       console.log(`[P20a.3]   unknown_taxonomy: ${JSON.stringify(currentSnapshot.snapshot.unknown_taxonomy_counts)}`);
       console.log(`[P20a.3]   quality.actionable_ratio: ${(currentSnapshot.snapshot.quality.actionable_ratio * 100).toFixed(1)}%`);
       console.log(`[P20a.3]   quality.unknown_bucket_files: ${currentSnapshot.snapshot.quality.unknown_bucket_file_count}`);
-      expect(true).toBe(true); // First run always passes
+      expect(existsSync(GOLDEN_PATH)).toBe(true);
       return;
     }
 
@@ -137,6 +137,6 @@ describe("P20a.3: Golden Observation Baseline", () => {
       JSON.stringify(currentSnapshot, null, 2),
     );
     console.log(`[P20a.3] Current snapshot written to ${OUT_DIR}`);
-    expect(true).toBe(true);
+    expect(existsSync(join(OUT_DIR, "current_observation_snapshot.json"))).toBe(true);
   });
 });

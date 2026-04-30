@@ -1,0 +1,750 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "mobolic__facebook-sdk",
+    "observed_file_count": 43,
+    "python_file_count": 22
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: facebook"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "docs": 1,
+      "source": 9,
+      "unknown": 1,
+      "config": 1,
+      "test": 10
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "flask",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "flask found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "flask imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "flask_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (medium)",
+      "framework: flask / web_framework (high)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: authorization (high, 1 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/config*",
+        "reason": "Application configuration affects runtime behavior",
+        "severity": "medium",
+        "matched_path_count": 2,
+        "evidence": [
+          "2 paths match pattern **/config*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/blueprints/**",
+        "reason": "No Flask blueprint directory observed"
+      },
+      {
+        "pattern": "**/extensions*",
+        "reason": "No extensions files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 8341,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "examples/flask/app/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 566,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/flask/app/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3268,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/flask/app/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 203,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/flask/config.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 269,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/flask/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 59,
+      "evidence": []
+    },
+    {
+      "path": "examples/flask/run.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 103,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/get_posts.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1431,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/tornado/example.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3638,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "facebook/version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 645,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "facebook/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 18598,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 1138,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "test/test_access_tokens.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3394,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_application_secret_proof.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4380,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_connections.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1407,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_graphapierror.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 966,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_oauth_dialog_url.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1578,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_permissions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1227,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_search.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1199,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_signed_request.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1490,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_versions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1263,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3076,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/flask/app/models.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flask/app/models.py",
+      "raw_specifier": "from app import db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flask/app/views.py",
+      "raw_specifier": "from facebook import get_user_from_cookie, GraphAPI",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "facebook",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flask/app/views.py",
+      "raw_specifier": "from flask import g, render_template, redirect, request, session, url_for",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flask/app/views.py",
+      "raw_specifier": "from app import app, db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flask/app/views.py",
+      "raw_specifier": "from .models import User",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/flask/app/__init__.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flask/app/__init__.py",
+      "raw_specifier": "from flask.ext.sqlalchemy import SQLAlchemy",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flask/app/__init__.py",
+      "raw_specifier": "from app import views, models  # noqa: E402,F401",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flask/config.py",
+      "raw_specifier": "from os import path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flask/run.py",
+      "raw_specifier": "from app import app, db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/get_posts.py",
+      "raw_specifier": "facebook",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "facebook",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/get_posts.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tornado/example.py",
+      "raw_specifier": "facebook",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "facebook",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tornado/example.py",
+      "raw_specifier": "tornado.database",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "tornado",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/tornado/example.py",
+      "raw_specifier": "tornado.httpserver",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "tornado",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/tornado/example.py",
+      "raw_specifier": "tornado.options",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "tornado",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/tornado/example.py",
+      "raw_specifier": "tornado.web",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "tornado",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/tornado/example.py",
+      "raw_specifier": "from tornado.options import define, options",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tornado",
+      "confidence": "low"
+    },
+    {
+      "from_file": "facebook/__init__.py",
+      "raw_specifier": "hashlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "facebook/__init__.py",
+      "raw_specifier": "hmac",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hmac",
+      "confidence": "high"
+    },
+    {
+      "from_file": "facebook/__init__.py",
+      "raw_specifier": "binascii",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "binascii",
+      "confidence": "low"
+    },
+    {
+      "from_file": "facebook/__init__.py",
+      "raw_specifier": "base64",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "facebook/__init__.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "facebook/__init__.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "facebook/__init__.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "facebook/__init__.py",
+      "raw_specifier": "from urllib.parse import parse_qs, urlencode, urlparse",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "facebook/__init__.py",
+      "raw_specifier": "from . import version",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "examples/flask/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "facebook_sdk",
+        "flask",
+        "flask_sqlalchemy"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [
+        "requests"
+      ],
+      "dev_packages": [],
+      "confidence": "medium",
+      "warnings": [
+        "setup.py parsing is weak detection — consider using pyproject.toml"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/flask/app/models.py",
+      "candidate_test_paths": [
+        "examples/flask/app/tests/test_models.py",
+        "tests/flask/app/test_models.py",
+        "examples/flask/app/tests/test_app.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py",
+        "tests/app/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/flask/app/views.py",
+      "candidate_test_paths": [
+        "examples/flask/app/tests/test_views.py",
+        "tests/flask/app/test_views.py",
+        "examples/flask/app/tests/test_app.py",
+        "test/test_views.py",
+        "tests/test_views.py",
+        "tests/views/test_views.py",
+        "tests/app/test_views.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/flask/config.py",
+      "candidate_test_paths": [
+        "examples/flask/tests/test_config.py",
+        "tests/flask/test_config.py",
+        "examples/flask/tests/test_flask.py",
+        "test/test_config.py",
+        "tests/test_config.py",
+        "tests/config/test_config.py",
+        "tests/configs/test_config.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/flask/run.py",
+      "candidate_test_paths": [
+        "examples/flask/tests/test_run.py",
+        "tests/flask/test_run.py",
+        "examples/flask/tests/test_flask.py",
+        "test/test_run.py",
+        "tests/test_run.py",
+        "tests/run/test_run.py",
+        "tests/runs/test_run.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/get_posts.py",
+      "candidate_test_paths": [
+        "examples/tests/test_get_posts.py",
+        "tests/test_get_posts.py",
+        "examples/tests/test_examples.py",
+        "test/test_get_posts.py",
+        "tests/get_posts/test_get_posts.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/tornado/example.py",
+      "candidate_test_paths": [
+        "examples/tornado/tests/test_example.py",
+        "tests/tornado/test_example.py",
+        "examples/tornado/tests/test_tornado.py",
+        "test/test_example.py",
+        "tests/test_example.py",
+        "tests/example/test_example.py",
+        "tests/examples/test_example.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "facebook/version.py",
+      "candidate_test_paths": [
+        "facebook/tests/test_version.py",
+        "tests/test_version.py",
+        "facebook/tests/test_facebook.py",
+        "test/test_version.py",
+        "tests/version/test_version.py",
+        "tests/versions/test_version.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/permission/**",
+      "matched_paths": [
+        "test/test_permissions.py"
+      ],
+      "category": "authorization",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"permission\" found in 1 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "examples/flask/requirements.txt"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 21,
+    "classified_count": 21,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 28,
+    "project_import_count": 3,
+    "declared_package_count": 5,
+    "undeclared_package_count": 10,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 7,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 1,
+    "sensitive_file_count": 1,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

@@ -1,14 +1,11 @@
-import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { shortStableId } from "../deterministic.js";
+import { globToRegex as sharedGlobToRegex, matchesGlob } from "../globMatch.js";
 import { normalizeRepoRelativePath } from "../repoObservation/pathUtils.js";
 
 export function deterministicId(prefix: string, payload: unknown): string {
-  const hash = createHash("sha1")
-    .update(JSON.stringify(payload))
-    .digest("hex")
-    .slice(0, 12);
-  return `${prefix}_${hash}`;
+  return shortStableId(prefix, payload, 16);
 }
 
 export function normalizeRepairPath(path: string): string | null {
@@ -26,31 +23,22 @@ export function pathExistsInRepo(repoRoot: string, repoPath: string): boolean {
 }
 
 export function readJsonFile<T>(path: string): T {
-  return JSON.parse(readFileSync(path, "utf-8")) as T;
+  try {
+    return JSON.parse(readFileSync(path, "utf-8")) as T;
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to read JSON file ${path}: ${reason}`);
+  }
 }
 
 export function uniqueSorted(values: readonly string[]): string[] {
   return [...new Set(values)].sort((a, b) => a.localeCompare(b));
 }
 
-const globRegexCache = new Map<string, RegExp>();
-
 export function globToRegex(glob: string): RegExp {
-  const cached = globRegexCache.get(glob);
-  if (cached) return cached;
-  const regex = glob
-    .replace(/[.+^${}()|[\]\\]/g, "\\$&")
-    .replace(/\*\*/g, "___DOUBLESTAR___")
-    .replace(/\*/g, "[^/]*")
-    .replace(/___DOUBLESTAR___/g, ".*");
-  const compiled = new RegExp(`^${regex}$`);
-  // Cap cache size to avoid unbounded growth from dynamic patterns
-  if (globRegexCache.size < 2000) {
-    globRegexCache.set(glob, compiled);
-  }
-  return compiled;
+  return sharedGlobToRegex(glob);
 }
 
 export function matchesPattern(path: string, pattern: string): boolean {
-  return globToRegex(pattern).test(path);
+  return matchesGlob(path, pattern);
 }

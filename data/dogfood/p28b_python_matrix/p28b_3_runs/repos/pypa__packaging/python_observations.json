@@ -1,0 +1,3538 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "pypa__packaging",
+    "observed_file_count": 131,
+    "python_file_count": 69
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "src_layout",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "src_layout_detected",
+        "weight": "strong",
+        "evidence": "src/ directory with package(s): packaging"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 2,
+      "source": 37,
+      "docs": 1,
+      "unknown": 1,
+      "test": 28
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "httpx",
+        "kind": "http_client",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "httpx imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / src_layout (high)",
+      "framework: httpx / http_client (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 6,
+        "evidence": [
+          "6 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 1883,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "benchmarks/markers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 945,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "benchmarks/requirement.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 537,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "benchmarks/resolver.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1280,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "benchmarks/specifiers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4425,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "benchmarks/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 718,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "benchmarks/version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2159,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "benchmarks/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 421,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 4088,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "noxfile.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 18473,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 4664,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "src/packaging/dependency_groups.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10520,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/direct_url.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11242,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/errors.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2774,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/licenses/_spdx.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 51921,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/licenses/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7479,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/markers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17976,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/metadata.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 39734,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/pylock.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 34877,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/requirements.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4580,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/specifiers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 73476,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/tags.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 35163,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10137,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 39588,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/_elffile.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3319,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/_manylinux.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9889,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/_musllinux.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2860,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/_parser.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 12106,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/_structures.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1142,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/_tokenizer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5652,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/packaging/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 514,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tasks/check.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4525,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tasks/check_frozen_revs.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3401,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tasks/licenses.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2873,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tasks/paths.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 317,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tasks/pickle_compat.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6374,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tasks/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 67,
+      "evidence": []
+    },
+    {
+      "path": "tasks/select_pypi_dist.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 952,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tasks/select_pypi_specs.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 785,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tasks/select_pypi_versions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1902,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tasks/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 256,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 295,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/property/strategies.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5255,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/property/test_specifier_comparison.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 32812,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/property/test_specifier_extended.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4939,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/property/test_specifier_implied.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 31651,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/property/test_specifier_matching.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 27914,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/property/test_version_format.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 27888,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/property/test_version_normalization.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 25287,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/property/test_version_ordering.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 17437,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/property/test_version_releases.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 36267,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/property/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_dependency_groups.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 15499,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_direct_url.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9337,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_elffile.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3420,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_errors.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3770,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_licenses.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 301,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_manylinux.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7157,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_markers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 28492,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_metadata.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 45452,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_musllinux.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3000,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_pylock.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 25733,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_pylock_select.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12214,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_requirements.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 28346,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_specifiers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 128093,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_tags.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 82680,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6938,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_version.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 50561,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 183,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "benchmarks/markers.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/markers.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/markers.py",
+      "raw_specifier": "from packaging.markers import Marker",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/markers.py",
+      "raw_specifier": "from . import add_attributes",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "benchmarks/requirement.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/requirement.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/requirement.py",
+      "raw_specifier": "from packaging.requirements import Requirement",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/requirement.py",
+      "raw_specifier": "from . import add_attributes",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "benchmarks/resolver.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/resolver.py",
+      "raw_specifier": "from packaging.specifiers import SpecifierSet",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/resolver.py",
+      "raw_specifier": "from packaging.version import Version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/resolver.py",
+      "raw_specifier": "from . import add_attributes",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "benchmarks/specifiers.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/specifiers.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/specifiers.py",
+      "raw_specifier": "from packaging.specifiers import SpecifierSet",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/specifiers.py",
+      "raw_specifier": "from packaging.version import Version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/specifiers.py",
+      "raw_specifier": "from . import add_attributes",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "benchmarks/utils.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/utils.py",
+      "raw_specifier": "from packaging.utils import canonicalize_name",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/utils.py",
+      "raw_specifier": "from . import add_attributes",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "benchmarks/version.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/version.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/version.py",
+      "raw_specifier": "from packaging.version import InvalidVersion, Version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/version.py",
+      "raw_specifier": "from . import add_attributes",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "benchmarks/__init__.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/__init__.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, TypeVar",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/__init__.py",
+      "raw_specifier": "from collections.abc import Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "difflib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "difflib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "glob",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "glob",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "tarfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tarfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "textwrap",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "textwrap",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "urllib.request",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "from typing import IO, TYPE_CHECKING",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "nox",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "nox",
+      "confidence": "low"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "packaging.version",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "noxfile.py",
+      "raw_specifier": "from collections.abc import Generator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/dependency_groups.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/dependency_groups.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/dependency_groups.py",
+      "raw_specifier": "from collections.abc import Mapping, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/dependency_groups.py",
+      "raw_specifier": "from .errors import _ErrorCollector",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".errors",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/dependency_groups.py",
+      "raw_specifier": "from .requirements import Requirement",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".requirements",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/direct_url.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/direct_url.py",
+      "raw_specifier": "dataclasses",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/direct_url.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/direct_url.py",
+      "raw_specifier": "urllib.parse",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/direct_url.py",
+      "raw_specifier": "from collections.abc import Mapping",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/direct_url.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, Protocol, TypeVar",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/direct_url.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/direct_url.py",
+      "raw_specifier": "from collections.abc import Collection",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/direct_url.py",
+      "raw_specifier": "from typing import Self",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/direct_url.py",
+      "raw_specifier": "from typing_extensions import Self",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/packaging/errors.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/errors.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/errors.py",
+      "raw_specifier": "dataclasses",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/errors.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/errors.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/errors.py",
+      "raw_specifier": "from builtins import ExceptionGroup",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "builtins",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/licenses/_spdx.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/licenses/_spdx.py",
+      "raw_specifier": "from typing import TypedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/licenses/__init__.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/licenses/__init__.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/licenses/__init__.py",
+      "raw_specifier": "from typing import NewType, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/licenses/__init__.py",
+      "raw_specifier": "from ._spdx import EXCEPTIONS, LICENSES",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._spdx",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "operator",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "operator",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "from collections.abc import Set as AbstractSet",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Callable, Literal, TypedDict, Union, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "from ._parser import MarkerAtom, MarkerList, Op, Value, Variable",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "from ._parser import parse_marker as _parse_marker",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "from ._tokenizer import ParserSyntaxError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._tokenizer",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "from .specifiers import InvalidSpecifier, Specifier",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".specifiers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "from .utils import canonicalize_name",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/markers.py",
+      "raw_specifier": "from collections.abc import Mapping",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "email.header",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "email",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "email.message",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "email",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "email.parser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "email",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "email.policy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "email",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "keyword",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "keyword",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "from typing import ( Any, Callable, Generic, Literal, TypedDict, cast, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "from . import licenses, requirements, specifiers, utils",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "from . import version as version_module",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "from .errors import ExceptionGroup, _ErrorCollector",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".errors",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/metadata.py",
+      "raw_specifier": "from .licenses import NormalizedLicenseExpression",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".licenses",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "dataclasses",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from collections.abc import Mapping, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from dataclasses import dataclass",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from typing import ( TYPE_CHECKING, Any, Callable, Protocol, TypeVar, cast, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from urllib.parse import urlparse",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from .markers import ( Environment, Marker, _pep440_python_full_version, default_environment, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".markers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from .specifiers import SpecifierSet",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".specifiers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from .tags import create_compatible_tags_selector, sys_tags",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".tags",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from .utils import ( NormalizedName, is_normalized_name, parse_sdist_filename, parse_wheel_filename, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from .version import Version",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".version",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from collections.abc import Collection, Iterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from typing_extensions import Self",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/packaging/pylock.py",
+      "raw_specifier": "from .tags import Tag",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".tags",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/requirements.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/requirements.py",
+      "raw_specifier": "from typing import TYPE_CHECKING",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/requirements.py",
+      "raw_specifier": "from ._parser import parse_requirement as _parse_requirement",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/requirements.py",
+      "raw_specifier": "from ._tokenizer import ParserSyntaxError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._tokenizer",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/requirements.py",
+      "raw_specifier": "from .markers import Marker, _normalize_extra_values",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".markers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/requirements.py",
+      "raw_specifier": "from .specifiers import SpecifierSet",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".specifiers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/requirements.py",
+      "raw_specifier": "from .utils import canonicalize_name",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/requirements.py",
+      "raw_specifier": "from collections.abc import Iterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "from packaging.specifiers import Specifier, SpecifierSet, InvalidSpecifier",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "from packaging.version import Version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "enum",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "from typing import ( TYPE_CHECKING, Any, Callable, Final, TypeVar, Union, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "from .utils import canonicalize_version",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "from .version import InvalidVersion, Version",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".version",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "from typing import TypeGuard  # pragma: no cover",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "from typing_extensions import TypeGuard",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/packaging/specifiers.py",
+      "raw_specifier": "from collections.abc import Iterable, Iterator, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "operator",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "operator",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "struct",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "struct",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "sysconfig",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sysconfig",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "from collections.abc import Iterable, Iterator, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "from importlib.machinery import EXTENSION_SUFFIXES",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "from typing import ( TYPE_CHECKING, TypeVar, cast, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "from . import _manylinux, _musllinux",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "from collections.abc import Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/tags.py",
+      "raw_specifier": "from collections.abc import Set as AbstractSet",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/utils.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/utils.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/utils.py",
+      "raw_specifier": "from typing import NewType, Union, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/utils.py",
+      "raw_specifier": "from .tags import Tag, UnsortedTagsError, parse_tag",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".tags",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/utils.py",
+      "raw_specifier": "from .version import InvalidVersion, Version, _TrimmedRelease",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".version",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/version.py",
+      "raw_specifier": "from packaging.version import parse, normalize_pre, Version, _cmpkey",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/version.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/version.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/version.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/version.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/version.py",
+      "raw_specifier": "from typing import ( Any, Callable, Literal, NamedTuple, SupportsInt, TypedDict, Union, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/version.py",
+      "raw_specifier": "from typing_extensions import Self, Unpack",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/packaging/version.py",
+      "raw_specifier": "from warnings import deprecated as _deprecated",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/version.py",
+      "raw_specifier": "from typing_extensions import deprecated as _deprecated",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/packaging/version.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/version.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_elffile.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_elffile.py",
+      "raw_specifier": "enum",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_elffile.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_elffile.py",
+      "raw_specifier": "struct",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "struct",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_elffile.py",
+      "raw_specifier": "from typing import IO",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "collections",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, NamedTuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "from ._elffile import EIClass, EIData, ELFFile, EMachine",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._elffile",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "from collections.abc import Generator, Iterator, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "ctypes",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_manylinux.py",
+      "raw_specifier": "_manylinux",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "_manylinux",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/packaging/_musllinux.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_musllinux.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_musllinux.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_musllinux.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_musllinux.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_musllinux.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, NamedTuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_musllinux.py",
+      "raw_specifier": "from ._elffile import ELFFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._elffile",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/_musllinux.py",
+      "raw_specifier": "from collections.abc import Iterator, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_musllinux.py",
+      "raw_specifier": "sysconfig",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sysconfig",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_parser.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_parser.py",
+      "raw_specifier": "ast",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ast",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_parser.py",
+      "raw_specifier": "from collections.abc import Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_parser.py",
+      "raw_specifier": "from typing import Literal, NamedTuple, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_parser.py",
+      "raw_specifier": "from ._tokenizer import DEFAULT_RULES, Tokenizer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._tokenizer",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/_structures.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_tokenizer.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_tokenizer.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_tokenizer.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_tokenizer.py",
+      "raw_specifier": "from dataclasses import dataclass",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_tokenizer.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, NoReturn",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/packaging/_tokenizer.py",
+      "raw_specifier": "from .specifiers import Specifier",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".specifiers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/packaging/_tokenizer.py",
+      "raw_specifier": "from collections.abc import Generator, Mapping",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check.py",
+      "raw_specifier": "os.path",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check.py",
+      "raw_specifier": "xmlrpc.client",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "xmlrpc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check.py",
+      "raw_specifier": "invoke",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check.py",
+      "raw_specifier": "pkg_resources",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pkg_resources",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tasks/check.py",
+      "raw_specifier": "progress.bar",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "progress",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check.py",
+      "raw_specifier": "from packaging.version import Version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check.py",
+      "raw_specifier": "from .paths import CACHE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".paths",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "tasks/check_frozen_revs.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check_frozen_revs.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tasks/check_frozen_revs.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check_frozen_revs.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check_frozen_revs.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check_frozen_revs.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/check_frozen_revs.py",
+      "raw_specifier": "from ruamel.yaml import YAML  # type: ignore[import-not-found]",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "ruamel",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tasks/licenses.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/licenses.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/licenses.py",
+      "raw_specifier": "from contextlib import closing",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/licenses.py",
+      "raw_specifier": "from io import StringIO",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/licenses.py",
+      "raw_specifier": "from textwrap import dedent",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "textwrap",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/licenses.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/licenses.py",
+      "raw_specifier": "httpx",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "httpx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/licenses.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/licenses.py",
+      "raw_specifier": "from typing import TypedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/paths.py",
+      "raw_specifier": "os.path",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/pickle_compat.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/pickle_compat.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tasks/pickle_compat.py",
+      "raw_specifier": "importlib.metadata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/pickle_compat.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/pickle_compat.py",
+      "raw_specifier": "pickle",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pickle",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/pickle_compat.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/pickle_compat.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/pickle_compat.py",
+      "raw_specifier": "from packaging.markers import Marker",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/pickle_compat.py",
+      "raw_specifier": "from packaging.specifiers import Specifier, SpecifierSet",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/pickle_compat.py",
+      "raw_specifier": "from packaging.tags import Tag",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/pickle_compat.py",
+      "raw_specifier": "from packaging.version import Version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/select_pypi_dist.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/select_pypi_dist.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/select_pypi_dist.py",
+      "raw_specifier": "sqlite3",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sqlite3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/select_pypi_dist.py",
+      "raw_specifier": "from packaging.requirements import InvalidRequirement, Requirement",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/select_pypi_specs.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/select_pypi_specs.py",
+      "raw_specifier": "sqlite3",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sqlite3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/select_pypi_specs.py",
+      "raw_specifier": "from packaging.specifiers import InvalidSpecifier, SpecifierSet",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/select_pypi_versions.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/select_pypi_versions.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/select_pypi_versions.py",
+      "raw_specifier": "sqlite3",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sqlite3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/select_pypi_versions.py",
+      "raw_specifier": "from packaging.version import InvalidVersion, Version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/__init__.py",
+      "raw_specifier": "invoke",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/__init__.py",
+      "raw_specifier": "from . import check",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "noxfile.py",
+      "source_type": "noxfile.py",
+      "packages": [],
+      "dev_packages": [
+        "test",
+        "prek",
+        "build",
+        "twine",
+        "docs",
+        "httpx",
+        "packaging"
+      ],
+      "confidence": "low",
+      "warnings": [
+        "noxfile.py parsing is weak detection"
+      ]
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tasks/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "invoke",
+        "progress"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "benchmarks/markers.py",
+      "candidate_test_paths": [
+        "benchmarks/tests/test_markers.py",
+        "tests/test_markers.py",
+        "benchmarks/tests/test_benchmarks.py",
+        "test/test_markers.py",
+        "tests/markers/test_markers.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_markers.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_markers.py [library_package layout]"
+    },
+    {
+      "source_path": "benchmarks/requirement.py",
+      "candidate_test_paths": [
+        "benchmarks/tests/test_requirement.py",
+        "tests/test_requirement.py",
+        "benchmarks/tests/test_benchmarks.py",
+        "test/test_requirement.py",
+        "tests/requirement/test_requirement.py",
+        "tests/requirements/test_requirement.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "benchmarks/resolver.py",
+      "candidate_test_paths": [
+        "benchmarks/tests/test_resolver.py",
+        "tests/test_resolver.py",
+        "benchmarks/tests/test_benchmarks.py",
+        "test/test_resolver.py",
+        "tests/resolver/test_resolver.py",
+        "tests/resolvers/test_resolver.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "benchmarks/specifiers.py",
+      "candidate_test_paths": [
+        "benchmarks/tests/test_specifiers.py",
+        "tests/test_specifiers.py",
+        "benchmarks/tests/test_benchmarks.py",
+        "test/test_specifiers.py",
+        "tests/specifiers/test_specifiers.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_specifiers.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_specifiers.py [library_package layout]"
+    },
+    {
+      "source_path": "benchmarks/utils.py",
+      "candidate_test_paths": [
+        "benchmarks/tests/test_utils.py",
+        "tests/test_utils.py",
+        "benchmarks/tests/test_benchmarks.py",
+        "test/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_utils.py"
+      ],
+      "confidence": "medium",
+      "reason": "Generic library helper match without directory context: tests/test_utils.py"
+    },
+    {
+      "source_path": "benchmarks/version.py",
+      "candidate_test_paths": [
+        "benchmarks/tests/test_version.py",
+        "tests/test_version.py",
+        "benchmarks/tests/test_benchmarks.py",
+        "test/test_version.py",
+        "tests/version/test_version.py",
+        "tests/versions/test_version.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_version.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_version.py [library_package layout]"
+    },
+    {
+      "source_path": "noxfile.py",
+      "candidate_test_paths": [
+        "test/test_noxfile.py",
+        "tests/test_noxfile.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/packaging/dependency_groups.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_dependency_groups.py",
+        "tests/packaging/test_dependency_groups.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_dependency_groups.py",
+        "tests/test_dependency_groups.py",
+        "tests/dependency_groups/test_dependency_groups.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_dependency_groups.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_dependency_groups.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/direct_url.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_direct_url.py",
+        "tests/packaging/test_direct_url.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_direct_url.py",
+        "tests/test_direct_url.py",
+        "tests/direct_url/test_direct_url.py",
+        "tests/direct_urls/test_direct_url.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_direct_url.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_direct_url.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/errors.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_errors.py",
+        "tests/packaging/test_errors.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_errors.py",
+        "tests/test_errors.py",
+        "tests/errors/test_errors.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_errors.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_errors.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/licenses/_spdx.py",
+      "candidate_test_paths": [
+        "src/packaging/licenses/tests/test_spdx.py",
+        "tests/packaging/licenses/test_spdx.py",
+        "src/packaging/licenses/tests/test_licenses.py",
+        "test/test_spdx.py",
+        "tests/test_spdx.py",
+        "tests/spdx/test_spdx.py",
+        "tests/spdxs/test_spdx.py",
+        "tests/test__spdx.py",
+        "tests/licenses/test__spdx.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/packaging/markers.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_markers.py",
+        "tests/packaging/test_markers.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_markers.py",
+        "tests/test_markers.py",
+        "tests/markers/test_markers.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_markers.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_markers.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/metadata.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_metadata.py",
+        "tests/packaging/test_metadata.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_metadata.py",
+        "tests/test_metadata.py",
+        "tests/metadata/test_metadata.py",
+        "tests/metadatas/test_metadata.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_metadata.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_metadata.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/pylock.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_pylock.py",
+        "tests/packaging/test_pylock.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_pylock.py",
+        "tests/test_pylock.py",
+        "tests/pylock/test_pylock.py",
+        "tests/pylocks/test_pylock.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_pylock.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_pylock.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/requirements.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_requirements.py",
+        "tests/packaging/test_requirements.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_requirements.py",
+        "tests/test_requirements.py",
+        "tests/requirements/test_requirements.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_requirements.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_requirements.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/specifiers.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_specifiers.py",
+        "tests/packaging/test_specifiers.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_specifiers.py",
+        "tests/test_specifiers.py",
+        "tests/specifiers/test_specifiers.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_specifiers.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_specifiers.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/tags.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_tags.py",
+        "tests/packaging/test_tags.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_tags.py",
+        "tests/test_tags.py",
+        "tests/tags/test_tags.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_tags.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_tags.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/utils.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_utils.py",
+        "tests/packaging/test_utils.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_utils.py"
+      ],
+      "confidence": "medium",
+      "reason": "Generic library helper match without directory context: tests/test_utils.py"
+    },
+    {
+      "source_path": "src/packaging/version.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_version.py",
+        "tests/packaging/test_version.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_version.py",
+        "tests/test_version.py",
+        "tests/version/test_version.py",
+        "tests/versions/test_version.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_version.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_version.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/_elffile.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_elffile.py",
+        "tests/packaging/test_elffile.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_elffile.py",
+        "tests/test_elffile.py",
+        "tests/elffile/test_elffile.py",
+        "tests/elffiles/test_elffile.py",
+        "tests/test__elffile.py",
+        "tests/packaging/test__elffile.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_elffile.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_elffile.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/_manylinux.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_manylinux.py",
+        "tests/packaging/test_manylinux.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_manylinux.py",
+        "tests/test_manylinux.py",
+        "tests/manylinux/test_manylinux.py",
+        "tests/manylinuxs/test_manylinux.py",
+        "tests/test__manylinux.py",
+        "tests/packaging/test__manylinux.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_manylinux.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_manylinux.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/_musllinux.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_musllinux.py",
+        "tests/packaging/test_musllinux.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_musllinux.py",
+        "tests/test_musllinux.py",
+        "tests/musllinux/test_musllinux.py",
+        "tests/musllinuxs/test_musllinux.py",
+        "tests/test__musllinux.py",
+        "tests/packaging/test__musllinux.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_musllinux.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_musllinux.py [library_package layout]"
+    },
+    {
+      "source_path": "src/packaging/_parser.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_parser.py",
+        "tests/packaging/test_parser.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_parser.py",
+        "tests/test_parser.py",
+        "tests/parser/test_parser.py",
+        "tests/parsers/test_parser.py",
+        "tests/test__parser.py",
+        "tests/packaging/test__parser.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/packaging/_structures.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_structures.py",
+        "tests/packaging/test_structures.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_structures.py",
+        "tests/test_structures.py",
+        "tests/structures/test_structures.py",
+        "tests/test__structures.py",
+        "tests/packaging/test__structures.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/packaging/_tokenizer.py",
+      "candidate_test_paths": [
+        "src/packaging/tests/test_tokenizer.py",
+        "tests/packaging/test_tokenizer.py",
+        "src/packaging/tests/test_packaging.py",
+        "test/test_tokenizer.py",
+        "tests/test_tokenizer.py",
+        "tests/tokenizer/test_tokenizer.py",
+        "tests/tokenizers/test_tokenizer.py",
+        "tests/test__tokenizer.py",
+        "tests/packaging/test__tokenizer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tasks/check.py",
+      "candidate_test_paths": [
+        "tasks/tests/test_check.py",
+        "tests/test_check.py",
+        "tasks/tests/test_tasks.py",
+        "test/test_check.py",
+        "tests/check/test_check.py",
+        "tests/checks/test_check.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tasks/check_frozen_revs.py",
+      "candidate_test_paths": [
+        "tasks/tests/test_check_frozen_revs.py",
+        "tests/test_check_frozen_revs.py",
+        "tasks/tests/test_tasks.py",
+        "test/test_check_frozen_revs.py",
+        "tests/check_frozen_revs/test_check_frozen_revs.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tasks/licenses.py",
+      "candidate_test_paths": [
+        "tasks/tests/test_licenses.py",
+        "tests/test_licenses.py",
+        "tasks/tests/test_tasks.py",
+        "test/test_licenses.py",
+        "tests/licenses/test_licenses.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_licenses.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_licenses.py [library_package layout]"
+    },
+    {
+      "source_path": "tasks/paths.py",
+      "candidate_test_paths": [
+        "tasks/tests/test_paths.py",
+        "tests/test_paths.py",
+        "tasks/tests/test_tasks.py",
+        "test/test_paths.py",
+        "tests/paths/test_paths.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tasks/pickle_compat.py",
+      "candidate_test_paths": [
+        "tasks/tests/test_pickle_compat.py",
+        "tests/test_pickle_compat.py",
+        "tasks/tests/test_tasks.py",
+        "test/test_pickle_compat.py",
+        "tests/pickle_compat/test_pickle_compat.py",
+        "tests/pickle_compats/test_pickle_compat.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tasks/select_pypi_dist.py",
+      "candidate_test_paths": [
+        "tasks/tests/test_select_pypi_dist.py",
+        "tests/test_select_pypi_dist.py",
+        "tasks/tests/test_tasks.py",
+        "test/test_select_pypi_dist.py",
+        "tests/select_pypi_dist/test_select_pypi_dist.py",
+        "tests/select_pypi_dists/test_select_pypi_dist.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tasks/select_pypi_specs.py",
+      "candidate_test_paths": [
+        "tasks/tests/test_select_pypi_specs.py",
+        "tests/test_select_pypi_specs.py",
+        "tasks/tests/test_tasks.py",
+        "test/test_select_pypi_specs.py",
+        "tests/select_pypi_specs/test_select_pypi_specs.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tasks/select_pypi_versions.py",
+      "candidate_test_paths": [
+        "tasks/tests/test_select_pypi_versions.py",
+        "tests/test_select_pypi_versions.py",
+        "tasks/tests/test_tasks.py",
+        "test/test_select_pypi_versions.py",
+        "tests/select_pypi_versions/test_select_pypi_versions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "tasks/requirements.txt"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "noxfile.py",
+        "pyproject.toml"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 66,
+    "classified_count": 66,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 266,
+    "project_import_count": 0,
+    "declared_package_count": 24,
+    "undeclared_package_count": 11,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 33,
+    "high_confidence_test_count": 17,
+    "medium_confidence_test_count": 2,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 3,
+    "low_confidence_manifest_count": 2
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

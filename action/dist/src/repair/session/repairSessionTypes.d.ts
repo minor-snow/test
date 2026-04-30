@@ -7,10 +7,12 @@ export type RepairSessionScopeSummary = {
 export type RepoStateSnapshot = {
     readonly base_sha: string | null;
     readonly head_sha: string | null;
+    readonly checkout_sha?: string | null;
     readonly diff_base: string | null;
     readonly working_tree_status: "clean" | "dirty" | "unknown";
     readonly created_at: string;
-    readonly source: "git" | "github" | "synthetic" | "unknown";
+    readonly source: "git" | "github" | "synthetic" | "unknown" | "github_pull_request";
+    readonly error?: string;
 };
 export type RepairSession = {
     readonly schema_version: "repair_session@0.1.0";

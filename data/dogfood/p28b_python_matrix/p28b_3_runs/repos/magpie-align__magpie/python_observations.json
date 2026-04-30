@@ -1,0 +1,1118 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "magpie-align__magpie",
+    "observed_file_count": 70,
+    "python_file_count": 14
+  },
+  "layout": {
+    "primary_layout": "ml_project",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "jupyter_notebooks",
+        "weight": "weak",
+        "evidence": "Jupyter notebooks present"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "Unable to determine package layout from file paths"
+      }
+    ],
+    "bucket_summary": {
+      "notebook": 4,
+      "source": 9,
+      "config": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [],
+    "project_role_signals": [],
+    "unknowns": [
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No framework could be detected from dependencies, paths, or imports"
+      },
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No project role could be inferred from layout, dependencies, or path families"
+      }
+    ]
+  },
+  "risk_preset_validation": {
+    "preset": "unknown",
+    "validation": "unvalidated",
+    "confidence": "low",
+    "matched_signals": [
+      "layout: ml_project / unknown (low)"
+    ],
+    "suggested_review": [],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "data_po/process_po.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 27679,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "data_sft/data_concatenation.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 17943,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "data_sft/data_filter.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 2453,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "demo.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 8091,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "exp/gen_dis.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6469,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "exp/gen_ins.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 12811,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "exp/gen_mt.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11771,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "exp/gen_po_multi_res.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 12550,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "exp/gen_po_rewards.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5184,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "exp/gen_res.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11843,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "exp/str_utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17449,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "exp/unitag.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17164,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "exp/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3195,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 508,
+      "evidence": [
+        "Requirements file"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "exp/gen_dis.py",
+      "raw_specifier": "from datasets import load_dataset",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "datasets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_dis.py",
+      "raw_specifier": "from sentence_transformers import SentenceTransformer",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sentence_transformers",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_dis.py",
+      "raw_specifier": "torch",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "torch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_dis.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_dis.py",
+      "raw_specifier": "faiss",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "faiss",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_dis.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_dis.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_dis.py",
+      "raw_specifier": "from tqdm import tqdm",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tqdm",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_dis.py",
+      "raw_specifier": "from utils import load_dataset_from_file",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "torch",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "torch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "from tqdm import tqdm",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tqdm",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "from vllm import LLM, SamplingParams",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "vllm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "from transformers import AutoTokenizer, AutoModelForCausalLM",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "transformers",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "from str_utils import de_md_logits_processor_for_llama3_1, flaming_tokens",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "str_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_ins.py",
+      "raw_specifier": "str_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "str_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_mt.py",
+      "raw_specifier": "torch",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "torch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_mt.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_mt.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_mt.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_mt.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_mt.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "requests",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_mt.py",
+      "raw_specifier": "concurrent.futures",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "concurrent",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_mt.py",
+      "raw_specifier": "from time import sleep",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_mt.py",
+      "raw_specifier": "from tqdm import tqdm",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tqdm",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_mt.py",
+      "raw_specifier": "from transformers import AutoTokenizer",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "transformers",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_mt.py",
+      "raw_specifier": "from utils import load_dataset_from_file, save_dataset, get_conversation_template",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_mt.py",
+      "raw_specifier": "from vllm import LLM, SamplingParams",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "vllm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "torch",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "torch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "requests",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "concurrent.futures",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "concurrent",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "from time import sleep",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "from tqdm import tqdm",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tqdm",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "from transformers import AutoTokenizer",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "transformers",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "from utils import load_dataset_from_file, save_dataset, make_api_request_with_retry, get_conversation_template",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "from vllm import LLM, SamplingParams",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "vllm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_multi_res.py",
+      "raw_specifier": "from transformers import AutoTokenizer, AutoModelForCausalLM",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "transformers",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_rewards.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_rewards.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_rewards.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_rewards.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "requests",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_po_rewards.py",
+      "raw_specifier": "concurrent.futures",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "concurrent",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_rewards.py",
+      "raw_specifier": "from time import sleep",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_rewards.py",
+      "raw_specifier": "from tqdm import tqdm",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tqdm",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_po_rewards.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_po_rewards.py",
+      "raw_specifier": "torch",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "torch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_po_rewards.py",
+      "raw_specifier": "from typing import Dict, List",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_po_rewards.py",
+      "raw_specifier": "from utils import load_dataset_from_file, save_dataset",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_po_rewards.py",
+      "raw_specifier": "from transformers import AutoModelForSequenceClassification, AutoTokenizer",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "transformers",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_res.py",
+      "raw_specifier": "torch",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "torch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_res.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_res.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_res.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_res.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_res.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "requests",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_res.py",
+      "raw_specifier": "concurrent.futures",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "concurrent",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_res.py",
+      "raw_specifier": "from time import sleep",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_res.py",
+      "raw_specifier": "from tqdm import tqdm",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tqdm",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_res.py",
+      "raw_specifier": "from utils import load_dataset_from_file, save_dataset, make_api_request_with_retry, get_conversation_template",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/gen_res.py",
+      "raw_specifier": "from vllm import LLM, SamplingParams",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "vllm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/gen_res.py",
+      "raw_specifier": "from transformers import AutoTokenizer, AutoModelForCausalLM",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "transformers",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/str_utils.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "concurrent.futures",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "concurrent",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "from tqdm import tqdm",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tqdm",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "torch",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "torch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "from vllm import LLM, SamplingParams",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "vllm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "from transformers import AutoTokenizer, pipeline",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "transformers",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "from utils import load_jsonl_to_list, load_dataset_from_file, save_dataset",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "from utils import make_api_request_with_retry",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "from str_utils import input_difficulty_rating, input_classification, input_quality_rating",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "str_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "from utils import get_conversation_template",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/unitag.py",
+      "raw_specifier": "from lingua import Language, LanguageDetectorBuilder",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "lingua",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/utils.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/utils.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "requests",
+      "confidence": "low"
+    },
+    {
+      "from_file": "exp/utils.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/utils.py",
+      "raw_specifier": "from time import sleep",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "exp/utils.py",
+      "raw_specifier": "from fastchat.model import get_conversation_template",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "fastchat",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "vllm",
+        "transformers",
+        "sentence_transformers",
+        "sentencepiece",
+        "trl",
+        "peft",
+        "datasets",
+        "accelerate",
+        "bitsandbytes",
+        "autoawq",
+        "ray",
+        "flashinfer",
+        "tenacity",
+        "boto3",
+        "openai",
+        "google_generativeai",
+        "anthropic",
+        "together",
+        "matplotlib",
+        "wandb",
+        "ipywidgets",
+        "ipykernel",
+        "lingua_language_detector",
+        "faiss_gpu",
+        "ml_collections"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "exp/gen_dis.py",
+      "candidate_test_paths": [
+        "exp/tests/test_gen_dis.py",
+        "tests/test_gen_dis.py",
+        "exp/tests/test_exp.py",
+        "test/test_gen_dis.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "exp/gen_ins.py",
+      "candidate_test_paths": [
+        "exp/tests/test_gen_ins.py",
+        "tests/test_gen_ins.py",
+        "exp/tests/test_exp.py",
+        "test/test_gen_ins.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "exp/gen_mt.py",
+      "candidate_test_paths": [
+        "exp/tests/test_gen_mt.py",
+        "tests/test_gen_mt.py",
+        "exp/tests/test_exp.py",
+        "test/test_gen_mt.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "exp/gen_po_multi_res.py",
+      "candidate_test_paths": [
+        "exp/tests/test_gen_po_multi_res.py",
+        "tests/test_gen_po_multi_res.py",
+        "exp/tests/test_exp.py",
+        "test/test_gen_po_multi_res.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "exp/gen_po_rewards.py",
+      "candidate_test_paths": [
+        "exp/tests/test_gen_po_rewards.py",
+        "tests/test_gen_po_rewards.py",
+        "exp/tests/test_exp.py",
+        "test/test_gen_po_rewards.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "exp/gen_res.py",
+      "candidate_test_paths": [
+        "exp/tests/test_gen_res.py",
+        "tests/test_gen_res.py",
+        "exp/tests/test_exp.py",
+        "test/test_gen_res.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "exp/str_utils.py",
+      "candidate_test_paths": [
+        "exp/tests/test_str_utils.py",
+        "tests/test_str_utils.py",
+        "exp/tests/test_exp.py",
+        "test/test_str_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "exp/unitag.py",
+      "candidate_test_paths": [
+        "exp/tests/test_unitag.py",
+        "tests/test_unitag.py",
+        "exp/tests/test_exp.py",
+        "test/test_unitag.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "exp/utils.py",
+      "candidate_test_paths": [
+        "exp/tests/test_utils.py",
+        "tests/test_utils.py",
+        "exp/tests/test_exp.py",
+        "test/test_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "data_po/process_po.ipynb",
+        "data_sft/data_concatenation.ipynb",
+        "data_sft/data_filter.ipynb",
+        "demo.ipynb"
+      ],
+      "count": 4,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 9,
+    "classified_count": 9,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 91,
+    "project_import_count": 0,
+    "declared_package_count": 14,
+    "undeclared_package_count": 42,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 9,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 1,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

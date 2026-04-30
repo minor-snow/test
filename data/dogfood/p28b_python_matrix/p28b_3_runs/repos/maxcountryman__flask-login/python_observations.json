@@ -1,0 +1,1231 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "maxcountryman__flask-login",
+    "observed_file_count": 41,
+    "python_file_count": 13
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "src_layout",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "src_layout_detected",
+        "weight": "strong",
+        "evidence": "src/ directory with package(s): flask_login"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 3,
+      "docs": 1,
+      "source": 7,
+      "test": 2
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "flask",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "flask found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "flask imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "flask_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / src_layout (medium)",
+      "framework: flask / web_framework (high)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/config*",
+        "reason": "Application configuration affects runtime behavior",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/config*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/blueprints/**",
+        "reason": "No Flask blueprint directory observed"
+      },
+      {
+        "pattern": "**/extensions*",
+        "reason": "No extensions files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 423,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 1505,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 1755,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "src/flask_login/config.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1774,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_login/login_manager.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17610,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_login/mixins.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1593,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_login/signals.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1863,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_login/test_client.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 536,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "src/flask_login/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13465,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_login/__about__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 610,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_login/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2632,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/test_login.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 63591,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 706,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "src/flask_login/config.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from datetime import timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from flask import abort",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from flask import current_app",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from flask import flash",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from flask import g",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from flask import redirect",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from flask import request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from flask import session",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .config import COOKIE_DURATION",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .config import COOKIE_HTTPONLY",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .config import COOKIE_NAME",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .config import COOKIE_SAMESITE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .config import COOKIE_SECURE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .config import ID_ATTRIBUTE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .config import LOGIN_MESSAGE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .config import LOGIN_MESSAGE_CATEGORY",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .config import REFRESH_MESSAGE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .config import REFRESH_MESSAGE_CATEGORY",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .config import SESSION_KEYS",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .config import USE_SESSION_FOR_NEXT",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .mixins import AnonymousUserMixin",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".mixins",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .signals import session_protected",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .signals import user_accessed",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .signals import user_loaded_from_cookie",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .signals import user_loaded_from_request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .signals import user_needs_refresh",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .signals import user_unauthorized",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .utils import _create_identifier",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .utils import _user_context_processor",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .utils import decode_cookie",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .utils import encode_cookie",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .utils import expand_login_view",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .utils import login_url as make_login_url",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/login_manager.py",
+      "raw_specifier": "from .utils import make_next_param",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/signals.py",
+      "raw_specifier": "from flask.signals import Namespace",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "hmac",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hmac",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from functools import wraps",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from hashlib import sha512",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from urllib.parse import parse_qs",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from urllib.parse import urlencode",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from urllib.parse import urlsplit",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from urllib.parse import urlunsplit",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from flask import current_app",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from flask import g",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from flask import has_request_context",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from flask import request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from flask import session",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from flask import url_for",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from werkzeug.local import LocalProxy",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from .config import COOKIE_NAME",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from .config import EXEMPT_METHODS",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from .signals import user_logged_in",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from .signals import user_logged_out",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/utils.py",
+      "raw_specifier": "from .signals import user_login_confirmed",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__about__.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .config import COOKIE_DURATION",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .config import COOKIE_HTTPONLY",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .config import COOKIE_NAME",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .config import COOKIE_SECURE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .config import ID_ATTRIBUTE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .config import LOGIN_MESSAGE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .config import LOGIN_MESSAGE_CATEGORY",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .config import REFRESH_MESSAGE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .config import REFRESH_MESSAGE_CATEGORY",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .login_manager import LoginManager",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".login_manager",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .mixins import AnonymousUserMixin",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".mixins",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .mixins import UserMixin",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".mixins",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .signals import session_protected",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .signals import user_accessed",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .signals import user_loaded_from_cookie",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .signals import user_loaded_from_request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .signals import user_logged_in",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .signals import user_logged_out",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .signals import user_login_confirmed",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .signals import user_needs_refresh",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .signals import user_unauthorized",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .test_client import FlaskLoginClient",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".test_client",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import confirm_login",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import current_user",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import decode_cookie",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import encode_cookie",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import fresh_login_required",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import login_fresh",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import login_remembered",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import login_required",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import login_url",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import login_user",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import logout_user",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import make_next_param",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "from .utils import set_login_view",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "importlib.metadata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_login/__init__.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "flask",
+        "werkzeug"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [
+        "pre_commit"
+      ],
+      "confidence": "medium",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "src/flask_login/config.py",
+      "candidate_test_paths": [
+        "src/flask_login/tests/test_config.py",
+        "tests/flask_login/test_config.py",
+        "src/flask_login/tests/test_flask_login.py",
+        "test/test_config.py",
+        "tests/test_config.py",
+        "tests/config/test_config.py",
+        "tests/configs/test_config.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/flask_login/login_manager.py",
+      "candidate_test_paths": [
+        "src/flask_login/tests/test_login_manager.py",
+        "tests/flask_login/test_login_manager.py",
+        "src/flask_login/tests/test_flask_login.py",
+        "test/test_login_manager.py",
+        "tests/test_login_manager.py",
+        "tests/login_manager/test_login_manager.py",
+        "tests/login_managers/test_login_manager.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/flask_login/mixins.py",
+      "candidate_test_paths": [
+        "src/flask_login/tests/test_mixins.py",
+        "tests/flask_login/test_mixins.py",
+        "src/flask_login/tests/test_flask_login.py",
+        "test/test_mixins.py",
+        "tests/test_mixins.py",
+        "tests/mixins/test_mixins.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/flask_login/signals.py",
+      "candidate_test_paths": [
+        "src/flask_login/tests/test_signals.py",
+        "tests/flask_login/test_signals.py",
+        "src/flask_login/tests/test_flask_login.py",
+        "test/test_signals.py",
+        "tests/test_signals.py",
+        "tests/signals/test_signals.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/flask_login/utils.py",
+      "candidate_test_paths": [
+        "src/flask_login/tests/test_utils.py",
+        "tests/flask_login/test_utils.py",
+        "src/flask_login/tests/test_flask_login.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/flask_login/__about__.py",
+      "candidate_test_paths": [
+        "src/flask_login/tests/test__about__.py",
+        "tests/flask_login/test__about__.py",
+        "src/flask_login/tests/test_flask_login.py",
+        "test/test__about__.py",
+        "tests/test__about__.py",
+        "tests/_about__/test__about__.py",
+        "tests/_about__s/test__about__.py",
+        "tests/test___about__.py",
+        "tests/flask_login/test___about__.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 10,
+    "classified_count": 10,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 95,
+    "project_import_count": 0,
+    "declared_package_count": 15,
+    "undeclared_package_count": 0,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 6,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

@@ -1,0 +1,1122 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "flask-restful__flask-restful",
+    "observed_file_count": 66,
+    "python_file_count": 28
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: flask_restful"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "docs": 2,
+      "source": 13,
+      "script": 1,
+      "config": 3,
+      "test": 9
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "flask",
+        "kind": "web_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "flask imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (medium)",
+      "framework: flask / web_framework (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 4,
+        "evidence": [
+          "4 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 9462,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/_themes/flask_theme_support.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 4961,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "examples/todo.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1491,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/todo_simple.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1375,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/xml_representation.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1202,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "flask_restful/fields.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13432,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "flask_restful/inputs.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9400,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "flask_restful/representations/json.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 898,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "flask_restful/representations/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "flask_restful/reqparse.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 15048,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "flask_restful/utils/cors.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2138,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "flask_restful/utils/crypto.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1031,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "flask_restful/utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 758,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "flask_restful/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 29362,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "flask_restful/__version__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 49,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "scripts/release.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 911,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "setup.cfg",
+      "bucket": "config",
+      "extension": ".cfg",
+      "size_bytes": 33,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 1740,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/requirements.txt",
+      "bucket": "test",
+      "extension": ".txt",
+      "size_bytes": 45,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_accept.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7940,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_api.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 40340,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_api_with_blueprint.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8174,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_cors.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3214,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_fields.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 19321,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_inputs.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12859,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_reqparse.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 35288,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 357,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 552,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/todo.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/todo.py",
+      "raw_specifier": "from flask_restful import reqparse, abort, Api, Resource",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "flask_restful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/todo_simple.py",
+      "raw_specifier": "from flask import Flask, request",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/todo_simple.py",
+      "raw_specifier": "from flask_restful import Resource, Api",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "flask_restful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/xml_representation.py",
+      "raw_specifier": "from simplexml import dumps",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "simplexml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/xml_representation.py",
+      "raw_specifier": "from flask import make_response, Flask",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/xml_representation.py",
+      "raw_specifier": "from flask_restful import Api, Resource",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "flask_restful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/fields.py",
+      "raw_specifier": "from calendar import timegm",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "calendar",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/fields.py",
+      "raw_specifier": "from decimal import Decimal as MyDecimal, ROUND_HALF_EVEN",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/fields.py",
+      "raw_specifier": "from email.utils import formatdate",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "email",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/fields.py",
+      "raw_specifier": "six",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/fields.py",
+      "raw_specifier": "from urlparse import urlparse, urlunparse",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "urlparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/fields.py",
+      "raw_specifier": "from urllib.parse import urlparse, urlunparse",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/fields.py",
+      "raw_specifier": "from flask_restful import marshal",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "flask_restful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/fields.py",
+      "raw_specifier": "from flask import url_for, request",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/inputs.py",
+      "raw_specifier": "from calendar import timegm",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "calendar",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/inputs.py",
+      "raw_specifier": "from datetime import datetime, time, timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/inputs.py",
+      "raw_specifier": "from email.utils import parsedate_tz, mktime_tz",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "email",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/inputs.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/inputs.py",
+      "raw_specifier": "aniso8601",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "aniso8601",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/inputs.py",
+      "raw_specifier": "pytz",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pytz",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/representations/json.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/representations/json.py",
+      "raw_specifier": "from flask import make_response, current_app",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/representations/json.py",
+      "raw_specifier": "from flask_restful.utils import PY3",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "flask_restful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/representations/json.py",
+      "raw_specifier": "from json import dumps",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/reqparse.py",
+      "raw_specifier": "from copy import deepcopy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/reqparse.py",
+      "raw_specifier": "from collections.abc import MutableSequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/reqparse.py",
+      "raw_specifier": "from collections import MutableSequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/reqparse.py",
+      "raw_specifier": "from flask import current_app, request",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/reqparse.py",
+      "raw_specifier": "from werkzeug.datastructures import MultiDict, FileStorage",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/reqparse.py",
+      "raw_specifier": "from werkzeug import exceptions",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/reqparse.py",
+      "raw_specifier": "flask_restful",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "flask_restful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/reqparse.py",
+      "raw_specifier": "decimal",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/reqparse.py",
+      "raw_specifier": "six",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/reqparse.py",
+      "raw_specifier": "from flask_restful import reqparse",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "flask_restful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/utils/cors.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/utils/cors.py",
+      "raw_specifier": "from flask import make_response, request, current_app",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/utils/cors.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/utils/crypto.py",
+      "raw_specifier": "pickle",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pickle",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/utils/crypto.py",
+      "raw_specifier": "from Crypto.Cipher import AES",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "Crypto",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/utils/crypto.py",
+      "raw_specifier": "from base64 import b64encode, b64decode",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/utils/__init__.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/utils/__init__.py",
+      "raw_specifier": "from collections.abc import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/utils/__init__.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/utils/__init__.py",
+      "raw_specifier": "from werkzeug.http import HTTP_STATUS_CODES",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from functools import wraps, partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from flask import request, url_for, current_app",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from flask import abort as original_flask_abort",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from flask import make_response as original_flask_make_response",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from flask.views import MethodView",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from flask.signals import got_request_exception",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from werkzeug.datastructures import Headers",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from werkzeug.exceptions import HTTPException, MethodNotAllowed, NotFound, NotAcceptable, InternalServerError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from werkzeug.wrappers import Response as ResponseBase",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from flask_restful.utils import http_status_message, unpack, OrderedDict",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "flask_restful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from flask_restful.representations.json import output_json",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "flask_restful",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from types import MethodType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "operator",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "operator",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from collections.abc import Mapping",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "flask_restful/__init__.py",
+      "raw_specifier": "from collections import Mapping",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    },
+    {
+      "source_path": "tests/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "nose",
+        "mock",
+        "nosexcover",
+        "blinker"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No deps found in tox.ini — may use requirements file references"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/todo.py",
+      "candidate_test_paths": [
+        "examples/tests/test_todo.py",
+        "tests/test_todo.py",
+        "examples/tests/test_examples.py",
+        "test/test_todo.py",
+        "tests/todo/test_todo.py",
+        "tests/todos/test_todo.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/todo_simple.py",
+      "candidate_test_paths": [
+        "examples/tests/test_todo_simple.py",
+        "tests/test_todo_simple.py",
+        "examples/tests/test_examples.py",
+        "test/test_todo_simple.py",
+        "tests/todo_simple/test_todo_simple.py",
+        "tests/todo_simples/test_todo_simple.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/xml_representation.py",
+      "candidate_test_paths": [
+        "examples/tests/test_xml_representation.py",
+        "tests/test_xml_representation.py",
+        "examples/tests/test_examples.py",
+        "test/test_xml_representation.py",
+        "tests/xml_representation/test_xml_representation.py",
+        "tests/xml_representations/test_xml_representation.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "flask_restful/fields.py",
+      "candidate_test_paths": [
+        "flask_restful/tests/test_fields.py",
+        "tests/test_fields.py",
+        "flask_restful/tests/test_flask_restful.py",
+        "test/test_fields.py",
+        "tests/fields/test_fields.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_fields.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_fields.py [library_package layout]"
+    },
+    {
+      "source_path": "flask_restful/inputs.py",
+      "candidate_test_paths": [
+        "flask_restful/tests/test_inputs.py",
+        "tests/test_inputs.py",
+        "flask_restful/tests/test_flask_restful.py",
+        "test/test_inputs.py",
+        "tests/inputs/test_inputs.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_inputs.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_inputs.py [library_package layout]"
+    },
+    {
+      "source_path": "flask_restful/representations/json.py",
+      "candidate_test_paths": [
+        "flask_restful/representations/tests/test_json.py",
+        "tests/representations/test_json.py",
+        "flask_restful/representations/tests/test_representations.py",
+        "test/test_json.py",
+        "tests/test_json.py",
+        "tests/json/test_json.py",
+        "tests/jsons/test_json.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "flask_restful/reqparse.py",
+      "candidate_test_paths": [
+        "flask_restful/tests/test_reqparse.py",
+        "tests/test_reqparse.py",
+        "flask_restful/tests/test_flask_restful.py",
+        "test/test_reqparse.py",
+        "tests/reqparse/test_reqparse.py",
+        "tests/reqparses/test_reqparse.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_reqparse.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_reqparse.py [library_package layout]"
+    },
+    {
+      "source_path": "flask_restful/utils/cors.py",
+      "candidate_test_paths": [
+        "flask_restful/utils/tests/test_cors.py",
+        "tests/utils/test_cors.py",
+        "flask_restful/utils/tests/test_utils.py",
+        "test/test_cors.py",
+        "tests/test_cors.py",
+        "tests/cors/test_cors.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cors.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_cors.py [library_package layout]"
+    },
+    {
+      "source_path": "flask_restful/utils/crypto.py",
+      "candidate_test_paths": [
+        "flask_restful/utils/tests/test_crypto.py",
+        "tests/utils/test_crypto.py",
+        "flask_restful/utils/tests/test_utils.py",
+        "test/test_crypto.py",
+        "tests/test_crypto.py",
+        "tests/crypto/test_crypto.py",
+        "tests/cryptos/test_crypto.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "flask_restful/__version__.py",
+      "candidate_test_paths": [
+        "flask_restful/tests/test__version__.py",
+        "tests/test__version__.py",
+        "flask_restful/tests/test_flask_restful.py",
+        "test/test__version__.py",
+        "tests/_version__/test__version__.py",
+        "tests/_version__s/test__version__.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.cfg",
+        "setup.py",
+        "tox.ini"
+      ],
+      "count": 3,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 25,
+    "classified_count": 25,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 62,
+    "project_import_count": 9,
+    "declared_package_count": 0,
+    "undeclared_package_count": 25,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 10,
+    "high_confidence_test_count": 4,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 4,
+    "low_confidence_manifest_count": 3
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

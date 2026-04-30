@@ -7,7 +7,7 @@
  * Does NOT parse patch content — only file paths and status.
  */
 
-import { execSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import { normalizeRepoRelativePath } from "../repoObservation/pathUtils.js";
 import type { GitDiffSummary, GitDiffFile, GitDiffFileStatus } from "./types.js";
 
@@ -41,10 +41,11 @@ export function readGitDiffSummary(input: {
 
   const warnings: string[] = [];
   const files: GitDiffFile[] = [];
+  const diffArgs = ["diff", "--name-status", ...(baseRef ? [baseRef] : [])];
 
   // 1. Read name-status diff
   try {
-    const nameStatus = execSync(`git diff --name-status ${baseRef}`, {
+    const nameStatus = execFileSync("git", diffArgs, {
       cwd: repoRoot,
       encoding: "utf-8",
       timeout: 10_000,
@@ -76,7 +77,7 @@ export function readGitDiffSummary(input: {
   // only and should not be polluted by local bootstrap artifacts like node_modules/.
   if (!baseRef) {
     try {
-      const untracked = execSync("git ls-files --others --exclude-standard", {
+      const untracked = execFileSync("git", ["ls-files", "--others", "--exclude-standard"], {
         cwd: repoRoot,
         encoding: "utf-8",
         timeout: 10_000,

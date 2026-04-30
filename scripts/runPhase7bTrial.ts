@@ -17,11 +17,11 @@ import {
   runMultiArtifactTrial,
   type MultiArtifactTrialConfig,
 } from "../src/trial/multiArtifactTrialRunner.js";
+import { requireDeepSeekApiKey } from "../src/trial/requireEnv.js";
 import { lintArtifact } from "../src/linter.js";
 import { crossLintArtifacts } from "../src/crossArtifactLinter.js";
 
-const DEEPSEEK_API_KEY =
-  process.env.DEEPSEEK_API_KEY ?? "sk-90b71c8c415b41ac93f7ff4e24a08a7c";
+const DEEPSEEK_API_KEY = requireDeepSeekApiKey();
 
 async function main() {
   console.log("╔═══════════════════════════════════════════════════╗");

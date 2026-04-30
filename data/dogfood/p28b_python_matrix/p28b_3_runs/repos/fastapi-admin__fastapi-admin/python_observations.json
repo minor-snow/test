@@ -1,0 +1,2519 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "fastapi-admin__fastapi-admin",
+    "observed_file_count": 117,
+    "python_file_count": 37
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: examples, fastapi_admin"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "test": 2,
+      "source": 31,
+      "config": 4
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "fastapi",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "fastapi found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "fastapi imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "fastapi_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (medium)",
+      "framework: fastapi / web_framework (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (medium)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: administration (high, 22 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/middleware*",
+        "reason": "Middleware affects request processing pipeline",
+        "severity": "medium",
+        "matched_path_count": 2,
+        "evidence": [
+          "2 paths match pattern **/middleware*",
+          "Sensitive zone \"administration\" (high) corroborates"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "alembic/**",
+        "reason": "No alembic directory observed"
+      },
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      },
+      {
+        "pattern": "**/db/**",
+        "reason": "No db directory observed"
+      },
+      {
+        "pattern": "**/deps*",
+        "reason": "No deps files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "pytest conftest"
+      ]
+    },
+    {
+      "path": "examples/constants.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 68,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/enums.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 244,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2910,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/middlewares.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1503,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/providers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 657,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/resources.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4781,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/routes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1212,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/settings.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 168,
+      "evidence": [
+        "Settings module"
+      ]
+    },
+    {
+      "path": "examples/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 41,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2646,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/constants.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 366,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/depends.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2488,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/enums.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 230,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1748,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/file_upload.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1683,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/i18n.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1026,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/middlewares.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 717,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 223,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/providers/login.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7702,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/providers/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 228,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/resources.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13256,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/responses.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 355,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/routes/resources.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9092,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/routes/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 256,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/template.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1182,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 541,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/widgets/displays.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1383,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/widgets/filters.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6396,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/widgets/inputs.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7519,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/widgets/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 709,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_admin/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "poetry.lock",
+      "bucket": "config",
+      "extension": ".lock",
+      "size_bytes": 238747,
+      "evidence": [
+        "Lock/manifest"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 1171,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "setup.cfg",
+      "bucket": "config",
+      "extension": ".cfg",
+      "size_bytes": 84,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/constants.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/enums.py",
+      "raw_specifier": "from enum import Enum, IntEnum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from contextlib import asynccontextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "redis.asyncio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "redis",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "uvicorn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "uvicorn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from fastapi import FastAPI",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from starlette.middleware.cors import CORSMiddleware",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from starlette.responses import RedirectResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from starlette.staticfiles import StaticFiles",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from starlette.status import ( HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND, HTTP_500_INTERNAL_SERVER_ERROR, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from tortoise.contrib.fastapi import register_tortoise",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from examples import settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "examples",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from examples.constants import BASE_DIR",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "examples",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from examples.models import Admin",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "examples",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from examples.providers import LoginProvider",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "examples",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from fastapi_admin.app import app as admin_app",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/main.py",
+      "raw_specifier": "from fastapi_admin.exceptions import ( forbidden_error_exception, not_found_error_exception, server_error_exception, unauthorized_error_exception, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/models.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/models.py",
+      "raw_specifier": "from tortoise import Model, fields",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/models.py",
+      "raw_specifier": "from examples.enums import ProductType, Status",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "examples",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/models.py",
+      "raw_specifier": "from fastapi_admin.models import AbstractAdmin",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/providers.py",
+      "raw_specifier": "from fastapi import Depends, Form",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/providers.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/providers.py",
+      "raw_specifier": "from fastapi_admin.depends import get_current_admin, get_resources",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/providers.py",
+      "raw_specifier": "from fastapi_admin.models import AbstractAdmin",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/providers.py",
+      "raw_specifier": "from fastapi_admin.providers.login import UsernamePasswordProvider",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/resources.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/resources.py",
+      "raw_specifier": "from typing import List",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/resources.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/resources.py",
+      "raw_specifier": "from examples import enums",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "examples",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/resources.py",
+      "raw_specifier": "from examples.constants import BASE_DIR",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "examples",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/resources.py",
+      "raw_specifier": "from examples.models import Admin, Category, Config, Product",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "examples",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/resources.py",
+      "raw_specifier": "from fastapi_admin.app import app",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/resources.py",
+      "raw_specifier": "from fastapi_admin.enums import Method",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/resources.py",
+      "raw_specifier": "from fastapi_admin.file_upload import FileUpload",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/resources.py",
+      "raw_specifier": "from fastapi_admin.resources import Action, Dropdown, Field, Link, Model, ToolbarAction",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/resources.py",
+      "raw_specifier": "from fastapi_admin.widgets import displays, filters, inputs",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/routes.py",
+      "raw_specifier": "from fastapi import Depends, HTTPException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/routes.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/routes.py",
+      "raw_specifier": "from starlette.responses import RedirectResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/routes.py",
+      "raw_specifier": "from starlette.status import HTTP_303_SEE_OTHER, HTTP_404_NOT_FOUND",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/routes.py",
+      "raw_specifier": "from examples.models import Config",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "examples",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/routes.py",
+      "raw_specifier": "from fastapi_admin.app import app",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/routes.py",
+      "raw_specifier": "from fastapi_admin.depends import get_resources",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/routes.py",
+      "raw_specifier": "from fastapi_admin.template import templates",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/__init__.py",
+      "raw_specifier": "from . import resources, routes  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "from typing import Dict, List, Optional, Type",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "redis.asyncio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "redis",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "from fastapi import FastAPI",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "from pydantic import HttpUrl",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "from starlette.middleware.base import BaseHTTPMiddleware",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "from tortoise import Model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "from fastapi_admin import i18n",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "from . import middlewares, template",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "from .providers import Provider",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".providers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "from .resources import Dropdown",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".resources",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "from .resources import Model as ModelResource",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".resources",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "from .resources import Resource",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".resources",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "fastapi_admin/app.py",
+      "raw_specifier": "from .routes import router",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".routes",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "fastapi_admin/constants.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/depends.py",
+      "raw_specifier": "from typing import List, Optional, Type",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/depends.py",
+      "raw_specifier": "from fastapi import Depends, HTTPException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/depends.py",
+      "raw_specifier": "from fastapi.params import Path",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/depends.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/depends.py",
+      "raw_specifier": "from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_404_NOT_FOUND",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/depends.py",
+      "raw_specifier": "from tortoise import Tortoise",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/depends.py",
+      "raw_specifier": "from fastapi_admin.exceptions import InvalidResource",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/depends.py",
+      "raw_specifier": "from fastapi_admin.resources import Dropdown, Link, Model, Resource",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/enums.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/exceptions.py",
+      "raw_specifier": "from fastapi import HTTPException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/exceptions.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/exceptions.py",
+      "raw_specifier": "from starlette.status import HTTP_500_INTERNAL_SERVER_ERROR",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/exceptions.py",
+      "raw_specifier": "from fastapi_admin.template import templates",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/file_upload.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/file_upload.py",
+      "raw_specifier": "from typing import Callable, List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/file_upload.py",
+      "raw_specifier": "aiofiles",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "aiofiles",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/file_upload.py",
+      "raw_specifier": "from starlette.datastructures import UploadFile",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/file_upload.py",
+      "raw_specifier": "from fastapi_admin.exceptions import FileExtNotAllowed, FileMaxSizeLimit",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/i18n.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/i18n.py",
+      "raw_specifier": "from babel.support import Translations",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "babel",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/i18n.py",
+      "raw_specifier": "from fastapi_admin.constants import BASE_DIR",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/i18n.py",
+      "raw_specifier": "from fastapi_admin.template import templates",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/middlewares.py",
+      "raw_specifier": "from typing import Callable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/middlewares.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/middlewares.py",
+      "raw_specifier": "from fastapi_admin import i18n",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/models.py",
+      "raw_specifier": "from tortoise import Model, fields",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from typing import Type",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "redis.asyncio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "redis",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from fastapi import Depends, Form",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from starlette.responses import RedirectResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from starlette.status import HTTP_303_SEE_OTHER, HTTP_401_UNAUTHORIZED",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from tortoise import signals",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from fastapi_admin import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from fastapi_admin.depends import get_current_admin, get_redis, get_resources",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from fastapi_admin.i18n import _",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from fastapi_admin.models import AbstractAdmin",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from fastapi_admin.providers import Provider",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from fastapi_admin.template import templates",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from fastapi_admin.utils import check_password, hash_password",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/login.py",
+      "raw_specifier": "from fastapi_admin.app import FastAPIAdmin",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/__init__.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/providers/__init__.py",
+      "raw_specifier": "from fastapi_admin.app import FastAPIAdmin",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from typing import Any, Dict, List, Optional, Tuple, Type, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from pydantic import BaseModel, validator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pydantic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from starlette.datastructures import FormData",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from tortoise import ForeignKeyFieldInstance, ManyToManyFieldInstance",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from tortoise import Model as TortoiseModel",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from tortoise.fields import BooleanField, DateField, DatetimeField, JSONField",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from tortoise.fields.data import CharEnumFieldInstance, IntEnumFieldInstance, IntField, TextField",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from tortoise.queryset import QuerySet",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from fastapi_admin.enums import Method",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from fastapi_admin.exceptions import NoSuchFieldFound",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from fastapi_admin.i18n import _",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from fastapi_admin.widgets import Widget, displays, inputs",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/resources.py",
+      "raw_specifier": "from fastapi_admin.widgets.filters import Filter, Search",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/responses.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/responses.py",
+      "raw_specifier": "from starlette.responses import RedirectResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/responses.py",
+      "raw_specifier": "from starlette.status import HTTP_303_SEE_OTHER",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from typing import Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from fastapi import APIRouter, Depends, Path",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from jinja2 import TemplateNotFound",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from starlette.responses import RedirectResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from starlette.status import HTTP_303_SEE_OTHER",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from tortoise import Model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from tortoise.fields import ManyToManyRelation",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from tortoise.transactions import in_transaction",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from fastapi_admin.depends import get_model, get_model_resource, get_resources",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from fastapi_admin.resources import Model as ModelResource",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from fastapi_admin.resources import render_values",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from fastapi_admin.responses import redirect",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/resources.py",
+      "raw_specifier": "from fastapi_admin.template import templates",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/__init__.py",
+      "raw_specifier": "from fastapi import APIRouter, Depends",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/__init__.py",
+      "raw_specifier": "from fastapi_admin.depends import get_current_admin",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/routes/__init__.py",
+      "raw_specifier": "from .resources import router as resources_router",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".resources",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "fastapi_admin/template.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/template.py",
+      "raw_specifier": "from datetime import date",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/template.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/template.py",
+      "raw_specifier": "from urllib.parse import urlencode",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/template.py",
+      "raw_specifier": "from jinja2 import pass_context",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/template.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/template.py",
+      "raw_specifier": "from starlette.templating import Jinja2Templates",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/template.py",
+      "raw_specifier": "from fastapi_admin import VERSION",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/template.py",
+      "raw_specifier": "from fastapi_admin.constants import BASE_DIR",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/utils.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/utils.py",
+      "raw_specifier": "string",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "string",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/utils.py",
+      "raw_specifier": "bcrypt",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "bcrypt",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/displays.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/displays.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/displays.py",
+      "raw_specifier": "from typing import Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/displays.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/displays.py",
+      "raw_specifier": "from fastapi_admin import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/displays.py",
+      "raw_specifier": "from fastapi_admin.widgets import Widget",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/filters.py",
+      "raw_specifier": "abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/filters.py",
+      "raw_specifier": "from enum import Enum as EnumCLS",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/filters.py",
+      "raw_specifier": "from typing import Any, List, Optional, Tuple, Type",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/filters.py",
+      "raw_specifier": "pendulum",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pendulum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/filters.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/filters.py",
+      "raw_specifier": "from tortoise import Model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/filters.py",
+      "raw_specifier": "from tortoise.queryset import QuerySet",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/filters.py",
+      "raw_specifier": "from fastapi_admin import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/filters.py",
+      "raw_specifier": "from fastapi_admin.widgets.inputs import Input",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/inputs.py",
+      "raw_specifier": "abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/inputs.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/inputs.py",
+      "raw_specifier": "from enum import Enum as EnumCLS",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/inputs.py",
+      "raw_specifier": "from typing import Any, List, Optional, Tuple, Type",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/inputs.py",
+      "raw_specifier": "from starlette.datastructures import UploadFile",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/inputs.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/inputs.py",
+      "raw_specifier": "from tortoise import Model",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "tortoise",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/inputs.py",
+      "raw_specifier": "from fastapi_admin.file_upload import FileUpload",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/inputs.py",
+      "raw_specifier": "from fastapi_admin.widgets import Widget",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/__init__.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/__init__.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/__init__.py",
+      "raw_specifier": "from starlette.templating import Jinja2Templates",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "starlette",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_admin/widgets/__init__.py",
+      "raw_specifier": "from fastapi_admin.template import templates as t",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_admin",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "poetry.lock",
+      "source_type": "poetry.lock",
+      "packages": [
+        "aiofiles",
+        "aiosqlite",
+        "annotated_types",
+        "anyio",
+        "astroid",
+        "async_timeout",
+        "asyncmy",
+        "asyncpg",
+        "babel",
+        "backports_zoneinfo",
+        "bcrypt",
+        "black",
+        "click",
+        "colorama",
+        "dill",
+        "exceptiongroup",
+        "execnet",
+        "fastapi",
+        "flake8",
+        "h11",
+        "httptools",
+        "idna",
+        "importlib_resources",
+        "iniconfig",
+        "iso8601",
+        "isort",
+        "jinja2",
+        "markupsafe",
+        "mccabe",
+        "mypy",
+        "mypy_extensions",
+        "packaging",
+        "pathspec",
+        "pendulum",
+        "platformdirs",
+        "pluggy",
+        "pycodestyle",
+        "pydantic",
+        "pydantic_core",
+        "pyflakes",
+        "pylint",
+        "pypika_tortoise",
+        "pytest",
+        "pytest_asyncio",
+        "pytest_mock",
+        "pytest_xdist",
+        "python_dateutil",
+        "python_dotenv",
+        "python_multipart",
+        "pytz",
+        "pyyaml",
+        "redis",
+        "six",
+        "sniffio",
+        "starlette",
+        "tomli",
+        "tomlkit",
+        "tortoise_orm",
+        "typing_extensions",
+        "typing_inspection",
+        "tzdata",
+        "uvicorn",
+        "uvloop",
+        "watchfiles",
+        "websockets",
+        "zipp"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "babel",
+        "aiofiles",
+        "redis",
+        "bcrypt",
+        "fastapi",
+        "jinja2",
+        "python_multipart",
+        "tortoise_orm",
+        "uvicorn",
+        "pendulum"
+      ],
+      "dev_packages": [
+        "pytest",
+        "pytest_asyncio",
+        "pytest_mock",
+        "pytest_xdist",
+        "black",
+        "flake8",
+        "isort",
+        "pylint",
+        "asyncmy",
+        "asyncpg",
+        "python_dotenv",
+        "mypy"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/constants.py",
+      "candidate_test_paths": [
+        "examples/tests/test_constants.py",
+        "tests/test_constants.py",
+        "examples/tests/test_examples.py",
+        "test/test_constants.py",
+        "tests/constants/test_constants.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/enums.py",
+      "candidate_test_paths": [
+        "examples/tests/test_enums.py",
+        "tests/test_enums.py",
+        "examples/tests/test_examples.py",
+        "test/test_enums.py",
+        "tests/enums/test_enums.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/main.py",
+      "candidate_test_paths": [
+        "examples/tests/test_main.py",
+        "tests/test_main.py",
+        "examples/tests/test_examples.py",
+        "test/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/middlewares.py",
+      "candidate_test_paths": [
+        "examples/tests/test_middlewares.py",
+        "tests/test_middlewares.py",
+        "examples/tests/test_examples.py",
+        "test/test_middlewares.py",
+        "tests/middlewares/test_middlewares.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/models.py",
+      "candidate_test_paths": [
+        "examples/tests/test_models.py",
+        "tests/test_models.py",
+        "examples/tests/test_examples.py",
+        "test/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/providers.py",
+      "candidate_test_paths": [
+        "examples/tests/test_providers.py",
+        "tests/test_providers.py",
+        "examples/tests/test_examples.py",
+        "test/test_providers.py",
+        "tests/providers/test_providers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/resources.py",
+      "candidate_test_paths": [
+        "examples/tests/test_resources.py",
+        "tests/test_resources.py",
+        "examples/tests/test_examples.py",
+        "test/test_resources.py",
+        "tests/resources/test_resources.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/routes.py",
+      "candidate_test_paths": [
+        "examples/tests/test_routes.py",
+        "tests/test_routes.py",
+        "examples/tests/test_examples.py",
+        "test/test_routes.py",
+        "tests/routes/test_routes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/app.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_app.py",
+        "tests/test_app.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/constants.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_constants.py",
+        "tests/test_constants.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_constants.py",
+        "tests/constants/test_constants.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/depends.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_depends.py",
+        "tests/test_depends.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_depends.py",
+        "tests/depends/test_depends.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/enums.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_enums.py",
+        "tests/test_enums.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_enums.py",
+        "tests/enums/test_enums.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/exceptions.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/file_upload.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_file_upload.py",
+        "tests/test_file_upload.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_file_upload.py",
+        "tests/file_upload/test_file_upload.py",
+        "tests/file_uploads/test_file_upload.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/i18n.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_i18n.py",
+        "tests/test_i18n.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_i18n.py",
+        "tests/i18n/test_i18n.py",
+        "tests/i18ns/test_i18n.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/middlewares.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_middlewares.py",
+        "tests/test_middlewares.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_middlewares.py",
+        "tests/middlewares/test_middlewares.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/models.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_models.py",
+        "tests/test_models.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/providers/login.py",
+      "candidate_test_paths": [
+        "fastapi_admin/providers/tests/test_login.py",
+        "tests/providers/test_login.py",
+        "fastapi_admin/providers/tests/test_providers.py",
+        "test/test_login.py",
+        "tests/test_login.py",
+        "tests/login/test_login.py",
+        "tests/logins/test_login.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/resources.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_resources.py",
+        "tests/test_resources.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_resources.py",
+        "tests/resources/test_resources.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/responses.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_responses.py",
+        "tests/test_responses.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_responses.py",
+        "tests/responses/test_responses.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/routes/resources.py",
+      "candidate_test_paths": [
+        "fastapi_admin/routes/tests/test_resources.py",
+        "tests/routes/test_resources.py",
+        "fastapi_admin/routes/tests/test_routes.py",
+        "test/test_resources.py",
+        "tests/test_resources.py",
+        "tests/resources/test_resources.py",
+        "tests/api/resources/test_resource_create.py",
+        "tests/api/resources/test_resource_get.py",
+        "tests/api/resources/test_resource_list.py",
+        "tests/api/resources/test_resource_update.py",
+        "tests/api/resources/test_resource_delete.py",
+        "tests/api/resources/test_resources.py",
+        "tests/api/test_resources.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/template.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_template.py",
+        "tests/test_template.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_template.py",
+        "tests/template/test_template.py",
+        "tests/templates/test_template.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/utils.py",
+      "candidate_test_paths": [
+        "fastapi_admin/tests/test_utils.py",
+        "tests/test_utils.py",
+        "fastapi_admin/tests/test_fastapi_admin.py",
+        "test/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/widgets/displays.py",
+      "candidate_test_paths": [
+        "fastapi_admin/widgets/tests/test_displays.py",
+        "tests/widgets/test_displays.py",
+        "fastapi_admin/widgets/tests/test_widgets.py",
+        "test/test_displays.py",
+        "tests/test_displays.py",
+        "tests/displays/test_displays.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/widgets/filters.py",
+      "candidate_test_paths": [
+        "fastapi_admin/widgets/tests/test_filters.py",
+        "tests/widgets/test_filters.py",
+        "fastapi_admin/widgets/tests/test_widgets.py",
+        "test/test_filters.py",
+        "tests/test_filters.py",
+        "tests/filters/test_filters.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_admin/widgets/inputs.py",
+      "candidate_test_paths": [
+        "fastapi_admin/widgets/tests/test_inputs.py",
+        "tests/widgets/test_inputs.py",
+        "fastapi_admin/widgets/tests/test_widgets.py",
+        "test/test_inputs.py",
+        "tests/test_inputs.py",
+        "tests/inputs/test_inputs.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/admin/**",
+      "matched_paths": [
+        "fastapi_admin/app.py",
+        "fastapi_admin/constants.py",
+        "fastapi_admin/depends.py",
+        "fastapi_admin/enums.py",
+        "fastapi_admin/exceptions.py",
+        "fastapi_admin/file_upload.py",
+        "fastapi_admin/i18n.py",
+        "fastapi_admin/middlewares.py",
+        "fastapi_admin/models.py",
+        "fastapi_admin/providers/login.py",
+        "fastapi_admin/providers/__init__.py",
+        "fastapi_admin/resources.py",
+        "fastapi_admin/responses.py",
+        "fastapi_admin/routes/resources.py",
+        "fastapi_admin/routes/__init__.py",
+        "fastapi_admin/template.py",
+        "fastapi_admin/utils.py",
+        "fastapi_admin/widgets/displays.py",
+        "fastapi_admin/widgets/filters.py",
+        "fastapi_admin/widgets/inputs.py",
+        "fastapi_admin/widgets/__init__.py",
+        "fastapi_admin/__init__.py"
+      ],
+      "category": "administration",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"admin\" found in 22 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/settings/**",
+      "matched_paths": [
+        "examples/settings.py"
+      ],
+      "category": "infrastructure_config",
+      "severity": "medium",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"settings\" found in 1 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.cfg"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 34,
+    "classified_count": 34,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 181,
+    "project_import_count": 60,
+    "declared_package_count": 58,
+    "undeclared_package_count": 17,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 26,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 2,
+    "sensitive_file_count": 23,
+    "manifest_count": 3,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

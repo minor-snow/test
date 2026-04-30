@@ -153,7 +153,7 @@ function runCli(cliEntry: string, args: string[], cwd: string): void {
   const result = spawnSync(process.execPath, [cliEntry, ...args], {
     cwd,
     encoding: "utf-8",
-    stdio: "pipe",
+    stdio: ["inherit", "pipe", "pipe"],
   });
 
   if (result.stdout) process.stdout.write(result.stdout);

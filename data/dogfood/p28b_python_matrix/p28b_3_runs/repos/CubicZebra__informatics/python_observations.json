@@ -1,0 +1,273 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "CubicZebra__informatics",
+    "observed_file_count": 169,
+    "python_file_count": 7
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "loose_scripts_only",
+        "weight": "weak",
+        "evidence": "1 top-level .py files without package __init__.py"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "No package structure detected; only loose scripts"
+      }
+    ],
+    "bucket_summary": {
+      "docs": 2,
+      "config": 2,
+      "test": 3
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No framework could be detected from dependencies, paths, or imports"
+      }
+    ]
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "unvalidated",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / unknown (low)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/__init__.py",
+        "reason": "No __init__.py observed (unusual)"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/requirements.txt",
+      "bucket": "docs",
+      "extension": ".txt",
+      "size_bytes": 31,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/source/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 2569,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 3309,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 2875,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "test/test_anomalies.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2164,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_bayes.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3249,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test/test_tensor_hypotest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 18165,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [],
+  "dependency_manifests": [
+    {
+      "source_path": "docs/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "informatics",
+        "sphinx_inline_tabs"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "numpy",
+        "scipy",
+        "dill",
+        "tensorly",
+        "pandas",
+        "pillow",
+        "requests",
+        "pyqtgraph",
+        "pyopengl",
+        "pydicom",
+        "simpleitk",
+        "torch"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    }
+  ],
+  "test_mappings": [],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.py"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 5,
+    "classified_count": 5,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 0,
+    "project_import_count": 0,
+    "declared_package_count": 0,
+    "undeclared_package_count": 0,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 0,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 3,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

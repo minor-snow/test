@@ -1,5 +1,5 @@
 import { type RepairAuditGate } from "../repair/types.js";
-import type { RepairSession } from "../repair/session/repairSessionTypes.js";
+import type { RepoStateSnapshot, RepairSession } from "../repair/session/repairSessionTypes.js";
 export declare function cmdRepair(args: string[]): void;
 export declare function cmdRepairIntake(input: {
     repoRoot: string;
@@ -15,6 +15,11 @@ export declare function cmdRepairPlan(input: {
     repoRoot: string;
     repairId: string;
     configPath?: string;
+    overrideBaseSha?: string;
+    overrideHeadSha?: string;
+    overrideCheckoutSha?: string;
+    overrideSource?: RepoStateSnapshot["source"];
+    sourceOverride?: "local_cli" | "github_action";
 }): void;
 export declare function cmdRepairAudit(input: {
     repoRoot: string;
@@ -34,6 +39,12 @@ export declare function cmdRepairCheck(input: {
     baseRef?: string;
     diffJsonPath?: string;
     changedFilesOverride?: string[];
+    sourceOverride?: "local_cli" | "github_action";
+    prNumber?: number;
+    prBaseSha?: string;
+    prHeadSha?: string;
+    artifactDir?: string;
+    sanitizerViolations?: number;
 }): void;
 export declare function cmdRepairList(input: {
     repoRoot: string;

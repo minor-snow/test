@@ -1,0 +1,2964 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "hyperliquid-dex__hyperliquid-python-sdk",
+    "observed_file_count": 97,
+    "python_file_count": 60
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: hyperliquid"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 3,
+      "source": 54,
+      "test": 3
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "api/ directory present"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "generic_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (medium)",
+      "framework: pytest / test_framework (medium)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: order_lifecycle (high, 8 paths)",
+      "sensitive_zone: identity (high, 1 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/config*",
+        "reason": "Configuration affects system behavior",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/config*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 1813,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "examples/basic_adding.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9936,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_agent.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4911,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_builder_fee.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 855,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_convert_to_multi_sig_user.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1069,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_evm_use_big_blocks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 381,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_leverage_adjustment.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1251,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_market_order.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1343,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_order.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1439,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_order_modify.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1227,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_order_with_builder_deployed_dex.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1759,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_order_with_cloid.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1232,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_recover_user.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2008,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_schedule_cancel.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1022,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_send_asset.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 784,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_set_referrer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 498,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_spot_order.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2033,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_spot_to_builder_deployed_perp_dex.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 659,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_spot_to_perp.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 521,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_spot_transfer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 629,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_staking.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 871,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_sub_account.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1040,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_tpsl.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3006,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_transfer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 562,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_vault.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 943,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_vault_transfer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 471,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_withdraw.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 531,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/basic_ws.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1417,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/cancel_open_orders.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 414,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/c_signer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 837,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/c_validator.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1944,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/dex_abstraction.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2531,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/evm_block_indexer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8564,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/evm_erc20.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 40293,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/example_utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3145,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/multi_sig_convert_to_normal_user.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2010,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/multi_sig_order.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1867,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/multi_sig_register_token.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1946,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/multi_sig_usd_send.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2090,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/parse_token_delegate_from_replica_cmds.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3192,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/perp_deploy.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2440,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/priority_fees.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 778,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/rounding.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2584,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/spot_deploy.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5593,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/user_abstraction.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2062,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hyperliquid/api.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1673,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hyperliquid/exchange.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 38962,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hyperliquid/info.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 28573,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hyperliquid/utils/constants.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 147,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hyperliquid/utils/error.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 496,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hyperliquid/utils/signing.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 16626,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hyperliquid/utils/types.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8164,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hyperliquid/utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hyperliquid/websocket_manager.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7708,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "hyperliquid/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "poetry.lock",
+      "bucket": "config",
+      "extension": ".lock",
+      "size_bytes": 311144,
+      "evidence": [
+        "Lock/manifest"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 4354,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/info_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11439,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/signing_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12219,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/basic_adding.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_adding.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_adding.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_adding.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_adding.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_adding.py",
+      "raw_specifier": "from hyperliquid.exchange import Exchange",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_adding.py",
+      "raw_specifier": "from hyperliquid.info import Info",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_adding.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_adding.py",
+      "raw_specifier": "from hyperliquid.utils.signing import get_timestamp_ms",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_adding.py",
+      "raw_specifier": "from hyperliquid.utils.types import ( SIDES, Dict, L2BookData, L2BookMsg, L2BookSubscription, Literal, Optional, Side, TypedDict, Union, UserEventsMsg, UserEventsSubscription, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_agent.py",
+      "raw_specifier": "eth_account",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "eth_account",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_agent.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_agent.py",
+      "raw_specifier": "from eth_account.signers.local import LocalAccount",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "eth_account",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_agent.py",
+      "raw_specifier": "from hyperliquid.exchange import Exchange",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_agent.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_builder_fee.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_builder_fee.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_convert_to_multi_sig_user.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_convert_to_multi_sig_user.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_evm_use_big_blocks.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_evm_use_big_blocks.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_leverage_adjustment.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_leverage_adjustment.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_leverage_adjustment.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_market_order.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_market_order.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_market_order.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_order.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_order.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_order.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_order_modify.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_order_modify.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_order_modify.py",
+      "raw_specifier": "from hyperliquid.utils.types import Cloid",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_order_with_builder_deployed_dex.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_order_with_builder_deployed_dex.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_order_with_builder_deployed_dex.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_order_with_cloid.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_order_with_cloid.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_order_with_cloid.py",
+      "raw_specifier": "from hyperliquid.utils.types import Cloid",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_recover_user.py",
+      "raw_specifier": "from hyperliquid.utils.signing import ( TOKEN_DELEGATE_TYPES, recover_agent_or_user_from_l1_action, recover_user_from_user_signed_action, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_schedule_cancel.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_schedule_cancel.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_schedule_cancel.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_schedule_cancel.py",
+      "raw_specifier": "from hyperliquid.utils.signing import get_timestamp_ms",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_send_asset.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_send_asset.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_set_referrer.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_set_referrer.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_spot_order.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_spot_order.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_spot_order.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_spot_to_builder_deployed_perp_dex.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_spot_to_builder_deployed_perp_dex.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_spot_to_perp.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_spot_to_perp.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_spot_transfer.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_spot_transfer.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_staking.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_staking.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_staking.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_sub_account.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_sub_account.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_tpsl.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_tpsl.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_tpsl.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_transfer.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_transfer.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_vault.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_vault.py",
+      "raw_specifier": "from hyperliquid.exchange import Exchange",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_vault.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_vault_transfer.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_vault_transfer.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_withdraw.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_withdraw.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/basic_ws.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/basic_ws.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/cancel_open_orders.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/cancel_open_orders.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/c_signer.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/c_signer.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/c_validator.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/c_validator.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/dex_abstraction.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/dex_abstraction.py",
+      "raw_specifier": "from hyperliquid.exchange import Exchange",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/dex_abstraction.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/evm_block_indexer.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/evm_block_indexer.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/evm_block_indexer.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/evm_block_indexer.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/evm_block_indexer.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/evm_block_indexer.py",
+      "raw_specifier": "lz4.frame",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "lz4",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/evm_block_indexer.py",
+      "raw_specifier": "msgpack",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "msgpack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/evm_erc20.py",
+      "raw_specifier": "from typing import Literal, TypedDict, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/evm_erc20.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/evm_erc20.py",
+      "raw_specifier": "from eth_account import Account",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "eth_account",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/evm_erc20.py",
+      "raw_specifier": "from eth_account.signers.local import LocalAccount",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "eth_account",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/evm_erc20.py",
+      "raw_specifier": "from web3 import Web3",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "web3",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/evm_erc20.py",
+      "raw_specifier": "from web3.middleware import SignAndSendRawMiddlewareBuilder",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "web3",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/evm_erc20.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/evm_erc20.py",
+      "raw_specifier": "from hyperliquid.utils.signing import get_timestamp_ms, sign_l1_action",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/example_utils.py",
+      "raw_specifier": "getpass",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "getpass",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/example_utils.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/example_utils.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/example_utils.py",
+      "raw_specifier": "eth_account",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "eth_account",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/example_utils.py",
+      "raw_specifier": "from eth_account.signers.local import LocalAccount",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "eth_account",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/example_utils.py",
+      "raw_specifier": "from hyperliquid.exchange import Exchange",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/example_utils.py",
+      "raw_specifier": "from hyperliquid.info import Info",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/multi_sig_convert_to_normal_user.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/multi_sig_convert_to_normal_user.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/multi_sig_convert_to_normal_user.py",
+      "raw_specifier": "from hyperliquid.utils.signing import ( CONVERT_TO_MULTI_SIG_USER_SIGN_TYPES, get_timestamp_ms, sign_multi_sig_user_signed_action_payload, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/multi_sig_order.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/multi_sig_order.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/multi_sig_order.py",
+      "raw_specifier": "from hyperliquid.utils.signing import get_timestamp_ms, sign_multi_sig_l1_action_payload",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/multi_sig_register_token.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/multi_sig_register_token.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/multi_sig_register_token.py",
+      "raw_specifier": "from hyperliquid.utils.signing import get_timestamp_ms, sign_multi_sig_l1_action_payload",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/multi_sig_usd_send.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/multi_sig_usd_send.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/multi_sig_usd_send.py",
+      "raw_specifier": "from hyperliquid.utils.signing import SEND_ASSET_SIGN_TYPES, get_timestamp_ms, sign_multi_sig_user_signed_action_payload",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/parse_token_delegate_from_replica_cmds.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/parse_token_delegate_from_replica_cmds.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/parse_token_delegate_from_replica_cmds.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/parse_token_delegate_from_replica_cmds.py",
+      "raw_specifier": "from collections import defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/parse_token_delegate_from_replica_cmds.py",
+      "raw_specifier": "lz4.frame",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "lz4",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/parse_token_delegate_from_replica_cmds.py",
+      "raw_specifier": "from hyperliquid.utils.signing import TOKEN_DELEGATE_TYPES, recover_user_from_user_signed_action",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/perp_deploy.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/perp_deploy.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/priority_fees.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/priority_fees.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/rounding.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/rounding.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/rounding.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/spot_deploy.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/spot_deploy.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/user_abstraction.py",
+      "raw_specifier": "example_utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "example_utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/user_abstraction.py",
+      "raw_specifier": "from hyperliquid.exchange import Exchange",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/user_abstraction.py",
+      "raw_specifier": "from hyperliquid.utils import constants",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/api.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/api.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/api.py",
+      "raw_specifier": "from json import JSONDecodeError",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/api.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/api.py",
+      "raw_specifier": "from hyperliquid.utils.constants import MAINNET_API_URL",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/api.py",
+      "raw_specifier": "from hyperliquid.utils.error import ClientError, ServerError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/api.py",
+      "raw_specifier": "from hyperliquid.utils.types import Any",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/exchange.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/exchange.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/exchange.py",
+      "raw_specifier": "secrets",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "secrets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/exchange.py",
+      "raw_specifier": "eth_account",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "eth_account",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/exchange.py",
+      "raw_specifier": "from eth_account.signers.local import LocalAccount",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "eth_account",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/exchange.py",
+      "raw_specifier": "from hyperliquid.api import API",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/exchange.py",
+      "raw_specifier": "from hyperliquid.info import Info",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/exchange.py",
+      "raw_specifier": "from hyperliquid.utils.constants import MAINNET_API_URL",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/exchange.py",
+      "raw_specifier": "from hyperliquid.utils.signing import ( CancelByCloidRequest, CancelRequest, Grouping, ModifyRequest, OidOrCloid, OrderRequest, OrderType, OrderWire, ScheduleCancelAction, float_to_usd_int, get_timestamp_ms, order_request_to_order_wire, order_wires_to_order_action, sign_agent, sign_approve_builder_fee, sign_convert_to_multi_sig_user_action, sign_l1_action, sign_multi_sig_action, sign_send_asset_action, sign_spot_transfer_action, sign_token_delegate_action, sign_usd_class_transfer_action, sign_usd_transfer_action, sign_user_dex_abstraction_action, sign_user_set_abstraction_action, sign_withdraw_from_bridge_action, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/exchange.py",
+      "raw_specifier": "from hyperliquid.utils.types import ( Abstraction, AgentAbstraction, Any, BuilderInfo, Cloid, Dict, List, Meta, Optional, PerpDexSchemaInput, SpotMeta, Tuple, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/info.py",
+      "raw_specifier": "from hyperliquid.api import API",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/info.py",
+      "raw_specifier": "from hyperliquid.utils.types import ( Any, Callable, Cloid, List, Meta, Optional, SpotMeta, SpotMetaAndAssetCtxs, Subscription, cast, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/info.py",
+      "raw_specifier": "from hyperliquid.websocket_manager import WebsocketManager",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/utils/signing.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/utils/signing.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/utils/signing.py",
+      "raw_specifier": "from decimal import Decimal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/utils/signing.py",
+      "raw_specifier": "msgpack",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "msgpack",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/utils/signing.py",
+      "raw_specifier": "from eth_account import Account",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "eth_account",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/utils/signing.py",
+      "raw_specifier": "from eth_account.messages import encode_typed_data",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "eth_account",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/utils/signing.py",
+      "raw_specifier": "from eth_utils import keccak, to_hex",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "eth_utils",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/utils/signing.py",
+      "raw_specifier": "from hyperliquid.utils.types import Cloid, Literal, NotRequired, Optional, TypedDict, Union",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/utils/types.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/utils/types.py",
+      "raw_specifier": "from typing import Any, Callable, Dict, List, Literal, NamedTuple, Optional, Tuple, TypedDict, Union, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/utils/types.py",
+      "raw_specifier": "from typing_extensions import NotRequired",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/websocket_manager.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/websocket_manager.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/websocket_manager.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/websocket_manager.py",
+      "raw_specifier": "from collections import defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "hyperliquid/websocket_manager.py",
+      "raw_specifier": "websocket",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "websocket",
+      "confidence": "low"
+    },
+    {
+      "from_file": "hyperliquid/websocket_manager.py",
+      "raw_specifier": "from hyperliquid.utils.types import Any, Callable, Dict, List, NamedTuple, Optional, Subscription, Tuple, WsMsg",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "hyperliquid",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "poetry.lock",
+      "source_type": "poetry.lock",
+      "packages": [
+        "annotated_types",
+        "bitarray",
+        "certifi",
+        "charset_normalizer",
+        "ckzg",
+        "cytoolz",
+        "eth_abi",
+        "eth_account",
+        "eth_hash",
+        "eth_keyfile",
+        "eth_keys",
+        "eth_rlp",
+        "eth_typing",
+        "eth_utils",
+        "hexbytes",
+        "idna",
+        "msgpack",
+        "parsimonious",
+        "pycryptodome",
+        "pydantic",
+        "pydantic_core",
+        "regex",
+        "requests",
+        "rlp",
+        "toolz",
+        "typing_extensions",
+        "urllib3",
+        "websocket_client"
+      ],
+      "dev_packages": [
+        "authlib",
+        "cffi",
+        "cfgv",
+        "click",
+        "colorama",
+        "coverage",
+        "cryptography",
+        "distlib",
+        "dparse",
+        "exceptiongroup",
+        "filelock",
+        "identify",
+        "iniconfig",
+        "jinja2",
+        "levenshtein",
+        "lz4",
+        "markdown_it_py",
+        "markupsafe",
+        "marshmallow",
+        "mdurl",
+        "multidict",
+        "mypy",
+        "mypy_extensions",
+        "nodeenv",
+        "packaging",
+        "platformdirs",
+        "pluggy",
+        "pre_commit",
+        "propcache",
+        "psutil",
+        "pycparser",
+        "pygments",
+        "pytest",
+        "pytest_cov",
+        "pytest_recording",
+        "python_levenshtein",
+        "pyyaml",
+        "rapidfuzz",
+        "rich",
+        "ruamel_yaml",
+        "ruamel_yaml_clib",
+        "safety",
+        "safety_schemas",
+        "setuptools",
+        "shellingham",
+        "tomli",
+        "typer",
+        "types_requests",
+        "types_urllib3",
+        "vcrpy",
+        "virtualenv",
+        "wrapt",
+        "yarl"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "eth_utils",
+        "eth_account",
+        "websocket_client",
+        "requests",
+        "msgpack"
+      ],
+      "dev_packages": [
+        "python",
+        "pytest",
+        "pytest_recording",
+        "mypy",
+        "mypy_extensions",
+        "pre_commit",
+        "safety",
+        "coverage",
+        "pytest_cov",
+        "vcrpy",
+        "types_requests",
+        "lz4"
+      ],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/basic_adding.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_adding.py",
+        "tests/test_basic_adding.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_adding.py",
+        "tests/basic_adding/test_basic_adding.py",
+        "tests/basic_addings/test_basic_adding.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_agent.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_agent.py",
+        "tests/test_basic_agent.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_agent.py",
+        "tests/basic_agent/test_basic_agent.py",
+        "tests/basic_agents/test_basic_agent.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_builder_fee.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_builder_fee.py",
+        "tests/test_basic_builder_fee.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_builder_fee.py",
+        "tests/basic_builder_fee/test_basic_builder_fee.py",
+        "tests/basic_builder_fees/test_basic_builder_fee.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_convert_to_multi_sig_user.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_convert_to_multi_sig_user.py",
+        "tests/test_basic_convert_to_multi_sig_user.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_convert_to_multi_sig_user.py",
+        "tests/basic_convert_to_multi_sig_user/test_basic_convert_to_multi_sig_user.py",
+        "tests/basic_convert_to_multi_sig_users/test_basic_convert_to_multi_sig_user.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_evm_use_big_blocks.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_evm_use_big_blocks.py",
+        "tests/test_basic_evm_use_big_blocks.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_evm_use_big_blocks.py",
+        "tests/basic_evm_use_big_blocks/test_basic_evm_use_big_blocks.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_leverage_adjustment.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_leverage_adjustment.py",
+        "tests/test_basic_leverage_adjustment.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_leverage_adjustment.py",
+        "tests/basic_leverage_adjustment/test_basic_leverage_adjustment.py",
+        "tests/basic_leverage_adjustments/test_basic_leverage_adjustment.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_market_order.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_market_order.py",
+        "tests/test_basic_market_order.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_market_order.py",
+        "tests/basic_market_order/test_basic_market_order.py",
+        "tests/basic_market_orders/test_basic_market_order.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_order.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_order.py",
+        "tests/test_basic_order.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_order.py",
+        "tests/basic_order/test_basic_order.py",
+        "tests/basic_orders/test_basic_order.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_order_modify.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_order_modify.py",
+        "tests/test_basic_order_modify.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_order_modify.py",
+        "tests/basic_order_modify/test_basic_order_modify.py",
+        "tests/basic_order_modifys/test_basic_order_modify.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_order_with_builder_deployed_dex.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_order_with_builder_deployed_dex.py",
+        "tests/test_basic_order_with_builder_deployed_dex.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_order_with_builder_deployed_dex.py",
+        "tests/basic_order_with_builder_deployed_dex/test_basic_order_with_builder_deployed_dex.py",
+        "tests/basic_order_with_builder_deployed_dexs/test_basic_order_with_builder_deployed_dex.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_order_with_cloid.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_order_with_cloid.py",
+        "tests/test_basic_order_with_cloid.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_order_with_cloid.py",
+        "tests/basic_order_with_cloid/test_basic_order_with_cloid.py",
+        "tests/basic_order_with_cloids/test_basic_order_with_cloid.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_recover_user.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_recover_user.py",
+        "tests/test_basic_recover_user.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_recover_user.py",
+        "tests/basic_recover_user/test_basic_recover_user.py",
+        "tests/basic_recover_users/test_basic_recover_user.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_schedule_cancel.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_schedule_cancel.py",
+        "tests/test_basic_schedule_cancel.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_schedule_cancel.py",
+        "tests/basic_schedule_cancel/test_basic_schedule_cancel.py",
+        "tests/basic_schedule_cancels/test_basic_schedule_cancel.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_send_asset.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_send_asset.py",
+        "tests/test_basic_send_asset.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_send_asset.py",
+        "tests/basic_send_asset/test_basic_send_asset.py",
+        "tests/basic_send_assets/test_basic_send_asset.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_set_referrer.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_set_referrer.py",
+        "tests/test_basic_set_referrer.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_set_referrer.py",
+        "tests/basic_set_referrer/test_basic_set_referrer.py",
+        "tests/basic_set_referrers/test_basic_set_referrer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_spot_order.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_spot_order.py",
+        "tests/test_basic_spot_order.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_spot_order.py",
+        "tests/basic_spot_order/test_basic_spot_order.py",
+        "tests/basic_spot_orders/test_basic_spot_order.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_spot_to_builder_deployed_perp_dex.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_spot_to_builder_deployed_perp_dex.py",
+        "tests/test_basic_spot_to_builder_deployed_perp_dex.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_spot_to_builder_deployed_perp_dex.py",
+        "tests/basic_spot_to_builder_deployed_perp_dex/test_basic_spot_to_builder_deployed_perp_dex.py",
+        "tests/basic_spot_to_builder_deployed_perp_dexs/test_basic_spot_to_builder_deployed_perp_dex.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_spot_to_perp.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_spot_to_perp.py",
+        "tests/test_basic_spot_to_perp.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_spot_to_perp.py",
+        "tests/basic_spot_to_perp/test_basic_spot_to_perp.py",
+        "tests/basic_spot_to_perps/test_basic_spot_to_perp.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_spot_transfer.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_spot_transfer.py",
+        "tests/test_basic_spot_transfer.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_spot_transfer.py",
+        "tests/basic_spot_transfer/test_basic_spot_transfer.py",
+        "tests/basic_spot_transfers/test_basic_spot_transfer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_staking.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_staking.py",
+        "tests/test_basic_staking.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_staking.py",
+        "tests/basic_staking/test_basic_staking.py",
+        "tests/basic_stakings/test_basic_staking.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_sub_account.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_sub_account.py",
+        "tests/test_basic_sub_account.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_sub_account.py",
+        "tests/basic_sub_account/test_basic_sub_account.py",
+        "tests/basic_sub_accounts/test_basic_sub_account.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_tpsl.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_tpsl.py",
+        "tests/test_basic_tpsl.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_tpsl.py",
+        "tests/basic_tpsl/test_basic_tpsl.py",
+        "tests/basic_tpsls/test_basic_tpsl.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_transfer.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_transfer.py",
+        "tests/test_basic_transfer.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_transfer.py",
+        "tests/basic_transfer/test_basic_transfer.py",
+        "tests/basic_transfers/test_basic_transfer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_vault.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_vault.py",
+        "tests/test_basic_vault.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_vault.py",
+        "tests/basic_vault/test_basic_vault.py",
+        "tests/basic_vaults/test_basic_vault.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_vault_transfer.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_vault_transfer.py",
+        "tests/test_basic_vault_transfer.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_vault_transfer.py",
+        "tests/basic_vault_transfer/test_basic_vault_transfer.py",
+        "tests/basic_vault_transfers/test_basic_vault_transfer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_withdraw.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_withdraw.py",
+        "tests/test_basic_withdraw.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_withdraw.py",
+        "tests/basic_withdraw/test_basic_withdraw.py",
+        "tests/basic_withdraws/test_basic_withdraw.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/basic_ws.py",
+      "candidate_test_paths": [
+        "examples/tests/test_basic_ws.py",
+        "tests/test_basic_ws.py",
+        "examples/tests/test_examples.py",
+        "test/test_basic_ws.py",
+        "tests/basic_ws/test_basic_ws.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/cancel_open_orders.py",
+      "candidate_test_paths": [
+        "examples/tests/test_cancel_open_orders.py",
+        "tests/test_cancel_open_orders.py",
+        "examples/tests/test_examples.py",
+        "test/test_cancel_open_orders.py",
+        "tests/cancel_open_orders/test_cancel_open_orders.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/c_signer.py",
+      "candidate_test_paths": [
+        "examples/tests/test_c_signer.py",
+        "tests/test_c_signer.py",
+        "examples/tests/test_examples.py",
+        "test/test_c_signer.py",
+        "tests/c_signer/test_c_signer.py",
+        "tests/c_signers/test_c_signer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/c_validator.py",
+      "candidate_test_paths": [
+        "examples/tests/test_c_validator.py",
+        "tests/test_c_validator.py",
+        "examples/tests/test_examples.py",
+        "test/test_c_validator.py",
+        "tests/c_validator/test_c_validator.py",
+        "tests/c_validators/test_c_validator.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/dex_abstraction.py",
+      "candidate_test_paths": [
+        "examples/tests/test_dex_abstraction.py",
+        "tests/test_dex_abstraction.py",
+        "examples/tests/test_examples.py",
+        "test/test_dex_abstraction.py",
+        "tests/dex_abstraction/test_dex_abstraction.py",
+        "tests/dex_abstractions/test_dex_abstraction.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/evm_block_indexer.py",
+      "candidate_test_paths": [
+        "examples/tests/test_evm_block_indexer.py",
+        "tests/test_evm_block_indexer.py",
+        "examples/tests/test_examples.py",
+        "test/test_evm_block_indexer.py",
+        "tests/evm_block_indexer/test_evm_block_indexer.py",
+        "tests/evm_block_indexers/test_evm_block_indexer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/evm_erc20.py",
+      "candidate_test_paths": [
+        "examples/tests/test_evm_erc20.py",
+        "tests/test_evm_erc20.py",
+        "examples/tests/test_examples.py",
+        "test/test_evm_erc20.py",
+        "tests/evm_erc20/test_evm_erc20.py",
+        "tests/evm_erc20s/test_evm_erc20.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/example_utils.py",
+      "candidate_test_paths": [
+        "examples/tests/test_example_utils.py",
+        "tests/test_example_utils.py",
+        "examples/tests/test_examples.py",
+        "test/test_example_utils.py",
+        "tests/example_utils/test_example_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/multi_sig_convert_to_normal_user.py",
+      "candidate_test_paths": [
+        "examples/tests/test_multi_sig_convert_to_normal_user.py",
+        "tests/test_multi_sig_convert_to_normal_user.py",
+        "examples/tests/test_examples.py",
+        "test/test_multi_sig_convert_to_normal_user.py",
+        "tests/multi_sig_convert_to_normal_user/test_multi_sig_convert_to_normal_user.py",
+        "tests/multi_sig_convert_to_normal_users/test_multi_sig_convert_to_normal_user.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/multi_sig_order.py",
+      "candidate_test_paths": [
+        "examples/tests/test_multi_sig_order.py",
+        "tests/test_multi_sig_order.py",
+        "examples/tests/test_examples.py",
+        "test/test_multi_sig_order.py",
+        "tests/multi_sig_order/test_multi_sig_order.py",
+        "tests/multi_sig_orders/test_multi_sig_order.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/multi_sig_register_token.py",
+      "candidate_test_paths": [
+        "examples/tests/test_multi_sig_register_token.py",
+        "tests/test_multi_sig_register_token.py",
+        "examples/tests/test_examples.py",
+        "test/test_multi_sig_register_token.py",
+        "tests/multi_sig_register_token/test_multi_sig_register_token.py",
+        "tests/multi_sig_register_tokens/test_multi_sig_register_token.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/multi_sig_usd_send.py",
+      "candidate_test_paths": [
+        "examples/tests/test_multi_sig_usd_send.py",
+        "tests/test_multi_sig_usd_send.py",
+        "examples/tests/test_examples.py",
+        "test/test_multi_sig_usd_send.py",
+        "tests/multi_sig_usd_send/test_multi_sig_usd_send.py",
+        "tests/multi_sig_usd_sends/test_multi_sig_usd_send.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/parse_token_delegate_from_replica_cmds.py",
+      "candidate_test_paths": [
+        "examples/tests/test_parse_token_delegate_from_replica_cmds.py",
+        "tests/test_parse_token_delegate_from_replica_cmds.py",
+        "examples/tests/test_examples.py",
+        "test/test_parse_token_delegate_from_replica_cmds.py",
+        "tests/parse_token_delegate_from_replica_cmds/test_parse_token_delegate_from_replica_cmds.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/perp_deploy.py",
+      "candidate_test_paths": [
+        "examples/tests/test_perp_deploy.py",
+        "tests/test_perp_deploy.py",
+        "examples/tests/test_examples.py",
+        "test/test_perp_deploy.py",
+        "tests/perp_deploy/test_perp_deploy.py",
+        "tests/perp_deploys/test_perp_deploy.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/priority_fees.py",
+      "candidate_test_paths": [
+        "examples/tests/test_priority_fees.py",
+        "tests/test_priority_fees.py",
+        "examples/tests/test_examples.py",
+        "test/test_priority_fees.py",
+        "tests/priority_fees/test_priority_fees.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/rounding.py",
+      "candidate_test_paths": [
+        "examples/tests/test_rounding.py",
+        "tests/test_rounding.py",
+        "examples/tests/test_examples.py",
+        "test/test_rounding.py",
+        "tests/rounding/test_rounding.py",
+        "tests/roundings/test_rounding.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/spot_deploy.py",
+      "candidate_test_paths": [
+        "examples/tests/test_spot_deploy.py",
+        "tests/test_spot_deploy.py",
+        "examples/tests/test_examples.py",
+        "test/test_spot_deploy.py",
+        "tests/spot_deploy/test_spot_deploy.py",
+        "tests/spot_deploys/test_spot_deploy.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/user_abstraction.py",
+      "candidate_test_paths": [
+        "examples/tests/test_user_abstraction.py",
+        "tests/test_user_abstraction.py",
+        "examples/tests/test_examples.py",
+        "test/test_user_abstraction.py",
+        "tests/user_abstraction/test_user_abstraction.py",
+        "tests/user_abstractions/test_user_abstraction.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "hyperliquid/api.py",
+      "candidate_test_paths": [
+        "hyperliquid/tests/test_api.py",
+        "tests/test_api.py",
+        "hyperliquid/tests/test_hyperliquid.py",
+        "test/test_api.py",
+        "tests/api/test_api.py",
+        "tests/apis/test_api.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "hyperliquid/exchange.py",
+      "candidate_test_paths": [
+        "hyperliquid/tests/test_exchange.py",
+        "tests/test_exchange.py",
+        "hyperliquid/tests/test_hyperliquid.py",
+        "test/test_exchange.py",
+        "tests/exchange/test_exchange.py",
+        "tests/exchanges/test_exchange.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "hyperliquid/info.py",
+      "candidate_test_paths": [
+        "hyperliquid/tests/test_info.py",
+        "tests/test_info.py",
+        "hyperliquid/tests/test_hyperliquid.py",
+        "test/test_info.py",
+        "tests/info/test_info.py",
+        "tests/infos/test_info.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "hyperliquid/utils/constants.py",
+      "candidate_test_paths": [
+        "hyperliquid/utils/tests/test_constants.py",
+        "tests/utils/test_constants.py",
+        "hyperliquid/utils/tests/test_utils.py",
+        "test/test_constants.py",
+        "tests/test_constants.py",
+        "tests/constants/test_constants.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "hyperliquid/utils/error.py",
+      "candidate_test_paths": [
+        "hyperliquid/utils/tests/test_error.py",
+        "tests/utils/test_error.py",
+        "hyperliquid/utils/tests/test_utils.py",
+        "test/test_error.py",
+        "tests/test_error.py",
+        "tests/error/test_error.py",
+        "tests/errors/test_error.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "hyperliquid/utils/signing.py",
+      "candidate_test_paths": [
+        "hyperliquid/utils/tests/test_signing.py",
+        "tests/utils/test_signing.py",
+        "hyperliquid/utils/tests/test_utils.py",
+        "test/test_signing.py",
+        "tests/test_signing.py",
+        "tests/signing/test_signing.py",
+        "tests/signings/test_signing.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "hyperliquid/utils/types.py",
+      "candidate_test_paths": [
+        "hyperliquid/utils/tests/test_types.py",
+        "tests/utils/test_types.py",
+        "hyperliquid/utils/tests/test_utils.py",
+        "test/test_types.py",
+        "tests/test_types.py",
+        "tests/types/test_types.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "hyperliquid/websocket_manager.py",
+      "candidate_test_paths": [
+        "hyperliquid/tests/test_websocket_manager.py",
+        "tests/test_websocket_manager.py",
+        "hyperliquid/tests/test_hyperliquid.py",
+        "test/test_websocket_manager.py",
+        "tests/websocket_manager/test_websocket_manager.py",
+        "tests/websocket_managers/test_websocket_manager.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/order/**",
+      "matched_paths": [
+        "examples/basic_market_order.py",
+        "examples/basic_order.py",
+        "examples/basic_order_modify.py",
+        "examples/basic_order_with_builder_deployed_dex.py",
+        "examples/basic_order_with_cloid.py",
+        "examples/basic_spot_order.py",
+        "examples/cancel_open_orders.py",
+        "examples/multi_sig_order.py"
+      ],
+      "category": "order_lifecycle",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"order\" found in 8 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/account/**",
+      "matched_paths": [
+        "examples/basic_sub_account.py"
+      ],
+      "category": "identity",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"account\" found in 1 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 57,
+    "classified_count": 57,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 174,
+    "project_import_count": 73,
+    "declared_package_count": 18,
+    "undeclared_package_count": 45,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 52,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 2,
+    "sensitive_file_count": 9,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

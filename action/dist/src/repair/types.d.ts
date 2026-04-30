@@ -234,8 +234,8 @@ export declare const humanAuditDecisionSchema: z.ZodObject<{
     repair_id: z.ZodString;
     target_revision: z.ZodNumber;
     gate: z.ZodEnum<{
-        repair_plan: "repair_plan";
         bug_intake: "bug_intake";
+        repair_plan: "repair_plan";
         post_repair: "post_repair";
     }>;
     decision: z.ZodEnum<{

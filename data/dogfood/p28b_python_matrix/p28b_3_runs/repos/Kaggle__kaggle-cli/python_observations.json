@@ -1,0 +1,1235 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "Kaggle__kaggle-cli",
+    "observed_file_count": 68,
+    "python_file_count": 22
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "src_layout",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "src_layout_detected",
+        "weight": "strong",
+        "evidence": "src/ directory with package(s): kaggle"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      },
+      {
+        "signal": "jupyter_notebooks",
+        "weight": "weak",
+        "evidence": "Jupyter notebooks present"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: library_package=3, cli_app=2"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "docs": 1,
+      "test": 9,
+      "source": 9,
+      "config": 1,
+      "notebook": 1,
+      "script": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "api/ directory present"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "generic_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / src_layout (medium)",
+      "framework: click / cli_framework (medium)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/config*",
+        "reason": "Configuration affects system behavior",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/config*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 2382,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "integration_tests/test_models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 615,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "integration_tests/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 2280,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "src/kaggle/api/kaggle_api.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 26122,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/kaggle/api/kaggle_api_extended.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 299926,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/kaggle/api/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/kaggle/cli.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 91850,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/kaggle/models/kaggle_models_extended.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7997,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/kaggle/models/upload_file.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5081,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/kaggle/models/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/kaggle/test/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 711,
+      "evidence": [
+        "pytest conftest"
+      ]
+    },
+    {
+      "path": "src/kaggle/test/test_authenticate.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1185,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "src/kaggle/test/test_benchmarks_cli.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 63167,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "src/kaggle/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 176,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/kernel/testing-x.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 1939,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "tests/test_dataset_status.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7127,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_kernels_logs.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8158,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_retry_after.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6370,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/unit_tests.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 36047,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tools/releases/requirements.txt",
+      "bucket": "script",
+      "extension": ".txt",
+      "size_bytes": 28803,
+      "evidence": [
+        "Tools directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "src/kaggle/api/kaggle_api.py",
+      "raw_specifier": "kaggle_api_extended",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "kaggle_api_extended",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from __future__ import print_function",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "csv",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "csv",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from datetime import datetime, timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "math",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "math",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "tarfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tarfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "zipfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "zipfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from dateutil.relativedelta import relativedelta",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dateutil",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from os.path import expanduser",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from random import random",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "bleach",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "bleach",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "mimetypes",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "mimetypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "urllib3.exceptions",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from requests import RequestException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kaggle.models.kaggle_models_extended import ResumableUploadResult, File",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kaggle",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from requests.adapters import HTTPAdapter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from slugify import slugify",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "slugify",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from tqdm import tqdm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "tqdm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from urllib3.util.retry import Retry",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "urllib3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from google.protobuf import field_mask_pb2",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "google",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from packaging.version import parse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "kaggle",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "kaggle",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk import get_access_token_from_env, KaggleClient, KaggleCredentials, KaggleEnv, KaggleOAuth  # type: ignore[attr-defined]",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.admin.types.inbox_file_service import CreateInboxFileRequest",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.blobs.types.blob_api_service import ApiStartBlobUploadRequest, ApiStartBlobUploadResponse, ApiBlobType",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.benchmarks.types.benchmark_enums import BenchmarkTaskRunState, BenchmarkTaskVersionCreationState",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.benchmarks.types.benchmark_tasks_api_service import ( ApiCreateBenchmarkTaskRequest, ApiListBenchmarkTasksRequest, ApiGetBenchmarkTaskRequest, ApiListBenchmarkTaskRunsRequest, ApiBenchmarkTaskSlug, ApiBatchScheduleBenchmarkTaskRunsRequest, ApiDownloadBenchmarkTaskRunOutputRequest, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.benchmarks.types.benchmarks_api_service import ApiListBenchmarkModelsRequest",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.competitions.types.competition_api_service import ( ApiListCompetitionsRequest, ApiCreateCodeSubmissionRequest, ApiCreateSubmissionResponse, ApiStartSubmissionUploadRequest, ApiCreateSubmissionRequest, ApiSubmission, ApiListSubmissionsRequest, ApiListDataFilesResponse, ApiListDataFilesRequest, ApiDownloadDataFileRequest, ApiDownloadDataFilesRequest, ApiDownloadLeaderboardRequest, ApiLeaderboardSubmission, ApiGetLeaderboardRequest, ApiDataFile, ApiCreateCodeSubmissionResponse, ApiListCompetitionsResponse, ApiListSubmissionEpisodesRequest, ApiListSubmissionEpisodesResponse, ApiGetEpisodeReplayRequest, ApiGetEpisodeAgentLogsRequest, ApiListCompetitionPagesRequest, ApiListCompetitionPagesResponse, ApiListCompetitionTopicsRequest, ApiListCompetitionTopicsResponse, ApiListTopicMessagesRequest, ApiListTopicMessagesResponse, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.discussions.types.discussions_enums import ( CommentListSortBy, TopicListSortBy, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.competitions.types.competition_enums import ( CompetitionListTab, HostSegment, CompetitionSortBy, SubmissionGroup, SubmissionSortBy, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.common.types.cropped_image_upload import CroppedImageUpload, CroppedImageRectangle",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.datasets.types.dataset_api_service import ( ApiListDatasetsRequest, ApiListDatasetFilesRequest, ApiGetDatasetRequest, ApiGetDatasetStatusRequest, ApiDownloadDatasetRequest, ApiCreateDatasetRequest, ApiCreateDatasetVersionRequestBody, ApiCreateDatasetVersionByIdRequest, ApiCreateDatasetVersionRequest, ApiDatasetNewFile, ApiUpdateDatasetMetadataRequest, ApiGetDatasetMetadataRequest, ApiDatasetFile, ApiDataset, ApiCreateDatasetResponse, ApiDatasetColumn, ApiDeleteDatasetRequest, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.datasets.types.dataset_enums import ( DatasetSelectionGroup, DatasetSortBy, DatasetFileTypeGroup, DatasetLicenseGroup, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.datasets.types.dataset_types import DatasetSettings, SettingsLicense, DatasetCollaborator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.kaggle_object import KaggleObject",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.kernels.types.kernels_api_service import ( ApiListKernelsRequest, ApiListKernelFilesRequest, ApiSaveKernelRequest, ApiGetKernelRequest, ApiListKernelSessionOutputRequest, ApiGetKernelSessionStatusRequest, ApiSaveKernelResponse, ApiKernelMetadata, ApiDeleteKernelRequest, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.kernels.types.kernels_enums import KernelWorkerStatus, KernelsListSortType, KernelsListViewType",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.models.types.model_api_service import ( ApiListModelsRequest, ApiCreateModelRequest, ApiGetModelRequest, ApiDeleteModelRequest, ApiUpdateModelRequest, ApiGetModelInstanceRequest, ApiCreateModelInstanceRequest, ApiCreateModelInstanceRequestBody, ApiListModelInstanceVersionFilesRequest, ApiUpdateModelInstanceRequest, ApiDeleteModelInstanceRequest, ApiCreateModelInstanceVersionRequest, ApiCreateModelInstanceVersionRequestBody, ApiDownloadModelInstanceVersionRequest, ApiDeleteModelInstanceVersionRequest, ApiModel, ApiCreateModelResponse, ApiDeleteModelResponse, ApiModelInstance, ApiListModelInstanceVersionFilesResponse, ApiListModelInstanceVersionsRequest, ApiListModelInstanceVersionsResponse, ApiListModelInstancesRequest, ApiListModelInstancesResponse, )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.models.types.model_enums import ListModelsOrderBy, ModelInstanceType, ModelFramework",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.models.types.model_proxy_api_service import ApiCreateDefaultModelProxyTokenRequest",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.models.types.model_types import Owner",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kagglesdk.security.types.oauth_service import IntrospectTokenRequest",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from ..models.upload_file import UploadFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..models.upload_file",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "kagglesdk.kaggle_client",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from enum import EnumMeta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from requests.exceptions import HTTPError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from requests.models import Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from typing import Callable, cast, Dict, List, Mapping, Optional, Tuple, Union, TypeVar, Iterable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kaggle_benchmarks.assertions import assertion_handler, AssertionResult",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kaggle_benchmarks",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from kaggle_benchmarks.content_types import images, videos, audios",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kaggle_benchmarks",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "kaggle_benchmarks",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "kaggle_benchmarks",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "ast",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ast",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "jupytext",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "jupytext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from pprint import pprint",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pprint",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from inspect import getmembers",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/api/kaggle_api_extended.py",
+      "raw_specifier": "from types import FunctionType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/cli.py",
+      "raw_specifier": "from __future__ import print_function",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/cli.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/cli.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/cli.py",
+      "raw_specifier": "kaggle",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "kaggle",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/cli.py",
+      "raw_specifier": "from kaggle import KaggleApi",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kaggle",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/cli.py",
+      "raw_specifier": "from kaggle import api",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kaggle",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/cli.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/models/kaggle_models_extended.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/models/upload_file.py",
+      "raw_specifier": "pprint",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pprint",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/models/upload_file.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/models/upload_file.py",
+      "raw_specifier": "six",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "six",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/kaggle/models/upload_file.py",
+      "raw_specifier": "from kagglesdk.datasets.types.dataset_api_service import ApiDatasetColumn",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "kagglesdk",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/__init__.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/kaggle/__init__.py",
+      "raw_specifier": "from kaggle.api.kaggle_api_extended import KaggleApi",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "kaggle",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "bleach",
+        "kagglesdk",
+        "python_slugify",
+        "requests",
+        "python_dateutil",
+        "tqdm",
+        "urllib3",
+        "packaging",
+        "protobuf",
+        "jupytext"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tools/releases/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "certifi",
+        "cffi",
+        "charset_normalizer",
+        "cryptography",
+        "docutils",
+        "idna",
+        "importlib_metadata",
+        "jaraco_classes",
+        "jeepney",
+        "keyring",
+        "markdown_it_py",
+        "mdurl",
+        "more_itertools",
+        "nh3",
+        "packaging",
+        "pkginfo",
+        "pycparser",
+        "pygments",
+        "readme_renderer",
+        "requests",
+        "requests_toolbelt",
+        "rfc3986",
+        "rich",
+        "secretstorage",
+        "twine",
+        "urllib3",
+        "zipp"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "src/kaggle/api/kaggle_api.py",
+      "candidate_test_paths": [
+        "src/kaggle/api/tests/test_kaggle_api.py",
+        "tests/kaggle/api/test_kaggle_api.py",
+        "src/kaggle/api/tests/test_api.py",
+        "test/test_kaggle_api.py",
+        "tests/test_kaggle_api.py",
+        "tests/kaggle_api/test_kaggle_api.py",
+        "tests/kaggle_apis/test_kaggle_api.py",
+        "tests/api/test_kaggle_api.py",
+        "tests/api/kaggle_api/test_kaggle_api_create.py",
+        "tests/api/kaggle_api/test_kaggle_api_get.py",
+        "tests/api/kaggle_api/test_kaggle_api_list.py",
+        "tests/api/kaggle_api/test_kaggle_api_update.py",
+        "tests/api/kaggle_api/test_kaggle_api_delete.py",
+        "tests/api/kaggle_api/test_kaggle_api.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/kaggle/api/kaggle_api_extended.py",
+      "candidate_test_paths": [
+        "src/kaggle/api/tests/test_kaggle_api_extended.py",
+        "tests/kaggle/api/test_kaggle_api_extended.py",
+        "src/kaggle/api/tests/test_api.py",
+        "test/test_kaggle_api_extended.py",
+        "tests/test_kaggle_api_extended.py",
+        "tests/kaggle_api_extended/test_kaggle_api_extended.py",
+        "tests/kaggle_api_extendeds/test_kaggle_api_extended.py",
+        "tests/api/test_kaggle_api_extended.py",
+        "tests/api/kaggle_api_extended/test_kaggle_api_extended_create.py",
+        "tests/api/kaggle_api_extended/test_kaggle_api_extended_get.py",
+        "tests/api/kaggle_api_extended/test_kaggle_api_extended_list.py",
+        "tests/api/kaggle_api_extended/test_kaggle_api_extended_update.py",
+        "tests/api/kaggle_api_extended/test_kaggle_api_extended_delete.py",
+        "tests/api/kaggle_api_extended/test_kaggle_api_extended.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/kaggle/cli.py",
+      "candidate_test_paths": [
+        "src/kaggle/tests/test_cli.py",
+        "tests/kaggle/test_cli.py",
+        "src/kaggle/tests/test_kaggle.py",
+        "test/test_cli.py",
+        "tests/test_cli.py",
+        "tests/cli/test_cli.py",
+        "tests/clis/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/kaggle/models/kaggle_models_extended.py",
+      "candidate_test_paths": [
+        "src/kaggle/models/tests/test_kaggle_models_extended.py",
+        "tests/kaggle/models/test_kaggle_models_extended.py",
+        "src/kaggle/models/tests/test_models.py",
+        "test/test_kaggle_models_extended.py",
+        "tests/test_kaggle_models_extended.py",
+        "tests/kaggle_models_extended/test_kaggle_models_extended.py",
+        "tests/kaggle_models_extendeds/test_kaggle_models_extended.py",
+        "tests/models/test_kaggle_models_extended.py",
+        "tests/schemas/test_kaggle_models_extended.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/kaggle/models/upload_file.py",
+      "candidate_test_paths": [
+        "src/kaggle/models/tests/test_upload_file.py",
+        "tests/kaggle/models/test_upload_file.py",
+        "src/kaggle/models/tests/test_models.py",
+        "test/test_upload_file.py",
+        "tests/test_upload_file.py",
+        "tests/upload_file/test_upload_file.py",
+        "tests/upload_files/test_upload_file.py",
+        "tests/models/test_upload_file.py",
+        "tests/schemas/test_upload_file.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "tests/kernel/testing-x.ipynb"
+      ],
+      "count": 1,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 19,
+    "classified_count": 19,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 87,
+    "project_import_count": 0,
+    "declared_package_count": 34,
+    "undeclared_package_count": 15,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 5,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "6320ebb790392be309cc04a0c1d16188793bbe8b8bbfcbe3675c678db1893e73",
+  "pinned_commit": "ccf5b8221b486faca71cb1eba81de130f9da98fe",
+  "completed_at": "2026-04-30T11:14:28.393Z",
+  "repo_id": "wagtail",
+  "category_expected": "django_cms",
+  "category_observed": "django_commerce",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 1490,
+  "python_files": 1260,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "django/high"
+  ],
+  "project_role_signals": [
+    "commerce_backend/medium",
+    "service_backend/medium",
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 549,
+  "risk_preset": "django_commerce",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "wagtail",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected django_cms, got django_commerce",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "wagtail/project_template/requirements.txt"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.py"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

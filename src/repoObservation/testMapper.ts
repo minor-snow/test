@@ -98,27 +98,26 @@ function findTestCandidates(srcPath: string, testPaths: Set<string>): TestCandid
   const basename = getBasename(srcPath);
   const dirParts = srcPath.split("/").slice(1, -1); // remove bucket prefix and filename
   const subPath = dirParts.join("/");
+  const extensions = ["ts", "tsx", "js", "jsx"];
 
-  // Convention 1: test/<subpath>/<basename>.test.ts
-  tryCandidate(candidates, testPaths, `test/${subPath ? subPath + "/" : ""}${basename}.test.ts`, "parallel_test_dir", "high");
+  for (const extension of extensions) {
+    // Convention 1: test/<subpath>/<basename>.test.tsx|ts|js|jsx
+    tryCandidate(candidates, testPaths, `test/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "parallel_test_dir", extension === "ts" ? "high" : "medium");
 
-  // Convention 2: tests/<subpath>/<basename>.test.ts
-  tryCandidate(candidates, testPaths, `tests/${subPath ? subPath + "/" : ""}${basename}.test.ts`, "parallel_test_dir", "high");
+    // Convention 2: tests/<subpath>/<basename>.test.*
+    tryCandidate(candidates, testPaths, `tests/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "parallel_test_dir", extension === "ts" ? "high" : "medium");
 
-  // Convention 3: src/<subpath>/<basename>.test.ts (co-located)
-  tryCandidate(candidates, testPaths, `src/${subPath ? subPath + "/" : ""}${basename}.test.ts`, "same_basename", "high");
+    // Convention 3: src/<subpath>/<basename>.test.* (co-located)
+    tryCandidate(candidates, testPaths, `src/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "same_basename", extension === "ts" ? "high" : "medium");
 
-  // Convention 4: __tests__/<subpath>/<basename>.test.ts
-  tryCandidate(candidates, testPaths, `__tests__/${subPath ? subPath + "/" : ""}${basename}.test.ts`, "parallel_test_dir", "medium");
+    // Convention 4: __tests__/<subpath>/<basename>.test.*
+    tryCandidate(candidates, testPaths, `__tests__/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "parallel_test_dir", "medium");
 
-  // Convention 5: test/<subpath>/<basename>.spec.ts
-  tryCandidate(candidates, testPaths, `test/${subPath ? subPath + "/" : ""}${basename}.spec.ts`, "suffix_spec", "medium");
-
-  // Convention 6: tests/<subpath>/<basename>.spec.ts
-  tryCandidate(candidates, testPaths, `tests/${subPath ? subPath + "/" : ""}${basename}.spec.ts`, "suffix_spec", "medium");
-
-  // Convention 7: src/<subpath>/<basename>.spec.ts (co-located)
-  tryCandidate(candidates, testPaths, `src/${subPath ? subPath + "/" : ""}${basename}.spec.ts`, "suffix_spec", "medium");
+    // Convention 5/6/7: *.spec.*
+    tryCandidate(candidates, testPaths, `test/${subPath ? subPath + "/" : ""}${basename}.spec.${extension}`, "suffix_spec", "medium");
+    tryCandidate(candidates, testPaths, `tests/${subPath ? subPath + "/" : ""}${basename}.spec.${extension}`, "suffix_spec", "medium");
+    tryCandidate(candidates, testPaths, `src/${subPath ? subPath + "/" : ""}${basename}.spec.${extension}`, "suffix_spec", "medium");
+  }
 
   return candidates;
 }

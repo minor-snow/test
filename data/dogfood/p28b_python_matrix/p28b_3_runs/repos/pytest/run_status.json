@@ -1,0 +1,61 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "4b48f9d85480fecd33ed21f06708123cc99619bdfe77093bf8d4677b261ef893",
+  "pinned_commit": "602fc183e54f7652d164f85782c3bba0c96d96d9",
+  "completed_at": "2026-04-30T11:14:22.193Z",
+  "repo_id": "pytest",
+  "category_expected": "python_sdk_library",
+  "category_observed": "django_commerce",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 328,
+  "python_files": 281,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "django/medium",
+    "pytest/medium",
+    "click/medium"
+  ],
+  "project_role_signals": [
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 101,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "pytest",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected python_sdk_library, got django_commerce",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "doc/en/example/customdirectory/pytest.ini",
+        "doc/en/pytest.ini",
+        "doc/en/requirements.txt",
+        "testing/example_scripts/collect/collect_init_tests/pytest.ini",
+        "testing/example_scripts/customdirectory/pytest.ini",
+        "testing/example_scripts/pytest.ini",
+        "testing/plugins_integration/pytest.ini",
+        "testing/plugins_integration/requirements.txt"
+      ],
+      "count": 8,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

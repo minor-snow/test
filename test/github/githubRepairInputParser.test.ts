@@ -47,5 +47,18 @@ describe("githubRepairInputParser", () => {
     expect(parseDelimitedList("a,b\nc")).toEqual(["a", "b", "c"]);
     expect(parseRepairFailConditions("all")).toEqual(["all"]);
     expect(parseRepairFailConditions("none")).toEqual(["none"]);
+    expect(parseRepairFailConditions(" FAIL , REQUIRES_REVIEW ")).toEqual(["fail", "requires_review"]);
+  });
+
+  it("normalizes audit and artifact modes case-insensitively", () => {
+    const { inputs } = parseGitHubRepairInputs({
+      INPUT_MODE: "repair",
+      INPUT_REPAIR_ID: "repair_abc123",
+      INPUT_AUDIT_MODE: " REQUIRE_ALL ",
+      INPUT_ARTIFACT_MODE: " DEBUG ",
+    });
+
+    expect(inputs.auditMode).toBe("require_all");
+    expect(inputs.artifactMode).toBe("debug");
   });
 });

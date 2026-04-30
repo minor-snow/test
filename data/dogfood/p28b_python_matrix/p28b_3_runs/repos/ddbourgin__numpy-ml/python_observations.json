@@ -1,0 +1,4496 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "ddbourgin__numpy-ml",
+    "observed_file_count": 226,
+    "python_file_count": 103
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: numpy_ml"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "docs": 2,
+      "source": 84,
+      "test": 12,
+      "config": 5
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (medium)",
+      "framework: pytest / test_framework (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 26,
+        "evidence": [
+          "26 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 11127,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/requirements.txt",
+      "bucket": "docs",
+      "extension": ".txt",
+      "size_bytes": 97,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/bandits/bandits.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 18000,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/bandits/policies.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17713,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/bandits/trainer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14365,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/bandits/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 71,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/factorization/factors.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13491,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/factorization/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 81,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/gmm/gmm.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8114,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/gmm/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 20,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/hmm/hmm.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 26192,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/hmm/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 20,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/lda/lda.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8140,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/lda/lda_smoothed.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7449,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/lda/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 49,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/linear_models/bayesian_regression.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11525,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/linear_models/glm.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8081,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/linear_models/linear_regression.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9796,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/linear_models/logistic.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6644,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/linear_models/naive_bayes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8041,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/linear_models/ridge.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3707,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/linear_models/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 397,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/activations/activations.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 22362,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/activations/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 28,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/initializers/initializers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10382,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/initializers/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 29,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/layers/layers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 166109,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/layers/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 23,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/losses/losses.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 34670,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/losses/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 163,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/models/vae.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17335,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/models/w2v.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 18799,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/models/wgan_gp.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 18871,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/models/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 64,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/modules/modules.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 54712,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/modules/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 24,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/optimizers/optimizers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 18015,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/optimizers/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 27,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/schedulers/schedulers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 12751,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/schedulers/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 27,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/utils/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 37489,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 204,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/wrappers/wrappers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8933,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/wrappers/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 25,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/neural_nets/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 315,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/ngram/ngram.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 24816,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/ngram/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 22,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/nonparametric/gp.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9583,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/nonparametric/kernel_regression.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2282,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/nonparametric/knn.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3965,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/nonparametric/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 332,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/plots/bandit_plots.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4991,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/plots/gmm_plots.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3313,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/plots/hmm_plots.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5191,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/plots/lda_plots.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2561,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/plots/lm_plots.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10074,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/plots/ngram_plots.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4068,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/plots/nn_activations_plots.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1732,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/plots/nn_schedulers_plots.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5590,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/plots/nonparametric_plots.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8555,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/plots/rl_plots.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3000,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/plots/trees_plots.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5812,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/preprocessing/dsp.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 30162,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/preprocessing/general.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13340,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/preprocessing/nlp.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 49054,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/preprocessing/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 61,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/rl_models/agents.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 69364,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/rl_models/rl_utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 15758,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/rl_models/tiles/tiles3.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4188,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/rl_models/tiles/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 22,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/rl_models/trainer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5425,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/rl_models/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 90,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/tests/nn_torch_models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 89784,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/tests/test_glm.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2275,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/tests/test_linear_regression.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3142,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/tests/test_naive_bayes.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2471,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/tests/test_ngram.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8526,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/tests/test_nn.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 80671,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/tests/test_nn_activations.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10320,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/tests/test_nonparametric.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3407,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/tests/test_preprocessing.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6766,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/tests/test_trees.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12743,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/tests/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9693,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 47,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "numpy_ml/trees/dt.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8256,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/trees/gbdt.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6783,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/trees/losses.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1864,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/trees/rf.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3642,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/trees/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 81,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/utils/data_structures.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 18962,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/utils/distance_metrics.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3291,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/utils/graphs.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11868,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/utils/kernels.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 12316,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/utils/misc.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 617,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/utils/testing.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4449,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/utils/windows.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5269,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 200,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "numpy_ml/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 388,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "requirements-dev.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 197,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "requirements-test.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 164,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 14,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 1429,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 122,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "numpy_ml/bandits/bandits.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/bandits/bandits.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/bandits/bandits.py",
+      "raw_specifier": "from numpy_ml.utils.testing import random_one_hot_matrix, is_number",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/bandits/policies.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/bandits/policies.py",
+      "raw_specifier": "from collections import defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/bandits/policies.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/bandits/policies.py",
+      "raw_specifier": "from ..utils.testing import is_number",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils.testing",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/bandits/trainer.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/bandits/trainer.py",
+      "raw_specifier": "os.path",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/bandits/trainer.py",
+      "raw_specifier": "from collections import defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/bandits/trainer.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/bandits/trainer.py",
+      "raw_specifier": "from numpy_ml.utils.testing import DependencyWarning",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/bandits/trainer.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/bandits/__init__.py",
+      "raw_specifier": "from .bandits import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".bandits",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/bandits/__init__.py",
+      "raw_specifier": "from . import policies",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/bandits/__init__.py",
+      "raw_specifier": "from . import trainer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/factorization/factors.py",
+      "raw_specifier": "from copy import deepcopy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/factorization/factors.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/factorization/__init__.py",
+      "raw_specifier": "from .factors import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".factors",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/gmm/gmm.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/gmm/gmm.py",
+      "raw_specifier": "from numpy_ml.utils.misc import logsumexp, log_gaussian_pdf",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/gmm/__init__.py",
+      "raw_specifier": "from .gmm import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".gmm",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/hmm/hmm.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/hmm/hmm.py",
+      "raw_specifier": "from numpy_ml.utils.misc import logsumexp",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/hmm/__init__.py",
+      "raw_specifier": "from .hmm import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".hmm",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/lda/lda.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/lda/lda.py",
+      "raw_specifier": "from scipy.special import digamma, polygamma, gammaln",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "scipy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/lda/lda_smoothed.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/lda/__init__.py",
+      "raw_specifier": "from .lda import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".lda",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/lda/__init__.py",
+      "raw_specifier": "from .lda_smoothed import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".lda_smoothed",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/bayesian_regression.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/bayesian_regression.py",
+      "raw_specifier": "scipy.stats",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "scipy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/bayesian_regression.py",
+      "raw_specifier": "from numpy_ml.utils.testing import is_number, is_symmetric_positive_definite",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/glm.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/glm.py",
+      "raw_specifier": "from numpy_ml.linear_models.linear_regression import LinearRegression",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/linear_regression.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/logistic.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/naive_bayes.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/ridge.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/__init__.py",
+      "raw_specifier": "from .ridge import RidgeRegression",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".ridge",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/__init__.py",
+      "raw_specifier": "from .glm import GeneralizedLinearModel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".glm",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/__init__.py",
+      "raw_specifier": "from .logistic import LogisticRegression",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".logistic",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/__init__.py",
+      "raw_specifier": "from .bayesian_regression import ( BayesianLinearRegressionKnownVariance, BayesianLinearRegressionUnknownVariance, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".bayesian_regression",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/__init__.py",
+      "raw_specifier": "from .naive_bayes import GaussianNBClassifier",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".naive_bayes",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/linear_models/__init__.py",
+      "raw_specifier": "from .linear_regression import LinearRegression",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".linear_regression",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/activations/activations.py",
+      "raw_specifier": "from math import erf",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "math",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/activations/activations.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/activations/activations.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/activations/__init__.py",
+      "raw_specifier": "from .activations import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".activations",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/initializers/initializers.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/initializers/initializers.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/initializers/initializers.py",
+      "raw_specifier": "from ast import literal_eval as _eval",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ast",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/initializers/initializers.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/initializers/initializers.py",
+      "raw_specifier": "from ..optimizers import OptimizerBase, SGD, AdaGrad, RMSProp, Adam",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..optimizers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/initializers/initializers.py",
+      "raw_specifier": "from ..activations import ( ELU, GELU, SELU, ReLU, Tanh, Affine, Sigmoid, Identity, SoftPlus, LeakyReLU, Exponential, HardSigmoid, ActivationBase, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..activations",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/initializers/initializers.py",
+      "raw_specifier": "from ..schedulers import ( SchedulerBase, ConstantScheduler, ExponentialScheduler, NoamScheduler, KingScheduler, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..schedulers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/initializers/initializers.py",
+      "raw_specifier": "from ..utils import ( he_normal, he_uniform, glorot_normal, glorot_uniform, truncated_normal, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/initializers/__init__.py",
+      "raw_specifier": "from .initializers import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".initializers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/layers/layers.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/layers/layers.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/layers/layers.py",
+      "raw_specifier": "from ..wrappers import init_wrappers, Dropout",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/layers/layers.py",
+      "raw_specifier": "from ..initializers import ( WeightInitializer, OptimizerInitializer, ActivationInitializer, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..initializers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/layers/layers.py",
+      "raw_specifier": "from ..utils import ( pad1D, pad2D, conv1D, conv2D, im2col, col2im, dilate, deconv2D_naive, calc_pad_dims_2D, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/layers/__init__.py",
+      "raw_specifier": "from .layers import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".layers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/losses/losses.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/losses/losses.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/losses/losses.py",
+      "raw_specifier": "from ...utils.testing import is_binary, is_stochastic",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "...utils.testing",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/losses/losses.py",
+      "raw_specifier": "from ..initializers import ( WeightInitializer, ActivationInitializer, OptimizerInitializer, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..initializers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/losses/__init__.py",
+      "raw_specifier": "from .losses import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".losses",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/vae.py",
+      "raw_specifier": "from time import time",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/vae.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/vae.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/vae.py",
+      "raw_specifier": "from ..losses import VAELoss",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..losses",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/vae.py",
+      "raw_specifier": "from ..utils import minibatch",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/vae.py",
+      "raw_specifier": "from ..activations import ReLU, Affine, Sigmoid",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..activations",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/vae.py",
+      "raw_specifier": "from ..layers import Conv2D, Pool2D, Flatten, FullyConnected",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..layers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/w2v.py",
+      "raw_specifier": "from time import time",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/w2v.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/w2v.py",
+      "raw_specifier": "from ..layers import Embedding",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..layers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/w2v.py",
+      "raw_specifier": "from ..losses import NCELoss",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..losses",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/w2v.py",
+      "raw_specifier": "from ...preprocessing.nlp import Vocabulary, tokenize_words",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "...preprocessing.nlp",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/w2v.py",
+      "raw_specifier": "from ...utils.data_structures import DiscreteSampler",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "...utils.data_structures",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/wgan_gp.py",
+      "raw_specifier": "from time import time",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/wgan_gp.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/wgan_gp.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/wgan_gp.py",
+      "raw_specifier": "from ..utils import minibatch",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/wgan_gp.py",
+      "raw_specifier": "from ..layers import FullyConnected",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..layers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/wgan_gp.py",
+      "raw_specifier": "from ..losses import WGAN_GPLoss",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..losses",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/__init__.py",
+      "raw_specifier": "from .vae import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".vae",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/__init__.py",
+      "raw_specifier": "from .wgan_gp import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wgan_gp",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/models/__init__.py",
+      "raw_specifier": "from .w2v import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".w2v",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/modules/modules.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/modules/modules.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/modules/modules.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/modules/modules.py",
+      "raw_specifier": "from ..wrappers import Dropout",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/modules/modules.py",
+      "raw_specifier": "from ..utils import calc_pad_dims_2D",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/modules/modules.py",
+      "raw_specifier": "from ..activations import Tanh, Sigmoid, ReLU, LeakyReLU, Affine",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..activations",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/modules/modules.py",
+      "raw_specifier": "from ..layers import ( DotProductAttention, FullyConnected, BatchNorm2D, Conv1D, Conv2D, Multiply, LSTMCell, Add, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..layers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/modules/__init__.py",
+      "raw_specifier": "from .modules import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".modules",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/optimizers/optimizers.py",
+      "raw_specifier": "from copy import deepcopy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/optimizers/optimizers.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/optimizers/optimizers.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/optimizers/optimizers.py",
+      "raw_specifier": "from numpy.linalg import norm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/optimizers/optimizers.py",
+      "raw_specifier": "from ..initializers import SchedulerInitializer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..initializers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/optimizers/optimizers.py",
+      "raw_specifier": "from ..initializers import SchedulerInitializer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..initializers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/optimizers/__init__.py",
+      "raw_specifier": "from .optimizers import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".optimizers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/schedulers/schedulers.py",
+      "raw_specifier": "from copy import deepcopy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/schedulers/schedulers.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/schedulers/schedulers.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/schedulers/schedulers.py",
+      "raw_specifier": "from math import erf",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "math",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/schedulers/__init__.py",
+      "raw_specifier": "from .schedulers import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".schedulers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/utils/utils.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/utils/__init__.py",
+      "raw_specifier": "from .utils import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/wrappers/wrappers.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/wrappers/wrappers.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/wrappers/__init__.py",
+      "raw_specifier": "from .wrappers import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/__init__.py",
+      "raw_specifier": "from . import utils",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/__init__.py",
+      "raw_specifier": "from . import losses",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/__init__.py",
+      "raw_specifier": "from . import activations",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/__init__.py",
+      "raw_specifier": "from . import schedulers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/__init__.py",
+      "raw_specifier": "from . import optimizers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/__init__.py",
+      "raw_specifier": "from . import wrappers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/__init__.py",
+      "raw_specifier": "from . import layers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/__init__.py",
+      "raw_specifier": "from . import initializers",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/__init__.py",
+      "raw_specifier": "from . import modules",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/neural_nets/__init__.py",
+      "raw_specifier": "from . import models",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/ngram/ngram.py",
+      "raw_specifier": "textwrap",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "textwrap",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/ngram/ngram.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/ngram/ngram.py",
+      "raw_specifier": "from collections import Counter",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/ngram/ngram.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/ngram/ngram.py",
+      "raw_specifier": "from numpy_ml.linear_models import LinearRegression",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/ngram/ngram.py",
+      "raw_specifier": "from numpy_ml.preprocessing.nlp import tokenize_words, ngrams, strip_punctuation",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/ngram/__init__.py",
+      "raw_specifier": "from .ngram import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".ngram",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/nonparametric/gp.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/nonparametric/gp.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/nonparametric/gp.py",
+      "raw_specifier": "from numpy.linalg import slogdet, inv",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/nonparametric/gp.py",
+      "raw_specifier": "from scipy.stats import norm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "scipy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/nonparametric/gp.py",
+      "raw_specifier": "from ..utils.kernels import KernelInitializer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils.kernels",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/nonparametric/kernel_regression.py",
+      "raw_specifier": "from ..utils.kernels import KernelInitializer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils.kernels",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/nonparametric/knn.py",
+      "raw_specifier": "from collections import Counter",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/nonparametric/knn.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/nonparametric/knn.py",
+      "raw_specifier": "from ..utils.data_structures import BallTree",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils.data_structures",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/nonparametric/__init__.py",
+      "raw_specifier": "from .gp import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".gp",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/nonparametric/__init__.py",
+      "raw_specifier": "from .knn import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".knn",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/nonparametric/__init__.py",
+      "raw_specifier": "from .kernel_regression import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".kernel_regression",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/plots/bandit_plots.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/bandit_plots.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/bandit_plots.py",
+      "raw_specifier": "from numpy_ml.bandits import ( MultinomialBandit, BernoulliBandit, ShortestPathBandit, ContextualLinearBandit, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/bandit_plots.py",
+      "raw_specifier": "from numpy_ml.bandits.trainer import BanditTrainer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/bandit_plots.py",
+      "raw_specifier": "from numpy_ml.bandits.policies import ( EpsilonGreedy, UCB1, ThompsonSamplingBetaBinomial, LinUCB, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/bandit_plots.py",
+      "raw_specifier": "from numpy_ml.utils.graphs import random_DAG, DiGraph, Edge",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/gmm_plots.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/gmm_plots.py",
+      "raw_specifier": "from sklearn.datasets.samples_generator import make_blobs",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sklearn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/gmm_plots.py",
+      "raw_specifier": "from scipy.stats import multivariate_normal",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "scipy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/gmm_plots.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/gmm_plots.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "seaborn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/gmm_plots.py",
+      "raw_specifier": "from numpy_ml.gmm import GMM",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/gmm_plots.py",
+      "raw_specifier": "from matplotlib.colors import ListedColormap",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/hmm_plots.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/hmm_plots.py",
+      "raw_specifier": "from matplotlib import pyplot as plt",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/hmm_plots.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "seaborn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/hmm_plots.py",
+      "raw_specifier": "from hmmlearn.hmm import MultinomialHMM as MHMM",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "hmmlearn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/hmm_plots.py",
+      "raw_specifier": "from numpy_ml.hmm import MultinomialHMM",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lda_plots.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lda_plots.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lda_plots.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "seaborn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lda_plots.py",
+      "raw_specifier": "from numpy_ml.lda import LDA",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lm_plots.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lm_plots.py",
+      "raw_specifier": "from sklearn.model_selection import train_test_split",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sklearn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lm_plots.py",
+      "raw_specifier": "from sklearn.datasets.samples_generator import make_blobs",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sklearn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lm_plots.py",
+      "raw_specifier": "from sklearn.linear_model import LogisticRegression as LogisticRegression_sk",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sklearn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lm_plots.py",
+      "raw_specifier": "from sklearn.datasets import make_regression",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sklearn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lm_plots.py",
+      "raw_specifier": "from sklearn.metrics import zero_one_loss, r2_score",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sklearn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lm_plots.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lm_plots.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "seaborn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/lm_plots.py",
+      "raw_specifier": "from numpy_ml.linear_models import ( RidgeRegression, LinearRegression, BayesianLinearRegressionKnownVariance, BayesianLinearRegressionUnknownVariance, LogisticRegression, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/ngram_plots.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/ngram_plots.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/ngram_plots.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "seaborn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/ngram_plots.py",
+      "raw_specifier": "from numpy_ml.ngram import MLENGram, AdditiveNGram, GoodTuringNGram",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nn_activations_plots.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nn_activations_plots.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nn_activations_plots.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "seaborn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nn_activations_plots.py",
+      "raw_specifier": "from numpy_ml.neural_nets.activations import ( Affine, ReLU, LeakyReLU, Tanh, Sigmoid, ELU, Exponential, SELU, HardSigmoid, SoftPlus, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nn_schedulers_plots.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nn_schedulers_plots.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nn_schedulers_plots.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nn_schedulers_plots.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "seaborn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nn_schedulers_plots.py",
+      "raw_specifier": "from numpy_ml.neural_nets.schedulers import ( ConstantScheduler, ExponentialScheduler, NoamScheduler, KingScheduler, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nonparametric_plots.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nonparametric_plots.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nonparametric_plots.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "seaborn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nonparametric_plots.py",
+      "raw_specifier": "from numpy_ml.nonparametric import GPRegression, KNN, KernelRegression",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nonparametric_plots.py",
+      "raw_specifier": "from numpy_ml.linear_models.lm import LinearRegression",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/nonparametric_plots.py",
+      "raw_specifier": "from sklearn.model_selection import train_test_split",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sklearn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/rl_plots.py",
+      "raw_specifier": "gym",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "gym",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/rl_plots.py",
+      "raw_specifier": "from numpy_ml.rl_models.trainer import Trainer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/rl_plots.py",
+      "raw_specifier": "from numpy_ml.rl_models.agents import ( CrossEntropyAgent, MonteCarloAgent, TemporalDifferenceAgent, DynaAgent, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/trees_plots.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/trees_plots.py",
+      "raw_specifier": "from sklearn.metrics import accuracy_score, mean_squared_error",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sklearn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/trees_plots.py",
+      "raw_specifier": "from sklearn.datasets import make_blobs, make_regression",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sklearn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/trees_plots.py",
+      "raw_specifier": "from sklearn.model_selection import train_test_split",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sklearn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/trees_plots.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/trees_plots.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "seaborn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/plots/trees_plots.py",
+      "raw_specifier": "from numpy_ml.trees import GradientBoostedDecisionTree, DecisionTree, RandomForest",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/dsp.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/dsp.py",
+      "raw_specifier": "from numpy.lib.stride_tricks import as_strided",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/dsp.py",
+      "raw_specifier": "from ..utils.windows import WindowInitializer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils.windows",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/general.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/general.py",
+      "raw_specifier": "hashlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/general.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/general.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/general.py",
+      "raw_specifier": "from scipy.sparse import csr_matrix",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "scipy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/nlp.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/nlp.py",
+      "raw_specifier": "heapq",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "heapq",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/nlp.py",
+      "raw_specifier": "os.path",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/nlp.py",
+      "raw_specifier": "from collections import Counter, OrderedDict, defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/nlp.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/__init__.py",
+      "raw_specifier": "from . import general",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/__init__.py",
+      "raw_specifier": "from . import nlp",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/preprocessing/__init__.py",
+      "raw_specifier": "from . import dsp",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/agents.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/agents.py",
+      "raw_specifier": "from collections import defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/agents.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/agents.py",
+      "raw_specifier": "from .rl_utils import EnvModel, env_stats, tile_state_space",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".rl_utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/agents.py",
+      "raw_specifier": "from ..utils.data_structures import Dict",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..utils.data_structures",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/rl_utils.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/rl_utils.py",
+      "raw_specifier": "from itertools import product",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/rl_utils.py",
+      "raw_specifier": "from collections import defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/rl_utils.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/rl_utils.py",
+      "raw_specifier": "from numpy_ml.utils.testing import DependencyWarning",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/rl_utils.py",
+      "raw_specifier": "from numpy_ml.rl_models.tiles.tiles3 import tiles, IHT",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "numpy_ml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/rl_utils.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pandas",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/rl_utils.py",
+      "raw_specifier": "gym",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "gym",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/tiles/tiles3.py",
+      "raw_specifier": "from math import floor",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "math",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/tiles/tiles3.py",
+      "raw_specifier": "from itertools import zip_longest",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/tiles/__init__.py",
+      "raw_specifier": "from . import tiles3",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/trainer.py",
+      "raw_specifier": "from time import time",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/trainer.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/trainer.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/trainer.py",
+      "raw_specifier": "seaborn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "seaborn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/__init__.py",
+      "raw_specifier": "from . import rl_utils",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/__init__.py",
+      "raw_specifier": "from . import agents",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/__init__.py",
+      "raw_specifier": "from . import trainer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/rl_models/__init__.py",
+      "raw_specifier": "from . import tiles",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/trees/dt.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/trees/gbdt.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/trees/gbdt.py",
+      "raw_specifier": "from .dt import DecisionTree",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".dt",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/trees/gbdt.py",
+      "raw_specifier": "from .losses import MSELoss, CrossEntropyLoss",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".losses",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/trees/losses.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/trees/rf.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/trees/rf.py",
+      "raw_specifier": "from .dt import DecisionTree",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".dt",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/trees/__init__.py",
+      "raw_specifier": "from . import losses",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/trees/__init__.py",
+      "raw_specifier": "from .dt import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".dt",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/trees/__init__.py",
+      "raw_specifier": "from .rf import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".rf",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/trees/__init__.py",
+      "raw_specifier": "from .gbdt import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".gbdt",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/utils/data_structures.py",
+      "raw_specifier": "heapq",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "heapq",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/data_structures.py",
+      "raw_specifier": "from copy import copy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/data_structures.py",
+      "raw_specifier": "from collections import Hashable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/data_structures.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/data_structures.py",
+      "raw_specifier": "from .distance_metrics import euclidean",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".distance_metrics",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/utils/distance_metrics.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/graphs.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/graphs.py",
+      "raw_specifier": "from collections import defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/graphs.py",
+      "raw_specifier": "from itertools import combinations, permutations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/graphs.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/kernels.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/kernels.py",
+      "raw_specifier": "from abc import ABC, abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/kernels.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/misc.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/testing.py",
+      "raw_specifier": "numbers",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "numbers",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/testing.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/windows.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "numpy_ml/utils/__init__.py",
+      "raw_specifier": "from . import testing",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/utils/__init__.py",
+      "raw_specifier": "from . import data_structures",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/utils/__init__.py",
+      "raw_specifier": "from . import distance_metrics",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/utils/__init__.py",
+      "raw_specifier": "from . import kernels",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/utils/__init__.py",
+      "raw_specifier": "from . import windows",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/utils/__init__.py",
+      "raw_specifier": "from . import graphs",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/utils/__init__.py",
+      "raw_specifier": "from . import misc",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import utils",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import preprocessing",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import gmm",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import hmm",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import lda",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import linear_models",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import neural_nets",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import ngram",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import nonparametric",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import rl_models",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import trees",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import bandits",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "numpy_ml/__init__.py",
+      "raw_specifier": "from . import factorization",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "docs/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "numpy",
+        "scipy",
+        "matplotlib",
+        "seaborn",
+        "pandas",
+        "sklearn",
+        "huffman"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements-dev.txt",
+      "source_type": "requirements-dev.txt",
+      "packages": [],
+      "dev_packages": [
+        "numpy",
+        "scipy",
+        "sklearn",
+        "torch",
+        "networkx",
+        "matplotlib",
+        "seaborn",
+        "tensorflow",
+        "gym",
+        "keras",
+        "huffman",
+        "librosa",
+        "llvmlite",
+        "numba",
+        "nltk",
+        "hmmlearn",
+        "statsmodels",
+        "pre_commit",
+        "tox",
+        "pytest"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements-test.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "numpy",
+        "scipy",
+        "sklearn",
+        "torch",
+        "networkx",
+        "tensorflow",
+        "keras",
+        "gym",
+        "huffman",
+        "librosa",
+        "llvmlite",
+        "numba",
+        "nltk",
+        "hmmlearn",
+        "statsmodels",
+        "tox",
+        "pytest"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "numpy",
+        "scipy"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No deps found in tox.ini — may use requirements file references"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "numpy_ml/bandits/bandits.py",
+      "candidate_test_paths": [
+        "numpy_ml/bandits/tests/test_bandits.py",
+        "tests/bandits/test_bandits.py",
+        "test/test_bandits.py",
+        "tests/test_bandits.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/bandits/policies.py",
+      "candidate_test_paths": [
+        "numpy_ml/bandits/tests/test_policies.py",
+        "tests/bandits/test_policies.py",
+        "numpy_ml/bandits/tests/test_bandits.py",
+        "test/test_policies.py",
+        "tests/test_policies.py",
+        "tests/policies/test_policies.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/bandits/trainer.py",
+      "candidate_test_paths": [
+        "numpy_ml/bandits/tests/test_trainer.py",
+        "tests/bandits/test_trainer.py",
+        "numpy_ml/bandits/tests/test_bandits.py",
+        "test/test_trainer.py",
+        "tests/test_trainer.py",
+        "tests/trainer/test_trainer.py",
+        "tests/trainers/test_trainer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/factorization/factors.py",
+      "candidate_test_paths": [
+        "numpy_ml/factorization/tests/test_factors.py",
+        "tests/factorization/test_factors.py",
+        "numpy_ml/factorization/tests/test_factorization.py",
+        "test/test_factors.py",
+        "tests/test_factors.py",
+        "tests/factors/test_factors.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/gmm/gmm.py",
+      "candidate_test_paths": [
+        "numpy_ml/gmm/tests/test_gmm.py",
+        "tests/gmm/test_gmm.py",
+        "test/test_gmm.py",
+        "tests/test_gmm.py",
+        "tests/gmms/test_gmm.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/hmm/hmm.py",
+      "candidate_test_paths": [
+        "numpy_ml/hmm/tests/test_hmm.py",
+        "tests/hmm/test_hmm.py",
+        "test/test_hmm.py",
+        "tests/test_hmm.py",
+        "tests/hmms/test_hmm.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/lda/lda.py",
+      "candidate_test_paths": [
+        "numpy_ml/lda/tests/test_lda.py",
+        "tests/lda/test_lda.py",
+        "test/test_lda.py",
+        "tests/test_lda.py",
+        "tests/ldas/test_lda.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/lda/lda_smoothed.py",
+      "candidate_test_paths": [
+        "numpy_ml/lda/tests/test_lda_smoothed.py",
+        "tests/lda/test_lda_smoothed.py",
+        "numpy_ml/lda/tests/test_lda.py",
+        "test/test_lda_smoothed.py",
+        "tests/test_lda_smoothed.py",
+        "tests/lda_smoothed/test_lda_smoothed.py",
+        "tests/lda_smootheds/test_lda_smoothed.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/linear_models/bayesian_regression.py",
+      "candidate_test_paths": [
+        "numpy_ml/linear_models/tests/test_bayesian_regression.py",
+        "tests/linear_models/test_bayesian_regression.py",
+        "numpy_ml/linear_models/tests/test_linear_models.py",
+        "test/test_bayesian_regression.py",
+        "tests/test_bayesian_regression.py",
+        "tests/bayesian_regression/test_bayesian_regression.py",
+        "tests/bayesian_regressions/test_bayesian_regression.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/linear_models/glm.py",
+      "candidate_test_paths": [
+        "numpy_ml/linear_models/tests/test_glm.py",
+        "tests/linear_models/test_glm.py",
+        "numpy_ml/linear_models/tests/test_linear_models.py",
+        "test/test_glm.py",
+        "tests/test_glm.py",
+        "tests/glm/test_glm.py",
+        "tests/glms/test_glm.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/linear_models/linear_regression.py",
+      "candidate_test_paths": [
+        "numpy_ml/linear_models/tests/test_linear_regression.py",
+        "tests/linear_models/test_linear_regression.py",
+        "numpy_ml/linear_models/tests/test_linear_models.py",
+        "test/test_linear_regression.py",
+        "tests/test_linear_regression.py",
+        "tests/linear_regression/test_linear_regression.py",
+        "tests/linear_regressions/test_linear_regression.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/linear_models/logistic.py",
+      "candidate_test_paths": [
+        "numpy_ml/linear_models/tests/test_logistic.py",
+        "tests/linear_models/test_logistic.py",
+        "numpy_ml/linear_models/tests/test_linear_models.py",
+        "test/test_logistic.py",
+        "tests/test_logistic.py",
+        "tests/logistic/test_logistic.py",
+        "tests/logistics/test_logistic.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/linear_models/naive_bayes.py",
+      "candidate_test_paths": [
+        "numpy_ml/linear_models/tests/test_naive_bayes.py",
+        "tests/linear_models/test_naive_bayes.py",
+        "numpy_ml/linear_models/tests/test_linear_models.py",
+        "test/test_naive_bayes.py",
+        "tests/test_naive_bayes.py",
+        "tests/naive_bayes/test_naive_bayes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/linear_models/ridge.py",
+      "candidate_test_paths": [
+        "numpy_ml/linear_models/tests/test_ridge.py",
+        "tests/linear_models/test_ridge.py",
+        "numpy_ml/linear_models/tests/test_linear_models.py",
+        "test/test_ridge.py",
+        "tests/test_ridge.py",
+        "tests/ridge/test_ridge.py",
+        "tests/ridges/test_ridge.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/neural_nets/activations/activations.py",
+      "candidate_test_paths": [
+        "numpy_ml/neural_nets/activations/tests/test_activations.py",
+        "tests/neural_nets/activations/test_activations.py",
+        "test/test_activations.py",
+        "tests/test_activations.py",
+        "tests/activations/test_activations.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/neural_nets/initializers/initializers.py",
+      "candidate_test_paths": [
+        "numpy_ml/neural_nets/initializers/tests/test_initializers.py",
+        "tests/neural_nets/initializers/test_initializers.py",
+        "test/test_initializers.py",
+        "tests/test_initializers.py",
+        "tests/initializers/test_initializers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/neural_nets/layers/layers.py",
+      "candidate_test_paths": [
+        "numpy_ml/neural_nets/layers/tests/test_layers.py",
+        "tests/neural_nets/layers/test_layers.py",
+        "test/test_layers.py",
+        "tests/test_layers.py",
+        "tests/layers/test_layers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/neural_nets/losses/losses.py",
+      "candidate_test_paths": [
+        "numpy_ml/neural_nets/losses/tests/test_losses.py",
+        "tests/neural_nets/losses/test_losses.py",
+        "test/test_losses.py",
+        "tests/test_losses.py",
+        "tests/losses/test_losses.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/neural_nets/models/vae.py",
+      "candidate_test_paths": [
+        "numpy_ml/neural_nets/models/tests/test_vae.py",
+        "tests/neural_nets/models/test_vae.py",
+        "numpy_ml/neural_nets/models/tests/test_models.py",
+        "test/test_vae.py",
+        "tests/test_vae.py",
+        "tests/vae/test_vae.py",
+        "tests/vaes/test_vae.py",
+        "tests/models/test_vae.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/neural_nets/models/w2v.py",
+      "candidate_test_paths": [
+        "numpy_ml/neural_nets/models/tests/test_w2v.py",
+        "tests/neural_nets/models/test_w2v.py",
+        "numpy_ml/neural_nets/models/tests/test_models.py",
+        "test/test_w2v.py",
+        "tests/test_w2v.py",
+        "tests/w2v/test_w2v.py",
+        "tests/w2vs/test_w2v.py",
+        "tests/models/test_w2v.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/neural_nets/models/wgan_gp.py",
+      "candidate_test_paths": [
+        "numpy_ml/neural_nets/models/tests/test_wgan_gp.py",
+        "tests/neural_nets/models/test_wgan_gp.py",
+        "numpy_ml/neural_nets/models/tests/test_models.py",
+        "test/test_wgan_gp.py",
+        "tests/test_wgan_gp.py",
+        "tests/wgan_gp/test_wgan_gp.py",
+        "tests/wgan_gps/test_wgan_gp.py",
+        "tests/models/test_wgan_gp.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/neural_nets/modules/modules.py",
+      "candidate_test_paths": [
+        "numpy_ml/neural_nets/modules/tests/test_modules.py",
+        "tests/neural_nets/modules/test_modules.py",
+        "test/test_modules.py",
+        "tests/test_modules.py",
+        "tests/modules/test_modules.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/neural_nets/optimizers/optimizers.py",
+      "candidate_test_paths": [
+        "numpy_ml/neural_nets/optimizers/tests/test_optimizers.py",
+        "tests/neural_nets/optimizers/test_optimizers.py",
+        "test/test_optimizers.py",
+        "tests/test_optimizers.py",
+        "tests/optimizers/test_optimizers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/neural_nets/schedulers/schedulers.py",
+      "candidate_test_paths": [
+        "numpy_ml/neural_nets/schedulers/tests/test_schedulers.py",
+        "tests/neural_nets/schedulers/test_schedulers.py",
+        "test/test_schedulers.py",
+        "tests/test_schedulers.py",
+        "tests/schedulers/test_schedulers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/neural_nets/utils/utils.py",
+      "candidate_test_paths": [
+        "numpy_ml/neural_nets/utils/tests/test_utils.py",
+        "tests/neural_nets/utils/test_utils.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/neural_nets/wrappers/wrappers.py",
+      "candidate_test_paths": [
+        "numpy_ml/neural_nets/wrappers/tests/test_wrappers.py",
+        "tests/neural_nets/wrappers/test_wrappers.py",
+        "test/test_wrappers.py",
+        "tests/test_wrappers.py",
+        "tests/wrappers/test_wrappers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/ngram/ngram.py",
+      "candidate_test_paths": [
+        "numpy_ml/ngram/tests/test_ngram.py",
+        "tests/ngram/test_ngram.py",
+        "test/test_ngram.py",
+        "tests/test_ngram.py",
+        "tests/ngrams/test_ngram.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/nonparametric/gp.py",
+      "candidate_test_paths": [
+        "numpy_ml/nonparametric/tests/test_gp.py",
+        "tests/nonparametric/test_gp.py",
+        "numpy_ml/nonparametric/tests/test_nonparametric.py",
+        "test/test_gp.py",
+        "tests/test_gp.py",
+        "tests/gp/test_gp.py",
+        "tests/gps/test_gp.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/nonparametric/kernel_regression.py",
+      "candidate_test_paths": [
+        "numpy_ml/nonparametric/tests/test_kernel_regression.py",
+        "tests/nonparametric/test_kernel_regression.py",
+        "numpy_ml/nonparametric/tests/test_nonparametric.py",
+        "test/test_kernel_regression.py",
+        "tests/test_kernel_regression.py",
+        "tests/kernel_regression/test_kernel_regression.py",
+        "tests/kernel_regressions/test_kernel_regression.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/nonparametric/knn.py",
+      "candidate_test_paths": [
+        "numpy_ml/nonparametric/tests/test_knn.py",
+        "tests/nonparametric/test_knn.py",
+        "numpy_ml/nonparametric/tests/test_nonparametric.py",
+        "test/test_knn.py",
+        "tests/test_knn.py",
+        "tests/knn/test_knn.py",
+        "tests/knns/test_knn.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/plots/bandit_plots.py",
+      "candidate_test_paths": [
+        "numpy_ml/plots/tests/test_bandit_plots.py",
+        "tests/plots/test_bandit_plots.py",
+        "numpy_ml/plots/tests/test_plots.py",
+        "test/test_bandit_plots.py",
+        "tests/test_bandit_plots.py",
+        "tests/bandit_plots/test_bandit_plots.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/plots/gmm_plots.py",
+      "candidate_test_paths": [
+        "numpy_ml/plots/tests/test_gmm_plots.py",
+        "tests/plots/test_gmm_plots.py",
+        "numpy_ml/plots/tests/test_plots.py",
+        "test/test_gmm_plots.py",
+        "tests/test_gmm_plots.py",
+        "tests/gmm_plots/test_gmm_plots.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/plots/hmm_plots.py",
+      "candidate_test_paths": [
+        "numpy_ml/plots/tests/test_hmm_plots.py",
+        "tests/plots/test_hmm_plots.py",
+        "numpy_ml/plots/tests/test_plots.py",
+        "test/test_hmm_plots.py",
+        "tests/test_hmm_plots.py",
+        "tests/hmm_plots/test_hmm_plots.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/plots/lda_plots.py",
+      "candidate_test_paths": [
+        "numpy_ml/plots/tests/test_lda_plots.py",
+        "tests/plots/test_lda_plots.py",
+        "numpy_ml/plots/tests/test_plots.py",
+        "test/test_lda_plots.py",
+        "tests/test_lda_plots.py",
+        "tests/lda_plots/test_lda_plots.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/plots/lm_plots.py",
+      "candidate_test_paths": [
+        "numpy_ml/plots/tests/test_lm_plots.py",
+        "tests/plots/test_lm_plots.py",
+        "numpy_ml/plots/tests/test_plots.py",
+        "test/test_lm_plots.py",
+        "tests/test_lm_plots.py",
+        "tests/lm_plots/test_lm_plots.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/plots/ngram_plots.py",
+      "candidate_test_paths": [
+        "numpy_ml/plots/tests/test_ngram_plots.py",
+        "tests/plots/test_ngram_plots.py",
+        "numpy_ml/plots/tests/test_plots.py",
+        "test/test_ngram_plots.py",
+        "tests/test_ngram_plots.py",
+        "tests/ngram_plots/test_ngram_plots.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/plots/nn_activations_plots.py",
+      "candidate_test_paths": [
+        "numpy_ml/plots/tests/test_nn_activations_plots.py",
+        "tests/plots/test_nn_activations_plots.py",
+        "numpy_ml/plots/tests/test_plots.py",
+        "test/test_nn_activations_plots.py",
+        "tests/test_nn_activations_plots.py",
+        "tests/nn_activations_plots/test_nn_activations_plots.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/plots/nn_schedulers_plots.py",
+      "candidate_test_paths": [
+        "numpy_ml/plots/tests/test_nn_schedulers_plots.py",
+        "tests/plots/test_nn_schedulers_plots.py",
+        "numpy_ml/plots/tests/test_plots.py",
+        "test/test_nn_schedulers_plots.py",
+        "tests/test_nn_schedulers_plots.py",
+        "tests/nn_schedulers_plots/test_nn_schedulers_plots.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/plots/nonparametric_plots.py",
+      "candidate_test_paths": [
+        "numpy_ml/plots/tests/test_nonparametric_plots.py",
+        "tests/plots/test_nonparametric_plots.py",
+        "numpy_ml/plots/tests/test_plots.py",
+        "test/test_nonparametric_plots.py",
+        "tests/test_nonparametric_plots.py",
+        "tests/nonparametric_plots/test_nonparametric_plots.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/plots/rl_plots.py",
+      "candidate_test_paths": [
+        "numpy_ml/plots/tests/test_rl_plots.py",
+        "tests/plots/test_rl_plots.py",
+        "numpy_ml/plots/tests/test_plots.py",
+        "test/test_rl_plots.py",
+        "tests/test_rl_plots.py",
+        "tests/rl_plots/test_rl_plots.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/plots/trees_plots.py",
+      "candidate_test_paths": [
+        "numpy_ml/plots/tests/test_trees_plots.py",
+        "tests/plots/test_trees_plots.py",
+        "numpy_ml/plots/tests/test_plots.py",
+        "test/test_trees_plots.py",
+        "tests/test_trees_plots.py",
+        "tests/trees_plots/test_trees_plots.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/preprocessing/dsp.py",
+      "candidate_test_paths": [
+        "numpy_ml/preprocessing/tests/test_dsp.py",
+        "tests/preprocessing/test_dsp.py",
+        "numpy_ml/preprocessing/tests/test_preprocessing.py",
+        "test/test_dsp.py",
+        "tests/test_dsp.py",
+        "tests/dsp/test_dsp.py",
+        "tests/dsps/test_dsp.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/preprocessing/general.py",
+      "candidate_test_paths": [
+        "numpy_ml/preprocessing/tests/test_general.py",
+        "tests/preprocessing/test_general.py",
+        "numpy_ml/preprocessing/tests/test_preprocessing.py",
+        "test/test_general.py",
+        "tests/test_general.py",
+        "tests/general/test_general.py",
+        "tests/generals/test_general.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/preprocessing/nlp.py",
+      "candidate_test_paths": [
+        "numpy_ml/preprocessing/tests/test_nlp.py",
+        "tests/preprocessing/test_nlp.py",
+        "numpy_ml/preprocessing/tests/test_preprocessing.py",
+        "test/test_nlp.py",
+        "tests/test_nlp.py",
+        "tests/nlp/test_nlp.py",
+        "tests/nlps/test_nlp.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/rl_models/agents.py",
+      "candidate_test_paths": [
+        "numpy_ml/rl_models/tests/test_agents.py",
+        "tests/rl_models/test_agents.py",
+        "numpy_ml/rl_models/tests/test_rl_models.py",
+        "test/test_agents.py",
+        "tests/test_agents.py",
+        "tests/agents/test_agents.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/rl_models/rl_utils.py",
+      "candidate_test_paths": [
+        "numpy_ml/rl_models/tests/test_rl_utils.py",
+        "tests/rl_models/test_rl_utils.py",
+        "numpy_ml/rl_models/tests/test_rl_models.py",
+        "test/test_rl_utils.py",
+        "tests/test_rl_utils.py",
+        "tests/rl_utils/test_rl_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/rl_models/tiles/tiles3.py",
+      "candidate_test_paths": [
+        "numpy_ml/rl_models/tiles/tests/test_tiles3.py",
+        "tests/rl_models/tiles/test_tiles3.py",
+        "numpy_ml/rl_models/tiles/tests/test_tiles.py",
+        "test/test_tiles3.py",
+        "tests/test_tiles3.py",
+        "tests/tiles3/test_tiles3.py",
+        "tests/tiles3s/test_tiles3.py",
+        "tests/tiles/test_tiles3.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/rl_models/trainer.py",
+      "candidate_test_paths": [
+        "numpy_ml/rl_models/tests/test_trainer.py",
+        "tests/rl_models/test_trainer.py",
+        "numpy_ml/rl_models/tests/test_rl_models.py",
+        "test/test_trainer.py",
+        "tests/test_trainer.py",
+        "tests/trainer/test_trainer.py",
+        "tests/trainers/test_trainer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/trees/dt.py",
+      "candidate_test_paths": [
+        "numpy_ml/trees/tests/test_dt.py",
+        "tests/trees/test_dt.py",
+        "numpy_ml/trees/tests/test_trees.py",
+        "test/test_dt.py",
+        "tests/test_dt.py",
+        "tests/dt/test_dt.py",
+        "tests/dts/test_dt.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/trees/gbdt.py",
+      "candidate_test_paths": [
+        "numpy_ml/trees/tests/test_gbdt.py",
+        "tests/trees/test_gbdt.py",
+        "numpy_ml/trees/tests/test_trees.py",
+        "test/test_gbdt.py",
+        "tests/test_gbdt.py",
+        "tests/gbdt/test_gbdt.py",
+        "tests/gbdts/test_gbdt.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/trees/losses.py",
+      "candidate_test_paths": [
+        "numpy_ml/trees/tests/test_losses.py",
+        "tests/trees/test_losses.py",
+        "numpy_ml/trees/tests/test_trees.py",
+        "test/test_losses.py",
+        "tests/test_losses.py",
+        "tests/losses/test_losses.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/trees/rf.py",
+      "candidate_test_paths": [
+        "numpy_ml/trees/tests/test_rf.py",
+        "tests/trees/test_rf.py",
+        "numpy_ml/trees/tests/test_trees.py",
+        "test/test_rf.py",
+        "tests/test_rf.py",
+        "tests/rf/test_rf.py",
+        "tests/rfs/test_rf.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/utils/data_structures.py",
+      "candidate_test_paths": [
+        "numpy_ml/utils/tests/test_data_structures.py",
+        "tests/utils/test_data_structures.py",
+        "numpy_ml/utils/tests/test_utils.py",
+        "test/test_data_structures.py",
+        "tests/test_data_structures.py",
+        "tests/data_structures/test_data_structures.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/utils/distance_metrics.py",
+      "candidate_test_paths": [
+        "numpy_ml/utils/tests/test_distance_metrics.py",
+        "tests/utils/test_distance_metrics.py",
+        "numpy_ml/utils/tests/test_utils.py",
+        "test/test_distance_metrics.py",
+        "tests/test_distance_metrics.py",
+        "tests/distance_metrics/test_distance_metrics.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/utils/graphs.py",
+      "candidate_test_paths": [
+        "numpy_ml/utils/tests/test_graphs.py",
+        "tests/utils/test_graphs.py",
+        "numpy_ml/utils/tests/test_utils.py",
+        "test/test_graphs.py",
+        "tests/test_graphs.py",
+        "tests/graphs/test_graphs.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/utils/kernels.py",
+      "candidate_test_paths": [
+        "numpy_ml/utils/tests/test_kernels.py",
+        "tests/utils/test_kernels.py",
+        "numpy_ml/utils/tests/test_utils.py",
+        "test/test_kernels.py",
+        "tests/test_kernels.py",
+        "tests/kernels/test_kernels.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/utils/misc.py",
+      "candidate_test_paths": [
+        "numpy_ml/utils/tests/test_misc.py",
+        "tests/utils/test_misc.py",
+        "numpy_ml/utils/tests/test_utils.py",
+        "test/test_misc.py",
+        "tests/test_misc.py",
+        "tests/misc/test_misc.py",
+        "tests/miscs/test_misc.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/utils/testing.py",
+      "candidate_test_paths": [
+        "numpy_ml/utils/tests/test_testing.py",
+        "tests/utils/test_testing.py",
+        "numpy_ml/utils/tests/test_utils.py",
+        "test/test_testing.py",
+        "tests/test_testing.py",
+        "tests/testing/test_testing.py",
+        "tests/testings/test_testing.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "numpy_ml/utils/windows.py",
+      "candidate_test_paths": [
+        "numpy_ml/utils/tests/test_windows.py",
+        "tests/utils/test_windows.py",
+        "numpy_ml/utils/tests/test_utils.py",
+        "test/test_windows.py",
+        "tests/test_windows.py",
+        "tests/windows/test_windows.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.py",
+        "tox.ini"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 98,
+    "classified_count": 98,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 293,
+    "project_import_count": 26,
+    "declared_package_count": 100,
+    "undeclared_package_count": 0,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 59,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 6,
+    "low_confidence_manifest_count": 2
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

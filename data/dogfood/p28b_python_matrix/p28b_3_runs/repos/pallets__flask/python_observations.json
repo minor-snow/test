@@ -1,0 +1,5642 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "pallets__flask",
+    "observed_file_count": 236,
+    "python_file_count": 90
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "src_layout",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "src_layout_detected",
+        "weight": "strong",
+        "evidence": "src/ directory with package(s): flask"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 2,
+      "docs": 1,
+      "source": 34,
+      "unknown": 5,
+      "test": 48
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "flask",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "flask found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "flask imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "click imported in source files"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      },
+      {
+        "name": "celery",
+        "kind": "task_queue",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "celery found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "celery imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "httpx",
+        "kind": "http_client",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpx found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      },
+      {
+        "role": "http_client_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpcore dependency (HTTP transport layer)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "API-related paths in library package"
+          },
+          {
+            "dimension": "layout_classification",
+            "detail": "Library package with HTTP core dependency"
+          }
+        ]
+      },
+      {
+        "role": "cli_application",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points (__main__.py or cli.py)"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "CLI framework in dependencies"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "flask_service",
+    "validation": "validated",
+    "confidence": "high",
+    "matched_signals": [
+      "layout: library_package / src_layout (high)",
+      "framework: flask / web_framework (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (high)",
+      "framework: celery / task_queue (high)",
+      "framework: httpx / http_client (medium)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)",
+      "project_role: http_client_library (high)",
+      "project_role: cli_application (high)",
+      "sensitive_zone: authentication (high, 2 paths)",
+      "sensitive_zone: administration (high, 1 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/auth*",
+        "reason": "Authentication logic requires human review",
+        "severity": "high",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/auth*",
+          "Sensitive zone \"authentication\" (high) corroborates"
+        ]
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "Application configuration affects runtime behavior",
+        "severity": "medium",
+        "matched_path_count": 5,
+        "evidence": [
+          "5 paths match pattern **/config*"
+        ]
+      },
+      {
+        "pattern": "**/extensions*",
+        "reason": "Flask extensions influence app wiring and security hooks",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/extensions*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/blueprints/**",
+        "reason": "No Flask blueprint directory observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 850,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 3487,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "examples/celery/make_celery.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 106,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/celery/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 398,
+      "evidence": []
+    },
+    {
+      "path": "examples/celery/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 1131,
+      "evidence": []
+    },
+    {
+      "path": "examples/celery/src/task_app/tasks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 507,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/celery/src/task_app/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 992,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/celery/src/task_app/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1058,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/javascript/js_example/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 447,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/javascript/js_example/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 102,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/javascript/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 769,
+      "evidence": []
+    },
+    {
+      "path": "examples/javascript/tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 231,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "examples/javascript/tests/test_js_example.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 754,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "examples/tutorial/flaskr/auth.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3412,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/tutorial/flaskr/blog.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3430,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/tutorial/flaskr/db.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1373,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/tutorial/flaskr/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1454,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/tutorial/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 811,
+      "evidence": []
+    },
+    {
+      "path": "examples/tutorial/tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1516,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "examples/tutorial/tests/test_auth.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2139,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "examples/tutorial/tests/test_blog.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2586,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "examples/tutorial/tests/test_db.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 645,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "examples/tutorial/tests/test_factory.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 310,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 6835,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "src/flask/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 67048,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/blueprints.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4669,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/cli.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 37935,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/config.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13586,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/ctx.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 18644,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/debughelpers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6249,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/globals.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2491,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/helpers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 25319,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/json/provider.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7859,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/json/tag.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9608,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/json/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5753,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/logging.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2456,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/sansio/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 40392,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/sansio/blueprints.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 27709,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/sansio/scaffold.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 31156,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/sessions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 15354,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/signals.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 767,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/templating.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7548,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/testing.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10412,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/typing.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3201,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7153,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/wrappers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9663,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2111,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask/__main__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 33,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3422,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_appctx.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7092,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/blueprintapp/apps/admin/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 386,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/blueprintapp/apps/frontend/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 341,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/blueprintapp/apps/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/blueprintapp/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 265,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/cliapp/app.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 55,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/cliapp/factory.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 182,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/cliapp/importerrorapp.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 78,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/cliapp/inner1/inner2/flask.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 50,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/cliapp/inner1/inner2/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/cliapp/inner1/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 58,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/cliapp/multiapp.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 71,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/cliapp/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/helloworld/hello.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 112,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/helloworld/wsgi.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 37,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_apps/subdomaintestmodule/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 76,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_async.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3480,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_basic.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 56091,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_blueprints.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 32572,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_cli.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 21086,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_config.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7998,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_converters.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1135,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_helpers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11595,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_instance_config.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3428,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_json.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9087,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_json_tag.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2084,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_logging.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2627,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_regression.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 742,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_reqctx.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7776,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_request.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1972,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_session_interface.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 812,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_signals.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5045,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_subclassing.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 501,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_templating.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 15935,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_testing.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10603,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_user_error_handler.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8731,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_views.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7447,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/type_check/typing_app_decorators.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 621,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/type_check/typing_error_handler.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 680,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/type_check/typing_route.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2644,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "uv.lock",
+      "bucket": "unknown",
+      "extension": ".lock",
+      "size_bytes": 311918,
+      "evidence": []
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/celery/make_celery.py",
+      "raw_specifier": "from task_app import create_app",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "task_app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/celery/src/task_app/tasks.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/celery/src/task_app/tasks.py",
+      "raw_specifier": "from celery import shared_task",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "celery",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/celery/src/task_app/tasks.py",
+      "raw_specifier": "from celery import Task",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "celery",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/celery/src/task_app/views.py",
+      "raw_specifier": "from celery.result import AsyncResult",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "celery",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/celery/src/task_app/views.py",
+      "raw_specifier": "from flask import Blueprint",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/celery/src/task_app/views.py",
+      "raw_specifier": "from flask import request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/celery/src/task_app/views.py",
+      "raw_specifier": "from . import tasks",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/celery/src/task_app/__init__.py",
+      "raw_specifier": "from celery import Celery",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "celery",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/celery/src/task_app/__init__.py",
+      "raw_specifier": "from celery import Task",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "celery",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/celery/src/task_app/__init__.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/celery/src/task_app/__init__.py",
+      "raw_specifier": "from flask import render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/celery/src/task_app/__init__.py",
+      "raw_specifier": "from . import views",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/javascript/js_example/views.py",
+      "raw_specifier": "from flask import jsonify",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/javascript/js_example/views.py",
+      "raw_specifier": "from flask import render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/javascript/js_example/views.py",
+      "raw_specifier": "from flask import request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/javascript/js_example/views.py",
+      "raw_specifier": "from . import app",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/javascript/js_example/__init__.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/javascript/js_example/__init__.py",
+      "raw_specifier": "from js_example import views  # noqa: E402, F401",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "js_example",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/auth.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/auth.py",
+      "raw_specifier": "from flask import Blueprint",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/auth.py",
+      "raw_specifier": "from flask import flash",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/auth.py",
+      "raw_specifier": "from flask import g",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/auth.py",
+      "raw_specifier": "from flask import redirect",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/auth.py",
+      "raw_specifier": "from flask import render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/auth.py",
+      "raw_specifier": "from flask import request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/auth.py",
+      "raw_specifier": "from flask import session",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/auth.py",
+      "raw_specifier": "from flask import url_for",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/auth.py",
+      "raw_specifier": "from werkzeug.security import check_password_hash",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/auth.py",
+      "raw_specifier": "from werkzeug.security import generate_password_hash",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/auth.py",
+      "raw_specifier": "from .db import get_db",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".db",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/blog.py",
+      "raw_specifier": "from flask import Blueprint",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/blog.py",
+      "raw_specifier": "from flask import flash",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/blog.py",
+      "raw_specifier": "from flask import g",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/blog.py",
+      "raw_specifier": "from flask import redirect",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/blog.py",
+      "raw_specifier": "from flask import render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/blog.py",
+      "raw_specifier": "from flask import request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/blog.py",
+      "raw_specifier": "from flask import url_for",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/blog.py",
+      "raw_specifier": "from werkzeug.exceptions import abort",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/blog.py",
+      "raw_specifier": "from .auth import login_required",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".auth",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/blog.py",
+      "raw_specifier": "from .db import get_db",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".db",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/db.py",
+      "raw_specifier": "sqlite3",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sqlite3",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/db.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/db.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/db.py",
+      "raw_specifier": "from flask import current_app",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/db.py",
+      "raw_specifier": "from flask import g",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/__init__.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/__init__.py",
+      "raw_specifier": "from . import db",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/__init__.py",
+      "raw_specifier": "from . import auth",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/tutorial/flaskr/__init__.py",
+      "raw_specifier": "from . import blog",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "weakref",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "weakref",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from inspect import iscoroutinefunction",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from itertools import chain",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from urllib.parse import quote as _url_quote",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.datastructures import Headers",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.datastructures import ImmutableDict",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.exceptions import BadRequestKeyError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.exceptions import HTTPException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.exceptions import InternalServerError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.routing import BuildError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.routing import MapAdapter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.routing import RequestRedirect",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.routing import RoutingException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.routing import Rule",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.serving import is_running_from_reloader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.wrappers import Response as BaseResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.wsgi import get_host",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from . import cli",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from . import typing as ft",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .ctx import AppContext",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".ctx",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .globals import _cv_app",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .globals import app_ctx",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .globals import g",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .globals import request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .globals import session",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .helpers import _CollectErrors",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .helpers import get_debug_flag",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .helpers import get_flashed_messages",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .helpers import get_load_dotenv",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .helpers import send_from_directory",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .sansio.app import App",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sansio.app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .sessions import SecureCookieSessionInterface",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sessions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .sessions import SessionInterface",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sessions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .signals import appcontext_tearing_down",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .signals import got_request_exception",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .signals import request_finished",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .signals import request_started",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .signals import request_tearing_down",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .templating import Environment",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".templating",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .wrappers import Request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .wrappers import Response",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from _typeshed.wsgi import StartResponse",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "_typeshed",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from _typeshed.wsgi import WSGIEnvironment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "_typeshed",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .testing import FlaskClient",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".testing",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .testing import FlaskCliRunner",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".testing",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .typing import HeadersValue",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".typing",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .debughelpers import FormDataRoutingRedirect",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".debughelpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from werkzeug.serving import run_simple",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from flask.testing import FlaskClient",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .testing import FlaskClient as cls",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".testing",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .testing import FlaskCliRunner as cls",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".testing",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from asgiref.sync import async_to_sync as asgiref_async_to_sync",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "asgiref",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/app.py",
+      "raw_specifier": "from .testing import EnvironBuilder",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".testing",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/blueprints.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/blueprints.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/blueprints.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/blueprints.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/blueprints.py",
+      "raw_specifier": "from .cli import AppGroup",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cli",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/blueprints.py",
+      "raw_specifier": "from .globals import current_app",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/blueprints.py",
+      "raw_specifier": "from .helpers import send_from_directory",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/blueprints.py",
+      "raw_specifier": "from .sansio.blueprints import Blueprint as SansioBlueprint",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sansio.blueprints",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/blueprints.py",
+      "raw_specifier": "from .sansio.blueprints import BlueprintSetupState as BlueprintSetupState  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sansio.blueprints",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/blueprints.py",
+      "raw_specifier": "from .sansio.scaffold import _sentinel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sansio.scaffold",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/blueprints.py",
+      "raw_specifier": "from .wrappers import Response",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "ast",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ast",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "importlib.metadata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "traceback",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "traceback",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from operator import itemgetter",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "operator",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from types import ModuleType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from click.core import ParameterSource",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from werkzeug import run_simple",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from werkzeug.serving import is_running_from_reloader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from werkzeug.utils import import_string",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from .globals import current_app",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from .helpers import get_debug_flag",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from .helpers import get_load_dotenv",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "ssl",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ssl",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from _typeshed.wsgi import StartResponse",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "_typeshed",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from _typeshed.wsgi import WSGIApplication",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "_typeshed",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from _typeshed.wsgi import WSGIEnvironment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "_typeshed",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from .app import Flask",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from . import Flask",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from . import Flask",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "dotenv",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "dotenv",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "ssl",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ssl",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "cryptography",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "cryptography",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "ssl",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ssl",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "code",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "code",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "readline",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "readline",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/cli.py",
+      "raw_specifier": "from rlcompleter import Completer",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "rlcompleter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/config.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/config.py",
+      "raw_specifier": "errno",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "errno",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/config.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/config.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/config.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/config.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/config.py",
+      "raw_specifier": "from werkzeug.utils import import_string",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/config.py",
+      "raw_specifier": "typing_extensions",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/config.py",
+      "raw_specifier": "from .sansio.app import App",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sansio.app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/config.py",
+      "raw_specifier": "from yourapplication import default_config",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "yourapplication",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask/config.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/config.py",
+      "raw_specifier": "tomllib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tomllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "contextvars",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextvars",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from werkzeug.exceptions import HTTPException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from werkzeug.routing import MapAdapter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from . import typing as ft",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from .globals import _cv_app",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from .helpers import _CollectErrors",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from .signals import appcontext_popped",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from .signals import appcontext_pushed",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "typing_extensions",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from _typeshed.wsgi import WSGIEnvironment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "_typeshed",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from .app import Flask",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from .sessions import SessionMixin",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sessions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from .wrappers import Request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "gevent",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "gevent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from flask import copy_current_request_context",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from flask import has_request_context, request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from flask import request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from flask import has_app_context, g",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "from flask import g",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/ctx.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/debughelpers.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/debughelpers.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/debughelpers.py",
+      "raw_specifier": "from jinja2.loaders import BaseLoader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/debughelpers.py",
+      "raw_specifier": "from werkzeug.routing import RequestRedirect",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/debughelpers.py",
+      "raw_specifier": "from .blueprints import Blueprint",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".blueprints",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/debughelpers.py",
+      "raw_specifier": "from .globals import _cv_app",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/debughelpers.py",
+      "raw_specifier": "from .sansio.app import App",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sansio.app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/debughelpers.py",
+      "raw_specifier": "from .sansio.scaffold import Scaffold",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sansio.scaffold",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/debughelpers.py",
+      "raw_specifier": "from .wrappers import Request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/globals.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/globals.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/globals.py",
+      "raw_specifier": "from contextvars import ContextVar",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextvars",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/globals.py",
+      "raw_specifier": "from werkzeug.local import LocalProxy",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/globals.py",
+      "raw_specifier": "from .app import Flask",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/globals.py",
+      "raw_specifier": "from .ctx import _AppCtxGlobals",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".ctx",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/globals.py",
+      "raw_specifier": "from .ctx import AppContext",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".ctx",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/globals.py",
+      "raw_specifier": "from .sessions import SessionMixin",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sessions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/globals.py",
+      "raw_specifier": "from .wrappers import Request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/globals.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "importlib.util",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from functools import cache",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "werkzeug.utils",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from werkzeug.exceptions import abort as _wz_abort",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from werkzeug.utils import redirect as _wz_redirect",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from werkzeug.wrappers import Response as BaseResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from .globals import _cv_app",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from .globals import app_ctx",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from .globals import current_app",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from .globals import request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from .globals import session",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from .signals import message_flashed",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from .wrappers import Response",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from flask import stream_with_context, request, Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/helpers.py",
+      "raw_specifier": "from flask import stream_with_context, request, Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/provider.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/provider.py",
+      "raw_specifier": "dataclasses",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/provider.py",
+      "raw_specifier": "decimal",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/provider.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/provider.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/provider.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/provider.py",
+      "raw_specifier": "weakref",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "weakref",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/provider.py",
+      "raw_specifier": "from datetime import date",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/provider.py",
+      "raw_specifier": "from werkzeug.http import http_date",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/provider.py",
+      "raw_specifier": "from werkzeug.sansio.response import Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/provider.py",
+      "raw_specifier": "from ..sansio.app import App",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..sansio.app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/json/tag.py",
+      "raw_specifier": "from flask.json.tag import JSONTag",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/tag.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/tag.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/tag.py",
+      "raw_specifier": "from base64 import b64decode",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/tag.py",
+      "raw_specifier": "from base64 import b64encode",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/tag.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/tag.py",
+      "raw_specifier": "from uuid import UUID",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/tag.py",
+      "raw_specifier": "from markupsafe import Markup",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "markupsafe",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/tag.py",
+      "raw_specifier": "from werkzeug.http import http_date",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/tag.py",
+      "raw_specifier": "from werkzeug.http import parse_date",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/tag.py",
+      "raw_specifier": "from ..json import dumps",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..json",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/json/tag.py",
+      "raw_specifier": "from ..json import loads",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..json",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/json/__init__.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/__init__.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/__init__.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/json/__init__.py",
+      "raw_specifier": "from ..globals import current_app",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/json/__init__.py",
+      "raw_specifier": "from .provider import _default",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".provider",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/json/__init__.py",
+      "raw_specifier": "from ..wrappers import Response",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/logging.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/logging.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/logging.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/logging.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/logging.py",
+      "raw_specifier": "from werkzeug.local import LocalProxy",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/logging.py",
+      "raw_specifier": "from .globals import request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/logging.py",
+      "raw_specifier": "from .sansio.app import App",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sansio.app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from itertools import chain",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from werkzeug.exceptions import Aborter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from werkzeug.exceptions import BadRequest",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from werkzeug.exceptions import BadRequestKeyError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from werkzeug.routing import BuildError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from werkzeug.routing import Map",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from werkzeug.routing import Rule",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from werkzeug.sansio.response import Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from werkzeug.utils import cached_property",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from werkzeug.utils import redirect as _wz_redirect",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from .. import typing as ft",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from ..config import Config",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from ..config import ConfigAttribute",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from ..ctx import _AppCtxGlobals",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..ctx",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from ..helpers import _split_blueprint_path",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from ..helpers import get_debug_flag",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from ..json.provider import DefaultJSONProvider",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..json.provider",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from ..json.provider import JSONProvider",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..json.provider",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from ..logging import create_logger",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..logging",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from ..templating import DispatchingJinjaLoader",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..templating",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from ..templating import Environment",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..templating",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from .scaffold import _endpoint_from_view_func",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".scaffold",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from .scaffold import find_package",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".scaffold",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from .scaffold import Scaffold",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".scaffold",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from .scaffold import setupmethod",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".scaffold",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from werkzeug.wrappers import Response as BaseResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from ..testing import FlaskClient",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..testing",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from ..testing import FlaskCliRunner",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..testing",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from .blueprints import Blueprint",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".blueprints",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/app.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/blueprints.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/blueprints.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/blueprints.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/blueprints.py",
+      "raw_specifier": "from collections import defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/blueprints.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/blueprints.py",
+      "raw_specifier": "from .. import typing as ft",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/blueprints.py",
+      "raw_specifier": "from .scaffold import _endpoint_from_view_func",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".scaffold",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/blueprints.py",
+      "raw_specifier": "from .scaffold import _sentinel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".scaffold",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/blueprints.py",
+      "raw_specifier": "from .scaffold import Scaffold",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".scaffold",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/blueprints.py",
+      "raw_specifier": "from .scaffold import setupmethod",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".scaffold",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/blueprints.py",
+      "raw_specifier": "from .app import App",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "importlib.util",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "from collections import defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "from jinja2 import BaseLoader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "from jinja2 import FileSystemLoader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "from werkzeug.exceptions import default_exceptions",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "from werkzeug.exceptions import HTTPException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "from werkzeug.utils import cached_property",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "from .. import typing as ft",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "from ..helpers import get_root_path",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "from ..templating import _default_template_ctx_processor",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..templating",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sansio/scaffold.py",
+      "raw_specifier": "from click import Group",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "hashlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "from collections.abc import MutableMapping",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "from datetime import timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "from itsdangerous import BadSignature",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "itsdangerous",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "from itsdangerous import URLSafeTimedSerializer",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "itsdangerous",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "from werkzeug.datastructures import CallbackDict",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "from .json.tag import TaggedJSONSerializer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".json.tag",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "typing_extensions",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "from .app import Flask",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "from .wrappers import Request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/sessions.py",
+      "raw_specifier": "from .wrappers import Response",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/signals.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/signals.py",
+      "raw_specifier": "from blinker import Namespace",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "blinker",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from jinja2 import BaseLoader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from jinja2 import Environment as BaseEnvironment",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from jinja2 import Template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from jinja2 import TemplateNotFound",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from .ctx import AppContext",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".ctx",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from .globals import app_ctx",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from .helpers import stream_with_context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from .signals import before_render_template",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from .signals import template_rendered",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from .sansio.app import App",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sansio.app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from .sansio.scaffold import Scaffold",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sansio.scaffold",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/templating.py",
+      "raw_specifier": "from .debughelpers import explain_template_loading_attempts",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".debughelpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "importlib.metadata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from contextlib import ExitStack",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from copy import copy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from urllib.parse import urlsplit",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "werkzeug.test",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from click.testing import CliRunner",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from click.testing import Result",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from werkzeug.test import Client",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from werkzeug.wrappers import Request as BaseRequest",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from .cli import ScriptInfo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cli",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from .sessions import SessionMixin",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".sessions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from _typeshed.wsgi import WSGIEnvironment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "_typeshed",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from werkzeug.test import TestResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/testing.py",
+      "raw_specifier": "from .app import Flask",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/typing.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/typing.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/typing.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/typing.py",
+      "raw_specifier": "from _typeshed.wsgi import WSGIApplication  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "_typeshed",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask/typing.py",
+      "raw_specifier": "from werkzeug.datastructures import Headers  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/typing.py",
+      "raw_specifier": "from werkzeug.sansio.response import Response  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/views.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/views.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/views.py",
+      "raw_specifier": "from . import typing as ft",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/views.py",
+      "raw_specifier": "from .globals import current_app",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/views.py",
+      "raw_specifier": "from .globals import request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/wrappers.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/wrappers.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/wrappers.py",
+      "raw_specifier": "from werkzeug.exceptions import BadRequest",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/wrappers.py",
+      "raw_specifier": "from werkzeug.exceptions import HTTPException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/wrappers.py",
+      "raw_specifier": "from werkzeug.wrappers import Request as RequestBase",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/wrappers.py",
+      "raw_specifier": "from werkzeug.wrappers import Response as ResponseBase",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/wrappers.py",
+      "raw_specifier": "from . import json",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/wrappers.py",
+      "raw_specifier": "from .globals import current_app",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/wrappers.py",
+      "raw_specifier": "from .helpers import _split_blueprint_path",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/wrappers.py",
+      "raw_specifier": "from werkzeug.routing import Rule",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask/wrappers.py",
+      "raw_specifier": "from .debughelpers import attach_enctype_error_multidict",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".debughelpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from . import json as json",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .app import Flask as Flask",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".app",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .blueprints import Blueprint as Blueprint",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".blueprints",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .config import Config as Config",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .ctx import after_this_request as after_this_request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".ctx",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .ctx import copy_current_request_context as copy_current_request_context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".ctx",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .ctx import has_app_context as has_app_context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".ctx",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .ctx import has_request_context as has_request_context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".ctx",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .globals import current_app as current_app",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .globals import g as g",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .globals import request as request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .globals import session as session",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .helpers import abort as abort",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .helpers import flash as flash",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .helpers import get_flashed_messages as get_flashed_messages",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .helpers import get_template_attribute as get_template_attribute",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .helpers import make_response as make_response",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .helpers import redirect as redirect",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .helpers import send_file as send_file",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .helpers import send_from_directory as send_from_directory",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .helpers import stream_with_context as stream_with_context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .helpers import url_for as url_for",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".helpers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .json import jsonify as jsonify",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".json",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .signals import appcontext_popped as appcontext_popped",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .signals import appcontext_pushed as appcontext_pushed",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .signals import appcontext_tearing_down as appcontext_tearing_down",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .signals import before_render_template as before_render_template",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .signals import got_request_exception as got_request_exception",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .signals import message_flashed as message_flashed",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .signals import request_finished as request_finished",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .signals import request_started as request_started",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .signals import request_tearing_down as request_tearing_down",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .signals import template_rendered as template_rendered",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .templating import render_template as render_template",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".templating",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .templating import render_template_string as render_template_string",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".templating",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .templating import stream_template as stream_template",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".templating",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .templating import stream_template_string as stream_template_string",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".templating",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .wrappers import Request as Request",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__init__.py",
+      "raw_specifier": "from .wrappers import Response as Response",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".wrappers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask/__main__.py",
+      "raw_specifier": "from .cli import main",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cli",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "examples/celery/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "flask",
+        "celery"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/celery/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "amqp",
+        "async_timeout",
+        "billiard",
+        "blinker",
+        "celery",
+        "click",
+        "click_didyoumean",
+        "click_plugins",
+        "click_repl",
+        "flask",
+        "itsdangerous",
+        "jinja2",
+        "kombu",
+        "markupsafe",
+        "prompt_toolkit",
+        "pytz",
+        "redis",
+        "six",
+        "vine",
+        "wcwidth",
+        "werkzeug"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/javascript/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "flask"
+      ],
+      "dev_packages": [
+        "pytest"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/tutorial/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "flask"
+      ],
+      "dev_packages": [
+        "pytest"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "blinker",
+        "click",
+        "itsdangerous",
+        "jinja2",
+        "markupsafe",
+        "werkzeug",
+        "asgiref",
+        "python_dotenv"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "uv.lock",
+      "source_type": "uv.lock",
+      "packages": [
+        "alabaster",
+        "anyio",
+        "asgiref",
+        "babel",
+        "blinker",
+        "cachetools",
+        "certifi",
+        "cffi",
+        "cfgv",
+        "charset_normalizer",
+        "click",
+        "colorama",
+        "cryptography",
+        "distlib",
+        "docutils",
+        "exceptiongroup",
+        "filelock",
+        "flask",
+        "gha_update",
+        "greenlet",
+        "h11",
+        "httpcore",
+        "httpx",
+        "identify",
+        "idna",
+        "imagesize",
+        "iniconfig",
+        "itsdangerous",
+        "jinja2",
+        "librt",
+        "markupsafe",
+        "mypy",
+        "mypy_extensions",
+        "nodeenv",
+        "packaging",
+        "pallets_sphinx_themes",
+        "pathspec",
+        "platformdirs",
+        "pluggy",
+        "pre_commit",
+        "pre_commit_uv",
+        "pycparser",
+        "pygments",
+        "pyproject_api",
+        "pyright",
+        "pytest",
+        "python_discovery",
+        "python_dotenv",
+        "pyyaml",
+        "requests",
+        "roman_numerals",
+        "roman_numerals_py",
+        "ruff",
+        "snowballstemmer",
+        "sphinx",
+        "sphinx_autobuild",
+        "sphinx_notfound_page",
+        "sphinx_tabs",
+        "sphinxcontrib_applehelp",
+        "sphinxcontrib_devhelp",
+        "sphinxcontrib_htmlhelp",
+        "sphinxcontrib_jsmath",
+        "sphinxcontrib_log_cabinet",
+        "sphinxcontrib_qthelp",
+        "sphinxcontrib_serializinghtml",
+        "starlette",
+        "tomli",
+        "tomli_w",
+        "tox",
+        "tox_uv",
+        "tox_uv_bare",
+        "types_contextvars",
+        "types_dataclasses",
+        "typing_extensions",
+        "urllib3",
+        "uv",
+        "uvicorn",
+        "virtualenv",
+        "watchfiles",
+        "websockets",
+        "werkzeug"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/celery/make_celery.py",
+      "candidate_test_paths": [
+        "examples/celery/tests/test_make_celery.py",
+        "tests/celery/test_make_celery.py",
+        "examples/celery/tests/test_celery.py",
+        "test/test_make_celery.py",
+        "tests/test_make_celery.py",
+        "tests/make_celery/test_make_celery.py",
+        "tests/make_celerys/test_make_celery.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "examples/celery/src/task_app/tasks.py",
+      "candidate_test_paths": [
+        "examples/celery/src/task_app/tests/test_tasks.py",
+        "tests/celery/src/task_app/test_tasks.py",
+        "examples/celery/src/task_app/tests/test_task_app.py",
+        "test/test_tasks.py",
+        "tests/test_tasks.py",
+        "tests/tasks/test_tasks.py",
+        "tests/task_app/test_tasks.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "examples/celery/src/task_app/views.py",
+      "candidate_test_paths": [
+        "examples/celery/src/task_app/tests/test_views.py",
+        "tests/celery/src/task_app/test_views.py",
+        "examples/celery/src/task_app/tests/test_task_app.py",
+        "test/test_views.py",
+        "tests/test_views.py",
+        "tests/views/test_views.py",
+        "tests/task_app/test_views.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_views.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_views.py [library_package layout]"
+    },
+    {
+      "source_path": "examples/javascript/js_example/views.py",
+      "candidate_test_paths": [
+        "examples/javascript/js_example/tests/test_views.py",
+        "tests/javascript/js_example/test_views.py",
+        "examples/javascript/js_example/tests/test_js_example.py",
+        "test/test_views.py",
+        "tests/test_views.py",
+        "tests/views/test_views.py",
+        "tests/js_example/test_views.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_views.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_views.py [library_package layout]"
+    },
+    {
+      "source_path": "examples/tutorial/flaskr/auth.py",
+      "candidate_test_paths": [
+        "examples/tutorial/flaskr/tests/test_auth.py",
+        "tests/tutorial/flaskr/test_auth.py",
+        "examples/tutorial/flaskr/tests/test_flaskr.py",
+        "test/test_auth.py",
+        "tests/test_auth.py",
+        "tests/auth/test_auth.py",
+        "tests/auths/test_auth.py",
+        "tests/flaskr/test_auth.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "examples/tutorial/flaskr/blog.py",
+      "candidate_test_paths": [
+        "examples/tutorial/flaskr/tests/test_blog.py",
+        "tests/tutorial/flaskr/test_blog.py",
+        "examples/tutorial/flaskr/tests/test_flaskr.py",
+        "test/test_blog.py",
+        "tests/test_blog.py",
+        "tests/blog/test_blog.py",
+        "tests/blogs/test_blog.py",
+        "tests/flaskr/test_blog.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "examples/tutorial/flaskr/db.py",
+      "candidate_test_paths": [
+        "examples/tutorial/flaskr/tests/test_db.py",
+        "tests/tutorial/flaskr/test_db.py",
+        "examples/tutorial/flaskr/tests/test_flaskr.py",
+        "test/test_db.py",
+        "tests/test_db.py",
+        "tests/db/test_db.py",
+        "tests/dbs/test_db.py",
+        "tests/flaskr/test_db.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "src/flask/app.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_app.py",
+        "tests/flask/test_app.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "src/flask/blueprints.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_blueprints.py",
+        "tests/flask/test_blueprints.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_blueprints.py",
+        "tests/test_blueprints.py",
+        "tests/blueprints/test_blueprints.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_blueprints.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_blueprints.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask/cli.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_cli.py",
+        "tests/flask/test_cli.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_cli.py",
+        "tests/test_cli.py",
+        "tests/cli/test_cli.py",
+        "tests/clis/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_cli.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask/config.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_config.py",
+        "tests/flask/test_config.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_config.py",
+        "tests/test_config.py",
+        "tests/config/test_config.py",
+        "tests/configs/test_config.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_config.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_config.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask/ctx.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_ctx.py",
+        "tests/flask/test_ctx.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_ctx.py",
+        "tests/test_ctx.py",
+        "tests/ctx/test_ctx.py",
+        "tests/ctxs/test_ctx.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "src/flask/debughelpers.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_debughelpers.py",
+        "tests/flask/test_debughelpers.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_debughelpers.py",
+        "tests/test_debughelpers.py",
+        "tests/debughelpers/test_debughelpers.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "src/flask/globals.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_globals.py",
+        "tests/flask/test_globals.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_globals.py",
+        "tests/test_globals.py",
+        "tests/globals/test_globals.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "src/flask/helpers.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_helpers.py",
+        "tests/flask/test_helpers.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_helpers.py",
+        "tests/test_helpers.py",
+        "tests/helpers/test_helpers.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_helpers.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Generic library helper match without directory context: tests/test_helpers.py"
+    },
+    {
+      "source_path": "src/flask/json/provider.py",
+      "candidate_test_paths": [
+        "src/flask/json/tests/test_provider.py",
+        "tests/flask/json/test_provider.py",
+        "src/flask/json/tests/test_json.py",
+        "test/test_provider.py",
+        "tests/test_provider.py",
+        "tests/provider/test_provider.py",
+        "tests/providers/test_provider.py",
+        "tests/json/test_provider.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "src/flask/json/tag.py",
+      "candidate_test_paths": [
+        "src/flask/json/tests/test_tag.py",
+        "tests/flask/json/test_tag.py",
+        "src/flask/json/tests/test_json.py",
+        "test/test_tag.py",
+        "tests/test_tag.py",
+        "tests/tag/test_tag.py",
+        "tests/tags/test_tag.py",
+        "tests/json/test_tag.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "src/flask/logging.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_logging.py",
+        "tests/flask/test_logging.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_logging.py",
+        "tests/test_logging.py",
+        "tests/logging/test_logging.py",
+        "tests/loggings/test_logging.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_logging.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_logging.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask/sansio/app.py",
+      "candidate_test_paths": [
+        "src/flask/sansio/tests/test_app.py",
+        "tests/flask/sansio/test_app.py",
+        "src/flask/sansio/tests/test_sansio.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py",
+        "tests/sansio/test_app.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "src/flask/sansio/blueprints.py",
+      "candidate_test_paths": [
+        "src/flask/sansio/tests/test_blueprints.py",
+        "tests/flask/sansio/test_blueprints.py",
+        "src/flask/sansio/tests/test_sansio.py",
+        "test/test_blueprints.py",
+        "tests/test_blueprints.py",
+        "tests/blueprints/test_blueprints.py",
+        "tests/sansio/test_blueprints.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_blueprints.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_blueprints.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask/sansio/scaffold.py",
+      "candidate_test_paths": [
+        "src/flask/sansio/tests/test_scaffold.py",
+        "tests/flask/sansio/test_scaffold.py",
+        "src/flask/sansio/tests/test_sansio.py",
+        "test/test_scaffold.py",
+        "tests/test_scaffold.py",
+        "tests/scaffold/test_scaffold.py",
+        "tests/scaffolds/test_scaffold.py",
+        "tests/sansio/test_scaffold.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "src/flask/sessions.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_sessions.py",
+        "tests/flask/test_sessions.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_sessions.py",
+        "tests/test_sessions.py",
+        "tests/sessions/test_sessions.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "src/flask/signals.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_signals.py",
+        "tests/flask/test_signals.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_signals.py",
+        "tests/test_signals.py",
+        "tests/signals/test_signals.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_signals.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_signals.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask/templating.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_templating.py",
+        "tests/flask/test_templating.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_templating.py",
+        "tests/test_templating.py",
+        "tests/templating/test_templating.py",
+        "tests/templatings/test_templating.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_templating.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_templating.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask/testing.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_testing.py",
+        "tests/flask/test_testing.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_testing.py",
+        "tests/test_testing.py",
+        "tests/testing/test_testing.py",
+        "tests/testings/test_testing.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_testing.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_testing.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask/typing.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_typing.py",
+        "tests/flask/test_typing.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_typing.py",
+        "tests/test_typing.py",
+        "tests/typing/test_typing.py",
+        "tests/typings/test_typing.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "src/flask/views.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_views.py",
+        "tests/flask/test_views.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_views.py",
+        "tests/test_views.py",
+        "tests/views/test_views.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_views.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_views.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask/wrappers.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test_wrappers.py",
+        "tests/flask/test_wrappers.py",
+        "src/flask/tests/test_flask.py",
+        "test/test_wrappers.py",
+        "tests/test_wrappers.py",
+        "tests/wrappers/test_wrappers.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "src/flask/__main__.py",
+      "candidate_test_paths": [
+        "src/flask/tests/test___main__.py",
+        "tests/flask/test___main__.py",
+        "src/flask/tests/test_flask.py",
+        "test/test___main__.py",
+        "tests/test___main__.py",
+        "tests/__main__/test___main__.py",
+        "tests/__main__s/test___main__.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/auth/**",
+      "matched_paths": [
+        "examples/tutorial/flaskr/auth.py",
+        "examples/tutorial/tests/test_auth.py"
+      ],
+      "category": "authentication",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"auth\" found in 2 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/admin/**",
+      "matched_paths": [
+        "tests/test_apps/blueprintapp/apps/admin/__init__.py"
+      ],
+      "category": "administration",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"admin\" found in 1 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "examples/celery/pyproject.toml",
+        "examples/celery/requirements.txt",
+        "examples/javascript/pyproject.toml",
+        "examples/tutorial/pyproject.toml",
+        "uv.lock"
+      ],
+      "count": 5,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 83,
+    "classified_count": 83,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 453,
+    "project_import_count": 0,
+    "declared_package_count": 124,
+    "undeclared_package_count": 14,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 29,
+    "high_confidence_test_count": 11,
+    "medium_confidence_test_count": 18,
+    "sensitive_zone_count": 2,
+    "sensitive_file_count": 3,
+    "manifest_count": 6,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

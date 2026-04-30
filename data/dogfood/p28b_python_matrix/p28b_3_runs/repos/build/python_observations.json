@@ -1,0 +1,847 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "build",
+    "observed_file_count": 93,
+    "python_file_count": 41
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "Unable to determine package layout from file paths"
+      }
+    ],
+    "bucket_summary": {
+      "config": 2,
+      "docs": 1,
+      "source": 1,
+      "test": 37
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No framework could be detected from dependencies, paths, or imports"
+      }
+    ]
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / unknown (low)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: authorization (high, 1 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 2,
+        "evidence": [
+          "2 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 2120,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 3156,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 8124,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tasks/release.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5130,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7754,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/inline/build.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1757,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/inline/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 78,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/legacy/legacy/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 98,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/legacy/setup.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 359,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-bad-backend/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 67,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-bad-syntax/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 45,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-bad-wheel/backend_bad_wheel.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 144,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-bad-wheel/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 112,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-bad-wheel/setup.cfg",
+      "bucket": "test",
+      "extension": ".cfg",
+      "size_bytes": 52,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-cant-build-via-sdist/backend_bad_sdist.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 873,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-cant-build-via-sdist/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 90,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-flit/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 354,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-flit/test_flit/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 99,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-invalid-requirements/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 113,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-invalid-requirements/setup.cfg",
+      "bucket": "test",
+      "extension": ".cfg",
+      "size_bytes": 63,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-metadata/backend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1170,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-metadata/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 229,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-no-backend/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 31,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-no-permission/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-no-prepare/backend_no_prepare.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 793,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-no-prepare/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 252,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-no-requires/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 45,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-optional-hooks/hookless_backend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-optional-hooks/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 89,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-setuptools/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 94,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-setuptools/setup.cfg",
+      "bucket": "test",
+      "extension": ".cfg",
+      "size_bytes": 53,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/packages/test-typo/pyproject.toml",
+      "bucket": "test",
+      "extension": ".toml",
+      "size_bytes": 93,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_ctx_logger.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1750,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_env.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 21706,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_integration.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5443,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_main.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 31292,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_main_helpers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 452,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_module.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 228,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_projectbuilder.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 25264,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_self_packaging.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3073,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_util.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2832,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "tasks/release.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/release.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/release.py",
+      "raw_specifier": "from subprocess import call, check_call",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/release.py",
+      "raw_specifier": "from git import Commit, Remote, Repo, TagReference",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "git",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tasks/release.py",
+      "raw_specifier": "from packaging.version import Version",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "packaging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks/release.py",
+      "raw_specifier": "from argparse import ArgumentParser",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "packaging",
+        "pyproject_hooks",
+        "recommended dependency",
+        "colorama",
+        ",",
+        "3_10_2",
+        ",  # not required but fixes a stdlib bug",
+        "3_11",
+        "uv",
+        "keyring",
+        "virtualenv",
+        "and python_version",
+        "3_14"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tests/packages/inline/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/legacy/setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-bad-backend/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-bad-syntax/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-bad-wheel/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-bad-wheel/setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-cant-build-via-sdist/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-flit/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-invalid-requirements/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-invalid-requirements/setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-metadata/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-no-backend/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-no-permission/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-no-prepare/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-no-requires/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-optional-hooks/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-setuptools/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-setuptools/setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    },
+    {
+      "source_path": "tests/packages/test-typo/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "tasks/release.py",
+      "candidate_test_paths": [
+        "tasks/tests/test_release.py",
+        "tests/test_release.py",
+        "tasks/tests/test_tasks.py",
+        "test/test_release.py",
+        "tests/release/test_release.py",
+        "tests/releases/test_release.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/permission/**",
+      "matched_paths": [
+        "tests/packages/test-no-permission/pyproject.toml"
+      ],
+      "category": "authorization",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"permission\" found in 1 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "tests/packages/inline/pyproject.toml",
+        "tests/packages/legacy/setup.py",
+        "tests/packages/test-bad-backend/pyproject.toml",
+        "tests/packages/test-bad-syntax/pyproject.toml",
+        "tests/packages/test-bad-wheel/pyproject.toml",
+        "tests/packages/test-bad-wheel/setup.cfg",
+        "tests/packages/test-cant-build-via-sdist/pyproject.toml",
+        "tests/packages/test-flit/pyproject.toml",
+        "tests/packages/test-invalid-requirements/pyproject.toml",
+        "tests/packages/test-invalid-requirements/setup.cfg",
+        "tests/packages/test-metadata/pyproject.toml",
+        "tests/packages/test-no-backend/pyproject.toml",
+        "tests/packages/test-no-permission/pyproject.toml",
+        "tests/packages/test-no-prepare/pyproject.toml",
+        "tests/packages/test-no-requires/pyproject.toml",
+        "tests/packages/test-optional-hooks/pyproject.toml",
+        "tests/packages/test-setuptools/pyproject.toml",
+        "tests/packages/test-setuptools/setup.cfg",
+        "tests/packages/test-typo/pyproject.toml"
+      ],
+      "count": 19,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 21,
+    "classified_count": 21,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 6,
+    "project_import_count": 0,
+    "declared_package_count": 1,
+    "undeclared_package_count": 2,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 1,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 1,
+    "sensitive_file_count": 1,
+    "manifest_count": 20,
+    "low_confidence_manifest_count": 19
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

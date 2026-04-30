@@ -1,0 +1,87 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "cfa2ccb9eef8284b36f8897fa02daec30c1215e3242951b033a4a463d257c578",
+  "pinned_commit": "0c92c5421cf27fe45e5883658bcacffc3a845695",
+  "completed_at": "2026-04-30T11:54:07.824Z",
+  "repo_id": "HKUDS/CLI-Anything",
+  "category_expected": "python_cli_tool",
+  "category_observed": "python_sdk_library",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 1058,
+  "python_files": 941,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "pytest/medium",
+    "click/high"
+  ],
+  "project_role_signals": [
+    "python_sdk_library/medium",
+    "cli_application/high"
+  ],
+  "test_mapping_count": 597,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "HKUDS/CLI-Anything",
+      "gap_kind": "layout_low_confidence",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Primary layout missing or low confidence",
+      "recommended_phase": "P28b-later"
+    },
+    {
+      "repo_id": "HKUDS/CLI-Anything",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected python_cli_tool, got python_sdk_library",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "mubu/agent-harness/pyproject.toml",
+        "n8n/agent-harness/pyproject.toml",
+        "QGIS/agent-harness/pytest.ini",
+        "unimol_tools/agent-harness/pyproject.toml",
+        "zotero/agent-harness/pyproject.toml"
+      ],
+      "count": 5,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "dynamic_or_unresolved_import",
+      "classification": "intrinsic",
+      "paths": [
+        "audacity/agent-harness/cli_anything/audacity/eval/runner.py",
+        "comfyui/agent-harness/setup.py",
+        "zoom/agent-harness/setup.py"
+      ],
+      "count": 3,
+      "note": "Imports using __import__(), importlib.import_module(), or computed paths. Cannot be statically resolved — this is inherent to Python."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "mubu/agent-harness/pyproject.toml",
+        "zotero/agent-harness/pyproject.toml"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

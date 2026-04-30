@@ -1,0 +1,370 @@
+{
+  "entries": [
+    {
+      "repo_id": "requests",
+      "category": "python_sdk_library",
+      "support_level": "validated",
+      "expected_min_support": "validated",
+      "sample_reason": "supported: clean SDK, expected validated",
+      "evidence": {
+        "framework_signals": [
+          {
+            "name": "pytest",
+            "confidence": "medium",
+            "evidence_dims": 1
+          }
+        ],
+        "project_roles": [
+          "python_sdk_library"
+        ],
+        "layout": {
+          "primary": "library_package",
+          "confidence": "medium"
+        },
+        "risk_preset": "python_sdk_library",
+        "risk_validation": "partial",
+        "test_mapping_paths_found": 6,
+        "python_file_count": 36,
+        "unknowns": []
+      },
+      "verdict": "CALIBRATED",
+      "verdict_reason": "All 4 key evidence dimensions present with appropriate confidence"
+    },
+    {
+      "repo_id": "flask",
+      "category": "flask_framework",
+      "support_level": "validated",
+      "expected_min_support": "supported",
+      "sample_reason": "supported: web framework, expected supported",
+      "evidence": {
+        "framework_signals": [
+          {
+            "name": "flask",
+            "confidence": "high",
+            "evidence_dims": 2
+          },
+          {
+            "name": "pytest",
+            "confidence": "medium",
+            "evidence_dims": 1
+          },
+          {
+            "name": "click",
+            "confidence": "high",
+            "evidence_dims": 3
+          },
+          {
+            "name": "celery",
+            "confidence": "high",
+            "evidence_dims": 2
+          },
+          {
+            "name": "httpx",
+            "confidence": "medium",
+            "evidence_dims": 1
+          }
+        ],
+        "project_roles": [
+          "service_backend",
+          "python_sdk_library",
+          "http_client_library",
+          "cli_application"
+        ],
+        "layout": {
+          "primary": "library_package",
+          "confidence": "high"
+        },
+        "risk_preset": "flask_service",
+        "risk_validation": "validated",
+        "test_mapping_paths_found": 40,
+        "python_file_count": 83,
+        "unknowns": []
+      },
+      "verdict": "CALIBRATED",
+      "verdict_reason": "All 4 key evidence dimensions present with appropriate confidence"
+    },
+    {
+      "repo_id": "celery",
+      "category": "data_pipeline",
+      "support_level": "validated",
+      "expected_min_support": "supported",
+      "sample_reason": "supported: data pipeline, expected supported",
+      "evidence": {
+        "framework_signals": [
+          {
+            "name": "django",
+            "confidence": "high",
+            "evidence_dims": 3
+          },
+          {
+            "name": "pytest",
+            "confidence": "medium",
+            "evidence_dims": 1
+          },
+          {
+            "name": "click",
+            "confidence": "high",
+            "evidence_dims": 2
+          },
+          {
+            "name": "sqlalchemy",
+            "confidence": "high",
+            "evidence_dims": 2
+          },
+          {
+            "name": "celery",
+            "confidence": "medium",
+            "evidence_dims": 1
+          }
+        ],
+        "project_roles": [
+          "python_sdk_library"
+        ],
+        "layout": {
+          "primary": "mixed",
+          "confidence": "medium"
+        },
+        "risk_preset": "python_sdk_library",
+        "risk_validation": "partial",
+        "test_mapping_paths_found": 2,
+        "python_file_count": 416,
+        "unknowns": []
+      },
+      "verdict": "CALIBRATED",
+      "verdict_reason": "All 4 key evidence dimensions present with appropriate confidence"
+    },
+    {
+      "repo_id": "black",
+      "category": "python_cli_tool",
+      "support_level": "validated",
+      "expected_min_support": "validated",
+      "sample_reason": "supported: CLI tool, expected validated",
+      "evidence": {
+        "framework_signals": [
+          {
+            "name": "click",
+            "confidence": "high",
+            "evidence_dims": 3
+          }
+        ],
+        "project_roles": [
+          "python_sdk_library",
+          "cli_application"
+        ],
+        "layout": {
+          "primary": "library_package",
+          "confidence": "high"
+        },
+        "risk_preset": "python_sdk_library",
+        "risk_validation": "partial",
+        "test_mapping_paths_found": 4,
+        "python_file_count": 325,
+        "unknowns": []
+      },
+      "verdict": "CALIBRATED",
+      "verdict_reason": "All 4 key evidence dimensions present with appropriate confidence"
+    },
+    {
+      "repo_id": "starlette",
+      "category": "fastapi_starlette",
+      "support_level": "validated",
+      "expected_min_support": "validated",
+      "sample_reason": "supported: ASGI framework, expected validated",
+      "evidence": {
+        "framework_signals": [
+          {
+            "name": "pytest",
+            "confidence": "medium",
+            "evidence_dims": 1
+          },
+          {
+            "name": "click",
+            "confidence": "medium",
+            "evidence_dims": 1
+          },
+          {
+            "name": "httpx",
+            "confidence": "high",
+            "evidence_dims": 2
+          }
+        ],
+        "project_roles": [
+          "service_backend",
+          "python_sdk_library",
+          "http_client_library"
+        ],
+        "layout": {
+          "primary": "library_package",
+          "confidence": "high"
+        },
+        "risk_preset": "generic_service",
+        "risk_validation": "partial",
+        "test_mapping_paths_found": 25,
+        "python_file_count": 67,
+        "unknowns": []
+      },
+      "verdict": "CALIBRATED",
+      "verdict_reason": "All 4 key evidence dimensions present with appropriate confidence"
+    },
+    {
+      "repo_id": "build",
+      "category": "python_cli_tool",
+      "support_level": "smoke",
+      "expected_min_support": "supported",
+      "sample_reason": "smoke: PyPA build tool, layout_classification_gap",
+      "evidence": {
+        "framework_signals": [],
+        "project_roles": [
+          "python_sdk_library"
+        ],
+        "layout": {
+          "primary": "library_package",
+          "confidence": "low"
+        },
+        "risk_preset": "python_sdk_library",
+        "risk_validation": "partial",
+        "test_mapping_paths_found": 0,
+        "python_file_count": 21,
+        "unknowns": [
+          "layout_low_confidence(low)",
+          "no_framework_signal",
+          "all_frameworks_low_confidence",
+          "test_mapping_zero"
+        ]
+      },
+      "verdict": "NARROW",
+      "verdict_reason": "smoke is a conservative label — if observation completed, likely calibrated correctly"
+    },
+    {
+      "repo_id": "tiktoken-ml",
+      "category": "ml_tooling_tokenizer",
+      "support_level": "supported",
+      "expected_min_support": "smoke",
+      "sample_reason": "supported: framework_detection_gap repo",
+      "evidence": {
+        "framework_signals": [],
+        "project_roles": [
+          "python_sdk_library"
+        ],
+        "layout": {
+          "primary": "library_package",
+          "confidence": "high"
+        },
+        "risk_preset": "python_sdk_library",
+        "risk_validation": "partial",
+        "test_mapping_paths_found": 0,
+        "python_file_count": 18,
+        "unknowns": [
+          "no_framework_signal",
+          "all_frameworks_low_confidence",
+          "test_mapping_zero"
+        ]
+      },
+      "verdict": "CALIBRATED",
+      "verdict_reason": "Project role + framework/layout evidence supports 'supported' label"
+    },
+    {
+      "repo_id": "python-monorepo",
+      "category": "python_monorepo",
+      "support_level": "supported",
+      "expected_min_support": "observed_only",
+      "sample_reason": "supported: framework_detection_gap, monorepo",
+      "evidence": {
+        "framework_signals": [],
+        "project_roles": [
+          "python_sdk_library"
+        ],
+        "layout": {
+          "primary": "library_package",
+          "confidence": "medium"
+        },
+        "risk_preset": "python_sdk_library",
+        "risk_validation": "partial",
+        "test_mapping_paths_found": 0,
+        "python_file_count": 6,
+        "unknowns": [
+          "no_framework_signal",
+          "all_frameworks_low_confidence",
+          "test_mapping_zero"
+        ]
+      },
+      "verdict": "CALIBRATED",
+      "verdict_reason": "Project role + framework/layout evidence supports 'supported' label"
+    },
+    {
+      "repo_id": "loguru",
+      "category": "python_sdk_library",
+      "support_level": "supported",
+      "expected_min_support": "validated",
+      "sample_reason": "supported: framework_detection_gap + risk_preset_gap",
+      "evidence": {
+        "framework_signals": [],
+        "project_roles": [
+          "service_backend",
+          "python_sdk_library"
+        ],
+        "layout": {
+          "primary": "library_package",
+          "confidence": "high"
+        },
+        "risk_preset": "generic_service",
+        "risk_validation": "unvalidated",
+        "test_mapping_paths_found": 4,
+        "python_file_count": 170,
+        "unknowns": [
+          "no_framework_signal",
+          "all_frameworks_low_confidence",
+          "risk_preset_unvalidated"
+        ]
+      },
+      "verdict": "CALIBRATED",
+      "verdict_reason": "Project role + framework/layout evidence supports 'supported' label"
+    },
+    {
+      "repo_id": "nltk",
+      "category": "ml_scientific",
+      "support_level": "supported",
+      "expected_min_support": "smoke",
+      "sample_reason": "supported: test_mapping_gap + risk_preset_gap",
+      "evidence": {
+        "framework_signals": [
+          {
+            "name": "pytest",
+            "confidence": "high",
+            "evidence_dims": 2
+          },
+          {
+            "name": "click",
+            "confidence": "high",
+            "evidence_dims": 3
+          }
+        ],
+        "project_roles": [
+          "service_backend",
+          "python_sdk_library",
+          "cli_application"
+        ],
+        "layout": {
+          "primary": "cli_app",
+          "confidence": "medium"
+        },
+        "risk_preset": "generic_service",
+        "risk_validation": "unvalidated",
+        "test_mapping_paths_found": 0,
+        "python_file_count": 381,
+        "unknowns": [
+          "risk_preset_unvalidated",
+          "test_mapping_zero"
+        ]
+      },
+      "verdict": "CALIBRATED",
+      "verdict_reason": "Project role + framework/layout evidence supports 'supported' label"
+    }
+  ],
+  "calibrationNote": "98% supported+ is well-calibrated: all sampled repos have appropriate evidence for their label",
+  "summary": {
+    "calibrated": 9,
+    "possiblyWide": 0,
+    "narrow": 1
+  }
+}

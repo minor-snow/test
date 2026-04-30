@@ -1,0 +1,4007 @@
+{
+  "repo_id": "starlette",
+  "category": "fastapi_starlette",
+  "local_path": "H:\\Boom\\benchmarks\\starlette",
+  "pinned_commit": "0a29b5ccdcbd1285c75c4fdb5d62ae1d244a21b0",
+  "expected_min_support": "validated",
+  "scan_ms": 2676,
+  "timeout": false,
+  "exit_code": 0,
+  "python_obs_path": "H:\\Boom\\benchmarks\\starlette\\.pantheon\\internal\\python_observations.json",
+  "python_obs_available": true,
+  "python_obs": {
+    "schema_version": "python_observations.v1",
+    "repo": {
+      "root_label": "starlette",
+      "observed_file_count": 126,
+      "python_file_count": 69
+    },
+    "layout": {
+      "primary_layout": "library_package",
+      "package_layout": "flat_package",
+      "confidence": "high",
+      "signals": [
+        {
+          "signal": "flat_package_detected",
+          "weight": "strong",
+          "evidence": "Root-level package(s) with __init__.py: starlette"
+        },
+        {
+          "signal": "py_typed_marker",
+          "weight": "strong",
+          "evidence": "py.typed marker file (PEP 561 typed package)"
+        },
+        {
+          "signal": "packaging_config_no_framework",
+          "weight": "weak",
+          "evidence": "Packaging config present without framework indicators"
+        },
+        {
+          "signal": "docs_directory",
+          "weight": "weak",
+          "evidence": "docs/ directory suggests library documentation"
+        },
+        {
+          "signal": "top_level_tests_pattern",
+          "weight": "weak",
+          "evidence": "Top-level tests/ directory typical of library packages"
+        }
+      ],
+      "unknowns": [],
+      "bucket_summary": {
+        "config": 1,
+        "source": 34,
+        "test": 33,
+        "unknown": 1
+      }
+    },
+    "framework_profile": {
+      "framework_signals": [
+        {
+          "name": "pytest",
+          "kind": "test_framework",
+          "confidence": "medium",
+          "evidence": [
+            {
+              "dimension": "dependency_manifest",
+              "detail": "pytest found in dependency manifests"
+            }
+          ]
+        },
+        {
+          "name": "click",
+          "kind": "cli_framework",
+          "confidence": "medium",
+          "evidence": [
+            {
+              "dimension": "dependency_manifest",
+              "detail": "click found in dependency manifests"
+            }
+          ]
+        },
+        {
+          "name": "httpx",
+          "kind": "http_client",
+          "confidence": "high",
+          "evidence": [
+            {
+              "dimension": "dependency_manifest",
+              "detail": "httpx found in dependency manifests"
+            },
+            {
+              "dimension": "import_pattern",
+              "detail": "httpx imported in source files"
+            }
+          ]
+        }
+      ],
+      "project_role_signals": [
+        {
+          "role": "service_backend",
+          "confidence": "medium",
+          "evidence": [
+            {
+              "dimension": "dependency_manifest",
+              "detail": "API framework found in dependencies"
+            }
+          ]
+        },
+        {
+          "role": "python_sdk_library",
+          "confidence": "high",
+          "evidence": [
+            {
+              "dimension": "layout_classification",
+              "detail": "Layout classified as library_package"
+            },
+            {
+              "dimension": "path_pattern",
+              "detail": "py.typed marker (PEP 561 typed package)"
+            },
+            {
+              "dimension": "path_pattern",
+              "detail": "docs/ directory without web framework signals"
+            },
+            {
+              "dimension": "dependency_manifest",
+              "detail": "Packaging config without web framework"
+            }
+          ]
+        },
+        {
+          "role": "http_client_library",
+          "confidence": "high",
+          "evidence": [
+            {
+              "dimension": "dependency_manifest",
+              "detail": "httpcore dependency (HTTP transport layer)"
+            },
+            {
+              "dimension": "layout_classification",
+              "detail": "Library package with HTTP core dependency"
+            }
+          ]
+        }
+      ],
+      "unknowns": []
+    },
+    "risk_preset_validation": {
+      "preset": "generic_service",
+      "validation": "partial",
+      "confidence": "medium",
+      "matched_signals": [
+        "layout: library_package / flat_package (high)",
+        "framework: pytest / test_framework (medium)",
+        "framework: click / cli_framework (medium)",
+        "framework: httpx / http_client (high)",
+        "project_role: service_backend (medium)",
+        "project_role: python_sdk_library (high)",
+        "project_role: http_client_library (high)"
+      ],
+      "suggested_review": [
+        {
+          "pattern": "**/auth*",
+          "reason": "Authentication logic requires human review",
+          "severity": "high",
+          "matched_path_count": 3,
+          "evidence": [
+            "3 paths match pattern **/auth*"
+          ]
+        },
+        {
+          "pattern": "**/config*",
+          "reason": "Configuration affects system behavior",
+          "severity": "medium",
+          "matched_path_count": 3,
+          "evidence": [
+            "3 paths match pattern **/config*"
+          ]
+        }
+      ],
+      "suggested_forbidden": [],
+      "dormant_patterns": [
+        {
+          "pattern": "**/security*",
+          "reason": "No security files observed"
+        }
+      ]
+    },
+    "files": [
+      {
+        "path": "pyproject.toml",
+        "bucket": "config",
+        "extension": ".toml",
+        "size_bytes": 3672,
+        "evidence": [
+          "Project config"
+        ]
+      },
+      {
+        "path": "starlette/applications.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 5409,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/authentication.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 4892,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/background.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1158,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/concurrency.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1687,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/config.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 4566,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/convertors.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 2393,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/datastructures.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 23535,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/endpoints.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 5222,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/exceptions.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1099,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/formparsers.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 11408,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/middleware/authentication.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1852,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/middleware/base.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 10577,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/middleware/cors.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 7688,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/middleware/errors.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 8296,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/middleware/exceptions.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 2857,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/middleware/gzip.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 6044,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/middleware/httpsredirect.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 867,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/middleware/sessions.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 4903,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/middleware/trustedhost.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 2279,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/middleware/wsgi.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 5522,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/middleware/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1386,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/requests.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 12590,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/responses.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 22325,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/routing.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 30241,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/schemas.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 5316,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/staticfiles.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 8847,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/status.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 6568,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/templating.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 5603,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/testclient.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 28589,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/types.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1067,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/websockets.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 8548,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/_exception_handler.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 2270,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/_utils.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 2938,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "starlette/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 23,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "tests/conftest.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 640,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/middleware/test_base.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 44127,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/middleware/test_cors.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 21399,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/middleware/test_errors.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 3904,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/middleware/test_gzip.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 7363,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/middleware/test_https_redirect.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1738,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/middleware/test_middleware.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 798,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/middleware/test_session.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 10720,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/middleware/test_trusted_host.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1849,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/middleware/test_wsgi.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 5249,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/middleware/__init__.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_applications.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 17750,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_authentication.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 12493,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_background.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 2918,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_concurrency.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1632,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_config.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 5330,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_convertors.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 3360,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_datastructures.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 17491,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_endpoints.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 5941,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_exceptions.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 8160,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_formparsers.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 28620,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_requests.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 23887,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_responses.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 39598,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_routing.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 39763,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_schemas.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 7187,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_staticfiles.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 23431,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_status.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1003,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_templates.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 7001,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_testclient.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 15586,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_websockets.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 26642,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test__utils.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 2884,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/types.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 804,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/__init__.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "uv.lock",
+        "bucket": "unknown",
+        "extension": ".lock",
+        "size_bytes": 232648,
+        "evidence": []
+      }
+    ],
+    "import_observations": [
+      {
+        "from_file": "starlette/applications.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/applications.py",
+        "raw_specifier": "from collections.abc import Awaitable, Callable, Mapping, Sequence",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/applications.py",
+        "raw_specifier": "from typing import Any, ParamSpec, TypeVar",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/applications.py",
+        "raw_specifier": "from starlette.datastructures import State, URLPath",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/applications.py",
+        "raw_specifier": "from starlette.middleware import Middleware, _MiddlewareFactory",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/applications.py",
+        "raw_specifier": "from starlette.middleware.errors import ServerErrorMiddleware",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/applications.py",
+        "raw_specifier": "from starlette.middleware.exceptions import ExceptionMiddleware",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/applications.py",
+        "raw_specifier": "from starlette.requests import Request",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/applications.py",
+        "raw_specifier": "from starlette.responses import Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/applications.py",
+        "raw_specifier": "from starlette.routing import BaseRoute, Router",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/applications.py",
+        "raw_specifier": "from starlette.types import ASGIApp, ExceptionHandler, Lifespan, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/authentication.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/authentication.py",
+        "raw_specifier": "functools",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "functools",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/authentication.py",
+        "raw_specifier": "inspect",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "inspect",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/authentication.py",
+        "raw_specifier": "from collections.abc import Callable, Sequence",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/authentication.py",
+        "raw_specifier": "from typing import Any, ParamSpec",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/authentication.py",
+        "raw_specifier": "from urllib.parse import urlencode",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "urllib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/authentication.py",
+        "raw_specifier": "from starlette._utils import is_async_callable",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/authentication.py",
+        "raw_specifier": "from starlette.exceptions import HTTPException",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/authentication.py",
+        "raw_specifier": "from starlette.requests import HTTPConnection, Request",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/authentication.py",
+        "raw_specifier": "from starlette.responses import RedirectResponse",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/authentication.py",
+        "raw_specifier": "from starlette.websockets import WebSocket",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/background.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/background.py",
+        "raw_specifier": "from collections.abc import Callable, Sequence",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/background.py",
+        "raw_specifier": "from typing import Any, ParamSpec",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/background.py",
+        "raw_specifier": "from starlette._utils import is_async_callable",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/background.py",
+        "raw_specifier": "from starlette.concurrency import run_in_threadpool",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/concurrency.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/concurrency.py",
+        "raw_specifier": "functools",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "functools",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/concurrency.py",
+        "raw_specifier": "warnings",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "warnings",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/concurrency.py",
+        "raw_specifier": "from collections.abc import AsyncIterator, Callable, Coroutine, Iterable, Iterator",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/concurrency.py",
+        "raw_specifier": "from typing import ParamSpec, TypeVar",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/concurrency.py",
+        "raw_specifier": "anyio.to_thread",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/config.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/config.py",
+        "raw_specifier": "os",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "os",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/config.py",
+        "raw_specifier": "warnings",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "warnings",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/config.py",
+        "raw_specifier": "from collections.abc import Callable, Iterator, Mapping, MutableMapping",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/config.py",
+        "raw_specifier": "from pathlib import Path",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "pathlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/config.py",
+        "raw_specifier": "from typing import Any, TypeVar, overload",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/convertors.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/convertors.py",
+        "raw_specifier": "math",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "math",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/convertors.py",
+        "raw_specifier": "uuid",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "uuid",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/convertors.py",
+        "raw_specifier": "from typing import Any, ClassVar, Generic, TypeVar",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/datastructures.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/datastructures.py",
+        "raw_specifier": "from collections.abc import ItemsView, Iterable, Iterator, KeysView, Mapping, MutableMapping, Sequence, ValuesView",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/datastructures.py",
+        "raw_specifier": "from shlex import shlex",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "shlex",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/datastructures.py",
+        "raw_specifier": "from typing import ( Any, BinaryIO, NamedTuple, TypeVar, cast, )",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/datastructures.py",
+        "raw_specifier": "from urllib.parse import SplitResult, parse_qsl, urlencode, urlsplit",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "urllib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/datastructures.py",
+        "raw_specifier": "from starlette.concurrency import run_in_threadpool",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/datastructures.py",
+        "raw_specifier": "from starlette.types import Scope",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/endpoints.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/endpoints.py",
+        "raw_specifier": "json",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "json",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/endpoints.py",
+        "raw_specifier": "from collections.abc import Callable, Generator",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/endpoints.py",
+        "raw_specifier": "from typing import Any, Literal",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/endpoints.py",
+        "raw_specifier": "from starlette import status",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/endpoints.py",
+        "raw_specifier": "from starlette._utils import is_async_callable",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/endpoints.py",
+        "raw_specifier": "from starlette.concurrency import run_in_threadpool",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/endpoints.py",
+        "raw_specifier": "from starlette.exceptions import HTTPException",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/endpoints.py",
+        "raw_specifier": "from starlette.requests import Request",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/endpoints.py",
+        "raw_specifier": "from starlette.responses import PlainTextResponse, Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/endpoints.py",
+        "raw_specifier": "from starlette.types import Message, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/endpoints.py",
+        "raw_specifier": "from starlette.websockets import WebSocket",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/exceptions.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/exceptions.py",
+        "raw_specifier": "http",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "http",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/exceptions.py",
+        "raw_specifier": "from collections.abc import Mapping",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "from collections.abc import AsyncGenerator",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "from dataclasses import dataclass, field",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "dataclasses",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "from enum import Enum",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "enum",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "from tempfile import SpooledTemporaryFile",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "tempfile",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "from typing import TYPE_CHECKING",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "from urllib.parse import unquote_plus",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "urllib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "from starlette.datastructures import FormData, Headers, UploadFile",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "python_multipart",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "python_multipart",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "from python_multipart.multipart import MultipartCallbacks, QuerystringCallbacks, parse_options_header",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "python_multipart",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "python_multipart",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "python_multipart",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "from python_multipart.multipart import parse_options_header",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "python_multipart",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "multipart",
+        "import_kind": "import",
+        "status": "undeclared_package",
+        "top_level_module": "multipart",
+        "confidence": "low"
+      },
+      {
+        "from_file": "starlette/formparsers.py",
+        "raw_specifier": "from multipart.multipart import parse_options_header",
+        "import_kind": "from_import",
+        "status": "undeclared_package",
+        "top_level_module": "multipart",
+        "confidence": "low"
+      },
+      {
+        "from_file": "starlette/middleware/authentication.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/authentication.py",
+        "raw_specifier": "from collections.abc import Callable",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/authentication.py",
+        "raw_specifier": "from starlette.authentication import ( AuthCredentials, AuthenticationBackend, AuthenticationError, UnauthenticatedUser, )",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/authentication.py",
+        "raw_specifier": "from starlette.requests import HTTPConnection",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/authentication.py",
+        "raw_specifier": "from starlette.responses import PlainTextResponse, Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/authentication.py",
+        "raw_specifier": "from starlette.types import ASGIApp, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/base.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/base.py",
+        "raw_specifier": "from collections.abc import AsyncGenerator, AsyncIterable, Awaitable, Callable, Mapping, MutableMapping",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/base.py",
+        "raw_specifier": "from typing import Any, TypeVar",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/base.py",
+        "raw_specifier": "anyio",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/base.py",
+        "raw_specifier": "from starlette._utils import collapse_excgroups",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/base.py",
+        "raw_specifier": "from starlette.requests import ClientDisconnect, Request",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/base.py",
+        "raw_specifier": "from starlette.responses import Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/base.py",
+        "raw_specifier": "from starlette.types import ASGIApp, Message, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/cors.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/cors.py",
+        "raw_specifier": "functools",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "functools",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/cors.py",
+        "raw_specifier": "re",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "re",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/cors.py",
+        "raw_specifier": "from collections.abc import Sequence",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/cors.py",
+        "raw_specifier": "from starlette.datastructures import Headers, MutableHeaders",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/cors.py",
+        "raw_specifier": "from starlette.responses import PlainTextResponse, Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/cors.py",
+        "raw_specifier": "from starlette.types import ASGIApp, Message, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/errors.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/errors.py",
+        "raw_specifier": "html",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "html",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/errors.py",
+        "raw_specifier": "inspect",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "inspect",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/errors.py",
+        "raw_specifier": "sys",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "sys",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/errors.py",
+        "raw_specifier": "traceback",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "traceback",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/errors.py",
+        "raw_specifier": "from starlette._utils import is_async_callable",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/errors.py",
+        "raw_specifier": "from starlette.concurrency import run_in_threadpool",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/errors.py",
+        "raw_specifier": "from starlette.requests import Request",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/errors.py",
+        "raw_specifier": "from starlette.responses import HTMLResponse, PlainTextResponse, Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/errors.py",
+        "raw_specifier": "from starlette.types import ASGIApp, ExceptionHandler, Message, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/exceptions.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/exceptions.py",
+        "raw_specifier": "from collections.abc import Mapping",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/exceptions.py",
+        "raw_specifier": "from typing import Any",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/exceptions.py",
+        "raw_specifier": "from starlette._exception_handler import ( ExceptionHandlers, StatusHandlers, wrap_app_handling_exceptions, )",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/exceptions.py",
+        "raw_specifier": "from starlette.exceptions import HTTPException, WebSocketException",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/exceptions.py",
+        "raw_specifier": "from starlette.requests import Request",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/exceptions.py",
+        "raw_specifier": "from starlette.responses import PlainTextResponse, Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/exceptions.py",
+        "raw_specifier": "from starlette.types import ASGIApp, ExceptionHandler, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/exceptions.py",
+        "raw_specifier": "from starlette.websockets import WebSocket",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/gzip.py",
+        "raw_specifier": "gzip",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "gzip",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/gzip.py",
+        "raw_specifier": "io",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "io",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/gzip.py",
+        "raw_specifier": "from typing import NoReturn",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/gzip.py",
+        "raw_specifier": "from starlette.datastructures import Headers, MutableHeaders",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/gzip.py",
+        "raw_specifier": "from starlette.types import ASGIApp, Message, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/httpsredirect.py",
+        "raw_specifier": "from starlette.datastructures import URL",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/httpsredirect.py",
+        "raw_specifier": "from starlette.responses import RedirectResponse",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/httpsredirect.py",
+        "raw_specifier": "from starlette.types import ASGIApp, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/sessions.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/sessions.py",
+        "raw_specifier": "json",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "json",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/sessions.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/sessions.py",
+        "raw_specifier": "from base64 import b64decode, b64encode",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "base64",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/sessions.py",
+        "raw_specifier": "from typing import Literal",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/sessions.py",
+        "raw_specifier": "itsdangerous",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "itsdangerous",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/sessions.py",
+        "raw_specifier": "from itsdangerous.exc import BadSignature",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "itsdangerous",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/sessions.py",
+        "raw_specifier": "from starlette.datastructures import MutableHeaders, Secret",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/sessions.py",
+        "raw_specifier": "from starlette.requests import HTTPConnection",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/sessions.py",
+        "raw_specifier": "from starlette.types import ASGIApp, Message, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/trustedhost.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/trustedhost.py",
+        "raw_specifier": "from collections.abc import Sequence",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/trustedhost.py",
+        "raw_specifier": "from starlette.datastructures import URL, Headers",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/trustedhost.py",
+        "raw_specifier": "from starlette.responses import PlainTextResponse, RedirectResponse, Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/trustedhost.py",
+        "raw_specifier": "from starlette.types import ASGIApp, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/wsgi.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/wsgi.py",
+        "raw_specifier": "io",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "io",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/wsgi.py",
+        "raw_specifier": "math",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "math",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/wsgi.py",
+        "raw_specifier": "sys",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "sys",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/wsgi.py",
+        "raw_specifier": "warnings",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "warnings",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/wsgi.py",
+        "raw_specifier": "from collections.abc import Callable, MutableMapping",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/wsgi.py",
+        "raw_specifier": "from typing import Any",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/wsgi.py",
+        "raw_specifier": "anyio",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/wsgi.py",
+        "raw_specifier": "from anyio.abc import ObjectReceiveStream, ObjectSendStream",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/wsgi.py",
+        "raw_specifier": "from starlette.types import Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/__init__.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/__init__.py",
+        "raw_specifier": "from collections.abc import Awaitable, Callable, Iterator",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/middleware/__init__.py",
+        "raw_specifier": "from typing import Any, ParamSpec, Protocol",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "json",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "json",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "sys",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "sys",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from collections.abc import AsyncGenerator, Iterator, Mapping",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from http import cookies as http_cookies",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "http",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from typing import TYPE_CHECKING, Any, Generic, NoReturn, cast",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "anyio",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from starlette._utils import AwaitableOrContextManager, AwaitableOrContextManagerWrapper",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from starlette.datastructures import URL, Address, FormData, Headers, QueryParams, State",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from starlette.exceptions import HTTPException",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from starlette.formparsers import FormParser, MultiPartException, MultiPartParser",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from starlette.types import Message, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from python_multipart.multipart import parse_options_header",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "python_multipart",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from starlette.applications import Starlette",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from starlette.middleware.sessions import Session",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from starlette.routing import Router",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from python_multipart.multipart import parse_options_header",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "python_multipart",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from multipart.multipart import parse_options_header",
+        "import_kind": "from_import",
+        "status": "undeclared_package",
+        "top_level_module": "multipart",
+        "confidence": "low"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from typing import TypeVar",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/requests.py",
+        "raw_specifier": "from typing_extensions import TypeVar",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "typing_extensions",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "hashlib",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "hashlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "http.cookies",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "http",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "json",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "json",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "os",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "os",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "stat",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "stat",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "sys",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "sys",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from collections.abc import AsyncIterable, Awaitable, Callable, Iterable, Mapping, Sequence",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from datetime import datetime",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "datetime",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from email.utils import format_datetime, formatdate",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "email",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from functools import partial",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "functools",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from mimetypes import guess_type",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "mimetypes",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from secrets import token_hex",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "secrets",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from typing import Any, Literal",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from urllib.parse import quote",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "urllib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "anyio",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "anyio.to_thread",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from starlette._utils import collapse_excgroups",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from starlette.background import BackgroundTask",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from starlette.concurrency import iterate_in_threadpool",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from starlette.datastructures import URL, Headers, MutableHeaders",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from starlette.requests import ClientDisconnect",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/responses.py",
+        "raw_specifier": "from starlette.types import Message, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "contextlib",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "contextlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "functools",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "functools",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "inspect",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "inspect",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "re",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "re",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "traceback",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "traceback",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "types",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "types",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "warnings",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "warnings",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from collections.abc import Awaitable, Callable, Collection, Generator, Sequence",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from contextlib import AbstractAsyncContextManager, AbstractContextManager, asynccontextmanager",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "contextlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from enum import Enum",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "enum",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from re import Pattern",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "re",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from typing import Any, TypeVar",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from starlette._exception_handler import wrap_app_handling_exceptions",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from starlette._utils import get_route_path, is_async_callable",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from starlette.concurrency import run_in_threadpool",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from starlette.convertors import CONVERTOR_TYPES, Convertor",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from starlette.datastructures import URL, Headers, URLPath",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from starlette.exceptions import HTTPException",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from starlette.middleware import Middleware",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from starlette.requests import Request",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from starlette.responses import PlainTextResponse, RedirectResponse, Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from starlette.types import ASGIApp, Lifespan, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/routing.py",
+        "raw_specifier": "from starlette.websockets import WebSocket, WebSocketClose",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/schemas.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/schemas.py",
+        "raw_specifier": "inspect",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "inspect",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/schemas.py",
+        "raw_specifier": "re",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "re",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/schemas.py",
+        "raw_specifier": "from collections.abc import Callable",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/schemas.py",
+        "raw_specifier": "from typing import Any, NamedTuple",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/schemas.py",
+        "raw_specifier": "from starlette.requests import Request",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/schemas.py",
+        "raw_specifier": "from starlette.responses import Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/schemas.py",
+        "raw_specifier": "from starlette.routing import BaseRoute, Host, Mount, Route",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/schemas.py",
+        "raw_specifier": "yaml",
+        "import_kind": "import",
+        "status": "undeclared_package",
+        "top_level_module": "yaml",
+        "confidence": "low"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "errno",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "errno",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "importlib.util",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "importlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "os",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "os",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "stat",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "stat",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "from email.utils import parsedate",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "email",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "from typing import Union",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "anyio",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "anyio.to_thread",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "from starlette._utils import get_route_path",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "from starlette.datastructures import URL, Headers",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "from starlette.exceptions import HTTPException",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "from starlette.responses import FileResponse, RedirectResponse, Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/staticfiles.py",
+        "raw_specifier": "from starlette.types import Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/status.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/status.py",
+        "raw_specifier": "warnings",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "warnings",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/templating.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/templating.py",
+        "raw_specifier": "from collections.abc import Callable, Mapping, Sequence",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/templating.py",
+        "raw_specifier": "from os import PathLike",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "os",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/templating.py",
+        "raw_specifier": "from typing import TYPE_CHECKING, Any, overload",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/templating.py",
+        "raw_specifier": "from starlette.background import BackgroundTask",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/templating.py",
+        "raw_specifier": "from starlette.datastructures import URL",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/templating.py",
+        "raw_specifier": "from starlette.requests import Request",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/templating.py",
+        "raw_specifier": "from starlette.responses import HTMLResponse",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/templating.py",
+        "raw_specifier": "from starlette.types import Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/templating.py",
+        "raw_specifier": "jinja2",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "jinja2",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/templating.py",
+        "raw_specifier": "from starlette.templating import Jinja2Templates",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "contextlib",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "contextlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "inspect",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "inspect",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "io",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "io",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "json",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "json",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "math",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "math",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "sys",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "sys",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "warnings",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "warnings",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from collections.abc import Awaitable, Callable, Generator, Iterable, Mapping, MutableMapping, Sequence",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from concurrent.futures import Future",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "concurrent",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from contextlib import AbstractContextManager",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "contextlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from types import GeneratorType",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "types",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from typing import ( Any, Literal, TypedDict, TypeGuard, cast, )",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from urllib.parse import unquote, urljoin",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "urllib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "anyio",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "anyio.abc",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "anyio.from_thread",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from anyio.streams.stapled import StapledObjectStream",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from starlette._utils import is_async_callable",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from starlette.types import ASGIApp, Message, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from starlette.websockets import WebSocketDisconnect",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from typing import Self",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "from typing_extensions import Self",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "typing_extensions",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/testclient.py",
+        "raw_specifier": "httpx",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "httpx",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/types.py",
+        "raw_specifier": "from collections.abc import Awaitable, Callable, Mapping, MutableMapping",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/types.py",
+        "raw_specifier": "from contextlib import AbstractAsyncContextManager",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "contextlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/types.py",
+        "raw_specifier": "from typing import TYPE_CHECKING, Any, TypeVar",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/types.py",
+        "raw_specifier": "from starlette.requests import Request",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/types.py",
+        "raw_specifier": "from starlette.responses import Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/types.py",
+        "raw_specifier": "from starlette.websockets import WebSocket",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/websockets.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/websockets.py",
+        "raw_specifier": "enum",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "enum",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/websockets.py",
+        "raw_specifier": "json",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "json",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/websockets.py",
+        "raw_specifier": "from collections.abc import AsyncIterator, Iterable",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/websockets.py",
+        "raw_specifier": "from typing import Any, cast",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/websockets.py",
+        "raw_specifier": "from starlette.requests import HTTPConnection, StateT",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/websockets.py",
+        "raw_specifier": "from starlette.responses import Response",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/websockets.py",
+        "raw_specifier": "from starlette.types import Message, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_exception_handler.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_exception_handler.py",
+        "raw_specifier": "from typing import Any",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_exception_handler.py",
+        "raw_specifier": "from starlette._utils import is_async_callable",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_exception_handler.py",
+        "raw_specifier": "from starlette.concurrency import run_in_threadpool",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_exception_handler.py",
+        "raw_specifier": "from starlette.exceptions import HTTPException",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_exception_handler.py",
+        "raw_specifier": "from starlette.requests import Request",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_exception_handler.py",
+        "raw_specifier": "from starlette.types import ASGIApp, ExceptionHandler, Message, Receive, Scope, Send",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_exception_handler.py",
+        "raw_specifier": "from starlette.websockets import WebSocket",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_utils.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_utils.py",
+        "raw_specifier": "functools",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "functools",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_utils.py",
+        "raw_specifier": "sys",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "sys",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_utils.py",
+        "raw_specifier": "from collections.abc import Awaitable, Callable, Generator",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "collections",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_utils.py",
+        "raw_specifier": "from contextlib import AbstractAsyncContextManager, contextmanager",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "contextlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_utils.py",
+        "raw_specifier": "from typing import Any, Generic, Protocol, TypeVar, overload",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_utils.py",
+        "raw_specifier": "from starlette.types import Scope",
+        "import_kind": "from_import",
+        "status": "project_import",
+        "top_level_module": "starlette",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_utils.py",
+        "raw_specifier": "from inspect import iscoroutinefunction",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "inspect",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_utils.py",
+        "raw_specifier": "from typing import TypeIs",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_utils.py",
+        "raw_specifier": "from asyncio import iscoroutinefunction",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "asyncio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_utils.py",
+        "raw_specifier": "from typing_extensions import TypeIs",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "typing_extensions",
+        "confidence": "high"
+      },
+      {
+        "from_file": "starlette/_utils.py",
+        "raw_specifier": "from exceptiongroup import BaseExceptionGroup  # type: ignore[unused-ignore,import-not-found]",
+        "import_kind": "from_import",
+        "status": "declared_package",
+        "top_level_module": "exceptiongroup",
+        "confidence": "high"
+      }
+    ],
+    "dependency_manifests": [
+      {
+        "source_path": "pyproject.toml",
+        "source_type": "pyproject.toml",
+        "packages": [
+          "anyio",
+          "typing_extensions",
+          "itsdangerous",
+          "jinja2",
+          "python_multipart",
+          "pyyaml",
+          "httpx"
+        ],
+        "dev_packages": [],
+        "confidence": "high",
+        "warnings": []
+      },
+      {
+        "source_path": "uv.lock",
+        "source_type": "uv.lock",
+        "packages": [
+          "anyio",
+          "attrs",
+          "backports_tarfile",
+          "black",
+          "certifi",
+          "cffi",
+          "charset_normalizer",
+          "click",
+          "colorama",
+          "coverage",
+          "cryptography",
+          "deepmerge",
+          "docutils",
+          "exceptiongroup",
+          "ghp_import",
+          "griffelib",
+          "h11",
+          "httpcore",
+          "httpx",
+          "id",
+          "idna",
+          "importlib_metadata",
+          "iniconfig",
+          "itsdangerous",
+          "jaraco_classes",
+          "jaraco_context",
+          "jaraco_functools",
+          "jeepney",
+          "jinja2",
+          "keyring",
+          "markdown",
+          "markdown_it_py",
+          "markupsafe",
+          "mdurl",
+          "mergedeep",
+          "mkdocs",
+          "mkdocs_autorefs",
+          "mkdocs_get_deps",
+          "mkdocstrings",
+          "mkdocstrings_python",
+          "more_itertools",
+          "mypy",
+          "mypy_extensions",
+          "nh3",
+          "outcome",
+          "packaging",
+          "pathspec",
+          "platformdirs",
+          "pluggy",
+          "pycparser",
+          "pygments",
+          "pymdown_extensions",
+          "pytest",
+          "python_dateutil",
+          "python_multipart",
+          "pytokens",
+          "pywin32_ctypes",
+          "pyyaml",
+          "pyyaml_env_tag",
+          "readme_renderer",
+          "requests",
+          "requests_toolbelt",
+          "rfc3986",
+          "rich",
+          "ruff",
+          "secretstorage",
+          "six",
+          "sniffio",
+          "sortedcontainers",
+          "starlette",
+          "tomli",
+          "trio",
+          "twine",
+          "types_pyyaml",
+          "typing_extensions",
+          "urllib3",
+          "watchdog",
+          "zensical",
+          "zipp"
+        ],
+        "dev_packages": [],
+        "confidence": "high",
+        "warnings": []
+      }
+    ],
+    "test_mappings": [
+      {
+        "source_path": "starlette/applications.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_applications.py",
+          "tests/test_applications.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_applications.py",
+          "tests/applications/test_applications.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_applications.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_applications.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/authentication.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_authentication.py",
+          "tests/test_authentication.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_authentication.py",
+          "tests/authentication/test_authentication.py",
+          "tests/authentications/test_authentication.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_authentication.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_authentication.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/background.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_background.py",
+          "tests/test_background.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_background.py",
+          "tests/background/test_background.py",
+          "tests/backgrounds/test_background.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_background.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_background.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/concurrency.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_concurrency.py",
+          "tests/test_concurrency.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_concurrency.py",
+          "tests/concurrency/test_concurrency.py",
+          "tests/concurrencys/test_concurrency.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_concurrency.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_concurrency.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/config.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_config.py",
+          "tests/test_config.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_config.py",
+          "tests/config/test_config.py",
+          "tests/configs/test_config.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_config.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_config.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/convertors.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_convertors.py",
+          "tests/test_convertors.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_convertors.py",
+          "tests/convertors/test_convertors.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_convertors.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_convertors.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/datastructures.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_datastructures.py",
+          "tests/test_datastructures.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_datastructures.py",
+          "tests/datastructures/test_datastructures.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_datastructures.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_datastructures.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/endpoints.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_endpoints.py",
+          "tests/test_endpoints.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_endpoints.py",
+          "tests/endpoints/test_endpoints.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_endpoints.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_endpoints.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/exceptions.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_exceptions.py",
+          "tests/test_exceptions.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_exceptions.py",
+          "tests/exceptions/test_exceptions.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_exceptions.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_exceptions.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/formparsers.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_formparsers.py",
+          "tests/test_formparsers.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_formparsers.py",
+          "tests/formparsers/test_formparsers.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_formparsers.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_formparsers.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/middleware/authentication.py",
+        "candidate_test_paths": [
+          "starlette/middleware/tests/test_authentication.py",
+          "tests/middleware/test_authentication.py",
+          "starlette/middleware/tests/test_middleware.py",
+          "test/test_authentication.py",
+          "tests/test_authentication.py",
+          "tests/authentication/test_authentication.py",
+          "tests/authentications/test_authentication.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_authentication.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_authentication.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/middleware/base.py",
+        "candidate_test_paths": [
+          "starlette/middleware/tests/test_base.py",
+          "tests/middleware/test_base.py",
+          "starlette/middleware/tests/test_middleware.py",
+          "test/test_base.py",
+          "tests/test_base.py",
+          "tests/base/test_base.py",
+          "tests/bases/test_base.py"
+        ],
+        "existing_test_paths": [
+          "tests/middleware/test_base.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/middleware/test_base.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/middleware/cors.py",
+        "candidate_test_paths": [
+          "starlette/middleware/tests/test_cors.py",
+          "tests/middleware/test_cors.py",
+          "starlette/middleware/tests/test_middleware.py",
+          "test/test_cors.py",
+          "tests/test_cors.py",
+          "tests/cors/test_cors.py"
+        ],
+        "existing_test_paths": [
+          "tests/middleware/test_cors.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/middleware/test_cors.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/middleware/errors.py",
+        "candidate_test_paths": [
+          "starlette/middleware/tests/test_errors.py",
+          "tests/middleware/test_errors.py",
+          "starlette/middleware/tests/test_middleware.py",
+          "test/test_errors.py",
+          "tests/test_errors.py",
+          "tests/errors/test_errors.py"
+        ],
+        "existing_test_paths": [
+          "tests/middleware/test_errors.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/middleware/test_errors.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/middleware/exceptions.py",
+        "candidate_test_paths": [
+          "starlette/middleware/tests/test_exceptions.py",
+          "tests/middleware/test_exceptions.py",
+          "starlette/middleware/tests/test_middleware.py",
+          "test/test_exceptions.py",
+          "tests/test_exceptions.py",
+          "tests/exceptions/test_exceptions.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_exceptions.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_exceptions.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/middleware/gzip.py",
+        "candidate_test_paths": [
+          "starlette/middleware/tests/test_gzip.py",
+          "tests/middleware/test_gzip.py",
+          "starlette/middleware/tests/test_middleware.py",
+          "test/test_gzip.py",
+          "tests/test_gzip.py",
+          "tests/gzip/test_gzip.py",
+          "tests/gzips/test_gzip.py"
+        ],
+        "existing_test_paths": [
+          "tests/middleware/test_gzip.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/middleware/test_gzip.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/middleware/httpsredirect.py",
+        "candidate_test_paths": [
+          "starlette/middleware/tests/test_httpsredirect.py",
+          "tests/middleware/test_httpsredirect.py",
+          "starlette/middleware/tests/test_middleware.py",
+          "test/test_httpsredirect.py",
+          "tests/test_httpsredirect.py",
+          "tests/httpsredirect/test_httpsredirect.py",
+          "tests/httpsredirects/test_httpsredirect.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "starlette/middleware/sessions.py",
+        "candidate_test_paths": [
+          "starlette/middleware/tests/test_sessions.py",
+          "tests/middleware/test_sessions.py",
+          "starlette/middleware/tests/test_middleware.py",
+          "test/test_sessions.py",
+          "tests/test_sessions.py",
+          "tests/sessions/test_sessions.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "starlette/middleware/trustedhost.py",
+        "candidate_test_paths": [
+          "starlette/middleware/tests/test_trustedhost.py",
+          "tests/middleware/test_trustedhost.py",
+          "starlette/middleware/tests/test_middleware.py",
+          "test/test_trustedhost.py",
+          "tests/test_trustedhost.py",
+          "tests/trustedhost/test_trustedhost.py",
+          "tests/trustedhosts/test_trustedhost.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "starlette/middleware/wsgi.py",
+        "candidate_test_paths": [
+          "starlette/middleware/tests/test_wsgi.py",
+          "tests/middleware/test_wsgi.py",
+          "starlette/middleware/tests/test_middleware.py",
+          "test/test_wsgi.py",
+          "tests/test_wsgi.py",
+          "tests/wsgi/test_wsgi.py",
+          "tests/wsgis/test_wsgi.py"
+        ],
+        "existing_test_paths": [
+          "tests/middleware/test_wsgi.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/middleware/test_wsgi.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/requests.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_requests.py",
+          "tests/test_requests.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_requests.py",
+          "tests/requests/test_requests.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_requests.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_requests.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/responses.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_responses.py",
+          "tests/test_responses.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_responses.py",
+          "tests/responses/test_responses.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_responses.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_responses.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/routing.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_routing.py",
+          "tests/test_routing.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_routing.py",
+          "tests/routing/test_routing.py",
+          "tests/routings/test_routing.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_routing.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_routing.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/schemas.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_schemas.py",
+          "tests/test_schemas.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_schemas.py",
+          "tests/schemas/test_schemas.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_schemas.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_schemas.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/staticfiles.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_staticfiles.py",
+          "tests/test_staticfiles.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_staticfiles.py",
+          "tests/staticfiles/test_staticfiles.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_staticfiles.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_staticfiles.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/status.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_status.py",
+          "tests/test_status.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_status.py",
+          "tests/status/test_status.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_status.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_status.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/templating.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_templating.py",
+          "tests/test_templating.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_templating.py",
+          "tests/templating/test_templating.py",
+          "tests/templatings/test_templating.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "starlette/testclient.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_testclient.py",
+          "tests/test_testclient.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_testclient.py",
+          "tests/testclient/test_testclient.py",
+          "tests/testclients/test_testclient.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_testclient.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_testclient.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/types.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_types.py",
+          "tests/test_types.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_types.py",
+          "tests/types/test_types.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "starlette/websockets.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_websockets.py",
+          "tests/test_websockets.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_websockets.py",
+          "tests/websockets/test_websockets.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_websockets.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_websockets.py [library_package layout]"
+      },
+      {
+        "source_path": "starlette/_exception_handler.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_exception_handler.py",
+          "tests/test_exception_handler.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_exception_handler.py",
+          "tests/exception_handler/test_exception_handler.py",
+          "tests/exception_handlers/test_exception_handler.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "starlette/_utils.py",
+        "candidate_test_paths": [
+          "starlette/tests/test_utils.py",
+          "tests/test_utils.py",
+          "starlette/tests/test_starlette.py",
+          "test/test_utils.py",
+          "tests/utils/test_utils.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      }
+    ],
+    "sensitive_zones": [],
+    "unknowns": [
+      {
+        "category": "unclassified_python_file",
+        "classification": "actionable",
+        "paths": [
+          "uv.lock"
+        ],
+        "count": 1,
+        "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+      },
+      {
+        "category": "scope_granularity_limit",
+        "classification": "intrinsic",
+        "paths": [],
+        "count": 0,
+        "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+      }
+    ],
+    "quality": {
+      "python_file_count": 67,
+      "classified_count": 67,
+      "classified_ratio": 1,
+      "unknown_count": 0,
+      "unknown_ratio": 0,
+      "import_observation_count": 316,
+      "project_import_count": 115,
+      "declared_package_count": 27,
+      "undeclared_package_count": 4,
+      "dynamic_import_count": 0,
+      "test_mapping_count": 32,
+      "high_confidence_test_count": 25,
+      "medium_confidence_test_count": 0,
+      "sensitive_zone_count": 0,
+      "sensitive_file_count": 0,
+      "manifest_count": 2,
+      "low_confidence_manifest_count": 0
+    },
+    "limitations": [
+      "Python import observations are syntax-level observations, not full runtime import resolution.",
+      "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+      "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+      "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+      "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+      "Namespace packages without __init__.py are not detected as project packages."
+    ]
+  },
+  "support_assessment": {
+    "support_level": "validated",
+    "reason": "All 5 observation signals present",
+    "meets_expected": true,
+    "signals": {
+      "has_layout": true,
+      "has_framework": true,
+      "has_project_role": true,
+      "has_test_mapping": true,
+      "has_risk_preset": true,
+      "python_file_count": 67,
+      "crash": false,
+      "sanitizer_clean": true
+    },
+    "gaps": []
+  },
+  "sanitizer": {
+    "violations": 0,
+    "details": [],
+    "clean": true
+  },
+  "notes": "ok"
+}

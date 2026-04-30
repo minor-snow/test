@@ -113,7 +113,7 @@ describe("pythonRiskPresetValidator", () => {
     expect(result.validation).toBe("partial");
   });
 
-  it("marks generic service as validated once at least 60 percent of rules are active", () => {
+  it("requires at least three active rules before marking a preset validated", () => {
     const result = validatePythonRiskPreset({
       layout: layout("api_service", "flat_package"),
       frameworkProfile: frameworkProfile({
@@ -123,6 +123,22 @@ describe("pythonRiskPresetValidator", () => {
       }),
       sensitiveZones: [zone("authentication", ["app/auth.py"])],
       allPaths: ["app/auth.py", "app/config.py"],
+    });
+
+    expect(result.preset).toBe("generic_service");
+    expect(result.validation).toBe("partial");
+  });
+
+  it("marks generic service as validated once enough rules are active", () => {
+    const result = validatePythonRiskPreset({
+      layout: layout("api_service", "flat_package"),
+      frameworkProfile: frameworkProfile({
+        project_role_signals: [
+          { role: "service_backend", confidence: "medium", evidence: [{ dimension: "layout_classification", detail: "api_service" }] },
+        ],
+      }),
+      sensitiveZones: [zone("authentication", ["app/auth.py"])],
+      allPaths: ["app/auth.py", "app/config.py", "app/security.py"],
     });
 
     expect(result.preset).toBe("generic_service");

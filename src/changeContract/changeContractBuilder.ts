@@ -22,9 +22,9 @@
  * ref: P19b
  */
 
-import { createHash } from "node:crypto";
 import type { BlastRadiusReport } from "../boundary/blastRadius.js";
 import type { ScopedImplementationBoundaryPackage } from "../scopedHandoff/types.js";
+import { stableHash, stableHexDigest, stableTextHash } from "../deterministic.js";
 import type {
   ChangeContract,
   ChangeContractRefs,
@@ -195,12 +195,16 @@ function verifyUpstreamConsistency(input: BuildChangeContractInput): void {
   }
 
   // Check 2: blast radius report hash
-  const recomputedBlastHash = hashString(JSON.stringify(input.blastRadiusReport));
-  if (input.scopedPackage.source.blast_radius_report_hash !== recomputedBlastHash) {
+  const recomputedBlastHash = stableHash(input.blastRadiusReport);
+  const legacyBlastHash = stableTextHash(JSON.stringify(input.blastRadiusReport));
+  if (
+    input.scopedPackage.source.blast_radius_report_hash !== recomputedBlastHash &&
+    input.scopedPackage.source.blast_radius_report_hash !== legacyBlastHash
+  ) {
     throw new Error(
       `P15/P17 upstream mismatch: blast_radius_report_hash differs. ` +
       `P17 recorded: '${input.scopedPackage.source.blast_radius_report_hash}', ` +
-      `recomputed from supplied P15: '${recomputedBlastHash}'. ` +
+      `recomputed from supplied P15: '${recomputedBlastHash}' (legacy accepted: '${legacyBlastHash}'). ` +
       `Cannot build a ChangeContract from unrelated pipeline outputs.`,
     );
   }
@@ -254,8 +258,7 @@ function extractScope(pkg: ScopedImplementationBoundaryPackage): ChangeScope {
   // Hash the full enforcement surface of the scope package.
   // This covers: paths + per-file ops, constraints, assumptions (id + text),
   // required tests (id + requirement), escalation rules, and review flag.
-  const scopeHash = createHash("sha256")
-    .update(JSON.stringify({
+  const scopeHash = stableHexDigest({
       scope_id: pkg.scope_id,
       allowed_files: pkg.allowed_files.map(f => ({ path: f.path, ops: f.allowed_operations.sort() })),
       forbidden_files: pkg.forbidden_files.map(f => f.pattern).sort(),
@@ -270,9 +273,7 @@ function extractScope(pkg: ScopedImplementationBoundaryPackage): ChangeScope {
         .map(ri => ({ id: ri.trigger_id, condition: ri.condition, action: ri.required_action }))
         .sort((a, b) => a.id.localeCompare(b.id)),
       must_require_human_review: pkg.summary.must_require_human_review,
-    }))
-    .digest("hex")
-    .slice(0, 16);
+    }).slice(0, 16);
 
   return {
     scope_hash: `scope_${scopeHash}`,
@@ -306,13 +307,9 @@ function buildRefs(input: BuildChangeContractInput): ChangeContractRefs {
     canonical_revisions: input.canonical_revisions,
     handoff_hash: input.scopedPackage.source.handoff_package_hash,
     boundary_graph_hash: input.scopedPackage.source.boundary_graph_hash,
-    blast_radius_hash: hashString(JSON.stringify(input.blastRadiusReport)),
-    scoped_handoff_hash: hashString(JSON.stringify(input.scopedPackage)),
+    blast_radius_hash: stableHash(input.blastRadiusReport),
+    scoped_handoff_hash: stableHash(input.scopedPackage),
   };
-}
-
-function hashString(s: string): string {
-  return "sha256:" + createHash("sha256").update(s).digest("hex");
 }
 
 // ---------------------------------------------------------------------------

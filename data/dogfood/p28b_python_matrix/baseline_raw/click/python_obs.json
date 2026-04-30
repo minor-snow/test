@@ -1,0 +1,5187 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "click",
+    "observed_file_count": 149,
+    "python_file_count": 76
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "src_layout",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "src_layout_detected",
+        "weight": "strong",
+        "evidence": "src/ directory with package(s): click"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 2,
+      "docs": 1,
+      "source": 31,
+      "unknown": 11,
+      "test": 31
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "click imported in source files"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      },
+      {
+        "name": "httpx",
+        "kind": "http_client",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpx found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      },
+      {
+        "role": "http_client_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpcore dependency (HTTP transport layer)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "API-related paths in library package"
+          },
+          {
+            "dimension": "layout_classification",
+            "detail": "Library package with HTTP core dependency"
+          }
+        ]
+      },
+      {
+        "role": "cli_application",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points (__main__.py or cli.py)"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "CLI framework in dependencies"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "generic_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / src_layout (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (high)",
+      "framework: httpx / http_client (medium)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)",
+      "project_role: http_client_library (high)",
+      "project_role: cli_application (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/config*",
+        "reason": "Configuration affects system behavior",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/config*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 949,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 2013,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "examples/aliases/aliases.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4205,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/aliases/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 339,
+      "evidence": []
+    },
+    {
+      "path": "examples/colors/colors.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 965,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/colors/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 334,
+      "evidence": []
+    },
+    {
+      "path": "examples/completion/completion.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1444,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/completion/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 354,
+      "evidence": []
+    },
+    {
+      "path": "examples/complex/complex/cli.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1668,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/complex/complex/commands/cmd_init.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 398,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/complex/complex/commands/cmd_status.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 297,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/complex/complex/commands/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/complex/complex/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/complex/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 343,
+      "evidence": []
+    },
+    {
+      "path": "examples/imagepipe/imagepipe.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8545,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/imagepipe/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 364,
+      "evidence": []
+    },
+    {
+      "path": "examples/inout/inout.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 752,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/inout/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 329,
+      "evidence": []
+    },
+    {
+      "path": "examples/naval/naval.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1769,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/naval/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 329,
+      "evidence": []
+    },
+    {
+      "path": "examples/repo/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 324,
+      "evidence": []
+    },
+    {
+      "path": "examples/repo/repo.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4880,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/termui/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 334,
+      "evidence": []
+    },
+    {
+      "path": "examples/termui/termui.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4319,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/validation/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 354,
+      "evidence": []
+    },
+    {
+      "path": "examples/validation/validation.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1501,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 5608,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "src/click/core.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 138851,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/decorators.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19012,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11604,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/formatting.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10031,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/globals.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1990,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/parser.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19423,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/shell_completion.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 22084,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/termui.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 33132,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/testing.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 23383,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/types.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 43339,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 20912,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/_compat.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19505,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/_termui_impl.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 30315,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/_textwrap.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1451,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/_utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 979,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/_winconsole.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8761,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/click/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4760,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 139,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_arguments.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 19817,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_basic.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 21487,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_chain.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6031,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_commands.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 19338,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_command_decorators.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1972,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_compat.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1339,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_context.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 23824,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_custom_classes.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3134,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_defaults.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 14806,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_formatting.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11971,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_imports.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1640,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_info_dict.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8206,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_normalization.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1857,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_options.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 91298,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_parser.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 947,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_shell_completion.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 20067,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_stream_lifecycle.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 16653,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_termui.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 37474,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_testing.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 15159,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_types.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8360,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 25871,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/typing/typing_aliased_group.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1238,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/typing/typing_confirmation_option.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 341,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/typing/typing_group_kw_options.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 167,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/typing/typing_help_option.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 275,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/typing/typing_options.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 407,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/typing/typing_password_option.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 269,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/typing/typing_progressbar.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 583,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/typing/typing_simple_example.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 525,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/typing/typing_version_option.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 304,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "uv.lock",
+      "bucket": "unknown",
+      "extension": ".lock",
+      "size_bytes": 260258,
+      "evidence": []
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/aliases/aliases.py",
+      "raw_specifier": "configparser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "configparser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/aliases/aliases.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/aliases/aliases.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/colors/colors.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/completion/completion.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/completion/completion.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/completion/completion.py",
+      "raw_specifier": "from click.shell_completion import CompletionItem",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/complex/complex/cli.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/complex/complex/cli.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/complex/complex/cli.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/complex/complex/commands/cmd_init.py",
+      "raw_specifier": "from complex.cli import pass_environment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "complex",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/complex/complex/commands/cmd_init.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/complex/complex/commands/cmd_status.py",
+      "raw_specifier": "from complex.cli import pass_environment",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "complex",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/complex/complex/commands/cmd_status.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/imagepipe/imagepipe.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/imagepipe/imagepipe.py",
+      "raw_specifier": "from PIL import Image",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "PIL",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/imagepipe/imagepipe.py",
+      "raw_specifier": "from PIL import ImageEnhance",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "PIL",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/imagepipe/imagepipe.py",
+      "raw_specifier": "from PIL import ImageFilter",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "PIL",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/imagepipe/imagepipe.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/inout/inout.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/naval/naval.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/repo/repo.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/repo/repo.py",
+      "raw_specifier": "posixpath",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "posixpath",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/repo/repo.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/repo/repo.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/termui/termui.py",
+      "raw_specifier": "math",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "math",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/termui/termui.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/termui/termui.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/termui/termui.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/validation/validation.py",
+      "raw_specifier": "from urllib import parse as urlparse",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/validation/validation.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "enum",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "errno",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "errno",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from abc import ABC",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from abc import abstractmethod",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from collections import abc",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from collections import Counter",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from contextlib import AbstractContextManager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from contextlib import ExitStack",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from gettext import gettext as _",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from gettext import ngettext",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from itertools import repeat",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from . import types",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from ._utils import FLAG_NEEDS_VALUE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from ._utils import UNSET",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .exceptions import Abort",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .exceptions import BadParameter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .exceptions import ClickException",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .exceptions import Exit",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .exceptions import MissingParameter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .exceptions import NoArgsIsHelpError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .exceptions import NoSuchCommand",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .exceptions import UsageError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .formatting import HelpFormatter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".formatting",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .formatting import join_options",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".formatting",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .globals import pop_context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .globals import push_context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .parser import _OptionParser",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .parser import _split_opt",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .termui import confirm",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .termui import prompt",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .termui import style",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .utils import _detect_program_name",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .utils import _expand_args",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .utils import echo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .utils import make_default_short_help",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .utils import make_str",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .utils import PacifyFlushWrapper",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .shell_completion import CompletionItem",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".shell_completion",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .decorators import help_option",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from click.shell_completion import CompletionItem",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .shell_completion import shell_complete",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".shell_completion",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .decorators import command",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from .decorators import group",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from click.shell_completion import CompletionItem",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "from click.shell_completion import CompletionItem",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/core.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "from gettext import gettext as _",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "from .core import Argument",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "from .core import Command",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "from .core import Context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "from .core import Group",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "from .core import Option",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "from .core import Parameter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "from .globals import get_current_context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "from .utils import echo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "typing_extensions",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/decorators.py",
+      "raw_specifier": "importlib.metadata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "from gettext import gettext as _",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "from gettext import ngettext",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "from ._compat import get_text_stderr",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "from .globals import resolve_color_default",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "from .utils import echo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "from .utils import format_filename",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "from .core import Command",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "from .core import Context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "from .core import Parameter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "from difflib import get_close_matches",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "difflib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/exceptions.py",
+      "raw_specifier": "from difflib import get_close_matches",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "difflib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/formatting.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/formatting.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/formatting.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/formatting.py",
+      "raw_specifier": "from gettext import gettext as _",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/formatting.py",
+      "raw_specifier": "from ._compat import term_len",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/formatting.py",
+      "raw_specifier": "from .parser import _split_opt",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/formatting.py",
+      "raw_specifier": "from ._textwrap import TextWrapper",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._textwrap",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/formatting.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/globals.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/globals.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/globals.py",
+      "raw_specifier": "from threading import local",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/globals.py",
+      "raw_specifier": "from .core import Context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from collections import deque",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from gettext import gettext as _",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from gettext import ngettext",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from ._utils import FLAG_NEEDS_VALUE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from ._utils import UNSET",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from .exceptions import BadArgumentUsage",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from .exceptions import BadOptionUsage",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from .exceptions import NoSuchOption",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from .exceptions import UsageError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from ._utils import T_FLAG_NEEDS_VALUE",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from ._utils import T_UNSET",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from .core import Argument as CoreArgument",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from .core import Context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from .core import Option as CoreOption",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from .core import Parameter as CoreParameter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/parser.py",
+      "raw_specifier": "from .shell_completion import split_arg_string",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".shell_completion",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "from gettext import gettext as _",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "from .core import Argument",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "from .core import Command",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "from .core import Context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "from .core import Group",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "from .core import Option",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "from .core import Parameter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "from .core import ParameterSource",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "from .utils import echo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/shell_completion.py",
+      "raw_specifier": "shlex",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shlex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from contextlib import AbstractContextManager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from contextlib import redirect_stdout",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from gettext import gettext as _",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from ._compat import isatty",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from ._compat import strip_ansi",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from ._compat import WIN",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from .exceptions import Abort",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from .exceptions import UsageError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from .globals import resolve_color_default",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from .types import Choice",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from .types import convert_type",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from .types import ParamType",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from .utils import echo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from .utils import LazyFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from ._termui_impl import ProgressBar",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._termui_impl",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "getpass",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "getpass",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from ._termui_impl import get_pager_file",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._termui_impl",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from ._termui_impl import ProgressBar",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._termui_impl",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from ._termui_impl import Editor",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._termui_impl",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from ._termui_impl import open_url",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._termui_impl",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from ._termui_impl import getchar as f",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._termui_impl",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/termui.py",
+      "raw_specifier": "from ._termui_impl import raw_terminal as f",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._termui_impl",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "pdb",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pdb",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "shlex",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shlex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "from . import _compat",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "from . import formatting",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "from . import termui",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "from . import utils",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "from ._compat import _find_binary_reader",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "from _typeshed import ReadableBuffer",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "_typeshed",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "from .core import Command",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/testing.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "abc",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "enum",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "stat",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "stat",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from gettext import gettext as _",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from gettext import ngettext",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from ._compat import _get_argv_encoding",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from ._compat import open_stream",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from .exceptions import BadParameter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from .utils import format_filename",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from .utils import LazyFile",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from .utils import safecall",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "typing_extensions",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from .core import Context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from .core import Parameter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from .shell_completion import CompletionItem",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".shell_completion",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from click.shell_completion import CompletionItem",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "operator",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "operator",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from click.shell_completion import CompletionItem",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/types.py",
+      "raw_specifier": "from click.shell_completion import CompletionItem",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from types import ModuleType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from ._compat import _default_text_stderr",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from ._compat import _default_text_stdout",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from ._compat import _find_binary_writer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from ._compat import auto_wrap_for_ansi",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from ._compat import binary_streams",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from ._compat import open_stream",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from ._compat import should_strip_ansi",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from ._compat import strip_ansi",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from ._compat import text_streams",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from ._compat import WIN",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from .globals import resolve_color_default",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "typing_extensions",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from .exceptions import FileError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "errno",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "errno",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/utils.py",
+      "raw_specifier": "from glob import glob",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "glob",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "codecs",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "codecs",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "from weakref import WeakKeyDictionary",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "weakref",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "errno",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "errno",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "random",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "random",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "from ._winconsole import _get_windows_console_stream",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._winconsole",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "locale",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "locale",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_compat.py",
+      "raw_specifier": "colorama",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "colorama",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "math",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "math",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "shlex",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shlex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from gettext import gettext as _",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "gettext",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from io import StringIO",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from ._compat import _default_text_stdout",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from ._compat import CYGWIN",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from ._compat import get_best_encoding",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from ._compat import isatty",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from ._compat import strip_ansi",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from ._compat import term_len",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from ._compat import WIN",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from .exceptions import ClickException",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from .utils import echo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from operator import length_hint",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "operator",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from shutil import which",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "shlex",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shlex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "from urllib.parse import unquote",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "webbrowser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "webbrowser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "msvcrt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "msvcrt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "termios",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "termios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_termui_impl.py",
+      "raw_specifier": "tty",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tty",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_textwrap.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_textwrap.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_textwrap.py",
+      "raw_specifier": "textwrap",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "textwrap",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_textwrap.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_utils.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_utils.py",
+      "raw_specifier": "enum",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_utils.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import Array",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import byref",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import c_char",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import c_char_p",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import c_int",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import c_ssize_t",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import c_ulong",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import c_void_p",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import POINTER",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import py_object",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import Structure",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes.wintypes import DWORD",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes.wintypes import HANDLE",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes.wintypes import LPCWSTR",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes.wintypes import LPWSTR",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ._compat import _NonClosingTextIOWrapper",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._compat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "msvcrt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "msvcrt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import windll  # noqa: E402",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import WINFUNCTYPE  # noqa: E402",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from collections.abc import Buffer  # type: ignore",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from typing_extensions import Buffer",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "typing_extensions",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/_winconsole.py",
+      "raw_specifier": "from ctypes import pythonapi",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .core import Argument as Argument",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .core import Command as Command",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .core import CommandCollection as CommandCollection",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .core import Context as Context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .core import Group as Group",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .core import Option as Option",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .core import Parameter as Parameter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .core import ParameterSource as ParameterSource",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .decorators import argument as argument",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .decorators import command as command",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .decorators import confirmation_option as confirmation_option",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .decorators import group as group",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .decorators import help_option as help_option",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .decorators import make_pass_decorator as make_pass_decorator",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .decorators import option as option",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .decorators import pass_context as pass_context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .decorators import pass_obj as pass_obj",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .decorators import password_option as password_option",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .decorators import version_option as version_option",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".decorators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .exceptions import Abort as Abort",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .exceptions import BadArgumentUsage as BadArgumentUsage",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .exceptions import BadOptionUsage as BadOptionUsage",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .exceptions import BadParameter as BadParameter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .exceptions import ClickException as ClickException",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .exceptions import FileError as FileError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .exceptions import MissingParameter as MissingParameter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .exceptions import NoSuchCommand as NoSuchCommand",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .exceptions import NoSuchOption as NoSuchOption",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .exceptions import UsageError as UsageError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .formatting import HelpFormatter as HelpFormatter",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".formatting",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .formatting import wrap_text as wrap_text",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".formatting",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .globals import get_current_context as get_current_context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".globals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import clear as clear",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import confirm as confirm",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import echo_via_pager as echo_via_pager",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import edit as edit",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import get_pager_file as get_pager_file",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import getchar as getchar",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import launch as launch",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import pause as pause",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import progressbar as progressbar",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import prompt as prompt",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import secho as secho",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import style as style",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .termui import unstyle as unstyle",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".termui",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import BOOL as BOOL",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import Choice as Choice",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import DateTime as DateTime",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import File as File",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import FLOAT as FLOAT",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import FloatRange as FloatRange",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import INT as INT",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import IntRange as IntRange",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import ParamType as ParamType",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import Path as Path",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import STRING as STRING",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import Tuple as Tuple",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import UNPROCESSED as UNPROCESSED",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .types import UUID as UUID",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".types",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .utils import echo as echo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .utils import format_filename as format_filename",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .utils import get_app_dir as get_app_dir",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .utils import get_binary_stream as get_binary_stream",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .utils import get_text_stream as get_text_stream",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .utils import open_file as open_file",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .core import _BaseCommand",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .core import _MultiCommand",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".core",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "from .parser import _OptionParser",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "importlib.metadata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/click/__init__.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "examples/aliases/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "click"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/colors/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "click"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/completion/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "click"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/complex/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "click"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/imagepipe/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "click",
+        "pillow"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/inout/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "click"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/naval/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "click"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/repo/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "click"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/termui/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "click"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/validation/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "click"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "colorama"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "uv.lock",
+      "source_type": "uv.lock",
+      "packages": [
+        "alabaster",
+        "anyio",
+        "babel",
+        "cachetools",
+        "certifi",
+        "cfgv",
+        "charset_normalizer",
+        "click",
+        "colorama",
+        "distlib",
+        "docutils",
+        "exceptiongroup",
+        "execnet",
+        "filelock",
+        "gha_update",
+        "h11",
+        "httpcore",
+        "httpx",
+        "identify",
+        "idna",
+        "imagesize",
+        "iniconfig",
+        "jinja2",
+        "librt",
+        "markdown_it_py",
+        "markupsafe",
+        "mdit_py_plugins",
+        "mdurl",
+        "mypy",
+        "mypy_extensions",
+        "myst_parser",
+        "nodeenv",
+        "packaging",
+        "pallets_sphinx_themes",
+        "pathspec",
+        "platformdirs",
+        "pluggy",
+        "pre_commit",
+        "pre_commit_uv",
+        "pygments",
+        "pyproject_api",
+        "pyright",
+        "pytest",
+        "pytest_randomly",
+        "pytest_xdist",
+        "python_discovery",
+        "pyyaml",
+        "requests",
+        "roman_numerals",
+        "ruff",
+        "snowballstemmer",
+        "sphinx",
+        "sphinx_autobuild",
+        "sphinx_notfound_page",
+        "sphinx_tabs",
+        "sphinxcontrib_applehelp",
+        "sphinxcontrib_devhelp",
+        "sphinxcontrib_htmlhelp",
+        "sphinxcontrib_jsmath",
+        "sphinxcontrib_log_cabinet",
+        "sphinxcontrib_qthelp",
+        "sphinxcontrib_serializinghtml",
+        "starlette",
+        "tomli",
+        "tomli_w",
+        "tox",
+        "tox_uv",
+        "tox_uv_bare",
+        "typing_extensions",
+        "urllib3",
+        "uv",
+        "uvicorn",
+        "virtualenv",
+        "watchfiles",
+        "websockets"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/aliases/aliases.py",
+      "candidate_test_paths": [
+        "examples/aliases/tests/test_aliases.py",
+        "tests/aliases/test_aliases.py",
+        "test/test_aliases.py",
+        "tests/test_aliases.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/colors/colors.py",
+      "candidate_test_paths": [
+        "examples/colors/tests/test_colors.py",
+        "tests/colors/test_colors.py",
+        "test/test_colors.py",
+        "tests/test_colors.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/completion/completion.py",
+      "candidate_test_paths": [
+        "examples/completion/tests/test_completion.py",
+        "tests/completion/test_completion.py",
+        "test/test_completion.py",
+        "tests/test_completion.py",
+        "tests/completions/test_completion.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/complex/complex/cli.py",
+      "candidate_test_paths": [
+        "examples/complex/complex/tests/test_cli.py",
+        "tests/complex/complex/test_cli.py",
+        "examples/complex/complex/tests/test_complex.py",
+        "test/test_cli.py",
+        "tests/test_cli.py",
+        "tests/cli/test_cli.py",
+        "tests/clis/test_cli.py",
+        "tests/complex/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/complex/complex/commands/cmd_init.py",
+      "candidate_test_paths": [
+        "examples/complex/complex/commands/tests/test_cmd_init.py",
+        "tests/complex/complex/commands/test_cmd_init.py",
+        "examples/complex/complex/commands/tests/test_commands.py",
+        "test/test_cmd_init.py",
+        "tests/test_cmd_init.py",
+        "tests/cmd_init/test_cmd_init.py",
+        "tests/cmd_inits/test_cmd_init.py",
+        "tests/commands/test_cmd_init.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/complex/complex/commands/cmd_status.py",
+      "candidate_test_paths": [
+        "examples/complex/complex/commands/tests/test_cmd_status.py",
+        "tests/complex/complex/commands/test_cmd_status.py",
+        "examples/complex/complex/commands/tests/test_commands.py",
+        "test/test_cmd_status.py",
+        "tests/test_cmd_status.py",
+        "tests/cmd_status/test_cmd_status.py",
+        "tests/commands/test_cmd_status.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/imagepipe/imagepipe.py",
+      "candidate_test_paths": [
+        "examples/imagepipe/tests/test_imagepipe.py",
+        "tests/imagepipe/test_imagepipe.py",
+        "test/test_imagepipe.py",
+        "tests/test_imagepipe.py",
+        "tests/imagepipes/test_imagepipe.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/inout/inout.py",
+      "candidate_test_paths": [
+        "examples/inout/tests/test_inout.py",
+        "tests/inout/test_inout.py",
+        "test/test_inout.py",
+        "tests/test_inout.py",
+        "tests/inouts/test_inout.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/naval/naval.py",
+      "candidate_test_paths": [
+        "examples/naval/tests/test_naval.py",
+        "tests/naval/test_naval.py",
+        "test/test_naval.py",
+        "tests/test_naval.py",
+        "tests/navals/test_naval.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/repo/repo.py",
+      "candidate_test_paths": [
+        "examples/repo/tests/test_repo.py",
+        "tests/repo/test_repo.py",
+        "test/test_repo.py",
+        "tests/test_repo.py",
+        "tests/repos/test_repo.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/termui/termui.py",
+      "candidate_test_paths": [
+        "examples/termui/tests/test_termui.py",
+        "tests/termui/test_termui.py",
+        "test/test_termui.py",
+        "tests/test_termui.py",
+        "tests/termuis/test_termui.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_termui.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_termui.py [library_package layout]"
+    },
+    {
+      "source_path": "examples/validation/validation.py",
+      "candidate_test_paths": [
+        "examples/validation/tests/test_validation.py",
+        "tests/validation/test_validation.py",
+        "test/test_validation.py",
+        "tests/test_validation.py",
+        "tests/validations/test_validation.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/click/core.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_core.py",
+        "tests/click/test_core.py",
+        "src/click/tests/test_click.py",
+        "test/test_core.py",
+        "tests/test_core.py",
+        "tests/core/test_core.py",
+        "tests/cores/test_core.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/click/decorators.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_decorators.py",
+        "tests/click/test_decorators.py",
+        "src/click/tests/test_click.py",
+        "test/test_decorators.py",
+        "tests/test_decorators.py",
+        "tests/decorators/test_decorators.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/click/exceptions.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_exceptions.py",
+        "tests/click/test_exceptions.py",
+        "src/click/tests/test_click.py",
+        "test/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/click/formatting.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_formatting.py",
+        "tests/click/test_formatting.py",
+        "src/click/tests/test_click.py",
+        "test/test_formatting.py",
+        "tests/test_formatting.py",
+        "tests/formatting/test_formatting.py",
+        "tests/formattings/test_formatting.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_formatting.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_formatting.py [library_package layout]"
+    },
+    {
+      "source_path": "src/click/globals.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_globals.py",
+        "tests/click/test_globals.py",
+        "src/click/tests/test_click.py",
+        "test/test_globals.py",
+        "tests/test_globals.py",
+        "tests/globals/test_globals.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/click/parser.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_parser.py",
+        "tests/click/test_parser.py",
+        "src/click/tests/test_click.py",
+        "test/test_parser.py",
+        "tests/test_parser.py",
+        "tests/parser/test_parser.py",
+        "tests/parsers/test_parser.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_parser.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_parser.py [library_package layout]"
+    },
+    {
+      "source_path": "src/click/shell_completion.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_shell_completion.py",
+        "tests/click/test_shell_completion.py",
+        "src/click/tests/test_click.py",
+        "test/test_shell_completion.py",
+        "tests/test_shell_completion.py",
+        "tests/shell_completion/test_shell_completion.py",
+        "tests/shell_completions/test_shell_completion.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_shell_completion.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_shell_completion.py [library_package layout]"
+    },
+    {
+      "source_path": "src/click/termui.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_termui.py",
+        "tests/click/test_termui.py",
+        "src/click/tests/test_click.py",
+        "test/test_termui.py",
+        "tests/test_termui.py",
+        "tests/termui/test_termui.py",
+        "tests/termuis/test_termui.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_termui.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_termui.py [library_package layout]"
+    },
+    {
+      "source_path": "src/click/testing.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_testing.py",
+        "tests/click/test_testing.py",
+        "src/click/tests/test_click.py",
+        "test/test_testing.py",
+        "tests/test_testing.py",
+        "tests/testing/test_testing.py",
+        "tests/testings/test_testing.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_testing.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_testing.py [library_package layout]"
+    },
+    {
+      "source_path": "src/click/types.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_types.py",
+        "tests/click/test_types.py",
+        "src/click/tests/test_click.py",
+        "test/test_types.py",
+        "tests/test_types.py",
+        "tests/types/test_types.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_types.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_types.py [library_package layout]"
+    },
+    {
+      "source_path": "src/click/utils.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_utils.py",
+        "tests/click/test_utils.py",
+        "src/click/tests/test_click.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_utils.py"
+      ],
+      "confidence": "medium",
+      "reason": "Generic library helper match without directory context: tests/test_utils.py"
+    },
+    {
+      "source_path": "src/click/_compat.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_compat.py",
+        "tests/click/test_compat.py",
+        "src/click/tests/test_click.py",
+        "test/test_compat.py",
+        "tests/test_compat.py",
+        "tests/compat/test_compat.py",
+        "tests/compats/test_compat.py",
+        "tests/test__compat.py",
+        "tests/click/test__compat.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_compat.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_compat.py [library_package layout]"
+    },
+    {
+      "source_path": "src/click/_termui_impl.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_termui_impl.py",
+        "tests/click/test_termui_impl.py",
+        "src/click/tests/test_click.py",
+        "test/test_termui_impl.py",
+        "tests/test_termui_impl.py",
+        "tests/termui_impl/test_termui_impl.py",
+        "tests/termui_impls/test_termui_impl.py",
+        "tests/test__termui_impl.py",
+        "tests/click/test__termui_impl.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/click/_textwrap.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_textwrap.py",
+        "tests/click/test_textwrap.py",
+        "src/click/tests/test_click.py",
+        "test/test_textwrap.py",
+        "tests/test_textwrap.py",
+        "tests/textwrap/test_textwrap.py",
+        "tests/textwraps/test_textwrap.py",
+        "tests/test__textwrap.py",
+        "tests/click/test__textwrap.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/click/_utils.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_utils.py",
+        "tests/click/test_utils.py",
+        "src/click/tests/test_click.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py",
+        "tests/test__utils.py",
+        "tests/click/test__utils.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_utils.py"
+      ],
+      "confidence": "medium",
+      "reason": "Generic library helper match without directory context: tests/test_utils.py"
+    },
+    {
+      "source_path": "src/click/_winconsole.py",
+      "candidate_test_paths": [
+        "src/click/tests/test_winconsole.py",
+        "tests/click/test_winconsole.py",
+        "src/click/tests/test_click.py",
+        "test/test_winconsole.py",
+        "tests/test_winconsole.py",
+        "tests/winconsole/test_winconsole.py",
+        "tests/winconsoles/test_winconsole.py",
+        "tests/test__winconsole.py",
+        "tests/click/test__winconsole.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "examples/aliases/pyproject.toml",
+        "examples/colors/pyproject.toml",
+        "examples/completion/pyproject.toml",
+        "examples/complex/pyproject.toml",
+        "examples/imagepipe/pyproject.toml",
+        "examples/inout/pyproject.toml",
+        "examples/naval/pyproject.toml",
+        "examples/repo/pyproject.toml",
+        "examples/termui/pyproject.toml",
+        "examples/validation/pyproject.toml",
+        "uv.lock"
+      ],
+      "count": 11,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 63,
+    "classified_count": 63,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 427,
+    "project_import_count": 0,
+    "declared_package_count": 24,
+    "undeclared_package_count": 8,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 28,
+    "high_confidence_test_count": 8,
+    "medium_confidence_test_count": 2,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 12,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

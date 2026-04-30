@@ -5,6 +5,8 @@
  */
 
 import type { PythonSensitiveZone, PythonSensitiveZoneSeverity, PythonSensitiveZoneSource } from "./types.js";
+import { matchesGlob } from "../../globMatch.js";
+import { pathContainsKeyword } from "../pathKeywordMatcher.js";
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -91,19 +93,11 @@ const SENSITIVE_KEYWORDS: SensitiveKeyword[] = [
 // ---------------------------------------------------------------------------
 
 function matchesKeyword(path: string, keyword: string): boolean {
-  const lower = path.toLowerCase();
-  // Match as directory segment or filename segment
-  const segments = lower.split("/");
-  return segments.some(seg => seg.includes(keyword));
+  return pathContainsKeyword(path, keyword);
 }
 
 function matchGlob(path: string, pattern: string): boolean {
-  const regex = pattern
-    .replace(/[.+^${}()|[\]\\]/g, "\\$&")
-    .replace(/\*\*/g, "___DOUBLESTAR___")
-    .replace(/\*/g, "[^/]*")
-    .replace(/___DOUBLESTAR___/g, ".*");
-  return new RegExp(`^${regex}$`).test(path);
+  return matchesGlob(path, pattern);
 }
 
 // ---------------------------------------------------------------------------

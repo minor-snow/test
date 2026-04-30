@@ -3,7 +3,7 @@
  *
  * ref: 执行宪法 v0.2 §15 MVP 工作流
  *
- * STATUS: This is a GENERAL-PURPOSE orchestrator.
+ * STATUS: This orchestrator is demo-oriented.
  * For the §21 demo runner, see src/demo/runDemo.ts.
  *
  * Ties together all modules into the canonical workflow:
@@ -48,9 +48,8 @@ export type PipelineState = {
  *
  * @param config - Store configuration
  * @param draftArtifact - The artifact to process
- * @param patchTextOverride - Optional replacement text for the patch.
- *   If not provided, uses the §21 default (SECTION21_PATCH_TEXT).
- *   Future: this parameter will be replaced by a real Patch Agent.
+ * @param patchTextOverride - Replacement text for the patch.
+ *   The §21 default fixture is used only for the known demo artifact.
  *
  * @returns PipelineState with all intermediate results for the cockpit.
  */

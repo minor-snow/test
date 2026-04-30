@@ -18,7 +18,7 @@ import { readJsonFile } from "../repair/repairUtils.js";
 import { loadRepairSession } from "../repair/session/repairSessionStore.js";
 import type { RepairSession } from "../repair/session/repairSessionTypes.js";
 import type { GitHubRepairRunPhase, GitHubRepairRunResult } from "./githubRepairTypes.js";
-import { appendGovernanceEvent } from "../governanceLog/governanceEventWriter.js";
+import { tryAppendGovernanceEvent } from "../governanceLog/governanceEventWriter.js";
 
 export async function runGitHubRepairAction(env: NodeJS.ProcessEnv = process.env): Promise<GitHubRepairRunResult> {
   const repoRoot = resolve(env.GITHUB_WORKSPACE ?? process.cwd());
@@ -106,7 +106,7 @@ export async function runGitHubRepairAction(env: NodeJS.ProcessEnv = process.env
     artifactMode: inputs.artifactMode,
   });
   if (artifactCollection.sanitizerViolations.length > 0) {
-    appendGovernanceEvent(repoRoot, {
+    const governanceResult = tryAppendGovernanceEvent(repoRoot, {
       schema_version: "pantheon_governance_event@0.1.0",
       event_id: `gov_${repairId}_github_sanitizer_${Date.now().toString(36)}`,
       timestamp: new Date().toISOString(),
@@ -129,6 +129,9 @@ export async function runGitHubRepairAction(env: NodeJS.ProcessEnv = process.env
         action: "block_merge",
       }],
     });
+    if (!governanceResult.ok) {
+      console.warn(`[Pantheon Repair Action] Failed to record governance event: ${governanceResult.message}`);
+    }
   }
   const exitDecision = decideGitHubRepairExit({
     verdict,
@@ -211,13 +214,13 @@ function resolveRepairSession(
   inputs: ReturnType<typeof parseGitHubRepairInputs>["inputs"],
 ): RepairSession {
   if (inputs.sourceKind === "existing_repair_id") {
-    return loadRepairSession(repoRoot, inputs.repairId!);
+    return loadRepairSession(repoRoot, requireExistingRepairId(inputs));
   }
 
   if (inputs.sourceKind === "agent_bug_report") {
     return cmdRepairIntake({
       repoRoot,
-      fromPath: resolve(repoRoot, inputs.agentBugReport!),
+      fromPath: resolve(repoRoot, requireAgentBugReportPath(inputs)),
       agentId: "github-action",
       operatorId: "github-action",
     });
@@ -272,4 +275,22 @@ function deriveRunVerdict(
   if (runPhase === "checked") return "pass";
   if (session.status === "intake_rejected") return "fail";
   return "requires_review";
+}
+
+function requireExistingRepairId(
+  inputs: ReturnType<typeof parseGitHubRepairInputs>["inputs"],
+): string {
+  if (inputs.repairId) {
+    return inputs.repairId;
+  }
+  throw new Error("GitHub repair mode expected an existing repair_id.");
+}
+
+function requireAgentBugReportPath(
+  inputs: ReturnType<typeof parseGitHubRepairInputs>["inputs"],
+): string {
+  if (inputs.agentBugReport) {
+    return inputs.agentBugReport;
+  }
+  throw new Error("GitHub repair mode expected an agent_bug_report path.");
 }

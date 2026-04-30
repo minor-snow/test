@@ -1,0 +1,54 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "3396fcd0b4726e3f6931903927b28efb40978461b494956268cf5b075c5c4946",
+  "pinned_commit": "67fea6af63a3956bc0f9cf68dd6bce322c5daeec",
+  "completed_at": "2026-04-30T11:11:33.097Z",
+  "repo_id": "django-rest-framework",
+  "category_expected": "django_sdk_library",
+  "category_observed": "django_commerce",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 354,
+  "python_files": 158,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "django/high",
+    "pytest/medium"
+  ],
+  "project_role_signals": [
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 58,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "django-rest-framework",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected django_sdk_library, got django_commerce",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.cfg",
+        "tox.ini"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

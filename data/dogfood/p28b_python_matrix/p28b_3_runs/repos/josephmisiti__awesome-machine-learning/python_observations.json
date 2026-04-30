@@ -1,0 +1,134 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "josephmisiti__awesome-machine-learning",
+    "observed_file_count": 10,
+    "python_file_count": 2
+  },
+  "layout": {
+    "primary_layout": "unknown",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "Unable to determine package layout from file paths"
+      },
+      {
+        "aspect": "primary_layout",
+        "reason": "No structural signals matched known project forms"
+      }
+    ],
+    "bucket_summary": {
+      "script": 2
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [],
+    "project_role_signals": [],
+    "unknowns": [
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No framework could be detected from dependencies, paths, or imports"
+      },
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No project role could be inferred from layout, dependencies, or path families"
+      }
+    ]
+  },
+  "risk_preset_validation": {
+    "preset": "unknown",
+    "validation": "unvalidated",
+    "confidence": "low",
+    "matched_signals": [
+      "layout: unknown / unknown (low)"
+    ],
+    "suggested_review": [],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "scripts/pull_R_packages.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 1180,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "scripts/requirements.txt",
+      "bucket": "script",
+      "extension": ".txt",
+      "size_bytes": 757,
+      "evidence": [
+        "Scripts directory"
+      ]
+    }
+  ],
+  "import_observations": [],
+  "dependency_manifests": [
+    {
+      "source_path": "scripts/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "pyquery",
+        "urllib3",
+        "codecs"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 1,
+    "classified_count": 1,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 0,
+    "project_import_count": 0,
+    "declared_package_count": 0,
+    "undeclared_package_count": 0,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 0,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 1,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

@@ -1,0 +1,4908 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "invoke",
+    "observed_file_count": 203,
+    "python_file_count": 135
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: invoke"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 3,
+      "source": 67,
+      "test": 65
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "pytest imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "api/ directory present"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "generic_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (medium)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/config*",
+        "reason": "Configuration affects system behavior",
+        "severity": "medium",
+        "matched_path_count": 5,
+        "evidence": [
+          "5 paths match pattern **/config*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".flake8",
+      "bucket": "config",
+      "extension": ".flake8",
+      "size_bytes": 169,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "integration/context.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 864,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6908,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/runners.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5417,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_explicit.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 124,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_support/busywork.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 644,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_support/err.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 146,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_support/nested_or_piped.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 159,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_support/package/tasks/module.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 78,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_support/package/tasks/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 230,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_support/parsing.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 306,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_support/regression.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1161,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_support/respond_base.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 81,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_support/respond_both.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 240,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_support/respond_fail.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 289,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_support/tasks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 266,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "integration/_util.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1683,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/collection.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 23668,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/completion/complete.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5351,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/completion/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/config.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 50931,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/context.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 26541,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/env.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4517,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 12652,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/executor.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9277,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/loader.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6164,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 249,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/parser/argument.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6223,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/parser/context.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10081,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/parser/parser.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 20264,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/parser/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 186,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/program.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 39164,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/runners.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 69095,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/tasks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 20669,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/terminals.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8396,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/util.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10286,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/fluidity/backwardscompat.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 143,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/fluidity/machine.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8956,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/fluidity/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 200,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/lexicon/alias_dict.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3318,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/lexicon/attribute_dict.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 423,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/lexicon/_version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 82,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/lexicon/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1157,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/composer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5022,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/constructor.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 29387,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/cyaml.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3952,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/dumper.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2899,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/emitter.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 44143,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/error.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2608,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/events.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2531,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/loader.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2124,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/nodes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1489,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/parser.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 26084,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/reader.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6979,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/representer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14573,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/resolver.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9226,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/scanner.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 52712,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/serializer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4276,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/tokens.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2677,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/yaml/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13597,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/vendor/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/watchers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5242,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2284,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "invoke/__main__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 50,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 3020,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "pytest.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 47,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "sites/docs/conf.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 802,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "sites/shared_conf.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1405,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "sites/www/conf.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 726,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tasks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5273,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/cli.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5525,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/collection.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 34391,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/completion.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7903,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/concurrency.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3356,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/config.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 45174,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2987,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/context.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 30587,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/executor.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12842,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/init.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3712,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/loader.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4555,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/merge_dicts.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4669,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/parser_argument.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7383,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/parser_context.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12438,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/parser_parser.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 23884,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/program.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 57693,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/runners.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 73871,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/task.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 18295,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/terminals.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3023,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/util.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1730,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/watchers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4347,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/alias_sorting.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 84,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/autoprint.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 391,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/branch/explicit.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 79,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/branch/tasks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 92,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/configs/all-four/invoke.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 46,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/configs/collection.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 183,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/configs/json-and-python/invoke.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 46,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/configs/package/tasks/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 98,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/configs/python/invoke.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 41,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/configs/runtime.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 95,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/configs/three-of-em/invoke.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 46,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/configs/underscores/tasks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 74,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/configs/yaml/explicit.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 136,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/configs/yaml/tasks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 95,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/configs/yml/explicit.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 135,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/configs/yml/tasks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 94,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/contextualized.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 425,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/custom_executor.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 61,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/debugging.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 106,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/decorators.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 991,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/decorator_multi_default.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 127,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/deeper_ns_list.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 210,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/depth_first.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 552,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/docstrings.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 306,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/empty.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/empty_subcollection.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 130,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/explicit_root.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 283,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/foo.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 247,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/has_modules.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 37,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/integration.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 718,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/namespacing.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 205,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/nontrivial_docstrings.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 449,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/oops.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 45,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/package/module.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 62,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/package/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 82,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/simple_ns_list.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 192,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/subcollection_task_name.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 91,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/subspace/module.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 62,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/subspace/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 82,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/sudo_prompt.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 164,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/tasks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 107,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/tree/deploy.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 322,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/tree/provision.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 186,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_support/tree/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 677,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/_util.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10149,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "integration/context.py",
+      "raw_specifier": "from invoke import Context, Config",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/context.py",
+      "raw_specifier": "from invocations import ci as ci_mod",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "invocations",
+      "confidence": "low"
+    },
+    {
+      "from_file": "integration/main.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/main.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/main.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/main.py",
+      "raw_specifier": "pytest",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pytest",
+      "confidence": "low"
+    },
+    {
+      "from_file": "integration/main.py",
+      "raw_specifier": "from _util import only_utf8",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "_util",
+      "confidence": "low"
+    },
+    {
+      "from_file": "integration/main.py",
+      "raw_specifier": "from pytest_relaxed import trap",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pytest_relaxed",
+      "confidence": "low"
+    },
+    {
+      "from_file": "integration/main.py",
+      "raw_specifier": "from invoke import __version__, run",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/main.py",
+      "raw_specifier": "from invoke.terminals import WINDOWS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/runners.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/runners.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/runners.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/runners.py",
+      "raw_specifier": "from unittest.mock import Mock",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "unittest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/runners.py",
+      "raw_specifier": "from _util import assert_cpu_usage",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "_util",
+      "confidence": "low"
+    },
+    {
+      "from_file": "integration/runners.py",
+      "raw_specifier": "from pytest import raises, skip",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pytest",
+      "confidence": "low"
+    },
+    {
+      "from_file": "integration/runners.py",
+      "raw_specifier": "from invoke import ( CommandTimedOut, Context, FailingResponder, Failure, Local, Responder, ThreadException, WatcherError, run, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_explicit.py",
+      "raw_specifier": "from invoke import Context, task",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/busywork.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/busywork.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/err.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/nested_or_piped.py",
+      "raw_specifier": "from invoke import task",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/package/tasks/module.py",
+      "raw_specifier": "from invoke import task",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/package/tasks/__init__.py",
+      "raw_specifier": "from invoke import Collection",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/package/tasks/__init__.py",
+      "raw_specifier": "from . import module",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "integration/_support/parsing.py",
+      "raw_specifier": "from invoke import task",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/parsing.py",
+      "raw_specifier": "from invoke.context import Context",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/regression.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/regression.py",
+      "raw_specifier": "from invoke import task",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/respond_base.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/respond_both.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_support/tasks.py",
+      "raw_specifier": "from invoke import task",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_util.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_util.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_util.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_util.py",
+      "raw_specifier": "from functools import wraps",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_util.py",
+      "raw_specifier": "from resource import RUSAGE_SELF, getrusage",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "resource",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_util.py",
+      "raw_specifier": "from typing import Any, Callable, Iterator, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "integration/_util.py",
+      "raw_specifier": "from pytest import skip",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pytest",
+      "confidence": "low"
+    },
+    {
+      "from_file": "invoke/collection.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/collection.py",
+      "raw_specifier": "from types import ModuleType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/collection.py",
+      "raw_specifier": "from typing import Any, Callable, Dict, List, Optional, Tuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/collection.py",
+      "raw_specifier": "from .util import Lexicon, helpline",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".util",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/collection.py",
+      "raw_specifier": "from .config import merge_dicts, copy_dict",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/collection.py",
+      "raw_specifier": "from .parser import Context as ParserContext",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/collection.py",
+      "raw_specifier": "from .tasks import Task",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".tasks",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/completion/complete.py",
+      "raw_specifier": "from typing import List",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/completion/complete.py",
+      "raw_specifier": "glob",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "glob",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/completion/complete.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/completion/complete.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/completion/complete.py",
+      "raw_specifier": "shlex",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shlex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/completion/complete.py",
+      "raw_specifier": "from typing import TYPE_CHECKING",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/completion/complete.py",
+      "raw_specifier": "from ..exceptions import Exit, ParseError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/completion/complete.py",
+      "raw_specifier": "from ..util import debug, task_name_sort_key",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..util",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/completion/complete.py",
+      "raw_specifier": "from ..collection import Collection",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..collection",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/completion/complete.py",
+      "raw_specifier": "from ..parser import Parser, ParseResult, ParserContext",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "from importlib.util import spec_from_loader",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "from os import PathLike",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "from os.path import join, splitext, expanduser",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "from types import ModuleType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "from typing import Any, Dict, Iterator, Optional, Tuple, Type, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "from .env import Environment",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".env",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "from .exceptions import UnknownFileType, UnpicklableConfigMember",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "from .runners import Local",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".runners",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "from .terminals import WINDOWS",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".terminals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "from .util import debug, yaml",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".util",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "from importlib.machinery import SourceFileLoader",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/config.py",
+      "raw_specifier": "from importlib._bootstrap import (  # type: ignore[no-redef]",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/context.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/context.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/context.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/context.py",
+      "raw_specifier": "from itertools import cycle",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/context.py",
+      "raw_specifier": "from os import PathLike",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/context.py",
+      "raw_specifier": "from typing import ( Any, Generator, Iterator, List, Optional, Union, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/context.py",
+      "raw_specifier": "from unittest.mock import Mock",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "unittest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/context.py",
+      "raw_specifier": "from .config import Config, DataProxy",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/context.py",
+      "raw_specifier": "from .exceptions import AuthFailure, Failure, ResponseNotAccepted",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/context.py",
+      "raw_specifier": "from .runners import Result, Runner",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".runners",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/context.py",
+      "raw_specifier": "from .watchers import FailingResponder",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".watchers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/env.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/env.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, Dict, Iterable, List, Mapping, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/env.py",
+      "raw_specifier": "from .exceptions import UncastableEnvVar, AmbiguousEnvVar",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/env.py",
+      "raw_specifier": "from .util import debug",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".util",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/env.py",
+      "raw_specifier": "from .config import Config",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/exceptions.py",
+      "raw_specifier": "from pprint import pformat",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pprint",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/exceptions.py",
+      "raw_specifier": "from traceback import format_exception",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "traceback",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/exceptions.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/exceptions.py",
+      "raw_specifier": "from .parser import ParserContext",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/exceptions.py",
+      "raw_specifier": "from .runners import Result",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".runners",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/exceptions.py",
+      "raw_specifier": "from .util import ExceptionWrapper",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".util",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/executor.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/executor.py",
+      "raw_specifier": "from .config import Config",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/executor.py",
+      "raw_specifier": "from .parser import ParserContext, ParseResult",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/executor.py",
+      "raw_specifier": "from .tasks import Call, Task",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".tasks",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/executor.py",
+      "raw_specifier": "from .util import debug",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".util",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/executor.py",
+      "raw_specifier": "from .collection import Collection",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".collection",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/executor.py",
+      "raw_specifier": "from .runners import Result",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".runners",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/loader.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/loader.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/loader.py",
+      "raw_specifier": "from importlib.machinery import ModuleSpec",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/loader.py",
+      "raw_specifier": "from importlib.util import module_from_spec, spec_from_file_location",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/loader.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/loader.py",
+      "raw_specifier": "from types import ModuleType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/loader.py",
+      "raw_specifier": "from typing import Any, Optional, Tuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/loader.py",
+      "raw_specifier": "from . import Config",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/loader.py",
+      "raw_specifier": "from .exceptions import CollectionNotFound",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/loader.py",
+      "raw_specifier": "from .util import debug",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".util",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/loader.py",
+      "raw_specifier": "behavior",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "behavior",
+      "confidence": "low"
+    },
+    {
+      "from_file": "invoke/main.py",
+      "raw_specifier": "from . import __version__, Program",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/parser/argument.py",
+      "raw_specifier": "from typing import Any, Iterable, Optional, Tuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/parser/context.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/parser/context.py",
+      "raw_specifier": "from typing import Any, Dict, List, Iterable, Optional, Tuple, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/parser/context.py",
+      "raw_specifier": "from ..vendor.lexicon import Lexicon",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..vendor.lexicon",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/parser/context.py",
+      "raw_specifier": "from lexicon import Lexicon  # type: ignore[no-redef]",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "lexicon",
+      "confidence": "low"
+    },
+    {
+      "from_file": "invoke/parser/context.py",
+      "raw_specifier": "from .argument import Argument",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".argument",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/parser/parser.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/parser/parser.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, Iterable, List, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/parser/parser.py",
+      "raw_specifier": "from ..vendor.lexicon import Lexicon",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..vendor.lexicon",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/parser/parser.py",
+      "raw_specifier": "from ..vendor.fluidity import StateMachine, state, transition",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..vendor.fluidity",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/parser/parser.py",
+      "raw_specifier": "from lexicon import Lexicon  # type: ignore[no-redef]",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "lexicon",
+      "confidence": "low"
+    },
+    {
+      "from_file": "invoke/parser/parser.py",
+      "raw_specifier": "from fluidity import (  # type: ignore[no-redef]",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "fluidity",
+      "confidence": "low"
+    },
+    {
+      "from_file": "invoke/parser/parser.py",
+      "raw_specifier": "from ..exceptions import ParseError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/parser/parser.py",
+      "raw_specifier": "from ..util import debug",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..util",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/parser/parser.py",
+      "raw_specifier": "from .context import ParserContext",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".context",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/parser/__init__.py",
+      "raw_specifier": "from .parser import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/parser/__init__.py",
+      "raw_specifier": "from .context import ParserContext",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".context",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/parser/__init__.py",
+      "raw_specifier": "from .context import ParserContext as Context, to_flag, translate_underscores",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".context",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/parser/__init__.py",
+      "raw_specifier": "from .argument import Argument",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".argument",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "getpass",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "getpass",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "textwrap",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "textwrap",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "from importlib import import_module  # buffalo buffalo",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "from typing import ( TYPE_CHECKING, Any, Dict, List, Optional, Sequence, Tuple, Type, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "from . import Collection, Config, Executor, FilesystemLoader",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "from .completion.complete import complete, print_completion_script",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".completion.complete",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "from .exceptions import CollectionNotFound, Exit, ParseError, UnexpectedExit",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "from .parser import Argument, Parser, ParserContext",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "from .terminals import pty_size",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".terminals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "from .util import debug, enable_logging, helpline",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".util",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "from .loader import Loader",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".loader",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "from .parser import ParseResult",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/program.py",
+      "raw_specifier": "from .util import Lexicon",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".util",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "errno",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "errno",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "locale",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "locale",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "signal",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "signal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "struct",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "struct",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "from contextlib import AbstractContextManager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "from subprocess import PIPE, Popen",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "from typing import ( IO, TYPE_CHECKING, Any, Callable, Dict, Generator, List, Optional, Tuple, Type, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "pty",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pty",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "fcntl",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "fcntl",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "termios",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "termios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "from .exceptions import ( CommandTimedOut, Failure, SubprocessPipeError, ThreadException, UnexpectedExit, WatcherError, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "from .terminals import ( WINDOWS, bytes_to_read, character_buffered, pty_size, ready_for_reading, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".terminals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "from .util import ExceptionHandlingThread, has_fileno, isatty",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".util",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "from .context import Context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".context",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/runners.py",
+      "raw_specifier": "from .watchers import StreamWatcher",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".watchers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/tasks.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/tasks.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/tasks.py",
+      "raw_specifier": "from copy import deepcopy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/tasks.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/tasks.py",
+      "raw_specifier": "from typing import ( TYPE_CHECKING, Any, Callable, Dict, Generic, Iterable, List, Optional, Set, Tuple, Type, TypeVar, Union, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/tasks.py",
+      "raw_specifier": "from .context import Context",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".context",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/tasks.py",
+      "raw_specifier": "from .parser import Argument, ParseResult, translate_underscores",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/tasks.py",
+      "raw_specifier": "from inspect import Signature",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/tasks.py",
+      "raw_specifier": "from .config import Config",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "from typing import Generator, IO, Optional, Tuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "select",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "select",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "from .util import has_fileno, isatty",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".util",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "msvcrt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "msvcrt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "from ctypes import ( Structure, c_ushort, windll, POINTER, byref, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "from ctypes.wintypes import HANDLE, _COORD, _SMALL_RECT",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "fcntl",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "fcntl",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "struct",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "struct",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "termios",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "termios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/terminals.py",
+      "raw_specifier": "tty",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tty",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "from types import TracebackType",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "from typing import Any, Generator, List, IO, Optional, Tuple, Type, Union",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "from .vendor.lexicon import Lexicon  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".vendor.lexicon",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "from .vendor import yaml  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".vendor",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "from lexicon import Lexicon  # type: ignore[no-redef] # noqa",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "lexicon",
+      "confidence": "low"
+    },
+    {
+      "from_file": "invoke/util.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "invoke/vendor/fluidity/backwardscompat.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/fluidity/machine.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/fluidity/machine.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/fluidity/machine.py",
+      "raw_specifier": "from .backwardscompat import callable",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".backwardscompat",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/fluidity/__init__.py",
+      "raw_specifier": "from .machine import (StateMachine, state, transition,",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".machine",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/lexicon/__init__.py",
+      "raw_specifier": "from ._version import __version_info__, __version__  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._version",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/lexicon/__init__.py",
+      "raw_specifier": "from .attribute_dict import AttributeDict",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".attribute_dict",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/lexicon/__init__.py",
+      "raw_specifier": "from .alias_dict import AliasDict",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".alias_dict",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/composer.py",
+      "raw_specifier": "from .error import MarkedYAMLError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".error",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/composer.py",
+      "raw_specifier": "from .events import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".events",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/composer.py",
+      "raw_specifier": "from .nodes import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".nodes",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/constructor.py",
+      "raw_specifier": "from .error import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".error",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/constructor.py",
+      "raw_specifier": "from .nodes import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".nodes",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/constructor.py",
+      "raw_specifier": "collections.abc",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/constructor.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/constructor.py",
+      "raw_specifier": "base64",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/constructor.py",
+      "raw_specifier": "binascii",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "binascii",
+      "confidence": "low"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/constructor.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/constructor.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/constructor.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/cyaml.py",
+      "raw_specifier": "from yaml._yaml import CParser, CEmitter",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/cyaml.py",
+      "raw_specifier": "from .constructor import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".constructor",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/cyaml.py",
+      "raw_specifier": "from .serializer import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".serializer",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/cyaml.py",
+      "raw_specifier": "from .representer import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".representer",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/cyaml.py",
+      "raw_specifier": "from .resolver import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".resolver",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/dumper.py",
+      "raw_specifier": "from .emitter import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".emitter",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/dumper.py",
+      "raw_specifier": "from .serializer import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".serializer",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/dumper.py",
+      "raw_specifier": "from .representer import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".representer",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/dumper.py",
+      "raw_specifier": "from .resolver import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".resolver",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/emitter.py",
+      "raw_specifier": "from .error import YAMLError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".error",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/emitter.py",
+      "raw_specifier": "from .events import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".events",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/loader.py",
+      "raw_specifier": "from .reader import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".reader",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/loader.py",
+      "raw_specifier": "from .scanner import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".scanner",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/loader.py",
+      "raw_specifier": "from .parser import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/loader.py",
+      "raw_specifier": "from .composer import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".composer",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/loader.py",
+      "raw_specifier": "from .constructor import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".constructor",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/loader.py",
+      "raw_specifier": "from .resolver import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".resolver",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/parser.py",
+      "raw_specifier": "from .error import MarkedYAMLError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".error",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/parser.py",
+      "raw_specifier": "from .tokens import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".tokens",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/parser.py",
+      "raw_specifier": "from .events import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".events",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/parser.py",
+      "raw_specifier": "from .scanner import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".scanner",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/reader.py",
+      "raw_specifier": "from .error import YAMLError, Mark",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".error",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/reader.py",
+      "raw_specifier": "codecs",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "codecs",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/reader.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/representer.py",
+      "raw_specifier": "from .error import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".error",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/representer.py",
+      "raw_specifier": "from .nodes import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".nodes",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/representer.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/representer.py",
+      "raw_specifier": "copyreg",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copyreg",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/representer.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/representer.py",
+      "raw_specifier": "base64",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/representer.py",
+      "raw_specifier": "collections",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/resolver.py",
+      "raw_specifier": "from .error import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".error",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/resolver.py",
+      "raw_specifier": "from .nodes import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".nodes",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/resolver.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/scanner.py",
+      "raw_specifier": "from .error import MarkedYAMLError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".error",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/scanner.py",
+      "raw_specifier": "from .tokens import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".tokens",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/serializer.py",
+      "raw_specifier": "from .error import YAMLError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".error",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/serializer.py",
+      "raw_specifier": "from .events import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".events",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/serializer.py",
+      "raw_specifier": "from .nodes import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".nodes",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/__init__.py",
+      "raw_specifier": "from .error import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".error",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/__init__.py",
+      "raw_specifier": "from .tokens import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".tokens",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/__init__.py",
+      "raw_specifier": "from .events import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".events",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/__init__.py",
+      "raw_specifier": "from .nodes import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".nodes",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/__init__.py",
+      "raw_specifier": "from .loader import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".loader",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/__init__.py",
+      "raw_specifier": "from .dumper import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".dumper",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/__init__.py",
+      "raw_specifier": "from .cyaml import *",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cyaml",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/__init__.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/vendor/yaml/__init__.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/watchers.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/watchers.py",
+      "raw_specifier": "threading",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/watchers.py",
+      "raw_specifier": "from typing import Generator, Iterable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/watchers.py",
+      "raw_specifier": "from .exceptions import ResponseNotAccepted",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from importlib import metadata",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from .collection import Collection  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".collection",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from .config import Config  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".config",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from .context import Context, MockContext  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".context",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from .exceptions import (  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".exceptions",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from .executor import Executor  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".executor",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from .loader import FilesystemLoader  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".loader",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from .parser import Argument, Parser, ParserContext, ParseResult  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from .program import Program  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".program",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from .runners import Failure, Local, Promise, Result, Runner  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".runners",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from .tasks import Call, Task, call, task  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".tasks",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from .terminals import pty_size  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".terminals",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__init__.py",
+      "raw_specifier": "from .watchers import FailingResponder, Responder, StreamWatcher  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".watchers",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "invoke/__main__.py",
+      "raw_specifier": "from invoke.main import program",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    },
+    {
+      "from_file": "sites/docs/conf.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "sites/docs/conf.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "sites/docs/conf.py",
+      "raw_specifier": "from shared_conf import *",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "shared_conf",
+      "confidence": "low"
+    },
+    {
+      "from_file": "sites/shared_conf.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "sites/shared_conf.py",
+      "raw_specifier": "from os.path import abspath, dirname, join",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "sites/shared_conf.py",
+      "raw_specifier": "alabaster",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "alabaster",
+      "confidence": "low"
+    },
+    {
+      "from_file": "sites/shared_conf.py",
+      "raw_specifier": "from _util import MockSubprocess",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "_util",
+      "confidence": "low"
+    },
+    {
+      "from_file": "sites/www/conf.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "sites/www/conf.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "sites/www/conf.py",
+      "raw_specifier": "from os.path import abspath, join, dirname",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "sites/www/conf.py",
+      "raw_specifier": "from shared_conf import *",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "shared_conf",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "from typing import Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "from invocations import checks, ci",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "invocations",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "from invocations.docs import docs, sites, watch_docs, www",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "invocations",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "from invocations.packaging import release, vendorize",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "invocations",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "from invocations.pytest import coverage as coverage_",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "invocations",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "from invocations.pytest import test as test_",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "invocations",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tasks.py",
+      "raw_specifier": "from invoke import Collection, Context, Exit, task",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "invoke",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "integration/context.py",
+      "candidate_test_paths": [
+        "integration/tests/test_context.py",
+        "tests/test_context.py",
+        "integration/tests/test_integration.py",
+        "test/test_context.py",
+        "tests/context/test_context.py",
+        "tests/contexts/test_context.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/main.py",
+      "candidate_test_paths": [
+        "integration/tests/test_main.py",
+        "tests/test_main.py",
+        "integration/tests/test_integration.py",
+        "test/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/runners.py",
+      "candidate_test_paths": [
+        "integration/tests/test_runners.py",
+        "tests/test_runners.py",
+        "integration/tests/test_integration.py",
+        "test/test_runners.py",
+        "tests/runners/test_runners.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/_explicit.py",
+      "candidate_test_paths": [
+        "integration/tests/test_explicit.py",
+        "tests/test_explicit.py",
+        "integration/tests/test_integration.py",
+        "test/test_explicit.py",
+        "tests/explicit/test_explicit.py",
+        "tests/explicits/test_explicit.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/_support/busywork.py",
+      "candidate_test_paths": [
+        "integration/_support/tests/test_busywork.py",
+        "tests/_support/test_busywork.py",
+        "integration/_support/tests/test__support.py",
+        "test/test_busywork.py",
+        "tests/test_busywork.py",
+        "tests/busywork/test_busywork.py",
+        "tests/busyworks/test_busywork.py",
+        "tests/support/test_busywork.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/_support/err.py",
+      "candidate_test_paths": [
+        "integration/_support/tests/test_err.py",
+        "tests/_support/test_err.py",
+        "integration/_support/tests/test__support.py",
+        "test/test_err.py",
+        "tests/test_err.py",
+        "tests/err/test_err.py",
+        "tests/errs/test_err.py",
+        "tests/support/test_err.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/_support/nested_or_piped.py",
+      "candidate_test_paths": [
+        "integration/_support/tests/test_nested_or_piped.py",
+        "tests/_support/test_nested_or_piped.py",
+        "integration/_support/tests/test__support.py",
+        "test/test_nested_or_piped.py",
+        "tests/test_nested_or_piped.py",
+        "tests/nested_or_piped/test_nested_or_piped.py",
+        "tests/nested_or_pipeds/test_nested_or_piped.py",
+        "tests/support/test_nested_or_piped.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/_support/package/tasks/module.py",
+      "candidate_test_paths": [
+        "integration/_support/package/tasks/tests/test_module.py",
+        "tests/_support/package/tasks/test_module.py",
+        "integration/_support/package/tasks/tests/test_tasks.py",
+        "test/test_module.py",
+        "tests/test_module.py",
+        "tests/module/test_module.py",
+        "tests/modules/test_module.py",
+        "tests/tasks/test_module.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/_support/parsing.py",
+      "candidate_test_paths": [
+        "integration/_support/tests/test_parsing.py",
+        "tests/_support/test_parsing.py",
+        "integration/_support/tests/test__support.py",
+        "test/test_parsing.py",
+        "tests/test_parsing.py",
+        "tests/parsing/test_parsing.py",
+        "tests/parsings/test_parsing.py",
+        "tests/support/test_parsing.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/_support/regression.py",
+      "candidate_test_paths": [
+        "integration/_support/tests/test_regression.py",
+        "tests/_support/test_regression.py",
+        "integration/_support/tests/test__support.py",
+        "test/test_regression.py",
+        "tests/test_regression.py",
+        "tests/regression/test_regression.py",
+        "tests/regressions/test_regression.py",
+        "tests/support/test_regression.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/_support/respond_base.py",
+      "candidate_test_paths": [
+        "integration/_support/tests/test_respond_base.py",
+        "tests/_support/test_respond_base.py",
+        "integration/_support/tests/test__support.py",
+        "test/test_respond_base.py",
+        "tests/test_respond_base.py",
+        "tests/respond_base/test_respond_base.py",
+        "tests/respond_bases/test_respond_base.py",
+        "tests/support/test_respond_base.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/_support/respond_both.py",
+      "candidate_test_paths": [
+        "integration/_support/tests/test_respond_both.py",
+        "tests/_support/test_respond_both.py",
+        "integration/_support/tests/test__support.py",
+        "test/test_respond_both.py",
+        "tests/test_respond_both.py",
+        "tests/respond_both/test_respond_both.py",
+        "tests/respond_boths/test_respond_both.py",
+        "tests/support/test_respond_both.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/_support/respond_fail.py",
+      "candidate_test_paths": [
+        "integration/_support/tests/test_respond_fail.py",
+        "tests/_support/test_respond_fail.py",
+        "integration/_support/tests/test__support.py",
+        "test/test_respond_fail.py",
+        "tests/test_respond_fail.py",
+        "tests/respond_fail/test_respond_fail.py",
+        "tests/respond_fails/test_respond_fail.py",
+        "tests/support/test_respond_fail.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/_support/tasks.py",
+      "candidate_test_paths": [
+        "integration/_support/tests/test_tasks.py",
+        "tests/_support/test_tasks.py",
+        "integration/_support/tests/test__support.py",
+        "test/test_tasks.py",
+        "tests/test_tasks.py",
+        "tests/tasks/test_tasks.py",
+        "tests/support/test_tasks.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "integration/_util.py",
+      "candidate_test_paths": [
+        "integration/tests/test_util.py",
+        "tests/test_util.py",
+        "integration/tests/test_integration.py",
+        "test/test_util.py",
+        "tests/util/test_util.py",
+        "tests/utils/test_util.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/collection.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_collection.py",
+        "tests/test_collection.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_collection.py",
+        "tests/collection/test_collection.py",
+        "tests/collections/test_collection.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/completion/complete.py",
+      "candidate_test_paths": [
+        "invoke/completion/tests/test_complete.py",
+        "tests/completion/test_complete.py",
+        "invoke/completion/tests/test_completion.py",
+        "test/test_complete.py",
+        "tests/test_complete.py",
+        "tests/complete/test_complete.py",
+        "tests/completes/test_complete.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/config.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_config.py",
+        "tests/test_config.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_config.py",
+        "tests/config/test_config.py",
+        "tests/configs/test_config.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/context.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_context.py",
+        "tests/test_context.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_context.py",
+        "tests/context/test_context.py",
+        "tests/contexts/test_context.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/env.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_env.py",
+        "tests/test_env.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_env.py",
+        "tests/env/test_env.py",
+        "tests/envs/test_env.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/exceptions.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/executor.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_executor.py",
+        "tests/test_executor.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_executor.py",
+        "tests/executor/test_executor.py",
+        "tests/executors/test_executor.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/loader.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_loader.py",
+        "tests/test_loader.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_loader.py",
+        "tests/loader/test_loader.py",
+        "tests/loaders/test_loader.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/main.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_main.py",
+        "tests/test_main.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/parser/argument.py",
+      "candidate_test_paths": [
+        "invoke/parser/tests/test_argument.py",
+        "tests/parser/test_argument.py",
+        "invoke/parser/tests/test_parser.py",
+        "test/test_argument.py",
+        "tests/test_argument.py",
+        "tests/argument/test_argument.py",
+        "tests/arguments/test_argument.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/parser/context.py",
+      "candidate_test_paths": [
+        "invoke/parser/tests/test_context.py",
+        "tests/parser/test_context.py",
+        "invoke/parser/tests/test_parser.py",
+        "test/test_context.py",
+        "tests/test_context.py",
+        "tests/context/test_context.py",
+        "tests/contexts/test_context.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/parser/parser.py",
+      "candidate_test_paths": [
+        "invoke/parser/tests/test_parser.py",
+        "tests/parser/test_parser.py",
+        "test/test_parser.py",
+        "tests/test_parser.py",
+        "tests/parsers/test_parser.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/program.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_program.py",
+        "tests/test_program.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_program.py",
+        "tests/program/test_program.py",
+        "tests/programs/test_program.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/runners.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_runners.py",
+        "tests/test_runners.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_runners.py",
+        "tests/runners/test_runners.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/tasks.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_tasks.py",
+        "tests/test_tasks.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_tasks.py",
+        "tests/tasks/test_tasks.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/terminals.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_terminals.py",
+        "tests/test_terminals.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_terminals.py",
+        "tests/terminals/test_terminals.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/util.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_util.py",
+        "tests/test_util.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_util.py",
+        "tests/util/test_util.py",
+        "tests/utils/test_util.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/fluidity/backwardscompat.py",
+      "candidate_test_paths": [
+        "invoke/vendor/fluidity/tests/test_backwardscompat.py",
+        "tests/vendor/fluidity/test_backwardscompat.py",
+        "invoke/vendor/fluidity/tests/test_fluidity.py",
+        "test/test_backwardscompat.py",
+        "tests/test_backwardscompat.py",
+        "tests/backwardscompat/test_backwardscompat.py",
+        "tests/backwardscompats/test_backwardscompat.py",
+        "tests/fluidity/test_backwardscompat.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/fluidity/machine.py",
+      "candidate_test_paths": [
+        "invoke/vendor/fluidity/tests/test_machine.py",
+        "tests/vendor/fluidity/test_machine.py",
+        "invoke/vendor/fluidity/tests/test_fluidity.py",
+        "test/test_machine.py",
+        "tests/test_machine.py",
+        "tests/machine/test_machine.py",
+        "tests/machines/test_machine.py",
+        "tests/fluidity/test_machine.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/lexicon/alias_dict.py",
+      "candidate_test_paths": [
+        "invoke/vendor/lexicon/tests/test_alias_dict.py",
+        "tests/vendor/lexicon/test_alias_dict.py",
+        "invoke/vendor/lexicon/tests/test_lexicon.py",
+        "test/test_alias_dict.py",
+        "tests/test_alias_dict.py",
+        "tests/alias_dict/test_alias_dict.py",
+        "tests/alias_dicts/test_alias_dict.py",
+        "tests/lexicon/test_alias_dict.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/lexicon/attribute_dict.py",
+      "candidate_test_paths": [
+        "invoke/vendor/lexicon/tests/test_attribute_dict.py",
+        "tests/vendor/lexicon/test_attribute_dict.py",
+        "invoke/vendor/lexicon/tests/test_lexicon.py",
+        "test/test_attribute_dict.py",
+        "tests/test_attribute_dict.py",
+        "tests/attribute_dict/test_attribute_dict.py",
+        "tests/attribute_dicts/test_attribute_dict.py",
+        "tests/lexicon/test_attribute_dict.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/lexicon/_version.py",
+      "candidate_test_paths": [
+        "invoke/vendor/lexicon/tests/test_version.py",
+        "tests/vendor/lexicon/test_version.py",
+        "invoke/vendor/lexicon/tests/test_lexicon.py",
+        "test/test_version.py",
+        "tests/test_version.py",
+        "tests/version/test_version.py",
+        "tests/versions/test_version.py",
+        "tests/test__version.py",
+        "tests/lexicon/test__version.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/composer.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_composer.py",
+        "tests/vendor/yaml/test_composer.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_composer.py",
+        "tests/test_composer.py",
+        "tests/composer/test_composer.py",
+        "tests/composers/test_composer.py",
+        "tests/yaml/test_composer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/constructor.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_constructor.py",
+        "tests/vendor/yaml/test_constructor.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_constructor.py",
+        "tests/test_constructor.py",
+        "tests/constructor/test_constructor.py",
+        "tests/constructors/test_constructor.py",
+        "tests/yaml/test_constructor.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/cyaml.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_cyaml.py",
+        "tests/vendor/yaml/test_cyaml.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_cyaml.py",
+        "tests/test_cyaml.py",
+        "tests/cyaml/test_cyaml.py",
+        "tests/cyamls/test_cyaml.py",
+        "tests/yaml/test_cyaml.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/dumper.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_dumper.py",
+        "tests/vendor/yaml/test_dumper.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_dumper.py",
+        "tests/test_dumper.py",
+        "tests/dumper/test_dumper.py",
+        "tests/dumpers/test_dumper.py",
+        "tests/yaml/test_dumper.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/emitter.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_emitter.py",
+        "tests/vendor/yaml/test_emitter.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_emitter.py",
+        "tests/test_emitter.py",
+        "tests/emitter/test_emitter.py",
+        "tests/emitters/test_emitter.py",
+        "tests/yaml/test_emitter.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/error.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_error.py",
+        "tests/vendor/yaml/test_error.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_error.py",
+        "tests/test_error.py",
+        "tests/error/test_error.py",
+        "tests/errors/test_error.py",
+        "tests/yaml/test_error.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/events.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_events.py",
+        "tests/vendor/yaml/test_events.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_events.py",
+        "tests/test_events.py",
+        "tests/events/test_events.py",
+        "tests/yaml/test_events.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/loader.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_loader.py",
+        "tests/vendor/yaml/test_loader.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_loader.py",
+        "tests/test_loader.py",
+        "tests/loader/test_loader.py",
+        "tests/loaders/test_loader.py",
+        "tests/yaml/test_loader.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/nodes.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_nodes.py",
+        "tests/vendor/yaml/test_nodes.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_nodes.py",
+        "tests/test_nodes.py",
+        "tests/nodes/test_nodes.py",
+        "tests/yaml/test_nodes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/parser.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_parser.py",
+        "tests/vendor/yaml/test_parser.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_parser.py",
+        "tests/test_parser.py",
+        "tests/parser/test_parser.py",
+        "tests/parsers/test_parser.py",
+        "tests/yaml/test_parser.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/reader.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_reader.py",
+        "tests/vendor/yaml/test_reader.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_reader.py",
+        "tests/test_reader.py",
+        "tests/reader/test_reader.py",
+        "tests/readers/test_reader.py",
+        "tests/yaml/test_reader.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/representer.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_representer.py",
+        "tests/vendor/yaml/test_representer.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_representer.py",
+        "tests/test_representer.py",
+        "tests/representer/test_representer.py",
+        "tests/representers/test_representer.py",
+        "tests/yaml/test_representer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/resolver.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_resolver.py",
+        "tests/vendor/yaml/test_resolver.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_resolver.py",
+        "tests/test_resolver.py",
+        "tests/resolver/test_resolver.py",
+        "tests/resolvers/test_resolver.py",
+        "tests/yaml/test_resolver.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/scanner.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_scanner.py",
+        "tests/vendor/yaml/test_scanner.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_scanner.py",
+        "tests/test_scanner.py",
+        "tests/scanner/test_scanner.py",
+        "tests/scanners/test_scanner.py",
+        "tests/yaml/test_scanner.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/serializer.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_serializer.py",
+        "tests/vendor/yaml/test_serializer.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_serializer.py",
+        "tests/test_serializer.py",
+        "tests/serializer/test_serializer.py",
+        "tests/serializers/test_serializer.py",
+        "tests/yaml/test_serializer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/vendor/yaml/tokens.py",
+      "candidate_test_paths": [
+        "invoke/vendor/yaml/tests/test_tokens.py",
+        "tests/vendor/yaml/test_tokens.py",
+        "invoke/vendor/yaml/tests/test_yaml.py",
+        "test/test_tokens.py",
+        "tests/test_tokens.py",
+        "tests/tokens/test_tokens.py",
+        "tests/yaml/test_tokens.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/watchers.py",
+      "candidate_test_paths": [
+        "invoke/tests/test_watchers.py",
+        "tests/test_watchers.py",
+        "invoke/tests/test_invoke.py",
+        "test/test_watchers.py",
+        "tests/watchers/test_watchers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "invoke/__main__.py",
+      "candidate_test_paths": [
+        "invoke/tests/test___main__.py",
+        "tests/test___main__.py",
+        "invoke/tests/test_invoke.py",
+        "test/test___main__.py",
+        "tests/__main__/test___main__.py",
+        "tests/__main__s/test___main__.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "sites/docs/conf.py",
+      "candidate_test_paths": [
+        "sites/docs/tests/test_conf.py",
+        "tests/docs/test_conf.py",
+        "sites/docs/tests/test_docs.py",
+        "test/test_conf.py",
+        "tests/test_conf.py",
+        "tests/conf/test_conf.py",
+        "tests/confs/test_conf.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "sites/shared_conf.py",
+      "candidate_test_paths": [
+        "sites/tests/test_shared_conf.py",
+        "tests/test_shared_conf.py",
+        "sites/tests/test_sites.py",
+        "test/test_shared_conf.py",
+        "tests/shared_conf/test_shared_conf.py",
+        "tests/shared_confs/test_shared_conf.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "sites/www/conf.py",
+      "candidate_test_paths": [
+        "sites/www/tests/test_conf.py",
+        "tests/www/test_conf.py",
+        "sites/www/tests/test_www.py",
+        "test/test_conf.py",
+        "tests/test_conf.py",
+        "tests/conf/test_conf.py",
+        "tests/confs/test_conf.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tasks.py",
+      "candidate_test_paths": [
+        "test/test_tasks.py",
+        "tests/test_tasks.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "pyproject.toml"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 132,
+    "classified_count": 132,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 311,
+    "project_import_count": 14,
+    "declared_package_count": 0,
+    "undeclared_package_count": 25,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 59,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 1,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

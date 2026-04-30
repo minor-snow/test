@@ -1,0 +1,2376 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "google__python-fire",
+    "observed_file_count": 79,
+    "python_file_count": 62
+  },
+  "layout": {
+    "primary_layout": "mixed",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: examples, fire"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: library_package=2, cli_app=2"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "primary_layout",
+        "reason": "Tied between library_package and cli_app"
+      }
+    ],
+    "bucket_summary": {
+      "source": 36,
+      "test": 25,
+      "config": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: mixed / flat_package (medium)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 7,
+        "evidence": [
+          "7 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "examples/cipher/cipher.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1727,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/cipher/cipher_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1208,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "examples/cipher/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/diff/diff.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3294,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/diff/difffull.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1808,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/diff/diff_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2771,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "examples/diff/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/identity/identity.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 818,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/identity/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/widget/collector.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1165,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/widget/collector_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1229,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "examples/widget/widget.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1011,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/widget/widget_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1117,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "examples/widget/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/completion.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 16510,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/completion_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6454,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/console/console_attr.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 24384,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/console/console_attr_os.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7715,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/console/console_io.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4259,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/console/console_pager.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9862,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/console/encoding.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6229,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/console/files.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4170,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/console/platforms.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 16970,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/console/text.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2879,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/console/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/core.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 37725,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/core_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9841,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/custom_descriptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5391,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/custom_descriptions_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2723,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/decorators.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3671,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/decorators_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5752,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/docstrings.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 25797,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/docstrings_fuzz_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1136,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/docstrings_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12645,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/fire_import_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1147,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/fire_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 29939,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/formatting.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2809,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/formatting_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2725,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/formatting_windows.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2042,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/helptext.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 28128,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/helptext_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 23301,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/inspectutils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 12315,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/inspectutils_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5127,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/interact.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3132,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/interact_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1484,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/main_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3412,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/parser.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4829,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/parser_fuzz_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3135,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/parser_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6519,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/testutils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3562,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/testutils_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1806,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/test_components.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12291,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "fire/test_components_bin.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 835,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "fire/test_components_py3.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2495,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "fire/test_components_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1266,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "fire/trace.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10620,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/trace_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5262,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    },
+    {
+      "path": "fire/value_types.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2695,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 696,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fire/__main__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3914,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 1928,
+      "evidence": [
+        "Project config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/cipher/cipher.py",
+      "raw_specifier": "fire",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/diff/diff.py",
+      "raw_specifier": "difflib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "difflib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/diff/diff.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/diff/diff.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/diff/diff.py",
+      "raw_specifier": "fire",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/diff/difffull.py",
+      "raw_specifier": "difflib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "difflib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/diff/difffull.py",
+      "raw_specifier": "fire",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/identity/identity.py",
+      "raw_specifier": "fire",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/widget/collector.py",
+      "raw_specifier": "fire",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/widget/collector.py",
+      "raw_specifier": "from examples.widget import widget",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "examples",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/widget/widget.py",
+      "raw_specifier": "fire",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/completion.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/completion.py",
+      "raw_specifier": "from __future__ import division",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/completion.py",
+      "raw_specifier": "from __future__ import print_function",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/completion.py",
+      "raw_specifier": "collections",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/completion.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/completion.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/completion.py",
+      "raw_specifier": "from fire import inspectutils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr.py",
+      "raw_specifier": "from __future__ import division",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr.py",
+      "raw_specifier": "from __future__ import unicode_literals",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr.py",
+      "raw_specifier": "unicodedata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "unicodedata",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr.py",
+      "raw_specifier": "from fire.console import console_attr_os",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr.py",
+      "raw_specifier": "from fire.console import encoding as encoding_util",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr.py",
+      "raw_specifier": "from fire.console import text",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "from __future__ import division",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "from __future__ import unicode_literals",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "from fire.console import encoding",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "fcntl",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "fcntl",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "struct",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "struct",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "termios",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "termios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "struct",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "struct",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "from ctypes import create_string_buffer",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "from ctypes import windll",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "tty",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tty",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "termios",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "termios",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_attr_os.py",
+      "raw_specifier": "msvcrt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "msvcrt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fire/console/console_io.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_io.py",
+      "raw_specifier": "signal",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "signal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_io.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_io.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_io.py",
+      "raw_specifier": "from fire.console import console_attr",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_io.py",
+      "raw_specifier": "from fire.console import console_pager",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_io.py",
+      "raw_specifier": "from fire.console import encoding",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_io.py",
+      "raw_specifier": "from fire.console import files",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_pager.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_pager.py",
+      "raw_specifier": "from __future__ import division",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_pager.py",
+      "raw_specifier": "from __future__ import unicode_literals",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_pager.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_pager.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/console_pager.py",
+      "raw_specifier": "from fire.console import console_attr",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/encoding.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/encoding.py",
+      "raw_specifier": "from __future__ import division",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/encoding.py",
+      "raw_specifier": "from __future__ import unicode_literals",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/encoding.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/files.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/files.py",
+      "raw_specifier": "from __future__ import division",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/files.py",
+      "raw_specifier": "from __future__ import unicode_literals",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/files.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/files.py",
+      "raw_specifier": "from fire.console import encoding as encoding_util",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/files.py",
+      "raw_specifier": "from fire.console import platforms",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/platforms.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/platforms.py",
+      "raw_specifier": "from __future__ import division",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/platforms.py",
+      "raw_specifier": "from __future__ import unicode_literals",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/platforms.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/platforms.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/platforms.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/platforms.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/text.py",
+      "raw_specifier": "from __future__ import absolute_import",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/text.py",
+      "raw_specifier": "from __future__ import division",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/text.py",
+      "raw_specifier": "from __future__ import unicode_literals",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/console/text.py",
+      "raw_specifier": "enum",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "asyncio",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "asyncio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "shlex",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shlex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "from fire import completion",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "from fire import decorators",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "from fire import formatting",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "from fire import helptext",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "from fire import inspectutils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "from fire import interact",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "from fire import parser",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "from fire import trace",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "from fire import value_types",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/core.py",
+      "raw_specifier": "from fire.console import console_io",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/custom_descriptions.py",
+      "raw_specifier": "from fire import formatting",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/decorators.py",
+      "raw_specifier": "from typing import Any, Dict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/decorators.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/docstrings.py",
+      "raw_specifier": "collections",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/docstrings.py",
+      "raw_specifier": "enum",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/docstrings.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/docstrings.py",
+      "raw_specifier": "textwrap",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "textwrap",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/formatting.py",
+      "raw_specifier": "from fire import formatting_windows  # pylint: disable=unused-import",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/formatting.py",
+      "raw_specifier": "termcolor",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "termcolor",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/formatting_windows.py",
+      "raw_specifier": "ctypes",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ctypes",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/formatting_windows.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/formatting_windows.py",
+      "raw_specifier": "platform",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "platform",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/formatting_windows.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/formatting_windows.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/formatting_windows.py",
+      "raw_specifier": "colorama",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "colorama",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fire/helptext.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/helptext.py",
+      "raw_specifier": "collections",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/helptext.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/helptext.py",
+      "raw_specifier": "from fire import completion",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/helptext.py",
+      "raw_specifier": "from fire import custom_descriptions",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/helptext.py",
+      "raw_specifier": "from fire import decorators",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/helptext.py",
+      "raw_specifier": "from fire import docstrings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/helptext.py",
+      "raw_specifier": "from fire import formatting",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/helptext.py",
+      "raw_specifier": "from fire import inspectutils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/helptext.py",
+      "raw_specifier": "from fire import value_types",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/inspectutils.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/inspectutils.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/inspectutils.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/inspectutils.py",
+      "raw_specifier": "from fire import docstrings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/inspectutils.py",
+      "raw_specifier": "from IPython.core import oinspect  # pylint: disable=import-outside-toplevel,g-import-not-at-top",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "IPython",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fire/interact.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/interact.py",
+      "raw_specifier": "IPython",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "IPython",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fire/interact.py",
+      "raw_specifier": "code",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "code",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/parser.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fire/parser.py",
+      "raw_specifier": "ast",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ast",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/parser.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/testutils.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/testutils.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/testutils.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/testutils.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/testutils.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/testutils.py",
+      "raw_specifier": "unittest",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "unittest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/testutils.py",
+      "raw_specifier": "from unittest import mock",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "unittest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/testutils.py",
+      "raw_specifier": "from fire import core",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/testutils.py",
+      "raw_specifier": "from fire import trace",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/trace.py",
+      "raw_specifier": "shlex",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shlex",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/trace.py",
+      "raw_specifier": "from fire import inspectutils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/value_types.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/value_types.py",
+      "raw_specifier": "from fire import inspectutils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/__init__.py",
+      "raw_specifier": "from fire.core import Fire",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/__main__.py",
+      "raw_specifier": "importlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/__main__.py",
+      "raw_specifier": "from importlib import util",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/__main__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/__main__.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fire/__main__.py",
+      "raw_specifier": "fire",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "fire",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "termcolor"
+      ],
+      "dev_packages": [
+        "setuptools",
+        "pip",
+        "pylint",
+        "pytest",
+        "pytest_pylint",
+        "pytest_runner",
+        "termcolor",
+        "hypothesis",
+        "levenshtein"
+      ],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/cipher/cipher.py",
+      "candidate_test_paths": [
+        "examples/cipher/tests/test_cipher.py",
+        "tests/cipher/test_cipher.py",
+        "test/test_cipher.py",
+        "tests/test_cipher.py",
+        "tests/ciphers/test_cipher.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/diff/diff.py",
+      "candidate_test_paths": [
+        "examples/diff/tests/test_diff.py",
+        "tests/diff/test_diff.py",
+        "test/test_diff.py",
+        "tests/test_diff.py",
+        "tests/diffs/test_diff.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/diff/difffull.py",
+      "candidate_test_paths": [
+        "examples/diff/tests/test_difffull.py",
+        "tests/diff/test_difffull.py",
+        "examples/diff/tests/test_diff.py",
+        "test/test_difffull.py",
+        "tests/test_difffull.py",
+        "tests/difffull/test_difffull.py",
+        "tests/difffulls/test_difffull.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/identity/identity.py",
+      "candidate_test_paths": [
+        "examples/identity/tests/test_identity.py",
+        "tests/identity/test_identity.py",
+        "test/test_identity.py",
+        "tests/test_identity.py",
+        "tests/identitys/test_identity.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/widget/collector.py",
+      "candidate_test_paths": [
+        "examples/widget/tests/test_collector.py",
+        "tests/widget/test_collector.py",
+        "examples/widget/tests/test_widget.py",
+        "test/test_collector.py",
+        "tests/test_collector.py",
+        "tests/collector/test_collector.py",
+        "tests/collectors/test_collector.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/widget/widget.py",
+      "candidate_test_paths": [
+        "examples/widget/tests/test_widget.py",
+        "tests/widget/test_widget.py",
+        "test/test_widget.py",
+        "tests/test_widget.py",
+        "tests/widgets/test_widget.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/completion.py",
+      "candidate_test_paths": [
+        "fire/tests/test_completion.py",
+        "tests/test_completion.py",
+        "fire/tests/test_fire.py",
+        "test/test_completion.py",
+        "tests/completion/test_completion.py",
+        "tests/completions/test_completion.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/console/console_attr.py",
+      "candidate_test_paths": [
+        "fire/console/tests/test_console_attr.py",
+        "tests/console/test_console_attr.py",
+        "fire/console/tests/test_console.py",
+        "test/test_console_attr.py",
+        "tests/test_console_attr.py",
+        "tests/console_attr/test_console_attr.py",
+        "tests/console_attrs/test_console_attr.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/console/console_attr_os.py",
+      "candidate_test_paths": [
+        "fire/console/tests/test_console_attr_os.py",
+        "tests/console/test_console_attr_os.py",
+        "fire/console/tests/test_console.py",
+        "test/test_console_attr_os.py",
+        "tests/test_console_attr_os.py",
+        "tests/console_attr_os/test_console_attr_os.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/console/console_io.py",
+      "candidate_test_paths": [
+        "fire/console/tests/test_console_io.py",
+        "tests/console/test_console_io.py",
+        "fire/console/tests/test_console.py",
+        "test/test_console_io.py",
+        "tests/test_console_io.py",
+        "tests/console_io/test_console_io.py",
+        "tests/console_ios/test_console_io.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/console/console_pager.py",
+      "candidate_test_paths": [
+        "fire/console/tests/test_console_pager.py",
+        "tests/console/test_console_pager.py",
+        "fire/console/tests/test_console.py",
+        "test/test_console_pager.py",
+        "tests/test_console_pager.py",
+        "tests/console_pager/test_console_pager.py",
+        "tests/console_pagers/test_console_pager.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/console/encoding.py",
+      "candidate_test_paths": [
+        "fire/console/tests/test_encoding.py",
+        "tests/console/test_encoding.py",
+        "fire/console/tests/test_console.py",
+        "test/test_encoding.py",
+        "tests/test_encoding.py",
+        "tests/encoding/test_encoding.py",
+        "tests/encodings/test_encoding.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/console/files.py",
+      "candidate_test_paths": [
+        "fire/console/tests/test_files.py",
+        "tests/console/test_files.py",
+        "fire/console/tests/test_console.py",
+        "test/test_files.py",
+        "tests/test_files.py",
+        "tests/files/test_files.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/console/platforms.py",
+      "candidate_test_paths": [
+        "fire/console/tests/test_platforms.py",
+        "tests/console/test_platforms.py",
+        "fire/console/tests/test_console.py",
+        "test/test_platforms.py",
+        "tests/test_platforms.py",
+        "tests/platforms/test_platforms.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/console/text.py",
+      "candidate_test_paths": [
+        "fire/console/tests/test_text.py",
+        "tests/console/test_text.py",
+        "fire/console/tests/test_console.py",
+        "test/test_text.py",
+        "tests/test_text.py",
+        "tests/text/test_text.py",
+        "tests/texts/test_text.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/core.py",
+      "candidate_test_paths": [
+        "fire/tests/test_core.py",
+        "tests/test_core.py",
+        "fire/tests/test_fire.py",
+        "test/test_core.py",
+        "tests/core/test_core.py",
+        "tests/cores/test_core.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/custom_descriptions.py",
+      "candidate_test_paths": [
+        "fire/tests/test_custom_descriptions.py",
+        "tests/test_custom_descriptions.py",
+        "fire/tests/test_fire.py",
+        "test/test_custom_descriptions.py",
+        "tests/custom_descriptions/test_custom_descriptions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/decorators.py",
+      "candidate_test_paths": [
+        "fire/tests/test_decorators.py",
+        "tests/test_decorators.py",
+        "fire/tests/test_fire.py",
+        "test/test_decorators.py",
+        "tests/decorators/test_decorators.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/docstrings.py",
+      "candidate_test_paths": [
+        "fire/tests/test_docstrings.py",
+        "tests/test_docstrings.py",
+        "fire/tests/test_fire.py",
+        "test/test_docstrings.py",
+        "tests/docstrings/test_docstrings.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/formatting.py",
+      "candidate_test_paths": [
+        "fire/tests/test_formatting.py",
+        "tests/test_formatting.py",
+        "fire/tests/test_fire.py",
+        "test/test_formatting.py",
+        "tests/formatting/test_formatting.py",
+        "tests/formattings/test_formatting.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/formatting_windows.py",
+      "candidate_test_paths": [
+        "fire/tests/test_formatting_windows.py",
+        "tests/test_formatting_windows.py",
+        "fire/tests/test_fire.py",
+        "test/test_formatting_windows.py",
+        "tests/formatting_windows/test_formatting_windows.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/helptext.py",
+      "candidate_test_paths": [
+        "fire/tests/test_helptext.py",
+        "tests/test_helptext.py",
+        "fire/tests/test_fire.py",
+        "test/test_helptext.py",
+        "tests/helptext/test_helptext.py",
+        "tests/helptexts/test_helptext.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/inspectutils.py",
+      "candidate_test_paths": [
+        "fire/tests/test_inspectutils.py",
+        "tests/test_inspectutils.py",
+        "fire/tests/test_fire.py",
+        "test/test_inspectutils.py",
+        "tests/inspectutils/test_inspectutils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/interact.py",
+      "candidate_test_paths": [
+        "fire/tests/test_interact.py",
+        "tests/test_interact.py",
+        "fire/tests/test_fire.py",
+        "test/test_interact.py",
+        "tests/interact/test_interact.py",
+        "tests/interacts/test_interact.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/parser.py",
+      "candidate_test_paths": [
+        "fire/tests/test_parser.py",
+        "tests/test_parser.py",
+        "fire/tests/test_fire.py",
+        "test/test_parser.py",
+        "tests/parser/test_parser.py",
+        "tests/parsers/test_parser.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/testutils.py",
+      "candidate_test_paths": [
+        "fire/tests/test_testutils.py",
+        "tests/test_testutils.py",
+        "fire/tests/test_fire.py",
+        "test/test_testutils.py",
+        "tests/testutils/test_testutils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/trace.py",
+      "candidate_test_paths": [
+        "fire/tests/test_trace.py",
+        "tests/test_trace.py",
+        "fire/tests/test_fire.py",
+        "test/test_trace.py",
+        "tests/trace/test_trace.py",
+        "tests/traces/test_trace.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/value_types.py",
+      "candidate_test_paths": [
+        "fire/tests/test_value_types.py",
+        "tests/test_value_types.py",
+        "fire/tests/test_fire.py",
+        "test/test_value_types.py",
+        "tests/value_types/test_value_types.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fire/__main__.py",
+      "candidate_test_paths": [
+        "fire/tests/test___main__.py",
+        "tests/test___main__.py",
+        "fire/tests/test_fire.py",
+        "test/test___main__.py",
+        "tests/__main__/test___main__.py",
+        "tests/__main__s/test___main__.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 61,
+    "classified_count": 61,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 151,
+    "project_import_count": 45,
+    "declared_package_count": 1,
+    "undeclared_package_count": 5,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 29,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 1,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

@@ -9,7 +9,7 @@
  *   - JSON is authoritative; markdown is a projection.
  */
 
-import { randomUUID } from "node:crypto";
+import { shortStableId } from "../deterministic.js";
 import type { AgentScopeLite } from "../diffWorkflow/types.js";
 import type { PetTrialScenario, AgentTaskPacket } from "./types.js";
 
@@ -24,11 +24,18 @@ export function buildAgentTaskPacket(input: {
   previousFeedbackRef?: string;
 }): AgentTaskPacket {
   const { scenario, scope, attempt, previousFeedbackRef } = input;
+  const generatedAt = new Date().toISOString();
 
   return {
     schema_version: "agent_task_packet.v1",
-    packet_id: randomUUID(),
-    generated_at: new Date().toISOString(),
+    packet_id: shortStableId("pkt", {
+      scenario_id: scenario.id,
+      attempt,
+      scope,
+      previous_feedback_ref: previousFeedbackRef ?? null,
+      generated_at: generatedAt,
+    }),
+    generated_at: generatedAt,
     scenario_id: scenario.id,
     attempt,
 

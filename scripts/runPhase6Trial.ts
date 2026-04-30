@@ -14,10 +14,10 @@ import { createTrialArtifact } from "../src/trial/trialArtifact.js";
 import { createDeepSeekClient } from "../src/trial/deepseekAdapter.js";
 import { runTrial, type TrialConfig } from "../src/trial/trialRunner.js";
 import { validateTrial } from "../src/trial/trialValidation.js";
+import { requireDeepSeekApiKey } from "../src/trial/requireEnv.js";
 import { lintArtifact } from "../src/linter.js";
 
-const DEEPSEEK_API_KEY =
-  process.env.DEEPSEEK_API_KEY ?? "sk-90b71c8c415b41ac93f7ff4e24a08a7c";
+const DEEPSEEK_API_KEY = requireDeepSeekApiKey();
 
 async function main() {
   console.log("╔══════════════════════════════════════════════╗");

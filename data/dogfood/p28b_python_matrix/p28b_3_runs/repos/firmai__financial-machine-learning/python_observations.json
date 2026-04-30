@@ -1,0 +1,419 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "firmai__financial-machine-learning",
+    "observed_file_count": 31,
+    "python_file_count": 8
+  },
+  "layout": {
+    "primary_layout": "unknown",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: generated_wiki, raw_data"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "primary_layout",
+        "reason": "No structural signals matched known project forms"
+      }
+    ],
+    "bucket_summary": {
+      "source": 7,
+      "config": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [],
+    "project_role_signals": [],
+    "unknowns": [
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No framework could be detected from dependencies, paths, or imports"
+      },
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No project role could be inferred from layout, dependencies, or path families"
+      }
+    ]
+  },
+  "risk_preset_validation": {
+    "preset": "unknown",
+    "validation": "unvalidated",
+    "confidence": "low",
+    "matched_signals": [
+      "layout: unknown / flat_package (medium)"
+    ],
+    "suggested_review": [],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "conf.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 74,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "generated_wiki/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "git_search.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 18337,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "git_status.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3649,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "git_util.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2155,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "raw_data/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 48,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "wiki_gen.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3827,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "conf.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "git_search.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "git_search.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "git_search.py",
+      "raw_specifier": "from typing import Dict, List",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "git_search.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pandas",
+      "confidence": "high"
+    },
+    {
+      "from_file": "git_search.py",
+      "raw_specifier": "from conf import PROJECT_ROOT_DIR",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "conf",
+      "confidence": "low"
+    },
+    {
+      "from_file": "git_search.py",
+      "raw_specifier": "from git_status import get_repo_list",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "git_status",
+      "confidence": "low"
+    },
+    {
+      "from_file": "git_search.py",
+      "raw_specifier": "from git_util import get_github_client, get_repo_attributes_dict",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "git_util",
+      "confidence": "low"
+    },
+    {
+      "from_file": "git_status.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "git_status.py",
+      "raw_specifier": "from conf import PROJECT_ROOT_DIR",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "conf",
+      "confidence": "low"
+    },
+    {
+      "from_file": "git_status.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "git_status.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pandas",
+      "confidence": "high"
+    },
+    {
+      "from_file": "git_status.py",
+      "raw_specifier": "from git_util import get_repo_attributes_dict, get_github_client, get_repo_path",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "git_util",
+      "confidence": "low"
+    },
+    {
+      "from_file": "git_util.py",
+      "raw_specifier": "from github import Github, Repository, GithubException",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "github",
+      "confidence": "low"
+    },
+    {
+      "from_file": "git_util.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "git_util.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "wiki_gen.py",
+      "raw_specifier": "from conf import PROJECT_ROOT_DIR",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "conf",
+      "confidence": "low"
+    },
+    {
+      "from_file": "wiki_gen.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "wiki_gen.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pandas",
+      "confidence": "high"
+    },
+    {
+      "from_file": "wiki_gen.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "wiki_gen.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "wiki_gen.py",
+      "raw_specifier": "from git_status import get_repo_list",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "git_status",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "pandas",
+        "pygithub",
+        "tabulate"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "conf.py",
+      "candidate_test_paths": [
+        "test/test_conf.py",
+        "tests/test_conf.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "git_search.py",
+      "candidate_test_paths": [
+        "test/test_git_search.py",
+        "tests/test_git_search.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "git_status.py",
+      "candidate_test_paths": [
+        "test/test_git_status.py",
+        "tests/test_git_status.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "git_util.py",
+      "candidate_test_paths": [
+        "test/test_git_util.py",
+        "tests/test_git_util.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "wiki_gen.py",
+      "candidate_test_paths": [
+        "test/test_wiki_gen.py",
+        "tests/test_wiki_gen.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 7,
+    "classified_count": 7,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 22,
+    "project_import_count": 0,
+    "declared_package_count": 3,
+    "undeclared_package_count": 9,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 5,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 1,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

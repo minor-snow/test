@@ -1,0 +1,1176 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "arrow",
+    "observed_file_count": 50,
+    "python_file_count": 28
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: arrow"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 7,
+      "source": 10,
+      "docs": 1,
+      "test": 10
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (high)",
+      "framework: pytest / test_framework (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 2,
+        "evidence": [
+          "2 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 1704,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "arrow/api.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2856,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "arrow/arrow.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 66905,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "arrow/constants.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3290,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "arrow/factory.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11713,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "arrow/formatter.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5279,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "arrow/locales.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 166746,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "arrow/parser.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 34300,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "arrow/util.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3739,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "arrow/_version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 23,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "arrow/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 969,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 1669,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 1896,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "requirements/requirements-docs.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 111,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "requirements/requirements-tests.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 145,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "requirements/requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 102,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "setup.cfg",
+      "bucket": "config",
+      "extension": ".cfg",
+      "size_bytes": 722,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2162,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_api.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 797,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_arrow.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 113024,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_factory.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 13612,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_formatter.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9831,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_locales.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 203034,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_parser.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 63450,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_util.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4685,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1406,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 1387,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "arrow/api.py",
+      "raw_specifier": "from datetime import date, datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/api.py",
+      "raw_specifier": "from datetime import tzinfo as dt_tzinfo",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/api.py",
+      "raw_specifier": "from time import struct_time",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/api.py",
+      "raw_specifier": "from typing import Any, List, Optional, Tuple, Type, Union, overload",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/api.py",
+      "raw_specifier": "from arrow.arrow import TZ_EXPR, Arrow",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/api.py",
+      "raw_specifier": "from arrow.constants import DEFAULT_LOCALE",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/api.py",
+      "raw_specifier": "from arrow.factory import ArrowFactory",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "calendar",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "calendar",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from datetime import date as dt_date",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from datetime import datetime as dt_datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from datetime import time as dt_time",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from datetime import timedelta, timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from datetime import tzinfo as dt_tzinfo",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from math import trunc",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "math",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from time import struct_time",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from typing import ( Any, ClassVar, Final, Generator, Iterable, List, Literal, Mapping, Optional, Tuple, Union, cast, overload, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from dateutil import tz as dateutil_tz",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dateutil",
+      "confidence": "low"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from dateutil.relativedelta import relativedelta",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dateutil",
+      "confidence": "low"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from arrow import formatter, locales, parser, util",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from arrow.constants import DEFAULT_LOCALE, DEHUMANIZE_LOCALES",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/arrow.py",
+      "raw_specifier": "from arrow.locales import TimeFrameLiteral",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/constants.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/constants.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/constants.py",
+      "raw_specifier": "from typing import Final",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/factory.py",
+      "raw_specifier": "calendar",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "calendar",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/factory.py",
+      "raw_specifier": "from datetime import date, datetime, timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/factory.py",
+      "raw_specifier": "from datetime import tzinfo as dt_tzinfo",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/factory.py",
+      "raw_specifier": "from decimal import Decimal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/factory.py",
+      "raw_specifier": "from time import struct_time",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/factory.py",
+      "raw_specifier": "from typing import Any, List, Optional, Tuple, Type, Union, overload",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/factory.py",
+      "raw_specifier": "from arrow import parser",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/factory.py",
+      "raw_specifier": "from arrow.arrow import TZ_EXPR, Arrow",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/factory.py",
+      "raw_specifier": "from arrow.constants import DEFAULT_LOCALE",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/factory.py",
+      "raw_specifier": "from arrow.util import is_timestamp, iso_to_gregorian",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/formatter.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/formatter.py",
+      "raw_specifier": "from datetime import datetime, timedelta, timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/formatter.py",
+      "raw_specifier": "from typing import Final, Optional, Pattern, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/formatter.py",
+      "raw_specifier": "from arrow import locales",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/formatter.py",
+      "raw_specifier": "from arrow.constants import DEFAULT_LOCALE",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/locales.py",
+      "raw_specifier": "from math import trunc",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "math",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/locales.py",
+      "raw_specifier": "from typing import ( Any, ClassVar, Dict, List, Literal, Mapping, Optional, Sequence, Tuple, Type, Union, cast, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/parser.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/parser.py",
+      "raw_specifier": "from datetime import datetime, timedelta, timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/parser.py",
+      "raw_specifier": "from datetime import tzinfo as dt_tzinfo",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/parser.py",
+      "raw_specifier": "from functools import lru_cache",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/parser.py",
+      "raw_specifier": "from typing import ( Any, ClassVar, Dict, Iterable, List, Literal, Match, Optional, Pattern, SupportsFloat, SupportsInt, Tuple, TypedDict, Union, cast, overload, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/parser.py",
+      "raw_specifier": "from zoneinfo import ZoneInfo, ZoneInfoNotFoundError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "zoneinfo",
+      "confidence": "low"
+    },
+    {
+      "from_file": "arrow/parser.py",
+      "raw_specifier": "from backports.zoneinfo import ZoneInfo, ZoneInfoNotFoundError  # type: ignore[import-not-found, no-redef]",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "backports",
+      "confidence": "low"
+    },
+    {
+      "from_file": "arrow/parser.py",
+      "raw_specifier": "from arrow import locales",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/parser.py",
+      "raw_specifier": "from arrow.constants import DEFAULT_LOCALE",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/parser.py",
+      "raw_specifier": "from arrow.util import next_weekday, normalize_timestamp",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/util.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/util.py",
+      "raw_specifier": "from typing import Any, Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/util.py",
+      "raw_specifier": "from dateutil.rrule import WEEKLY, rrule",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dateutil",
+      "confidence": "low"
+    },
+    {
+      "from_file": "arrow/util.py",
+      "raw_specifier": "from arrow.constants import ( MAX_ORDINAL, MAX_TIMESTAMP, MAX_TIMESTAMP_MS, MAX_TIMESTAMP_US, MIN_ORDINAL, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "arrow/__init__.py",
+      "raw_specifier": "from ._version import __version__",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "._version",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "arrow/__init__.py",
+      "raw_specifier": "from .api import get, now, utcnow",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".api",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "arrow/__init__.py",
+      "raw_specifier": "from .arrow import Arrow",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".arrow",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "arrow/__init__.py",
+      "raw_specifier": "from .factory import ArrowFactory",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".factory",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "arrow/__init__.py",
+      "raw_specifier": "from .formatter import ( FORMAT_ATOM, FORMAT_COOKIE, FORMAT_RFC822, FORMAT_RFC850, FORMAT_RFC1036, FORMAT_RFC1123, FORMAT_RFC2822, FORMAT_RFC3339, FORMAT_RFC3339_STRICT, FORMAT_RSS, FORMAT_W3C, )",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".formatter",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "arrow/__init__.py",
+      "raw_specifier": "from .parser import ParserError",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".parser",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "python_dateutil",
+        "backports_zoneinfo",
+        ",",
+        "3_9",
+        "doc8",
+        "sphinx",
+        "sphinx_autobuild",
+        "sphinx_autodoc_typehints",
+        "sphinx_rtd_theme"
+      ],
+      "dev_packages": [
+        "dateparser",
+        "pre_commit",
+        "pytest",
+        "pytest_cov",
+        "pytest_mock",
+        "pytz",
+        "simplejson"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements/requirements-docs.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "doc8",
+        "sphinx",
+        "sphinx_autobuild",
+        "sphinx_autodoc_typehints",
+        "sphinx_rtd_theme"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements/requirements-tests.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "dateparser",
+        "pre_commit",
+        "pytest",
+        "pytest_cov",
+        "pytest_mock",
+        "pytz",
+        "simplejson",
+        "types_python_dateutil"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "python_dateutil",
+        "tzdata"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [
+        "pre_commit"
+      ],
+      "confidence": "medium",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "arrow/api.py",
+      "candidate_test_paths": [
+        "arrow/tests/test_api.py",
+        "tests/test_api.py",
+        "arrow/tests/test_arrow.py",
+        "test/test_api.py",
+        "tests/api/test_api.py",
+        "tests/apis/test_api.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_api.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_api.py [library_package layout]"
+    },
+    {
+      "source_path": "arrow/arrow.py",
+      "candidate_test_paths": [
+        "arrow/tests/test_arrow.py",
+        "tests/test_arrow.py",
+        "test/test_arrow.py",
+        "tests/arrow/test_arrow.py",
+        "tests/arrows/test_arrow.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_arrow.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_arrow.py [library_package layout]"
+    },
+    {
+      "source_path": "arrow/constants.py",
+      "candidate_test_paths": [
+        "arrow/tests/test_constants.py",
+        "tests/test_constants.py",
+        "arrow/tests/test_arrow.py",
+        "test/test_constants.py",
+        "tests/constants/test_constants.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "arrow/factory.py",
+      "candidate_test_paths": [
+        "arrow/tests/test_factory.py",
+        "tests/test_factory.py",
+        "arrow/tests/test_arrow.py",
+        "test/test_factory.py",
+        "tests/factory/test_factory.py",
+        "tests/factorys/test_factory.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_factory.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_factory.py [library_package layout]"
+    },
+    {
+      "source_path": "arrow/formatter.py",
+      "candidate_test_paths": [
+        "arrow/tests/test_formatter.py",
+        "tests/test_formatter.py",
+        "arrow/tests/test_arrow.py",
+        "test/test_formatter.py",
+        "tests/formatter/test_formatter.py",
+        "tests/formatters/test_formatter.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_formatter.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_formatter.py [library_package layout]"
+    },
+    {
+      "source_path": "arrow/locales.py",
+      "candidate_test_paths": [
+        "arrow/tests/test_locales.py",
+        "tests/test_locales.py",
+        "arrow/tests/test_arrow.py",
+        "test/test_locales.py",
+        "tests/locales/test_locales.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_locales.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_locales.py [library_package layout]"
+    },
+    {
+      "source_path": "arrow/parser.py",
+      "candidate_test_paths": [
+        "arrow/tests/test_parser.py",
+        "tests/test_parser.py",
+        "arrow/tests/test_arrow.py",
+        "test/test_parser.py",
+        "tests/parser/test_parser.py",
+        "tests/parsers/test_parser.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_parser.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_parser.py [library_package layout]"
+    },
+    {
+      "source_path": "arrow/util.py",
+      "candidate_test_paths": [
+        "arrow/tests/test_util.py",
+        "tests/test_util.py",
+        "arrow/tests/test_arrow.py",
+        "test/test_util.py",
+        "tests/util/test_util.py",
+        "tests/utils/test_util.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_util.py"
+      ],
+      "confidence": "medium",
+      "reason": "Generic library helper match without directory context: tests/test_util.py"
+    },
+    {
+      "source_path": "arrow/_version.py",
+      "candidate_test_paths": [
+        "arrow/tests/test_version.py",
+        "tests/test_version.py",
+        "arrow/tests/test_arrow.py",
+        "test/test_version.py",
+        "tests/version/test_version.py",
+        "tests/versions/test_version.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.cfg"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 21,
+    "classified_count": 21,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 63,
+    "project_import_count": 16,
+    "declared_package_count": 0,
+    "undeclared_package_count": 5,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 9,
+    "high_confidence_test_count": 6,
+    "medium_confidence_test_count": 1,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 6,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

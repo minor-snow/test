@@ -11,7 +11,8 @@
  */
 
 import { promises as fs } from "node:fs";
-import { join, dirname } from "node:path";
+import { join, dirname, resolve } from "node:path";
+import { resolveTrustedPath } from "../safePath.js";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -37,8 +38,19 @@ async function ensureDir(dir: string): Promise<void> {
   await fs.mkdir(dir, { recursive: true });
 }
 
-function logPath(dataDir: string): string {
-  return join(dataDir, "decisions", "decisions.jsonl");
+export type DecisionLogPathOptions = {
+  readonly repoRoot?: string;
+  readonly trustedAbsolute?: boolean;
+};
+
+function resolveDecisionDataDir(dataDir: string, options?: DecisionLogPathOptions): string {
+  return resolveTrustedPath(resolve(options?.repoRoot ?? process.cwd()), dataDir, {
+    allowAbsolute: options?.trustedAbsolute === true,
+  });
+}
+
+function logPath(dataDir: string, options?: DecisionLogPathOptions): string {
+  return join(resolveDecisionDataDir(dataDir, options), "decisions", "decisions.jsonl");
 }
 
 /**
@@ -46,9 +58,10 @@ function logPath(dataDir: string): string {
  */
 export async function appendDecisionEntry(
   dataDir: string,
-  entry: DecisionEntry
+  entry: DecisionEntry,
+  options?: DecisionLogPathOptions,
 ): Promise<void> {
-  const path = logPath(dataDir);
+  const path = logPath(dataDir, options);
   await ensureDir(dirname(path));
   const line = JSON.stringify(entry) + "\n";
   await fs.appendFile(path, line, "utf8");
@@ -59,9 +72,10 @@ export async function appendDecisionEntry(
  * Returns empty array if file doesn't exist.
  */
 export async function readDecisionLog(
-  dataDir: string
+  dataDir: string,
+  options?: DecisionLogPathOptions,
 ): Promise<DecisionEntry[]> {
-  const path = logPath(dataDir);
+  const path = logPath(dataDir, options);
   try {
     const content = await fs.readFile(path, "utf8");
     return content

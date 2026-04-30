@@ -20,12 +20,16 @@ export type DecisionEntry = {
     created_at: string;
     quality_snapshot?: Record<string, unknown>;
 };
+export type DecisionLogPathOptions = {
+    readonly repoRoot?: string;
+    readonly trustedAbsolute?: boolean;
+};
 /**
  * Append a single DecisionEntry to the JSONL log.
  */
-export declare function appendDecisionEntry(dataDir: string, entry: DecisionEntry): Promise<void>;
+export declare function appendDecisionEntry(dataDir: string, entry: DecisionEntry, options?: DecisionLogPathOptions): Promise<void>;
 /**
  * Read all decision entries from the JSONL log.
  * Returns empty array if file doesn't exist.
  */
-export declare function readDecisionLog(dataDir: string): Promise<DecisionEntry[]>;
+export declare function readDecisionLog(dataDir: string, options?: DecisionLogPathOptions): Promise<DecisionEntry[]>;

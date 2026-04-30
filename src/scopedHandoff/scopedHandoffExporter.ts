@@ -12,9 +12,10 @@
  * ref: P17
  */
 
-import type { BoundaryGraph, BoundaryNode, GeneratedSymbolNode } from "../boundary/boundaryTypes.js";
+import type { BoundaryGraph, BoundaryNode, GeneratedFileNode, GeneratedSymbolNode } from "../boundary/boundaryTypes.js";
 import type { BlastRadiusReport, RiskAmplification } from "../boundary/blastRadius.js";
 import { queryDownstream } from "../boundary/boundaryGatesAndQueries.js";
+import { shortStableId, stableHash } from "../deterministic.js";
 import { getTermDisplay } from "../i18n/termGlossary.js";
 import type {
   ScopedImplementationBoundaryPackage,
@@ -39,25 +40,42 @@ import {
 // Helpers
 // ---------------------------------------------------------------------------
 
-function createScopeId(label?: string): string {
-  const base = label
-    ? label.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_-]/g, "").toLowerCase()
+function createScopeId(input: {
+  label?: string;
+  handoffPackageHash: string;
+  graphHash: string;
+  changedNodes: readonly string[];
+  extraForbiddenPatterns?: readonly string[];
+}): string {
+  const base = input.label
+    ? input.label.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_-]/g, "").toLowerCase()
     : "scope";
-  const ts = Date.now().toString(36);
-  return `${base}_${ts}`;
+  return shortStableId(base, {
+    handoff_hash: input.handoffPackageHash,
+    graph_hash: input.graphHash,
+    changed_nodes: [...input.changedNodes].sort((a, b) => a.localeCompare(b)),
+    extra_forbidden_patterns: [...(input.extraForbiddenPatterns ?? [])].sort((a, b) => a.localeCompare(b)),
+  });
 }
 
 function findNode(graph: BoundaryGraph, nodeId: string): BoundaryNode | undefined {
   return graph.nodes.find(n => n.node_id === nodeId);
 }
 
-function hashString(s: string): string {
-  // Simple hash for deterministic IDs. Not cryptographic.
-  let h = 0;
-  for (let i = 0; i < s.length; i++) {
-    h = ((h << 5) - h + s.charCodeAt(i)) | 0;
-  }
-  return Math.abs(h).toString(16).padStart(8, "0");
+function findGeneratedFileNode(graph: BoundaryGraph, nodeId: string | undefined): GeneratedFileNode | undefined {
+  if (!nodeId) return undefined;
+  const node = findNode(graph, nodeId);
+  return node?.kind === "generated_file" ? node : undefined;
+}
+
+function findGeneratedSymbolNode(graph: BoundaryGraph, nodeId: string): GeneratedSymbolNode | undefined {
+  const node = findNode(graph, nodeId);
+  return node?.kind === "generated_symbol" ? node : undefined;
+}
+
+function getBoundaryNodeLabel(node: BoundaryNode | undefined): string | undefined {
+  if (!node) return undefined;
+  return "label" in node ? node.label : undefined;
 }
 
 // ---------------------------------------------------------------------------
@@ -77,15 +95,15 @@ function findHeuristicEnforcement(
 
   for (const n of downstream) {
     if (n.kind === "test_obligation") {
-      const fileNode = findNode(graph, (n as any).file_node_id);
+      const fileNode = findGeneratedFileNode(graph, n.file_node_id);
       refs.push({
         kind: "test",
         id: n.node_id,
-        file_path: fileNode && "file_path" in fileNode ? (fileNode as any).file_path : undefined,
+        file_path: fileNode?.file_path,
         enforcement_source: "heuristic_downstream_match",
       });
-    } else if (n.kind === "generated_file" && "file_path" in n) {
-      const path = (n as any).file_path as string;
+    } else if (n.kind === "generated_file") {
+      const path = n.file_path;
       if (path.includes("Guard") || path.includes("Contract")) {
         refs.push({
           kind: "guard",
@@ -112,7 +130,7 @@ function buildAllowedFiles(
 
   for (const fileId of report.by_layer.generated_files) {
     const node = findNode(graph, fileId);
-    const filePath = node && "file_path" in node ? (node as any).file_path : fileId.replace("file:", "");
+    const filePath = node?.kind === "generated_file" ? node.file_path : fileId.replace("file:", "");
     const isTest = filePath.includes("Test");
 
     files.push({
@@ -175,9 +193,10 @@ function buildRequiredTests(
 
   for (const testId of testIds) {
     const node = findNode(graph, testId);
-    const fileNodeId = node && "file_node_id" in node ? (node as any).file_node_id : undefined;
-    const fileNode = fileNodeId ? findNode(graph, fileNodeId) : undefined;
-    const filePath = fileNode && "file_path" in fileNode ? (fileNode as any).file_path : undefined;
+    const fileNode = node?.kind === "test_obligation"
+      ? findGeneratedFileNode(graph, node.file_node_id)
+      : undefined;
+    const filePath = fileNode?.file_path;
 
     // Find which risk nodes this test is connected to
     const sourceNodes: string[] = [];
@@ -187,7 +206,7 @@ function buildRequiredTests(
       }
     }
 
-    const nodeLabel = node && "label" in node ? (node as any).label : undefined;
+    const nodeLabel = getBoundaryNodeLabel(node);
     tests.push({
       test_id: testId,
       test_name: nodeLabel || testId.replace("test:", ""),
@@ -212,10 +231,9 @@ function buildAffectedSymbols(
   graph: BoundaryGraph,
 ): ScopedSymbol[] {
   return report.by_layer.generated_symbols.map(symId => {
-    const node = findNode(graph, symId) as GeneratedSymbolNode | undefined;
-    const fileNodeId = node?.file_node_id;
-    const fileNode = fileNodeId ? findNode(graph, fileNodeId) : undefined;
-    const filePath = fileNode && "file_path" in fileNode ? (fileNode as any).file_path : "";
+    const node = findGeneratedSymbolNode(graph, symId);
+    const fileNode = findGeneratedFileNode(graph, node?.file_node_id);
+    const filePath = fileNode?.file_path ?? "";
 
     return {
       symbol_id: symId,
@@ -258,7 +276,7 @@ function buildMustPreserve(
 
     if (amp.node_id.includes("forbidden")) {
       const node = findNode(graph, amp.node_id);
-      const label = node && "label" in node ? (node as any).label : amp.node_id;
+      const label = getBoundaryNodeLabel(node) ?? amp.node_id;
       const enforcement = findHeuristicEnforcement(graph, amp.node_id);
       constraints.push({
         constraint_id: `constraint_${amp.node_id.replace(/[^a-zA-Z0-9]/g, "_")}`,
@@ -288,7 +306,7 @@ function buildForbiddenAssumptions(
     .filter(amp => amp.node_id.includes("forbidden"))
     .map(amp => {
       const node = findNode(graph, amp.node_id);
-      const label = node && "label" in node ? (node as any).label : amp.node_id;
+      const label = getBoundaryNodeLabel(node) ?? amp.node_id;
       const enforcement = findHeuristicEnforcement(graph, amp.node_id);
       return {
         assumption_id: amp.node_id,
@@ -451,7 +469,13 @@ export function buildScopedImplementationBoundaryPackage(input: {
   const { boundaryGraph: graph, blastRadiusReport: report, options } = input;
   const locale = options.locale;
 
-  const scopeId = createScopeId(options.scopeLabel);
+  const scopeId = createScopeId({
+    label: options.scopeLabel,
+    handoffPackageHash: input.handoffPackageHash,
+    graphHash: report.graph_hash,
+    changedNodes: report.request.changed_nodes,
+    extraForbiddenPatterns: options.extraForbiddenPatterns,
+  });
   const allowedFiles = buildAllowedFiles(report, graph);
   const forbiddenFiles = buildForbiddenFiles(options.extraForbiddenPatterns);
   const requiredTests = buildRequiredTests(report, graph);
@@ -475,7 +499,7 @@ export function buildScopedImplementationBoundaryPackage(input: {
     source: {
       handoff_package_hash: input.handoffPackageHash,
       boundary_graph_hash: report.graph_hash,
-      blast_radius_report_hash: hashString(JSON.stringify(report)),
+      blast_radius_report_hash: stableHash(report),
       locale,
       generator_version: GENERATOR_VERSION,
     },
@@ -526,7 +550,7 @@ export function buildHandoffReference(
     if (!node) continue;
 
     if ("block_id" in node) {
-      relevantSourceBlocks.push((node as any).block_id);
+      relevantSourceBlocks.push(node.block_id);
     }
     relevantNodes.push(nodeId);
   }

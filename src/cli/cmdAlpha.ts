@@ -5,6 +5,7 @@ import { cmdReview } from "./cmdReview.js";
 import { cmdMetrics } from "./cmdMetrics.js";
 import { resolve } from "node:path";
 import { rmSync } from "node:fs";
+import type { AlphaInitInput } from "../alpha/alphaInit.js";
 
 function getFlag(args: string[], name: string): string | undefined {
   const idx = args.indexOf(`--${name}`);
@@ -26,12 +27,13 @@ export function cmdAlpha(args: string[]): void {
 
   switch (subCommand) {
     case "init":
+      const artifactMode = parseAlphaArtifactMode(getFlag(tailArgs, "artifact-mode"));
       cmdAlphaInit({
         repoRoot,
         force: tailArgs.includes("--force"),
         noGithub: tailArgs.includes("--no-github"),
         actionRef: getFlag(tailArgs, "action-ref"),
-        artifactMode: getFlag(tailArgs, "artifact-mode") as any,
+        artifactMode,
       });
       break;
 
@@ -104,6 +106,13 @@ Run with --yes to confirm.`);
       process.exitCode = 1;
       break;
   }
+}
+
+function parseAlphaArtifactMode(raw: string | undefined): AlphaInitInput["artifactMode"] {
+  if (raw === "public" || raw === "private" || raw === "debug") {
+    return raw;
+  }
+  return undefined;
 }
 
 function normalizeAlphaRepairArgs(args: string[], repoRoot: string): string[] {

@@ -2,6 +2,11 @@ import type { RepairCheck, RepairCheckFinding, RepairContract, RepairVerdict } f
 import { attentionLevelForVerdict } from "./reviewAttentionPolicy.js";
 import type { ReviewRequest, ReviewRequestAction } from "./reviewRequestTypes.js";
 
+type FileScopedReviewFinding = RepairCheckFinding & {
+  readonly file: string;
+  readonly kind: "review_required_file" | "outside_scope_file" | "forbidden_file";
+};
+
 export function buildReviewRequest(input: {
   repairId: string;
   contractRevision: number;
@@ -26,16 +31,15 @@ export function buildReviewRequest(input: {
   }
 
   const files = input.check.findings
-    .filter(isFileScopedFinding)
-    .map(finding => ({
-      path: finding.file!,
+    .flatMap(finding => isFileScopedFinding(finding) ? [{
+      path: finding.file,
       bucket: (finding.kind === "review_required_file"
         ? "review_required"
         : finding.kind === "forbidden_file"
           ? "forbidden"
           : "outside_scope") as "review_required" | "forbidden" | "outside_scope",
       reason: finding.message,
-    }));
+    }] : []);
 
   const recommendedActions: ReviewRequestAction[] = dedupeActions([
     ...input.check.findings.flatMap(toReviewActions),
@@ -112,7 +116,7 @@ function buildReviewReason(
   }
 }
 
-function isFileScopedFinding(finding: RepairCheckFinding): boolean {
+function isFileScopedFinding(finding: RepairCheckFinding): finding is FileScopedReviewFinding {
   return (
     (finding.kind === "review_required_file"
       || finding.kind === "outside_scope_file"

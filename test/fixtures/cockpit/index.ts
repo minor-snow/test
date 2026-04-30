@@ -31,6 +31,7 @@ export type CockpitFixture = {
   patchProposal?: PatchProposal;
   /** Expected pipeline phase after runPipeline */
   expectedPhase:
+    | "issues_found"
     | "committed"
     | "regression_failed"
     | "patch_compiled"
@@ -39,6 +40,8 @@ export type CockpitFixture = {
   expectedFailedGates?: string[];
   /** Expected patch rejection reason (if pipeline halts at patch) */
   expectedPatchRejectReason?: string;
+  /** Expected pipeline error substring for fail-closed demo states */
+  expectedErrorIncludes?: string;
   /** Whether patch result should be rejected before regression */
   expectPatchRejected?: boolean;
 };
@@ -241,7 +244,7 @@ const F08_EMPTY_BLOCK: CockpitFixture = {
   id: "f08_empty_block",
   name: "Empty Block Text",
   description:
-    "Block has near-empty text. Linter flags it. Patch fixes with clean text.",
+    "Artifact produces multiple validated issues. The demo pipeline stops early and requires an explicit multi-issue flow.",
   artifact: makeArtifact("f08", [
     block({
       block_id: "b_f08",
@@ -253,7 +256,8 @@ const F08_EMPTY_BLOCK: CockpitFixture = {
     }),
   ]),
   patchText: "The validation layer enforces schema compliance.",
-  expectedPhase: "committed",
+  expectedPhase: "issues_found",
+  expectedErrorIncludes: "supports exactly one validated issue at a time",
 };
 
 /**

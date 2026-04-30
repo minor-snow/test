@@ -1,0 +1,56 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "eeeabaeed8963592db88daf1148e081c1a9707f7f4db0e6f2febe888d7b2a602",
+  "pinned_commit": "0a29b5ccdcbd1285c75c4fdb5d62ae1d244a21b0",
+  "completed_at": "2026-04-30T11:14:33.159Z",
+  "repo_id": "starlette",
+  "category_expected": "fastapi_starlette",
+  "category_observed": "generic_service",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 223,
+  "python_files": 69,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "pytest/medium",
+    "click/medium",
+    "httpx/high"
+  ],
+  "project_role_signals": [
+    "service_backend/medium",
+    "python_sdk_library/high",
+    "http_client_library/high"
+  ],
+  "test_mapping_count": 32,
+  "risk_preset": "generic_service",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "starlette",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected fastapi_starlette, got generic_service",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "uv.lock"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

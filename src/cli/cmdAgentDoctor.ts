@@ -1,5 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { getAllGateIds } from "../gateRegistry.js";
+import { getCriticalFieldBehaviors } from "../governance/fieldBehaviorRegistry.js";
 
 export type AgentDoctorCheck = {
   readonly id:
@@ -40,6 +42,7 @@ export function cmdAgentDoctor(repoRoot = "."): AgentDoctorResult {
 
   console.log("");
   console.log(`Agent-usable repo: ${result.ready ? "yes" : "no"}`);
+  console.log(`Governance registries: ${getAllGateIds().length} gates, ${getCriticalFieldBehaviors().length} critical field-behavior rules`);
   if (result.nextCommands.length > 0) {
     console.log("");
     console.log("Next commands:");

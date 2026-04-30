@@ -10,7 +10,7 @@
  *   - requires_human = true means agent must not self-resolve.
  */
 
-import { randomUUID } from "node:crypto";
+import { shortStableId } from "../deterministic.js";
 import type { DiffVerificationResult } from "../diffWorkflow/types.js";
 import type { AgentScopeLite, AgentScopeViolationHint } from "../diffWorkflow/types.js";
 import type { ChangeContractLite } from "../changeContract/lite/types.js";
@@ -29,6 +29,7 @@ export function buildAgentFeedbackFromDiffVerification(input: {
   contract: ChangeContractLite;
 }): AgentFeedback {
   const { verification, scope, contract } = input;
+  const generatedAt = new Date().toISOString();
   const violations: AgentViolation[] = [];
   const repairActions: AgentRepairAction[] = [];
   let violationIdx = 0;
@@ -90,8 +91,13 @@ export function buildAgentFeedbackFromDiffVerification(input: {
 
   return {
     schema_version: "agent_feedback.v1",
-    feedback_id: randomUUID(),
-    generated_at: new Date().toISOString(),
+    feedback_id: shortStableId("fb", {
+      contract_id: contract.contract_id,
+      verdict: verification.verdict,
+      file_statuses: verification.file_statuses,
+      generated_at: generatedAt,
+    }),
+    generated_at: generatedAt,
     source: {
       phase: "diff_verification",
       source_id: contract.contract_id,

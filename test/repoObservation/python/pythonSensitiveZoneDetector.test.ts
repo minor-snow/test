@@ -66,7 +66,14 @@ describe("pythonSensitiveZoneDetector", () => {
   it("detects at least 5 different sensitive categories", () => {
     const zones = detectPythonSensitiveZones({ pythonPaths: saleorPaths });
     const categories = new Set(zones.map(z => z.category));
-    expect(categories.size).toBeGreaterThanOrEqual(5);
+    expect(categories.size).toBeGreaterThanOrEqual(7);
+    expect(categories.has("financial_transactions")).toBe(true);
+    expect(categories.has("purchase_flow")).toBe(true);
+    expect(categories.has("order_lifecycle")).toBe(true);
+    expect(categories.has("identity")).toBe(true);
+    expect(categories.has("pricing_adjustment")).toBe(true);
+    expect(categories.has("regulatory_calculation")).toBe(true);
+    expect(categories.has("runtime_extension")).toBe(true);
   });
 
   it("supports config overrides", () => {

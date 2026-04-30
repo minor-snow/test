@@ -1,0 +1,2943 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "cookiecutter",
+    "observed_file_count": 341,
+    "python_file_count": 97
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: cookiecutter"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: library_package=3, cli_app=2"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "source": 19,
+      "docs": 3,
+      "config": 1,
+      "test": 73,
+      "unknown": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "click imported in source files"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      },
+      {
+        "name": "typer",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "typer found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "httpx",
+        "kind": "http_client",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpx found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      },
+      {
+        "role": "http_client_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpcore dependency (HTTP transport layer)"
+          },
+          {
+            "dimension": "layout_classification",
+            "detail": "Library package with HTTP core dependency"
+          }
+        ]
+      },
+      {
+        "role": "cli_application",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points (__main__.py or cli.py)"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "CLI framework in dependencies"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "generic_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (medium)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (high)",
+      "framework: typer / cli_framework (medium)",
+      "framework: httpx / http_client (medium)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)",
+      "project_role: http_client_library (high)",
+      "project_role: cli_application (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/config*",
+        "reason": "Configuration affects system behavior",
+        "severity": "medium",
+        "matched_path_count": 3,
+        "evidence": [
+          "3 paths match pattern **/config*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "cookiecutter/cli.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7909,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/config.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5014,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/environment.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2474,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4249,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/extensions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5441,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/find.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1131,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/generate.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 17872,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/hooks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6356,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/log.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1650,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8046,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/prompt.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14777,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/replay.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1410,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/repository.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4538,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3201,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/vcs.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4550,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/zipfile.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5123,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 116,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "cookiecutter/__main__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 174,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 11396,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/requirements.txt",
+      "bucket": "docs",
+      "extension": ".txt",
+      "size_bytes": 185,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/__init__.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 29,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 6224,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7551,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/hooks-abort-render/hooks/post_gen_project.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 199,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/hooks-abort-render/hooks/pre_gen_project.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 197,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/replay/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 678,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/replay/test_dump.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2925,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/replay/test_load.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1680,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/replay/test_replay.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2329,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/repository/test_abbreviation_expansion.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1854,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/repository/test_determine_repository_should_use_local_repo.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2115,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/repository/test_determine_repo_dir_clones_repo.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3234,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/repository/test_determine_repo_dir_finds_existing_cookiecutter.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1310,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/repository/test_determine_repo_dir_finds_subdirectories.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2472,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/repository/test_is_repo_url.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2262,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/repository/test_repository_has_cookiecutter_json.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 623,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-extensions/custom-extension-post/hooks/post_gen_project.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 200,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-extensions/custom-extension-pre/hooks/pre_gen_project.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 199,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-extensions/hello_extension/hello_extension.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 890,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-extensions/hello_extension/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 23,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-extensions/local_extension/local_extensions/main.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 613,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-extensions/local_extension/local_extensions/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 71,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-generate-files-line-end/{{cookiecutter.test_name}}/{{cookiecutter.folder_name}}/{{cookiecutter.filename}}.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 126,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-output-folder/{{cookiecutter.test_name}}/{{cookiecutter.folder_name}}/{{cookiecutter.filename}}.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 128,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-pyhooks/hooks/post_gen_project.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 153,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-pyhooks/hooks/pre_gen_project.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 151,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-pyhooks/hooks/pre_prompt.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 675,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-pyshellhooks/hooks/post_gen_project.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 153,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-pyshellhooks/hooks/pre_gen_project.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 151,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-templates/extends/{{cookiecutter.project_slug}}/requirements.txt",
+      "bucket": "test",
+      "extension": ".txt",
+      "size_bytes": 40,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-templates/include/{{cookiecutter.project_slug}}/requirements.txt",
+      "bucket": "test",
+      "extension": ".txt",
+      "size_bytes": 213,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-templates/no-templates/{{cookiecutter.project_slug}}/requirements.txt",
+      "bucket": "test",
+      "extension": ".txt",
+      "size_bytes": 143,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test-templates/super/{{cookiecutter.project_slug}}/requirements.txt",
+      "bucket": "test",
+      "extension": ".txt",
+      "size_bytes": 96,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_abort_generate_on_hook_error.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1165,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_cli.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 22816,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_cookiecutter_invocation.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 976,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_cookiecutter_local_no_input.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4624,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_cookiecutter_local_with_input.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1713,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_cookiecutter_nested_templates.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 807,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_custom_extensions_in_hooks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1280,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_default_extensions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1874,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_environment.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1088,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_exceptions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 721,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_find.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2214,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_generate_context.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 13865,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_generate_copy_without_render.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2484,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_generate_copy_without_render_override.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3114,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_generate_file.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7298,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_generate_files.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 16283,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_generate_hooks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8833,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_get_config.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5619,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_get_user_config.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5866,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_hooks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10727,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_log.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3982,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_main.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3446,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_output_folder.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1887,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_preferred_encoding.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 851,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_pre_prompt_hooks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1861,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_prompt.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 28348,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_read_repo_password.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 497,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_read_user_choice.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1184,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_read_user_dict.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3965,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_read_user_variable.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1057,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_read_user_yes_no.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 903,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_repo_not_found.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 376,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_specify_output_dir.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2364,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_templates.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 942,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_time_extension.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2509,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3228,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/undefined-variable/dir-name/{{cookiecutter.project_slug}}/{{cookiecutter.foobar}}/helloworld.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 121,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/vcs/test_clone.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7209,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/vcs/test_identify_repo.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2590,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/vcs/test_is_vcs_installed.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 509,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/zipfile/test_unzip.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9861,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 38,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "uv.lock",
+      "bucket": "unknown",
+      "extension": ".lock",
+      "size_bytes": 331327,
+      "evidence": []
+    },
+    {
+      "path": "__main__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 171,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "from collections.abc import Iterable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "from typing import Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "from click import Context, Parameter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "from cookiecutter import __version__",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "from cookiecutter.config import get_user_config",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "from cookiecutter.exceptions import ( ContextDecodingException, EmptyDirNameException, FailedHookException, InvalidModeException, InvalidZipRepository, OutputDirExistsException, RepositoryCloneFailed, RepositoryNotFound, UndefinedVariableInTemplate, UnknownExtension, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "from cookiecutter.log import configure_logger",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/cli.py",
+      "raw_specifier": "from cookiecutter.main import cookiecutter",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/config.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/config.py",
+      "raw_specifier": "collections",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/config.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/config.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/config.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/config.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/config.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "cookiecutter/config.py",
+      "raw_specifier": "from cookiecutter.exceptions import ConfigDoesNotExistException, InvalidConfiguration",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/config.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/environment.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/environment.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/environment.py",
+      "raw_specifier": "from jinja2 import Environment, StrictUndefined",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/environment.py",
+      "raw_specifier": "from cookiecutter.exceptions import UnknownExtension",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/exceptions.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/exceptions.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/exceptions.py",
+      "raw_specifier": "from jinja2 import TemplateError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "string",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "string",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "from collections.abc import Iterable",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "from secrets import choice",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "secrets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "arrow",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "arrow",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "from jinja2 import Environment, nodes",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "from jinja2.ext import Extension",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "from slugify import slugify as pyslugify",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "slugify",
+      "confidence": "low"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "from slugify.slugify import DEFAULT_SEPARATOR",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "slugify",
+      "confidence": "low"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/extensions.py",
+      "raw_specifier": "from jinja2.parser import Parser",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/find.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/find.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/find.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/find.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/find.py",
+      "raw_specifier": "from typing import TYPE_CHECKING",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/find.py",
+      "raw_specifier": "from cookiecutter.exceptions import NonTemplatedInputDirException",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/find.py",
+      "raw_specifier": "from jinja2 import Environment",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "fnmatch",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "fnmatch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from binaryornot.check import is_binary",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "binaryornot",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from jinja2 import Environment, FileSystemLoader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from jinja2.exceptions import TemplateSyntaxError, UndefinedError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from rich.prompt import InvalidResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from cookiecutter.exceptions import ( ContextDecodingException, EmptyDirNameException, OutputDirExistsException, UndefinedVariableInTemplate, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from cookiecutter.find import find_template",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from cookiecutter.hooks import run_hook_from_repo_dir",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from cookiecutter.prompt import YesNoPrompt",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/generate.py",
+      "raw_specifier": "from cookiecutter.utils import ( create_env_with_context, make_sure_path_exists, rmtree, work_in, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "errno",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "errno",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "from jinja2.exceptions import UndefinedError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "from cookiecutter import utils",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "from cookiecutter.exceptions import FailedHookException",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/hooks.py",
+      "raw_specifier": "from cookiecutter.utils import ( create_env_with_context, create_tmp_repo_dir, rmtree, work_in, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/log.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/log.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/log.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "from copy import copy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "from cookiecutter.config import get_user_config",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "from cookiecutter.exceptions import InvalidModeException",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "from cookiecutter.generate import generate_context, generate_files",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "from cookiecutter.hooks import run_pre_prompt_hook",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "from cookiecutter.prompt import choose_nested_template, prompt_for_config",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "from cookiecutter.replay import dump, load",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "from cookiecutter.repository import determine_repo_dir",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/main.py",
+      "raw_specifier": "from cookiecutter.utils import rmtree",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "from collections import OrderedDict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "from collections.abc import Iterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "from itertools import starmap",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any, TypeAlias",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "from jinja2.exceptions import UndefinedError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "from rich.prompt import Confirm, InvalidResponse, Prompt, PromptBase",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "rich",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "from cookiecutter.exceptions import UndefinedVariableInTemplate",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "from cookiecutter.utils import create_env_with_context, rmtree",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/prompt.py",
+      "raw_specifier": "from jinja2 import Environment",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/replay.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/replay.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/replay.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/replay.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/replay.py",
+      "raw_specifier": "from cookiecutter.utils import make_sure_path_exists",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/replay.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/repository.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/repository.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/repository.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/repository.py",
+      "raw_specifier": "from typing import TYPE_CHECKING",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/repository.py",
+      "raw_specifier": "from cookiecutter.exceptions import RepositoryNotFound",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/repository.py",
+      "raw_specifier": "from cookiecutter.vcs import clone",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/repository.py",
+      "raw_specifier": "from cookiecutter.zipfile import unzip",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/repository.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "stat",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "stat",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "from collections.abc import Iterator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "from typing import TYPE_CHECKING, Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "from jinja2.ext import Extension",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "from cookiecutter.environment import StrictEnvironment",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/utils.py",
+      "raw_specifier": "from jinja2 import Environment",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/vcs.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/vcs.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/vcs.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/vcs.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/vcs.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/vcs.py",
+      "raw_specifier": "from shutil import which",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/vcs.py",
+      "raw_specifier": "from typing import TYPE_CHECKING",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/vcs.py",
+      "raw_specifier": "from typing import Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/vcs.py",
+      "raw_specifier": "from cookiecutter.exceptions import ( RepositoryCloneFailed, RepositoryNotFound, UnknownRepoType, VCSNotInstalled, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/vcs.py",
+      "raw_specifier": "from cookiecutter.prompt import prompt_and_delete",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/vcs.py",
+      "raw_specifier": "from cookiecutter.utils import make_sure_path_exists",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/zipfile.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/zipfile.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/zipfile.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/zipfile.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/zipfile.py",
+      "raw_specifier": "from zipfile import BadZipFile, ZipFile",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "zipfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/zipfile.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/zipfile.py",
+      "raw_specifier": "from cookiecutter.exceptions import InvalidZipRepository",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/zipfile.py",
+      "raw_specifier": "from cookiecutter.prompt import prompt_and_delete, read_repo_password",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/zipfile.py",
+      "raw_specifier": "from cookiecutter.utils import make_sure_path_exists",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/__init__.py",
+      "raw_specifier": "from importlib.metadata import version",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "cookiecutter/__main__.py",
+      "raw_specifier": "from cookiecutter.cli import main",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "cookiecutter",
+      "confidence": "high"
+    },
+    {
+      "from_file": "__main__.py",
+      "raw_specifier": "runpy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "runpy",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "docs/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "sphinx_rtd_theme",
+        "sphinx_click",
+        "myst_parser",
+        "sphinx_autobuild",
+        "sphinx",
+        "sphinxcontrib_apidoc",
+        "sphinx_autodoc_typehints",
+        "typing_extensions"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "binaryornot",
+        "jinja2",
+        "click",
+        "pyyaml",
+        "python_slugify",
+        "requests",
+        "arrow",
+        "rich"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tests/test-templates/extends/{{cookiecutter.project_slug}}/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tests/test-templates/include/{{cookiecutter.project_slug}}/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "pip"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tests/test-templates/no-templates/{{cookiecutter.project_slug}}/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "pip"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tests/test-templates/super/{{cookiecutter.project_slug}}/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "uv.lock",
+      "source_type": "uv.lock",
+      "packages": [
+        "alabaster",
+        "annotated_types",
+        "anyio",
+        "arrow",
+        "authlib",
+        "babel",
+        "backports_datetime_fromisoformat",
+        "binaryornot",
+        "certifi",
+        "cffi",
+        "chardet",
+        "charset_normalizer",
+        "click",
+        "colorama",
+        "cookiecutter",
+        "coverage",
+        "cryptography",
+        "docutils",
+        "dparse",
+        "exceptiongroup",
+        "filelock",
+        "freezegun",
+        "h11",
+        "httpcore",
+        "httpx",
+        "idna",
+        "imagesize",
+        "iniconfig",
+        "jinja2",
+        "joblib",
+        "markdown_it_py",
+        "markupsafe",
+        "marshmallow",
+        "mdit_py_plugins",
+        "mdurl",
+        "myst_parser",
+        "nltk",
+        "packaging",
+        "pbr",
+        "pluggy",
+        "pycparser",
+        "pydantic",
+        "pydantic_core",
+        "pygments",
+        "pytest",
+        "pytest_cov",
+        "pytest_mock",
+        "python_dateutil",
+        "python_slugify",
+        "pyyaml",
+        "regex",
+        "requests",
+        "rich",
+        "roman_numerals",
+        "ruamel_yaml",
+        "ruamel_yaml_clib",
+        "ruff",
+        "rust_just",
+        "safety",
+        "safety_schemas",
+        "setuptools",
+        "shellingham",
+        "six",
+        "sniffio",
+        "snowballstemmer",
+        "sphinx",
+        "sphinx_autobuild",
+        "sphinx_autodoc_typehints",
+        "sphinx_click",
+        "sphinx_rtd_theme",
+        "sphinxcontrib_apidoc",
+        "sphinxcontrib_applehelp",
+        "sphinxcontrib_devhelp",
+        "sphinxcontrib_htmlhelp",
+        "sphinxcontrib_jquery",
+        "sphinxcontrib_jsmath",
+        "sphinxcontrib_qthelp",
+        "sphinxcontrib_serializinghtml",
+        "starlette",
+        "tenacity",
+        "text_unidecode",
+        "tomli",
+        "tomlkit",
+        "tqdm",
+        "typer",
+        "types_python_dateutil",
+        "typing_extensions",
+        "urllib3",
+        "uv",
+        "uvicorn",
+        "watchfiles",
+        "websockets"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "cookiecutter/cli.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_cli.py",
+        "tests/test_cli.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_cli.py",
+        "tests/cli/test_cli.py",
+        "tests/clis/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_cli.py [library_package layout]"
+    },
+    {
+      "source_path": "cookiecutter/config.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_config.py",
+        "tests/test_config.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_config.py",
+        "tests/config/test_config.py",
+        "tests/configs/test_config.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "cookiecutter/environment.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_environment.py",
+        "tests/test_environment.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_environment.py",
+        "tests/environment/test_environment.py",
+        "tests/environments/test_environment.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_environment.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_environment.py [library_package layout]"
+    },
+    {
+      "source_path": "cookiecutter/exceptions.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_exceptions.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_exceptions.py [library_package layout]"
+    },
+    {
+      "source_path": "cookiecutter/extensions.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_extensions.py",
+        "tests/test_extensions.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_extensions.py",
+        "tests/extensions/test_extensions.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "cookiecutter/find.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_find.py",
+        "tests/test_find.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_find.py",
+        "tests/find/test_find.py",
+        "tests/finds/test_find.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_find.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_find.py [library_package layout]"
+    },
+    {
+      "source_path": "cookiecutter/generate.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_generate.py",
+        "tests/test_generate.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_generate.py",
+        "tests/generate/test_generate.py",
+        "tests/generates/test_generate.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "cookiecutter/hooks.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_hooks.py",
+        "tests/test_hooks.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_hooks.py",
+        "tests/hooks/test_hooks.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_hooks.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_hooks.py [library_package layout]"
+    },
+    {
+      "source_path": "cookiecutter/log.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_log.py",
+        "tests/test_log.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_log.py",
+        "tests/log/test_log.py",
+        "tests/logs/test_log.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_log.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_log.py [library_package layout]"
+    },
+    {
+      "source_path": "cookiecutter/main.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_main.py",
+        "tests/test_main.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_main.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_main.py [library_package layout]"
+    },
+    {
+      "source_path": "cookiecutter/prompt.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_prompt.py",
+        "tests/test_prompt.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_prompt.py",
+        "tests/prompt/test_prompt.py",
+        "tests/prompts/test_prompt.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_prompt.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_prompt.py [library_package layout]"
+    },
+    {
+      "source_path": "cookiecutter/replay.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_replay.py",
+        "tests/test_replay.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_replay.py",
+        "tests/replay/test_replay.py",
+        "tests/replays/test_replay.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/replay/test_replay.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/replay/test_replay.py [library_package layout]"
+    },
+    {
+      "source_path": "cookiecutter/repository.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_repository.py",
+        "tests/test_repository.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_repository.py",
+        "tests/repository/test_repository.py",
+        "tests/repositorys/test_repository.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "cookiecutter/utils.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_utils.py",
+        "tests/test_utils.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_utils.py",
+        "tests/utils/test_utils.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_utils.py",
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Generic library helper match without directory context: tests/test_utils.py"
+    },
+    {
+      "source_path": "cookiecutter/vcs.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_vcs.py",
+        "tests/test_vcs.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_vcs.py",
+        "tests/vcs/test_vcs.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "cookiecutter/zipfile.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test_zipfile.py",
+        "tests/test_zipfile.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test_zipfile.py",
+        "tests/zipfile/test_zipfile.py",
+        "tests/zipfiles/test_zipfile.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "cookiecutter/__main__.py",
+      "candidate_test_paths": [
+        "cookiecutter/tests/test___main__.py",
+        "tests/test___main__.py",
+        "cookiecutter/tests/test_cookiecutter.py",
+        "test/test___main__.py",
+        "tests/__main__/test___main__.py",
+        "tests/__main__s/test___main__.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    },
+    {
+      "source_path": "__main__.py",
+      "candidate_test_paths": [
+        "test/test___main__.py",
+        "tests/test___main__.py",
+        "tests/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "medium",
+      "reason": "Module-level test file found: tests/test_cli.py"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "uv.lock"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 90,
+    "classified_count": 90,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 167,
+    "project_import_count": 38,
+    "declared_package_count": 20,
+    "undeclared_package_count": 3,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 18,
+    "high_confidence_test_count": 9,
+    "medium_confidence_test_count": 9,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 7,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

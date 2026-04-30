@@ -53,5 +53,5 @@ function classifyFinding(kind: string, severity: string): GitHubFailCondition {
   if (kind === "forbidden_file_modified") return "forbidden";
   if (kind === "outside_scope_file") return "outside_scope";
   if (severity === "review_required") return "review_required";
-  return "forbidden";
+  return "review_required";
 }

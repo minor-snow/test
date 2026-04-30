@@ -9,6 +9,7 @@
 
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { globToRegex } from "../globMatch.js";
 import { scanRepo } from "../repoObservation/repoScanner.js";
 import { loadRepoObservationConfig } from "../repoObservation/repoObservationConfigLoader.js";
 import { buildChangeContractLite } from "../changeContract/lite/changeContractLiteBuilder.js";
@@ -18,6 +19,7 @@ import { loadPantheonConfig } from "./pantheonConfig.js";
 import { buildPublicGuardBaseline } from "./publicCheckProjection.js";
 import { renderPublicTaskMarkdown, renderPublicScopeMarkdown } from "./markdownRenderers.js";
 import type { PantheonRepoInfo } from "./types.js";
+import type { FileBucket } from "../repoObservation/types.js";
 import { hasPythonSignals } from "../repoObservation/python/pythonEcosystemPatterns.js";
 import { enhanceWithPythonObservations } from "../repoObservation/python/pythonObservationEnhancer.js";
 import type { PythonObservationConfig, PythonObservationSidecar } from "../repoObservation/python/types.js";
@@ -61,6 +63,15 @@ export function cmdGuard(input: {
     for (const w of pantheonConfig.warnings) console.log("  Warning:", w);
   }
   const repoObsConfig = loadRepoObservationConfig(repoRoot);
+  const pantheonPathRoles = Object.entries(pantheonConfig.config.path_roles).reduce<Record<string, FileBucket>>(
+    (acc, [pattern, bucket]) => {
+      if (isFileBucket(bucket)) {
+        acc[pattern] = bucket;
+      }
+      return acc;
+    },
+    {},
+  );
 
   // 2. Scan repo
   const observations = scanRepo({
@@ -69,11 +80,7 @@ export function cmdGuard(input: {
       ...repoObsConfig.config,
       path_roles: {
         ...(repoObsConfig.config.path_roles ?? {}),
-        ...Object.fromEntries(
-          Object.entries(pantheonConfig.config.path_roles)
-            .filter(([, v]) => ["src", "test", "config", "generated", "docs", "script", "asset", "unknown"].includes(v))
-            .map(([k, v]) => [k, v as any]),
-        ),
+        ...pantheonPathRoles,
       },
     },
   });
@@ -334,11 +341,15 @@ function matchesForbiddenPattern(
   return patterns.some(pattern => globToRegex(pattern.pattern).test(path));
 }
 
-function globToRegex(glob: string): RegExp {
-  let regex = glob
-    .replace(/[.+^${}()|[\]\\]/g, "\\$&")  // escape regex special chars
-    .replace(/\*\*/g, "___DOUBLESTAR___")
-    .replace(/\*/g, "[^/]*")
-    .replace(/___DOUBLESTAR___/g, ".*");
-  return new RegExp(`^${regex}$`);
+function isFileBucket(value: string): value is FileBucket {
+  return [
+    "src",
+    "test",
+    "config",
+    "generated",
+    "docs",
+    "script",
+    "asset",
+    "unknown",
+  ].includes(value);
 }

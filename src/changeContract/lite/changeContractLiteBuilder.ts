@@ -10,8 +10,8 @@
  * P20a does NOT produce "fail" for missing test mappings.
  */
 
-import { randomUUID } from "node:crypto";
 import type { RepoObservations } from "../../repoObservation/types.js";
+import { shortStableId } from "../../deterministic.js";
 import { isRepoRelativePath, normalizeRepoRelativePath } from "../../repoObservation/pathUtils.js";
 import type {
   ChangeContractLite, ChangedFileStatus, ChangedFileObservationStatus, LiteVerdict,
@@ -81,7 +81,12 @@ export function buildChangeContractLite(input: {
 
   return {
     schema_version: "change_contract_lite.v1",
-    contract_id: randomUUID(),
+    contract_id: shortStableId("ccl", {
+      observation_hash: observations.meta.observation_hash,
+      changed_files: [...input.changedFiles].sort((a, b) => a.localeCompare(b)),
+      intent: input.intent ?? null,
+      repo_state: observations.repo.repo_state,
+    }),
     mode: "bootstrap",
     created_at: new Date().toISOString(),
     ...(input.intent ? { intent: input.intent } : {}),

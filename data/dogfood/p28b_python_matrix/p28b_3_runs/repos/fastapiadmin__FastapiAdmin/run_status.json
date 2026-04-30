@@ -1,0 +1,71 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "87504ffe5f5ad5308f42df74429a9275c06a6e7e8fa54ffe6028ad32091a6a07",
+  "pinned_commit": "842d1a5c98a18fb67ab8fc2ae0a43e8c3197f326",
+  "completed_at": "2026-04-30T11:14:57.018Z",
+  "repo_id": "fastapiadmin/FastapiAdmin",
+  "category_expected": "fastapi_service",
+  "category_observed": "fastapi_service",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 465,
+  "python_files": 219,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "fastapi/high",
+    "pytest/medium",
+    "click/medium",
+    "typer/high",
+    "sqlalchemy/high",
+    "httpx/high",
+    "prefect/high"
+  ],
+  "project_role_signals": [
+    "service_backend/high",
+    "workflow_orchestration/high"
+  ],
+  "test_mapping_count": 164,
+  "risk_preset": "fastapi_service",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "fastapiadmin/FastapiAdmin",
+      "gap_kind": "layout_low_confidence",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Primary layout missing or low confidence",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "backend/pyproject.toml",
+        "backend/requirements.txt",
+        "backend/uv.lock"
+      ],
+      "count": 3,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "dynamic_or_unresolved_import",
+      "classification": "intrinsic",
+      "paths": [
+        "backend/app/api/v1/module_application/portal/plugin_manifest.py",
+        "backend/app/core/discover.py"
+      ],
+      "count": 2,
+      "note": "Imports using __import__(), importlib.import_module(), or computed paths. Cannot be statically resolved — this is inherent to Python."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

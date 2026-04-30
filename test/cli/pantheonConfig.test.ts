@@ -75,10 +75,9 @@ describe("pantheonConfig (JSON)", () => {
       cleanup();
     });
 
-    it("warns on malformed JSON", () => {
+    it("fails closed on malformed JSON", () => {
       setup("not valid json {{{");
-      const { warnings } = loadPantheonConfig(tmpDir);
-      expect(warnings.length).toBeGreaterThan(0);
+      expect(() => loadPantheonConfig(tmpDir)).toThrow(/Failed to parse/);
       cleanup();
     });
 

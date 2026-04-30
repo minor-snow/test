@@ -22,7 +22,7 @@
  * ref: P19c
  */
 
-import { createHash } from "node:crypto";
+import { stableTextHash } from "../deterministic.js";
 import type {
   ChangeContract,
   AgentAdapter,
@@ -71,16 +71,33 @@ export function exportAgentScope(
   const now = input.timestamp ?? new Date().toISOString();
 
   // --- Guard: only scoped contracts can be exported ---
-  if (contract.lifecycle_status !== "scoped") {
+  if (contract.lifecycle_status !== "scoped" && contract.lifecycle_status !== "exported") {
     throw new Error(
       `Cannot export agent scope: contract is in '${contract.lifecycle_status}' status, ` +
-      `expected 'scoped'. Contract: ${contract.contract_id}`,
+      `expected 'scoped' or 'exported'. Contract: ${contract.contract_id}`,
     );
   }
 
   // --- Render instructions ---
   const instructions = renderAgentInstructions(contract);
   const instructionsHash = hashString(instructions);
+
+  if (contract.lifecycle_status === "exported") {
+    return {
+      contract: {
+        ...contract,
+        updated_at: now,
+        agent: {
+          ...contract.agent,
+          exported: true,
+          instructions_path,
+          handoff_hash: instructionsHash,
+        },
+      },
+      instructions,
+      instructions_hash: instructionsHash,
+    };
+  }
 
   // --- Transition to exported ---
   const exportEvent = createResultEvent(
@@ -248,5 +265,5 @@ function renderAgentInstructions(contract: ChangeContract): string {
 // ---------------------------------------------------------------------------
 
 function hashString(s: string): string {
-  return "sha256:" + createHash("sha256").update(s).digest("hex");
+  return stableTextHash(s);
 }

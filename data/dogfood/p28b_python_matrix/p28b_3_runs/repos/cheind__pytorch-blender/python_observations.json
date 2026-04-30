@@ -1,0 +1,3059 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "cheind__pytorch-blender",
+    "observed_file_count": 108,
+    "python_file_count": 70
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "Unable to determine package layout from file paths"
+      }
+    ],
+    "bucket_summary": {
+      "source": 48,
+      "unknown": 2,
+      "config": 2,
+      "script": 1,
+      "test": 17
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / unknown (low)",
+      "framework: pytest / test_framework (medium)",
+      "project_role: python_sdk_library (medium)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 6,
+        "evidence": [
+          "6 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "benchmarks/benchmark.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2180,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/compositor_normals_depth/compositor_normals_depth.blend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1699,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/compositor_normals_depth/generate.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1607,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/compositor_normals_depth/scene_helpers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1957,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/control/cartpole.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1150,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/control/cartpole_gym/envs/cartpole.blend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2218,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/control/cartpole_gym/envs/cartpole_env.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 653,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/control/cartpole_gym/envs/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 47,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/control/cartpole_gym/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 130,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/datagen/cube.blend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1212,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/datagen/cube_compositor.blend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1180,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/datagen/falling_cubes.blend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1409,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/datagen/generate.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3253,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/datagen/minimal.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 964,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/densityopt/densityopt.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 15020,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/densityopt/supershape.blend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1676,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/animation.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10358,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/arguments.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1620,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/camera.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7638,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/constants.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 97,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/duplex.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1903,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/env.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10525,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/materials.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1610,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/offscreen.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3482,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/paths.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 200,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/publisher.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1331,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/renderer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5567,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/signal.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1422,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6056,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 23,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/blendtorch/btb/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 423,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_blender/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 79,
+      "evidence": []
+    },
+    {
+      "path": "pkg_blender/setup.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 866,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/apps/launch.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1761,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/apps/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/colors.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 627,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/constants.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 99,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/dataset.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6050,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/duplex.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1906,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/env.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11092,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/env_rendering.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2206,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/file.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4774,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/finder.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2237,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/launcher.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8286,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/launch_info.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2217,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 531,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/version.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 23,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/blendtorch/btt/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 318,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pkg_pytorch/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 74,
+      "evidence": []
+    },
+    {
+      "path": "pkg_pytorch/setup.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1000,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pytest.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 113,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "requirements_dev.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 26,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "scripts/install_btb.py",
+      "bucket": "script",
+      "extension": ".py",
+      "size_bytes": 1216,
+      "evidence": [
+        "Scripts directory"
+      ]
+    },
+    {
+      "path": "tests/blender/anim.blend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1215,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/blender/cam.blend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 758,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/blender/compositor.blend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 539,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/blender/dataset.blend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 601,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/blender/dataset_robust.blend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 731,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/blender/duplex.blend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 433,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/blender/env.blend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1367,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/blender/launcher.blend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 373,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_animation.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1384,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_camera.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1560,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_compositor.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 927,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_dataset.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1811,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_duplex.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1451,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_env.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1553,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_file.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1025,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_launcher.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3718,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "benchmarks/benchmark.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/benchmark.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "benchmarks/benchmark.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/benchmark.py",
+      "raw_specifier": "torch.utils.data",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "torch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/benchmark.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/benchmark.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "benchmarks/benchmark.py",
+      "raw_specifier": "from blendtorch import btt",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/compositor_normals_depth/compositor_normals_depth.blend.py",
+      "raw_specifier": "blendtorch.btb",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/compositor_normals_depth/compositor_normals_depth.blend.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/compositor_normals_depth/compositor_normals_depth.blend.py",
+      "raw_specifier": "scene_helpers",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "scene_helpers",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/compositor_normals_depth/generate.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/compositor_normals_depth/generate.py",
+      "raw_specifier": "blendtorch.btt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/compositor_normals_depth/generate.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/compositor_normals_depth/generate.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/compositor_normals_depth/generate.py",
+      "raw_specifier": "from torch.utils import data",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "torch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/compositor_normals_depth/scene_helpers.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/compositor_normals_depth/scene_helpers.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/compositor_normals_depth/scene_helpers.py",
+      "raw_specifier": "blendtorch.btb",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/compositor_normals_depth/scene_helpers.py",
+      "raw_specifier": "supershape",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "supershape",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/control/cartpole.py",
+      "raw_specifier": "gym",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "gym",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/control/cartpole.py",
+      "raw_specifier": "cartpole_gym",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "cartpole_gym",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/control/cartpole_gym/envs/cartpole.blend.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/control/cartpole_gym/envs/cartpole.blend.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/control/cartpole_gym/envs/cartpole.blend.py",
+      "raw_specifier": "from blendtorch import btb",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/control/cartpole_gym/envs/cartpole.blend.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/control/cartpole_gym/envs/cartpole_env.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/control/cartpole_gym/envs/cartpole_env.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/control/cartpole_gym/envs/cartpole_env.py",
+      "raw_specifier": "from gym import spaces",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "gym",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/control/cartpole_gym/envs/cartpole_env.py",
+      "raw_specifier": "from blendtorch import btt",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/control/cartpole_gym/envs/__init__.py",
+      "raw_specifier": "from .cartpole_env import CartpoleEnv  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cartpole_env",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/control/cartpole_gym/__init__.py",
+      "raw_specifier": "from gym.envs.registration import register",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "gym",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/datagen/cube.blend.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/datagen/cube.blend.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/datagen/cube.blend.py",
+      "raw_specifier": "blendtorch.btb",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/datagen/cube_compositor.blend.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/datagen/cube_compositor.blend.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/datagen/cube_compositor.blend.py",
+      "raw_specifier": "blendtorch.btb",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/datagen/falling_cubes.blend.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/datagen/falling_cubes.blend.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/datagen/falling_cubes.blend.py",
+      "raw_specifier": "blendtorch.btb",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/datagen/generate.py",
+      "raw_specifier": "from torch.utils.data import DataLoader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "torch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/datagen/generate.py",
+      "raw_specifier": "from contextlib import ExitStack",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/datagen/generate.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/datagen/generate.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/datagen/generate.py",
+      "raw_specifier": "blendtorch.btt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/datagen/generate.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/datagen/generate.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/datagen/minimal.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/datagen/minimal.py",
+      "raw_specifier": "from torch.utils import data",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "torch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/datagen/minimal.py",
+      "raw_specifier": "blendtorch.btt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/densityopt/densityopt.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/densityopt/densityopt.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/densityopt/densityopt.py",
+      "raw_specifier": "torch",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "torch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/densityopt/densityopt.py",
+      "raw_specifier": "torch.nn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "torch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/densityopt/densityopt.py",
+      "raw_specifier": "torch.optim",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "torch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/densityopt/densityopt.py",
+      "raw_specifier": "from torch.utils import data",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "torch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/densityopt/densityopt.py",
+      "raw_specifier": "from torch.distributions import LogNormal",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "torch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/densityopt/densityopt.py",
+      "raw_specifier": "torchvision.utils",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "torchvision",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/densityopt/densityopt.py",
+      "raw_specifier": "from blendtorch import btt",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/densityopt/densityopt.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/densityopt/densityopt.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/densityopt/supershape.blend.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/densityopt/supershape.blend.py",
+      "raw_specifier": "from blendtorch import btb",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "blendtorch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/densityopt/supershape.blend.py",
+      "raw_specifier": "supershape",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "supershape",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/animation.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/animation.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/animation.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/animation.py",
+      "raw_specifier": "from .signal import Signal",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".signal",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/animation.py",
+      "raw_specifier": "from .utils import find_first_view3d",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/arguments.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/arguments.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/camera.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/camera.py",
+      "raw_specifier": "from mathutils import Vector  # noqa",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mathutils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/camera.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/camera.py",
+      "raw_specifier": "from . import utils",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/duplex.py",
+      "raw_specifier": "zmq",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "zmq",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/duplex.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/duplex.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/duplex.py",
+      "raw_specifier": "from .constants import DEFAULT_TIMEOUTMS",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".constants",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/env.py",
+      "raw_specifier": "zmq",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "zmq",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/env.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/env.py",
+      "raw_specifier": "from .animation import AnimationController",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".animation",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/env.py",
+      "raw_specifier": "from .offscreen import OffScreenRenderer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".offscreen",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/env.py",
+      "raw_specifier": "from .constants import DEFAULT_TIMEOUTMS",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".constants",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/env.py",
+      "raw_specifier": "from .camera import Camera",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".camera",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/materials.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/offscreen.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/offscreen.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/offscreen.py",
+      "raw_specifier": "gpu",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "gpu",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/offscreen.py",
+      "raw_specifier": "bgl",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bgl",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/offscreen.py",
+      "raw_specifier": "from OpenGL.GL import glGetTexImage",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "OpenGL",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/offscreen.py",
+      "raw_specifier": "from .camera import Camera",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".camera",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/offscreen.py",
+      "raw_specifier": "from .utils import find_first_view3d",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/paths.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/paths.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/publisher.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/publisher.py",
+      "raw_specifier": "zmq",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "zmq",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/renderer.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/renderer.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/renderer.py",
+      "raw_specifier": "from dataclasses import dataclass",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/renderer.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/renderer.py",
+      "raw_specifier": "from itertools import groupby",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/renderer.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/renderer.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/renderer.py",
+      "raw_specifier": "minexr",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "minexr",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/renderer.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/renderer.py",
+      "raw_specifier": "from .camera import Camera",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".camera",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/signal.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/utils.py",
+      "raw_specifier": "bpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "bpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/utils.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/utils.py",
+      "raw_specifier": "from mathutils import Vector",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "mathutils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/__init__.py",
+      "raw_specifier": "from .animation import AnimationController",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".animation",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/__init__.py",
+      "raw_specifier": "from .offscreen import OffScreenRenderer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".offscreen",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/__init__.py",
+      "raw_specifier": "from .renderer import CompositeRenderer, CompositeSelection",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".renderer",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/__init__.py",
+      "raw_specifier": "from .arguments import parse_blendtorch_args",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".arguments",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/__init__.py",
+      "raw_specifier": "from .paths import add_scene_dir_to_path",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".paths",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/__init__.py",
+      "raw_specifier": "from .publisher import DataPublisher",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".publisher",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/__init__.py",
+      "raw_specifier": "from .camera import Camera",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".camera",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/__init__.py",
+      "raw_specifier": "from .duplex import DuplexChannel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".duplex",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/__init__.py",
+      "raw_specifier": "from . import env, utils, materials",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/blendtorch/btb/__init__.py",
+      "raw_specifier": "from .version import __version__",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".version",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_blender/setup.py",
+      "raw_specifier": "from setuptools import setup",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "setuptools",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_blender/setup.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/apps/launch.py",
+      "raw_specifier": "from ..launcher import BlenderLauncher",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..launcher",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/apps/launch.py",
+      "raw_specifier": "from ..launch_info import LaunchInfo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..launch_info",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/apps/launch.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/apps/launch.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/apps/launch.py",
+      "raw_specifier": "from argparse import RawTextHelpFormatter",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/colors.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/dataset.py",
+      "raw_specifier": "zmq",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "zmq",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/dataset.py",
+      "raw_specifier": "pickle",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pickle",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/dataset.py",
+      "raw_specifier": "from contextlib import ExitStack",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/dataset.py",
+      "raw_specifier": "from glob import glob",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "glob",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/dataset.py",
+      "raw_specifier": "torch.utils",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "torch",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/dataset.py",
+      "raw_specifier": "from .file import FileRecorder, FileReader",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".file",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/dataset.py",
+      "raw_specifier": "from .constants import DEFAULT_TIMEOUTMS",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".constants",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/duplex.py",
+      "raw_specifier": "zmq",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "zmq",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/duplex.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/duplex.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/duplex.py",
+      "raw_specifier": "from .constants import DEFAULT_TIMEOUTMS",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".constants",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/env.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/env.py",
+      "raw_specifier": "zmq",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "zmq",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/env.py",
+      "raw_specifier": "from .constants import DEFAULT_TIMEOUTMS",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".constants",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/env.py",
+      "raw_specifier": "from .launcher import BlenderLauncher",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".launcher",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/env.py",
+      "raw_specifier": "from .env_rendering import create_renderer",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".env_rendering",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/env.py",
+      "raw_specifier": "from . import colors",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/env.py",
+      "raw_specifier": "gym",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "gym",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/env.py",
+      "raw_specifier": "from contextlib import ExitStack",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/env_rendering.py",
+      "raw_specifier": "matplotlib.pyplot",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "matplotlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/env_rendering.py",
+      "raw_specifier": "from gym.envs.classic_control import rendering",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "gym",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/file.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/file.py",
+      "raw_specifier": "pickle",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pickle",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/file.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/file.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/file.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/finder.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/finder.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/finder.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/finder.py",
+      "raw_specifier": "shutil",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "shutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/finder.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/finder.py",
+      "raw_specifier": "tempfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "tempfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/finder.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/finder.py",
+      "raw_specifier": "zmq",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "zmq",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/launcher.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/launcher.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/launcher.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/launcher.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/launcher.py",
+      "raw_specifier": "psutil",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "psutil",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/launcher.py",
+      "raw_specifier": "signal",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "signal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/launcher.py",
+      "raw_specifier": "from .finder import discover_blender",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".finder",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/launcher.py",
+      "raw_specifier": "from .launch_info import LaunchInfo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".launch_info",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/launcher.py",
+      "raw_specifier": "from .utils import get_primary_ip",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/launch_info.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/launch_info.py",
+      "raw_specifier": "from contextlib import ExitStack, nullcontext",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/utils.py",
+      "raw_specifier": "socket",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "socket",
+      "confidence": "high"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/__init__.py",
+      "raw_specifier": "from .launcher import BlenderLauncher, LaunchInfo",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".launcher",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/__init__.py",
+      "raw_specifier": "from .dataset import RemoteIterableDataset, FileDataset",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".dataset",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/__init__.py",
+      "raw_specifier": "from .finder import discover_blender",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".finder",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/__init__.py",
+      "raw_specifier": "from .file import FileRecorder, FileReader",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".file",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/__init__.py",
+      "raw_specifier": "from .duplex import DuplexChannel",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".duplex",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/__init__.py",
+      "raw_specifier": "from . import env",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/__init__.py",
+      "raw_specifier": "from . import colors",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/blendtorch/btt/__init__.py",
+      "raw_specifier": "from .version import __version__",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".version",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "pkg_pytorch/setup.py",
+      "raw_specifier": "from setuptools import setup",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "setuptools",
+      "confidence": "low"
+    },
+    {
+      "from_file": "pkg_pytorch/setup.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pkg_blender/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "pyzmq",
+        "numpy",
+        "pyopengl",
+        "minexr",
+        "supershape"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pkg_blender/setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    },
+    {
+      "source_path": "pkg_pytorch/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "pyzmq",
+        "numpy",
+        "matplotlib",
+        "torch",
+        "psutil"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pkg_pytorch/setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    },
+    {
+      "source_path": "requirements_dev.txt",
+      "source_type": "requirements-dev.txt",
+      "packages": [],
+      "dev_packages": [
+        "pytest",
+        "gym"
+      ],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "benchmarks/benchmark.py",
+      "candidate_test_paths": [
+        "benchmarks/tests/test_benchmark.py",
+        "tests/test_benchmark.py",
+        "benchmarks/tests/test_benchmarks.py",
+        "test/test_benchmark.py",
+        "tests/benchmark/test_benchmark.py",
+        "tests/benchmarks/test_benchmark.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/compositor_normals_depth/compositor_normals_depth.blend.py",
+      "candidate_test_paths": [
+        "examples/compositor_normals_depth/tests/test_compositor_normals_depth.blend.py",
+        "tests/compositor_normals_depth/test_compositor_normals_depth.blend.py",
+        "examples/compositor_normals_depth/tests/test_compositor_normals_depth.py",
+        "test/test_compositor_normals_depth.blend.py",
+        "tests/test_compositor_normals_depth.blend.py",
+        "tests/compositor_normals_depth.blend/test_compositor_normals_depth.blend.py",
+        "tests/compositor_normals_depth.blends/test_compositor_normals_depth.blend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/compositor_normals_depth/generate.py",
+      "candidate_test_paths": [
+        "examples/compositor_normals_depth/tests/test_generate.py",
+        "tests/compositor_normals_depth/test_generate.py",
+        "examples/compositor_normals_depth/tests/test_compositor_normals_depth.py",
+        "test/test_generate.py",
+        "tests/test_generate.py",
+        "tests/generate/test_generate.py",
+        "tests/generates/test_generate.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/compositor_normals_depth/scene_helpers.py",
+      "candidate_test_paths": [
+        "examples/compositor_normals_depth/tests/test_scene_helpers.py",
+        "tests/compositor_normals_depth/test_scene_helpers.py",
+        "examples/compositor_normals_depth/tests/test_compositor_normals_depth.py",
+        "test/test_scene_helpers.py",
+        "tests/test_scene_helpers.py",
+        "tests/scene_helpers/test_scene_helpers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/control/cartpole.py",
+      "candidate_test_paths": [
+        "examples/control/tests/test_cartpole.py",
+        "tests/control/test_cartpole.py",
+        "examples/control/tests/test_control.py",
+        "test/test_cartpole.py",
+        "tests/test_cartpole.py",
+        "tests/cartpole/test_cartpole.py",
+        "tests/cartpoles/test_cartpole.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/control/cartpole_gym/envs/cartpole.blend.py",
+      "candidate_test_paths": [
+        "examples/control/cartpole_gym/envs/tests/test_cartpole.blend.py",
+        "tests/control/cartpole_gym/envs/test_cartpole.blend.py",
+        "examples/control/cartpole_gym/envs/tests/test_envs.py",
+        "test/test_cartpole.blend.py",
+        "tests/test_cartpole.blend.py",
+        "tests/cartpole.blend/test_cartpole.blend.py",
+        "tests/cartpole.blends/test_cartpole.blend.py",
+        "tests/envs/test_cartpole.blend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/control/cartpole_gym/envs/cartpole_env.py",
+      "candidate_test_paths": [
+        "examples/control/cartpole_gym/envs/tests/test_cartpole_env.py",
+        "tests/control/cartpole_gym/envs/test_cartpole_env.py",
+        "examples/control/cartpole_gym/envs/tests/test_envs.py",
+        "test/test_cartpole_env.py",
+        "tests/test_cartpole_env.py",
+        "tests/cartpole_env/test_cartpole_env.py",
+        "tests/cartpole_envs/test_cartpole_env.py",
+        "tests/envs/test_cartpole_env.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/datagen/cube.blend.py",
+      "candidate_test_paths": [
+        "examples/datagen/tests/test_cube.blend.py",
+        "tests/datagen/test_cube.blend.py",
+        "examples/datagen/tests/test_datagen.py",
+        "test/test_cube.blend.py",
+        "tests/test_cube.blend.py",
+        "tests/cube.blend/test_cube.blend.py",
+        "tests/cube.blends/test_cube.blend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/datagen/cube_compositor.blend.py",
+      "candidate_test_paths": [
+        "examples/datagen/tests/test_cube_compositor.blend.py",
+        "tests/datagen/test_cube_compositor.blend.py",
+        "examples/datagen/tests/test_datagen.py",
+        "test/test_cube_compositor.blend.py",
+        "tests/test_cube_compositor.blend.py",
+        "tests/cube_compositor.blend/test_cube_compositor.blend.py",
+        "tests/cube_compositor.blends/test_cube_compositor.blend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/datagen/falling_cubes.blend.py",
+      "candidate_test_paths": [
+        "examples/datagen/tests/test_falling_cubes.blend.py",
+        "tests/datagen/test_falling_cubes.blend.py",
+        "examples/datagen/tests/test_datagen.py",
+        "test/test_falling_cubes.blend.py",
+        "tests/test_falling_cubes.blend.py",
+        "tests/falling_cubes.blend/test_falling_cubes.blend.py",
+        "tests/falling_cubes.blends/test_falling_cubes.blend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/datagen/generate.py",
+      "candidate_test_paths": [
+        "examples/datagen/tests/test_generate.py",
+        "tests/datagen/test_generate.py",
+        "examples/datagen/tests/test_datagen.py",
+        "test/test_generate.py",
+        "tests/test_generate.py",
+        "tests/generate/test_generate.py",
+        "tests/generates/test_generate.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/datagen/minimal.py",
+      "candidate_test_paths": [
+        "examples/datagen/tests/test_minimal.py",
+        "tests/datagen/test_minimal.py",
+        "examples/datagen/tests/test_datagen.py",
+        "test/test_minimal.py",
+        "tests/test_minimal.py",
+        "tests/minimal/test_minimal.py",
+        "tests/minimals/test_minimal.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/densityopt/densityopt.py",
+      "candidate_test_paths": [
+        "examples/densityopt/tests/test_densityopt.py",
+        "tests/densityopt/test_densityopt.py",
+        "test/test_densityopt.py",
+        "tests/test_densityopt.py",
+        "tests/densityopts/test_densityopt.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/densityopt/supershape.blend.py",
+      "candidate_test_paths": [
+        "examples/densityopt/tests/test_supershape.blend.py",
+        "tests/densityopt/test_supershape.blend.py",
+        "examples/densityopt/tests/test_densityopt.py",
+        "test/test_supershape.blend.py",
+        "tests/test_supershape.blend.py",
+        "tests/supershape.blend/test_supershape.blend.py",
+        "tests/supershape.blends/test_supershape.blend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/animation.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_animation.py",
+        "tests/blendtorch/btb/test_animation.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_animation.py",
+        "tests/test_animation.py",
+        "tests/animation/test_animation.py",
+        "tests/animations/test_animation.py",
+        "tests/btb/test_animation.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_animation.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_animation.py [library_package layout]"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/arguments.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_arguments.py",
+        "tests/blendtorch/btb/test_arguments.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_arguments.py",
+        "tests/test_arguments.py",
+        "tests/arguments/test_arguments.py",
+        "tests/btb/test_arguments.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/camera.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_camera.py",
+        "tests/blendtorch/btb/test_camera.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_camera.py",
+        "tests/test_camera.py",
+        "tests/camera/test_camera.py",
+        "tests/cameras/test_camera.py",
+        "tests/btb/test_camera.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_camera.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_camera.py [library_package layout]"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/constants.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_constants.py",
+        "tests/blendtorch/btb/test_constants.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_constants.py",
+        "tests/test_constants.py",
+        "tests/constants/test_constants.py",
+        "tests/btb/test_constants.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/duplex.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_duplex.py",
+        "tests/blendtorch/btb/test_duplex.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_duplex.py",
+        "tests/test_duplex.py",
+        "tests/duplex/test_duplex.py",
+        "tests/duplexs/test_duplex.py",
+        "tests/btb/test_duplex.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_duplex.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_duplex.py [library_package layout]"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/env.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_env.py",
+        "tests/blendtorch/btb/test_env.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_env.py",
+        "tests/test_env.py",
+        "tests/env/test_env.py",
+        "tests/envs/test_env.py",
+        "tests/btb/test_env.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_env.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_env.py [library_package layout]"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/materials.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_materials.py",
+        "tests/blendtorch/btb/test_materials.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_materials.py",
+        "tests/test_materials.py",
+        "tests/materials/test_materials.py",
+        "tests/btb/test_materials.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/offscreen.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_offscreen.py",
+        "tests/blendtorch/btb/test_offscreen.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_offscreen.py",
+        "tests/test_offscreen.py",
+        "tests/offscreen/test_offscreen.py",
+        "tests/offscreens/test_offscreen.py",
+        "tests/btb/test_offscreen.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/paths.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_paths.py",
+        "tests/blendtorch/btb/test_paths.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_paths.py",
+        "tests/test_paths.py",
+        "tests/paths/test_paths.py",
+        "tests/btb/test_paths.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/publisher.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_publisher.py",
+        "tests/blendtorch/btb/test_publisher.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_publisher.py",
+        "tests/test_publisher.py",
+        "tests/publisher/test_publisher.py",
+        "tests/publishers/test_publisher.py",
+        "tests/btb/test_publisher.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/renderer.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_renderer.py",
+        "tests/blendtorch/btb/test_renderer.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_renderer.py",
+        "tests/test_renderer.py",
+        "tests/renderer/test_renderer.py",
+        "tests/renderers/test_renderer.py",
+        "tests/btb/test_renderer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/signal.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_signal.py",
+        "tests/blendtorch/btb/test_signal.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_signal.py",
+        "tests/test_signal.py",
+        "tests/signal/test_signal.py",
+        "tests/signals/test_signal.py",
+        "tests/btb/test_signal.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/utils.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_utils.py",
+        "tests/blendtorch/btb/test_utils.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py",
+        "tests/btb/test_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_blender/blendtorch/btb/version.py",
+      "candidate_test_paths": [
+        "pkg_blender/blendtorch/btb/tests/test_version.py",
+        "tests/blendtorch/btb/test_version.py",
+        "pkg_blender/blendtorch/btb/tests/test_btb.py",
+        "test/test_version.py",
+        "tests/test_version.py",
+        "tests/version/test_version.py",
+        "tests/versions/test_version.py",
+        "tests/btb/test_version.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_blender/setup.py",
+      "candidate_test_paths": [
+        "pkg_blender/tests/test_setup.py",
+        "tests/test_setup.py",
+        "pkg_blender/tests/test_pkg_blender.py",
+        "test/test_setup.py",
+        "tests/setup/test_setup.py",
+        "tests/setups/test_setup.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/apps/launch.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/apps/tests/test_launch.py",
+        "tests/blendtorch/btt/apps/test_launch.py",
+        "pkg_pytorch/blendtorch/btt/apps/tests/test_apps.py",
+        "test/test_launch.py",
+        "tests/test_launch.py",
+        "tests/launch/test_launch.py",
+        "tests/launchs/test_launch.py",
+        "tests/apps/test_launch.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/colors.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/tests/test_colors.py",
+        "tests/blendtorch/btt/test_colors.py",
+        "pkg_pytorch/blendtorch/btt/tests/test_btt.py",
+        "test/test_colors.py",
+        "tests/test_colors.py",
+        "tests/colors/test_colors.py",
+        "tests/btt/test_colors.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/constants.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/tests/test_constants.py",
+        "tests/blendtorch/btt/test_constants.py",
+        "pkg_pytorch/blendtorch/btt/tests/test_btt.py",
+        "test/test_constants.py",
+        "tests/test_constants.py",
+        "tests/constants/test_constants.py",
+        "tests/btt/test_constants.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/dataset.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/tests/test_dataset.py",
+        "tests/blendtorch/btt/test_dataset.py",
+        "pkg_pytorch/blendtorch/btt/tests/test_btt.py",
+        "test/test_dataset.py",
+        "tests/test_dataset.py",
+        "tests/dataset/test_dataset.py",
+        "tests/datasets/test_dataset.py",
+        "tests/btt/test_dataset.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_dataset.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_dataset.py [library_package layout]"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/duplex.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/tests/test_duplex.py",
+        "tests/blendtorch/btt/test_duplex.py",
+        "pkg_pytorch/blendtorch/btt/tests/test_btt.py",
+        "test/test_duplex.py",
+        "tests/test_duplex.py",
+        "tests/duplex/test_duplex.py",
+        "tests/duplexs/test_duplex.py",
+        "tests/btt/test_duplex.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_duplex.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_duplex.py [library_package layout]"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/env.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/tests/test_env.py",
+        "tests/blendtorch/btt/test_env.py",
+        "pkg_pytorch/blendtorch/btt/tests/test_btt.py",
+        "test/test_env.py",
+        "tests/test_env.py",
+        "tests/env/test_env.py",
+        "tests/envs/test_env.py",
+        "tests/btt/test_env.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_env.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_env.py [library_package layout]"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/env_rendering.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/tests/test_env_rendering.py",
+        "tests/blendtorch/btt/test_env_rendering.py",
+        "pkg_pytorch/blendtorch/btt/tests/test_btt.py",
+        "test/test_env_rendering.py",
+        "tests/test_env_rendering.py",
+        "tests/env_rendering/test_env_rendering.py",
+        "tests/env_renderings/test_env_rendering.py",
+        "tests/btt/test_env_rendering.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/file.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/tests/test_file.py",
+        "tests/blendtorch/btt/test_file.py",
+        "pkg_pytorch/blendtorch/btt/tests/test_btt.py",
+        "test/test_file.py",
+        "tests/test_file.py",
+        "tests/file/test_file.py",
+        "tests/files/test_file.py",
+        "tests/btt/test_file.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_file.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_file.py [library_package layout]"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/finder.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/tests/test_finder.py",
+        "tests/blendtorch/btt/test_finder.py",
+        "pkg_pytorch/blendtorch/btt/tests/test_btt.py",
+        "test/test_finder.py",
+        "tests/test_finder.py",
+        "tests/finder/test_finder.py",
+        "tests/finders/test_finder.py",
+        "tests/btt/test_finder.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/launcher.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/tests/test_launcher.py",
+        "tests/blendtorch/btt/test_launcher.py",
+        "pkg_pytorch/blendtorch/btt/tests/test_btt.py",
+        "test/test_launcher.py",
+        "tests/test_launcher.py",
+        "tests/launcher/test_launcher.py",
+        "tests/launchers/test_launcher.py",
+        "tests/btt/test_launcher.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_launcher.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_launcher.py [library_package layout]"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/launch_info.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/tests/test_launch_info.py",
+        "tests/blendtorch/btt/test_launch_info.py",
+        "pkg_pytorch/blendtorch/btt/tests/test_btt.py",
+        "test/test_launch_info.py",
+        "tests/test_launch_info.py",
+        "tests/launch_info/test_launch_info.py",
+        "tests/launch_infos/test_launch_info.py",
+        "tests/btt/test_launch_info.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/utils.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/tests/test_utils.py",
+        "tests/blendtorch/btt/test_utils.py",
+        "pkg_pytorch/blendtorch/btt/tests/test_btt.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py",
+        "tests/btt/test_utils.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_pytorch/blendtorch/btt/version.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/blendtorch/btt/tests/test_version.py",
+        "tests/blendtorch/btt/test_version.py",
+        "pkg_pytorch/blendtorch/btt/tests/test_btt.py",
+        "test/test_version.py",
+        "tests/test_version.py",
+        "tests/version/test_version.py",
+        "tests/versions/test_version.py",
+        "tests/btt/test_version.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "pkg_pytorch/setup.py",
+      "candidate_test_paths": [
+        "pkg_pytorch/tests/test_setup.py",
+        "tests/test_setup.py",
+        "pkg_pytorch/tests/test_pkg_pytorch.py",
+        "test/test_setup.py",
+        "tests/setup/test_setup.py",
+        "tests/setups/test_setup.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "pkg_blender/requirements.txt",
+        "pkg_pytorch/requirements.txt"
+      ],
+      "count": 2,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "pkg_blender/setup.py",
+        "pkg_pytorch/setup.py"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 66,
+    "classified_count": 66,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 185,
+    "project_import_count": 0,
+    "declared_package_count": 40,
+    "undeclared_package_count": 52,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 43,
+    "high_confidence_test_count": 9,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 5,
+    "low_confidence_manifest_count": 2
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

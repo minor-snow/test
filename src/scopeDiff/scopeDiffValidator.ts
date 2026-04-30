@@ -197,8 +197,8 @@ export function validateScopeDiff(input: {
   );
 
   let status: ScopeDiffReport["status"];
-  if (hasHumanReviewMissing) status = "requires_human_review";
-  else if (hasReverseIssue) status = "requires_reverse_issue";
+  if (hasReverseIssue) status = "requires_reverse_issue";
+  else if (hasHumanReviewMissing) status = "requires_human_review";
   else if (hasScopeMismatch || hasHighViolations) status = "fail";
   else if (violations.length > 0) status = "fail";
   else status = "pass";

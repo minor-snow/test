@@ -10,14 +10,14 @@ describe("pantheonAlpha command surface", () => {
   const fixtureDir = join("test", "fixtures", "repo_fixture");
 
   beforeEach(() => {
-    rmSync(tmpDir, { recursive: true, force: true });
+    safeRemoveDir(tmpDir);
     mkdirSync(tmpDir, { recursive: true });
     cpSync(fixtureDir, tmpDir, { recursive: true });
     cmdAlpha(["init", "--repo", tmpDir, "--no-github"]);
   });
 
   afterEach(() => {
-    rmSync(tmpDir, { recursive: true, force: true });
+    safeRemoveDir(tmpDir);
   });
 
   it("supports repair, review, and metrics commands through pantheon-alpha", () => {
@@ -57,3 +57,15 @@ describe("pantheonAlpha command surface", () => {
     expect(loadReviewQueue(tmpDir).open).toHaveLength(1);
   });
 });
+
+function safeRemoveDir(target: string): void {
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    try {
+      rmSync(target, { recursive: true, force: true });
+      return;
+    } catch {
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25 * (attempt + 1));
+    }
+  }
+  rmSync(target, { recursive: true, force: true });
+}

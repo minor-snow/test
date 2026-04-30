@@ -4,12 +4,18 @@
 - **Verdict:** requires_review
 
 ### Reasons
-- No Git repository detected; observations are working-tree-only
-- Changed file(s) import undeclared package(s): @org/pkg, express, my-internal-pkg, lodash, d-pkg, some-private-pkg
+- Changed file not observed: src/repoObservation/importExtractor.ts
+- Changed file not observed: src/repoObservation/repoScanner.ts
+- Changed file not observed: src/changeContract/lite/changeContractLiteBuilder.ts
+- Changed file not observed: test/repoObservation/importExtractor.test.ts
+- Repository has uncommitted changes
 
 ### Required Actions
-- Consider initializing a Git repository for full audit trail
-- Add undeclared package(s) to package.json or review imports: @org/pkg, express, my-internal-pkg, lodash, d-pkg, some-private-pkg
+- Verify unobserved changed file: src/repoObservation/importExtractor.ts
+- Verify unobserved changed file: src/repoObservation/repoScanner.ts
+- Verify unobserved changed file: src/changeContract/lite/changeContractLiteBuilder.ts
+- Verify unobserved changed file: test/repoObservation/importExtractor.test.ts
+- Commit or stash uncommitted changes before proceeding
 
 ## Intent
 P20a.1 self-scan trial: validate observation quality on Pantheon itself
@@ -23,20 +29,19 @@ P20a.1 self-scan trial: validate observation quality on Pantheon itself
 ## Changed File Statuses
 | Path | Status | Reason |
 |---|---|---|
-| `src/repoObservation/importExtractor.ts` | observed | File found in observations |
-| `src/repoObservation/repoScanner.ts` | observed | File found in observations |
-| `src/changeContract/lite/changeContractLiteBuilder.ts` | observed | File found in observations |
-| `test/repoObservation/importExtractor.test.ts` | observed | File found in observations |
+| `src/repoObservation/importExtractor.ts` | not_observed | File not found in observations; manual verification recommended |
+| `src/repoObservation/repoScanner.ts` | not_observed | File not found in observations; manual verification recommended |
+| `src/changeContract/lite/changeContractLiteBuilder.ts` | not_observed | File not found in observations; manual verification recommended |
+| `test/repoObservation/importExtractor.test.ts` | not_observed | File not found in observations; manual verification recommended |
 
 ## Observed Scope
-- **Touched buckets:** src, test
-- **Related tests:** test/repoObservation/importExtractor.test.ts, test/repoObservation/repoScanner.test.ts, test/changeContract/lite/changeContractLiteBuilder.test.ts
+- **Unknowns:** src/repoObservation/importExtractor.ts, src/repoObservation/repoScanner.ts, src/changeContract/lite/changeContractLiteBuilder.ts, test/repoObservation/importExtractor.test.ts
 
 ## References
-- **Repo observations hash:** `sha256:d06de3f5092684323b33500bc28a75505be74bd1259d0cd440c6e06e3fd68597`
-- **Head commit:** _none_
-- **Repo state:** working_tree_only
-- **Uncommitted changes:** _unknown_
+- **Repo observations hash:** `sha256:2b909c8990b7b9418a42f02055aa4be11d5341df4fa1b32e5c37508c2ceb9383`
+- **Head commit:** f000ea27f47b2bc5464bd9617b5b34730baff086
+- **Repo state:** git_dirty
+- **Uncommitted changes:** true
 
 ---
 

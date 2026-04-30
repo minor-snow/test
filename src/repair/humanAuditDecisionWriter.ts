@@ -1,4 +1,5 @@
-import { writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
 import type { HumanAuditDecision, RepairAuditDecisionType, RepairAuditGate } from "./types.js";
 import { humanAuditDecisionSchema } from "./types.js";
 import { deterministicId } from "./repairUtils.js";
@@ -42,6 +43,7 @@ export function buildHumanAuditDecision(input: {
 
 export function writeHumanAuditDecision(repoRoot: string, decision: HumanAuditDecision): string {
   const target = repairRunPaths(repoRoot, decision.repair_id).humanAuditDecision(decision.decision_id);
+  mkdirSync(dirname(target), { recursive: true });
   writeFileSync(target, JSON.stringify(decision, null, 2));
   return target;
 }

@@ -11,14 +11,14 @@
 import { join } from "node:path";
 import { promises as fs } from "node:fs";
 import { createDeepSeekClient } from "../src/trial/deepseekAdapter.js";
+import { requireDeepSeekApiKey } from "../src/trial/requireEnv.js";
 
 const STORE_ROOT = join(process.cwd(), "data", "dogfood", "p10");
 const HANDOFF_DIR = join(STORE_ROOT, "handoff");
 const EVIDENCE_DIR = join(STORE_ROOT, "evidence");
 const ts = new Date().toISOString();
 
-const DEEPSEEK_API_KEY =
-  process.env.DEEPSEEK_API_KEY ?? "sk-90b71c8c415b41ac93f7ff4e24a08a7c";
+const DEEPSEEK_API_KEY = requireDeepSeekApiKey();
 
 // ---------------------------------------------------------------------------
 // Prompt — ONLY handoff inputs, nothing else

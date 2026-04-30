@@ -1,0 +1,762 @@
+{
+  "schema_version": "phase_bug_issue_index@0.1.0",
+  "generated_at": "2026-04-30",
+  "source_audit": "AUDIT_2026-04-29.md",
+  "policy": {
+    "fixed_statuses": [
+      "fixed",
+      "duplicate",
+      "intentional",
+      "not_repro"
+    ],
+    "deferred_statuses": [
+      "deferred"
+    ],
+    "note": "Phase BUG zeroed all critical/high correctness items and recorded remaining non-blocking debt explicitly."
+  },
+  "summary": {
+    "total": 74,
+    "fixed": 57,
+    "duplicate": 2,
+    "deferred": 11,
+    "intentional": 1,
+    "not_repro": 3,
+    "critical_open": 0,
+    "high_open": 0
+  },
+  "items": [
+    {
+      "id": "B1",
+      "severity": "critical",
+      "title": "Session lock catch-all retry loop",
+      "wave": "BUG-2",
+      "status": "fixed",
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts"
+      ]
+    },
+    {
+      "id": "B2",
+      "severity": "critical",
+      "title": "Shell injection in git diff reader",
+      "wave": "BUG-1",
+      "status": "fixed",
+      "verification": [
+        "test/diffWorkflow/gitDiffReader.test.ts"
+      ]
+    },
+    {
+      "id": "B3",
+      "severity": "critical",
+      "title": "Repair session FSM not enforced",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/cli/cmdRepair.test.ts",
+        "test/repair/session/repairSessionStore.test.ts"
+      ]
+    },
+    {
+      "id": "B4",
+      "severity": "critical",
+      "title": "SHA-1 used for repair deterministic IDs",
+      "wave": "BUG-3",
+      "status": "fixed",
+      "verification": [
+        "test/cli/cmdRepair.test.ts"
+      ]
+    },
+    {
+      "id": "B5",
+      "severity": "critical",
+      "title": "atomicWrite temp-file leaks",
+      "wave": "BUG-2",
+      "status": "fixed",
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts",
+        "test/artifactStore.test.ts"
+      ]
+    },
+    {
+      "id": "B6",
+      "severity": "critical",
+      "title": "TOCTOU ENOENT crash on latest pointer load",
+      "wave": "BUG-2",
+      "status": "fixed",
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts"
+      ]
+    },
+    {
+      "id": "B7",
+      "severity": "high",
+      "title": "validEvidenceCount inflation",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/cli/cmdRepair.test.ts",
+        "test/repair/agentBugReportValidator.test.ts"
+      ]
+    },
+    {
+      "id": "B8",
+      "severity": "high",
+      "title": "32-bit hash / NaN collision risk",
+      "wave": "BUG-3",
+      "status": "fixed",
+      "verification": [
+        "test/scopedHandoff/scopedHandoffExporter.test.ts"
+      ]
+    },
+    {
+      "id": "B9",
+      "severity": "high",
+      "title": "Non-deterministic Lite contract ID",
+      "wave": "BUG-3",
+      "status": "fixed",
+      "verification": [
+        "test/changeContract/lite/changeContractLiteBuilder.test.ts"
+      ]
+    },
+    {
+      "id": "B10",
+      "severity": "high",
+      "title": "Non-deterministic scope ID",
+      "wave": "BUG-3",
+      "status": "fixed",
+      "verification": [
+        "test/scopedHandoff/scopedHandoffExporter.test.ts",
+        "test/diffWorkflow/agentScopeLiteBuilder.test.ts"
+      ]
+    },
+    {
+      "id": "B11",
+      "severity": "high",
+      "title": "RiskArea dedup drops matched_paths",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/repair/impactSurfaceBuilder.test.ts"
+      ]
+    },
+    {
+      "id": "B12",
+      "severity": "high",
+      "title": "Reverse issue hidden by human review",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/scopeDiff/scopeDiffValidator.test.ts"
+      ]
+    },
+    {
+      "id": "B13",
+      "severity": "high",
+      "title": "Empty suspect surface creates useless contract",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/cli/cmdRepair.test.ts"
+      ]
+    },
+    {
+      "id": "B14",
+      "severity": "high",
+      "title": "Inconsistent lock ordering",
+      "wave": "BUG-2",
+      "status": "fixed",
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts"
+      ]
+    },
+    {
+      "id": "B15",
+      "severity": "high",
+      "title": "Git snapshot errors fail open",
+      "wave": "BUG-1",
+      "status": "fixed",
+      "verification": [
+        "test/repair/session/stalePlanDetector.test.ts"
+      ]
+    },
+    {
+      "id": "B16",
+      "severity": "high",
+      "title": "JSON.stringify non-deterministic contract hashing",
+      "wave": "BUG-3",
+      "status": "fixed",
+      "verification": [
+        "test/changeContract/changeContractBuilder.test.ts",
+        "test/changeContract/lifecycle.test.ts"
+      ]
+    },
+    {
+      "id": "B17",
+      "severity": "high",
+      "title": "Session revision regression",
+      "wave": "BUG-2",
+      "status": "fixed",
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts"
+      ]
+    },
+    {
+      "id": "B18",
+      "severity": "high",
+      "title": "Config parse fail-open",
+      "wave": "BUG-1",
+      "status": "fixed",
+      "verification": [
+        "test/cli/pantheonConfig.test.ts"
+      ]
+    },
+    {
+      "id": "B19",
+      "severity": "medium",
+      "title": "requireRepairId always throws after load",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/cli/cmdRepair.test.ts"
+      ]
+    },
+    {
+      "id": "B20",
+      "severity": "medium",
+      "title": "Unknown audit decision accepted silently",
+      "wave": "BUG-1",
+      "status": "fixed",
+      "verification": [
+        "test/cli/cmdRepair.test.ts"
+      ]
+    },
+    {
+      "id": "B21",
+      "severity": "medium",
+      "title": "Duplicate hashString helpers",
+      "wave": "BUG-3",
+      "status": "fixed",
+      "verification": [
+        "test/changeContract/changeContractBuilder.test.ts",
+        "test/changeContract/changeContractVerifier.test.ts"
+      ]
+    },
+    {
+      "id": "B22",
+      "severity": "medium",
+      "title": "Fragmented hash schemes",
+      "wave": "BUG-3",
+      "status": "fixed",
+      "verification": [
+        "test/hash.test.ts",
+        "test/changeContract/lifecycle.test.ts"
+      ]
+    },
+    {
+      "id": "B23",
+      "severity": "medium",
+      "title": "Flask mapped to FastAPI preset",
+      "wave": "BUG-5",
+      "status": "fixed",
+      "verification": [
+        "test/repoObservation/python/pythonRiskPresetValidator.test.ts"
+      ]
+    },
+    {
+      "id": "B24",
+      "severity": "medium",
+      "title": "Airflow classified as async_framework",
+      "wave": "BUG-5",
+      "status": "fixed",
+      "verification": [
+        "test/repoObservation/python/pythonFrameworkDetector.test.ts"
+      ]
+    },
+    {
+      "id": "B25",
+      "severity": "medium",
+      "title": "attemptHistory lexicographic sorting",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/cli/e2e.test.ts"
+      ]
+    },
+    {
+      "id": "B26",
+      "severity": "medium",
+      "title": "runPipeline silently handles only first issue",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/pipeline.test.ts"
+      ]
+    },
+    {
+      "id": "B27",
+      "severity": "medium",
+      "title": "runPipeline defaulted to demo fixture text",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/e2e.test.ts"
+      ]
+    },
+    {
+      "id": "B28",
+      "severity": "medium",
+      "title": "server.ts hardcoded artifact_id",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/gateRegistry.test.ts"
+      ]
+    },
+    {
+      "id": "B29",
+      "severity": "medium",
+      "title": "48-bit contract ID collision risk",
+      "wave": "BUG-3",
+      "status": "fixed",
+      "verification": [
+        "test/changeContract/lifecycle.test.ts"
+      ]
+    },
+    {
+      "id": "B30",
+      "severity": "medium",
+      "title": "Contracts cannot be re-exported",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/changeContract/agentScopeExporter.test.ts"
+      ]
+    },
+    {
+      "id": "B31",
+      "severity": "medium",
+      "title": "Audit log writer does not create directories",
+      "wave": "BUG-2",
+      "status": "fixed",
+      "verification": [
+        "test/cli/cmdRepair.test.ts"
+      ]
+    },
+    {
+      "id": "B32",
+      "severity": "medium",
+      "title": "Generic/Python sensitive path inconsistency",
+      "wave": "BUG-5",
+      "status": "fixed",
+      "verification": [
+        "test/repoObservation/sensitivePathDetector.test.ts",
+        "test/repoObservation/python/pythonSensitiveZoneDetector.test.ts"
+      ]
+    },
+    {
+      "id": "B33",
+      "severity": "medium",
+      "title": "Generic testMapper misses JS/TSX variants",
+      "wave": "BUG-5",
+      "status": "fixed",
+      "verification": [
+        "test/repoObservation/testMapper.test.ts"
+      ]
+    },
+    {
+      "id": "B34",
+      "severity": "medium",
+      "title": "Python _auth.py double-underscore candidate",
+      "wave": "BUG-5",
+      "status": "fixed",
+      "verification": [
+        "test/repoObservation/python/pythonTestMapper.test.ts"
+      ]
+    },
+    {
+      "id": "B35",
+      "severity": "medium",
+      "title": "Python utils matching too broad",
+      "wave": "BUG-5",
+      "status": "fixed",
+      "verification": [
+        "test/repoObservation/python/pythonTestMapper.test.ts"
+      ]
+    },
+    {
+      "id": "B36",
+      "severity": "medium",
+      "title": "immigration triggers migration false positive",
+      "wave": "BUG-5",
+      "status": "fixed",
+      "verification": [
+        "test/repoObservation/python/pythonSensitiveZoneDetector.test.ts"
+      ]
+    },
+    {
+      "id": "B37",
+      "severity": "medium",
+      "title": "Impact path directory boundary not anchored",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/repair/impactSurfaceBuilder.test.ts"
+      ]
+    },
+    {
+      "id": "B38",
+      "severity": "medium",
+      "title": "globToRegex duplicated in three places",
+      "wave": "BUG-6",
+      "status": "fixed",
+      "verification": [
+        "test/cli/cmdGuard.test.ts",
+        "test/repoObservation/python/pythonRiskPresetValidator.test.ts"
+      ]
+    },
+    {
+      "id": "B39",
+      "severity": "medium",
+      "title": "Lite contract validator pseudo-coverage check",
+      "wave": "BUG-4",
+      "status": "fixed",
+      "verification": [
+        "test/changeContract/lite/changeContractLiteValidator.test.ts"
+      ]
+    },
+    {
+      "id": "B40",
+      "severity": "low",
+      "title": "loadRepairSession lacks schema validation",
+      "wave": "BUG-2",
+      "status": "fixed",
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts"
+      ]
+    },
+    {
+      "id": "B41",
+      "severity": "low",
+      "title": "readJsonFile lacks contextual error handling",
+      "wave": "BUG-2",
+      "status": "fixed",
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts"
+      ]
+    },
+    {
+      "id": "B42",
+      "severity": "low",
+      "title": "loadLatestRepairId read outside try/catch",
+      "wave": "BUG-2",
+      "status": "fixed",
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts"
+      ]
+    },
+    {
+      "id": "B43",
+      "severity": "low",
+      "title": "Lock file metadata missing pid",
+      "wave": "BUG-2",
+      "status": "fixed",
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts"
+      ]
+    },
+    {
+      "id": "B44",
+      "severity": "low",
+      "title": "crossArtifactLinter Interface/Module asymmetry",
+      "wave": "BUG-7",
+      "status": "not_repro",
+      "verification": [
+        "test/crossArtifactLinter.test.ts"
+      ]
+    },
+    {
+      "id": "B45",
+      "severity": "low",
+      "title": "namespace_package layout never produced",
+      "wave": "BUG-5",
+      "status": "fixed",
+      "verification": [
+        "test/repoObservation/python/pythonLayoutClassifier.test.ts"
+      ]
+    },
+    {
+      "id": "B46",
+      "severity": "low",
+      "title": "Airflow duplicate low-severity finding",
+      "wave": "BUG-5",
+      "status": "duplicate",
+      "verification": [
+        "test/repoObservation/python/pythonFrameworkDetector.test.ts"
+      ]
+    },
+    {
+      "id": "B47",
+      "severity": "low",
+      "title": "Risk preset validated threshold too low",
+      "wave": "BUG-5",
+      "status": "fixed",
+      "verification": [
+        "test/repoObservation/python/pythonRiskPresetValidator.test.ts"
+      ]
+    },
+    {
+      "id": "B48",
+      "severity": "low",
+      "title": "CODEOWNERS missing brace expansion",
+      "wave": "BUG-6",
+      "status": "fixed",
+      "verification": [
+        "test/repoObservation/codeownersParser.test.ts"
+      ]
+    },
+    {
+      "id": "B49",
+      "severity": "low",
+      "title": "artifactStore Windows replacement risk",
+      "wave": "BUG-2",
+      "status": "fixed",
+      "verification": [
+        "test/artifactStore.test.ts"
+      ]
+    },
+    {
+      "id": "B50",
+      "severity": "low",
+      "title": "deriveMustPreserve duplicates checklist logic",
+      "wave": "BUG-6",
+      "status": "deferred",
+      "verification": []
+    },
+    {
+      "id": "B51",
+      "severity": "low",
+      "title": "Auto-commit pipeline omits saveProjection",
+      "wave": "BUG-7",
+      "status": "fixed",
+      "verification": [
+        "test/e2e.test.ts"
+      ]
+    },
+    {
+      "id": "B52",
+      "severity": "low",
+      "title": "integrityCheck bypasses artifactStore loaders",
+      "wave": "BUG-7",
+      "status": "intentional",
+      "verification": [
+        "test/integrityCheck.test.ts"
+      ]
+    },
+    {
+      "id": "B53",
+      "severity": "low",
+      "title": "server.ts import.meta directory pattern flagged as fragile",
+      "wave": "BUG-7",
+      "status": "not_repro",
+      "verification": []
+    },
+    {
+      "id": "B54",
+      "severity": "low",
+      "title": "Duplicate contract ID collision finding",
+      "wave": "BUG-3",
+      "status": "duplicate",
+      "verification": [
+        "test/changeContract/lifecycle.test.ts"
+      ]
+    },
+    {
+      "id": "B55",
+      "severity": "low",
+      "title": "Boundary graph edge counter determinism concern",
+      "wave": "BUG-7",
+      "status": "not_repro",
+      "verification": [
+        "test/boundary/boundaryGraph.test.ts",
+        "test/boundary/boundaryGraph.regression.test.ts"
+      ]
+    },
+    {
+      "id": "A1",
+      "severity": "architecture",
+      "title": "New source directories missing from architecture doc",
+      "wave": "BUG-7",
+      "status": "fixed",
+      "verification": [
+        "ARCHITECTURE.md"
+      ]
+    },
+    {
+      "id": "A2",
+      "severity": "architecture",
+      "title": "Python sidecar forms parallel architecture",
+      "wave": "BUG-7",
+      "status": "deferred",
+      "verification": [
+        "ARCHITECTURE.md"
+      ]
+    },
+    {
+      "id": "A3",
+      "severity": "architecture",
+      "title": "ARCHITECTURE metrics drifted low",
+      "wave": "BUG-7",
+      "status": "fixed",
+      "verification": [
+        "ARCHITECTURE.md"
+      ]
+    },
+    {
+      "id": "A4",
+      "severity": "architecture",
+      "title": "Internal doc contradictions",
+      "wave": "BUG-7",
+      "status": "fixed",
+      "verification": [
+        "ARCHITECTURE.md",
+        "docs/internal/phase_bug_stabilization_report.md"
+      ]
+    },
+    {
+      "id": "A5",
+      "severity": "architecture",
+      "title": "Orphan / undocumented scripts and stale data dirs",
+      "wave": "BUG-7",
+      "status": "fixed",
+      "verification": [
+        "docs/internal/script_status_inventory.md"
+      ]
+    },
+    {
+      "id": "A6",
+      "severity": "architecture",
+      "title": "python/ module under-documented",
+      "wave": "BUG-7",
+      "status": "fixed",
+      "verification": [
+        "ARCHITECTURE.md",
+        "docs/internal/phase_bug_stabilization_report.md"
+      ]
+    },
+    {
+      "id": "T1",
+      "severity": "tech_debt",
+      "title": "Hash system fragmentation",
+      "wave": "BUG-6",
+      "status": "fixed",
+      "verification": [
+        "src/deterministic.ts",
+        "test/hash.test.ts"
+      ]
+    },
+    {
+      "id": "T2",
+      "severity": "tech_debt",
+      "title": "Three parallel scope classifiers",
+      "wave": "BUG-6",
+      "status": "deferred",
+      "verification": []
+    },
+    {
+      "id": "T3",
+      "severity": "tech_debt",
+      "title": "Two parallel diff verifiers",
+      "wave": "BUG-6",
+      "status": "deferred",
+      "verification": []
+    },
+    {
+      "id": "T4",
+      "severity": "tech_debt",
+      "title": "ValidationResult type fragmentation",
+      "wave": "BUG-6",
+      "status": "deferred",
+      "verification": []
+    },
+    {
+      "id": "T5",
+      "severity": "tech_debt",
+      "title": "23 markdown renderers without shared toolkit",
+      "wave": "BUG-6",
+      "status": "deferred",
+      "verification": []
+    },
+    {
+      "id": "T6",
+      "severity": "tech_debt",
+      "title": "Catch-style inconsistency",
+      "wave": "BUG-6",
+      "status": "deferred",
+      "verification": []
+    },
+    {
+      "id": "T7",
+      "severity": "tech_debt",
+      "title": "globToRegex triplication",
+      "wave": "BUG-6",
+      "status": "fixed",
+      "verification": [
+        "src/globMatch.ts"
+      ]
+    },
+    {
+      "id": "T8",
+      "severity": "tech_debt",
+      "title": "agentScopeLiteBuilder violates SRP",
+      "wave": "BUG-6",
+      "status": "deferred",
+      "verification": []
+    },
+    {
+      "id": "T9",
+      "severity": "tech_debt",
+      "title": "High-risk as any concentration",
+      "wave": "BUG-6",
+      "status": "deferred",
+      "verification": []
+    },
+    {
+      "id": "T10",
+      "severity": "tech_debt",
+      "title": "Non-null assertions in production code",
+      "wave": "BUG-6",
+      "status": "deferred",
+      "verification": []
+    },
+    {
+      "id": "E1",
+      "severity": "engineering",
+      "title": "43% of source files lack focused tests",
+      "wave": "BUG-7",
+      "status": "deferred",
+      "verification": []
+    },
+    {
+      "id": "E2",
+      "severity": "engineering",
+      "title": "repair/session lacked direct unit tests",
+      "wave": "BUG-7",
+      "status": "fixed",
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts",
+        "test/repair/session/stalePlanDetector.test.ts",
+        "test/repair/session/scopeOverlapDetector.test.ts"
+      ]
+    },
+    {
+      "id": "E3",
+      "severity": "engineering",
+      "title": "Scripts lacked runbook / status documentation",
+      "wave": "BUG-7",
+      "status": "fixed",
+      "verification": [
+        "docs/internal/script_status_inventory.md"
+      ]
+    }
+  ]
+}

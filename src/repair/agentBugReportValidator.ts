@@ -46,6 +46,8 @@ export function validateRepairSourceReport(
   let validEvidenceCount = 0;
 
   for (const evidence of report.evidence) {
+    let evidenceValidated = false;
+
     if (evidence.path) {
       const normalized = normalizeRepairPath(evidence.path);
       if (!normalized || !pathExistsInRepo(repoRoot, normalized)) {
@@ -54,17 +56,27 @@ export function validateRepairSourceReport(
       }
       validPathReferences.add(normalized);
       confirmedFacts.push(`${normalized} exists`);
+      evidenceValidated = true;
     }
 
-    validEvidenceCount++;
     if (evidence.kind === "failing_test" && evidence.path) {
       unverifiedClaims.push(`Reported failing test: ${evidence.path}${evidence.test_name ? ` (${evidence.test_name})` : ""}`);
+      evidenceValidated = true;
     }
     if (evidence.kind === "code_observation" && evidence.summary) {
       unverifiedClaims.push(evidence.summary);
+      evidenceValidated = true;
     }
     if (evidence.kind === "stack_trace" && evidence.excerpt) {
       unverifiedClaims.push(`Stack trace excerpt: ${evidence.excerpt}`);
+      evidenceValidated = true;
+    }
+    if (evidence.kind === "user_reference" && evidence.summary) {
+      unverifiedClaims.push(evidence.summary);
+      evidenceValidated = true;
+    }
+    if (evidenceValidated) {
+      validEvidenceCount++;
     }
   }
 

@@ -21,6 +21,7 @@ import type {
   PythonRiskPresetSuggestion,
   PythonDormantPattern,
 } from "./types.js";
+import { matchesGlob } from "../../globMatch.js";
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -95,8 +96,9 @@ export function validatePythonRiskPreset(input: RiskPresetValidatorInput): Pytho
   // 4. Determine validation status
   const totalRules = presetRules.length;
   const activeRules = totalRules - dormantPatterns.length;
+  const minimumValidatedRules = Math.max(3, Math.ceil(totalRules * 0.6));
   const validation: "validated" | "partial" | "unvalidated" =
-    activeRules >= totalRules * 0.6 ? "validated" :
+    activeRules >= minimumValidatedRules ? "validated" :
     activeRules > 0 ? "partial" :
     "unvalidated";
 
@@ -187,12 +189,7 @@ function collectMatchedSignals(input: RiskPresetValidatorInput): string[] {
 // ---------------------------------------------------------------------------
 
 function matchPattern(path: string, pattern: string): boolean {
-  const regex = pattern
-    .replace(/[.+^${}()|[\]\\]/g, "\\$&")
-    .replace(/\*\*/g, "___DOUBLESTAR___")
-    .replace(/\*/g, "[^/]*")
-    .replace(/___DOUBLESTAR___/g, ".*");
-  return new RegExp(`^${regex}$`).test(path);
+  return matchesGlob(path, pattern);
 }
 
 // ---------------------------------------------------------------------------
@@ -215,7 +212,7 @@ function getPresetRules(presetName: string): PresetRule[] {
     case "fastapi_service": return FASTAPI_SERVICE_RULES;
     case "python_sdk_library": return PYTHON_SDK_LIBRARY_RULES;
     case "django_generic": return DJANGO_GENERIC_RULES;
-    case "flask_service": return FASTAPI_SERVICE_RULES; // similar patterns
+    case "flask_service": return FLASK_SERVICE_RULES;
     case "generic_service": return GENERIC_SERVICE_RULES;
     case "cli_application": return CLI_APPLICATION_RULES;
     default: return GENERIC_RULES;
@@ -382,6 +379,46 @@ const FASTAPI_SERVICE_RULES: PresetRule[] = [
     suggestedLevel: "review",
     frameworkEvidence: "FastAPI dependency injection pattern",
     dormantReason: "No deps files observed",
+  },
+];
+
+const FLASK_SERVICE_RULES: PresetRule[] = [
+  {
+    pattern: "**/auth*",
+    reason: "Authentication logic requires human review",
+    severity: "high",
+    suggestedLevel: "review",
+    sensitiveCategory: "authentication",
+    dormantReason: "No auth files observed",
+  },
+  {
+    pattern: "**/security*",
+    reason: "Security module requires human review",
+    severity: "high",
+    suggestedLevel: "review",
+    sensitiveCategory: "security",
+    dormantReason: "No security files observed",
+  },
+  {
+    pattern: "**/blueprints/**",
+    reason: "Flask blueprint routing affects request behavior",
+    severity: "medium",
+    suggestedLevel: "review",
+    dormantReason: "No Flask blueprint directory observed",
+  },
+  {
+    pattern: "**/config*",
+    reason: "Application configuration affects runtime behavior",
+    severity: "medium",
+    suggestedLevel: "review",
+    dormantReason: "No config files observed",
+  },
+  {
+    pattern: "**/extensions*",
+    reason: "Flask extensions influence app wiring and security hooks",
+    severity: "medium",
+    suggestedLevel: "review",
+    dormantReason: "No extensions files observed",
   },
 ];
 

@@ -16,7 +16,8 @@
  * ref: P19a
  */
 
-import { createHash } from "node:crypto";
+import { shortStableId } from "../deterministic.js";
+import { stableSerialize } from "../stableSerialize.js";
 import type {
   ChangeContract,
   ChangeContractLifecycleStatus,
@@ -56,13 +57,11 @@ export function generateContractId(
   intent: ChangeIntent,
   canonicalRefs: ChangeContractRefs["canonical_revisions"],
 ): string {
-  const payload =
-    normalize(intent.intent) +
-    normalize(intent.source_request) +
-    stableJsonRefs(canonicalRefs);
-
-  const hash = createHash("sha256").update(payload).digest("hex").slice(0, 12);
-  return `cc_${hash}`;
+  return shortStableId("cc", {
+    intent: normalize(intent.intent),
+    source_request: normalize(intent.source_request),
+    canonical_refs: [...canonicalRefs].sort((a, b) => a.artifact_id.localeCompare(b.artifact_id)),
+  }, 16);
 }
 
 function normalize(s: string): string {
@@ -75,7 +74,7 @@ function stableJsonRefs(
   const sorted = [...refs].sort((a, b) =>
     a.artifact_id.localeCompare(b.artifact_id),
   );
-  return JSON.stringify(sorted);
+  return stableSerialize(sorted);
 }
 
 // ---------------------------------------------------------------------------
@@ -314,14 +313,16 @@ export function createResultEvent(
   timestamp?: string,
 ): ChangeResultEvent {
   const created_at = timestamp ?? new Date().toISOString();
-  const refsStr = refs ? JSON.stringify(refs, Object.keys(refs).sort()) : "";
-  const eventId = createHash("sha256")
-    .update(eventType + status + created_at + summary + refsStr)
-    .digest("hex")
-    .slice(0, 12);
+  const eventId = shortStableId("evt", {
+    event_type: eventType,
+    status,
+    created_at,
+    summary,
+    refs: refs ?? null,
+  }, 12);
 
   return {
-    event_id: `evt_${eventId}`,
+    event_id: eventId,
     event_type: eventType,
     status,
     created_at,

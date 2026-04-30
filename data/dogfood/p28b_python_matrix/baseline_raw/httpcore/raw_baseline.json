@@ -1,0 +1,3668 @@
+{
+  "repo_id": "httpcore",
+  "category": "python_sdk_library",
+  "local_path": "H:\\Boom\\benchmarks\\httpcore",
+  "pinned_commit": "10a658221deb38a4c5b16db55ab554b0bf731707",
+  "expected_min_support": "validated",
+  "scan_ms": 3544,
+  "timeout": false,
+  "exit_code": 0,
+  "python_obs_path": "H:\\Boom\\benchmarks\\httpcore\\.pantheon\\internal\\python_observations.json",
+  "python_obs_available": true,
+  "python_obs": {
+    "schema_version": "python_observations.v1",
+    "repo": {
+      "root_label": "httpcore",
+      "observed_file_count": 92,
+      "python_file_count": 57
+    },
+    "layout": {
+      "primary_layout": "library_package",
+      "package_layout": "flat_package",
+      "confidence": "high",
+      "signals": [
+        {
+          "signal": "flat_package_detected",
+          "weight": "strong",
+          "evidence": "Root-level package(s) with __init__.py: httpcore"
+        },
+        {
+          "signal": "py_typed_marker",
+          "weight": "strong",
+          "evidence": "py.typed marker file (PEP 561 typed package)"
+        },
+        {
+          "signal": "packaging_config_no_framework",
+          "weight": "weak",
+          "evidence": "Packaging config present without framework indicators"
+        },
+        {
+          "signal": "docs_directory",
+          "weight": "weak",
+          "evidence": "docs/ directory suggests library documentation"
+        },
+        {
+          "signal": "top_level_tests_pattern",
+          "weight": "weak",
+          "evidence": "Top-level tests/ directory typical of library packages"
+        }
+      ],
+      "unknowns": [],
+      "bucket_summary": {
+        "source": 31,
+        "config": 2,
+        "script": 1,
+        "test": 23
+      }
+    },
+    "framework_profile": {
+      "framework_signals": [
+        {
+          "name": "pytest",
+          "kind": "test_framework",
+          "confidence": "medium",
+          "evidence": [
+            {
+              "dimension": "dependency_manifest",
+              "detail": "pytest found in dependency manifests"
+            }
+          ]
+        }
+      ],
+      "project_role_signals": [
+        {
+          "role": "python_sdk_library",
+          "confidence": "high",
+          "evidence": [
+            {
+              "dimension": "layout_classification",
+              "detail": "Layout classified as library_package"
+            },
+            {
+              "dimension": "path_pattern",
+              "detail": "py.typed marker (PEP 561 typed package)"
+            },
+            {
+              "dimension": "path_pattern",
+              "detail": "docs/ directory without web framework signals"
+            },
+            {
+              "dimension": "dependency_manifest",
+              "detail": "Packaging config without web framework"
+            }
+          ]
+        }
+      ],
+      "unknowns": []
+    },
+    "risk_preset_validation": {
+      "preset": "python_sdk_library",
+      "validation": "partial",
+      "confidence": "medium",
+      "matched_signals": [
+        "layout: library_package / flat_package (high)",
+        "framework: pytest / test_framework (medium)",
+        "project_role: python_sdk_library (high)"
+      ],
+      "suggested_review": [
+        {
+          "pattern": "**/__init__.py",
+          "reason": "Public API exports — changes affect import compatibility",
+          "severity": "medium",
+          "matched_path_count": 7,
+          "evidence": [
+            "7 paths match pattern **/__init__.py"
+          ]
+        },
+        {
+          "pattern": "**/_models*",
+          "reason": "Data model changes affect serialization and API compatibility",
+          "severity": "medium",
+          "matched_path_count": 1,
+          "evidence": [
+            "1 paths match pattern **/_models*"
+          ]
+        }
+      ],
+      "suggested_forbidden": [],
+      "dormant_patterns": [
+        {
+          "pattern": "**/_client*",
+          "reason": "No client module observed"
+        },
+        {
+          "pattern": "**/_transport*/**",
+          "reason": "No transport module observed"
+        },
+        {
+          "pattern": "**/_auth*",
+          "reason": "No auth module observed"
+        },
+        {
+          "pattern": "**/_config*",
+          "reason": "No config module observed"
+        },
+        {
+          "pattern": "**/_urls*",
+          "reason": "No URL module observed"
+        }
+      ]
+    },
+    "files": [
+      {
+        "path": "httpcore/_api.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 3240,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_async/connection.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 8671,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_async/connection_pool.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 17725,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_async/http11.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 14259,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_async/http2.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 24528,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_async/http_proxy.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 15068,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_async/interfaces.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 4592,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_async/socks_proxy.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 14182,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_async/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1260,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_backends/anyio.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 5398,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_backends/auto.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1714,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_backends/base.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 3143,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_backends/mock.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 4220,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_backends/sync.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 8218,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_backends/trio.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 6155,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_backends/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_exceptions.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1265,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_models.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 18139,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_ssl.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 196,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_sync/connection.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 8460,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_sync/connection_pool.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 17373,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_sync/http11.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 13855,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_sync/http2.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 23992,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_sync/http_proxy.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 14830,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_sync/interfaces.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 4481,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_sync/socks_proxy.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 13955,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_sync/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1180,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_synchronization.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 9752,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_trace.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 4059,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/_utils.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 1574,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "httpcore/__init__.py",
+        "bucket": "source",
+        "extension": ".py",
+        "size_bytes": 3586,
+        "evidence": [
+          "Default classification: .py file not matching test/config/migration/script patterns"
+        ]
+      },
+      {
+        "path": "pyproject.toml",
+        "bucket": "config",
+        "extension": ".toml",
+        "size_bytes": 2766,
+        "evidence": [
+          "Project config"
+        ]
+      },
+      {
+        "path": "requirements.txt",
+        "bucket": "config",
+        "extension": ".txt",
+        "size_bytes": 577,
+        "evidence": [
+          "Requirements file"
+        ]
+      },
+      {
+        "path": "scripts/unasync.py",
+        "bucket": "script",
+        "extension": ".py",
+        "size_bytes": 3195,
+        "evidence": [
+          "Scripts directory"
+        ]
+      },
+      {
+        "path": "tests/benchmark/client.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 6227,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/benchmark/server.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 946,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/concurrency.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1252,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_api.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 541,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_cancellations.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 7772,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/test_models.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 6211,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_async/test_connection.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 13186,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_async/test_connection_pool.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 31053,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_async/test_http11.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 13333,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_async/test_http2.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 14887,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_async/test_http_proxy.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 9615,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_async/test_integration.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1757,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_async/test_socks_proxy.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 6963,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_async/__init__.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_sync/test_connection.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 12569,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_sync/test_connection_pool.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 29833,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_sync/test_http11.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 12655,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_sync/test_http2.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 14377,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_sync/test_http_proxy.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 9287,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_sync/test_integration.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 1634,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_sync/test_socks_proxy.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 6699,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/_sync/__init__.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      },
+      {
+        "path": "tests/__init__.py",
+        "bucket": "test",
+        "extension": ".py",
+        "size_bytes": 0,
+        "evidence": [
+          "Top-level test directory"
+        ]
+      }
+    ],
+    "import_observations": [
+      {
+        "from_file": "httpcore/_api.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_api.py",
+        "raw_specifier": "contextlib",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "contextlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_api.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_api.py",
+        "raw_specifier": "from ._models import URL, Extensions, HeaderTypes, Response",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_api.py",
+        "raw_specifier": "from ._sync.connection_pool import ConnectionPool",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._sync.connection_pool",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "itertools",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "itertools",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "logging",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "types",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "types",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "from .._backends.auto import AutoBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.auto",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "from .._backends.base import SOCKET_OPTION, AsyncNetworkBackend, AsyncNetworkStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "from .._exceptions import ConnectError, ConnectTimeout",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "from .._models import Origin, Request, Response",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "from .._ssl import default_ssl_context",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._ssl",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "from .._synchronization import AsyncLock",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "from .._trace import Trace",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._trace",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "from .http11 import AsyncHTTP11Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http11",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "from .interfaces import AsyncConnectionInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection.py",
+        "raw_specifier": "from .http2 import AsyncHTTP2Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http2",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "sys",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "sys",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "types",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "types",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "from .._backends.auto import AutoBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.auto",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "from .._backends.base import SOCKET_OPTION, AsyncNetworkBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "from .._exceptions import ConnectionNotAvailable, UnsupportedProtocol",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "from .._models import Origin, Proxy, Request, Response",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "from .._synchronization import AsyncEvent, AsyncShieldCancellation, AsyncThreadLock",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "from .connection import AsyncHTTPConnection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".connection",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "from .interfaces import AsyncConnectionInterface, AsyncRequestInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "from .socks_proxy import AsyncSocks5Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".socks_proxy",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "from .http_proxy import AsyncForwardHTTPConnection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http_proxy",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/connection_pool.py",
+        "raw_specifier": "from .http_proxy import AsyncTunnelHTTPConnection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http_proxy",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "enum",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "enum",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "logging",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "time",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "time",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "types",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "types",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "h11",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "h11",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "from .._backends.base import AsyncNetworkStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "from .._exceptions import ( ConnectionNotAvailable, LocalProtocolError, RemoteProtocolError, WriteError, map_exceptions, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "from .._models import Origin, Request, Response",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "from .._synchronization import AsyncLock, AsyncShieldCancellation",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "from .._trace import Trace",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._trace",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http11.py",
+        "raw_specifier": "from .interfaces import AsyncConnectionInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "enum",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "enum",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "logging",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "time",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "time",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "types",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "types",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "h2.config",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "h2",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "h2.connection",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "h2",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "h2.events",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "h2",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "h2.exceptions",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "h2",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "h2.settings",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "h2",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "from .._backends.base import AsyncNetworkStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "from .._exceptions import ( ConnectionNotAvailable, LocalProtocolError, RemoteProtocolError, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "from .._models import Origin, Request, Response",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "from .._synchronization import AsyncLock, AsyncSemaphore, AsyncShieldCancellation",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "from .._trace import Trace",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._trace",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http2.py",
+        "raw_specifier": "from .interfaces import AsyncConnectionInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "base64",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "base64",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "logging",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "from .._backends.base import SOCKET_OPTION, AsyncNetworkBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "from .._exceptions import ProxyError",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "from .._models import ( URL, Origin, Request, Response, enforce_bytes, enforce_headers, enforce_url, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "from .._ssl import default_ssl_context",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._ssl",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "from .._synchronization import AsyncLock",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "from .._trace import Trace",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._trace",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "from .connection import AsyncHTTPConnection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".connection",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "from .connection_pool import AsyncConnectionPool",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".connection_pool",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "from .http11 import AsyncHTTP11Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http11",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "from .interfaces import AsyncConnectionInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/http_proxy.py",
+        "raw_specifier": "from .http2 import AsyncHTTP2Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http2",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/interfaces.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/interfaces.py",
+        "raw_specifier": "contextlib",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "contextlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/interfaces.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/interfaces.py",
+        "raw_specifier": "from .._models import ( URL, Extensions, HeaderTypes, Origin, Request, Response, enforce_bytes, enforce_headers, enforce_url, include_request_headers, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "logging",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "socksio",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "socksio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "from .._backends.auto import AutoBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.auto",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "from .._backends.base import AsyncNetworkBackend, AsyncNetworkStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "from .._exceptions import ConnectionNotAvailable, ProxyError",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "from .._models import URL, Origin, Request, Response, enforce_bytes, enforce_url",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "from .._ssl import default_ssl_context",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._ssl",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "from .._synchronization import AsyncLock",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "from .._trace import Trace",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._trace",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "from .connection_pool import AsyncConnectionPool",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".connection_pool",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "from .http11 import AsyncHTTP11Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http11",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "from .interfaces import AsyncConnectionInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/socks_proxy.py",
+        "raw_specifier": "from .http2 import AsyncHTTP2Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http2",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/__init__.py",
+        "raw_specifier": "from .connection import AsyncHTTPConnection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".connection",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/__init__.py",
+        "raw_specifier": "from .connection_pool import AsyncConnectionPool",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".connection_pool",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/__init__.py",
+        "raw_specifier": "from .http11 import AsyncHTTP11Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http11",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/__init__.py",
+        "raw_specifier": "from .http_proxy import AsyncHTTPProxy",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http_proxy",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/__init__.py",
+        "raw_specifier": "from .interfaces import AsyncConnectionInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/__init__.py",
+        "raw_specifier": "from .http2 import AsyncHTTP2Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http2",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_async/__init__.py",
+        "raw_specifier": "from .socks_proxy import AsyncSOCKSProxy",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".socks_proxy",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/anyio.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/anyio.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/anyio.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/anyio.py",
+        "raw_specifier": "anyio",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/anyio.py",
+        "raw_specifier": "from .._exceptions import ( ConnectError, ConnectTimeout, ReadError, ReadTimeout, WriteError, WriteTimeout, map_exceptions, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/anyio.py",
+        "raw_specifier": "from .._utils import is_socket_readable",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._utils",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/anyio.py",
+        "raw_specifier": "from .base import SOCKET_OPTION, AsyncNetworkBackend, AsyncNetworkStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/auto.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/auto.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/auto.py",
+        "raw_specifier": "from .._synchronization import current_async_library",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/auto.py",
+        "raw_specifier": "from .base import SOCKET_OPTION, AsyncNetworkBackend, AsyncNetworkStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/auto.py",
+        "raw_specifier": "from .trio import TrioBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".trio",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/auto.py",
+        "raw_specifier": "from .anyio import AnyIOBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".anyio",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/base.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/base.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/base.py",
+        "raw_specifier": "time",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "time",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/base.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/mock.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/mock.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/mock.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/mock.py",
+        "raw_specifier": "from .._exceptions import ReadError",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/mock.py",
+        "raw_specifier": "from .base import ( SOCKET_OPTION, AsyncNetworkBackend, AsyncNetworkStream, NetworkBackend, NetworkStream, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/sync.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/sync.py",
+        "raw_specifier": "functools",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "functools",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/sync.py",
+        "raw_specifier": "socket",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "socket",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/sync.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/sync.py",
+        "raw_specifier": "sys",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "sys",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/sync.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/sync.py",
+        "raw_specifier": "from .._exceptions import ( ConnectError, ConnectTimeout, ExceptionMapping, ReadError, ReadTimeout, WriteError, WriteTimeout, map_exceptions, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/sync.py",
+        "raw_specifier": "from .._utils import is_socket_readable",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._utils",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/sync.py",
+        "raw_specifier": "from .base import SOCKET_OPTION, NetworkBackend, NetworkStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/trio.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/trio.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/trio.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/trio.py",
+        "raw_specifier": "trio",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "trio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_backends/trio.py",
+        "raw_specifier": "from .._exceptions import ( ConnectError, ConnectTimeout, ExceptionMapping, ReadError, ReadTimeout, WriteError, WriteTimeout, map_exceptions, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_backends/trio.py",
+        "raw_specifier": "from .base import SOCKET_OPTION, AsyncNetworkBackend, AsyncNetworkStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_exceptions.py",
+        "raw_specifier": "contextlib",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "contextlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_exceptions.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_models.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_models.py",
+        "raw_specifier": "base64",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "base64",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_models.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_models.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_models.py",
+        "raw_specifier": "urllib.parse",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "urllib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_ssl.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_ssl.py",
+        "raw_specifier": "certifi",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "certifi",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "itertools",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "itertools",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "logging",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "types",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "types",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "from .._backends.sync import SyncBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.sync",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "from .._backends.base import SOCKET_OPTION, NetworkBackend, NetworkStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "from .._exceptions import ConnectError, ConnectTimeout",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "from .._models import Origin, Request, Response",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "from .._ssl import default_ssl_context",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._ssl",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "from .._synchronization import Lock",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "from .._trace import Trace",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._trace",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "from .http11 import HTTP11Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http11",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "from .interfaces import ConnectionInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection.py",
+        "raw_specifier": "from .http2 import HTTP2Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http2",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "sys",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "sys",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "types",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "types",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "from .._backends.sync import SyncBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.sync",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "from .._backends.base import SOCKET_OPTION, NetworkBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "from .._exceptions import ConnectionNotAvailable, UnsupportedProtocol",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "from .._models import Origin, Proxy, Request, Response",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "from .._synchronization import Event, ShieldCancellation, ThreadLock",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "from .connection import HTTPConnection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".connection",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "from .interfaces import ConnectionInterface, RequestInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "from .socks_proxy import Socks5Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".socks_proxy",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "from .http_proxy import ForwardHTTPConnection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http_proxy",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/connection_pool.py",
+        "raw_specifier": "from .http_proxy import TunnelHTTPConnection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http_proxy",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "enum",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "enum",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "logging",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "time",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "time",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "types",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "types",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "h11",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "h11",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "from .._backends.base import NetworkStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "from .._exceptions import ( ConnectionNotAvailable, LocalProtocolError, RemoteProtocolError, WriteError, map_exceptions, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "from .._models import Origin, Request, Response",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "from .._synchronization import Lock, ShieldCancellation",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "from .._trace import Trace",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._trace",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http11.py",
+        "raw_specifier": "from .interfaces import ConnectionInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "enum",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "enum",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "logging",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "time",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "time",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "types",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "types",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "h2.config",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "h2",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "h2.connection",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "h2",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "h2.events",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "h2",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "h2.exceptions",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "h2",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "h2.settings",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "h2",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "from .._backends.base import NetworkStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "from .._exceptions import ( ConnectionNotAvailable, LocalProtocolError, RemoteProtocolError, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "from .._models import Origin, Request, Response",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "from .._synchronization import Lock, Semaphore, ShieldCancellation",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "from .._trace import Trace",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._trace",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http2.py",
+        "raw_specifier": "from .interfaces import ConnectionInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "base64",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "base64",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "logging",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "from .._backends.base import SOCKET_OPTION, NetworkBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "from .._exceptions import ProxyError",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "from .._models import ( URL, Origin, Request, Response, enforce_bytes, enforce_headers, enforce_url, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "from .._ssl import default_ssl_context",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._ssl",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "from .._synchronization import Lock",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "from .._trace import Trace",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._trace",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "from .connection import HTTPConnection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".connection",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "from .connection_pool import ConnectionPool",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".connection_pool",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "from .http11 import HTTP11Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http11",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "from .interfaces import ConnectionInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/http_proxy.py",
+        "raw_specifier": "from .http2 import HTTP2Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http2",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/interfaces.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/interfaces.py",
+        "raw_specifier": "contextlib",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "contextlib",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/interfaces.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/interfaces.py",
+        "raw_specifier": "from .._models import ( URL, Extensions, HeaderTypes, Origin, Request, Response, enforce_bytes, enforce_headers, enforce_url, include_request_headers, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "logging",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "ssl",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "ssl",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "socksio",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "socksio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "from .._backends.sync import SyncBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.sync",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "from .._backends.base import NetworkBackend, NetworkStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "from .._exceptions import ConnectionNotAvailable, ProxyError",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "from .._models import URL, Origin, Request, Response, enforce_bytes, enforce_url",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "from .._ssl import default_ssl_context",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._ssl",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "from .._synchronization import Lock",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._synchronization",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "from .._trace import Trace",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".._trace",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "from .connection_pool import ConnectionPool",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".connection_pool",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "from .http11 import HTTP11Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http11",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "from .interfaces import ConnectionInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/socks_proxy.py",
+        "raw_specifier": "from .http2 import HTTP2Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http2",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/__init__.py",
+        "raw_specifier": "from .connection import HTTPConnection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".connection",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/__init__.py",
+        "raw_specifier": "from .connection_pool import ConnectionPool",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".connection_pool",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/__init__.py",
+        "raw_specifier": "from .http11 import HTTP11Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http11",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/__init__.py",
+        "raw_specifier": "from .http_proxy import HTTPProxy",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http_proxy",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/__init__.py",
+        "raw_specifier": "from .interfaces import ConnectionInterface",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".interfaces",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/__init__.py",
+        "raw_specifier": "from .http2 import HTTP2Connection",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".http2",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_sync/__init__.py",
+        "raw_specifier": "from .socks_proxy import SOCKSProxy",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": ".socks_proxy",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_synchronization.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_synchronization.py",
+        "raw_specifier": "threading",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "threading",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_synchronization.py",
+        "raw_specifier": "types",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "types",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_synchronization.py",
+        "raw_specifier": "from ._exceptions import ExceptionMapping, PoolTimeout, map_exceptions",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_synchronization.py",
+        "raw_specifier": "trio",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "trio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_synchronization.py",
+        "raw_specifier": "anyio",
+        "import_kind": "import",
+        "status": "declared_package",
+        "top_level_module": "anyio",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_synchronization.py",
+        "raw_specifier": "sniffio",
+        "import_kind": "import",
+        "status": "undeclared_package",
+        "top_level_module": "sniffio",
+        "confidence": "low"
+      },
+      {
+        "from_file": "httpcore/_trace.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_trace.py",
+        "raw_specifier": "inspect",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "inspect",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_trace.py",
+        "raw_specifier": "logging",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "logging",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_trace.py",
+        "raw_specifier": "types",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "types",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_trace.py",
+        "raw_specifier": "typing",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "typing",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_trace.py",
+        "raw_specifier": "from ._models import Request",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/_utils.py",
+        "raw_specifier": "from __future__ import annotations",
+        "import_kind": "from_import",
+        "status": "builtin_python_package",
+        "top_level_module": "__future__",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_utils.py",
+        "raw_specifier": "select",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "select",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_utils.py",
+        "raw_specifier": "socket",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "socket",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/_utils.py",
+        "raw_specifier": "sys",
+        "import_kind": "import",
+        "status": "builtin_python_package",
+        "top_level_module": "sys",
+        "confidence": "high"
+      },
+      {
+        "from_file": "httpcore/__init__.py",
+        "raw_specifier": "from ._api import request, stream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._api",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/__init__.py",
+        "raw_specifier": "from ._async import ( AsyncConnectionInterface, AsyncConnectionPool, AsyncHTTP2Connection, AsyncHTTP11Connection, AsyncHTTPConnection, AsyncHTTPProxy, AsyncSOCKSProxy, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._async",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/__init__.py",
+        "raw_specifier": "from ._backends.base import ( SOCKET_OPTION, AsyncNetworkBackend, AsyncNetworkStream, NetworkBackend, NetworkStream, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._backends.base",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/__init__.py",
+        "raw_specifier": "from ._backends.mock import AsyncMockBackend, AsyncMockStream, MockBackend, MockStream",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._backends.mock",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/__init__.py",
+        "raw_specifier": "from ._backends.sync import SyncBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._backends.sync",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/__init__.py",
+        "raw_specifier": "from ._exceptions import ( ConnectError, ConnectionNotAvailable, ConnectTimeout, LocalProtocolError, NetworkError, PoolTimeout, ProtocolError, ProxyError, ReadError, ReadTimeout, RemoteProtocolError, TimeoutException, UnsupportedProtocol, WriteError, WriteTimeout, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._exceptions",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/__init__.py",
+        "raw_specifier": "from ._models import URL, Origin, Proxy, Request, Response",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._models",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/__init__.py",
+        "raw_specifier": "from ._ssl import default_ssl_context",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._ssl",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/__init__.py",
+        "raw_specifier": "from ._sync import ( ConnectionInterface, ConnectionPool, HTTP2Connection, HTTP11Connection, HTTPConnection, HTTPProxy, SOCKSProxy, )",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._sync",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/__init__.py",
+        "raw_specifier": "from ._backends.anyio import AnyIOBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._backends.anyio",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      },
+      {
+        "from_file": "httpcore/__init__.py",
+        "raw_specifier": "from ._backends.trio import TrioBackend",
+        "import_kind": "from_import",
+        "status": "relative_import",
+        "top_level_module": "._backends.trio",
+        "confidence": "medium",
+        "note": "Relative import observed; full package resolution not attempted"
+      }
+    ],
+    "dependency_manifests": [
+      {
+        "source_path": "pyproject.toml",
+        "source_type": "pyproject.toml",
+        "packages": [
+          "certifi",
+          "h11",
+          "h2",
+          "socksio",
+          "trio"
+        ],
+        "dev_packages": [
+          "anyio"
+        ],
+        "confidence": "high",
+        "warnings": []
+      },
+      {
+        "source_path": "requirements.txt",
+        "source_type": "requirements.txt",
+        "packages": [
+          "mkdocs",
+          "mkdocs_autorefs",
+          "mkdocs_material",
+          "mkdocs_material_extensions",
+          "mkdocstrings",
+          "jinja2",
+          "build",
+          "twine",
+          "coverage",
+          "ruff",
+          "mypy",
+          "trio_typing",
+          "pytest",
+          "pytest_httpbin",
+          "pytest_trio",
+          "werkzeug",
+          "uvicorn",
+          "aiohttp",
+          "urllib3",
+          "matplotlib",
+          "pyinstrument"
+        ],
+        "dev_packages": [],
+        "confidence": "high",
+        "warnings": []
+      }
+    ],
+    "test_mappings": [
+      {
+        "source_path": "httpcore/_api.py",
+        "candidate_test_paths": [
+          "httpcore/tests/test_api.py",
+          "tests/test_api.py",
+          "httpcore/tests/test_httpcore.py",
+          "test/test_api.py",
+          "tests/api/test_api.py",
+          "tests/apis/test_api.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_api.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_api.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_async/connection.py",
+        "candidate_test_paths": [
+          "httpcore/_async/tests/test_connection.py",
+          "tests/_async/test_connection.py",
+          "httpcore/_async/tests/test__async.py",
+          "test/test_connection.py",
+          "tests/test_connection.py",
+          "tests/connection/test_connection.py",
+          "tests/connections/test_connection.py",
+          "tests/async/test_connection.py"
+        ],
+        "existing_test_paths": [
+          "tests/_async/test_connection.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/_async/test_connection.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_async/connection_pool.py",
+        "candidate_test_paths": [
+          "httpcore/_async/tests/test_connection_pool.py",
+          "tests/_async/test_connection_pool.py",
+          "httpcore/_async/tests/test__async.py",
+          "test/test_connection_pool.py",
+          "tests/test_connection_pool.py",
+          "tests/connection_pool/test_connection_pool.py",
+          "tests/connection_pools/test_connection_pool.py",
+          "tests/async/test_connection_pool.py"
+        ],
+        "existing_test_paths": [
+          "tests/_async/test_connection_pool.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/_async/test_connection_pool.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_async/http11.py",
+        "candidate_test_paths": [
+          "httpcore/_async/tests/test_http11.py",
+          "tests/_async/test_http11.py",
+          "httpcore/_async/tests/test__async.py",
+          "test/test_http11.py",
+          "tests/test_http11.py",
+          "tests/http11/test_http11.py",
+          "tests/http11s/test_http11.py",
+          "tests/async/test_http11.py"
+        ],
+        "existing_test_paths": [
+          "tests/_async/test_http11.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/_async/test_http11.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_async/http2.py",
+        "candidate_test_paths": [
+          "httpcore/_async/tests/test_http2.py",
+          "tests/_async/test_http2.py",
+          "httpcore/_async/tests/test__async.py",
+          "test/test_http2.py",
+          "tests/test_http2.py",
+          "tests/http2/test_http2.py",
+          "tests/http2s/test_http2.py",
+          "tests/async/test_http2.py"
+        ],
+        "existing_test_paths": [
+          "tests/_async/test_http2.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/_async/test_http2.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_async/http_proxy.py",
+        "candidate_test_paths": [
+          "httpcore/_async/tests/test_http_proxy.py",
+          "tests/_async/test_http_proxy.py",
+          "httpcore/_async/tests/test__async.py",
+          "test/test_http_proxy.py",
+          "tests/test_http_proxy.py",
+          "tests/http_proxy/test_http_proxy.py",
+          "tests/http_proxys/test_http_proxy.py",
+          "tests/async/test_http_proxy.py"
+        ],
+        "existing_test_paths": [
+          "tests/_async/test_http_proxy.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/_async/test_http_proxy.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_async/interfaces.py",
+        "candidate_test_paths": [
+          "httpcore/_async/tests/test_interfaces.py",
+          "tests/_async/test_interfaces.py",
+          "httpcore/_async/tests/test__async.py",
+          "test/test_interfaces.py",
+          "tests/test_interfaces.py",
+          "tests/interfaces/test_interfaces.py",
+          "tests/async/test_interfaces.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "httpcore/_async/socks_proxy.py",
+        "candidate_test_paths": [
+          "httpcore/_async/tests/test_socks_proxy.py",
+          "tests/_async/test_socks_proxy.py",
+          "httpcore/_async/tests/test__async.py",
+          "test/test_socks_proxy.py",
+          "tests/test_socks_proxy.py",
+          "tests/socks_proxy/test_socks_proxy.py",
+          "tests/socks_proxys/test_socks_proxy.py",
+          "tests/async/test_socks_proxy.py"
+        ],
+        "existing_test_paths": [
+          "tests/_async/test_socks_proxy.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/_async/test_socks_proxy.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_backends/anyio.py",
+        "candidate_test_paths": [
+          "httpcore/_backends/tests/test_anyio.py",
+          "tests/_backends/test_anyio.py",
+          "httpcore/_backends/tests/test__backends.py",
+          "test/test_anyio.py",
+          "tests/test_anyio.py",
+          "tests/anyio/test_anyio.py",
+          "tests/anyios/test_anyio.py",
+          "tests/backends/test_anyio.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "httpcore/_backends/auto.py",
+        "candidate_test_paths": [
+          "httpcore/_backends/tests/test_auto.py",
+          "tests/_backends/test_auto.py",
+          "httpcore/_backends/tests/test__backends.py",
+          "test/test_auto.py",
+          "tests/test_auto.py",
+          "tests/auto/test_auto.py",
+          "tests/autos/test_auto.py",
+          "tests/backends/test_auto.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "httpcore/_backends/base.py",
+        "candidate_test_paths": [
+          "httpcore/_backends/tests/test_base.py",
+          "tests/_backends/test_base.py",
+          "httpcore/_backends/tests/test__backends.py",
+          "test/test_base.py",
+          "tests/test_base.py",
+          "tests/base/test_base.py",
+          "tests/bases/test_base.py",
+          "tests/backends/test_base.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "httpcore/_backends/mock.py",
+        "candidate_test_paths": [
+          "httpcore/_backends/tests/test_mock.py",
+          "tests/_backends/test_mock.py",
+          "httpcore/_backends/tests/test__backends.py",
+          "test/test_mock.py",
+          "tests/test_mock.py",
+          "tests/mock/test_mock.py",
+          "tests/mocks/test_mock.py",
+          "tests/backends/test_mock.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "httpcore/_backends/sync.py",
+        "candidate_test_paths": [
+          "httpcore/_backends/tests/test_sync.py",
+          "tests/_backends/test_sync.py",
+          "httpcore/_backends/tests/test__backends.py",
+          "test/test_sync.py",
+          "tests/test_sync.py",
+          "tests/sync/test_sync.py",
+          "tests/syncs/test_sync.py",
+          "tests/backends/test_sync.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "httpcore/_backends/trio.py",
+        "candidate_test_paths": [
+          "httpcore/_backends/tests/test_trio.py",
+          "tests/_backends/test_trio.py",
+          "httpcore/_backends/tests/test__backends.py",
+          "test/test_trio.py",
+          "tests/test_trio.py",
+          "tests/trio/test_trio.py",
+          "tests/trios/test_trio.py",
+          "tests/backends/test_trio.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "httpcore/_exceptions.py",
+        "candidate_test_paths": [
+          "httpcore/tests/test_exceptions.py",
+          "tests/test_exceptions.py",
+          "httpcore/tests/test_httpcore.py",
+          "test/test_exceptions.py",
+          "tests/exceptions/test_exceptions.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "httpcore/_models.py",
+        "candidate_test_paths": [
+          "httpcore/tests/test_models.py",
+          "tests/test_models.py",
+          "httpcore/tests/test_httpcore.py",
+          "test/test_models.py",
+          "tests/models/test_models.py"
+        ],
+        "existing_test_paths": [
+          "tests/test_models.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/test_models.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_ssl.py",
+        "candidate_test_paths": [
+          "httpcore/tests/test_ssl.py",
+          "tests/test_ssl.py",
+          "httpcore/tests/test_httpcore.py",
+          "test/test_ssl.py",
+          "tests/ssl/test_ssl.py",
+          "tests/ssls/test_ssl.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "httpcore/_sync/connection.py",
+        "candidate_test_paths": [
+          "httpcore/_sync/tests/test_connection.py",
+          "tests/_sync/test_connection.py",
+          "httpcore/_sync/tests/test__sync.py",
+          "test/test_connection.py",
+          "tests/test_connection.py",
+          "tests/connection/test_connection.py",
+          "tests/connections/test_connection.py",
+          "tests/sync/test_connection.py"
+        ],
+        "existing_test_paths": [
+          "tests/_sync/test_connection.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/_sync/test_connection.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_sync/connection_pool.py",
+        "candidate_test_paths": [
+          "httpcore/_sync/tests/test_connection_pool.py",
+          "tests/_sync/test_connection_pool.py",
+          "httpcore/_sync/tests/test__sync.py",
+          "test/test_connection_pool.py",
+          "tests/test_connection_pool.py",
+          "tests/connection_pool/test_connection_pool.py",
+          "tests/connection_pools/test_connection_pool.py",
+          "tests/sync/test_connection_pool.py"
+        ],
+        "existing_test_paths": [
+          "tests/_sync/test_connection_pool.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/_sync/test_connection_pool.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_sync/http11.py",
+        "candidate_test_paths": [
+          "httpcore/_sync/tests/test_http11.py",
+          "tests/_sync/test_http11.py",
+          "httpcore/_sync/tests/test__sync.py",
+          "test/test_http11.py",
+          "tests/test_http11.py",
+          "tests/http11/test_http11.py",
+          "tests/http11s/test_http11.py",
+          "tests/sync/test_http11.py"
+        ],
+        "existing_test_paths": [
+          "tests/_sync/test_http11.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/_sync/test_http11.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_sync/http2.py",
+        "candidate_test_paths": [
+          "httpcore/_sync/tests/test_http2.py",
+          "tests/_sync/test_http2.py",
+          "httpcore/_sync/tests/test__sync.py",
+          "test/test_http2.py",
+          "tests/test_http2.py",
+          "tests/http2/test_http2.py",
+          "tests/http2s/test_http2.py",
+          "tests/sync/test_http2.py"
+        ],
+        "existing_test_paths": [
+          "tests/_sync/test_http2.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/_sync/test_http2.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_sync/http_proxy.py",
+        "candidate_test_paths": [
+          "httpcore/_sync/tests/test_http_proxy.py",
+          "tests/_sync/test_http_proxy.py",
+          "httpcore/_sync/tests/test__sync.py",
+          "test/test_http_proxy.py",
+          "tests/test_http_proxy.py",
+          "tests/http_proxy/test_http_proxy.py",
+          "tests/http_proxys/test_http_proxy.py",
+          "tests/sync/test_http_proxy.py"
+        ],
+        "existing_test_paths": [
+          "tests/_sync/test_http_proxy.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/_sync/test_http_proxy.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_sync/interfaces.py",
+        "candidate_test_paths": [
+          "httpcore/_sync/tests/test_interfaces.py",
+          "tests/_sync/test_interfaces.py",
+          "httpcore/_sync/tests/test__sync.py",
+          "test/test_interfaces.py",
+          "tests/test_interfaces.py",
+          "tests/interfaces/test_interfaces.py",
+          "tests/sync/test_interfaces.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "httpcore/_sync/socks_proxy.py",
+        "candidate_test_paths": [
+          "httpcore/_sync/tests/test_socks_proxy.py",
+          "tests/_sync/test_socks_proxy.py",
+          "httpcore/_sync/tests/test__sync.py",
+          "test/test_socks_proxy.py",
+          "tests/test_socks_proxy.py",
+          "tests/socks_proxy/test_socks_proxy.py",
+          "tests/socks_proxys/test_socks_proxy.py",
+          "tests/sync/test_socks_proxy.py"
+        ],
+        "existing_test_paths": [
+          "tests/_sync/test_socks_proxy.py"
+        ],
+        "confidence": "high",
+        "reason": "Library module match: tests/_sync/test_socks_proxy.py [library_package layout]"
+      },
+      {
+        "source_path": "httpcore/_synchronization.py",
+        "candidate_test_paths": [
+          "httpcore/tests/test_synchronization.py",
+          "tests/test_synchronization.py",
+          "httpcore/tests/test_httpcore.py",
+          "test/test_synchronization.py",
+          "tests/synchronization/test_synchronization.py",
+          "tests/synchronizations/test_synchronization.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "httpcore/_trace.py",
+        "candidate_test_paths": [
+          "httpcore/tests/test_trace.py",
+          "tests/test_trace.py",
+          "httpcore/tests/test_httpcore.py",
+          "test/test_trace.py",
+          "tests/trace/test_trace.py",
+          "tests/traces/test_trace.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      },
+      {
+        "source_path": "httpcore/_utils.py",
+        "candidate_test_paths": [
+          "httpcore/tests/test_utils.py",
+          "tests/test_utils.py",
+          "httpcore/tests/test_httpcore.py",
+          "test/test_utils.py",
+          "tests/utils/test_utils.py"
+        ],
+        "existing_test_paths": [],
+        "confidence": "low",
+        "reason": "Candidate test paths generated but none exist"
+      }
+    ],
+    "sensitive_zones": [],
+    "unknowns": [
+      {
+        "category": "scope_granularity_limit",
+        "classification": "intrinsic",
+        "paths": [],
+        "count": 0,
+        "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+      }
+    ],
+    "quality": {
+      "python_file_count": 55,
+      "classified_count": 55,
+      "classified_ratio": 1,
+      "unknown_count": 0,
+      "unknown_ratio": 0,
+      "import_observation_count": 287,
+      "project_import_count": 0,
+      "declared_package_count": 19,
+      "undeclared_package_count": 1,
+      "dynamic_import_count": 0,
+      "test_mapping_count": 27,
+      "high_confidence_test_count": 14,
+      "medium_confidence_test_count": 0,
+      "sensitive_zone_count": 0,
+      "sensitive_file_count": 0,
+      "manifest_count": 2,
+      "low_confidence_manifest_count": 0
+    },
+    "limitations": [
+      "Python import observations are syntax-level observations, not full runtime import resolution.",
+      "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+      "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+      "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+      "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+      "Namespace packages without __init__.py are not detected as project packages."
+    ]
+  },
+  "support_assessment": {
+    "support_level": "validated",
+    "reason": "All 5 observation signals present",
+    "meets_expected": true,
+    "signals": {
+      "has_layout": true,
+      "has_framework": true,
+      "has_project_role": true,
+      "has_test_mapping": true,
+      "has_risk_preset": true,
+      "python_file_count": 55,
+      "crash": false,
+      "sanitizer_clean": true
+    },
+    "gaps": []
+  },
+  "sanitizer": {
+    "violations": 0,
+    "details": [],
+    "clean": true
+  },
+  "notes": "ok"
+}

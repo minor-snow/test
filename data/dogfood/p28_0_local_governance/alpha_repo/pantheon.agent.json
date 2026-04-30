@@ -1,0 +1,42 @@
+{
+  "schema_version": "pantheon_agent_entry@0.1.0",
+  "project": "auto",
+  "purpose": "Pantheon repair governance",
+  "primary_entrypoints": {
+    "read_first": "AGENTS.md",
+    "agent_quickstart": "docs/pantheon/agent-quickstart.md",
+    "human_quickstart": "docs/pantheon/human-quickstart.md"
+  },
+  "commands": {
+    "doctor": "npx pantheon-alpha doctor",
+    "repair_intake": "npx pantheon-alpha repair intake --from .pantheon/repair/inbox/agent_bug_report.json",
+    "repair_plan": "npx pantheon-alpha repair plan --repair-id <repair_id>",
+    "repair_check": "npx pantheon-alpha repair check --repair-id <repair_id>",
+    "review_list": "npx pantheon-alpha review list",
+    "review_show": "npx pantheon-alpha review show --repair-id <repair_id>",
+    "metrics_daily": "npx pantheon-alpha metrics daily",
+    "metrics_status": "npx pantheon-alpha metrics status"
+  },
+  "repair_protocol": {
+    "bug_report_template": ".pantheon/repair/inbox/agent_bug_report.template.json",
+    "inbox": ".pantheon/repair/inbox/",
+    "runs": ".pantheon/repair/runs/",
+    "requires_repair_id": true,
+    "latest_is_convenience_only": true
+  },
+  "local_governance": {
+    "events": ".pantheon/governance/events.jsonl",
+    "review_queue": ".pantheon/reviews/review_queue.json",
+    "daily_metrics": ".pantheon/metrics/daily/"
+  },
+  "github": {
+    "workflow": ".github/workflows/pantheon-repair.yml",
+    "action_mode": "repair"
+  },
+  "hard_rules": [
+    "Do not patch before bug report.",
+    "Do not use latest for correctness.",
+    "Do not edit forbidden files.",
+    "Do not treat hypotheses as confirmed facts."
+  ]
+}

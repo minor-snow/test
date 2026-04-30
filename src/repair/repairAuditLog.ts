@@ -1,10 +1,13 @@
-import { appendFileSync, existsSync, readFileSync, writeFileSync } from "node:fs";
+import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
 import type { RepairAuditLogEvent } from "./types.js";
 import { repairRunPaths } from "./repairArtifactLayout.js";
 
 export function appendRepairAuditEvent(repoRoot: string, repairId: string, event: RepairAuditLogEvent): void {
+  const target = repairRunPaths(repoRoot, repairId).auditLog;
+  mkdirSync(dirname(target), { recursive: true });
   const line = JSON.stringify(event) + "\n";
-  appendFileSync(repairRunPaths(repoRoot, repairId).auditLog, line);
+  appendFileSync(target, line);
 }
 
 export function loadRepairAuditLog(repoRoot: string, repairId: string): RepairAuditLogEvent[] {
@@ -17,6 +20,7 @@ export function loadRepairAuditLog(repoRoot: string, repairId: string): RepairAu
 
 export function writeRepairAuditLog(repoRoot: string, repairId: string, events: readonly RepairAuditLogEvent[]): void {
   const path = repairRunPaths(repoRoot, repairId).auditLog;
+  mkdirSync(dirname(path), { recursive: true });
   const text = events.map(event => JSON.stringify(event)).join("\n");
   writeFileSync(path, text ? `${text}\n` : "");
 }

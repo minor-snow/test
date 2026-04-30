@@ -1,0 +1,3925 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "fastapi-users__fastapi-users",
+    "observed_file_count": 151,
+    "python_file_count": 94
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "flat_package",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: fastapi_users"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "docs": 8,
+      "source": 60,
+      "unknown": 4,
+      "config": 2,
+      "test": 20
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "fastapi",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "fastapi found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "fastapi imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "sqlalchemy imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "fastapi_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / flat_package (high)",
+      "framework: fastapi / web_framework (high)",
+      "framework: sqlalchemy / orm (medium)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: authentication (high, 2 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/auth*",
+        "reason": "Authentication logic requires human review",
+        "severity": "high",
+        "matched_path_count": 3,
+        "evidence": [
+          "3 paths match pattern **/auth*",
+          "Sensitive zone \"authentication\" (high) corroborates"
+        ]
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "Application configuration affects system behavior",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/config*"
+        ]
+      },
+      {
+        "pattern": "**/db/**",
+        "reason": "Database layer changes affect data integrity",
+        "severity": "high",
+        "matched_path_count": 6,
+        "evidence": [
+          "6 paths match pattern **/db/**"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "alembic/**",
+        "reason": "No alembic directory observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/middleware*",
+        "reason": "No middleware files observed"
+      },
+      {
+        "pattern": "**/deps*",
+        "reason": "No deps files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/src/cookbook_create_user_programmatically.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 1132,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/db_beanie.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 419,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/db_beanie_access_tokens.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 705,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/db_beanie_oauth.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 592,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/db_sqlalchemy.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 979,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/db_sqlalchemy_access_tokens.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 1367,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/db_sqlalchemy_oauth.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 1251,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/src/user_manager.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 964,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "examples/beanie/app/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1250,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/beanie/app/db.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 455,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/beanie/app/schemas.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 253,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/beanie/app/users.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1664,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/beanie/app/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/beanie/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 112,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/beanie/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 51,
+      "evidence": []
+    },
+    {
+      "path": "examples/beanie-oauth/app/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1460,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/beanie-oauth/app/db.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 592,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/beanie-oauth/app/schemas.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 253,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/beanie-oauth/app/users.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1898,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/beanie-oauth/app/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/beanie-oauth/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 112,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/beanie-oauth/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 57,
+      "evidence": []
+    },
+    {
+      "path": "examples/sqlalchemy/app/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1220,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sqlalchemy/app/db.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 979,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sqlalchemy/app/schemas.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 224,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sqlalchemy/app/users.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1658,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sqlalchemy/app/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sqlalchemy/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 112,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sqlalchemy/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 66,
+      "evidence": []
+    },
+    {
+      "path": "examples/sqlalchemy-oauth/app/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1432,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sqlalchemy-oauth/app/db.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1251,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sqlalchemy-oauth/app/schemas.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 224,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sqlalchemy-oauth/app/users.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1860,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sqlalchemy-oauth/app/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sqlalchemy-oauth/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 112,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/sqlalchemy-oauth/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 72,
+      "evidence": []
+    },
+    {
+      "path": "fastapi_users/authentication/authenticator.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9607,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/backend.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1833,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/strategy/base.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 617,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/strategy/db/adapter.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 902,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/strategy/db/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 340,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/strategy/db/strategy.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2092,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/strategy/db/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 333,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/strategy/jwt.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2385,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/strategy/redis.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1545,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/strategy/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 669,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/transport/base.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 882,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/transport/bearer.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1867,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/transport/cookie.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2573,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/transport/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 392,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/authentication/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 657,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/db/base.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1695,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/db/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1149,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 650,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/fastapi_users.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9192,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/jwt.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1050,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/manager.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 25804,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 989,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/openapi.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 81,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/password.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1289,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/router/auth.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3577,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/router/common.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1165,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/router/oauth.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14293,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/router/register.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2906,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/router/reset.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3283,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/router/users.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8676,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/router/verify.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3067,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/router/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 834,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/schemas.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1956,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/types.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 414,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fastapi_users/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 597,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 3718,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "setup.cfg",
+      "bucket": "config",
+      "extension": ".cfg",
+      "size_bytes": 300,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 17627,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_authentication_authenticator.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5179,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_authentication_backend.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2018,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_authentication_strategy_db.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4864,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_authentication_strategy_jwt.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6704,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_authentication_strategy_redis.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3762,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_authentication_transport_bearer.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1505,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_authentication_transport_cookie.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3133,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_db_base.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1170,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_fastapi_users.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 19486,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_jwt.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 408,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_manager.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 26243,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_openapi.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4071,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_router_auth.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8601,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_router_oauth.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 28438,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_router_register.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4632,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_router_reset.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6435,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_router_users.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 35056,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_router_verify.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6867,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "test_build.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 121,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/beanie/app/app.py",
+      "raw_specifier": "from contextlib import asynccontextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie/app/app.py",
+      "raw_specifier": "from beanie import init_beanie",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "beanie",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie/app/app.py",
+      "raw_specifier": "from fastapi import Depends, FastAPI",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie/app/app.py",
+      "raw_specifier": "from app.db import User, db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie/app/app.py",
+      "raw_specifier": "from app.schemas import UserCreate, UserRead, UserUpdate",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie/app/app.py",
+      "raw_specifier": "from app.users import auth_backend, current_active_user, fastapi_users",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie/app/db.py",
+      "raw_specifier": "motor.motor_asyncio",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "motor",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie/app/db.py",
+      "raw_specifier": "from beanie import Document",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "beanie",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie/app/db.py",
+      "raw_specifier": "from fastapi_users.db import BeanieBaseUser",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie/app/db.py",
+      "raw_specifier": "from fastapi_users_db_beanie import BeanieUserDatabase",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi_users_db_beanie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie/app/schemas.py",
+      "raw_specifier": "from beanie import PydanticObjectId",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "beanie",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie/app/schemas.py",
+      "raw_specifier": "from fastapi_users import schemas",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie/app/users.py",
+      "raw_specifier": "from beanie import PydanticObjectId",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "beanie",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie/app/users.py",
+      "raw_specifier": "from fastapi import Depends, Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie/app/users.py",
+      "raw_specifier": "from fastapi_users import BaseUserManager, FastAPIUsers",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie/app/users.py",
+      "raw_specifier": "from fastapi_users.authentication import ( AuthenticationBackend, BearerTransport, JWTStrategy, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie/app/users.py",
+      "raw_specifier": "from fastapi_users.db import BeanieUserDatabase, ObjectIDIDMixin",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie/app/users.py",
+      "raw_specifier": "from app.db import User, get_user_db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie/main.py",
+      "raw_specifier": "uvicorn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "uvicorn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/app.py",
+      "raw_specifier": "from contextlib import asynccontextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/app.py",
+      "raw_specifier": "from beanie import init_beanie",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "beanie",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/app.py",
+      "raw_specifier": "from fastapi import Depends, FastAPI",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/app.py",
+      "raw_specifier": "from app.db import User, db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/app.py",
+      "raw_specifier": "from app.schemas import UserCreate, UserRead, UserUpdate",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/app.py",
+      "raw_specifier": "from app.users import ( SECRET, auth_backend, current_active_user, fastapi_users, google_oauth_client, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/db.py",
+      "raw_specifier": "motor.motor_asyncio",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "motor",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/db.py",
+      "raw_specifier": "from beanie import Document",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "beanie",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/db.py",
+      "raw_specifier": "from fastapi_users.db import BaseOAuthAccount, BeanieBaseUser, BeanieUserDatabase",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/db.py",
+      "raw_specifier": "from pydantic import Field",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pydantic",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/schemas.py",
+      "raw_specifier": "from beanie import PydanticObjectId",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "beanie",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/schemas.py",
+      "raw_specifier": "from fastapi_users import schemas",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/users.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/users.py",
+      "raw_specifier": "from beanie import PydanticObjectId",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "beanie",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/users.py",
+      "raw_specifier": "from fastapi import Depends, Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/users.py",
+      "raw_specifier": "from fastapi_users import BaseUserManager, FastAPIUsers, models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/users.py",
+      "raw_specifier": "from fastapi_users.authentication import ( AuthenticationBackend, BearerTransport, JWTStrategy, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/users.py",
+      "raw_specifier": "from fastapi_users.db import BeanieUserDatabase, ObjectIDIDMixin",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/users.py",
+      "raw_specifier": "from httpx_oauth.clients.google import GoogleOAuth2",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "httpx_oauth",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/beanie-oauth/app/users.py",
+      "raw_specifier": "from app.db import User, get_user_db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/beanie-oauth/main.py",
+      "raw_specifier": "uvicorn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "uvicorn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/app.py",
+      "raw_specifier": "from contextlib import asynccontextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/app.py",
+      "raw_specifier": "from fastapi import Depends, FastAPI",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/app.py",
+      "raw_specifier": "from app.db import User, create_db_and_tables",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/app.py",
+      "raw_specifier": "from app.schemas import UserCreate, UserRead, UserUpdate",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/app.py",
+      "raw_specifier": "from app.users import auth_backend, current_active_user, fastapi_users",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/db.py",
+      "raw_specifier": "from collections.abc import AsyncGenerator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/db.py",
+      "raw_specifier": "from fastapi import Depends",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/db.py",
+      "raw_specifier": "from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/db.py",
+      "raw_specifier": "from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/db.py",
+      "raw_specifier": "from sqlalchemy.orm import DeclarativeBase",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/schemas.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/schemas.py",
+      "raw_specifier": "from fastapi_users import schemas",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/users.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/users.py",
+      "raw_specifier": "from fastapi import Depends, Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/users.py",
+      "raw_specifier": "from fastapi_users import BaseUserManager, FastAPIUsers, UUIDIDMixin, models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/users.py",
+      "raw_specifier": "from fastapi_users.authentication import ( AuthenticationBackend, BearerTransport, JWTStrategy, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/users.py",
+      "raw_specifier": "from fastapi_users.db import SQLAlchemyUserDatabase",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy/app/users.py",
+      "raw_specifier": "from app.db import User, get_user_db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sqlalchemy/main.py",
+      "raw_specifier": "uvicorn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "uvicorn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/app.py",
+      "raw_specifier": "from contextlib import asynccontextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/app.py",
+      "raw_specifier": "from fastapi import Depends, FastAPI",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/app.py",
+      "raw_specifier": "from app.db import User, create_db_and_tables",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/app.py",
+      "raw_specifier": "from app.schemas import UserCreate, UserRead, UserUpdate",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/app.py",
+      "raw_specifier": "from app.users import ( SECRET, auth_backend, current_active_user, fastapi_users, google_oauth_client, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/db.py",
+      "raw_specifier": "from collections.abc import AsyncGenerator",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/db.py",
+      "raw_specifier": "from fastapi import Depends",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/db.py",
+      "raw_specifier": "from fastapi_users.db import ( SQLAlchemyBaseOAuthAccountTableUUID, SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/db.py",
+      "raw_specifier": "from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/db.py",
+      "raw_specifier": "from sqlalchemy.orm import DeclarativeBase, Mapped, relationship",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/schemas.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/schemas.py",
+      "raw_specifier": "from fastapi_users import schemas",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/users.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/users.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/users.py",
+      "raw_specifier": "from fastapi import Depends, Request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/users.py",
+      "raw_specifier": "from fastapi_users import BaseUserManager, FastAPIUsers, UUIDIDMixin, models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/users.py",
+      "raw_specifier": "from fastapi_users.authentication import ( AuthenticationBackend, BearerTransport, JWTStrategy, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/users.py",
+      "raw_specifier": "from fastapi_users.db import SQLAlchemyUserDatabase",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/users.py",
+      "raw_specifier": "from httpx_oauth.clients.google import GoogleOAuth2",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "httpx_oauth",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/app/users.py",
+      "raw_specifier": "from app.db import User, get_user_db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/sqlalchemy-oauth/main.py",
+      "raw_specifier": "uvicorn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "uvicorn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/authenticator.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/authenticator.py",
+      "raw_specifier": "from collections.abc import Callable, Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/authenticator.py",
+      "raw_specifier": "from inspect import Parameter, Signature",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/authenticator.py",
+      "raw_specifier": "from typing import Any, Generic, cast",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/authenticator.py",
+      "raw_specifier": "from fastapi import Depends, HTTPException, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/authenticator.py",
+      "raw_specifier": "from makefun import with_signature",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "makefun",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/authenticator.py",
+      "raw_specifier": "from fastapi_users import models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/authenticator.py",
+      "raw_specifier": "from fastapi_users.authentication.backend import AuthenticationBackend",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/authenticator.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy import Strategy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/authenticator.py",
+      "raw_specifier": "from fastapi_users.manager import BaseUserManager, UserManagerDependency",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/authenticator.py",
+      "raw_specifier": "from fastapi_users.types import DependencyCallable",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/backend.py",
+      "raw_specifier": "from typing import Generic",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/backend.py",
+      "raw_specifier": "from fastapi import Response, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/backend.py",
+      "raw_specifier": "from fastapi_users import models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/backend.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy import ( Strategy, StrategyDestroyNotSupportedError, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/backend.py",
+      "raw_specifier": "from fastapi_users.authentication.transport import ( Transport, TransportLogoutNotSupportedError, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/backend.py",
+      "raw_specifier": "from fastapi_users.types import DependencyCallable",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/base.py",
+      "raw_specifier": "from typing import Generic, Protocol",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/base.py",
+      "raw_specifier": "from fastapi_users import models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/base.py",
+      "raw_specifier": "from fastapi_users.manager import BaseUserManager",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/adapter.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/adapter.py",
+      "raw_specifier": "from typing import Any, Generic, Protocol",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/adapter.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.db.models import AP",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/models.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/models.py",
+      "raw_specifier": "from typing import Protocol, TypeVar",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/models.py",
+      "raw_specifier": "from fastapi_users import models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/strategy.py",
+      "raw_specifier": "secrets",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "secrets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/strategy.py",
+      "raw_specifier": "from datetime import datetime, timedelta, timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/strategy.py",
+      "raw_specifier": "from typing import Any, Generic",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/strategy.py",
+      "raw_specifier": "from fastapi_users import exceptions, models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/strategy.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.base import Strategy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/strategy.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.db.adapter import AccessTokenDatabase",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/strategy.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.db.models import AP",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/strategy.py",
+      "raw_specifier": "from fastapi_users.manager import BaseUserManager",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.db.adapter import AccessTokenDatabase",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.db.models import AP, AccessTokenProtocol",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/db/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.db.strategy import DatabaseStrategy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/jwt.py",
+      "raw_specifier": "from typing import Generic",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/jwt.py",
+      "raw_specifier": "jwt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "jwt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/jwt.py",
+      "raw_specifier": "from fastapi_users import exceptions, models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/jwt.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.base import ( Strategy, StrategyDestroyNotSupportedError, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/jwt.py",
+      "raw_specifier": "from fastapi_users.jwt import SecretType, decode_jwt, generate_jwt",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/jwt.py",
+      "raw_specifier": "from fastapi_users.manager import BaseUserManager",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/redis.py",
+      "raw_specifier": "secrets",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "secrets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/redis.py",
+      "raw_specifier": "from typing import Generic",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/redis.py",
+      "raw_specifier": "redis.asyncio",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "redis",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/redis.py",
+      "raw_specifier": "from fastapi_users import exceptions, models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/redis.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.base import Strategy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/redis.py",
+      "raw_specifier": "from fastapi_users.manager import BaseUserManager",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.base import ( Strategy, StrategyDestroyNotSupportedError, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.db import ( AP, AccessTokenDatabase, AccessTokenProtocol, DatabaseStrategy, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.jwt import JWTStrategy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/strategy/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy.redis import RedisStrategy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/base.py",
+      "raw_specifier": "from typing import Protocol",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/base.py",
+      "raw_specifier": "from fastapi import Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/base.py",
+      "raw_specifier": "from fastapi.security.base import SecurityBase",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/base.py",
+      "raw_specifier": "from fastapi_users.openapi import OpenAPIResponseType",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/bearer.py",
+      "raw_specifier": "from fastapi import Response, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/bearer.py",
+      "raw_specifier": "from fastapi.responses import JSONResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/bearer.py",
+      "raw_specifier": "from fastapi.security import OAuth2PasswordBearer",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/bearer.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pydantic",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/bearer.py",
+      "raw_specifier": "from fastapi_users.authentication.transport.base import ( Transport, TransportLogoutNotSupportedError, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/bearer.py",
+      "raw_specifier": "from fastapi_users.openapi import OpenAPIResponseType",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/cookie.py",
+      "raw_specifier": "from typing import Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/cookie.py",
+      "raw_specifier": "from fastapi import Response, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/cookie.py",
+      "raw_specifier": "from fastapi.security import APIKeyCookie",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/cookie.py",
+      "raw_specifier": "from fastapi_users.authentication.transport.base import Transport",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/cookie.py",
+      "raw_specifier": "from fastapi_users.openapi import OpenAPIResponseType",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.transport.base import ( Transport, TransportLogoutNotSupportedError, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.transport.bearer import BearerTransport",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/transport/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.transport.cookie import CookieTransport",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.authenticator import Authenticator",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.backend import AuthenticationBackend",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy import JWTStrategy, Strategy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.strategy import RedisStrategy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/authentication/__init__.py",
+      "raw_specifier": "from fastapi_users.authentication.transport import ( BearerTransport, CookieTransport, Transport, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/db/base.py",
+      "raw_specifier": "from typing import Any, Generic",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/db/base.py",
+      "raw_specifier": "from fastapi_users.models import ID, OAP, UOAP, UP",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/db/base.py",
+      "raw_specifier": "from fastapi_users.types import DependencyCallable",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/db/__init__.py",
+      "raw_specifier": "from fastapi_users.db.base import BaseUserDatabase, UserDatabaseDependency",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/db/__init__.py",
+      "raw_specifier": "from fastapi_users_db_sqlalchemy import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi_users_db_sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/db/__init__.py",
+      "raw_specifier": "from fastapi_users_db_beanie import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi_users_db_beanie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/exceptions.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/fastapi_users.py",
+      "raw_specifier": "from collections.abc import Sequence",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/fastapi_users.py",
+      "raw_specifier": "from typing import Generic, Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/fastapi_users.py",
+      "raw_specifier": "from fastapi import APIRouter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/fastapi_users.py",
+      "raw_specifier": "from fastapi_users import models, schemas",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/fastapi_users.py",
+      "raw_specifier": "from fastapi_users.authentication import AuthenticationBackend, Authenticator",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/fastapi_users.py",
+      "raw_specifier": "from fastapi_users.jwt import SecretType",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/fastapi_users.py",
+      "raw_specifier": "from fastapi_users.manager import UserManagerDependency",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/fastapi_users.py",
+      "raw_specifier": "from fastapi_users.router import ( get_auth_router, get_register_router, get_reset_password_router, get_users_router, get_verify_router, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/fastapi_users.py",
+      "raw_specifier": "from httpx_oauth.oauth2 import BaseOAuth2",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "httpx_oauth",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/fastapi_users.py",
+      "raw_specifier": "from fastapi_users.router.oauth import ( CSRF_TOKEN_COOKIE_NAME, get_oauth_associate_router, get_oauth_router, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/jwt.py",
+      "raw_specifier": "from datetime import datetime, timedelta, timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/jwt.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/jwt.py",
+      "raw_specifier": "jwt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "jwt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_users/jwt.py",
+      "raw_specifier": "from pydantic import SecretStr",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pydantic",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_users/manager.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/manager.py",
+      "raw_specifier": "from typing import Any, Generic",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/manager.py",
+      "raw_specifier": "jwt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "jwt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_users/manager.py",
+      "raw_specifier": "from fastapi import Request, Response",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/manager.py",
+      "raw_specifier": "from fastapi.security import OAuth2PasswordRequestForm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/manager.py",
+      "raw_specifier": "from fastapi_users import exceptions, models, schemas",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/manager.py",
+      "raw_specifier": "from fastapi_users.db import BaseUserDatabase",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/manager.py",
+      "raw_specifier": "from fastapi_users.jwt import SecretType, decode_jwt, generate_jwt",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/manager.py",
+      "raw_specifier": "from fastapi_users.password import PasswordHelper, PasswordHelperProtocol",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/manager.py",
+      "raw_specifier": "from fastapi_users.types import DependencyCallable",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/models.py",
+      "raw_specifier": "from typing import Generic, Protocol, TypeVar",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/openapi.py",
+      "raw_specifier": "from typing import Any",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/password.py",
+      "raw_specifier": "secrets",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "secrets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/password.py",
+      "raw_specifier": "from typing import Protocol",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/password.py",
+      "raw_specifier": "from pwdlib import PasswordHash",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pwdlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/password.py",
+      "raw_specifier": "from pwdlib.hashers.argon2 import Argon2Hasher",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pwdlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/password.py",
+      "raw_specifier": "from pwdlib.hashers.bcrypt import BcryptHasher",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pwdlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/auth.py",
+      "raw_specifier": "from fastapi import APIRouter, Depends, HTTPException, Request, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/auth.py",
+      "raw_specifier": "from fastapi.security import OAuth2PasswordRequestForm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/auth.py",
+      "raw_specifier": "from fastapi_users import models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/auth.py",
+      "raw_specifier": "from fastapi_users.authentication import AuthenticationBackend, Authenticator, Strategy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/auth.py",
+      "raw_specifier": "from fastapi_users.manager import BaseUserManager, UserManagerDependency",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/auth.py",
+      "raw_specifier": "from fastapi_users.openapi import OpenAPIResponseType",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/auth.py",
+      "raw_specifier": "from fastapi_users.router.common import ErrorCode, ErrorModel",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/common.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/common.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pydantic",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "secrets",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "secrets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "from typing import Literal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "jwt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "jwt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "from fastapi import APIRouter, Depends, HTTPException, Query, Request, Response, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "from httpx_oauth.integrations.fastapi import OAuth2AuthorizeCallback",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "httpx_oauth",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "from httpx_oauth.oauth2 import BaseOAuth2, OAuth2Token",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "httpx_oauth",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pydantic",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "from fastapi_users import models, schemas",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "from fastapi_users.authentication import AuthenticationBackend, Authenticator, Strategy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "from fastapi_users.exceptions import UserAlreadyExists",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "from fastapi_users.jwt import SecretType, decode_jwt, generate_jwt",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "from fastapi_users.manager import BaseUserManager, UserManagerDependency",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/oauth.py",
+      "raw_specifier": "from fastapi_users.router.common import ErrorCode, ErrorModel",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/register.py",
+      "raw_specifier": "from fastapi import APIRouter, Depends, HTTPException, Request, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/register.py",
+      "raw_specifier": "from fastapi_users import exceptions, models, schemas",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/register.py",
+      "raw_specifier": "from fastapi_users.manager import BaseUserManager, UserManagerDependency",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/register.py",
+      "raw_specifier": "from fastapi_users.router.common import ErrorCode, ErrorModel",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/reset.py",
+      "raw_specifier": "from fastapi import APIRouter, Body, Depends, HTTPException, Request, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/reset.py",
+      "raw_specifier": "from pydantic import EmailStr",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pydantic",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_users/router/reset.py",
+      "raw_specifier": "from fastapi_users import exceptions, models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/reset.py",
+      "raw_specifier": "from fastapi_users.manager import BaseUserManager, UserManagerDependency",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/reset.py",
+      "raw_specifier": "from fastapi_users.openapi import OpenAPIResponseType",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/reset.py",
+      "raw_specifier": "from fastapi_users.router.common import ErrorCode, ErrorModel",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/users.py",
+      "raw_specifier": "from fastapi import APIRouter, Depends, HTTPException, Request, Response, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/users.py",
+      "raw_specifier": "from fastapi_users import exceptions, models, schemas",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/users.py",
+      "raw_specifier": "from fastapi_users.authentication import Authenticator",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/users.py",
+      "raw_specifier": "from fastapi_users.manager import BaseUserManager, UserManagerDependency",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/users.py",
+      "raw_specifier": "from fastapi_users.router.common import ErrorCode, ErrorModel",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/verify.py",
+      "raw_specifier": "from fastapi import APIRouter, Body, Depends, HTTPException, Request, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/verify.py",
+      "raw_specifier": "from pydantic import EmailStr",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pydantic",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_users/router/verify.py",
+      "raw_specifier": "from fastapi_users import exceptions, models, schemas",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/verify.py",
+      "raw_specifier": "from fastapi_users.manager import BaseUserManager, UserManagerDependency",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/verify.py",
+      "raw_specifier": "from fastapi_users.router.common import ErrorCode, ErrorModel",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/__init__.py",
+      "raw_specifier": "from fastapi_users.router.auth import get_auth_router",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/__init__.py",
+      "raw_specifier": "from fastapi_users.router.common import ErrorCode",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/__init__.py",
+      "raw_specifier": "from fastapi_users.router.register import get_register_router",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/__init__.py",
+      "raw_specifier": "from fastapi_users.router.reset import get_reset_password_router",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/__init__.py",
+      "raw_specifier": "from fastapi_users.router.users import get_users_router",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/__init__.py",
+      "raw_specifier": "from fastapi_users.router.verify import get_verify_router",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/router/__init__.py",
+      "raw_specifier": "from fastapi_users.router.oauth import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/schemas.py",
+      "raw_specifier": "from typing import Generic, TypeVar",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/schemas.py",
+      "raw_specifier": "from pydantic import BaseModel, ConfigDict, EmailStr",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pydantic",
+      "confidence": "low"
+    },
+    {
+      "from_file": "fastapi_users/schemas.py",
+      "raw_specifier": "from fastapi_users import models",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/types.py",
+      "raw_specifier": "from collections.abc import ( AsyncGenerator, AsyncIterator, Callable, Coroutine, Generator, )",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/types.py",
+      "raw_specifier": "from typing import TypeVar",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/__init__.py",
+      "raw_specifier": "from fastapi_users import models, schemas  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/__init__.py",
+      "raw_specifier": "from fastapi_users.exceptions import InvalidID, InvalidPasswordException",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/__init__.py",
+      "raw_specifier": "from fastapi_users.fastapi_users import FastAPIUsers  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fastapi_users/__init__.py",
+      "raw_specifier": "from fastapi_users.manager import (  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_build.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_build.py",
+      "raw_specifier": "from fastapi_users import FastAPIUsers",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "fastapi_users",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "examples/beanie/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "fastapi",
+        "fastapi_users",
+        "uvicorn"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/beanie-oauth/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "fastapi",
+        "fastapi_users",
+        "uvicorn"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/sqlalchemy/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "fastapi",
+        "fastapi_users",
+        "uvicorn",
+        "aiosqlite"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/sqlalchemy-oauth/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "fastapi",
+        "fastapi_users",
+        "uvicorn",
+        "aiosqlite"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "fastapi",
+        "pwdlib",
+        "email_validator",
+        "pyjwt",
+        "python_multipart",
+        "makefun",
+        "fastapi_users_db_sqlalchemy",
+        "fastapi_users_db_beanie",
+        "httpx_oauth",
+        "redis"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/beanie/app/app.py",
+      "candidate_test_paths": [
+        "examples/beanie/app/tests/test_app.py",
+        "tests/beanie/app/test_app.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/beanie/app/db.py",
+      "candidate_test_paths": [
+        "examples/beanie/app/tests/test_db.py",
+        "tests/beanie/app/test_db.py",
+        "examples/beanie/app/tests/test_app.py",
+        "test/test_db.py",
+        "tests/test_db.py",
+        "tests/db/test_db.py",
+        "tests/dbs/test_db.py",
+        "tests/app/test_db.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/beanie/app/schemas.py",
+      "candidate_test_paths": [
+        "examples/beanie/app/tests/test_schemas.py",
+        "tests/beanie/app/test_schemas.py",
+        "examples/beanie/app/tests/test_app.py",
+        "test/test_schemas.py",
+        "tests/test_schemas.py",
+        "tests/schemas/test_schemas.py",
+        "tests/app/test_schemas.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/beanie/app/users.py",
+      "candidate_test_paths": [
+        "examples/beanie/app/tests/test_users.py",
+        "tests/beanie/app/test_users.py",
+        "examples/beanie/app/tests/test_app.py",
+        "test/test_users.py",
+        "tests/test_users.py",
+        "tests/users/test_users.py",
+        "tests/app/test_users.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/beanie/main.py",
+      "candidate_test_paths": [
+        "examples/beanie/tests/test_main.py",
+        "tests/beanie/test_main.py",
+        "examples/beanie/tests/test_beanie.py",
+        "test/test_main.py",
+        "tests/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/beanie-oauth/app/app.py",
+      "candidate_test_paths": [
+        "examples/beanie-oauth/app/tests/test_app.py",
+        "tests/beanie-oauth/app/test_app.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/beanie-oauth/app/db.py",
+      "candidate_test_paths": [
+        "examples/beanie-oauth/app/tests/test_db.py",
+        "tests/beanie-oauth/app/test_db.py",
+        "examples/beanie-oauth/app/tests/test_app.py",
+        "test/test_db.py",
+        "tests/test_db.py",
+        "tests/db/test_db.py",
+        "tests/dbs/test_db.py",
+        "tests/app/test_db.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/beanie-oauth/app/schemas.py",
+      "candidate_test_paths": [
+        "examples/beanie-oauth/app/tests/test_schemas.py",
+        "tests/beanie-oauth/app/test_schemas.py",
+        "examples/beanie-oauth/app/tests/test_app.py",
+        "test/test_schemas.py",
+        "tests/test_schemas.py",
+        "tests/schemas/test_schemas.py",
+        "tests/app/test_schemas.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/beanie-oauth/app/users.py",
+      "candidate_test_paths": [
+        "examples/beanie-oauth/app/tests/test_users.py",
+        "tests/beanie-oauth/app/test_users.py",
+        "examples/beanie-oauth/app/tests/test_app.py",
+        "test/test_users.py",
+        "tests/test_users.py",
+        "tests/users/test_users.py",
+        "tests/app/test_users.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/beanie-oauth/main.py",
+      "candidate_test_paths": [
+        "examples/beanie-oauth/tests/test_main.py",
+        "tests/beanie-oauth/test_main.py",
+        "examples/beanie-oauth/tests/test_beanie-oauth.py",
+        "test/test_main.py",
+        "tests/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/sqlalchemy/app/app.py",
+      "candidate_test_paths": [
+        "examples/sqlalchemy/app/tests/test_app.py",
+        "tests/sqlalchemy/app/test_app.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/sqlalchemy/app/db.py",
+      "candidate_test_paths": [
+        "examples/sqlalchemy/app/tests/test_db.py",
+        "tests/sqlalchemy/app/test_db.py",
+        "examples/sqlalchemy/app/tests/test_app.py",
+        "test/test_db.py",
+        "tests/test_db.py",
+        "tests/db/test_db.py",
+        "tests/dbs/test_db.py",
+        "tests/app/test_db.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/sqlalchemy/app/schemas.py",
+      "candidate_test_paths": [
+        "examples/sqlalchemy/app/tests/test_schemas.py",
+        "tests/sqlalchemy/app/test_schemas.py",
+        "examples/sqlalchemy/app/tests/test_app.py",
+        "test/test_schemas.py",
+        "tests/test_schemas.py",
+        "tests/schemas/test_schemas.py",
+        "tests/app/test_schemas.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/sqlalchemy/app/users.py",
+      "candidate_test_paths": [
+        "examples/sqlalchemy/app/tests/test_users.py",
+        "tests/sqlalchemy/app/test_users.py",
+        "examples/sqlalchemy/app/tests/test_app.py",
+        "test/test_users.py",
+        "tests/test_users.py",
+        "tests/users/test_users.py",
+        "tests/app/test_users.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/sqlalchemy/main.py",
+      "candidate_test_paths": [
+        "examples/sqlalchemy/tests/test_main.py",
+        "tests/sqlalchemy/test_main.py",
+        "examples/sqlalchemy/tests/test_sqlalchemy.py",
+        "test/test_main.py",
+        "tests/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/sqlalchemy-oauth/app/app.py",
+      "candidate_test_paths": [
+        "examples/sqlalchemy-oauth/app/tests/test_app.py",
+        "tests/sqlalchemy-oauth/app/test_app.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/sqlalchemy-oauth/app/db.py",
+      "candidate_test_paths": [
+        "examples/sqlalchemy-oauth/app/tests/test_db.py",
+        "tests/sqlalchemy-oauth/app/test_db.py",
+        "examples/sqlalchemy-oauth/app/tests/test_app.py",
+        "test/test_db.py",
+        "tests/test_db.py",
+        "tests/db/test_db.py",
+        "tests/dbs/test_db.py",
+        "tests/app/test_db.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/sqlalchemy-oauth/app/schemas.py",
+      "candidate_test_paths": [
+        "examples/sqlalchemy-oauth/app/tests/test_schemas.py",
+        "tests/sqlalchemy-oauth/app/test_schemas.py",
+        "examples/sqlalchemy-oauth/app/tests/test_app.py",
+        "test/test_schemas.py",
+        "tests/test_schemas.py",
+        "tests/schemas/test_schemas.py",
+        "tests/app/test_schemas.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/sqlalchemy-oauth/app/users.py",
+      "candidate_test_paths": [
+        "examples/sqlalchemy-oauth/app/tests/test_users.py",
+        "tests/sqlalchemy-oauth/app/test_users.py",
+        "examples/sqlalchemy-oauth/app/tests/test_app.py",
+        "test/test_users.py",
+        "tests/test_users.py",
+        "tests/users/test_users.py",
+        "tests/app/test_users.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/sqlalchemy-oauth/main.py",
+      "candidate_test_paths": [
+        "examples/sqlalchemy-oauth/tests/test_main.py",
+        "tests/sqlalchemy-oauth/test_main.py",
+        "examples/sqlalchemy-oauth/tests/test_sqlalchemy-oauth.py",
+        "test/test_main.py",
+        "tests/test_main.py",
+        "tests/main/test_main.py",
+        "tests/mains/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/authentication/authenticator.py",
+      "candidate_test_paths": [
+        "fastapi_users/authentication/tests/test_authenticator.py",
+        "tests/authentication/test_authenticator.py",
+        "fastapi_users/authentication/tests/test_authentication.py",
+        "test/test_authenticator.py",
+        "tests/test_authenticator.py",
+        "tests/authenticator/test_authenticator.py",
+        "tests/authenticators/test_authenticator.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/authentication/backend.py",
+      "candidate_test_paths": [
+        "fastapi_users/authentication/tests/test_backend.py",
+        "tests/authentication/test_backend.py",
+        "fastapi_users/authentication/tests/test_authentication.py",
+        "test/test_backend.py",
+        "tests/test_backend.py",
+        "tests/backend/test_backend.py",
+        "tests/backends/test_backend.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/authentication/strategy/base.py",
+      "candidate_test_paths": [
+        "fastapi_users/authentication/strategy/tests/test_base.py",
+        "tests/authentication/strategy/test_base.py",
+        "fastapi_users/authentication/strategy/tests/test_strategy.py",
+        "test/test_base.py",
+        "tests/test_base.py",
+        "tests/base/test_base.py",
+        "tests/bases/test_base.py",
+        "tests/strategy/test_base.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/authentication/strategy/db/adapter.py",
+      "candidate_test_paths": [
+        "fastapi_users/authentication/strategy/db/tests/test_adapter.py",
+        "tests/authentication/strategy/db/test_adapter.py",
+        "fastapi_users/authentication/strategy/db/tests/test_db.py",
+        "test/test_adapter.py",
+        "tests/test_adapter.py",
+        "tests/adapter/test_adapter.py",
+        "tests/adapters/test_adapter.py",
+        "tests/db/test_adapter.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/authentication/strategy/db/models.py",
+      "candidate_test_paths": [
+        "fastapi_users/authentication/strategy/db/tests/test_models.py",
+        "tests/authentication/strategy/db/test_models.py",
+        "fastapi_users/authentication/strategy/db/tests/test_db.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py",
+        "tests/db/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/authentication/strategy/db/strategy.py",
+      "candidate_test_paths": [
+        "fastapi_users/authentication/strategy/db/tests/test_strategy.py",
+        "tests/authentication/strategy/db/test_strategy.py",
+        "fastapi_users/authentication/strategy/db/tests/test_db.py",
+        "test/test_strategy.py",
+        "tests/test_strategy.py",
+        "tests/strategy/test_strategy.py",
+        "tests/strategys/test_strategy.py",
+        "tests/db/test_strategy.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/authentication/strategy/jwt.py",
+      "candidate_test_paths": [
+        "fastapi_users/authentication/strategy/tests/test_jwt.py",
+        "tests/authentication/strategy/test_jwt.py",
+        "fastapi_users/authentication/strategy/tests/test_strategy.py",
+        "test/test_jwt.py",
+        "tests/test_jwt.py",
+        "tests/jwt/test_jwt.py",
+        "tests/jwts/test_jwt.py",
+        "tests/strategy/test_jwt.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_jwt.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_jwt.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_users/authentication/strategy/redis.py",
+      "candidate_test_paths": [
+        "fastapi_users/authentication/strategy/tests/test_redis.py",
+        "tests/authentication/strategy/test_redis.py",
+        "fastapi_users/authentication/strategy/tests/test_strategy.py",
+        "test/test_redis.py",
+        "tests/test_redis.py",
+        "tests/redis/test_redis.py",
+        "tests/strategy/test_redis.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/authentication/transport/base.py",
+      "candidate_test_paths": [
+        "fastapi_users/authentication/transport/tests/test_base.py",
+        "tests/authentication/transport/test_base.py",
+        "fastapi_users/authentication/transport/tests/test_transport.py",
+        "test/test_base.py",
+        "tests/test_base.py",
+        "tests/base/test_base.py",
+        "tests/bases/test_base.py",
+        "tests/transport/test_base.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/authentication/transport/bearer.py",
+      "candidate_test_paths": [
+        "fastapi_users/authentication/transport/tests/test_bearer.py",
+        "tests/authentication/transport/test_bearer.py",
+        "fastapi_users/authentication/transport/tests/test_transport.py",
+        "test/test_bearer.py",
+        "tests/test_bearer.py",
+        "tests/bearer/test_bearer.py",
+        "tests/bearers/test_bearer.py",
+        "tests/transport/test_bearer.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/authentication/transport/cookie.py",
+      "candidate_test_paths": [
+        "fastapi_users/authentication/transport/tests/test_cookie.py",
+        "tests/authentication/transport/test_cookie.py",
+        "fastapi_users/authentication/transport/tests/test_transport.py",
+        "test/test_cookie.py",
+        "tests/test_cookie.py",
+        "tests/cookie/test_cookie.py",
+        "tests/cookies/test_cookie.py",
+        "tests/transport/test_cookie.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/db/base.py",
+      "candidate_test_paths": [
+        "fastapi_users/db/tests/test_base.py",
+        "tests/db/test_base.py",
+        "fastapi_users/db/tests/test_db.py",
+        "test/test_base.py",
+        "tests/test_base.py",
+        "tests/base/test_base.py",
+        "tests/bases/test_base.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/exceptions.py",
+      "candidate_test_paths": [
+        "fastapi_users/tests/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "fastapi_users/tests/test_fastapi_users.py",
+        "test/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/fastapi_users.py",
+      "candidate_test_paths": [
+        "fastapi_users/tests/test_fastapi_users.py",
+        "tests/test_fastapi_users.py",
+        "test/test_fastapi_users.py",
+        "tests/fastapi_users/test_fastapi_users.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_fastapi_users.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_fastapi_users.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_users/jwt.py",
+      "candidate_test_paths": [
+        "fastapi_users/tests/test_jwt.py",
+        "tests/test_jwt.py",
+        "fastapi_users/tests/test_fastapi_users.py",
+        "test/test_jwt.py",
+        "tests/jwt/test_jwt.py",
+        "tests/jwts/test_jwt.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_jwt.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_jwt.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_users/manager.py",
+      "candidate_test_paths": [
+        "fastapi_users/tests/test_manager.py",
+        "tests/test_manager.py",
+        "fastapi_users/tests/test_fastapi_users.py",
+        "test/test_manager.py",
+        "tests/manager/test_manager.py",
+        "tests/managers/test_manager.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_manager.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_manager.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_users/models.py",
+      "candidate_test_paths": [
+        "fastapi_users/tests/test_models.py",
+        "tests/test_models.py",
+        "fastapi_users/tests/test_fastapi_users.py",
+        "test/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/openapi.py",
+      "candidate_test_paths": [
+        "fastapi_users/tests/test_openapi.py",
+        "tests/test_openapi.py",
+        "fastapi_users/tests/test_fastapi_users.py",
+        "test/test_openapi.py",
+        "tests/openapi/test_openapi.py",
+        "tests/openapis/test_openapi.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_openapi.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_openapi.py [library_package layout]"
+    },
+    {
+      "source_path": "fastapi_users/password.py",
+      "candidate_test_paths": [
+        "fastapi_users/tests/test_password.py",
+        "tests/test_password.py",
+        "fastapi_users/tests/test_fastapi_users.py",
+        "test/test_password.py",
+        "tests/password/test_password.py",
+        "tests/passwords/test_password.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/router/auth.py",
+      "candidate_test_paths": [
+        "fastapi_users/router/tests/test_auth.py",
+        "tests/router/test_auth.py",
+        "fastapi_users/router/tests/test_router.py",
+        "test/test_auth.py",
+        "tests/test_auth.py",
+        "tests/auth/test_auth.py",
+        "tests/auths/test_auth.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/router/common.py",
+      "candidate_test_paths": [
+        "fastapi_users/router/tests/test_common.py",
+        "tests/router/test_common.py",
+        "fastapi_users/router/tests/test_router.py",
+        "test/test_common.py",
+        "tests/test_common.py",
+        "tests/common/test_common.py",
+        "tests/commons/test_common.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/router/oauth.py",
+      "candidate_test_paths": [
+        "fastapi_users/router/tests/test_oauth.py",
+        "tests/router/test_oauth.py",
+        "fastapi_users/router/tests/test_router.py",
+        "test/test_oauth.py",
+        "tests/test_oauth.py",
+        "tests/oauth/test_oauth.py",
+        "tests/oauths/test_oauth.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/router/register.py",
+      "candidate_test_paths": [
+        "fastapi_users/router/tests/test_register.py",
+        "tests/router/test_register.py",
+        "fastapi_users/router/tests/test_router.py",
+        "test/test_register.py",
+        "tests/test_register.py",
+        "tests/register/test_register.py",
+        "tests/registers/test_register.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/router/reset.py",
+      "candidate_test_paths": [
+        "fastapi_users/router/tests/test_reset.py",
+        "tests/router/test_reset.py",
+        "fastapi_users/router/tests/test_router.py",
+        "test/test_reset.py",
+        "tests/test_reset.py",
+        "tests/reset/test_reset.py",
+        "tests/resets/test_reset.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/router/users.py",
+      "candidate_test_paths": [
+        "fastapi_users/router/tests/test_users.py",
+        "tests/router/test_users.py",
+        "fastapi_users/router/tests/test_router.py",
+        "test/test_users.py",
+        "tests/test_users.py",
+        "tests/users/test_users.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/router/verify.py",
+      "candidate_test_paths": [
+        "fastapi_users/router/tests/test_verify.py",
+        "tests/router/test_verify.py",
+        "fastapi_users/router/tests/test_router.py",
+        "test/test_verify.py",
+        "tests/test_verify.py",
+        "tests/verify/test_verify.py",
+        "tests/verifys/test_verify.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/schemas.py",
+      "candidate_test_paths": [
+        "fastapi_users/tests/test_schemas.py",
+        "tests/test_schemas.py",
+        "fastapi_users/tests/test_fastapi_users.py",
+        "test/test_schemas.py",
+        "tests/schemas/test_schemas.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fastapi_users/types.py",
+      "candidate_test_paths": [
+        "fastapi_users/tests/test_types.py",
+        "tests/test_types.py",
+        "fastapi_users/tests/test_fastapi_users.py",
+        "test/test_types.py",
+        "tests/types/test_types.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/auth/**",
+      "matched_paths": [
+        "fastapi_users/router/auth.py",
+        "tests/test_router_auth.py"
+      ],
+      "category": "authentication",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"auth\" found in 2 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "examples/beanie/requirements.txt",
+        "examples/beanie-oauth/requirements.txt",
+        "examples/sqlalchemy/requirements.txt",
+        "examples/sqlalchemy-oauth/requirements.txt"
+      ],
+      "count": 4,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.cfg"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 88,
+    "classified_count": 88,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 254,
+    "project_import_count": 117,
+    "declared_package_count": 46,
+    "undeclared_package_count": 42,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 48,
+    "high_confidence_test_count": 5,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 1,
+    "sensitive_file_count": 2,
+    "manifest_count": 6,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

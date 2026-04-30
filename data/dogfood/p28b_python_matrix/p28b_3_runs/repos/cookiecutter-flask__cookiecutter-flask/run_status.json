@@ -1,0 +1,59 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "fdd1a75ecb8cc1609935119d7967a50c73f53ed9483d996f2e0e62526b3fd2cc",
+  "pinned_commit": "e5666c23a633b5b6fcb0dc2cfda2441d7f885727",
+  "completed_at": "2026-04-30T11:15:09.359Z",
+  "repo_id": "cookiecutter-flask/cookiecutter-flask",
+  "category_expected": "flask_framework",
+  "category_observed": "flask_framework",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 223,
+  "python_files": 34,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "flask/high",
+    "pytest/high",
+    "click/high",
+    "sqlalchemy/high"
+  ],
+  "project_role_signals": [
+    "service_backend/medium"
+  ],
+  "test_mapping_count": 16,
+  "risk_preset": "flask_service",
+  "sanitizer_violations": 0,
+  "gaps": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "{{cookiecutter.app_name}}/Pipfile",
+        "{{cookiecutter.app_name}}/pyproject.toml",
+        "{{cookiecutter.app_name}}/requirements.txt",
+        "{{cookiecutter.app_name}}/setup.cfg"
+      ],
+      "count": 4,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "{{cookiecutter.app_name}}/pyproject.toml",
+        "{{cookiecutter.app_name}}/setup.cfg"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

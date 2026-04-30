@@ -1,0 +1,59 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "f685c27f099088ea9fa9433001db360fe8cb381459f4394925ad9702e8e9c76f",
+  "pinned_commit": "75b920160d0655c1631a2739b4470fc12317a155",
+  "completed_at": "2026-04-30T11:14:36.451Z",
+  "repo_id": "loguru",
+  "category_expected": "python_sdk_library",
+  "category_observed": "generic_service",
+  "support_level": "supported",
+  "status": "completed",
+  "duration_ms": 228,
+  "python_files": 173,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [],
+  "project_role_signals": [
+    "service_backend/medium",
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 18,
+  "risk_preset": "generic_service",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "loguru",
+      "gap_kind": "framework_detection_gap",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "No frameworks detected",
+      "recommended_phase": "P28b-later"
+    },
+    {
+      "repo_id": "loguru",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected python_sdk_library, got generic_service",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "tox.ini"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

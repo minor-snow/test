@@ -42,4 +42,42 @@ describe("governanceEventSanitizer", () => {
     expect(result.clean).toBe(false);
     expect(result.violations.some(violation => violation.kind === "absolute_path")).toBe(true);
   });
+
+  it("accepts multiline human-readable reasons", () => {
+    const result = sanitizeGovernanceEvent({
+      schema_version: "pantheon_governance_event@0.1.0",
+      event_id: "gov_multiline",
+      timestamp: "2026-04-29T00:00:00.000Z",
+      source: "local_cli",
+      event_type: "review_requested",
+      repair_id: "repair_2",
+      verdict: "requires_review",
+      attention_level: "human_review",
+      reasons: [{
+        kind: "review_required",
+        file: "src/payment/gateway.ts",
+        action: "human_review",
+      }],
+      artifact_dir: "pantheon-repair-report/\nreview_request.md",
+    });
+
+    expect(result.clean).toBe(true);
+  });
+
+  it("flags diff hunks embedded in multiline payloads", () => {
+    const result = sanitizeGovernanceEvent({
+      schema_version: "pantheon_governance_event@0.1.0",
+      event_id: "gov_diff",
+      timestamp: "2026-04-29T00:00:00.000Z",
+      source: "local_cli",
+      event_type: "repair_blocked",
+      repair_id: "repair_3",
+      verdict: "fail",
+      attention_level: "urgent",
+      artifact_dir: "summary\n@@ -1,3 +1,3 @@",
+    });
+
+    expect(result.clean).toBe(false);
+    expect(result.violations.some(violation => violation.kind === "diff_hunk")).toBe(true);
+  });
 });

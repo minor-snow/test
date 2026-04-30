@@ -80,6 +80,21 @@ describe("pythonLayoutClassifier", () => {
     expect(layout.confidence).toBe("high");
   });
 
+  it("classifies namespace_package when src packages omit __init__.py", () => {
+    const files = [
+      file("src/acme/core.py", "source"),
+      file("src/acme/utils.py", "source"),
+      file("tests/test_core.py", "test"),
+    ];
+    const layout = classifyPythonLayout({
+      files,
+      manifests: [manifest("pyproject.toml")],
+      allPaths: files.map(f => f.path).concat("pyproject.toml"),
+    });
+
+    expect(layout.package_layout).toBe("namespace_package");
+  });
+
   it("classifies cli_app from explicit CLI entry points", () => {
     const files = [
       file("tool/__init__.py", "source"),

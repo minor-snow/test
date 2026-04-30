@@ -154,6 +154,6 @@ describe("P20a.1: Pantheon Self-Scan Trial", () => {
 
     console.log(`\nOutputs written to: ${OUT_DIR}`);
 
-    expect(true).toBe(true); // diagnostic test always passes
+    expect(existsSync(join(OUT_DIR, "trial_report.json"))).toBe(true);
   });
 });

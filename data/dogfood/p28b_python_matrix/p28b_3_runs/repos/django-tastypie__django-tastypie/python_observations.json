@@ -1,0 +1,4047 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "django-tastypie__django-tastypie",
+    "observed_file_count": 281,
+    "python_file_count": 199
+  },
+  "layout": {
+    "primary_layout": "mixed",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: tastypie"
+      },
+      {
+        "signal": "django_migrations_found",
+        "weight": "moderate",
+        "evidence": "3 migration files"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: django_project=2, library_package=2"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "primary_layout",
+        "reason": "Tied between django_project and library_package"
+      }
+    ],
+    "bucket_summary": {
+      "docs": 12,
+      "config": 5,
+      "source": 34,
+      "migration": 3,
+      "test": 145
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "django",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "Django-style migrations/ directories found"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "django imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "api/ directory present"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "generic_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: mixed / flat_package (medium)",
+      "framework: django / web_framework (high)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: administration (high, 1 paths)",
+      "sensitive_zone: schema_migration (high, 21 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/auth*",
+        "reason": "Authentication logic requires human review",
+        "severity": "high",
+        "matched_path_count": 7,
+        "evidence": [
+          "7 paths match pattern **/auth*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/code/authentication.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 68,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/code/manage.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 262,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/code/myapp/api/resources.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 175,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/code/myapp/api/__init__.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/code/myapp/models.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 166,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/code/myapp/urls.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 50,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/code/myapp/__init__.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/code/myproject/settings.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 2152,
+      "evidence": [
+        "Settings module"
+      ]
+    },
+    {
+      "path": "docs/code/myproject/urls.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 275,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/code/myproject/wsgi.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 415,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/code/myproject/__init__.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 7377,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "docs/requirements.txt",
+      "bucket": "docs",
+      "extension": ".txt",
+      "size_bytes": 53,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 47,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "setup.cfg",
+      "bucket": "config",
+      "extension": ".cfg",
+      "size_bytes": 140,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "setup.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 2074,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tastypie/admin.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 788,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/api.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7343,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/authentication.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19960,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/authorization.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6896,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/bundle.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1176,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/cache.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2733,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/compat.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3520,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/constants.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 172,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/contrib/contenttypes/fields.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2252,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/contrib/contenttypes/resources.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1741,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/contrib/contenttypes/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/contrib/gis/resources.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2502,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/contrib/gis/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/contrib/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3134,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/fields.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 35017,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/http.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1694,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/management/commands/backfill_api_keys.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1053,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/management/commands/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/management/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/migrations/0001_initial.py",
+      "bucket": "migration",
+      "extension": ".py",
+      "size_bytes": 1571,
+      "evidence": [
+        "Django/Alembic migration directory"
+      ]
+    },
+    {
+      "path": "tastypie/migrations/0002_api_access_url_length.py",
+      "bucket": "migration",
+      "extension": ".py",
+      "size_bytes": 427,
+      "evidence": [
+        "Django/Alembic migration directory"
+      ]
+    },
+    {
+      "path": "tastypie/migrations/__init__.py",
+      "bucket": "migration",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Django/Alembic migration directory"
+      ]
+    },
+    {
+      "path": "tastypie/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1977,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/paginator.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7341,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/resources.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 105092,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/serializers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 18739,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/test.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19460,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/throttle.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4998,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/utils/formatting.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 808,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/utils/mime.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1908,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/utils/timezone.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1088,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/utils/urls.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 347,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/utils/validate_jsonp.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6369,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 596,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/validation.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4848,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tastypie/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 218,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/alphanumeric/api/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 316,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/alphanumeric/api/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 191,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/alphanumeric/api/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/alphanumeric/migrations/0001_initial.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 720,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/alphanumeric/migrations/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/alphanumeric/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 547,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/alphanumeric/tests/views.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 13255,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/alphanumeric/tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 48,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/alphanumeric/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 129,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/alphanumeric/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/authorization/api/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3126,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/authorization/api/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/authorization/migrations/0001_initial.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1704,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/authorization/migrations/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/authorization/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1396,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/authorization/tests.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 13266,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/authorization/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 408,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/authorization/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/basic/api/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2364,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/basic/api/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 818,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/basic/api/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/basic/migrations/0001_initial.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1960,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/basic/migrations/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/basic/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1513,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/basic/tests/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6974,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/basic/tests/views.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 14932,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/basic/tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 86,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/basic/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 122,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/basic/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/content_gfk/api/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 957,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/content_gfk/api/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 325,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/content_gfk/api/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/content_gfk/migrations/0001_initial.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1870,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/content_gfk/migrations/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/content_gfk/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 839,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/content_gfk/tests/fields.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2775,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/content_gfk/tests/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 658,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/content_gfk/tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 160,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/content_gfk/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 128,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/content_gfk/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/forms.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 516,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/migrations/0001_initial.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7145,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/migrations/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5002,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/api.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9949,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/api_urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 336,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/authentication.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 24656,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/authorization.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11156,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/cache.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2052,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/commands.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1228,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/fields.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 60019,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/http.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2350,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/manual_urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 201,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/mocks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 537,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/paginator.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11962,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/race_condition.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2595,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 250476,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/resource_urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 959,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/serializers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 28111,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/throttle.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7179,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5609,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/validation.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5424,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 976,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 747,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/core/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/customuser/migrations/0001_initial.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1016,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/customuser/migrations/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/customuser/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1076,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/customuser/tests/custom_user.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1849,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/customuser/tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 52,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/customuser/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/gis/api/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 769,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/gis/api/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 210,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/gis/api/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/gis/migrations/0001_initial.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1998,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/gis/migrations/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/gis/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1394,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/gis/tests/utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 177,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/gis/tests/views.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 16534,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/gis/tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 39,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/gis/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 120,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/gis/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_alphanumeric.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 315,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_authorization.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 316,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_basic.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 308,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_content_gfk.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 314,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_core.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 307,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_customuser.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 313,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_gis.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 306,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_gis_spatialite.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 317,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_namespaced.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 313,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_profilingtests.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 317,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_related.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 310,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_slashless.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 312,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/manage_validation.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 313,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/namespaced/api/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 655,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/namespaced/api/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 605,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/namespaced/api/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/namespaced/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/namespaced/tests.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1350,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/namespaced/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/profilingtests/migrations/0001_initial.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1171,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/profilingtests/migrations/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/profilingtests/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 968,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/profilingtests/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 777,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/profilingtests/tests.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1172,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/profilingtests/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 274,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/profilingtests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/related_resource/api/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8539,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/related_resource/api/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1779,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/related_resource/api/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/related_resource/migrations/0001_initial.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9118,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/related_resource/migrations/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/related_resource/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4997,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/related_resource/tests.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 42695,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/related_resource/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/requirements.txt",
+      "bucket": "test",
+      "extension": ".txt",
+      "size_bytes": 83,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2863,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_alphanumeric.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 109,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_authorization.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 160,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_basic.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 145,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_content_gfk.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 109,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_core.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 753,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_customuser.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 581,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_gis.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 263,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_gis_spatialite.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 422,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_namespaced.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 141,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_profilingtests.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 709,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_related.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 152,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_slashless.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 200,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/settings_validation.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 141,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/slashless/api/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 595,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/slashless/api/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 328,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/slashless/api/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/slashless/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/slashless/tests.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1721,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/slashless/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/testcases.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 738,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/validation/api/resources.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1676,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/validation/api/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 418,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/validation/api/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/validation/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/validation/tests.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8021,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/validation/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 2788,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "tastypie/admin.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/admin.py",
+      "raw_specifier": "from django.contrib import admin",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/admin.py",
+      "raw_specifier": "from tastypie.models import ApiKey",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/api.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/api.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/api.py",
+      "raw_specifier": "from django.http import HttpResponse, HttpResponseBadRequest",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/api.py",
+      "raw_specifier": "from tastypie.compat import reverse",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/api.py",
+      "raw_specifier": "from tastypie.exceptions import NotRegistered, BadRequest",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/api.py",
+      "raw_specifier": "from tastypie.serializers import Serializer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/api.py",
+      "raw_specifier": "from tastypie.utils import is_valid_jsonp_callback_value, string_to_python, trailing_slash",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/api.py",
+      "raw_specifier": "from tastypie.utils.mime import determine_format, build_content_type",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/api.py",
+      "raw_specifier": "from tastypie.resources import Resource",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/api.py",
+      "raw_specifier": "from django.urls.conf import re_path, include",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "base64",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "from hashlib import sha1",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "hmac",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hmac",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "from django.contrib.auth import authenticate",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "from django.utils.translation import gettext as _",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "from urllib.parse import urlparse",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "from tastypie.compat import ( get_user_model, get_username_field, compare_sanitized_tokens, InvalidTokenFormat, check_token_format )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "from tastypie.http import HttpUnauthorized",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "python_digest",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "python_digest",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "oauth2",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "oauth2",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "oauth_provider",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "oauth_provider",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "from tastypie.models import ApiKey",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "from tastypie.models import ApiKey",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "from oauth_provider.store import store",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "oauth_provider",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/authentication.py",
+      "raw_specifier": "from oauth_provider.consts import OAUTH_PARAMETERS_NAMES",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "oauth_provider",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/authorization.py",
+      "raw_specifier": "from tastypie.exceptions import Unauthorized",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/authorization.py",
+      "raw_specifier": "from tastypie.compat import get_module_name",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/bundle.py",
+      "raw_specifier": "from django.http import HttpRequest",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/cache.py",
+      "raw_specifier": "from django.core.cache import caches",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "django",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.contrib.auth import get_user_model  # noqa",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.utils import timezone",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.urls import NoReverseMatch, reverse, Resolver404, get_script_prefix  # noqa",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.core.urlresolvers import NoReverseMatch, reverse, Resolver404, get_script_prefix  # noqa",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.middleware.csrf import _sanitize_token",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.middleware.csrf import _check_token_format",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.utils import datetime_safe  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.utils.encoding import force_text as force_str  # noqa",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.utils.encoding import force_str  # noqa",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.middleware.csrf import _does_token_match, InvalidTokenFormat",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.middleware.csrf import _compare_masked_tokens",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/compat.py",
+      "raw_specifier": "from django.middleware.csrf import _unsalt_cipher_token, constant_time_compare",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/contrib/contenttypes/fields.py",
+      "raw_specifier": "from functools import partial",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/contrib/contenttypes/fields.py",
+      "raw_specifier": "from tastypie import fields",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/contrib/contenttypes/fields.py",
+      "raw_specifier": "from tastypie.resources import Resource",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/contrib/contenttypes/fields.py",
+      "raw_specifier": "from tastypie.exceptions import ApiFieldError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/contrib/contenttypes/fields.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/contrib/contenttypes/fields.py",
+      "raw_specifier": "from django.core.exceptions import ObjectDoesNotExist",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/contrib/contenttypes/fields.py",
+      "raw_specifier": "from .resources import GenericResource",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".resources",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "tastypie/contrib/contenttypes/resources.py",
+      "raw_specifier": "from tastypie.bundle import Bundle",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/contrib/contenttypes/resources.py",
+      "raw_specifier": "from tastypie.resources import ModelResource",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/contrib/contenttypes/resources.py",
+      "raw_specifier": "from tastypie.exceptions import NotFound",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/contrib/contenttypes/resources.py",
+      "raw_specifier": "from django.urls import resolve, Resolver404, get_script_prefix",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/contrib/contenttypes/resources.py",
+      "raw_specifier": "from django.core.urlresolvers import ( resolve, Resolver404, get_script_prefix, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/contrib/gis/resources.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/contrib/gis/resources.py",
+      "raw_specifier": "from urllib.parse import unquote",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/contrib/gis/resources.py",
+      "raw_specifier": "from urllib import unquote",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/contrib/gis/resources.py",
+      "raw_specifier": "from django.contrib.gis.db.models import GeometryField",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/contrib/gis/resources.py",
+      "raw_specifier": "from django.contrib.gis.geos import GEOSGeometry",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/contrib/gis/resources.py",
+      "raw_specifier": "from tastypie.fields import ApiField, CharField",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/contrib/gis/resources.py",
+      "raw_specifier": "from tastypie import resources",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/exceptions.py",
+      "raw_specifier": "from django.http import HttpResponse",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/fields.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/fields.py",
+      "raw_specifier": "from dateutil.parser import parse",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dateutil",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/fields.py",
+      "raw_specifier": "decimal",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/fields.py",
+      "raw_specifier": "from decimal import Decimal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/fields.py",
+      "raw_specifier": "importlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/fields.py",
+      "raw_specifier": "from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/fields.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/fields.py",
+      "raw_specifier": "from tastypie.compat import datetime_safe",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/fields.py",
+      "raw_specifier": "from tastypie.bundle import Bundle",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/fields.py",
+      "raw_specifier": "from tastypie.exceptions import ApiFieldError, NotFound",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/fields.py",
+      "raw_specifier": "from tastypie.utils import make_aware",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/http.py",
+      "raw_specifier": "from django.http import HttpResponse",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/management/commands/backfill_api_keys.py",
+      "raw_specifier": "from django.core.management.base import BaseCommand",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/management/commands/backfill_api_keys.py",
+      "raw_specifier": "from tastypie.compat import get_user_model",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/management/commands/backfill_api_keys.py",
+      "raw_specifier": "from tastypie.models import ApiKey",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/models.py",
+      "raw_specifier": "from hashlib import sha1",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "hashlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/models.py",
+      "raw_specifier": "hmac",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "hmac",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/models.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/models.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/models.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/models.py",
+      "raw_specifier": "from tastypie.utils import now",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/models.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/models.py",
+      "raw_specifier": "from tastypie.compat import AUTH_USER_MODEL",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/paginator.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/paginator.py",
+      "raw_specifier": "from tastypie.exceptions import BadRequest",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/paginator.py",
+      "raw_specifier": "from urllib.parse import urlencode",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/paginator.py",
+      "raw_specifier": "from urllib import urlencode",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from copy import copy, deepcopy",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from time import mktime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "traceback",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "traceback",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from wsgiref.handlers import format_date_time",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "wsgiref",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from django.core.exceptions import ( ObjectDoesNotExist, MultipleObjectsReturned, ValidationError, FieldDoesNotExist )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from django.core.signals import got_request_exception",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from django.db.models.fields.related import ForeignKey",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from django.urls.conf import re_path",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.utils.timezone import make_naive_utc",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from django.contrib.gis.db.models.fields import GeometryField",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from django.db.models.constants import LOOKUP_SEP",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from django.http import HttpResponse, HttpResponseNotFound, Http404",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from django.utils.cache import patch_cache_control, patch_vary_headers",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from django.utils.html import escape",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from django.views.decorators.csrf import csrf_exempt",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.authentication import Authentication",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.authorization import ReadOnlyAuthorization",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.bundle import Bundle",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.cache import NoCache",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.compat import NoReverseMatch, reverse, Resolver404, get_script_prefix, is_ajax",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.constants import ALL, ALL_WITH_RELATIONS",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.exceptions import ( NotFound, BadRequest, InvalidFilterError, HydrationError, InvalidSortError, ImmediateHttpResponse, Unauthorized, UnsupportedFormat, UnsupportedSerializationFormat, UnsupportedDeserializationFormat, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie import fields",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie import http",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.paginator import Paginator",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.serializers import Serializer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.throttle import BaseThrottle",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.utils import ( is_valid_jsonp_callback_value, string_to_python, trailing_slash, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.utils.mime import determine_format, build_content_type",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.validation import Validation",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/resources.py",
+      "raw_specifier": "from tastypie.compat import get_module_name, atomic_decorator",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from django.utils.encoding import smart_bytes",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from django.core.serializers import json as djangojson",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from tastypie.bundle import Bundle",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from tastypie.compat import force_str",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from tastypie.exceptions import BadRequest, UnsupportedSerializationFormat, \\",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from tastypie.utils import format_datetime, format_date, format_time, \\",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "defusedxml.lxml",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "defusedxml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from defusedxml.common import DefusedXmlException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "defusedxml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from defusedxml.lxml import parse as parse_xml",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "defusedxml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from lxml.etree import Element, tostring, LxmlError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "lxml",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "biplist",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "biplist",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from yaml.constructor import SafeConstructor",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/serializers.py",
+      "raw_specifier": "from yaml.loader import Reader, Scanner, Parser, Composer, Resolver",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "from django.test.client import Client",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "from tastypie.compat import force_str",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "from tastypie.serializers import Serializer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "from tastypie.test import TestApiClient",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "from tastypie.test import TestApiClient",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "from tastypie.test import TestApiClient",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "from tastypie.test import TestApiClient",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "from tastypie.test import TestApiClient",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "base64",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "from tastypie.authentication import hmac, sha1, uuid, python_digest",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/test.py",
+      "raw_specifier": "from oauth_provider.models import Consumer, Token, Resource",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "oauth_provider",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/throttle.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/throttle.py",
+      "raw_specifier": "from django.core.cache import cache",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/throttle.py",
+      "raw_specifier": "from tastypie.models import ApiAccess",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/utils/formatting.py",
+      "raw_specifier": "from django.utils import dateformat",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/utils/formatting.py",
+      "raw_specifier": "from tastypie.utils.timezone import make_naive, aware_datetime",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/utils/formatting.py",
+      "raw_specifier": "from dateutil.parser import parse as mk_datetime  # noqa",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dateutil",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/utils/mime.py",
+      "raw_specifier": "mimeparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "mimeparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/utils/mime.py",
+      "raw_specifier": "from tastypie.exceptions import BadRequest",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/utils/timezone.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/utils/timezone.py",
+      "raw_specifier": "from tastypie.compat import timezone",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/utils/timezone.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/utils/urls.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/utils/validate_jsonp.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/utils/validate_jsonp.py",
+      "raw_specifier": "from unicodedata import category",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "unicodedata",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/utils/validate_jsonp.py",
+      "raw_specifier": "doctest",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "doctest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/utils/__init__.py",
+      "raw_specifier": "from tastypie.utils.formatting import mk_datetime, format_datetime, format_date, format_time  # noqa",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/utils/__init__.py",
+      "raw_specifier": "from tastypie.utils.urls import trailing_slash  # noqa",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/utils/__init__.py",
+      "raw_specifier": "from tastypie.utils.validate_jsonp import is_valid_jsonp_callback_value  # noqa",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/utils/__init__.py",
+      "raw_specifier": "from tastypie.utils.timezone import now, make_aware, make_naive, aware_date, aware_datetime  # noqa",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "tastypie",
+      "confidence": "high"
+    },
+    {
+      "from_file": "tastypie/validation.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/validation.py",
+      "raw_specifier": "from django.forms import ModelForm",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/validation.py",
+      "raw_specifier": "from django.forms.models import model_to_dict",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    },
+    {
+      "from_file": "tastypie/validation.py",
+      "raw_specifier": "from django.db.models.fields.related import RelatedField",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "django",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "docs/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "sphinx",
+        "sphinx_rtd_theme",
+        "mock"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "python_dateutil",
+        "python_mimeparse"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    },
+    {
+      "source_path": "setup.py",
+      "source_type": "setup.py",
+      "packages": [
+        "python_mimeparse",
+        "python_dateutil"
+      ],
+      "dev_packages": [],
+      "confidence": "medium",
+      "warnings": [
+        "setup.py parsing is weak detection — consider using pyproject.toml"
+      ]
+    },
+    {
+      "source_path": "tests/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "biplist",
+        "coverage",
+        "defusedxml",
+        "lxml",
+        "pytz",
+        "pyyaml"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No deps found in tox.ini — may use requirements file references"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "tastypie/admin.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_admin.py",
+        "tests/test_admin.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_admin.py",
+        "tests/admin/test_admin.py",
+        "tests/admins/test_admin.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/api.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_api.py",
+        "tests/test_api.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_api.py",
+        "tests/api/test_api.py",
+        "tests/apis/test_api.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/authentication.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_authentication.py",
+        "tests/test_authentication.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_authentication.py",
+        "tests/authentication/test_authentication.py",
+        "tests/authentications/test_authentication.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/authorization.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_authorization.py",
+        "tests/test_authorization.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_authorization.py",
+        "tests/authorization/test_authorization.py",
+        "tests/authorizations/test_authorization.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/bundle.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_bundle.py",
+        "tests/test_bundle.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_bundle.py",
+        "tests/bundle/test_bundle.py",
+        "tests/bundles/test_bundle.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/cache.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_cache.py",
+        "tests/test_cache.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_cache.py",
+        "tests/cache/test_cache.py",
+        "tests/caches/test_cache.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/compat.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_compat.py",
+        "tests/test_compat.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_compat.py",
+        "tests/compat/test_compat.py",
+        "tests/compats/test_compat.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/constants.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_constants.py",
+        "tests/test_constants.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_constants.py",
+        "tests/constants/test_constants.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/contrib/contenttypes/fields.py",
+      "candidate_test_paths": [
+        "tastypie/contrib/contenttypes/tests/test_fields.py",
+        "tests/contrib/contenttypes/test_fields.py",
+        "tastypie/contrib/contenttypes/tests/test_contenttypes.py",
+        "test/test_fields.py",
+        "tests/test_fields.py",
+        "tests/fields/test_fields.py",
+        "tests/contenttypes/test_fields.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/contrib/contenttypes/resources.py",
+      "candidate_test_paths": [
+        "tastypie/contrib/contenttypes/tests/test_resources.py",
+        "tests/contrib/contenttypes/test_resources.py",
+        "tastypie/contrib/contenttypes/tests/test_contenttypes.py",
+        "test/test_resources.py",
+        "tests/test_resources.py",
+        "tests/resources/test_resources.py",
+        "tests/contenttypes/test_resources.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/contrib/gis/resources.py",
+      "candidate_test_paths": [
+        "tastypie/contrib/gis/tests/test_resources.py",
+        "tests/contrib/gis/test_resources.py",
+        "tastypie/contrib/gis/tests/test_gis.py",
+        "test/test_resources.py",
+        "tests/test_resources.py",
+        "tests/resources/test_resources.py",
+        "tests/gis/test_resources.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/exceptions.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/fields.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_fields.py",
+        "tests/test_fields.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_fields.py",
+        "tests/fields/test_fields.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/http.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_http.py",
+        "tests/test_http.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_http.py",
+        "tests/http/test_http.py",
+        "tests/https/test_http.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/management/commands/backfill_api_keys.py",
+      "candidate_test_paths": [
+        "tastypie/management/commands/tests/test_backfill_api_keys.py",
+        "tests/management/commands/test_backfill_api_keys.py",
+        "tastypie/management/commands/tests/test_commands.py",
+        "test/test_backfill_api_keys.py",
+        "tests/test_backfill_api_keys.py",
+        "tests/backfill_api_keys/test_backfill_api_keys.py",
+        "tests/commands/test_backfill_api_keys.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/models.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_models.py",
+        "tests/test_models.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/paginator.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_paginator.py",
+        "tests/test_paginator.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_paginator.py",
+        "tests/paginator/test_paginator.py",
+        "tests/paginators/test_paginator.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/resources.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_resources.py",
+        "tests/test_resources.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_resources.py",
+        "tests/resources/test_resources.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/serializers.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_serializers.py",
+        "tests/test_serializers.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_serializers.py",
+        "tests/serializers/test_serializers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/test.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_test.py",
+        "tests/test_test.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_test.py",
+        "tests/test/test_test.py",
+        "tests/tests/test_test.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/throttle.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_throttle.py",
+        "tests/test_throttle.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_throttle.py",
+        "tests/throttle/test_throttle.py",
+        "tests/throttles/test_throttle.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/utils/formatting.py",
+      "candidate_test_paths": [
+        "tastypie/utils/tests/test_formatting.py",
+        "tests/utils/test_formatting.py",
+        "tastypie/utils/tests/test_utils.py",
+        "test/test_formatting.py",
+        "tests/test_formatting.py",
+        "tests/formatting/test_formatting.py",
+        "tests/formattings/test_formatting.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/utils/mime.py",
+      "candidate_test_paths": [
+        "tastypie/utils/tests/test_mime.py",
+        "tests/utils/test_mime.py",
+        "tastypie/utils/tests/test_utils.py",
+        "test/test_mime.py",
+        "tests/test_mime.py",
+        "tests/mime/test_mime.py",
+        "tests/mimes/test_mime.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/utils/timezone.py",
+      "candidate_test_paths": [
+        "tastypie/utils/tests/test_timezone.py",
+        "tests/utils/test_timezone.py",
+        "tastypie/utils/tests/test_utils.py",
+        "test/test_timezone.py",
+        "tests/test_timezone.py",
+        "tests/timezone/test_timezone.py",
+        "tests/timezones/test_timezone.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/utils/urls.py",
+      "candidate_test_paths": [
+        "tastypie/utils/tests/test_urls.py",
+        "tests/utils/test_urls.py",
+        "tastypie/utils/tests/test_utils.py",
+        "test/test_urls.py",
+        "tests/test_urls.py",
+        "tests/urls/test_urls.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/utils/validate_jsonp.py",
+      "candidate_test_paths": [
+        "tastypie/utils/tests/test_validate_jsonp.py",
+        "tests/utils/test_validate_jsonp.py",
+        "tastypie/utils/tests/test_utils.py",
+        "test/test_validate_jsonp.py",
+        "tests/test_validate_jsonp.py",
+        "tests/validate_jsonp/test_validate_jsonp.py",
+        "tests/validate_jsonps/test_validate_jsonp.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "tastypie/validation.py",
+      "candidate_test_paths": [
+        "tastypie/tests/test_validation.py",
+        "tests/test_validation.py",
+        "tastypie/tests/test_tastypie.py",
+        "test/test_validation.py",
+        "tests/validation/test_validation.py",
+        "tests/validations/test_validation.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/admin/**",
+      "matched_paths": [
+        "tastypie/admin.py"
+      ],
+      "category": "administration",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"admin\" found in 1 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/migration/**",
+      "matched_paths": [
+        "tastypie/migrations/0001_initial.py",
+        "tastypie/migrations/0002_api_access_url_length.py",
+        "tastypie/migrations/__init__.py",
+        "tests/alphanumeric/migrations/0001_initial.py",
+        "tests/alphanumeric/migrations/__init__.py",
+        "tests/authorization/migrations/0001_initial.py",
+        "tests/authorization/migrations/__init__.py",
+        "tests/basic/migrations/0001_initial.py",
+        "tests/basic/migrations/__init__.py",
+        "tests/content_gfk/migrations/0001_initial.py",
+        "tests/content_gfk/migrations/__init__.py",
+        "tests/core/migrations/0001_initial.py",
+        "tests/core/migrations/__init__.py",
+        "tests/customuser/migrations/0001_initial.py",
+        "tests/customuser/migrations/__init__.py",
+        "tests/gis/migrations/0001_initial.py",
+        "tests/gis/migrations/__init__.py",
+        "tests/profilingtests/migrations/0001_initial.py",
+        "tests/profilingtests/migrations/__init__.py",
+        "tests/related_resource/migrations/0001_initial.py",
+        "tests/related_resource/migrations/__init__.py"
+      ],
+      "category": "schema_migration",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"migration\" found in 21 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/settings/**",
+      "matched_paths": [
+        "docs/code/myproject/settings.py",
+        "tests/settings.py",
+        "tests/settings_alphanumeric.py",
+        "tests/settings_authorization.py",
+        "tests/settings_basic.py",
+        "tests/settings_content_gfk.py",
+        "tests/settings_core.py",
+        "tests/settings_customuser.py",
+        "tests/settings_gis.py",
+        "tests/settings_gis_spatialite.py",
+        "tests/settings_namespaced.py",
+        "tests/settings_profilingtests.py",
+        "tests/settings_related.py",
+        "tests/settings_slashless.py",
+        "tests/settings_validation.py"
+      ],
+      "category": "infrastructure_config",
+      "severity": "medium",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"settings\" found in 15 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.cfg",
+        "tox.ini"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 194,
+    "classified_count": 194,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 193,
+    "project_import_count": 67,
+    "declared_package_count": 5,
+    "undeclared_package_count": 77,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 27,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 3,
+    "sensitive_file_count": 37,
+    "manifest_count": 6,
+    "low_confidence_manifest_count": 2
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

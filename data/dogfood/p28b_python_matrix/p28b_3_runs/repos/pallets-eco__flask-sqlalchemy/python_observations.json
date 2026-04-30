@@ -1,0 +1,2117 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "pallets-eco__flask-sqlalchemy",
+    "observed_file_count": 108,
+    "python_file_count": 44
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "src_layout",
+    "confidence": "high",
+    "signals": [
+      {
+        "signal": "src_layout_detected",
+        "weight": "strong",
+        "evidence": "src/ directory with package(s): flask_sqlalchemy"
+      },
+      {
+        "signal": "py_typed_marker",
+        "weight": "strong",
+        "evidence": "py.typed marker file (PEP 561 typed package)"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "cli_entry_point",
+        "weight": "moderate",
+        "evidence": "CLI entry point detected (__main__.py or cli.py)"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "config": 3,
+      "docs": 1,
+      "source": 19,
+      "unknown": 1,
+      "test": 20
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "flask",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "flask found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "flask imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "click imported in source files"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "CLI entry points detected"
+          }
+        ]
+      },
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "sqlalchemy found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "sqlalchemy imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "py.typed marker (PEP 561 typed package)"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "flask_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / src_layout (high)",
+      "framework: flask / web_framework (high)",
+      "framework: click / cli_framework (high)",
+      "framework: sqlalchemy / orm (high)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: authentication (high, 4 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/config*",
+        "reason": "Application configuration affects runtime behavior",
+        "severity": "medium",
+        "matched_path_count": 2,
+        "evidence": [
+          "2 paths match pattern **/config*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/blueprints/**",
+        "reason": "No Flask blueprint directory observed"
+      },
+      {
+        "pattern": "**/extensions*",
+        "reason": "No extensions files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 386,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 2057,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "examples/flaskr/flaskr/auth/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 953,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/flaskr/flaskr/auth/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3043,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/flaskr/flaskr/auth/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 37,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/flaskr/flaskr/blog/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 983,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/flaskr/flaskr/blog/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2860,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/flaskr/flaskr/blog/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 37,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/flaskr/flaskr/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1822,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/flaskr/setup.cfg",
+      "bucket": "unknown",
+      "extension": ".cfg",
+      "size_bytes": 574,
+      "evidence": []
+    },
+    {
+      "path": "examples/flaskr/setup.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 41,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/flaskr/tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1900,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "examples/flaskr/tests/test_auth.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2320,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "examples/flaskr/tests/test_blog.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2441,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "examples/flaskr/tests/test_init.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 764,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "examples/todo/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2041,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 2408,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "src/flask_sqlalchemy/cli.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 500,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_sqlalchemy/extension.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 39446,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_sqlalchemy/model.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11733,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_sqlalchemy/pagination.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 11483,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_sqlalchemy/query.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3853,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_sqlalchemy/record_queries.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3637,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_sqlalchemy/session.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3537,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_sqlalchemy/table.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 871,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_sqlalchemy/track_modifications.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2843,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_sqlalchemy/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 679,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3436,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_cli.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 380,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_engine.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4576,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_extension_object.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2700,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_extension_repr.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1582,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_legacy_query.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3850,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_metadata.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5862,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_model.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10982,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_model_bind.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2669,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_model_name.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8059,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_pagination.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5832,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_record_queries.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1799,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_session.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7509,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_table_bind.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1242,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_track_modifications.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2851,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_view_query.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3308,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 1453,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "examples/flaskr/flaskr/auth/models.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/models.py",
+      "raw_specifier": "from typing import TYPE_CHECKING",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/models.py",
+      "raw_specifier": "from sqlalchemy.orm import Mapped, mapped_column, relationship",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/models.py",
+      "raw_specifier": "from werkzeug.security import check_password_hash",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/models.py",
+      "raw_specifier": "from werkzeug.security import generate_password_hash",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/models.py",
+      "raw_specifier": "from flaskr import db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flaskr",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/models.py",
+      "raw_specifier": "from ..blog.models import Post",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": "..blog.models",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/views.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/views.py",
+      "raw_specifier": "from flask import Blueprint",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/views.py",
+      "raw_specifier": "from flask import flash",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/views.py",
+      "raw_specifier": "from flask import g",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/views.py",
+      "raw_specifier": "from flask import redirect",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/views.py",
+      "raw_specifier": "from flask import render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/views.py",
+      "raw_specifier": "from flask import request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/views.py",
+      "raw_specifier": "from flask import session",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/views.py",
+      "raw_specifier": "from flask import url_for",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/views.py",
+      "raw_specifier": "from flaskr import db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flaskr",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/views.py",
+      "raw_specifier": "from flaskr.auth.models import User",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flaskr",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/auth/__init__.py",
+      "raw_specifier": "from .views import bp  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".views",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/models.py",
+      "raw_specifier": "from sqlalchemy.orm import Mapped, mapped_column, relationship",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/models.py",
+      "raw_specifier": "from sqlalchemy import ForeignKey",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/models.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/models.py",
+      "raw_specifier": "from datetime import timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/models.py",
+      "raw_specifier": "from flask import url_for",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/models.py",
+      "raw_specifier": "from flaskr import db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flaskr",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/models.py",
+      "raw_specifier": "from flaskr.auth.models import User",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flaskr",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/views.py",
+      "raw_specifier": "from flask import Blueprint",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/views.py",
+      "raw_specifier": "from flask import flash",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/views.py",
+      "raw_specifier": "from flask import g",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/views.py",
+      "raw_specifier": "from flask import redirect",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/views.py",
+      "raw_specifier": "from flask import render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/views.py",
+      "raw_specifier": "from flask import request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/views.py",
+      "raw_specifier": "from flask import url_for",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/views.py",
+      "raw_specifier": "from werkzeug.exceptions import abort",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/views.py",
+      "raw_specifier": "from flaskr import db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flaskr",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/views.py",
+      "raw_specifier": "from flaskr.auth.views import login_required",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flaskr",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/views.py",
+      "raw_specifier": "from flaskr.blog.models import Post",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flaskr",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/blog/__init__.py",
+      "raw_specifier": "from .views import bp  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".views",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/__init__.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "click",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/__init__.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/__init__.py",
+      "raw_specifier": "from flask.cli import with_appcontext",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/__init__.py",
+      "raw_specifier": "from flask_sqlalchemy import SQLAlchemy",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask_sqlalchemy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/__init__.py",
+      "raw_specifier": "from sqlalchemy.orm import DeclarativeBase",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/flaskr/flaskr/__init__.py",
+      "raw_specifier": "from flaskr import auth, blog",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flaskr",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/flaskr/setup.py",
+      "raw_specifier": "from setuptools import setup",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "setuptools",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/todo/app.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/todo/app.py",
+      "raw_specifier": "from datetime import timezone",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/todo/app.py",
+      "raw_specifier": "from flask import flash",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/todo/app.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/todo/app.py",
+      "raw_specifier": "from flask import redirect",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/todo/app.py",
+      "raw_specifier": "from flask import render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/todo/app.py",
+      "raw_specifier": "from flask import request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/todo/app.py",
+      "raw_specifier": "from flask import url_for",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/todo/app.py",
+      "raw_specifier": "from flask_sqlalchemy import SQLAlchemy",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "flask_sqlalchemy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/todo/app.py",
+      "raw_specifier": "from sqlalchemy.orm import DeclarativeBase",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/todo/app.py",
+      "raw_specifier": "from sqlalchemy.orm import Mapped, mapped_column",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/cli.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/cli.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/cli.py",
+      "raw_specifier": "from flask import current_app",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from weakref import WeakKeyDictionary",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "weakref",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "sqlalchemy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "sqlalchemy.event",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "sqlalchemy.exc",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "sqlalchemy.orm",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from flask import abort",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from flask import current_app",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from flask import has_app_context",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .model import _QueryProperty",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .model import BindMixin",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .model import DefaultMeta",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .model import DefaultMetaNoName",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .model import Model",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .model import NameMixin",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".model",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .pagination import Pagination",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".pagination",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .pagination import SelectPagination",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".pagination",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .query import Query",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".query",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .session import _app_ctx_id",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .session import Session",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .table import _Table",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".table",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from .cli import add_models_to_shell",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".cli",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from . import record_queries",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/extension.py",
+      "raw_specifier": "from . import track_modifications",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/model.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/model.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/model.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/model.py",
+      "raw_specifier": "sqlalchemy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/model.py",
+      "raw_specifier": "sqlalchemy.orm",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/model.py",
+      "raw_specifier": "from .query import Query",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".query",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/model.py",
+      "raw_specifier": "from .extension import SQLAlchemy",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".extension",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/pagination.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/pagination.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/pagination.py",
+      "raw_specifier": "from math import ceil",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "math",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/pagination.py",
+      "raw_specifier": "sqlalchemy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/pagination.py",
+      "raw_specifier": "sqlalchemy.orm",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/pagination.py",
+      "raw_specifier": "from flask import abort",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/pagination.py",
+      "raw_specifier": "from flask import request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/query.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/query.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/query.py",
+      "raw_specifier": "sqlalchemy.exc",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/query.py",
+      "raw_specifier": "sqlalchemy.orm",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/query.py",
+      "raw_specifier": "from flask import abort",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/query.py",
+      "raw_specifier": "from .pagination import Pagination",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".pagination",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/query.py",
+      "raw_specifier": "from .pagination import QueryPagination",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".pagination",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/record_queries.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/record_queries.py",
+      "raw_specifier": "dataclasses",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "dataclasses",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/record_queries.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/record_queries.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/record_queries.py",
+      "raw_specifier": "from time import perf_counter",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/record_queries.py",
+      "raw_specifier": "sqlalchemy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/record_queries.py",
+      "raw_specifier": "sqlalchemy.event",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/record_queries.py",
+      "raw_specifier": "from flask import current_app",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/record_queries.py",
+      "raw_specifier": "from flask import g",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/record_queries.py",
+      "raw_specifier": "from flask import has_app_context",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/session.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/session.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/session.py",
+      "raw_specifier": "sqlalchemy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/session.py",
+      "raw_specifier": "sqlalchemy.exc",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/session.py",
+      "raw_specifier": "sqlalchemy.orm",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/session.py",
+      "raw_specifier": "from flask.globals import app_ctx",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/session.py",
+      "raw_specifier": "from .extension import SQLAlchemy",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".extension",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/table.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/table.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/table.py",
+      "raw_specifier": "sqlalchemy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/table.py",
+      "raw_specifier": "sqlalchemy.sql.schema",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/track_modifications.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/track_modifications.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/track_modifications.py",
+      "raw_specifier": "sqlalchemy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/track_modifications.py",
+      "raw_specifier": "sqlalchemy.event",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/track_modifications.py",
+      "raw_specifier": "sqlalchemy.orm",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/track_modifications.py",
+      "raw_specifier": "from flask import current_app",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/track_modifications.py",
+      "raw_specifier": "from flask import has_app_context",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/track_modifications.py",
+      "raw_specifier": "from flask.signals import Namespace  # type: ignore[attr-defined]",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/track_modifications.py",
+      "raw_specifier": "from .session import Session",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/__init__.py",
+      "raw_specifier": "from __future__ import annotations",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/__init__.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/__init__.py",
+      "raw_specifier": "from .extension import SQLAlchemy",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".extension",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/__init__.py",
+      "raw_specifier": "importlib.metadata",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_sqlalchemy/__init__.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "examples/flaskr/setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [
+        "flask"
+      ],
+      "dev_packages": [],
+      "confidence": "medium",
+      "warnings": []
+    },
+    {
+      "source_path": "examples/flaskr/setup.py",
+      "source_type": "setup.py",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "Could not extract install_requires from setup.py — weak detection"
+      ]
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "flask",
+        "sqlalchemy"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [
+        "pre_commit",
+        "gha_update",
+        "pip_tools"
+      ],
+      "confidence": "medium",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "examples/flaskr/flaskr/auth/models.py",
+      "candidate_test_paths": [
+        "examples/flaskr/flaskr/auth/tests/test_models.py",
+        "tests/flaskr/flaskr/auth/test_models.py",
+        "examples/flaskr/flaskr/auth/tests/test_auth.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py",
+        "tests/auth/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/flaskr/flaskr/auth/views.py",
+      "candidate_test_paths": [
+        "examples/flaskr/flaskr/auth/tests/test_views.py",
+        "tests/flaskr/flaskr/auth/test_views.py",
+        "examples/flaskr/flaskr/auth/tests/test_auth.py",
+        "test/test_views.py",
+        "tests/test_views.py",
+        "tests/views/test_views.py",
+        "tests/auth/test_views.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/flaskr/flaskr/blog/models.py",
+      "candidate_test_paths": [
+        "examples/flaskr/flaskr/blog/tests/test_models.py",
+        "tests/flaskr/flaskr/blog/test_models.py",
+        "examples/flaskr/flaskr/blog/tests/test_blog.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py",
+        "tests/blog/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/flaskr/flaskr/blog/views.py",
+      "candidate_test_paths": [
+        "examples/flaskr/flaskr/blog/tests/test_views.py",
+        "tests/flaskr/flaskr/blog/test_views.py",
+        "examples/flaskr/flaskr/blog/tests/test_blog.py",
+        "test/test_views.py",
+        "tests/test_views.py",
+        "tests/views/test_views.py",
+        "tests/blog/test_views.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/flaskr/setup.py",
+      "candidate_test_paths": [
+        "examples/flaskr/tests/test_setup.py",
+        "tests/flaskr/test_setup.py",
+        "examples/flaskr/tests/test_flaskr.py",
+        "test/test_setup.py",
+        "tests/test_setup.py",
+        "tests/setup/test_setup.py",
+        "tests/setups/test_setup.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/todo/app.py",
+      "candidate_test_paths": [
+        "examples/todo/tests/test_app.py",
+        "tests/todo/test_app.py",
+        "examples/todo/tests/test_todo.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/flask_sqlalchemy/cli.py",
+      "candidate_test_paths": [
+        "src/flask_sqlalchemy/tests/test_cli.py",
+        "tests/flask_sqlalchemy/test_cli.py",
+        "src/flask_sqlalchemy/tests/test_flask_sqlalchemy.py",
+        "test/test_cli.py",
+        "tests/test_cli.py",
+        "tests/cli/test_cli.py",
+        "tests/clis/test_cli.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_cli.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_cli.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask_sqlalchemy/extension.py",
+      "candidate_test_paths": [
+        "src/flask_sqlalchemy/tests/test_extension.py",
+        "tests/flask_sqlalchemy/test_extension.py",
+        "src/flask_sqlalchemy/tests/test_flask_sqlalchemy.py",
+        "test/test_extension.py",
+        "tests/test_extension.py",
+        "tests/extension/test_extension.py",
+        "tests/extensions/test_extension.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/flask_sqlalchemy/model.py",
+      "candidate_test_paths": [
+        "src/flask_sqlalchemy/tests/test_model.py",
+        "tests/flask_sqlalchemy/test_model.py",
+        "src/flask_sqlalchemy/tests/test_flask_sqlalchemy.py",
+        "test/test_model.py",
+        "tests/test_model.py",
+        "tests/model/test_model.py",
+        "tests/models/test_model.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_model.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_model.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask_sqlalchemy/pagination.py",
+      "candidate_test_paths": [
+        "src/flask_sqlalchemy/tests/test_pagination.py",
+        "tests/flask_sqlalchemy/test_pagination.py",
+        "src/flask_sqlalchemy/tests/test_flask_sqlalchemy.py",
+        "test/test_pagination.py",
+        "tests/test_pagination.py",
+        "tests/pagination/test_pagination.py",
+        "tests/paginations/test_pagination.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_pagination.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_pagination.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask_sqlalchemy/query.py",
+      "candidate_test_paths": [
+        "src/flask_sqlalchemy/tests/test_query.py",
+        "tests/flask_sqlalchemy/test_query.py",
+        "src/flask_sqlalchemy/tests/test_flask_sqlalchemy.py",
+        "test/test_query.py",
+        "tests/test_query.py",
+        "tests/query/test_query.py",
+        "tests/querys/test_query.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/flask_sqlalchemy/record_queries.py",
+      "candidate_test_paths": [
+        "src/flask_sqlalchemy/tests/test_record_queries.py",
+        "tests/flask_sqlalchemy/test_record_queries.py",
+        "src/flask_sqlalchemy/tests/test_flask_sqlalchemy.py",
+        "test/test_record_queries.py",
+        "tests/test_record_queries.py",
+        "tests/record_queries/test_record_queries.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_record_queries.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_record_queries.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask_sqlalchemy/session.py",
+      "candidate_test_paths": [
+        "src/flask_sqlalchemy/tests/test_session.py",
+        "tests/flask_sqlalchemy/test_session.py",
+        "src/flask_sqlalchemy/tests/test_flask_sqlalchemy.py",
+        "test/test_session.py",
+        "tests/test_session.py",
+        "tests/session/test_session.py",
+        "tests/sessions/test_session.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_session.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_session.py [library_package layout]"
+    },
+    {
+      "source_path": "src/flask_sqlalchemy/table.py",
+      "candidate_test_paths": [
+        "src/flask_sqlalchemy/tests/test_table.py",
+        "tests/flask_sqlalchemy/test_table.py",
+        "src/flask_sqlalchemy/tests/test_flask_sqlalchemy.py",
+        "test/test_table.py",
+        "tests/test_table.py",
+        "tests/table/test_table.py",
+        "tests/tables/test_table.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/flask_sqlalchemy/track_modifications.py",
+      "candidate_test_paths": [
+        "src/flask_sqlalchemy/tests/test_track_modifications.py",
+        "tests/flask_sqlalchemy/test_track_modifications.py",
+        "src/flask_sqlalchemy/tests/test_flask_sqlalchemy.py",
+        "test/test_track_modifications.py",
+        "tests/test_track_modifications.py",
+        "tests/track_modifications/test_track_modifications.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_track_modifications.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_track_modifications.py [library_package layout]"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/auth/**",
+      "matched_paths": [
+        "examples/flaskr/flaskr/auth/models.py",
+        "examples/flaskr/flaskr/auth/views.py",
+        "examples/flaskr/flaskr/auth/__init__.py",
+        "examples/flaskr/tests/test_auth.py"
+      ],
+      "category": "authentication",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"auth\" found in 4 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "examples/flaskr/setup.cfg"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "examples/flaskr/setup.py"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 40,
+    "classified_count": 40,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 145,
+    "project_import_count": 0,
+    "declared_package_count": 65,
+    "undeclared_package_count": 16,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 15,
+    "high_confidence_test_count": 6,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 1,
+    "sensitive_file_count": 4,
+    "manifest_count": 4,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

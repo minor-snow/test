@@ -42,6 +42,36 @@ describe("githubCommentClient", () => {
     expect(result).toEqual({ status: "updated", commentId: 5 });
   });
 
+  it("does not update comments that have the marker but no bot identity", async () => {
+    global.fetch = vi.fn()
+      .mockResolvedValueOnce(makeResponse([{ id: 5, body: "<!-- pantheon -->", user: {} }]))
+      .mockResolvedValueOnce(makeResponse({ id: 99 }));
+
+    const result = await postOrUpdatePantheonComment({
+      prContext: { owner: "saleor", repo: "saleor", prNumber: 42 },
+      githubToken: "token",
+      marker: "<!-- pantheon -->",
+      markdown: "<!-- pantheon -->\nupdated",
+    });
+
+    expect(result).toEqual({ status: "created", commentId: 99 });
+  });
+
+  it("does not update bot comments that are missing the Pantheon marker", async () => {
+    global.fetch = vi.fn()
+      .mockResolvedValueOnce(makeResponse([{ id: 5, body: "plain bot comment", user: { login: "github-actions[bot]", type: "Bot" } }]))
+      .mockResolvedValueOnce(makeResponse({ id: 101 }));
+
+    const result = await postOrUpdatePantheonComment({
+      prContext: { owner: "saleor", repo: "saleor", prNumber: 42 },
+      githubToken: "token",
+      marker: "<!-- pantheon -->",
+      markdown: "<!-- pantheon -->\nupdated",
+    });
+
+    expect(result).toEqual({ status: "created", commentId: 101 });
+  });
+
   it("returns failed instead of throwing on api error", async () => {
     global.fetch = vi.fn().mockResolvedValue(makeResponse({ message: "bad" }, 500));
 

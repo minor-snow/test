@@ -23,13 +23,17 @@ export type RiskEntry = {
     mitigation?: string;
     created_at: string;
 };
+export type RiskRegisterPathOptions = {
+    readonly repoRoot?: string;
+    readonly trustedAbsolute?: boolean;
+};
 /**
  * Append risk entries to the JSONL log.
  * Deduplicates by source_issue_id — if already present, skip.
  */
-export declare function appendRiskEntries(dataDir: string, entries: RiskEntry[]): Promise<number>;
+export declare function appendRiskEntries(dataDir: string, entries: RiskEntry[], options?: RiskRegisterPathOptions): Promise<number>;
 /**
  * Read all risk entries from the JSONL log.
  * Returns empty array if file doesn't exist.
  */
-export declare function readRiskRegister(dataDir: string): Promise<RiskEntry[]>;
+export declare function readRiskRegister(dataDir: string, options?: RiskRegisterPathOptions): Promise<RiskEntry[]>;

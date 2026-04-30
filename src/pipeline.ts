@@ -3,7 +3,7 @@
  *
  * ref: 执行宪法 v0.2 §15 MVP 工作流
  *
- * STATUS: This is a GENERAL-PURPOSE orchestrator.
+ * STATUS: This orchestrator is demo-oriented.
  * For the §21 demo runner, see src/demo/runDemo.ts.
  *
  * Ties together all modules into the canonical workflow:
@@ -119,9 +119,8 @@ function initialState(): PipelineState {
  *
  * @param config - Store configuration
  * @param draftArtifact - The artifact to process
- * @param patchTextOverride - Optional replacement text for the patch.
- *   If not provided, uses the §21 default (SECTION21_PATCH_TEXT).
- *   Future: this parameter will be replaced by a real Patch Agent.
+ * @param patchTextOverride - Replacement text for the patch.
+ *   The §21 default fixture is used only for the known demo artifact.
  *
  * @returns PipelineState with all intermediate results for the cockpit.
  */
@@ -185,9 +184,17 @@ export async function runPipeline(
       return state;
     }
 
+    if (state.validatedIssues.length > 1) {
+      state.error =
+        "runPipeline demo orchestrator supports exactly one validated issue at a time. " +
+        "Use an explicit patch proposal flow for multi-issue artifacts.";
+      return state;
+    }
+
     // ── Step 7: Generate PatchProposal ──
     // (In MVP, we simulate a simple Patch Agent that fixes the first issue)
     const firstIssue = state.validatedIssues[0];
+    const replacementText = resolvePatchText(state.artifact, patchTextOverride);
     state.patchProposal = {
       proposal_id: `proposal_for_${firstIssue.issue_id}`,
       artifact_id: state.artifact.artifact_id,
@@ -197,7 +204,7 @@ export async function runPipeline(
         {
           op: "replace_block",
           target_block_id: firstIssue.target_block_id,
-          replacement_text: patchTextOverride ?? SECTION21_PATCH_TEXT,
+          replacement_text: replacementText,
         },
       ],
     };
@@ -277,6 +284,13 @@ export async function runPipeline(
         details: { auto_committed: true },
       });
 
+      const projection = renderMarkdown(state.candidateRevision);
+      await saveProjection(
+        config,
+        state.candidateRevision.artifact_id,
+        projection,
+      );
+
       state.phase = "committed";
     } else {
       // ── Step 12: Requires human override ──
@@ -291,6 +305,25 @@ export async function runPipeline(
     state.error = (err as Error).message;
     return state;
   }
+}
+
+function resolvePatchText(
+  artifact: Artifact,
+  patchTextOverride?: string,
+): string {
+  if (patchTextOverride) {
+    return patchTextOverride;
+  }
+  if (
+    artifact.artifact_id === "arch_001"
+    || artifact.artifact_id === "art_section21"
+    || artifact.artifact_id === "section21_demo"
+  ) {
+    return SECTION21_PATCH_TEXT;
+  }
+  throw new Error(
+    "runPipeline requires an explicit patchTextOverride outside the Section 21 demo fixture.",
+  );
 }
 
 /**

@@ -121,7 +121,7 @@ export function validateScopedImplementationBoundaryPackage(
     const typeMatch = ri.example_command.match(/--type\s+"([^"]+)"/);
     if (typeMatch) {
       const typeValue = typeMatch[1];
-      if (!VALID_REVERSE_ISSUE_TYPES.includes(typeValue as any)) {
+      if (!isValidReverseIssueType(typeValue)) {
         entries.push({
           check_id: "reverse_issue_invalid_type",
           severity: "error",
@@ -247,4 +247,8 @@ export function renderScopedHandoffReportMarkdown(report: ScopedHandoffReport): 
   }
 
   return lines.join("\n");
+}
+
+function isValidReverseIssueType(value: string): boolean {
+  return VALID_REVERSE_ISSUE_TYPES.some(type => type === value);
 }

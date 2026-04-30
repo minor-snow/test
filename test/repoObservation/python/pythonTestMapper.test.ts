@@ -132,6 +132,7 @@ describe("pythonTestMapper", () => {
 
     expect(results).toHaveLength(1);
     expect(results[0].candidate_test_paths).toContain("tests/test_auth.py");
+    expect(results[0].candidate_test_paths).not.toContain("tests/test__auth.py");
     expect(results[0].confidence).toBe("high");
     expect(results[0].reason).toContain("Library module match");
   });
@@ -181,5 +182,26 @@ describe("pythonTestMapper", () => {
     expect(results[0].candidate_test_paths).toContain("tests/test_cli.py");
     expect(results[0].confidence).toBe("high");
     expect(results[0].reason).toContain("Exact match");
+  });
+
+  it("keeps utils-style top-level matches below high confidence without path context", () => {
+    const observedPaths = new Set([
+      "package/foo/utils.py",
+      "tests/test_utils.py",
+    ]);
+    const results = mapPythonTests({
+      sourcePaths: ["package/foo/utils.py"],
+      observedPaths,
+      layout: layout("library_package", "flat_package"),
+      frameworkProfile: frameworkProfile({
+        project_role_signals: [
+          { role: "python_sdk_library", confidence: "high", evidence: [{ dimension: "layout_classification", detail: "library_package" }] },
+        ],
+      }),
+    });
+
+    expect(results).toHaveLength(1);
+    expect(results[0].existing_test_paths).toContain("tests/test_utils.py");
+    expect(results[0].confidence).not.toBe("high");
   });
 });

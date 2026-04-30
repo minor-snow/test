@@ -1,0 +1,5885 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "encode__django-rest-framework",
+    "observed_file_count": 585,
+    "python_file_count": 158
+  },
+  "layout": {
+    "primary_layout": "mixed",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: rest_framework"
+      },
+      {
+        "signal": "django_migrations_found",
+        "weight": "moderate",
+        "evidence": "5 migration files"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: django_project=2, library_package=2"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "primary_layout",
+        "reason": "Tied between django_project and library_package"
+      }
+    ],
+    "bucket_summary": {
+      "config": 5,
+      "source": 67,
+      "migration": 5,
+      "test": 81
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "django",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "django found in dependency manifests"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "Django-style migrations/ directories found"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "django imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "pytest imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: mixed / flat_package (medium)",
+      "framework: django / web_framework (high)",
+      "framework: pytest / test_framework (medium)",
+      "project_role: python_sdk_library (high)",
+      "sensitive_zone: authentication (high, 2 paths)",
+      "sensitive_zone: authorization (high, 2 paths)",
+      "sensitive_zone: administration (high, 1 paths)",
+      "sensitive_zone: schema_migration (high, 9 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 18,
+        "evidence": [
+          "18 paths match pattern **/__init__.py",
+          "Sensitive zone \"schema_migration\" (high) corroborates"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "bucket": "config",
+      "extension": ".yaml",
+      "size_bytes": 1166,
+      "evidence": [
+        "Tool config"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 4046,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "rest_framework/apps.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 265,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/authentication.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7933,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/admin.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2016,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/apps.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 205,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/management/commands/drf_create_token.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1415,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/management/commands/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/management/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/migrations/0001_initial.py",
+      "bucket": "migration",
+      "extension": ".py",
+      "size_bytes": 729,
+      "evidence": [
+        "Django/Alembic migration directory"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/migrations/0002_auto_20160226_1747.py",
+      "bucket": "migration",
+      "extension": ".py",
+      "size_bytes": 1025,
+      "evidence": [
+        "Django/Alembic migration directory"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/migrations/0003_tokenproxy.py",
+      "bucket": "migration",
+      "extension": ".py",
+      "size_bytes": 577,
+      "evidence": [
+        "Django/Alembic migration directory"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/migrations/0004_alter_tokenproxy_options.py",
+      "bucket": "migration",
+      "extension": ".py",
+      "size_bytes": 396,
+      "evidence": [
+        "Django/Alembic migration directory"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/migrations/__init__.py",
+      "bucket": "migration",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Django/Alembic migration directory"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2007,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/serializers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1426,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1246,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/authtoken/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/checks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 991,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/compat.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6269,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/decorators.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10263,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/exceptions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8423,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/fields.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 73535,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/filters.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13238,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/generics.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 10458,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/management/commands/generateschema.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2109,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/management/commands/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/management/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/metadata.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6014,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/mixins.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3031,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/negotiation.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4131,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/pagination.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 33589,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/parsers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7923,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/permissions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9902,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/relations.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 21823,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/renderers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 36655,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/request.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 15570,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/response.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3650,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/reverse.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2210,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/routers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14313,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/schemas/generators.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8234,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/schemas/inspectors.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4353,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/schemas/openapi.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 27594,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/schemas/utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1236,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/schemas/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1602,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/schemas/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1685,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/serializers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 72364,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/settings.py",
+      "bucket": "config",
+      "extension": ".py",
+      "size_bytes": 8321,
+      "evidence": [
+        "Settings module"
+      ]
+    },
+    {
+      "path": "rest_framework/status.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2640,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/templatetags/rest_framework.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8502,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/templatetags/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/test.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14685,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/throttling.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8317,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/urlpatterns.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4519,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/urls.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 636,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/breadcrumbs.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2092,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/encoders.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2880,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/field_mapping.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 12477,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/formatting.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3108,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/html.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2389,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/humanize_datetime.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1328,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/json.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1064,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/mediatypes.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2571,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/model_meta.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5224,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/representation.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3071,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/serializer_helpers.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5949,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/timezone.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1111,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/urls.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1079,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/utils/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/validators.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13892,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/versioning.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6987,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/views.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19629,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/viewsets.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 9547,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "rest_framework/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 845,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "runtests.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2037,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "setup.cfg",
+      "bucket": "config",
+      "extension": ".cfg",
+      "size_bytes": 134,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/authentication/migrations/0001_initial.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 584,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/authentication/migrations/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/authentication/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 248,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/authentication/test_authentication.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 24237,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/authentication/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/browsable_api/auth_urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 207,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/browsable_api/no_auth_urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 226,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/browsable_api/serializers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 229,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/browsable_api/test_browsable_api.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4078,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/browsable_api/test_browsable_nested_api.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1334,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/browsable_api/test_form_rendering.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2879,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/browsable_api/views.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1264,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/browsable_api/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4085,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/generic_relations/migrations/0001_initial.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1218,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/generic_relations/migrations/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/generic_relations/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1055,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/generic_relations/test_generic_relations.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2128,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/generic_relations/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/importable/test_installed.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 719,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/importable/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 766,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/models.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 5284,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/schemas/test_get_schema_view.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 487,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/schemas/test_managementcommand.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2713,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/schemas/test_openapi.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 49028,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/schemas/views.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 7783,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/schemas/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_atomic_requests.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6418,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_authtoken.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6868,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_bound_fields.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10043,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_decorators.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 16017,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_description.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4881,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_encoders.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4220,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_exceptions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3644,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_fields.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 99746,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_filters.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 40399,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_generics.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 26332,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_htmlrenderer.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6842,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_lazy_hyperlinks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1394,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_metadata.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 15364,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_middleware.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4927,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_model_serializer.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 55502,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_multitable_inheritance.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2121,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_negotiation.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3779,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_one_to_one_with_inheritance.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1296,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_pagination.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 44602,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_parsers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6923,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_permissions.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 33228,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_prefetch_related.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2679,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_relations.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 21232,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_relations_hyperlink.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 26901,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_relations_pk.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 25765,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_relations_slug.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12104,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_renderers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 35974,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_request.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 13833,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_requests_client.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 9007,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_response.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11173,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_reverse.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1592,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_routers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 27545,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_serializer.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 30983,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_serializer_bulk_update.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3925,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_serializer_lists.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 32775,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_serializer_nested.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 13182,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_settings.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3156,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_status.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 984,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_templates.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 618,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_templatetags.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 10740,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_testing.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 14858,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_throttling.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 17405,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_urlpatterns.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8247,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8983,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_validation.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 8469,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_validation_error.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3809,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_validators.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 41577,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_versioning.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 15414,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_views.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4773,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_viewsets.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 12245,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_write_only_fields.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 938,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/urls.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 18,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1721,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 1297,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "rest_framework/apps.py",
+      "raw_specifier": "from django.apps import AppConfig",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/apps.py",
+      "raw_specifier": "from .checks import pagination_system_check  # NOQA",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".checks",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "rest_framework/authentication.py",
+      "raw_specifier": "base64",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authentication.py",
+      "raw_specifier": "binascii",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "binascii",
+      "confidence": "low"
+    },
+    {
+      "from_file": "rest_framework/authentication.py",
+      "raw_specifier": "from django.contrib.auth import authenticate, get_user_model",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authentication.py",
+      "raw_specifier": "from django.middleware.csrf import CsrfViewMiddleware",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authentication.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authentication.py",
+      "raw_specifier": "from rest_framework import HTTP_HEADER_ENCODING, exceptions",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authentication.py",
+      "raw_specifier": "from rest_framework.authtoken.models import Token",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/admin.py",
+      "raw_specifier": "from django.contrib import admin",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/admin.py",
+      "raw_specifier": "from django.contrib.admin.utils import quote",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/admin.py",
+      "raw_specifier": "from django.contrib.admin.views.main import ChangeList",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/admin.py",
+      "raw_specifier": "from django.contrib.auth import get_user_model",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/admin.py",
+      "raw_specifier": "from django.core.exceptions import ValidationError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/admin.py",
+      "raw_specifier": "from django.urls import reverse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/admin.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/admin.py",
+      "raw_specifier": "from rest_framework.authtoken.models import Token, TokenProxy",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/apps.py",
+      "raw_specifier": "from django.apps import AppConfig",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/apps.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/management/commands/drf_create_token.py",
+      "raw_specifier": "from django.contrib.auth import get_user_model",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/management/commands/drf_create_token.py",
+      "raw_specifier": "from django.core.management.base import BaseCommand, CommandError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/management/commands/drf_create_token.py",
+      "raw_specifier": "from rest_framework.authtoken.models import Token",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/models.py",
+      "raw_specifier": "secrets",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "secrets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/models.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/models.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/models.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/serializers.py",
+      "raw_specifier": "from django.contrib.auth import authenticate",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/serializers.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/serializers.py",
+      "raw_specifier": "from rest_framework import serializers",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/views.py",
+      "raw_specifier": "from rest_framework import parsers, renderers",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/views.py",
+      "raw_specifier": "from rest_framework.authtoken.models import Token",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/views.py",
+      "raw_specifier": "from rest_framework.authtoken.serializers import AuthTokenSerializer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/views.py",
+      "raw_specifier": "from rest_framework.response import Response",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/authtoken/views.py",
+      "raw_specifier": "from rest_framework.views import APIView",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/checks.py",
+      "raw_specifier": "from django.core.checks import Tags, Warning, register",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/checks.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "django",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "from django.db.models.constants import LOOKUP_SEP",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "from django.db.models.sql.query import Node",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "from django.views.generic import View",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "from django.contrib.postgres import fields as postgres_fields",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "uritemplate",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "uritemplate",
+      "confidence": "low"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "yaml",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "yaml",
+      "confidence": "low"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "inflection",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "inflection",
+      "confidence": "low"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "requests",
+      "confidence": "low"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "markdown",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "markdown",
+      "confidence": "low"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "pygments",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pygments",
+      "confidence": "low"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "from pygments.formatters import HtmlFormatter",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pygments",
+      "confidence": "low"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "from pygments.lexers import TextLexer, get_lexer_by_name",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pygments",
+      "confidence": "low"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "from markdown.preprocessors import Preprocessor",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "markdown",
+      "confidence": "low"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "from django.core.validators import ip_address_validators",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/compat.py",
+      "raw_specifier": "from django.core.validators import \\",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/decorators.py",
+      "raw_specifier": "types",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "types",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/decorators.py",
+      "raw_specifier": "from django.forms.utils import pretty_name",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/decorators.py",
+      "raw_specifier": "from rest_framework.views import APIView",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/exceptions.py",
+      "raw_specifier": "math",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "math",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/exceptions.py",
+      "raw_specifier": "from django.http import JsonResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/exceptions.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/exceptions.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/exceptions.py",
+      "raw_specifier": "from django.utils.translation import ngettext",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/exceptions.py",
+      "raw_specifier": "from rest_framework import status",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/exceptions.py",
+      "raw_specifier": "from rest_framework.utils.serializer_helpers import ReturnDict, ReturnList",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "decimal",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from collections.abc import Mapping",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from enum import Enum",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "enum",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.core.exceptions import ObjectDoesNotExist",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.core.exceptions import ValidationError as DjangoValidationError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.core.validators import ( EmailValidator, MaxLengthValidator, MaxValueValidator, MinLengthValidator, MinValueValidator, ProhibitNullCharactersValidator, RegexValidator, URLValidator )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.forms import FilePathField as DjangoFilePathField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.forms import ImageField as DjangoImageField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.utils import timezone",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.utils.dateparse import ( parse_date, parse_datetime, parse_duration, parse_time )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.utils.duration import duration_iso_string, duration_string",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.utils.encoding import is_protected_type, smart_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.utils.formats import localize_input, sanitize_separators",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.utils.ipv6 import clean_ipv6_address",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "pytz",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pytz",
+      "confidence": "low"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from rest_framework import DJANGO_DURATION_FORMAT, ISO_8601",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from rest_framework.compat import ip_address_validators",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from rest_framework.exceptions import ErrorDetail, ValidationError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from rest_framework.utils import html, humanize_datetime, json, representation",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from rest_framework.utils.formatting import lazy_format",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from rest_framework.utils.timezone import valid_datetime",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/fields.py",
+      "raw_specifier": "from rest_framework.validators import ProhibitSurrogateCharactersValidator",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/filters.py",
+      "raw_specifier": "operator",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "operator",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/filters.py",
+      "raw_specifier": "from functools import reduce",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/filters.py",
+      "raw_specifier": "from django.core.exceptions import FieldDoesNotExist, ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/filters.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/filters.py",
+      "raw_specifier": "from django.db.models.constants import LOOKUP_SEP",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/filters.py",
+      "raw_specifier": "from django.template import loader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/filters.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/filters.py",
+      "raw_specifier": "from django.utils.text import smart_split, unescape_string_literal",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/filters.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/filters.py",
+      "raw_specifier": "from rest_framework.fields import CharField",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/filters.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/generics.py",
+      "raw_specifier": "from django.core.exceptions import ValidationError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/generics.py",
+      "raw_specifier": "from django.db.models.query import QuerySet",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/generics.py",
+      "raw_specifier": "from django.http import Http404",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/generics.py",
+      "raw_specifier": "from django.shortcuts import get_object_or_404 as _get_object_or_404",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/generics.py",
+      "raw_specifier": "from rest_framework import mixins, views",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/generics.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/management/commands/generateschema.py",
+      "raw_specifier": "from django.core.management.base import BaseCommand",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/management/commands/generateschema.py",
+      "raw_specifier": "from django.utils.module_loading import import_string",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/management/commands/generateschema.py",
+      "raw_specifier": "from rest_framework import renderers",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/management/commands/generateschema.py",
+      "raw_specifier": "from rest_framework.schemas.openapi import SchemaGenerator",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/metadata.py",
+      "raw_specifier": "from django.core.exceptions import PermissionDenied",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/metadata.py",
+      "raw_specifier": "from django.http import Http404",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/metadata.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/metadata.py",
+      "raw_specifier": "from rest_framework import exceptions, serializers",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/metadata.py",
+      "raw_specifier": "from rest_framework.request import clone_request",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/metadata.py",
+      "raw_specifier": "from rest_framework.utils.field_mapping import ClassLookupDict",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/mixins.py",
+      "raw_specifier": "from rest_framework import status",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/mixins.py",
+      "raw_specifier": "from rest_framework.response import Response",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/mixins.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/negotiation.py",
+      "raw_specifier": "from django.http import Http404",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/negotiation.py",
+      "raw_specifier": "from rest_framework import exceptions",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/negotiation.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/negotiation.py",
+      "raw_specifier": "from rest_framework.utils.mediatypes import ( _MediaType, media_type_matches, order_by_precedence )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "from base64 import b64decode, b64encode",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "base64",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "from urllib import parse",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "from django.core.paginator import InvalidPage",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "from django.core.paginator import Paginator as DjangoPaginator",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "from django.template import loader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "from rest_framework.exceptions import NotFound",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "from rest_framework.response import Response",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/pagination.py",
+      "raw_specifier": "from rest_framework.utils.urls import remove_query_param, replace_query_param",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "codecs",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "codecs",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "from django.core.files.uploadhandler import StopFutureHandlers",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "from django.http import QueryDict",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "from django.http.multipartparser import ChunkIter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "from django.http.multipartparser import \\",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "from django.http.multipartparser import MultiPartParserError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "from django.utils.http import parse_header_parameters",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "from rest_framework import renderers",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "from rest_framework.exceptions import ParseError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/parsers.py",
+      "raw_specifier": "from rest_framework.utils import json",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/permissions.py",
+      "raw_specifier": "from django.http import Http404",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/permissions.py",
+      "raw_specifier": "from rest_framework import exceptions",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "from operator import attrgetter",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "operator",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "from urllib import parse",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured, ObjectDoesNotExist",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "from django.db.models import Manager",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "from django.db.models.query import QuerySet",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "from django.urls import NoReverseMatch, Resolver404, get_script_prefix, resolve",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "from django.utils.encoding import smart_str, uri_to_iri",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "from rest_framework.fields import ( Field, SkipField, empty, get_attribute, is_simple_callable, iter_options )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "from rest_framework.reverse import reverse",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/relations.py",
+      "raw_specifier": "from rest_framework.utils import html",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from django import forms",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from django.core.paginator import Page",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from django.template import engines, loader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from django.urls import NoReverseMatch",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from django.utils.http import parse_header_parameters",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from django.utils.safestring import SafeString",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from rest_framework import ISO_8601, VERSION, exceptions, serializers, status",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from rest_framework.compat import ( INDENT_SEPARATORS, LONG_SEPARATORS, SHORT_SEPARATORS, pygments_css, yaml )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from rest_framework.exceptions import ParseError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from rest_framework.request import is_form_media_type, override_method",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from rest_framework.utils import encoders, json",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from rest_framework.utils.breadcrumbs import get_breadcrumbs",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from rest_framework.utils.field_mapping import ClassLookupDict",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/renderers.py",
+      "raw_specifier": "from django.test.client import encode_multipart",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/request.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/request.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/request.py",
+      "raw_specifier": "from contextlib import contextmanager",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/request.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/request.py",
+      "raw_specifier": "from django.http import HttpRequest, QueryDict",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/request.py",
+      "raw_specifier": "from django.http.request import RawPostDataException",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/request.py",
+      "raw_specifier": "from django.utils.datastructures import MultiValueDict",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/request.py",
+      "raw_specifier": "from django.utils.http import parse_header_parameters",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/request.py",
+      "raw_specifier": "from rest_framework import exceptions",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/request.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/response.py",
+      "raw_specifier": "from http.client import responses",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "http",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/response.py",
+      "raw_specifier": "from django.template.response import SimpleTemplateResponse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/response.py",
+      "raw_specifier": "from rest_framework.serializers import Serializer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/reverse.py",
+      "raw_specifier": "from django.urls import NoReverseMatch",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/reverse.py",
+      "raw_specifier": "from django.urls import reverse as django_reverse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/reverse.py",
+      "raw_specifier": "from django.utils.functional import lazy",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/reverse.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/reverse.py",
+      "raw_specifier": "from rest_framework.utils.urls import replace_query_param",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/routers.py",
+      "raw_specifier": "itertools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "itertools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/routers.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/routers.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/routers.py",
+      "raw_specifier": "from django.urls import NoReverseMatch, path, re_path",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/routers.py",
+      "raw_specifier": "from rest_framework import views",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/routers.py",
+      "raw_specifier": "from rest_framework.response import Response",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/routers.py",
+      "raw_specifier": "from rest_framework.reverse import reverse",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/routers.py",
+      "raw_specifier": "from rest_framework.schemas import SchemaGenerator",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/routers.py",
+      "raw_specifier": "from rest_framework.schemas.views import SchemaView",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/routers.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/routers.py",
+      "raw_specifier": "from rest_framework.urlpatterns import format_suffix_patterns",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/generators.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/generators.py",
+      "raw_specifier": "from importlib import import_module",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/generators.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/generators.py",
+      "raw_specifier": "from django.contrib.admindocs.views import simplify_regex",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/generators.py",
+      "raw_specifier": "from django.core.exceptions import PermissionDenied",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/generators.py",
+      "raw_specifier": "from django.http import Http404",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/generators.py",
+      "raw_specifier": "from django.urls import URLPattern, URLResolver",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/generators.py",
+      "raw_specifier": "from rest_framework import exceptions",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/generators.py",
+      "raw_specifier": "from rest_framework.request import clone_request",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/generators.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/generators.py",
+      "raw_specifier": "from rest_framework.utils.model_meta import _get_pk",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/generators.py",
+      "raw_specifier": "from rest_framework.views import APIView",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/inspectors.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/inspectors.py",
+      "raw_specifier": "from weakref import WeakKeyDictionary",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "weakref",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/inspectors.py",
+      "raw_specifier": "from django.utils.encoding import smart_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/inspectors.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/inspectors.py",
+      "raw_specifier": "from rest_framework.utils import formatting",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "warnings",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "warnings",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from decimal import Decimal",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from operator import attrgetter",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "operator",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from urllib.parse import urljoin",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from django.core.validators import ( DecimalValidator, EmailValidator, MaxLengthValidator, MaxValueValidator, MinLengthValidator, MinValueValidator, RegexValidator, URLValidator )",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from rest_framework import exceptions, renderers, serializers",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from rest_framework.compat import inflection, uritemplate",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from rest_framework.fields import _UnvalidatedField, empty",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from .generators import BaseSchemaGenerator",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".generators",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from .inspectors import ViewInspector",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".inspectors",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "rest_framework/schemas/openapi.py",
+      "raw_specifier": "from .utils import get_pk_description, is_list_view",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".utils",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "rest_framework/schemas/utils.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/utils.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/utils.py",
+      "raw_specifier": "from rest_framework.mixins import RetrieveModelMixin",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/views.py",
+      "raw_specifier": "from rest_framework import exceptions, renderers",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/views.py",
+      "raw_specifier": "from rest_framework.response import Response",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/views.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/views.py",
+      "raw_specifier": "from rest_framework.views import APIView",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/__init__.py",
+      "raw_specifier": "from rest_framework.schemas import ( AutoSchema, get_schema_view, SchemaGenerator, )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/__init__.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/schemas/__init__.py",
+      "raw_specifier": "from . import openapi",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "rest_framework/schemas/__init__.py",
+      "raw_specifier": "from .inspectors import DefaultSchema  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".inspectors",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "rest_framework/schemas/__init__.py",
+      "raw_specifier": "from .openapi import AutoSchema, SchemaGenerator  # noqa",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".openapi",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "rest_framework/schemas/__init__.py",
+      "raw_specifier": "from .views import SchemaView",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".views",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "copy",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "copy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "traceback",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "traceback",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from collections import defaultdict",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from collections.abc import Mapping",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from django.core.exceptions import FieldDoesNotExist, ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from django.core.exceptions import ValidationError as DjangoValidationError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from django.db.models.fields import Field as DjangoModelField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from django.utils import timezone",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from django.utils.functional import cached_property",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from rest_framework.compat import ( get_referenced_base_fields_from_q, postgres_fields )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from rest_framework.exceptions import ErrorDetail, ValidationError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from rest_framework.fields import get_error_detail",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from rest_framework.utils import html, model_meta, representation",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from rest_framework.utils.field_mapping import ( ClassLookupDict, get_field_kwargs, get_nested_relation_kwargs, get_relation_kwargs, get_url_kwargs )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from rest_framework.utils.serializer_helpers import ( BindingDict, BoundField, JSONBoundField, NestedBoundField, ReturnDict, ReturnList )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from rest_framework.validators import ( UniqueForDateValidator, UniqueForMonthValidator, UniqueForYearValidator, UniqueTogetherValidator )",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from rest_framework.fields import (  # NOQA # isort:skip",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from rest_framework.relations import (  # NOQA # isort:skip",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from rest_framework.fields import (  # NOQA # isort:skip",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/serializers.py",
+      "raw_specifier": "from rest_framework.relations import Hyperlink, PKOnlyObject  # NOQA # isort:skip",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/templatetags/rest_framework.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/templatetags/rest_framework.py",
+      "raw_specifier": "from django import template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/templatetags/rest_framework.py",
+      "raw_specifier": "from django.template import loader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/templatetags/rest_framework.py",
+      "raw_specifier": "from django.urls import NoReverseMatch, reverse",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/templatetags/rest_framework.py",
+      "raw_specifier": "from django.utils.encoding import iri_to_uri",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/templatetags/rest_framework.py",
+      "raw_specifier": "from django.utils.html import escape, format_html, smart_urlquote",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/templatetags/rest_framework.py",
+      "raw_specifier": "from django.utils.safestring import mark_safe",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/templatetags/rest_framework.py",
+      "raw_specifier": "from rest_framework.compat import apply_markdown, pygments_highlight",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/templatetags/rest_framework.py",
+      "raw_specifier": "from rest_framework.renderers import HTMLFormRenderer",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/templatetags/rest_framework.py",
+      "raw_specifier": "from rest_framework.utils.urls import replace_query_param",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "io",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "io",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "from importlib import import_module",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "from django.core.handlers.wsgi import WSGIHandler",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "from django.test import override_settings, testcases",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "from django.test.client import Client as DjangoClient",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "from django.test.client import ClientHandler",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "from django.test.client import RequestFactory as DjangoRequestFactory",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "from django.utils.encoding import force_bytes",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "from django.utils.http import urlencode",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "from rest_framework.compat import requests",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/test.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/throttling.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/throttling.py",
+      "raw_specifier": "from django.core.cache import cache as default_cache",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/throttling.py",
+      "raw_specifier": "from django.core.exceptions import ImproperlyConfigured",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/throttling.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/urlpatterns.py",
+      "raw_specifier": "from django.urls import URLResolver, include, path, re_path, register_converter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/urlpatterns.py",
+      "raw_specifier": "from django.urls.converters import get_converters",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/urlpatterns.py",
+      "raw_specifier": "from django.urls.resolvers import RoutePattern",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/urlpatterns.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/urls.py",
+      "raw_specifier": "from django.contrib.auth import views",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/urls.py",
+      "raw_specifier": "from django.urls import path",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/breadcrumbs.py",
+      "raw_specifier": "from django.urls import get_script_prefix, resolve",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/breadcrumbs.py",
+      "raw_specifier": "from rest_framework.reverse import preserve_builtin_query_params",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/breadcrumbs.py",
+      "raw_specifier": "from rest_framework.views import APIView",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/encoders.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/encoders.py",
+      "raw_specifier": "datetime",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/encoders.py",
+      "raw_specifier": "decimal",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "decimal",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/encoders.py",
+      "raw_specifier": "ipaddress",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "ipaddress",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/encoders.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/encoders.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/encoders.py",
+      "raw_specifier": "from django.db.models.query import QuerySet",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/encoders.py",
+      "raw_specifier": "from django.utils import timezone",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/encoders.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/encoders.py",
+      "raw_specifier": "from django.utils.functional import Promise",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/field_mapping.py",
+      "raw_specifier": "inspect",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/field_mapping.py",
+      "raw_specifier": "from django.core import validators",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/field_mapping.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/field_mapping.py",
+      "raw_specifier": "from django.utils.text import capfirst",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/field_mapping.py",
+      "raw_specifier": "from rest_framework.compat import postgres_fields",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/field_mapping.py",
+      "raw_specifier": "from rest_framework.validators import UniqueValidator",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/formatting.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/formatting.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/formatting.py",
+      "raw_specifier": "from django.utils.html import escape",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/formatting.py",
+      "raw_specifier": "from django.utils.safestring import mark_safe",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/formatting.py",
+      "raw_specifier": "from rest_framework.compat import apply_markdown",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/html.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/html.py",
+      "raw_specifier": "from django.utils.datastructures import MultiValueDict",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/humanize_datetime.py",
+      "raw_specifier": "from rest_framework import ISO_8601",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/json.py",
+      "raw_specifier": "functools",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/json.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/mediatypes.py",
+      "raw_specifier": "from django.utils.http import parse_header_parameters",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/model_meta.py",
+      "raw_specifier": "from collections import namedtuple",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/representation.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/representation.py",
+      "raw_specifier": "from django.db import models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/representation.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/representation.py",
+      "raw_specifier": "from django.utils.functional import Promise",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/serializer_helpers.py",
+      "raw_specifier": "contextlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "contextlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/serializer_helpers.py",
+      "raw_specifier": "from collections.abc import Mapping, MutableMapping",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "collections",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/serializer_helpers.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/serializer_helpers.py",
+      "raw_specifier": "from rest_framework.utils import json",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/timezone.py",
+      "raw_specifier": "from datetime import datetime, timezone, tzinfo",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/urls.py",
+      "raw_specifier": "from urllib import parse",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/utils/urls.py",
+      "raw_specifier": "from django.utils.encoding import force_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/validators.py",
+      "raw_specifier": "from django.core.exceptions import FieldError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/validators.py",
+      "raw_specifier": "from django.db import DataError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/validators.py",
+      "raw_specifier": "from django.db.models import Exists",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/validators.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/validators.py",
+      "raw_specifier": "from rest_framework.exceptions import ValidationError",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/validators.py",
+      "raw_specifier": "from rest_framework.utils.representation import smart_repr",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/versioning.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/versioning.py",
+      "raw_specifier": "from django.utils.translation import gettext_lazy as _",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/versioning.py",
+      "raw_specifier": "from rest_framework import exceptions",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/versioning.py",
+      "raw_specifier": "from rest_framework.compat import unicode_http_header",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/versioning.py",
+      "raw_specifier": "from rest_framework.reverse import _reverse",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/versioning.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/versioning.py",
+      "raw_specifier": "from rest_framework.templatetags.rest_framework import replace_query_param",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/versioning.py",
+      "raw_specifier": "from rest_framework.utils.mediatypes import _MediaType",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from django import VERSION as DJANGO_VERSION",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from django.conf import settings",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from django.core.exceptions import PermissionDenied",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from django.db import connections, models",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from django.http import Http404",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from django.http.response import HttpResponseBase",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from django.utils.cache import cc_delim_re, patch_vary_headers",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from django.utils.encoding import smart_str",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from django.views.decorators.csrf import csrf_exempt",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from django.views.generic import View",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from rest_framework import exceptions, status",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from rest_framework.request import Request",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from rest_framework.response import Response",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from rest_framework.schemas import DefaultSchema",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from rest_framework.settings import api_settings",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/views.py",
+      "raw_specifier": "from rest_framework.utils import formatting",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/viewsets.py",
+      "raw_specifier": "from functools import update_wrapper",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/viewsets.py",
+      "raw_specifier": "from inspect import getmembers",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "inspect",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/viewsets.py",
+      "raw_specifier": "from django import VERSION as DJANGO_VERSION",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/viewsets.py",
+      "raw_specifier": "from django.urls import NoReverseMatch",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/viewsets.py",
+      "raw_specifier": "from django.utils.decorators import classonlymethod",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/viewsets.py",
+      "raw_specifier": "from django.views.decorators.csrf import csrf_exempt",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "django",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/viewsets.py",
+      "raw_specifier": "from rest_framework import generics, mixins, views",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/viewsets.py",
+      "raw_specifier": "from rest_framework.decorators import MethodMapper",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "rest_framework/viewsets.py",
+      "raw_specifier": "from rest_framework.reverse import reverse",
+      "import_kind": "from_import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    },
+    {
+      "from_file": "runtests.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "runtests.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "runtests.py",
+      "raw_specifier": "pytest",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pytest",
+      "confidence": "low"
+    },
+    {
+      "from_file": "runtests.py",
+      "raw_specifier": "rest_framework",
+      "import_kind": "import",
+      "status": "project_import",
+      "top_level_module": "rest_framework",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "django"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "setup.cfg",
+      "source_type": "setup.cfg",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No install_requires found in setup.cfg"
+      ]
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No deps found in tox.ini — may use requirements file references"
+      ]
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "rest_framework/apps.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_apps.py",
+        "tests/test_apps.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_apps.py",
+        "tests/apps/test_apps.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/authentication.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_authentication.py",
+        "tests/test_authentication.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_authentication.py",
+        "tests/authentication/test_authentication.py",
+        "tests/authentications/test_authentication.py"
+      ],
+      "existing_test_paths": [
+        "tests/authentication/test_authentication.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/authentication/test_authentication.py"
+    },
+    {
+      "source_path": "rest_framework/authtoken/admin.py",
+      "candidate_test_paths": [
+        "rest_framework/authtoken/tests/test_admin.py",
+        "tests/authtoken/test_admin.py",
+        "rest_framework/authtoken/tests/test_authtoken.py",
+        "test/test_admin.py",
+        "tests/test_admin.py",
+        "tests/admin/test_admin.py",
+        "tests/admins/test_admin.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/authtoken/apps.py",
+      "candidate_test_paths": [
+        "rest_framework/authtoken/tests/test_apps.py",
+        "tests/authtoken/test_apps.py",
+        "rest_framework/authtoken/tests/test_authtoken.py",
+        "test/test_apps.py",
+        "tests/test_apps.py",
+        "tests/apps/test_apps.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/authtoken/management/commands/drf_create_token.py",
+      "candidate_test_paths": [
+        "rest_framework/authtoken/management/commands/tests/test_drf_create_token.py",
+        "tests/authtoken/management/commands/test_drf_create_token.py",
+        "rest_framework/authtoken/management/commands/tests/test_commands.py",
+        "test/test_drf_create_token.py",
+        "tests/test_drf_create_token.py",
+        "tests/drf_create_token/test_drf_create_token.py",
+        "tests/drf_create_tokens/test_drf_create_token.py",
+        "tests/commands/test_drf_create_token.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/authtoken/models.py",
+      "candidate_test_paths": [
+        "rest_framework/authtoken/tests/test_models.py",
+        "tests/authtoken/test_models.py",
+        "rest_framework/authtoken/tests/test_authtoken.py",
+        "test/test_models.py",
+        "tests/test_models.py",
+        "tests/models/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/authtoken/serializers.py",
+      "candidate_test_paths": [
+        "rest_framework/authtoken/tests/test_serializers.py",
+        "tests/authtoken/test_serializers.py",
+        "rest_framework/authtoken/tests/test_authtoken.py",
+        "test/test_serializers.py",
+        "tests/test_serializers.py",
+        "tests/serializers/test_serializers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/authtoken/views.py",
+      "candidate_test_paths": [
+        "rest_framework/authtoken/tests/test_views.py",
+        "tests/authtoken/test_views.py",
+        "rest_framework/authtoken/tests/test_authtoken.py",
+        "test/test_views.py",
+        "tests/test_views.py",
+        "tests/views/test_views.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_views.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_views.py"
+    },
+    {
+      "source_path": "rest_framework/checks.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_checks.py",
+        "tests/test_checks.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_checks.py",
+        "tests/checks/test_checks.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/compat.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_compat.py",
+        "tests/test_compat.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_compat.py",
+        "tests/compat/test_compat.py",
+        "tests/compats/test_compat.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/decorators.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_decorators.py",
+        "tests/test_decorators.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_decorators.py",
+        "tests/decorators/test_decorators.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_decorators.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_decorators.py"
+    },
+    {
+      "source_path": "rest_framework/exceptions.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_exceptions.py",
+        "tests/test_exceptions.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_exceptions.py",
+        "tests/exceptions/test_exceptions.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_exceptions.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_exceptions.py"
+    },
+    {
+      "source_path": "rest_framework/fields.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_fields.py",
+        "tests/test_fields.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_fields.py",
+        "tests/fields/test_fields.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_fields.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_fields.py"
+    },
+    {
+      "source_path": "rest_framework/filters.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_filters.py",
+        "tests/test_filters.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_filters.py",
+        "tests/filters/test_filters.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_filters.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_filters.py"
+    },
+    {
+      "source_path": "rest_framework/generics.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_generics.py",
+        "tests/test_generics.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_generics.py",
+        "tests/generics/test_generics.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_generics.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_generics.py"
+    },
+    {
+      "source_path": "rest_framework/management/commands/generateschema.py",
+      "candidate_test_paths": [
+        "rest_framework/management/commands/tests/test_generateschema.py",
+        "tests/management/commands/test_generateschema.py",
+        "rest_framework/management/commands/tests/test_commands.py",
+        "test/test_generateschema.py",
+        "tests/test_generateschema.py",
+        "tests/generateschema/test_generateschema.py",
+        "tests/generateschemas/test_generateschema.py",
+        "tests/commands/test_generateschema.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/metadata.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_metadata.py",
+        "tests/test_metadata.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_metadata.py",
+        "tests/metadata/test_metadata.py",
+        "tests/metadatas/test_metadata.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_metadata.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_metadata.py"
+    },
+    {
+      "source_path": "rest_framework/mixins.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_mixins.py",
+        "tests/test_mixins.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_mixins.py",
+        "tests/mixins/test_mixins.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/negotiation.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_negotiation.py",
+        "tests/test_negotiation.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_negotiation.py",
+        "tests/negotiation/test_negotiation.py",
+        "tests/negotiations/test_negotiation.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_negotiation.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_negotiation.py"
+    },
+    {
+      "source_path": "rest_framework/pagination.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_pagination.py",
+        "tests/test_pagination.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_pagination.py",
+        "tests/pagination/test_pagination.py",
+        "tests/paginations/test_pagination.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_pagination.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_pagination.py"
+    },
+    {
+      "source_path": "rest_framework/parsers.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_parsers.py",
+        "tests/test_parsers.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_parsers.py",
+        "tests/parsers/test_parsers.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_parsers.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_parsers.py"
+    },
+    {
+      "source_path": "rest_framework/permissions.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_permissions.py",
+        "tests/test_permissions.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_permissions.py",
+        "tests/permissions/test_permissions.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_permissions.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_permissions.py"
+    },
+    {
+      "source_path": "rest_framework/relations.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_relations.py",
+        "tests/test_relations.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_relations.py",
+        "tests/relations/test_relations.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_relations.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_relations.py"
+    },
+    {
+      "source_path": "rest_framework/renderers.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_renderers.py",
+        "tests/test_renderers.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_renderers.py",
+        "tests/renderers/test_renderers.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_renderers.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_renderers.py"
+    },
+    {
+      "source_path": "rest_framework/request.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_request.py",
+        "tests/test_request.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_request.py",
+        "tests/request/test_request.py",
+        "tests/requests/test_request.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_request.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_request.py"
+    },
+    {
+      "source_path": "rest_framework/response.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_response.py",
+        "tests/test_response.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_response.py",
+        "tests/response/test_response.py",
+        "tests/responses/test_response.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_response.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_response.py"
+    },
+    {
+      "source_path": "rest_framework/reverse.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_reverse.py",
+        "tests/test_reverse.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_reverse.py",
+        "tests/reverse/test_reverse.py",
+        "tests/reverses/test_reverse.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_reverse.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_reverse.py"
+    },
+    {
+      "source_path": "rest_framework/routers.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_routers.py",
+        "tests/test_routers.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_routers.py",
+        "tests/routers/test_routers.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_routers.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_routers.py"
+    },
+    {
+      "source_path": "rest_framework/schemas/generators.py",
+      "candidate_test_paths": [
+        "rest_framework/schemas/tests/test_generators.py",
+        "tests/schemas/test_generators.py",
+        "rest_framework/schemas/tests/test_schemas.py",
+        "test/test_generators.py",
+        "tests/test_generators.py",
+        "tests/generators/test_generators.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/schemas/inspectors.py",
+      "candidate_test_paths": [
+        "rest_framework/schemas/tests/test_inspectors.py",
+        "tests/schemas/test_inspectors.py",
+        "rest_framework/schemas/tests/test_schemas.py",
+        "test/test_inspectors.py",
+        "tests/test_inspectors.py",
+        "tests/inspectors/test_inspectors.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/schemas/openapi.py",
+      "candidate_test_paths": [
+        "rest_framework/schemas/tests/test_openapi.py",
+        "tests/schemas/test_openapi.py",
+        "rest_framework/schemas/tests/test_schemas.py",
+        "test/test_openapi.py",
+        "tests/test_openapi.py",
+        "tests/openapi/test_openapi.py",
+        "tests/openapis/test_openapi.py"
+      ],
+      "existing_test_paths": [
+        "tests/schemas/test_openapi.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/schemas/test_openapi.py"
+    },
+    {
+      "source_path": "rest_framework/schemas/utils.py",
+      "candidate_test_paths": [
+        "rest_framework/schemas/tests/test_utils.py",
+        "tests/schemas/test_utils.py",
+        "rest_framework/schemas/tests/test_schemas.py",
+        "test/test_utils.py",
+        "tests/test_utils.py",
+        "tests/utils/test_utils.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_utils.py"
+      ],
+      "confidence": "medium",
+      "reason": "Generic library helper match without directory context: tests/test_utils.py"
+    },
+    {
+      "source_path": "rest_framework/schemas/views.py",
+      "candidate_test_paths": [
+        "rest_framework/schemas/tests/test_views.py",
+        "tests/schemas/test_views.py",
+        "rest_framework/schemas/tests/test_schemas.py",
+        "test/test_views.py",
+        "tests/test_views.py",
+        "tests/views/test_views.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_views.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_views.py"
+    },
+    {
+      "source_path": "rest_framework/serializers.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_serializers.py",
+        "tests/test_serializers.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_serializers.py",
+        "tests/serializers/test_serializers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/status.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_status.py",
+        "tests/test_status.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_status.py",
+        "tests/status/test_status.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_status.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_status.py"
+    },
+    {
+      "source_path": "rest_framework/templatetags/rest_framework.py",
+      "candidate_test_paths": [
+        "rest_framework/templatetags/tests/test_rest_framework.py",
+        "tests/templatetags/test_rest_framework.py",
+        "rest_framework/templatetags/tests/test_templatetags.py",
+        "test/test_rest_framework.py",
+        "tests/test_rest_framework.py",
+        "tests/rest_framework/test_rest_framework.py",
+        "tests/rest_frameworks/test_rest_framework.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/test.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_test.py",
+        "tests/test_test.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_test.py",
+        "tests/test/test_test.py",
+        "tests/tests/test_test.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/throttling.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_throttling.py",
+        "tests/test_throttling.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_throttling.py",
+        "tests/throttling/test_throttling.py",
+        "tests/throttlings/test_throttling.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_throttling.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_throttling.py"
+    },
+    {
+      "source_path": "rest_framework/urlpatterns.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_urlpatterns.py",
+        "tests/test_urlpatterns.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_urlpatterns.py",
+        "tests/urlpatterns/test_urlpatterns.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_urlpatterns.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_urlpatterns.py"
+    },
+    {
+      "source_path": "rest_framework/urls.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_urls.py",
+        "tests/test_urls.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_urls.py",
+        "tests/urls/test_urls.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/utils/breadcrumbs.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_breadcrumbs.py",
+        "tests/utils/test_breadcrumbs.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_breadcrumbs.py",
+        "tests/test_breadcrumbs.py",
+        "tests/breadcrumbs/test_breadcrumbs.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/utils/encoders.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_encoders.py",
+        "tests/utils/test_encoders.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_encoders.py",
+        "tests/test_encoders.py",
+        "tests/encoders/test_encoders.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_encoders.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_encoders.py"
+    },
+    {
+      "source_path": "rest_framework/utils/field_mapping.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_field_mapping.py",
+        "tests/utils/test_field_mapping.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_field_mapping.py",
+        "tests/test_field_mapping.py",
+        "tests/field_mapping/test_field_mapping.py",
+        "tests/field_mappings/test_field_mapping.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/utils/formatting.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_formatting.py",
+        "tests/utils/test_formatting.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_formatting.py",
+        "tests/test_formatting.py",
+        "tests/formatting/test_formatting.py",
+        "tests/formattings/test_formatting.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/utils/html.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_html.py",
+        "tests/utils/test_html.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_html.py",
+        "tests/test_html.py",
+        "tests/html/test_html.py",
+        "tests/htmls/test_html.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/utils/humanize_datetime.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_humanize_datetime.py",
+        "tests/utils/test_humanize_datetime.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_humanize_datetime.py",
+        "tests/test_humanize_datetime.py",
+        "tests/humanize_datetime/test_humanize_datetime.py",
+        "tests/humanize_datetimes/test_humanize_datetime.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/utils/json.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_json.py",
+        "tests/utils/test_json.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_json.py",
+        "tests/test_json.py",
+        "tests/json/test_json.py",
+        "tests/jsons/test_json.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/utils/mediatypes.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_mediatypes.py",
+        "tests/utils/test_mediatypes.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_mediatypes.py",
+        "tests/test_mediatypes.py",
+        "tests/mediatypes/test_mediatypes.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/utils/model_meta.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_model_meta.py",
+        "tests/utils/test_model_meta.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_model_meta.py",
+        "tests/test_model_meta.py",
+        "tests/model_meta/test_model_meta.py",
+        "tests/model_metas/test_model_meta.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/utils/representation.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_representation.py",
+        "tests/utils/test_representation.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_representation.py",
+        "tests/test_representation.py",
+        "tests/representation/test_representation.py",
+        "tests/representations/test_representation.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/utils/serializer_helpers.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_serializer_helpers.py",
+        "tests/utils/test_serializer_helpers.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_serializer_helpers.py",
+        "tests/test_serializer_helpers.py",
+        "tests/serializer_helpers/test_serializer_helpers.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/utils/timezone.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_timezone.py",
+        "tests/utils/test_timezone.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_timezone.py",
+        "tests/test_timezone.py",
+        "tests/timezone/test_timezone.py",
+        "tests/timezones/test_timezone.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/utils/urls.py",
+      "candidate_test_paths": [
+        "rest_framework/utils/tests/test_urls.py",
+        "tests/utils/test_urls.py",
+        "rest_framework/utils/tests/test_utils.py",
+        "test/test_urls.py",
+        "tests/test_urls.py",
+        "tests/urls/test_urls.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "rest_framework/validators.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_validators.py",
+        "tests/test_validators.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_validators.py",
+        "tests/validators/test_validators.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_validators.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_validators.py"
+    },
+    {
+      "source_path": "rest_framework/versioning.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_versioning.py",
+        "tests/test_versioning.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_versioning.py",
+        "tests/versioning/test_versioning.py",
+        "tests/versionings/test_versioning.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_versioning.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_versioning.py"
+    },
+    {
+      "source_path": "rest_framework/views.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_views.py",
+        "tests/test_views.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_views.py",
+        "tests/views/test_views.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_views.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_views.py"
+    },
+    {
+      "source_path": "rest_framework/viewsets.py",
+      "candidate_test_paths": [
+        "rest_framework/tests/test_viewsets.py",
+        "tests/test_viewsets.py",
+        "rest_framework/tests/test_rest_framework.py",
+        "test/test_viewsets.py",
+        "tests/viewsets/test_viewsets.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_viewsets.py"
+      ],
+      "confidence": "high",
+      "reason": "Library module match: tests/test_viewsets.py"
+    },
+    {
+      "source_path": "runtests.py",
+      "candidate_test_paths": [
+        "test/test_runtests.py",
+        "tests/test_runtests.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/auth/**",
+      "matched_paths": [
+        "tests/browsable_api/auth_urls.py",
+        "tests/browsable_api/no_auth_urls.py"
+      ],
+      "category": "authentication",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"auth\" found in 2 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/permission/**",
+      "matched_paths": [
+        "rest_framework/permissions.py",
+        "tests/test_permissions.py"
+      ],
+      "category": "authorization",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"permission\" found in 2 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/admin/**",
+      "matched_paths": [
+        "rest_framework/authtoken/admin.py"
+      ],
+      "category": "administration",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"admin\" found in 1 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/migration/**",
+      "matched_paths": [
+        "rest_framework/authtoken/migrations/0001_initial.py",
+        "rest_framework/authtoken/migrations/0002_auto_20160226_1747.py",
+        "rest_framework/authtoken/migrations/0003_tokenproxy.py",
+        "rest_framework/authtoken/migrations/0004_alter_tokenproxy_options.py",
+        "rest_framework/authtoken/migrations/__init__.py",
+        "tests/authentication/migrations/0001_initial.py",
+        "tests/authentication/migrations/__init__.py",
+        "tests/generic_relations/migrations/0001_initial.py",
+        "tests/generic_relations/migrations/__init__.py"
+      ],
+      "category": "schema_migration",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"migration\" found in 9 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/settings/**",
+      "matched_paths": [
+        "rest_framework/settings.py",
+        "tests/test_settings.py"
+      ],
+      "category": "infrastructure_config",
+      "severity": "medium",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"settings\" found in 2 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "setup.cfg",
+        "tox.ini"
+      ],
+      "count": 2,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 154,
+    "classified_count": 154,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 410,
+    "project_import_count": 132,
+    "declared_package_count": 180,
+    "undeclared_package_count": 12,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 58,
+    "high_confidence_test_count": 28,
+    "medium_confidence_test_count": 1,
+    "sensitive_zone_count": 5,
+    "sensitive_file_count": 16,
+    "manifest_count": 3,
+    "low_confidence_manifest_count": 2
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

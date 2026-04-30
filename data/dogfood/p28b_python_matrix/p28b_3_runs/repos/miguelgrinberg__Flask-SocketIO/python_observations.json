@@ -1,0 +1,727 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "miguelgrinberg__Flask-SocketIO",
+    "observed_file_count": 36,
+    "python_file_count": 11
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "src_layout",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "src_layout_detected",
+        "weight": "strong",
+        "evidence": "src/ directory with package(s): flask_socketio"
+      },
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "docs": 1,
+      "source": 6,
+      "unknown": 1,
+      "config": 2,
+      "test": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "flask",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "flask found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "flask imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "flask_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / src_layout (medium)",
+      "framework: flask / web_framework (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (medium)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/config*",
+        "reason": "Application configuration affects runtime behavior",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/config*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/blueprints/**",
+        "reason": "No Flask blueprint directory observed"
+      },
+      {
+        "pattern": "**/extensions*",
+        "reason": "No extensions files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/conf.py",
+      "bucket": "docs",
+      "extension": ".py",
+      "size_bytes": 5548,
+      "evidence": [
+        "Documentation directory"
+      ]
+    },
+    {
+      "path": "example/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3795,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "example/app_namespace.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3404,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "example/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 280,
+      "evidence": []
+    },
+    {
+      "path": "example/sessions.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1798,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 1337,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "src/flask_socketio/namespace.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2383,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "src/flask_socketio/test_client.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 11592,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "src/flask_socketio/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 57571,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "test_socketio.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 31218,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tox.ini",
+      "bucket": "config",
+      "extension": ".ini",
+      "size_bytes": 755,
+      "evidence": [
+        "Tool config"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "example/app.py",
+      "raw_specifier": "from threading import Lock",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example/app.py",
+      "raw_specifier": "from flask import Flask, render_template, session, request, \\",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example/app.py",
+      "raw_specifier": "from flask_socketio import SocketIO, emit, join_room, leave_room, \\",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_socketio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example/app_namespace.py",
+      "raw_specifier": "from threading import Lock",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example/app_namespace.py",
+      "raw_specifier": "from flask import Flask, render_template, session, request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example/app_namespace.py",
+      "raw_specifier": "from flask_socketio import SocketIO, Namespace, emit, join_room, leave_room, \\",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_socketio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example/sessions.py",
+      "raw_specifier": "from flask import Flask, render_template, session, request, jsonify",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example/sessions.py",
+      "raw_specifier": "from flask_login import LoginManager, UserMixin, current_user, login_user, \\",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_login",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example/sessions.py",
+      "raw_specifier": "from flask_session import Session",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_session",
+      "confidence": "high"
+    },
+    {
+      "from_file": "example/sessions.py",
+      "raw_specifier": "from flask_socketio import SocketIO, emit",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_socketio",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_socketio/namespace.py",
+      "raw_specifier": "from socketio import Namespace as _Namespace",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "socketio",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from functools import wraps",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "functools",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from socketio import socketio_manage  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "socketio",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "flask",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from flask import has_request_context, json as flask_json",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from flask.sessions import SessionMixin",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "socketio",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "socketio",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from socketio.exceptions import ConnectionRefusedError  # noqa: F401",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "socketio",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from werkzeug.debug import DebuggedApplication",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from werkzeug._reloader import run_with_reloader",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from .namespace import Namespace",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".namespace",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from .test_client import SocketIOTestClient",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".test_client",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "simple_websocket",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "simple_websocket",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from werkzeug._internal import _log",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from werkzeug._internal import _log",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "werkzeug",
+      "confidence": "high"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "eventlet",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "eventlet.wsgi",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "eventlet.green",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "eventlet",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from gevent import pywsgi",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "gevent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from geventwebsocket.handler import WebSocketHandler",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "geventwebsocket",
+      "confidence": "low"
+    },
+    {
+      "from_file": "src/flask_socketio/__init__.py",
+      "raw_specifier": "from gevent import monkey",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "gevent",
+      "confidence": "low"
+    },
+    {
+      "from_file": "test_socketio.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_socketio.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_socketio.py",
+      "raw_specifier": "unittest",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "unittest",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_socketio.py",
+      "raw_specifier": "from flask import Flask, session, request, json as flask_json",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "test_socketio.py",
+      "raw_specifier": "from flask_socketio import SocketIO, send, emit, join_room, leave_room, \\",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_socketio",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "example/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "bidict",
+        "cachelib",
+        "click",
+        "flask",
+        "flask_login",
+        "flask_session",
+        "flask_socketio",
+        "importlib_metadata",
+        "itsdangerous",
+        "jinja2",
+        "markupsafe",
+        "python_engineio",
+        "python_socketio",
+        "six",
+        "werkzeug",
+        "zipp"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "blinker",
+        "click",
+        "flask",
+        "jinja2",
+        "python_socketio",
+        "werkzeug",
+        "sphinx",
+        "furo"
+      ],
+      "dev_packages": [
+        "flask_login",
+        "flask_session",
+        "pytest",
+        "pytest_cov",
+        "redis",
+        "tox"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "tox.ini",
+      "source_type": "tox.ini",
+      "packages": [],
+      "dev_packages": [
+        "pytest",
+        "flake8",
+        "sphinx"
+      ],
+      "confidence": "medium",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "example/app.py",
+      "candidate_test_paths": [
+        "example/tests/test_app.py",
+        "tests/test_app.py",
+        "example/tests/test_example.py",
+        "test/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "example/app_namespace.py",
+      "candidate_test_paths": [
+        "example/tests/test_app_namespace.py",
+        "tests/test_app_namespace.py",
+        "example/tests/test_example.py",
+        "test/test_app_namespace.py",
+        "tests/app_namespace/test_app_namespace.py",
+        "tests/app_namespaces/test_app_namespace.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "example/sessions.py",
+      "candidate_test_paths": [
+        "example/tests/test_sessions.py",
+        "tests/test_sessions.py",
+        "example/tests/test_example.py",
+        "test/test_sessions.py",
+        "tests/sessions/test_sessions.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "src/flask_socketio/namespace.py",
+      "candidate_test_paths": [
+        "src/flask_socketio/tests/test_namespace.py",
+        "tests/flask_socketio/test_namespace.py",
+        "src/flask_socketio/tests/test_flask_socketio.py",
+        "test/test_namespace.py",
+        "tests/test_namespace.py",
+        "tests/namespace/test_namespace.py",
+        "tests/namespaces/test_namespace.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "example/requirements.txt"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 8,
+    "classified_count": 8,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 38,
+    "project_import_count": 0,
+    "declared_package_count": 17,
+    "undeclared_package_count": 11,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 4,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 3,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

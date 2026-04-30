@@ -9,6 +9,8 @@
  */
 
 import { promises as fs } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { resolveTrustedPath } from "../safePath.js";
 import type { UncertaintyEntry, UncertaintyRegister } from "./types.js";
 
 export function createUncertaintyRegister(): UncertaintyRegister {
@@ -63,15 +65,33 @@ export function getBlockingUncertainties(register: UncertaintyRegister): Uncerta
   );
 }
 
-export async function loadRegister(path: string): Promise<UncertaintyRegister> {
+export type UncertaintyRegisterPathOptions = {
+  readonly repoRoot?: string;
+  readonly trustedAbsolute?: boolean;
+};
+
+function resolveRegisterPath(path: string, options?: UncertaintyRegisterPathOptions): string {
+  return resolveTrustedPath(resolve(options?.repoRoot ?? process.cwd()), path, {
+    allowAbsolute: options?.trustedAbsolute === true,
+  });
+}
+
+export async function loadRegister(path: string, options?: UncertaintyRegisterPathOptions): Promise<UncertaintyRegister> {
+  const registerPath = resolveRegisterPath(path, options);
   try {
-    const raw = await fs.readFile(path, "utf8");
+    const raw = await fs.readFile(registerPath, "utf8");
     return JSON.parse(raw);
   } catch {
     return createUncertaintyRegister();
   }
 }
 
-export async function saveRegister(path: string, register: UncertaintyRegister): Promise<void> {
-  await fs.writeFile(path, JSON.stringify(register, null, 2), "utf8");
+export async function saveRegister(
+  path: string,
+  register: UncertaintyRegister,
+  options?: UncertaintyRegisterPathOptions,
+): Promise<void> {
+  const registerPath = resolveRegisterPath(path, options);
+  await fs.mkdir(dirname(registerPath), { recursive: true });
+  await fs.writeFile(registerPath, JSON.stringify(register, null, 2), "utf8");
 }

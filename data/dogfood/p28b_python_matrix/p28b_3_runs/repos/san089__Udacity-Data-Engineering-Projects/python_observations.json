@@ -1,0 +1,1460 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "san089__Udacity-Data-Engineering-Projects",
+    "observed_file_count": 278,
+    "python_file_count": 31
+  },
+  "layout": {
+    "primary_layout": "data_pipeline",
+    "package_layout": "flat_package",
+    "confidence": "medium",
+    "signals": [
+      {
+        "signal": "flat_package_detected",
+        "weight": "strong",
+        "evidence": "Root-level package(s) with __init__.py: Data_Api_to_Postgres"
+      },
+      {
+        "signal": "pipeline_structure",
+        "weight": "moderate",
+        "evidence": "Pipeline/DAG/ETL directory structure"
+      },
+      {
+        "signal": "jupyter_notebooks",
+        "weight": "weak",
+        "evidence": "Jupyter notebooks present"
+      },
+      {
+        "signal": "ambiguous_layout",
+        "weight": "weak",
+        "evidence": "Close scores: data_pipeline=2, ml_project=1"
+      }
+    ],
+    "unknowns": [],
+    "bucket_summary": {
+      "source": 27,
+      "notebook": 3,
+      "test": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "airflow",
+        "kind": "workflow_orchestration",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "airflow imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "workflow_orchestration",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "Workflow orchestration framework imported in source files"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "unknown",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: data_pipeline / flat_package (medium)",
+      "framework: airflow / workflow_orchestration (medium)",
+      "project_role: workflow_orchestration (medium)",
+      "sensitive_zone: authentication (high, 1 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/auth*",
+        "reason": "Authentication logic requires human review",
+        "severity": "high",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/auth*",
+          "Sensitive zone \"authentication\" (high) corroborates"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "Airflow_Data_Pipelines/dags/sparkify_dimension_subdag.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 758,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Airflow_Data_Pipelines/dags/udac_example_dag.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4591,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Airflow_Data_Pipelines/plugins/helpers/sql_queries.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1989,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Airflow_Data_Pipelines/plugins/helpers/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 79,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Airflow_Data_Pipelines/plugins/operators/create_table.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 859,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Airflow_Data_Pipelines/plugins/operators/data_quality.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1318,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Airflow_Data_Pipelines/plugins/operators/load_dimension.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1235,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Airflow_Data_Pipelines/plugins/operators/load_fact.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 704,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Airflow_Data_Pipelines/plugins/operators/stage_redshift.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2237,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Airflow_Data_Pipelines/plugins/operators/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 445,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Airflow_Data_Pipelines/plugins/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 532,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Api_to_Postgres/auth.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 243,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Api_to_Postgres/businesssearch.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1929,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Api_to_Postgres/databasedriver.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 654,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Api_to_Postgres/driver.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1959,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Api_to_Postgres/queries.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1306,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Api_to_Postgres/request.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 476,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Api_to_Postgres/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Lake/etl.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5281,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Modeling_with_Apache_Cassandra/Project_1B_ Project_Template.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 20758,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "Data_Modeling_with_Postgres/create_tables.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1932,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Modeling_with_Postgres/etl.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 12893,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "Data_Modeling_with_Postgres/etl.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4186,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Modeling_with_Postgres/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 158,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Modeling_with_Postgres/sql_queries.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3398,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Modeling_with_Postgres/test.ipynb",
+      "bucket": "notebook",
+      "extension": ".ipynb",
+      "size_bytes": 2234,
+      "evidence": [
+        "Jupyter notebook — unsupported for import analysis"
+      ]
+    },
+    {
+      "path": "Data_Warehouse/create_tables.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 702,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Warehouse/etl.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 722,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Data_Warehouse/sql_queries.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5262,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Redshift_Cluster_IaC.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 14339,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Redshift_test.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 671,
+      "evidence": [
+        "_test suffix convention"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/sparkify_dimension_subdag.py",
+      "raw_specifier": "from datetime import datetime, timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/sparkify_dimension_subdag.py",
+      "raw_specifier": "from airflow import DAG",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/sparkify_dimension_subdag.py",
+      "raw_specifier": "from airflow.operators.dummy_operator import DummyOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/sparkify_dimension_subdag.py",
+      "raw_specifier": "from airflow.operators import LoadDimensionOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/sparkify_dimension_subdag.py",
+      "raw_specifier": "from helpers import SqlQueries",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "helpers",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/udac_example_dag.py",
+      "raw_specifier": "from datetime import datetime, timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/udac_example_dag.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/udac_example_dag.py",
+      "raw_specifier": "from airflow import DAG",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/udac_example_dag.py",
+      "raw_specifier": "from airflow.operators.dummy_operator import DummyOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/udac_example_dag.py",
+      "raw_specifier": "from airflow.operators import ( CreateTableOperator, StageToRedshiftOperator, LoadFactOperator,",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/udac_example_dag.py",
+      "raw_specifier": "from helpers import SqlQueries",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "helpers",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/udac_example_dag.py",
+      "raw_specifier": "from sparkify_dimension_subdag import load_dimension_subdag",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sparkify_dimension_subdag",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/dags/udac_example_dag.py",
+      "raw_specifier": "from airflow.operators.subdag_operator import SubDagOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/helpers/__init__.py",
+      "raw_specifier": "from helpers.sql_queries import SqlQueries",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "helpers",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/create_table.py",
+      "raw_specifier": "from airflow.hooks.postgres_hook import PostgresHook",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/create_table.py",
+      "raw_specifier": "from airflow.models import BaseOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/create_table.py",
+      "raw_specifier": "from airflow.utils.decorators import apply_defaults",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/data_quality.py",
+      "raw_specifier": "from airflow.hooks.postgres_hook import PostgresHook",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/data_quality.py",
+      "raw_specifier": "from airflow.models import BaseOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/data_quality.py",
+      "raw_specifier": "from airflow.utils.decorators import apply_defaults",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/load_dimension.py",
+      "raw_specifier": "from airflow.hooks.postgres_hook import PostgresHook",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/load_dimension.py",
+      "raw_specifier": "from airflow.models import BaseOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/load_dimension.py",
+      "raw_specifier": "from airflow.utils.decorators import apply_defaults",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/load_fact.py",
+      "raw_specifier": "from airflow.hooks.postgres_hook import PostgresHook",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/load_fact.py",
+      "raw_specifier": "from airflow.models import BaseOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/load_fact.py",
+      "raw_specifier": "from airflow.utils.decorators import apply_defaults",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/stage_redshift.py",
+      "raw_specifier": "from airflow.hooks.postgres_hook import PostgresHook",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/stage_redshift.py",
+      "raw_specifier": "from airflow.models import BaseOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/stage_redshift.py",
+      "raw_specifier": "from airflow.utils.decorators import apply_defaults",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/stage_redshift.py",
+      "raw_specifier": "from airflow.contrib.hooks.aws_hook import AwsHook",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/__init__.py",
+      "raw_specifier": "from operators.create_table import CreateTableOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "operators",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/__init__.py",
+      "raw_specifier": "from operators.stage_redshift import StageToRedshiftOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "operators",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/__init__.py",
+      "raw_specifier": "from operators.load_fact import LoadFactOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "operators",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/__init__.py",
+      "raw_specifier": "from operators.load_dimension import LoadDimensionOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "operators",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/operators/__init__.py",
+      "raw_specifier": "from operators.data_quality import DataQualityOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "operators",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/__init__.py",
+      "raw_specifier": "from __future__ import division, absolute_import, print_function",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "__future__",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/__init__.py",
+      "raw_specifier": "from airflow.plugins_manager import AirflowPlugin",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/__init__.py",
+      "raw_specifier": "operators",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "operators",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Airflow_Data_Pipelines/plugins/__init__.py",
+      "raw_specifier": "helpers",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "helpers",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/auth.py",
+      "raw_specifier": "configparser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "configparser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/auth.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/businesssearch.py",
+      "raw_specifier": "from request import Request",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "request",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/businesssearch.py",
+      "raw_specifier": "from auth import headers",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "auth",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/businesssearch.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/databasedriver.py",
+      "raw_specifier": "psycopg2",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "psycopg2",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/databasedriver.py",
+      "raw_specifier": "configparser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "configparser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/databasedriver.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/databasedriver.py",
+      "raw_specifier": "from queries import create_business_schema, create_business_table",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "queries",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/driver.py",
+      "raw_specifier": "configparser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "configparser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/driver.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/driver.py",
+      "raw_specifier": "from businesssearch import BusinessSearch",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "businesssearch",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/driver.py",
+      "raw_specifier": "from queries import create_business_schema, create_business_table, insert_business_table",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "queries",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/driver.py",
+      "raw_specifier": "from databasedriver import DatabaseDriver",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "databasedriver",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/driver.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/request.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "requests",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/request.py",
+      "raw_specifier": "from auth import headers",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "auth",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Api_to_Postgres/request.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Lake/etl.py",
+      "raw_specifier": "configparser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "configparser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Lake/etl.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Lake/etl.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Lake/etl.py",
+      "raw_specifier": "from pyspark.sql import SparkSession",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pyspark",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Lake/etl.py",
+      "raw_specifier": "from pyspark.sql.functions import udf, col, monotonically_increasing_id",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pyspark",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Lake/etl.py",
+      "raw_specifier": "from pyspark.sql.functions import year, month, dayofmonth, hour, weekofyear, date_format, dayofweek",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pyspark",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Lake/etl.py",
+      "raw_specifier": "from pyspark.sql.types import *",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pyspark",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Modeling_with_Postgres/create_tables.py",
+      "raw_specifier": "psycopg2",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "psycopg2",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Modeling_with_Postgres/create_tables.py",
+      "raw_specifier": "from sql_queries import create_table_queries, drop_table_queries",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sql_queries",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Modeling_with_Postgres/etl.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Modeling_with_Postgres/etl.py",
+      "raw_specifier": "glob",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "glob",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Modeling_with_Postgres/etl.py",
+      "raw_specifier": "psycopg2",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "psycopg2",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Modeling_with_Postgres/etl.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pandas",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Modeling_with_Postgres/etl.py",
+      "raw_specifier": "from sql_queries import *",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sql_queries",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Modeling_with_Postgres/main.py",
+      "raw_specifier": "from create_tables import main as create_table_main",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "create_tables",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Modeling_with_Postgres/main.py",
+      "raw_specifier": "from etl import main as etl_main",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "etl",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Warehouse/create_tables.py",
+      "raw_specifier": "configparser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "configparser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Warehouse/create_tables.py",
+      "raw_specifier": "psycopg2",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "psycopg2",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Warehouse/create_tables.py",
+      "raw_specifier": "from sql_queries import create_table_queries, drop_table_queries",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sql_queries",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Warehouse/etl.py",
+      "raw_specifier": "configparser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "configparser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Data_Warehouse/etl.py",
+      "raw_specifier": "psycopg2",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "psycopg2",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Warehouse/etl.py",
+      "raw_specifier": "from sql_queries import copy_table_queries, insert_table_queries",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sql_queries",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Data_Warehouse/sql_queries.py",
+      "raw_specifier": "configparser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "configparser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Redshift_Cluster_IaC.py",
+      "raw_specifier": "boto3",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "boto3",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Redshift_Cluster_IaC.py",
+      "raw_specifier": "configparser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "configparser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Redshift_Cluster_IaC.py",
+      "raw_specifier": "from botocore.exceptions import ClientError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "botocore",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Redshift_Cluster_IaC.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Redshift_Cluster_IaC.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Redshift_Cluster_IaC.py",
+      "raw_specifier": "logging.config",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Redshift_Cluster_IaC.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Redshift_Cluster_IaC.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Redshift_Cluster_IaC.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [],
+  "test_mappings": [
+    {
+      "source_path": "Airflow_Data_Pipelines/dags/sparkify_dimension_subdag.py",
+      "candidate_test_paths": [
+        "Airflow_Data_Pipelines/dags/tests/test_sparkify_dimension_subdag.py",
+        "tests/dags/test_sparkify_dimension_subdag.py",
+        "Airflow_Data_Pipelines/dags/tests/test_dags.py",
+        "test/test_sparkify_dimension_subdag.py",
+        "tests/test_sparkify_dimension_subdag.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Airflow_Data_Pipelines/dags/udac_example_dag.py",
+      "candidate_test_paths": [
+        "Airflow_Data_Pipelines/dags/tests/test_udac_example_dag.py",
+        "tests/dags/test_udac_example_dag.py",
+        "Airflow_Data_Pipelines/dags/tests/test_dags.py",
+        "test/test_udac_example_dag.py",
+        "tests/test_udac_example_dag.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Airflow_Data_Pipelines/plugins/helpers/sql_queries.py",
+      "candidate_test_paths": [
+        "Airflow_Data_Pipelines/plugins/helpers/tests/test_sql_queries.py",
+        "tests/plugins/helpers/test_sql_queries.py",
+        "Airflow_Data_Pipelines/plugins/helpers/tests/test_helpers.py",
+        "test/test_sql_queries.py",
+        "tests/test_sql_queries.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Airflow_Data_Pipelines/plugins/operators/create_table.py",
+      "candidate_test_paths": [
+        "Airflow_Data_Pipelines/plugins/operators/tests/test_create_table.py",
+        "tests/plugins/operators/test_create_table.py",
+        "Airflow_Data_Pipelines/plugins/operators/tests/test_operators.py",
+        "test/test_create_table.py",
+        "tests/test_create_table.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Airflow_Data_Pipelines/plugins/operators/data_quality.py",
+      "candidate_test_paths": [
+        "Airflow_Data_Pipelines/plugins/operators/tests/test_data_quality.py",
+        "tests/plugins/operators/test_data_quality.py",
+        "Airflow_Data_Pipelines/plugins/operators/tests/test_operators.py",
+        "test/test_data_quality.py",
+        "tests/test_data_quality.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Airflow_Data_Pipelines/plugins/operators/load_dimension.py",
+      "candidate_test_paths": [
+        "Airflow_Data_Pipelines/plugins/operators/tests/test_load_dimension.py",
+        "tests/plugins/operators/test_load_dimension.py",
+        "Airflow_Data_Pipelines/plugins/operators/tests/test_operators.py",
+        "test/test_load_dimension.py",
+        "tests/test_load_dimension.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Airflow_Data_Pipelines/plugins/operators/load_fact.py",
+      "candidate_test_paths": [
+        "Airflow_Data_Pipelines/plugins/operators/tests/test_load_fact.py",
+        "tests/plugins/operators/test_load_fact.py",
+        "Airflow_Data_Pipelines/plugins/operators/tests/test_operators.py",
+        "test/test_load_fact.py",
+        "tests/test_load_fact.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Airflow_Data_Pipelines/plugins/operators/stage_redshift.py",
+      "candidate_test_paths": [
+        "Airflow_Data_Pipelines/plugins/operators/tests/test_stage_redshift.py",
+        "tests/plugins/operators/test_stage_redshift.py",
+        "Airflow_Data_Pipelines/plugins/operators/tests/test_operators.py",
+        "test/test_stage_redshift.py",
+        "tests/test_stage_redshift.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Api_to_Postgres/auth.py",
+      "candidate_test_paths": [
+        "Data_Api_to_Postgres/tests/test_auth.py",
+        "tests/test_auth.py",
+        "Data_Api_to_Postgres/tests/test_Data_Api_to_Postgres.py",
+        "test/test_auth.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Api_to_Postgres/businesssearch.py",
+      "candidate_test_paths": [
+        "Data_Api_to_Postgres/tests/test_businesssearch.py",
+        "tests/test_businesssearch.py",
+        "Data_Api_to_Postgres/tests/test_Data_Api_to_Postgres.py",
+        "test/test_businesssearch.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Api_to_Postgres/databasedriver.py",
+      "candidate_test_paths": [
+        "Data_Api_to_Postgres/tests/test_databasedriver.py",
+        "tests/test_databasedriver.py",
+        "Data_Api_to_Postgres/tests/test_Data_Api_to_Postgres.py",
+        "test/test_databasedriver.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Api_to_Postgres/driver.py",
+      "candidate_test_paths": [
+        "Data_Api_to_Postgres/tests/test_driver.py",
+        "tests/test_driver.py",
+        "Data_Api_to_Postgres/tests/test_Data_Api_to_Postgres.py",
+        "test/test_driver.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Api_to_Postgres/queries.py",
+      "candidate_test_paths": [
+        "Data_Api_to_Postgres/tests/test_queries.py",
+        "tests/test_queries.py",
+        "Data_Api_to_Postgres/tests/test_Data_Api_to_Postgres.py",
+        "test/test_queries.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Api_to_Postgres/request.py",
+      "candidate_test_paths": [
+        "Data_Api_to_Postgres/tests/test_request.py",
+        "tests/test_request.py",
+        "Data_Api_to_Postgres/tests/test_Data_Api_to_Postgres.py",
+        "test/test_request.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Lake/etl.py",
+      "candidate_test_paths": [
+        "Data_Lake/tests/test_etl.py",
+        "tests/test_etl.py",
+        "Data_Lake/tests/test_Data_Lake.py",
+        "test/test_etl.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Modeling_with_Postgres/create_tables.py",
+      "candidate_test_paths": [
+        "Data_Modeling_with_Postgres/tests/test_create_tables.py",
+        "tests/test_create_tables.py",
+        "Data_Modeling_with_Postgres/tests/test_Data_Modeling_with_Postgres.py",
+        "test/test_create_tables.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Modeling_with_Postgres/etl.py",
+      "candidate_test_paths": [
+        "Data_Modeling_with_Postgres/tests/test_etl.py",
+        "tests/test_etl.py",
+        "Data_Modeling_with_Postgres/tests/test_Data_Modeling_with_Postgres.py",
+        "test/test_etl.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Modeling_with_Postgres/main.py",
+      "candidate_test_paths": [
+        "Data_Modeling_with_Postgres/tests/test_main.py",
+        "tests/test_main.py",
+        "Data_Modeling_with_Postgres/tests/test_Data_Modeling_with_Postgres.py",
+        "test/test_main.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Modeling_with_Postgres/sql_queries.py",
+      "candidate_test_paths": [
+        "Data_Modeling_with_Postgres/tests/test_sql_queries.py",
+        "tests/test_sql_queries.py",
+        "Data_Modeling_with_Postgres/tests/test_Data_Modeling_with_Postgres.py",
+        "test/test_sql_queries.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Warehouse/create_tables.py",
+      "candidate_test_paths": [
+        "Data_Warehouse/tests/test_create_tables.py",
+        "tests/test_create_tables.py",
+        "Data_Warehouse/tests/test_Data_Warehouse.py",
+        "test/test_create_tables.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Warehouse/etl.py",
+      "candidate_test_paths": [
+        "Data_Warehouse/tests/test_etl.py",
+        "tests/test_etl.py",
+        "Data_Warehouse/tests/test_Data_Warehouse.py",
+        "test/test_etl.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Data_Warehouse/sql_queries.py",
+      "candidate_test_paths": [
+        "Data_Warehouse/tests/test_sql_queries.py",
+        "tests/test_sql_queries.py",
+        "Data_Warehouse/tests/test_Data_Warehouse.py",
+        "test/test_sql_queries.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Redshift_Cluster_IaC.py",
+      "candidate_test_paths": [
+        "test/test_Redshift_Cluster_IaC.py",
+        "tests/test_Redshift_Cluster_IaC.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/auth/**",
+      "matched_paths": [
+        "Data_Api_to_Postgres/auth.py"
+      ],
+      "category": "authentication",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"auth\" found in 1 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/plugin/**",
+      "matched_paths": [
+        "Airflow_Data_Pipelines/plugins/helpers/sql_queries.py",
+        "Airflow_Data_Pipelines/plugins/helpers/__init__.py",
+        "Airflow_Data_Pipelines/plugins/operators/create_table.py",
+        "Airflow_Data_Pipelines/plugins/operators/data_quality.py",
+        "Airflow_Data_Pipelines/plugins/operators/load_dimension.py",
+        "Airflow_Data_Pipelines/plugins/operators/load_fact.py",
+        "Airflow_Data_Pipelines/plugins/operators/stage_redshift.py",
+        "Airflow_Data_Pipelines/plugins/operators/__init__.py",
+        "Airflow_Data_Pipelines/plugins/__init__.py"
+      ],
+      "category": "runtime_extension",
+      "severity": "medium",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"plugin\" found in 9 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "Data_Modeling_with_Apache_Cassandra/Project_1B_ Project_Template.ipynb",
+        "Data_Modeling_with_Postgres/etl.ipynb",
+        "Data_Modeling_with_Postgres/test.ipynb"
+      ],
+      "count": 3,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 28,
+    "classified_count": 28,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 89,
+    "project_import_count": 0,
+    "declared_package_count": 0,
+    "undeclared_package_count": 63,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 23,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 2,
+    "sensitive_file_count": 10,
+    "manifest_count": 0,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

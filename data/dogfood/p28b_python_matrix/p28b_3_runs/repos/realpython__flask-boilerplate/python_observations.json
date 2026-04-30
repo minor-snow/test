@@ -1,0 +1,687 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "realpython__flask-boilerplate",
+    "observed_file_count": 104,
+    "python_file_count": 18
+  },
+  "layout": {
+    "primary_layout": "unknown",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "loose_scripts_only",
+        "weight": "weak",
+        "evidence": "5 top-level .py files without package __init__.py"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "No package structure detected; only loose scripts"
+      },
+      {
+        "aspect": "primary_layout",
+        "reason": "No structural signals matched known project forms"
+      }
+    ],
+    "bucket_summary": {
+      "source": 13,
+      "config": 1,
+      "unknown": 1,
+      "test": 3
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "flask",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "flask found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "flask imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "sqlalchemy found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "sqlalchemy imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "flask_service",
+    "validation": "unvalidated",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: unknown / unknown (low)",
+      "framework: flask / web_framework (high)",
+      "framework: sqlalchemy / orm (high)",
+      "project_role: service_backend (medium)"
+    ],
+    "suggested_review": [],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/blueprints/**",
+        "reason": "No Flask blueprint directory observed"
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      },
+      {
+        "pattern": "**/extensions*",
+        "reason": "No extensions files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2875,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "config.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 391,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "fabfile.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1062,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "forms.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 929,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 986,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 89,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "_updated/app/controllers/pages.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 826,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "_updated/app/controllers/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "_updated/app/forms.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 901,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "_updated/app/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 499,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "_updated/config/development/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 275,
+      "evidence": []
+    },
+    {
+      "path": "_updated/config/development/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 252,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "_updated/config/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "_updated/run.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 117,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "_updated/shell.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 114,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "_updated/tests/helpers.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1373,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "_updated/tests/test_page.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 167,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "_updated/tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Nested test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "app.py",
+      "raw_specifier": "from flask import Flask, render_template, request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "app.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "app.py",
+      "raw_specifier": "from logging import Formatter, FileHandler",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "app.py",
+      "raw_specifier": "from forms import *",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "forms",
+      "confidence": "low"
+    },
+    {
+      "from_file": "app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "config.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fabfile.py",
+      "raw_specifier": "from fabric.api import local, settings, abort",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fabric",
+      "confidence": "high"
+    },
+    {
+      "from_file": "fabfile.py",
+      "raw_specifier": "from fabric.contrib.console import confirm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fabric",
+      "confidence": "high"
+    },
+    {
+      "from_file": "forms.py",
+      "raw_specifier": "from flask_wtf import Form",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "forms.py",
+      "raw_specifier": "from wtforms import TextField, PasswordField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "forms.py",
+      "raw_specifier": "from wtforms.validators import DataRequired, EqualTo, Length",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "models.py",
+      "raw_specifier": "from sqlalchemy import create_engine",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "models.py",
+      "raw_specifier": "from sqlalchemy.orm import scoped_session, sessionmaker",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "models.py",
+      "raw_specifier": "from sqlalchemy.ext.declarative import declarative_base",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "_updated/app/controllers/pages.py",
+      "raw_specifier": "from flask import render_template, Blueprint, request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "_updated/app/controllers/pages.py",
+      "raw_specifier": "from app.forms import *",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "_updated/app/forms.py",
+      "raw_specifier": "from flask_wtf import Form",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "_updated/app/forms.py",
+      "raw_specifier": "from wtforms import TextField, PasswordField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "_updated/app/forms.py",
+      "raw_specifier": "from wtforms.validators import DataRequired, EqualTo, Length",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "_updated/app/__init__.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "_updated/app/__init__.py",
+      "raw_specifier": "from flask import Flask, request as req",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "_updated/app/__init__.py",
+      "raw_specifier": "from app.controllers import pages",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "_updated/config/development/__init__.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "_updated/run.py",
+      "raw_specifier": "from app import create_app",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "_updated/shell.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "_updated/shell.py",
+      "raw_specifier": "from flask import *",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "_updated/shell.py",
+      "raw_specifier": "from app import *",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "fabric",
+        "flask_sqlalchemy",
+        "flask_wtf",
+        "wtforms",
+        "coverage"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "_updated/config/development/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "fabric",
+        "flask",
+        "flask_sqlalchemy",
+        "gunicorn",
+        "jinja2",
+        "markupsafe",
+        "sqlalchemy",
+        "werkzeug",
+        "coverage",
+        "ecdsa",
+        "itsdangerous",
+        "paramiko",
+        "pycrypto",
+        "wsgiref",
+        "flask_wtf",
+        "pytest_xdist"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "app.py",
+      "candidate_test_paths": [
+        "test/test_app.py",
+        "tests/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "config.py",
+      "candidate_test_paths": [
+        "test/test_config.py",
+        "tests/test_config.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "fabfile.py",
+      "candidate_test_paths": [
+        "test/test_fabfile.py",
+        "tests/test_fabfile.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "forms.py",
+      "candidate_test_paths": [
+        "test/test_forms.py",
+        "tests/test_forms.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "models.py",
+      "candidate_test_paths": [
+        "test/test_models.py",
+        "tests/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "_updated/app/controllers/pages.py",
+      "candidate_test_paths": [
+        "_updated/app/controllers/tests/test_pages.py",
+        "tests/app/controllers/test_pages.py",
+        "_updated/app/controllers/tests/test_controllers.py",
+        "test/test_pages.py",
+        "tests/test_pages.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "_updated/app/forms.py",
+      "candidate_test_paths": [
+        "_updated/app/tests/test_forms.py",
+        "tests/app/test_forms.py",
+        "_updated/app/tests/test_app.py",
+        "test/test_forms.py",
+        "tests/test_forms.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "_updated/run.py",
+      "candidate_test_paths": [
+        "_updated/tests/test_run.py",
+        "tests/test_run.py",
+        "_updated/tests/test__updated.py",
+        "test/test_run.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "_updated/shell.py",
+      "candidate_test_paths": [
+        "_updated/tests/test_shell.py",
+        "tests/test_shell.py",
+        "_updated/tests/test__updated.py",
+        "test/test_shell.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "_updated/config/development/requirements.txt"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 16,
+    "classified_count": 16,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 27,
+    "project_import_count": 0,
+    "declared_package_count": 15,
+    "undeclared_package_count": 5,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 9,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

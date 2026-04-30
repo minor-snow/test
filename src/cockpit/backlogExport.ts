@@ -112,13 +112,19 @@ export const ALLOWED_DECISIONS = [
   "rejected_requires_cleanup",
 ] as const;
 
+export type AllowedReleaseDecision = (typeof ALLOWED_DECISIONS)[number];
+
+export function isAllowedReleaseDecision(value: unknown): value is AllowedReleaseDecision {
+  return typeof value === "string" && ALLOWED_DECISIONS.includes(value as AllowedReleaseDecision);
+}
+
 export function validateReleaseDecision(
   decision: ReleaseDecision
 ): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
 
   // Decision type must be a known value
-  if (!ALLOWED_DECISIONS.includes(decision.decision as any)) {
+  if (!isAllowedReleaseDecision(decision.decision)) {
     errors.push(
       `Invalid decision type: "${decision.decision}". ` +
       `Must be one of: ${ALLOWED_DECISIONS.join(", ")}`

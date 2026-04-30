@@ -1,0 +1,1631 @@
+{
+  "schema_version": "phase_bug_full_issue_index@0.1.0",
+  "generated_at": "2026-04-30",
+  "source_audit": "docs/audit/BUGS_AND_DEBT.md",
+  "summary": {
+    "total": 110,
+    "fixed": 81,
+    "duplicate": 3,
+    "non_repro": 0,
+    "intentional_exception": 1,
+    "defer_with_reason": 25,
+    "critical_open": 0,
+    "high_public_surface_open": 0,
+    "hardcoded_secrets_open": 0,
+    "path_traversal_open": 0,
+    "p28b_blockers_open": 0
+  },
+  "items": [
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B1",
+      "audit_id": "B1",
+      "title": "Session lock catch-all retry loop",
+      "severity": "critical",
+      "category": "session_integrity",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/diffWorkflow/gitDiffReader.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B2",
+      "audit_id": "B2",
+      "title": "Shell injection in git diff reader",
+      "severity": "critical",
+      "category": "security",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts",
+        "test/cli/cmdRepair.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B3",
+      "audit_id": "B3",
+      "title": "Repair session FSM not enforced",
+      "severity": "critical",
+      "category": "session_integrity",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/cli/cmdRepair.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B4",
+      "audit_id": "B4",
+      "title": "SHA-1 used for repair deterministic IDs",
+      "severity": "critical",
+      "category": "determinism",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts",
+        "test/artifactStore.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B5",
+      "audit_id": "B5",
+      "title": "atomicWrite temp-file leak",
+      "severity": "critical",
+      "category": "session_integrity",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B6",
+      "audit_id": "B6",
+      "title": "TOCTOU ENOENT crash on latest pointer load",
+      "severity": "critical",
+      "category": "session_integrity",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/github/githubCommentClient.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB1",
+      "audit_id": "CB1",
+      "title": "GitHub comment bot matching misclassifies null user",
+      "severity": "critical",
+      "category": "github_surface",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "src/cli/cmdAgentDoctor.ts",
+        "test/cli/cmdAgentDoctor.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB9",
+      "audit_id": "CB9",
+      "title": "fieldBehaviorRegistry considered dead code",
+      "severity": "critical",
+      "category": "dead_code",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/security/secretScan.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "S1",
+      "audit_id": "S1",
+      "title": "Hardcoded API key in live trial path",
+      "severity": "critical",
+      "category": "security",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/agentBugReportValidator.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B7",
+      "audit_id": "B7",
+      "title": "validEvidenceCount inflation",
+      "severity": "high",
+      "category": "repair_semantics",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/scopedHandoff/scopedHandoffExporter.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B8",
+      "audit_id": "B8",
+      "title": "32-bit hash and NaN collision risk",
+      "severity": "high",
+      "category": "determinism",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/changeContract/lite/changeContractLiteBuilder.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B9",
+      "audit_id": "B9",
+      "title": "Non-deterministic Lite contract ID",
+      "severity": "high",
+      "category": "determinism",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/scopedHandoff/scopedHandoffExporter.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B10",
+      "audit_id": "B10",
+      "title": "Non-deterministic scope ID",
+      "severity": "high",
+      "category": "determinism",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/impactSurfaceBuilder.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B11",
+      "audit_id": "B11",
+      "title": "Sensitive-area dedup drops matched paths",
+      "severity": "high",
+      "category": "repair_semantics",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/scopeDiff/scopeDiffValidator.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B12",
+      "audit_id": "B12",
+      "title": "Reverse-issue finding hidden by human-review finding",
+      "severity": "high",
+      "category": "repair_semantics",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/cli/cmdRepair.test.ts",
+        "src/repair/repairContractBuilder.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B13",
+      "audit_id": "B13",
+      "title": "Empty suspect surface creates useless repair contract",
+      "severity": "high",
+      "category": "repair_semantics",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B14",
+      "audit_id": "B14",
+      "title": "Inconsistent lock ordering",
+      "severity": "high",
+      "category": "session_integrity",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/session/stalePlanDetector.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B15",
+      "audit_id": "B15",
+      "title": "Git snapshot errors fail open",
+      "severity": "high",
+      "category": "security",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/changeContract/changeContractBuilder.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B16",
+      "audit_id": "B16",
+      "title": "JSON.stringify used for non-deterministic hashes",
+      "severity": "high",
+      "category": "determinism",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B17",
+      "audit_id": "B17",
+      "title": "Session revision regression",
+      "severity": "high",
+      "category": "session_integrity",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/cli/pantheonConfig.test.ts",
+        "test/metrics/metricsConfigFailClosed.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B18",
+      "audit_id": "B18",
+      "title": "Config corruption fails open",
+      "severity": "high",
+      "category": "security",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/agentFeedback/diffFeedbackBuilder.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB4",
+      "audit_id": "CB4",
+      "title": "Forbidden diff feedback severity/action mismatch",
+      "severity": "high",
+      "category": "github_surface",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/handoff/uncertaintyRegisterPathSafety.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB11",
+      "audit_id": "CB11",
+      "title": "uncertaintyRegister path traversal",
+      "severity": "high",
+      "category": "path_traversal",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "tsconfig.json",
+        "node ./node_modules/typescript/bin/tsc --noEmit"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "TA2",
+      "audit_id": "TA2",
+      "title": "Tests included in production TypeScript build",
+      "severity": "high",
+      "category": "build_hygiene",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/cli/cmdRepair.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B19-repair-id",
+      "audit_id": "B19",
+      "title": "requireRepairId single-session fallback broken",
+      "severity": "medium",
+      "category": "repair_semantics",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repoObservation/codeownersParser.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B19-codeowners",
+      "audit_id": "B19",
+      "title": "CODEOWNERS brace expansion missing",
+      "severity": "medium",
+      "category": "technical_debt",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/cli/cmdRepair.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B20",
+      "audit_id": "B20",
+      "title": "Unknown audit decision silently normalized",
+      "severity": "medium",
+      "category": "repair_semantics",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "src/deterministic.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B21",
+      "audit_id": "B21",
+      "title": "Repeated hash helper implementations",
+      "severity": "medium",
+      "category": "technical_debt",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "src/deterministic.ts",
+        "test/hash.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B22",
+      "audit_id": "B22",
+      "title": "Fragmented hash schemes",
+      "severity": "medium",
+      "category": "technical_debt",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repoObservation/python/pythonRiskPresetValidator.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B23-risk-preset",
+      "audit_id": "B23",
+      "title": "Flask mapped to FastAPI risk preset",
+      "severity": "medium",
+      "category": "python_p28b_blocker",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repoObservation/python/pythonRiskPresetValidator.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B23-threshold",
+      "audit_id": "B23",
+      "title": "Small risk presets validated with overly low threshold",
+      "severity": "medium",
+      "category": "python_p28b_blocker",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repoObservation/python/pythonFrameworkDetector.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B24",
+      "audit_id": "B24",
+      "title": "Airflow and Prefect classified as async framework",
+      "severity": "medium",
+      "category": "python_p28b_blocker",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/cli/attemptHistory.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B25",
+      "audit_id": "B25",
+      "title": "attemptHistory lexicographic sort",
+      "severity": "medium",
+      "category": "technical_debt",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/pipeline.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B26",
+      "audit_id": "B26",
+      "title": "pipeline silently fixes only the first issue",
+      "severity": "medium",
+      "category": "repair_semantics",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/pipeline.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B27",
+      "audit_id": "B27",
+      "title": "pipeline defaults to demo fixture on real input",
+      "severity": "medium",
+      "category": "repair_semantics",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/cockpitFixtures.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B28",
+      "audit_id": "B28",
+      "title": "server uses hardcoded artifact id",
+      "severity": "medium",
+      "category": "alpha_surface",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/changeContract/lite/changeContractLiteBuilder.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B29",
+      "audit_id": "B29",
+      "title": "48-bit contract-id collision risk",
+      "severity": "medium",
+      "category": "determinism",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/cli/cmdRepair.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B30",
+      "audit_id": "B30",
+      "title": "Repair/export contract cannot be re-exported",
+      "severity": "medium",
+      "category": "repair_semantics",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/repairOutputSanitizer.test.ts",
+        "test/repair/session/repairSessionStore.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B31",
+      "audit_id": "B31",
+      "title": "Audit log write does not create parent directory",
+      "severity": "medium",
+      "category": "session_integrity",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repoObservation/python/pythonSensitiveZoneDetector.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B32",
+      "audit_id": "B32",
+      "title": "Sensitive-path detection inconsistency across scanners",
+      "severity": "medium",
+      "category": "python_p28b_blocker",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repoObservation/testMapper.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B33",
+      "audit_id": "B33",
+      "title": "Test mapper misses common JS/TS extensions",
+      "severity": "medium",
+      "category": "python_p28b_blocker",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repoObservation/python/pythonLayoutClassifier.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B34-layout",
+      "audit_id": "B34",
+      "title": "namespace_package layout never emitted",
+      "severity": "medium",
+      "category": "python_p28b_blocker",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repoObservation/python/pythonTestMapper.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B34-underscore",
+      "audit_id": "B34",
+      "title": "Leading underscore source generates double-underscore test candidate",
+      "severity": "medium",
+      "category": "python_p28b_blocker",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repoObservation/python/pythonTestMapper.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B35",
+      "audit_id": "B35",
+      "title": "Utility-module test mapping is too broad",
+      "severity": "medium",
+      "category": "python_p28b_blocker",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repoObservation/python/pythonSensitiveZoneMigrationPrecision.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B36",
+      "audit_id": "B36",
+      "title": "Migration keyword false positives on substrings such as immigration",
+      "severity": "medium",
+      "category": "python_p28b_blocker",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "src/globMatch.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B38",
+      "audit_id": "B38",
+      "title": "globToRegex duplicated in three places",
+      "severity": "medium",
+      "category": "technical_debt",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/changeContract/lite/changeContractLiteValidator.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "B39",
+      "audit_id": "B39",
+      "title": "Compact contract validator path matching inconsistency",
+      "severity": "medium",
+      "category": "technical_debt",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/github/githubExitPolicy.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB2",
+      "audit_id": "CB2",
+      "title": "GitHub exit policy fail_on=all semantics missing",
+      "severity": "medium",
+      "category": "github_surface",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/github/githubInputParser.test.ts",
+        "test/github/githubRepairInputParser.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB3",
+      "audit_id": "CB3",
+      "title": "GitHub input parser optional-chaining and default inconsistency",
+      "severity": "medium",
+      "category": "github_surface",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/alpha/alphaBuilderValidatorConsistency.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB5",
+      "audit_id": "CB5",
+      "title": "Alpha builder and validator disagree on canonical output",
+      "severity": "medium",
+      "category": "alpha_surface",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/alpha/alphaDoctor.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB6",
+      "audit_id": "CB6",
+      "title": "alphaDoctor ignores github.enabled=false",
+      "severity": "medium",
+      "category": "alpha_surface",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/github/githubActionEntry.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB7",
+      "audit_id": "CB7",
+      "title": "GitHub action entry does not forward stdin deterministically",
+      "severity": "medium",
+      "category": "github_surface",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "src/cockpit/backlogExport.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB10",
+      "audit_id": "CB10",
+      "title": "backlogExport as any breaks type safety",
+      "severity": "medium",
+      "category": "technical_debt",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "src/review/reviewRequestBuilder.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB12",
+      "audit_id": "CB12",
+      "title": "reviewRequestBuilder relies on unsafe satisfies shortcut",
+      "severity": "medium",
+      "category": "review_queue",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/governanceLog/governanceEventWriter.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB13",
+      "audit_id": "CB13",
+      "title": "governanceEventWriter can fail silently",
+      "severity": "medium",
+      "category": "governance_log",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/cockpit/ledgerPathSafety.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB14",
+      "audit_id": "CB14",
+      "title": "releaseServer quarantine_id path traversal",
+      "severity": "medium",
+      "category": "path_traversal",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/cockpit/decisionLog.test.ts",
+        "test/cockpit/riskRegister.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB15",
+      "audit_id": "CB15",
+      "title": "riskRegister and decisionLog accept unvalidated dataDir",
+      "severity": "medium",
+      "category": "path_traversal",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "src/cockpit/reportGenerator.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB16",
+      "audit_id": "CB16",
+      "title": "reportGenerator runs integrityCheck on every request",
+      "severity": "medium",
+      "category": "performance",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/metrics/metricsConfigFailClosed.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB17",
+      "audit_id": "CB17",
+      "title": "metricsConfig silently fails open",
+      "severity": "medium",
+      "category": "metrics",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/review/reviewQueueStoreConcurrency.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB18",
+      "audit_id": "CB18",
+      "title": "reviewQueueStore race loses updates",
+      "severity": "medium",
+      "category": "review_queue",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/governanceLog/governanceEventSanitizer.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB19",
+      "audit_id": "CB19",
+      "title": "governanceEventSanitizer rejects all multiline text",
+      "severity": "medium",
+      "category": "governance_log",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "S4",
+      "audit_id": "S4",
+      "title": "releaseServer path traversal",
+      "severity": "medium",
+      "category": "path_traversal",
+      "disposition": "duplicate",
+      "note": "Duplicate of CB14."
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "S5",
+      "audit_id": "S5",
+      "title": "uncertaintyRegister path traversal",
+      "severity": "medium",
+      "category": "path_traversal",
+      "disposition": "duplicate",
+      "note": "Duplicate of CB11."
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "ARCHITECTURE.md"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "A1",
+      "audit_id": "A1",
+      "title": "New source directories missing from architecture doc",
+      "severity": "medium",
+      "category": "architecture_docs",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "A2",
+      "audit_id": "A2",
+      "title": "Python observation stack remains a parallel subsystem",
+      "severity": "medium",
+      "category": "architecture_docs",
+      "disposition": "intentional_exception",
+      "note": "The Python observation layer remains intentionally isolated until P28b so benchmark semantics stay stable while public surfaces are already documented and tested."
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "ARCHITECTURE.md"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "A3",
+      "audit_id": "A3",
+      "title": "ARCHITECTURE metrics and file counts drift from reality",
+      "severity": "medium",
+      "category": "architecture_docs",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "ARCHITECTURE.md",
+        "docs/phases/README.md"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "A4",
+      "audit_id": "A4",
+      "title": "Architecture and phase documents contradict each other",
+      "severity": "medium",
+      "category": "architecture_docs",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "docs/internal/script_status_inventory.md"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "A5",
+      "audit_id": "A5",
+      "title": "Scripts and historical data lack status classification",
+      "severity": "medium",
+      "category": "architecture_docs",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "ARCHITECTURE.md"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "A6",
+      "audit_id": "A6",
+      "title": "repoObservation/python architecture is under-documented",
+      "severity": "medium",
+      "category": "architecture_docs",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "src/deterministic.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "T1",
+      "audit_id": "T1",
+      "title": "Hash-system fragmentation",
+      "severity": "low",
+      "category": "technical_debt",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "This requires a larger ownership and behavior merge across boundary, bootstrap, and repair workflows. Current BUG-FULL work stabilized behavior without forcing a risky unification.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "T2",
+      "audit_id": "T2",
+      "title": "Three overlapping file-scope classifiers",
+      "severity": "low",
+      "category": "technical_debt",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Boundary diff verification and repair diff verification now have explicit ownership, but a full merger would be a larger refactor than BUG-FULL allows.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "T3",
+      "audit_id": "T3",
+      "title": "Two parallel diff verifiers",
+      "severity": "low",
+      "category": "technical_debt",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Public surfaces were normalized enough for alpha and repair workflows; deeper cross-project validator unification remains deferred.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "T4",
+      "audit_id": "T4",
+      "title": "ValidationResult type fragmentation",
+      "severity": "low",
+      "category": "technical_debt",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Renderer consolidation is valuable but not a blocker for P28b, closed alpha, or BUG-FULL public-surface trust.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "T5",
+      "audit_id": "T5",
+      "title": "Markdown renderers lack shared abstraction",
+      "severity": "low",
+      "category": "technical_debt",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Security-, session-, and public-surface paths were normalized first. Global stylistic catch unification remains non-blocking debt.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "T6",
+      "audit_id": "T6",
+      "title": "Mixed catch styles",
+      "severity": "low",
+      "category": "technical_debt",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "src/globMatch.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "T7",
+      "audit_id": "T7",
+      "title": "globToRegex duplicated three times",
+      "severity": "low",
+      "category": "technical_debt",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "The module remains behaviorally correct; structural decomposition is postponed to avoid churning stable boundary behavior before P28b.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "T8",
+      "audit_id": "T8",
+      "title": "agentScopeLiteBuilder violates SRP",
+      "severity": "low",
+      "category": "technical_debt",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "High-risk as any usage was removed from new public paths, but remaining legacy cleanup spans older modules that are not current public-surface blockers.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "T9",
+      "audit_id": "T9",
+      "title": "Production as any usage remains in older legacy modules",
+      "severity": "low",
+      "category": "technical_debt",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Public and repair-surface non-null assertions were reduced; the remaining legacy assertions need broader invariant refactors.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "T10",
+      "audit_id": "T10",
+      "title": "Production non-null assertions remain in older legacy modules",
+      "severity": "low",
+      "category": "technical_debt",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Public surfaces now standardize on @0.1.0-style schema versions. Older historical schemas are intentionally grandfathered to preserve backward readability.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "N1",
+      "audit_id": "N1",
+      "title": "Two schema_version conventions coexist",
+      "severity": "high",
+      "category": "naming",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "The alpha, GitHub, and local-governance public surfaces now fail closed where needed, but full validator return-type unification remains broader debt.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "N2",
+      "audit_id": "N2",
+      "title": "Validator return types are fragmented",
+      "severity": "high",
+      "category": "naming",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Naming drift is now documented but not worth a repo-wide churn pass before P28b.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "N3",
+      "audit_id": "N3",
+      "title": "save/write/persist naming is inconsistent",
+      "severity": "low",
+      "category": "naming",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "This is a narrow API ergonomics cleanup and is not on the repair, alpha, or Python-readiness critical path.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "N4",
+      "audit_id": "N4",
+      "title": "validateSkillOutput uses positional parameters",
+      "severity": "low",
+      "category": "naming",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "N5",
+      "audit_id": "N5",
+      "title": "agentScopeLiteBuilder one file three responsibilities",
+      "severity": "low",
+      "category": "technical_debt",
+      "disposition": "duplicate",
+      "note": "Duplicate of T8."
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Public docs can stay bilingual, but a full runtime error-code sweep is deferred until after language-readiness work.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "N6",
+      "audit_id": "N6",
+      "title": "Runtime error messages mix languages",
+      "severity": "low",
+      "category": "naming",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/session/repairSessionStore.test.ts",
+        "test/repair/session/scopeOverlapDetector.test.ts",
+        "test/repair/session/stalePlanDetector.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "E2",
+      "audit_id": "E2",
+      "title": "repair/session lacked direct unit tests",
+      "severity": "low",
+      "category": "test_quality",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "docs/internal/script_status_inventory.md"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "E3",
+      "audit_id": "E3",
+      "title": "Scripts lacked inventory and purpose tags",
+      "severity": "low",
+      "category": "architecture_docs",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "package.json"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "TA3",
+      "audit_id": "TA3",
+      "title": "package.json engines field missing",
+      "severity": "low",
+      "category": "build_hygiene",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/cli/attemptHistory.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "TA4",
+      "audit_id": "TA4",
+      "title": "Runtime CommonJS require remained inside executable tests",
+      "severity": "low",
+      "category": "test_quality",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "vitest.config.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "TA5",
+      "audit_id": "TA5",
+      "title": "Vitest config was split and unclear",
+      "severity": "low",
+      "category": "build_hygiene",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "BUG-FULL added direct tests for the repaired public surfaces and session paths, but a repo-wide coverage push remains a separate investment.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "E1",
+      "audit_id": "E1",
+      "title": "Repository-wide test coverage remains below ideal",
+      "severity": "low",
+      "category": "test_quality",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Several fixture-heavy tests intentionally bind to repository-curated dogfood assets. Converting all of them to temp-root helpers is useful but not a BUG-FULL blocker.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "TA1",
+      "audit_id": "TA1",
+      "title": "Many tests still use process.cwd()",
+      "severity": "high",
+      "category": "test_quality",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "src/cockpit/reportGenerator.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "P4",
+      "audit_id": "P4",
+      "title": "reportGenerator performs integrityCheck on every request",
+      "severity": "medium",
+      "category": "performance",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "The public and repair hot paths were reduced first. Remaining looped sync reads are not current closed-alpha blockers and need targeted profiling before refactor.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "P1",
+      "audit_id": "P1",
+      "title": "readFileSync remains inside some loops",
+      "severity": "high",
+      "category": "performance",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "A full async scanner rewrite would churn a stable observation pipeline immediately before P28b.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "P2",
+      "audit_id": "P2",
+      "title": "repoScanner remains synchronous and recursive",
+      "severity": "low",
+      "category": "performance",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "This remains measurable cleanup debt but is not currently a correctness or alpha-surface blocker.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "P3",
+      "audit_id": "P3",
+      "title": "Repeated filter passes over large arrays",
+      "severity": "low",
+      "category": "performance",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "The eager-load pattern is now bounded by local-only operator workflows; a lazy-load pass is deferred.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "P5",
+      "audit_id": "P5",
+      "title": "Startup loads many JSON artifacts eagerly",
+      "severity": "low",
+      "category": "performance",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repoObservation/repoObservationConfigLoader.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "TQ1",
+      "audit_id": "TQ1",
+      "title": "Tautological repoObservationConfigLoader assertion",
+      "severity": "critical",
+      "category": "test_quality",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/consistencyChecklistBuilder.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "TQ2",
+      "audit_id": "TQ2",
+      "title": "Checklist length >= 0 tautology",
+      "severity": "high",
+      "category": "test_quality",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repair/graphTruncation.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "TQ3",
+      "audit_id": "TQ3",
+      "title": "Graph truncation constant self-substring assertion",
+      "severity": "high",
+      "category": "test_quality",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/repoObservation/python/pythonSensitiveZoneDetector.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "TQ4",
+      "audit_id": "TQ4",
+      "title": "Magic-number sensitive-zone threshold assertion",
+      "severity": "medium",
+      "category": "test_quality",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/diffWorkflow/diffVerifier.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "TQ5",
+      "audit_id": "TQ5",
+      "title": "Weak diff-verifier shape assertion",
+      "severity": "medium",
+      "category": "test_quality",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/cli/attemptHistory.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "TQ6",
+      "audit_id": "TQ6",
+      "title": "CommonJS require in ESM test file",
+      "severity": "medium",
+      "category": "test_quality",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "test/agentTrial/attemptComparison.test.ts"
+      ],
+      "defer_reason": null,
+      "planned_phase": null,
+      "id": "CB8",
+      "audit_id": "CB8",
+      "title": "attemptComparison unreachable branch complaint",
+      "severity": "medium",
+      "category": "dead_code",
+      "disposition": "fixed"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Core repair, session, GitHub, metrics, and config fail-closed paths were fixed first. A full repo-wide catch-style sweep remains broader debt.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "S2",
+      "audit_id": "S2",
+      "title": "Broad fail-open catch audit bucket remains larger than desired",
+      "severity": "high",
+      "category": "security",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Public-surface JSON parsing now fails closed where it matters most. Remaining internal curated-artifact reads are documented debt rather than public-surface blockers.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "S3",
+      "audit_id": "S3",
+      "title": "Remaining JSON.parse sites are not all wrapped individually",
+      "severity": "high",
+      "category": "security",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [
+        "ARCHITECTURE.md"
+      ],
+      "defer_reason": "Cycle removal spans multiple legacy subsystems and is too large for a stabilization-only phase without risking regression.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "C1",
+      "audit_id": "C1",
+      "title": "Module-level cycles remain",
+      "severity": "high",
+      "category": "architecture_docs",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Layering cleanup remains broader refactor debt after public-surface stabilization.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "C2",
+      "audit_id": "C2",
+      "title": "repair layer still depends on CLI-owned surfaces in places",
+      "severity": "medium",
+      "category": "architecture_docs",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "This is expected for the current local-first product shape; deeper orchestration extraction is deferred.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "C3",
+      "audit_id": "C3",
+      "title": "CLI remains the highest fan-out integration surface",
+      "severity": "medium",
+      "category": "architecture_docs",
+      "disposition": "defer_with_reason"
+    },
+    {
+      "source": "docs/audit/BUGS_AND_DEBT.md",
+      "blocking_for": [],
+      "verification": [],
+      "defer_reason": "Coupling reduction is tracked but intentionally postponed until after P28b readiness work.",
+      "planned_phase": "Phase DEBT-LATER",
+      "id": "C4",
+      "audit_id": "C4",
+      "title": "Cross-module coupling remains high in legacy stacks",
+      "severity": "medium",
+      "category": "architecture_docs",
+      "disposition": "defer_with_reason"
+    }
+  ]
+}

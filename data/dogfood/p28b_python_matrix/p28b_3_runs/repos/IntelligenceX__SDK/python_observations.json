@@ -1,0 +1,1778 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "IntelligenceX__SDK",
+    "observed_file_count": 142,
+    "python_file_count": 33
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "Unable to determine package layout from file paths"
+      }
+    ],
+    "bucket_summary": {
+      "source": 26,
+      "unknown": 6,
+      "test": 1
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          }
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "kind": "unknown_framework_or_domain_role",
+        "reason": "No framework could be detected from dependencies, paths, or imports"
+      }
+    ]
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / unknown (low)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 2,
+        "evidence": [
+          "2 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "Maltego Transform/install.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5297,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Maltego Transform/project.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 344,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Maltego Transform/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 19,
+      "evidence": []
+    },
+    {
+      "path": "Maltego Transform/transforms/ixemails.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1043,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Maltego Transform/transforms/ixhistory.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1327,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Maltego Transform/transforms/ixsearch.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4393,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Maltego Transform/transforms/ixsearchresult.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 631,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Maltego Transform/transforms/ixselectors.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2959,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Maltego Transform/transforms/ixsubdomains.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1049,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Maltego Transform/transforms/ixtreeview.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1379,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Maltego Transform/transforms/ixurls.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1207,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/.devcontainer/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 169,
+      "evidence": []
+    },
+    {
+      "path": "Python/.pre-commit-config.yaml",
+      "bucket": "unknown",
+      "extension": ".yaml",
+      "size_bytes": 2483,
+      "evidence": []
+    },
+    {
+      "path": "Python/examples/advanced_search.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1035,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/examples/authenticate_info.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 302,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/examples/download.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 419,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/examples/fileview.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 417,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/examples/file_preview.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 608,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/examples/file_view.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 548,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/examples/idsearch.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 508,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/examples/reverse_domain.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 364,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/examples/search.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 437,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/examples/search_with_results.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 881,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/examples/stats.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 334,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/intelx/intelxapi.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 23150,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/intelx/intelx_identity.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5409,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/intelx/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 118,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 1131,
+      "evidence": []
+    },
+    {
+      "path": "Python/requirements-dev.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 119,
+      "evidence": []
+    },
+    {
+      "path": "Python/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 53,
+      "evidence": []
+    },
+    {
+      "path": "Python/scripts/intelx.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 16831,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "Python/scripts/tests/test_main.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 374,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "Python/scripts/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "Maltego Transform/install.py",
+      "raw_specifier": "zipfile",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "zipfile",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/install.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/install.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/project.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/project.py",
+      "raw_specifier": "transforms",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "transforms",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Maltego Transform/project.py",
+      "raw_specifier": "from maltego_trx.registry import register_transform_function, register_transform_classes",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/project.py",
+      "raw_specifier": "from maltego_trx.server import app, application",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/project.py",
+      "raw_specifier": "from maltego_trx.handler import handle_run",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixemails.py",
+      "raw_specifier": "intelxapi",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "intelxapi",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixemails.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixemails.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixemails.py",
+      "raw_specifier": "from maltego_trx.maltego import UIM_TYPES",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixemails.py",
+      "raw_specifier": "from maltego_trx.entities import Email",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixemails.py",
+      "raw_specifier": "from maltego_trx.transform import DiscoverableTransform",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixhistory.py",
+      "raw_specifier": "intelxapi",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "intelxapi",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixhistory.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixhistory.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixhistory.py",
+      "raw_specifier": "from maltego_trx.maltego import UIM_TYPES",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixhistory.py",
+      "raw_specifier": "from maltego_trx.entities import Domain",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixhistory.py",
+      "raw_specifier": "from maltego_trx.transform import DiscoverableTransform",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsearch.py",
+      "raw_specifier": "intelxapi",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "intelxapi",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsearch.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsearch.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsearch.py",
+      "raw_specifier": "html",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "html",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsearch.py",
+      "raw_specifier": "from maltego_trx.maltego import UIM_TYPES",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsearch.py",
+      "raw_specifier": "from maltego_trx.entities import Domain, URL, Email, IPAddress, PhoneNumber",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsearch.py",
+      "raw_specifier": "from maltego_trx.transform import DiscoverableTransform",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsearchresult.py",
+      "raw_specifier": "intelxapi",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "intelxapi",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsearchresult.py",
+      "raw_specifier": "webbrowser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "webbrowser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsearchresult.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsearchresult.py",
+      "raw_specifier": "from maltego_trx.maltego import UIM_TYPES",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsearchresult.py",
+      "raw_specifier": "from maltego_trx.transform import DiscoverableTransform",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixselectors.py",
+      "raw_specifier": "intelxapi",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "intelxapi",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixselectors.py",
+      "raw_specifier": "webbrowser",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "webbrowser",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixselectors.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixselectors.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixselectors.py",
+      "raw_specifier": "from maltego_trx.maltego import UIM_TYPES",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixselectors.py",
+      "raw_specifier": "from maltego_trx.entities import Domain, URL, Email, IPAddress, PhoneNumber",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixselectors.py",
+      "raw_specifier": "from maltego_trx.transform import DiscoverableTransform",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsubdomains.py",
+      "raw_specifier": "intelxapi",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "intelxapi",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsubdomains.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsubdomains.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsubdomains.py",
+      "raw_specifier": "from maltego_trx.maltego import UIM_TYPES",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsubdomains.py",
+      "raw_specifier": "from maltego_trx.entities import Domain",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixsubdomains.py",
+      "raw_specifier": "from maltego_trx.transform import DiscoverableTransform",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixtreeview.py",
+      "raw_specifier": "intelxapi",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "intelxapi",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixtreeview.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixtreeview.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixtreeview.py",
+      "raw_specifier": "from maltego_trx.maltego import UIM_TYPES",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixtreeview.py",
+      "raw_specifier": "from maltego_trx.entities import URL",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixtreeview.py",
+      "raw_specifier": "from maltego_trx.transform import DiscoverableTransform",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixtreeview.py",
+      "raw_specifier": "traceback",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "traceback",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixurls.py",
+      "raw_specifier": "intelxapi",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "intelxapi",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixurls.py",
+      "raw_specifier": "pathlib",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixurls.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixurls.py",
+      "raw_specifier": "from maltego_trx.maltego import UIM_TYPES",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixurls.py",
+      "raw_specifier": "from maltego_trx.entities import URL",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Maltego Transform/transforms/ixurls.py",
+      "raw_specifier": "from maltego_trx.transform import DiscoverableTransform",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "maltego_trx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/advanced_search.py",
+      "raw_specifier": "from intelx import intelx",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "intelx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/advanced_search.py",
+      "raw_specifier": "from dotenv import load_dotenv",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/examples/advanced_search.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/authenticate_info.py",
+      "raw_specifier": "from intelx import intelx",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "intelx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/authenticate_info.py",
+      "raw_specifier": "from dotenv import load_dotenv",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/examples/authenticate_info.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/download.py",
+      "raw_specifier": "from intelx import intelx",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "intelx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/download.py",
+      "raw_specifier": "from dotenv import load_dotenv",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/examples/download.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/fileview.py",
+      "raw_specifier": "from intelx import intelx",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "intelx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/fileview.py",
+      "raw_specifier": "from dotenv import load_dotenv",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/examples/fileview.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/file_preview.py",
+      "raw_specifier": "from intelx import intelx",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "intelx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/file_preview.py",
+      "raw_specifier": "from dotenv import load_dotenv",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/examples/file_preview.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/file_view.py",
+      "raw_specifier": "from intelx import intelx",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "intelx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/file_view.py",
+      "raw_specifier": "from dotenv import load_dotenv",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/examples/file_view.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/idsearch.py",
+      "raw_specifier": "from intelx import IdentityService",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "intelx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/idsearch.py",
+      "raw_specifier": "from dotenv import load_dotenv",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/examples/idsearch.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/reverse_domain.py",
+      "raw_specifier": "from intelx import IdentityService",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "intelx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/reverse_domain.py",
+      "raw_specifier": "from dotenv import load_dotenv",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/examples/reverse_domain.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/search.py",
+      "raw_specifier": "from intelx import intelx",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "intelx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/search.py",
+      "raw_specifier": "from dotenv import load_dotenv",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/examples/search.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/search_with_results.py",
+      "raw_specifier": "from intelx import intelx",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "intelx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/search_with_results.py",
+      "raw_specifier": "from dotenv import load_dotenv",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/examples/search_with_results.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/stats.py",
+      "raw_specifier": "from intelx import intelx",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "intelx",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/examples/stats.py",
+      "raw_specifier": "from dotenv import load_dotenv",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "dotenv",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/examples/stats.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/intelx/intelxapi.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/intelx/intelxapi.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/intelx/intelxapi.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/intelx/intelxapi.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/intelx/intelxapi.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/intelx/intelx_identity.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/intelx/intelx_identity.py",
+      "raw_specifier": "from intelxapi import intelx",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "intelxapi",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/intelx/__init__.py",
+      "raw_specifier": "from .intelxapi import intelx",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".intelxapi",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "Python/intelx/__init__.py",
+      "raw_specifier": "from .intelx_identity import IdentityService",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".intelx_identity",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "argparse",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "argparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "html",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "html",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "from importlib.metadata import PackageNotFoundError, version",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "importlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "tabulate",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "tabulate",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "from intelx_identity import IdentityService",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "intelx_identity",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "from intelxapi import intelx",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "intelxapi",
+      "confidence": "low"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "from pygments import highlight",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pygments",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "from pygments.formatters import TerminalFormatter",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pygments",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "from pygments.lexers import JsonLexer",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pygments",
+      "confidence": "high"
+    },
+    {
+      "from_file": "Python/scripts/intelx.py",
+      "raw_specifier": "from termcolor import colored",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "termcolor",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "Maltego Transform/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "maltego_trx",
+        "intelx"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "Python/.devcontainer/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "certifi",
+        "charset_normalizer",
+        "idna",
+        "pygments",
+        "requests",
+        "tabulate",
+        "termcolor",
+        "urllib3",
+        "python_dotenv"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "Python/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "pygments",
+        "requests",
+        "tabulate",
+        "termcolor"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "Python/requirements-dev.txt",
+      "source_type": "requirements-dev.txt",
+      "packages": [],
+      "dev_packages": [
+        "build",
+        "twine",
+        "pre_commit",
+        "git_cliff",
+        "bandit",
+        "uv"
+      ],
+      "confidence": "high",
+      "warnings": []
+    },
+    {
+      "source_path": "Python/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "Maltego Transform/install.py",
+      "candidate_test_paths": [
+        "Maltego Transform/tests/test_install.py",
+        "tests/test_install.py",
+        "Maltego Transform/tests/test_Maltego Transform.py",
+        "test/test_install.py",
+        "tests/install/test_install.py",
+        "tests/installs/test_install.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Maltego Transform/project.py",
+      "candidate_test_paths": [
+        "Maltego Transform/tests/test_project.py",
+        "tests/test_project.py",
+        "Maltego Transform/tests/test_Maltego Transform.py",
+        "test/test_project.py",
+        "tests/project/test_project.py",
+        "tests/projects/test_project.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Maltego Transform/transforms/ixemails.py",
+      "candidate_test_paths": [
+        "Maltego Transform/transforms/tests/test_ixemails.py",
+        "tests/transforms/test_ixemails.py",
+        "Maltego Transform/transforms/tests/test_transforms.py",
+        "test/test_ixemails.py",
+        "tests/test_ixemails.py",
+        "tests/ixemails/test_ixemails.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Maltego Transform/transforms/ixhistory.py",
+      "candidate_test_paths": [
+        "Maltego Transform/transforms/tests/test_ixhistory.py",
+        "tests/transforms/test_ixhistory.py",
+        "Maltego Transform/transforms/tests/test_transforms.py",
+        "test/test_ixhistory.py",
+        "tests/test_ixhistory.py",
+        "tests/ixhistory/test_ixhistory.py",
+        "tests/ixhistorys/test_ixhistory.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Maltego Transform/transforms/ixsearch.py",
+      "candidate_test_paths": [
+        "Maltego Transform/transforms/tests/test_ixsearch.py",
+        "tests/transforms/test_ixsearch.py",
+        "Maltego Transform/transforms/tests/test_transforms.py",
+        "test/test_ixsearch.py",
+        "tests/test_ixsearch.py",
+        "tests/ixsearch/test_ixsearch.py",
+        "tests/ixsearchs/test_ixsearch.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Maltego Transform/transforms/ixsearchresult.py",
+      "candidate_test_paths": [
+        "Maltego Transform/transforms/tests/test_ixsearchresult.py",
+        "tests/transforms/test_ixsearchresult.py",
+        "Maltego Transform/transforms/tests/test_transforms.py",
+        "test/test_ixsearchresult.py",
+        "tests/test_ixsearchresult.py",
+        "tests/ixsearchresult/test_ixsearchresult.py",
+        "tests/ixsearchresults/test_ixsearchresult.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Maltego Transform/transforms/ixselectors.py",
+      "candidate_test_paths": [
+        "Maltego Transform/transforms/tests/test_ixselectors.py",
+        "tests/transforms/test_ixselectors.py",
+        "Maltego Transform/transforms/tests/test_transforms.py",
+        "test/test_ixselectors.py",
+        "tests/test_ixselectors.py",
+        "tests/ixselectors/test_ixselectors.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Maltego Transform/transforms/ixsubdomains.py",
+      "candidate_test_paths": [
+        "Maltego Transform/transforms/tests/test_ixsubdomains.py",
+        "tests/transforms/test_ixsubdomains.py",
+        "Maltego Transform/transforms/tests/test_transforms.py",
+        "test/test_ixsubdomains.py",
+        "tests/test_ixsubdomains.py",
+        "tests/ixsubdomains/test_ixsubdomains.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Maltego Transform/transforms/ixtreeview.py",
+      "candidate_test_paths": [
+        "Maltego Transform/transforms/tests/test_ixtreeview.py",
+        "tests/transforms/test_ixtreeview.py",
+        "Maltego Transform/transforms/tests/test_transforms.py",
+        "test/test_ixtreeview.py",
+        "tests/test_ixtreeview.py",
+        "tests/ixtreeview/test_ixtreeview.py",
+        "tests/ixtreeviews/test_ixtreeview.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Maltego Transform/transforms/ixurls.py",
+      "candidate_test_paths": [
+        "Maltego Transform/transforms/tests/test_ixurls.py",
+        "tests/transforms/test_ixurls.py",
+        "Maltego Transform/transforms/tests/test_transforms.py",
+        "test/test_ixurls.py",
+        "tests/test_ixurls.py",
+        "tests/ixurls/test_ixurls.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/examples/advanced_search.py",
+      "candidate_test_paths": [
+        "Python/examples/tests/test_advanced_search.py",
+        "tests/examples/test_advanced_search.py",
+        "Python/examples/tests/test_examples.py",
+        "test/test_advanced_search.py",
+        "tests/test_advanced_search.py",
+        "tests/advanced_search/test_advanced_search.py",
+        "tests/advanced_searchs/test_advanced_search.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/examples/authenticate_info.py",
+      "candidate_test_paths": [
+        "Python/examples/tests/test_authenticate_info.py",
+        "tests/examples/test_authenticate_info.py",
+        "Python/examples/tests/test_examples.py",
+        "test/test_authenticate_info.py",
+        "tests/test_authenticate_info.py",
+        "tests/authenticate_info/test_authenticate_info.py",
+        "tests/authenticate_infos/test_authenticate_info.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/examples/download.py",
+      "candidate_test_paths": [
+        "Python/examples/tests/test_download.py",
+        "tests/examples/test_download.py",
+        "Python/examples/tests/test_examples.py",
+        "test/test_download.py",
+        "tests/test_download.py",
+        "tests/download/test_download.py",
+        "tests/downloads/test_download.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/examples/fileview.py",
+      "candidate_test_paths": [
+        "Python/examples/tests/test_fileview.py",
+        "tests/examples/test_fileview.py",
+        "Python/examples/tests/test_examples.py",
+        "test/test_fileview.py",
+        "tests/test_fileview.py",
+        "tests/fileview/test_fileview.py",
+        "tests/fileviews/test_fileview.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/examples/file_preview.py",
+      "candidate_test_paths": [
+        "Python/examples/tests/test_file_preview.py",
+        "tests/examples/test_file_preview.py",
+        "Python/examples/tests/test_examples.py",
+        "test/test_file_preview.py",
+        "tests/test_file_preview.py",
+        "tests/file_preview/test_file_preview.py",
+        "tests/file_previews/test_file_preview.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/examples/file_view.py",
+      "candidate_test_paths": [
+        "Python/examples/tests/test_file_view.py",
+        "tests/examples/test_file_view.py",
+        "Python/examples/tests/test_examples.py",
+        "test/test_file_view.py",
+        "tests/test_file_view.py",
+        "tests/file_view/test_file_view.py",
+        "tests/file_views/test_file_view.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/examples/idsearch.py",
+      "candidate_test_paths": [
+        "Python/examples/tests/test_idsearch.py",
+        "tests/examples/test_idsearch.py",
+        "Python/examples/tests/test_examples.py",
+        "test/test_idsearch.py",
+        "tests/test_idsearch.py",
+        "tests/idsearch/test_idsearch.py",
+        "tests/idsearchs/test_idsearch.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/examples/reverse_domain.py",
+      "candidate_test_paths": [
+        "Python/examples/tests/test_reverse_domain.py",
+        "tests/examples/test_reverse_domain.py",
+        "Python/examples/tests/test_examples.py",
+        "test/test_reverse_domain.py",
+        "tests/test_reverse_domain.py",
+        "tests/reverse_domain/test_reverse_domain.py",
+        "tests/reverse_domains/test_reverse_domain.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/examples/search.py",
+      "candidate_test_paths": [
+        "Python/examples/tests/test_search.py",
+        "tests/examples/test_search.py",
+        "Python/examples/tests/test_examples.py",
+        "test/test_search.py",
+        "tests/test_search.py",
+        "tests/search/test_search.py",
+        "tests/searchs/test_search.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/examples/search_with_results.py",
+      "candidate_test_paths": [
+        "Python/examples/tests/test_search_with_results.py",
+        "tests/examples/test_search_with_results.py",
+        "Python/examples/tests/test_examples.py",
+        "test/test_search_with_results.py",
+        "tests/test_search_with_results.py",
+        "tests/search_with_results/test_search_with_results.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/examples/stats.py",
+      "candidate_test_paths": [
+        "Python/examples/tests/test_stats.py",
+        "tests/examples/test_stats.py",
+        "Python/examples/tests/test_examples.py",
+        "test/test_stats.py",
+        "tests/test_stats.py",
+        "tests/stats/test_stats.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/intelx/intelxapi.py",
+      "candidate_test_paths": [
+        "Python/intelx/tests/test_intelxapi.py",
+        "tests/intelx/test_intelxapi.py",
+        "Python/intelx/tests/test_intelx.py",
+        "test/test_intelxapi.py",
+        "tests/test_intelxapi.py",
+        "tests/intelxapi/test_intelxapi.py",
+        "tests/intelxapis/test_intelxapi.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/intelx/intelx_identity.py",
+      "candidate_test_paths": [
+        "Python/intelx/tests/test_intelx_identity.py",
+        "tests/intelx/test_intelx_identity.py",
+        "Python/intelx/tests/test_intelx.py",
+        "test/test_intelx_identity.py",
+        "tests/test_intelx_identity.py",
+        "tests/intelx_identity/test_intelx_identity.py",
+        "tests/intelx_identitys/test_intelx_identity.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "Python/scripts/intelx.py",
+      "candidate_test_paths": [
+        "Python/scripts/tests/test_intelx.py",
+        "tests/scripts/test_intelx.py",
+        "Python/scripts/tests/test_scripts.py",
+        "test/test_intelx.py",
+        "tests/test_intelx.py",
+        "tests/intelx/test_intelx.py",
+        "tests/intelxs/test_intelx.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "Maltego Transform/requirements.txt",
+        "Python/.devcontainer/requirements.txt",
+        "Python/.pre-commit-config.yaml",
+        "Python/pyproject.toml",
+        "Python/requirements-dev.txt",
+        "Python/requirements.txt"
+      ],
+      "count": 6,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 27,
+    "classified_count": 27,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 114,
+    "project_import_count": 0,
+    "declared_package_count": 43,
+    "undeclared_package_count": 24,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 24,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 5,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

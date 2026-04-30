@@ -50,13 +50,6 @@ export function sanitizeGovernanceEvent(event: GovernanceEvent): {
         match: value.slice(0, 80),
       });
     }
-    if (value.includes("\n")) {
-      violations.push({
-        kind: "multiline_payload",
-        message: "Multiline payloads are not allowed in governance events.",
-        match: value.slice(0, 80),
-      });
-    }
   }
 
   return {
@@ -79,11 +72,13 @@ function walkStringValues(value: unknown): string[] {
 }
 
 function containsDiffHunkFragment(value: string): boolean {
-  const trimmed = value.trim();
-  return (
-    trimmed.startsWith("@@ ")
-    || trimmed.startsWith("diff --git ")
-    || trimmed.startsWith("+++ ")
-    || trimmed.startsWith("--- ")
-  );
+  return value
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .some(line =>
+      line.startsWith("@@ ")
+      || line.startsWith("diff --git ")
+      || line.startsWith("+++ ")
+      || line.startsWith("--- "),
+    );
 }

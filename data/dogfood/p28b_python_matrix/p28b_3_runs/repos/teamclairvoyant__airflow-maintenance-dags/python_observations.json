@@ -1,0 +1,1009 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "teamclairvoyant__airflow-maintenance-dags",
+    "observed_file_count": 18,
+    "python_file_count": 8
+  },
+  "layout": {
+    "primary_layout": "unknown",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "Unable to determine package layout from file paths"
+      },
+      {
+        "aspect": "primary_layout",
+        "reason": "No structural signals matched known project forms"
+      }
+    ],
+    "bucket_summary": {
+      "source": 8
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "sqlalchemy imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "celery",
+        "kind": "task_queue",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "celery imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "airflow",
+        "kind": "workflow_orchestration",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "airflow imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "workflow_orchestration",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "Workflow orchestration framework imported in source files"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "unknown",
+    "validation": "unvalidated",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: unknown / unknown (low)",
+      "framework: sqlalchemy / orm (medium)",
+      "framework: celery / task_queue (medium)",
+      "framework: airflow / workflow_orchestration (medium)",
+      "project_role: workflow_orchestration (medium)"
+    ],
+    "suggested_review": [],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "No config files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "backup-configs/airflow-backup-configs.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8616,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "clear-missing-dags/airflow-clear-missing-dags.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4275,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "db-cleanup/airflow-db-cleanup.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 13421,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "delete-broken-dags/airflow-delete-broken-dags.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3075,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 19764,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "log-cleanup/airflow-log-cleanup-pwdless-ssh.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 6888,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "log-cleanup/airflow-log-cleanup.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8362,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "sla-miss-report/airflow-sla-miss-report.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 37925,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "backup-configs/airflow-backup-configs.py",
+      "raw_specifier": "from airflow.models import DAG, Variable",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "backup-configs/airflow-backup-configs.py",
+      "raw_specifier": "from airflow.operators.python_operator import PythonOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "backup-configs/airflow-backup-configs.py",
+      "raw_specifier": "from airflow.configuration import conf",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "backup-configs/airflow-backup-configs.py",
+      "raw_specifier": "from datetime import datetime, timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "backup-configs/airflow-backup-configs.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "backup-configs/airflow-backup-configs.py",
+      "raw_specifier": "airflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "backup-configs/airflow-backup-configs.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "backup-configs/airflow-backup-configs.py",
+      "raw_specifier": "subprocess",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "subprocess",
+      "confidence": "high"
+    },
+    {
+      "from_file": "clear-missing-dags/airflow-clear-missing-dags.py",
+      "raw_specifier": "from airflow.models import DAG, DagModel",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "clear-missing-dags/airflow-clear-missing-dags.py",
+      "raw_specifier": "from airflow.operators.python_operator import PythonOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "clear-missing-dags/airflow-clear-missing-dags.py",
+      "raw_specifier": "from airflow import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "clear-missing-dags/airflow-clear-missing-dags.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "clear-missing-dags/airflow-clear-missing-dags.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "clear-missing-dags/airflow-clear-missing-dags.py",
+      "raw_specifier": "os.path",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "clear-missing-dags/airflow-clear-missing-dags.py",
+      "raw_specifier": "socket",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "socket",
+      "confidence": "high"
+    },
+    {
+      "from_file": "clear-missing-dags/airflow-clear-missing-dags.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "clear-missing-dags/airflow-clear-missing-dags.py",
+      "raw_specifier": "airflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "airflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from airflow import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from airflow.configuration import conf",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from airflow.models import DAG, DagTag, DagModel, DagRun, Log, XCom, SlaMiss, TaskInstance, Variable",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from airflow.jobs import BaseJob",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from airflow.jobs.base_job import BaseJob",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from airflow.operators.python_operator import PythonOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from datetime import datetime, timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "dateutil.parser",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "dateutil",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from sqlalchemy import func, and_",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from sqlalchemy.exc import ProgrammingError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from sqlalchemy.orm import load_only",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from airflow.utils import timezone",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from airflow.models import TaskReschedule",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from airflow.models import TaskFail",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from airflow.models import RenderedTaskInstanceFields",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from airflow.models import ImportError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "db-cleanup/airflow-db-cleanup.py",
+      "raw_specifier": "from celery.backends.database.models import Task, TaskSet",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "celery",
+      "confidence": "low"
+    },
+    {
+      "from_file": "delete-broken-dags/airflow-delete-broken-dags.py",
+      "raw_specifier": "from airflow.models import DAG, ImportError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "delete-broken-dags/airflow-delete-broken-dags.py",
+      "raw_specifier": "from airflow.operators.python_operator import PythonOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "delete-broken-dags/airflow-delete-broken-dags.py",
+      "raw_specifier": "from airflow import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "delete-broken-dags/airflow-delete-broken-dags.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "delete-broken-dags/airflow-delete-broken-dags.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "delete-broken-dags/airflow-delete-broken-dags.py",
+      "raw_specifier": "os.path",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "delete-broken-dags/airflow-delete-broken-dags.py",
+      "raw_specifier": "socket",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "socket",
+      "confidence": "high"
+    },
+    {
+      "from_file": "delete-broken-dags/airflow-delete-broken-dags.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "delete-broken-dags/airflow-delete-broken-dags.py",
+      "raw_specifier": "airflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "raw_specifier": "from airflow.models import DAG, DagModel, DagRun, TaskInstance",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "raw_specifier": "from airflow import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "raw_specifier": "PythonOperator",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "PythonOperator",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "raw_specifier": "ShortCircuitOperator",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "ShortCircuitOperator",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "raw_specifier": "from airflow.operators.email_operator import EmailOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "raw_specifier": "from sqlalchemy import and_",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "raw_specifier": "from datetime import datetime, timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "raw_specifier": "pytz",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pytz",
+      "confidence": "low"
+    },
+    {
+      "from_file": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "raw_specifier": "airflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup-pwdless-ssh.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup-pwdless-ssh.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup-pwdless-ssh.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup-pwdless-ssh.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup-pwdless-ssh.py",
+      "raw_specifier": "airflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup-pwdless-ssh.py",
+      "raw_specifier": "from airflow.configuration import conf",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup-pwdless-ssh.py",
+      "raw_specifier": "from airflow.models import DAG, Variable",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup-pwdless-ssh.py",
+      "raw_specifier": "from airflow.operators.bash_operator import BashOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup-pwdless-ssh.py",
+      "raw_specifier": "from airflow.operators.dummy_operator import DummyOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup.py",
+      "raw_specifier": "logging",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup.py",
+      "raw_specifier": "airflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup.py",
+      "raw_specifier": "jinja2",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "jinja2",
+      "confidence": "low"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup.py",
+      "raw_specifier": "from airflow.configuration import conf",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup.py",
+      "raw_specifier": "from airflow.models import DAG, Variable",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup.py",
+      "raw_specifier": "from airflow.operators.bash_operator import BashOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "log-cleanup/airflow-log-cleanup.py",
+      "raw_specifier": "from airflow.operators.dummy_operator import DummyOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "sla-miss-report/airflow-sla-miss-report.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "numpy",
+      "confidence": "low"
+    },
+    {
+      "from_file": "sla-miss-report/airflow-sla-miss-report.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "pandas",
+      "confidence": "low"
+    },
+    {
+      "from_file": "sla-miss-report/airflow-sla-miss-report.py",
+      "raw_specifier": "json",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "json",
+      "confidence": "high"
+    },
+    {
+      "from_file": "sla-miss-report/airflow-sla-miss-report.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "sla-miss-report/airflow-sla-miss-report.py",
+      "raw_specifier": "airflow",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "sla-miss-report/airflow-sla-miss-report.py",
+      "raw_specifier": "from airflow import settings",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "sla-miss-report/airflow-sla-miss-report.py",
+      "raw_specifier": "from airflow.models import DAG, DagRun, TaskInstance",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "sla-miss-report/airflow-sla-miss-report.py",
+      "raw_specifier": "from airflow.models.serialized_dag import SerializedDagModel",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "sla-miss-report/airflow-sla-miss-report.py",
+      "raw_specifier": "from airflow.operators.python import PythonOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "sla-miss-report/airflow-sla-miss-report.py",
+      "raw_specifier": "from airflow.utils.email import send_email",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "sla-miss-report/airflow-sla-miss-report.py",
+      "raw_specifier": "from datetime import date, datetime, timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [],
+  "test_mappings": [
+    {
+      "source_path": "backup-configs/airflow-backup-configs.py",
+      "candidate_test_paths": [
+        "backup-configs/tests/test_airflow-backup-configs.py",
+        "tests/test_airflow-backup-configs.py",
+        "backup-configs/tests/test_backup-configs.py",
+        "test/test_airflow-backup-configs.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "clear-missing-dags/airflow-clear-missing-dags.py",
+      "candidate_test_paths": [
+        "clear-missing-dags/tests/test_airflow-clear-missing-dags.py",
+        "tests/test_airflow-clear-missing-dags.py",
+        "clear-missing-dags/tests/test_clear-missing-dags.py",
+        "test/test_airflow-clear-missing-dags.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "db-cleanup/airflow-db-cleanup.py",
+      "candidate_test_paths": [
+        "db-cleanup/tests/test_airflow-db-cleanup.py",
+        "tests/test_airflow-db-cleanup.py",
+        "db-cleanup/tests/test_db-cleanup.py",
+        "test/test_airflow-db-cleanup.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "delete-broken-dags/airflow-delete-broken-dags.py",
+      "candidate_test_paths": [
+        "delete-broken-dags/tests/test_airflow-delete-broken-dags.py",
+        "tests/test_airflow-delete-broken-dags.py",
+        "delete-broken-dags/tests/test_delete-broken-dags.py",
+        "test/test_airflow-delete-broken-dags.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "kill-halted-tasks/airflow-kill-halted-tasks.py",
+      "candidate_test_paths": [
+        "kill-halted-tasks/tests/test_airflow-kill-halted-tasks.py",
+        "tests/test_airflow-kill-halted-tasks.py",
+        "kill-halted-tasks/tests/test_kill-halted-tasks.py",
+        "test/test_airflow-kill-halted-tasks.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "log-cleanup/airflow-log-cleanup-pwdless-ssh.py",
+      "candidate_test_paths": [
+        "log-cleanup/tests/test_airflow-log-cleanup-pwdless-ssh.py",
+        "tests/test_airflow-log-cleanup-pwdless-ssh.py",
+        "log-cleanup/tests/test_log-cleanup.py",
+        "test/test_airflow-log-cleanup-pwdless-ssh.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "log-cleanup/airflow-log-cleanup.py",
+      "candidate_test_paths": [
+        "log-cleanup/tests/test_airflow-log-cleanup.py",
+        "tests/test_airflow-log-cleanup.py",
+        "log-cleanup/tests/test_log-cleanup.py",
+        "test/test_airflow-log-cleanup.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "sla-miss-report/airflow-sla-miss-report.py",
+      "candidate_test_paths": [
+        "sla-miss-report/tests/test_airflow-sla-miss-report.py",
+        "tests/test_airflow-sla-miss-report.py",
+        "sla-miss-report/tests/test_sla-miss-report.py",
+        "test/test_airflow-sla-miss-report.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 8,
+    "classified_count": 8,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 87,
+    "project_import_count": 0,
+    "declared_package_count": 0,
+    "undeclared_package_count": 56,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 8,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 0,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

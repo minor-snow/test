@@ -1,0 +1,70 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "a755c251d22633fc2e0b5ec13882f62841e2bc7c2eaa66a5e377e8f4cb648557",
+  "pinned_commit": "4f808400371cb70e76a4970e59b64a9ea7663caf",
+  "completed_at": "2026-04-30T11:54:49.487Z",
+  "repo_id": "mesonbuild/meson",
+  "category_expected": "packaging",
+  "category_observed": "python_sdk_library",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 717,
+  "python_files": 557,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "pytest/medium"
+  ],
+  "project_role_signals": [
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 487,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "mesonbuild/meson",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected packaging, got python_sdk_library",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "test cases/cython/1 basic/libdir/storer.pyx",
+        "test cases/cython/2 generated sources/includestuff.pyx",
+        "test cases/cython/2 generated sources/simpleinclude.pyx",
+        "test cases/cython/3 cython_args/cythonargs.pyx",
+        "test cases/cython/4 override_options/foo_cpp.pyx",
+        "test cases/python/3 cython/libdir/storer.pyx",
+        "test cases/python3/3 cython/libdir/storer.pyx"
+      ],
+      "count": 7,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "docs/yaml/functions/environment.yaml",
+        "pyproject.toml",
+        "setup.cfg",
+        "setup.py"
+      ],
+      "count": 4,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

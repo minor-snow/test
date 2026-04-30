@@ -64,4 +64,21 @@ describe("githubExitPolicy", () => {
     expect(decision.shouldFail).toBe(true);
     expect(decision.matchedConditions).toContain("review_required");
   });
+
+  it("fails on all when any non-pass finding exists", () => {
+    const decision = decideGitHubActionExit({
+      check: makeCheck([{
+        kind: "requires_human_review",
+        severity: "review_required",
+        file: "saleor/order/models.py",
+        message: "Review required",
+        allowed_actions: [],
+        requires_human: true,
+      }]),
+      failOn: ["all"],
+    });
+
+    expect(decision.shouldFail).toBe(true);
+    expect(decision.matchedConditions).toContain("review_required");
+  });
 });

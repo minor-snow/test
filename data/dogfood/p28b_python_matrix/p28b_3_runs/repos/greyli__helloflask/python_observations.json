@@ -1,0 +1,1916 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "greyli__helloflask",
+    "observed_file_count": 1038,
+    "python_file_count": 37
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "packaging_config_no_framework",
+        "weight": "weak",
+        "evidence": "Packaging config present without framework indicators"
+      },
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "Unable to determine package layout from file paths"
+      }
+    ],
+    "bucket_summary": {
+      "source": 21,
+      "test": 12,
+      "unknown": 1,
+      "config": 3
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "flask",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "flask found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "flask imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "click",
+        "kind": "cli_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "click found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "click imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "sqlalchemy found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "sqlalchemy imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          }
+        ]
+      },
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          },
+          {
+            "dimension": "dependency_manifest",
+            "detail": "Packaging config without web framework"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "flask_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / unknown (low)",
+      "framework: flask / web_framework (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: click / cli_framework (high)",
+      "framework: sqlalchemy / orm (high)",
+      "project_role: service_backend (medium)",
+      "project_role: python_sdk_library (high)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/config*",
+        "reason": "Application configuration affects runtime behavior",
+        "severity": "medium",
+        "matched_path_count": 5,
+        "evidence": [
+          "5 paths match pattern **/config*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/auth*",
+        "reason": "No auth files observed"
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "No security files observed"
+      },
+      {
+        "pattern": "**/blueprints/**",
+        "reason": "No Flask blueprint directory observed"
+      },
+      {
+        "pattern": "**/extensions*",
+        "reason": "No extensions files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "demos/assets/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1360,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "demos/cache/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2138,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "demos/database/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8738,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "demos/email/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4444,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "demos/form/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8805,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "demos/form/forms.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3068,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "demos/hello/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 802,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "demos/http/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5519,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "demos/template/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2248,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/album/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1492,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/assets/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1112,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/cache/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1891,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/ch1/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 552,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/ch2/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4567,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/ch3/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2028,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/ch4/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1576,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/ch4/forms.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 729,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/ch5/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 7157,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/ckeditor/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2393,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/longtalk/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 331,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/notebook/app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 4581,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "examples/notebook/test_app.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4024,
+      "evidence": [
+        "test_ prefix convention"
+      ]
+    },
+    {
+      "path": "pdm.lock",
+      "bucket": "unknown",
+      "extension": ".lock",
+      "size_bytes": 108184,
+      "evidence": []
+    },
+    {
+      "path": "Pipfile",
+      "bucket": "config",
+      "extension": "",
+      "size_bytes": 453,
+      "evidence": [
+        "Lock/manifest"
+      ]
+    },
+    {
+      "path": "Pipfile.lock",
+      "bucket": "config",
+      "extension": ".lock",
+      "size_bytes": 12510,
+      "evidence": [
+        "Lock/manifest"
+      ]
+    },
+    {
+      "path": "pyproject.toml",
+      "bucket": "config",
+      "extension": ".toml",
+      "size_bytes": 1145,
+      "evidence": [
+        "Project config"
+      ]
+    },
+    {
+      "path": "tests/test_album.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2297,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_assets.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1293,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_cache.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1191,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_ch1.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2070,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_ch2.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 6380,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_ch3.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1363,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_ch4.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2903,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_ch5.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1882,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_ckeditor.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1319,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_longtalk.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1319,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "demos/assets/app.py",
+      "raw_specifier": "from flask import Flask, render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/assets/app.py",
+      "raw_specifier": "from flask_assets import Environment, Bundle",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_assets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/assets/app.py",
+      "raw_specifier": "from flask_ckeditor import CKEditor",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_ckeditor",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/cache/app.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/cache/app.py",
+      "raw_specifier": "from flask import Flask, url_for, redirect, request, flash, render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/cache/app.py",
+      "raw_specifier": "from flask_caching import Cache",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_caching",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/cache/app.py",
+      "raw_specifier": "from flask_debugtoolbar import DebugToolbarExtension",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_debugtoolbar",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/database/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/database/app.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/database/app.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/database/app.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/database/app.py",
+      "raw_specifier": "from flask import redirect, url_for, abort, render_template, flash",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/database/app.py",
+      "raw_specifier": "from flask_sqlalchemy import SQLAlchemy",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/database/app.py",
+      "raw_specifier": "from flask_wtf import FlaskForm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/database/app.py",
+      "raw_specifier": "from wtforms import SubmitField, TextAreaField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/database/app.py",
+      "raw_specifier": "from wtforms.validators import DataRequired",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/email/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/email/app.py",
+      "raw_specifier": "from threading import Thread",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "threading",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/email/app.py",
+      "raw_specifier": "sendgrid",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sendgrid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/email/app.py",
+      "raw_specifier": "from sendgrid.helpers.mail import Email as SGEmail, Content, Mail as SGMail",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sendgrid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/email/app.py",
+      "raw_specifier": "from flask_mail import Mail, Message",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_mail",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/email/app.py",
+      "raw_specifier": "from flask_wtf import FlaskForm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/email/app.py",
+      "raw_specifier": "from wtforms import StringField, TextAreaField, SubmitField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/email/app.py",
+      "raw_specifier": "from wtforms.validators import DataRequired, Email",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/email/app.py",
+      "raw_specifier": "from flask import Flask, flash, redirect, url_for, render_template, request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/form/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/form/app.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/form/app.py",
+      "raw_specifier": "from flask import Flask, render_template, flash, redirect, url_for, request, send_from_directory, session",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/form/app.py",
+      "raw_specifier": "from flask_ckeditor import CKEditor, upload_success, upload_fail",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_ckeditor",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/form/app.py",
+      "raw_specifier": "from flask_dropzone import Dropzone",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_dropzone",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/form/app.py",
+      "raw_specifier": "from flask_wtf.csrf import validate_csrf",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/form/app.py",
+      "raw_specifier": "from wtforms import ValidationError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/form/app.py",
+      "raw_specifier": "from forms import LoginForm, FortyTwoForm, NewPostForm, UploadForm, MultiUploadForm, SigninForm, \\",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "forms",
+      "confidence": "low"
+    },
+    {
+      "from_file": "demos/form/forms.py",
+      "raw_specifier": "from flask_ckeditor import CKEditorField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_ckeditor",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/form/forms.py",
+      "raw_specifier": "from flask_wtf import FlaskForm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/form/forms.py",
+      "raw_specifier": "from flask_wtf.file import FileField, FileRequired, FileAllowed",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/form/forms.py",
+      "raw_specifier": "from wtforms import StringField, PasswordField, BooleanField, IntegerField, \\",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/form/forms.py",
+      "raw_specifier": "from wtforms.validators import DataRequired, Length, ValidationError, Email",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/hello/app.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/hello/app.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/http/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/http/app.py",
+      "raw_specifier": "from urlparse import urlparse, urljoin",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "urlparse",
+      "confidence": "low"
+    },
+    {
+      "from_file": "demos/http/app.py",
+      "raw_specifier": "from urllib.parse import urlparse, urljoin",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/http/app.py",
+      "raw_specifier": "from markupsafe import escape",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "markupsafe",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/http/app.py",
+      "raw_specifier": "from jinja2.utils import generate_lorem_ipsum",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/http/app.py",
+      "raw_specifier": "from flask import Flask, make_response, request, redirect, url_for, abort, session, jsonify",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/template/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "demos/template/app.py",
+      "raw_specifier": "from flask import Flask, render_template, flash, redirect, url_for, Markup",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/album/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/album/app.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/album/app.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/album/app.py",
+      "raw_specifier": "from flask import Flask, render_template, flash, session, redirect, url_for, send_from_directory",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/album/app.py",
+      "raw_specifier": "from flask_wtf import FlaskForm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/album/app.py",
+      "raw_specifier": "from wtforms import SubmitField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/album/app.py",
+      "raw_specifier": "from flask_wtf.file import FileField, FileRequired, FileAllowed, FileSize",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/assets/app.py",
+      "raw_specifier": "from flask import Flask, render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/assets/app.py",
+      "raw_specifier": "from flask_assets import Environment, Bundle",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_assets",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/assets/app.py",
+      "raw_specifier": "from flask_ckeditor import CKEditor",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_ckeditor",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/cache/app.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/cache/app.py",
+      "raw_specifier": "from flask import Flask, url_for, redirect, request, flash, render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/cache/app.py",
+      "raw_specifier": "from flask_caching import Cache",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_caching",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/cache/app.py",
+      "raw_specifier": "from flask_debugtoolbar import DebugToolbarExtension",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_debugtoolbar",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch1/app.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch1/app.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch2/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch2/app.py",
+      "raw_specifier": "from urllib.parse import urlparse, urljoin",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "urllib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch2/app.py",
+      "raw_specifier": "from markupsafe import escape",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "markupsafe",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch2/app.py",
+      "raw_specifier": "from flask import Flask, make_response, request, redirect, url_for, abort, session, jsonify",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch3/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch3/app.py",
+      "raw_specifier": "from flask import Flask, render_template, flash, redirect, url_for",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch3/app.py",
+      "raw_specifier": "from markupsafe import Markup",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "markupsafe",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch4/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch4/app.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch4/app.py",
+      "raw_specifier": "from flask import Flask, render_template, flash, redirect, url_for, request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch4/app.py",
+      "raw_specifier": "from wtforms import ValidationError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch4/app.py",
+      "raw_specifier": "from forms import LoginForm, FortyTwoForm",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "forms",
+      "confidence": "low"
+    },
+    {
+      "from_file": "examples/ch4/forms.py",
+      "raw_specifier": "from flask_wtf import FlaskForm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch4/forms.py",
+      "raw_specifier": "from wtforms import StringField, PasswordField, BooleanField, IntegerField, SubmitField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch4/forms.py",
+      "raw_specifier": "from wtforms.validators import DataRequired, Length, ValidationError",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch5/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch5/app.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch5/app.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch5/app.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch5/app.py",
+      "raw_specifier": "from typing import Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch5/app.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch5/app.py",
+      "raw_specifier": "from flask import Flask",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch5/app.py",
+      "raw_specifier": "from flask_sqlalchemy import SQLAlchemy",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch5/app.py",
+      "raw_specifier": "from sqlalchemy import String, Text, MetaData, ForeignKey, Column, event",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ch5/app.py",
+      "raw_specifier": "from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ckeditor/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ckeditor/app.py",
+      "raw_specifier": "uuid",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "uuid",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ckeditor/app.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ckeditor/app.py",
+      "raw_specifier": "from flask_ckeditor import CKEditor, upload_success, upload_fail",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_ckeditor",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ckeditor/app.py",
+      "raw_specifier": "from flask import Flask, render_template, flash, request, url_for, send_from_directory",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ckeditor/app.py",
+      "raw_specifier": "from flask_wtf import FlaskForm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ckeditor/app.py",
+      "raw_specifier": "from wtforms import StringField, SubmitField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ckeditor/app.py",
+      "raw_specifier": "from wtforms.validators import DataRequired, Length",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ckeditor/app.py",
+      "raw_specifier": "from flask_ckeditor import CKEditorField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_ckeditor",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/ckeditor/app.py",
+      "raw_specifier": "from bleach import clean",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "bleach",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/longtalk/app.py",
+      "raw_specifier": "from jinja2.utils import generate_lorem_ipsum",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "jinja2",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/longtalk/app.py",
+      "raw_specifier": "from flask import Flask, render_template",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "sys",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "sys",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "from pathlib import Path",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "pathlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "from typing import Optional",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "click",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "click",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "from flask import Flask, redirect, url_for, render_template, flash, request",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "from flask_sqlalchemy import SQLAlchemy",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "from sqlalchemy import select, String, Text, MetaData",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "from flask_wtf import FlaskForm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "flask_wtf",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "from wtforms import SubmitField, StringField, TextAreaField",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "from wtforms.validators import DataRequired, Length",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "wtforms",
+      "confidence": "high"
+    },
+    {
+      "from_file": "examples/notebook/app.py",
+      "raw_specifier": "from faker import Faker",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "faker",
+      "confidence": "high"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "pdm.lock",
+      "source_type": "pdm.lock",
+      "packages": [
+        "babel",
+        "bleach",
+        "blinker",
+        "bootstrap_flask",
+        "cachelib",
+        "certifi",
+        "charset_normalizer",
+        "click",
+        "dnspython",
+        "email_validator",
+        "flask",
+        "flask_assets",
+        "flask_caching",
+        "flask_ckeditor",
+        "flask_debugtoolbar",
+        "flask_mailman",
+        "flask_sqlalchemy",
+        "flask_wtf",
+        "ghp_import",
+        "greenlet",
+        "idna",
+        "importlib_metadata",
+        "itsdangerous",
+        "jinja2",
+        "markdown",
+        "markupsafe",
+        "mergedeep",
+        "mkdocs",
+        "mkdocs_get_deps",
+        "mkdocs_material",
+        "mkdocs_material_extensions",
+        "paginate",
+        "pathspec",
+        "platformdirs",
+        "pygments",
+        "pymdown_extensions",
+        "python_dotenv",
+        "pyyaml",
+        "pyyaml_env_tag",
+        "regex",
+        "requests",
+        "sqlalchemy",
+        "typing_extensions",
+        "urllib3",
+        "webassets",
+        "webencodings",
+        "werkzeug",
+        "wtforms",
+        "zipp"
+      ],
+      "dev_packages": [
+        "colorama",
+        "coverage",
+        "exceptiongroup",
+        "faker",
+        "iniconfig",
+        "packaging",
+        "pluggy",
+        "pytest",
+        "pytest_cov",
+        "python_dateutil",
+        "ruff",
+        "six",
+        "tomli",
+        "watchdog"
+      ],
+      "confidence": "medium",
+      "warnings": []
+    },
+    {
+      "source_path": "Pipfile",
+      "source_type": "Pipfile",
+      "packages": [
+        "python_dotenv",
+        "flask_sqlalchemy",
+        "flask_mail",
+        "sendgrid",
+        "flask_migrate",
+        "flask_caching",
+        "flask_assets",
+        "flask",
+        "flask_debugtoolbar",
+        "cssmin",
+        "jsmin",
+        "redis",
+        "flask_dropzone",
+        "flask_wtf",
+        "flask_ckeditor",
+        "markupsafe"
+      ],
+      "dev_packages": [
+        "watchdog"
+      ],
+      "confidence": "medium",
+      "warnings": []
+    },
+    {
+      "source_path": "pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [
+        "flask",
+        "python_dotenv",
+        "bootstrap_flask",
+        "flask_wtf",
+        "flask_ckeditor",
+        "flask_sqlalchemy",
+        "flask_mailman",
+        "flask_caching",
+        "flask_assets",
+        "bleach",
+        "flask_debugtoolbar",
+        "greenlet"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "demos/assets/app.py",
+      "candidate_test_paths": [
+        "demos/assets/tests/test_app.py",
+        "tests/assets/test_app.py",
+        "demos/assets/tests/test_assets.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "demos/cache/app.py",
+      "candidate_test_paths": [
+        "demos/cache/tests/test_app.py",
+        "tests/cache/test_app.py",
+        "demos/cache/tests/test_cache.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "demos/database/app.py",
+      "candidate_test_paths": [
+        "demos/database/tests/test_app.py",
+        "tests/database/test_app.py",
+        "demos/database/tests/test_database.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "demos/email/app.py",
+      "candidate_test_paths": [
+        "demos/email/tests/test_app.py",
+        "tests/email/test_app.py",
+        "demos/email/tests/test_email.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "demos/form/app.py",
+      "candidate_test_paths": [
+        "demos/form/tests/test_app.py",
+        "tests/form/test_app.py",
+        "demos/form/tests/test_form.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "demos/form/forms.py",
+      "candidate_test_paths": [
+        "demos/form/tests/test_forms.py",
+        "tests/form/test_forms.py",
+        "demos/form/tests/test_form.py",
+        "test/test_forms.py",
+        "tests/test_forms.py",
+        "tests/forms/test_forms.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "demos/hello/app.py",
+      "candidate_test_paths": [
+        "demos/hello/tests/test_app.py",
+        "tests/hello/test_app.py",
+        "demos/hello/tests/test_hello.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "demos/http/app.py",
+      "candidate_test_paths": [
+        "demos/http/tests/test_app.py",
+        "tests/http/test_app.py",
+        "demos/http/tests/test_http.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "demos/template/app.py",
+      "candidate_test_paths": [
+        "demos/template/tests/test_app.py",
+        "tests/template/test_app.py",
+        "demos/template/tests/test_template.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/album/app.py",
+      "candidate_test_paths": [
+        "examples/album/tests/test_app.py",
+        "tests/album/test_app.py",
+        "examples/album/tests/test_album.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/assets/app.py",
+      "candidate_test_paths": [
+        "examples/assets/tests/test_app.py",
+        "tests/assets/test_app.py",
+        "examples/assets/tests/test_assets.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/cache/app.py",
+      "candidate_test_paths": [
+        "examples/cache/tests/test_app.py",
+        "tests/cache/test_app.py",
+        "examples/cache/tests/test_cache.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/ch1/app.py",
+      "candidate_test_paths": [
+        "examples/ch1/tests/test_app.py",
+        "tests/ch1/test_app.py",
+        "examples/ch1/tests/test_ch1.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/ch2/app.py",
+      "candidate_test_paths": [
+        "examples/ch2/tests/test_app.py",
+        "tests/ch2/test_app.py",
+        "examples/ch2/tests/test_ch2.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/ch3/app.py",
+      "candidate_test_paths": [
+        "examples/ch3/tests/test_app.py",
+        "tests/ch3/test_app.py",
+        "examples/ch3/tests/test_ch3.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/ch4/app.py",
+      "candidate_test_paths": [
+        "examples/ch4/tests/test_app.py",
+        "tests/ch4/test_app.py",
+        "examples/ch4/tests/test_ch4.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/ch4/forms.py",
+      "candidate_test_paths": [
+        "examples/ch4/tests/test_forms.py",
+        "tests/ch4/test_forms.py",
+        "examples/ch4/tests/test_ch4.py",
+        "test/test_forms.py",
+        "tests/test_forms.py",
+        "tests/forms/test_forms.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/ch5/app.py",
+      "candidate_test_paths": [
+        "examples/ch5/tests/test_app.py",
+        "tests/ch5/test_app.py",
+        "examples/ch5/tests/test_ch5.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/ckeditor/app.py",
+      "candidate_test_paths": [
+        "examples/ckeditor/tests/test_app.py",
+        "tests/ckeditor/test_app.py",
+        "examples/ckeditor/tests/test_ckeditor.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/longtalk/app.py",
+      "candidate_test_paths": [
+        "examples/longtalk/tests/test_app.py",
+        "tests/longtalk/test_app.py",
+        "examples/longtalk/tests/test_longtalk.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "examples/notebook/app.py",
+      "candidate_test_paths": [
+        "examples/notebook/tests/test_app.py",
+        "tests/notebook/test_app.py",
+        "examples/notebook/tests/test_notebook.py",
+        "test/test_app.py",
+        "tests/test_app.py",
+        "tests/app/test_app.py",
+        "tests/apps/test_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "pdm.lock"
+      ],
+      "count": 1,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 33,
+    "classified_count": 33,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 115,
+    "project_import_count": 0,
+    "declared_package_count": 80,
+    "undeclared_package_count": 3,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 21,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 3,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "e11ff861a85ca13b03f17e58f887a4682e3c11a9f8b6ff8e9755839991844eeb",
+  "pinned_commit": "84f92dcf29229e37f822ba3ba5eea4212d2abf35",
+  "completed_at": "2026-04-30T11:14:33.313Z",
+  "repo_id": "hypothesis",
+  "category_expected": "python_sdk_library",
+  "category_observed": "django_commerce",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 366,
+  "python_files": 468,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "django/high",
+    "pytest/high",
+    "click/high"
+  ],
+  "project_role_signals": [
+    "python_sdk_library/high",
+    "cli_application/high"
+  ],
+  "test_mapping_count": 111,
+  "risk_preset": "python_sdk_library",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "hypothesis",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected python_sdk_library, got django_commerce",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "hypothesis-python/pyproject.toml",
+        "hypothesis-python/tox.ini"
+      ],
+      "count": 2,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "unsupported_python_artifact",
+      "classification": "out_of_scope",
+      "paths": [
+        "notebooks/Designing a better simplifier.ipynb"
+      ],
+      "count": 1,
+      "note": "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "hypothesis-python/tests/common/setup.py",
+        "pyproject.toml",
+        "tooling/setup.py"
+      ],
+      "count": 3,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}

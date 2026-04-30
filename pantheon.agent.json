@@ -12,9 +12,14 @@
     "build": "npm run build",
     "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit",
     "test": "node ./node_modules/vitest/vitest.mjs run --reporter=dot",
-    "repair_intake": "node dist/src/cli/pantheon.js repair intake --from .pantheon/repair/inbox/agent_bug_report.json",
-    "repair_plan": "node dist/src/cli/pantheon.js repair plan --repair-id <repair_id> --config pantheon.alpha.json",
-    "repair_check": "node dist/src/cli/pantheon.js repair check --repair-id <repair_id>"
+    "doctor": "node dist/src/cli/pantheon-alpha.js doctor",
+    "repair_intake": "node dist/src/cli/pantheon-alpha.js repair intake --from .pantheon/repair/inbox/agent_bug_report.json",
+    "repair_plan": "node dist/src/cli/pantheon-alpha.js repair plan --repair-id <repair_id>",
+    "repair_check": "node dist/src/cli/pantheon-alpha.js repair check --repair-id <repair_id>",
+    "review_list": "node dist/src/cli/pantheon-alpha.js review list",
+    "review_show": "node dist/src/cli/pantheon-alpha.js review show --repair-id <repair_id>",
+    "metrics_daily": "node dist/src/cli/pantheon-alpha.js metrics daily",
+    "metrics_status": "node dist/src/cli/pantheon-alpha.js metrics status"
   },
   "repair_protocol": {
     "bug_report_template": ".pantheon/repair/inbox/agent_bug_report.template.json",
@@ -23,11 +28,17 @@
     "requires_repair_id": true,
     "latest_is_convenience_only": true
   },
+  "local_governance": {
+    "events": ".pantheon/governance/events.jsonl",
+    "review_queue": ".pantheon/reviews/review_queue.json",
+    "daily_metrics": ".pantheon/metrics/daily/"
+  },
   "public_artifacts": [
     "repair_task.md",
     "repair_report.md",
     "repair_feedback.md",
-    "repair_check.json"
+    "repair_check.json",
+    "review_request.md"
   ],
   "hard_rules": [
     "Do not patch before bug report.",

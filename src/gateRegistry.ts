@@ -626,7 +626,7 @@ export const GATE_REGISTRY: GateCompletenessEntry[] = [
       { file: "test/scopeDiff/scopeDiffValidator.test.ts", name: "protocol modification scenario" },
       { file: "test/scopeDiff/scopeDiffValidator.test.ts", name: "fails when source_scope_hash is tampered" },
       { file: "test/scopeDiff/scopeDiffValidator.test.ts", name: "generated boundary modified without modify permission" },
-      { file: "test/scopeDiff/scopeDiffValidator.test.ts", name: "missing human review scenario" },
+      { file: "test/scopeDiff/scopeDiffValidator.test.ts", name: "missing human review still preserves reverse-issue signal" },
     ],
   },
 ];

@@ -22,29 +22,39 @@ export function cmdMetrics(args: string[]): void {
 }
 
 export function cmdMetricsDaily(repoRootInput: string, date = new Date().toISOString().slice(0, 10)): void {
-  const repoRoot = resolve(repoRootInput);
-  const report = aggregateDailyMetrics(repoRoot, date);
-  const markdown = renderDailyMetricsReport(report);
-  const paths = writeDailyMetricsArtifacts(repoRoot, report, markdown);
+  try {
+    const repoRoot = resolve(repoRootInput);
+    const report = aggregateDailyMetrics(repoRoot, date);
+    const markdown = renderDailyMetricsReport(report);
+    const paths = writeDailyMetricsArtifacts(repoRoot, report, markdown);
 
-  console.log("Pantheon Metrics Daily\n");
-  console.log(`  Date: ${report.date}`);
-  console.log(`  Repair checks: ${report.repair_checks}`);
-  console.log(`  Open reviews: ${report.open_review_requests.length}`);
-  console.log(`  Output: ${paths.markdownPath(report.date)}`);
+    console.log("Pantheon Metrics Daily\n");
+    console.log(`  Date: ${report.date}`);
+    console.log(`  Repair checks: ${report.repair_checks}`);
+    console.log(`  Open reviews: ${report.open_review_requests.length}`);
+    console.log(`  Output: ${paths.markdownPath(report.date)}`);
+  } catch (error) {
+    console.error(`[Pantheon Metrics] ${error instanceof Error ? error.message : String(error)}`);
+    process.exitCode = 1;
+  }
 }
 
 export function cmdMetricsStatus(repoRootInput: string): void {
-  const repoRoot = resolve(repoRootInput);
-  const status = latestMetricsStatus(repoRoot);
+  try {
+    const repoRoot = resolve(repoRootInput);
+    const status = latestMetricsStatus(repoRoot);
 
-  console.log("Pantheon Metrics Status\n");
-  console.log(`  Enabled: ${status.config.enabled ? "yes" : "no"}`);
-  console.log(`  Mode: ${status.config.mode}`);
-  console.log(`  Generate daily report: ${status.config.generateDailyReport ? "yes" : "no"}`);
-  console.log(`  Include file paths: ${status.config.includeFilePaths ? "yes" : "no"}`);
-  console.log(`  Anonymize paths: ${status.config.anonymizePaths ? "yes" : "no"}`);
-  console.log(`  Latest report: ${status.latestJsonPath ?? "none"}`);
+    console.log("Pantheon Metrics Status\n");
+    console.log(`  Enabled: ${status.config.enabled ? "yes" : "no"}`);
+    console.log(`  Mode: ${status.config.mode}`);
+    console.log(`  Generate daily report: ${status.config.generateDailyReport ? "yes" : "no"}`);
+    console.log(`  Include file paths: ${status.config.includeFilePaths ? "yes" : "no"}`);
+    console.log(`  Anonymize paths: ${status.config.anonymizePaths ? "yes" : "no"}`);
+    console.log(`  Latest report: ${status.latestJsonPath ?? "none"}`);
+  } catch (error) {
+    console.error(`[Pantheon Metrics] ${error instanceof Error ? error.message : String(error)}`);
+    process.exitCode = 1;
+  }
 }
 
 function getFlag(args: readonly string[], name: string): string | undefined {

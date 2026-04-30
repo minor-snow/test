@@ -1,0 +1,274 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "abhishek-ch__around-dataengineering",
+    "observed_file_count": 110,
+    "python_file_count": 2
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "docs_directory",
+        "weight": "weak",
+        "evidence": "docs/ directory suggests library documentation"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "Unable to determine package layout from file paths"
+      }
+    ],
+    "bucket_summary": {
+      "source": 2
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "airflow",
+        "kind": "workflow_orchestration",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "airflow imported in source files"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "docs/ directory without web framework signals"
+          }
+        ]
+      },
+      {
+        "role": "workflow_orchestration",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "import_pattern",
+            "detail": "Workflow orchestration framework imported in source files"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / unknown (low)",
+      "framework: airflow / workflow_orchestration (medium)",
+      "project_role: python_sdk_library (high)",
+      "project_role: workflow_orchestration (medium)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/_config*",
+        "reason": "Configuration affects default behavior for all consumers",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/_config*"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/__init__.py",
+        "reason": "No __init__.py observed (unusual)"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "dags/example_pod.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2015,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "dags/test.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 60,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "dags/example_pod.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "dags/example_pod.py",
+      "raw_specifier": "from airflow import DAG",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "dags/example_pod.py",
+      "raw_specifier": "from airflow.models import Variable",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "dags/example_pod.py",
+      "raw_specifier": "from airflow.operators.python import PythonOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "dags/example_pod.py",
+      "raw_specifier": "from airflow.operators.dummy import DummyOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "dags/example_pod.py",
+      "raw_specifier": "from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "dags/example_pod.py",
+      "raw_specifier": "from airflow.utils.dates import datetime",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    },
+    {
+      "from_file": "dags/example_pod.py",
+      "raw_specifier": "from airflow.configuration import conf",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "airflow",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [],
+  "test_mappings": [
+    {
+      "source_path": "dags/example_pod.py",
+      "candidate_test_paths": [
+        "dags/tests/test_example_pod.py",
+        "tests/test_example_pod.py",
+        "dags/tests/test_dags.py",
+        "test/test_example_pod.py",
+        "tests/example_pod/test_example_pod.py",
+        "tests/example_pods/test_example_pod.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "dags/test.py",
+      "candidate_test_paths": [
+        "dags/tests/test_test.py",
+        "tests/test_test.py",
+        "dags/tests/test_dags.py",
+        "test/test_test.py",
+        "tests/test/test_test.py",
+        "tests/tests/test_test.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 2,
+    "classified_count": 2,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 8,
+    "project_import_count": 0,
+    "declared_package_count": 0,
+    "undeclared_package_count": 7,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 2,
+    "high_confidence_test_count": 0,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 0,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

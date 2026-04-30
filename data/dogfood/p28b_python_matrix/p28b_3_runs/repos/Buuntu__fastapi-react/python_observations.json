@@ -1,0 +1,1304 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "Buuntu__fastapi-react",
+    "observed_file_count": 105,
+    "python_file_count": 32
+  },
+  "layout": {
+    "primary_layout": "unknown",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "Unable to determine package layout from file paths"
+      },
+      {
+        "aspect": "primary_layout",
+        "reason": "No structural signals matched known project forms"
+      }
+    ],
+    "bucket_summary": {
+      "source": 23,
+      "test": 7,
+      "unknown": 2
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "fastapi",
+        "kind": "web_framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "fastapi found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "fastapi imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      },
+      {
+        "name": "sqlalchemy",
+        "kind": "orm",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "sqlalchemy found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "sqlalchemy imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "celery",
+        "kind": "task_queue",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "celery found in dependency manifests"
+          },
+          {
+            "dimension": "import_pattern",
+            "detail": "celery imported in source files"
+          }
+        ]
+      },
+      {
+        "name": "httpx",
+        "kind": "http_client",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "httpx found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "service_backend",
+        "confidence": "high",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "API framework found in dependencies"
+          },
+          {
+            "dimension": "path_pattern",
+            "detail": "api/ directory present"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "fastapi_service",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: unknown / unknown (low)",
+      "framework: fastapi / web_framework (high)",
+      "framework: pytest / test_framework (medium)",
+      "framework: sqlalchemy / orm (high)",
+      "framework: celery / task_queue (high)",
+      "framework: httpx / http_client (medium)",
+      "project_role: service_backend (high)",
+      "sensitive_zone: authentication (high, 3 paths)",
+      "sensitive_zone: security (high, 1 paths)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/auth*",
+        "reason": "Authentication logic requires human review",
+        "severity": "high",
+        "matched_path_count": 4,
+        "evidence": [
+          "4 paths match pattern **/auth*",
+          "Sensitive zone \"authentication\" (high) corroborates"
+        ]
+      },
+      {
+        "pattern": "**/security*",
+        "reason": "Security module requires human review",
+        "severity": "high",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/security*",
+          "Sensitive zone \"security\" (high) corroborates"
+        ]
+      },
+      {
+        "pattern": "**/config*",
+        "reason": "Application configuration affects system behavior",
+        "severity": "medium",
+        "matched_path_count": 3,
+        "evidence": [
+          "3 paths match pattern **/config*"
+        ]
+      },
+      {
+        "pattern": "**/db/**",
+        "reason": "Database layer changes affect data integrity",
+        "severity": "high",
+        "matched_path_count": 5,
+        "evidence": [
+          "5 paths match pattern **/db/**"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "alembic/**",
+        "reason": "No alembic directory observed"
+      },
+      {
+        "pattern": "**/middleware*",
+        "reason": "No middleware files observed"
+      },
+      {
+        "pattern": "**/deps*",
+        "reason": "No deps files observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/alembic/env.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2323,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/alembic/versions/91979b40eb38_create_users_table.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 869,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/alembic/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/auth.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2002,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/tests/test_auth.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 2064,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/tests/test_users.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3543,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/users.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2507,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/api/dependencies/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/api/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/core/auth.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2279,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/core/celery_app.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 154,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/core/config.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 142,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/core/security.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1000,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/core/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/db/crud.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2016,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/db/models.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 481,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/db/schemas.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 714,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/db/session.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 460,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/db/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/initial_data.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 620,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/main.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1280,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/tasks.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 159,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/tests/test_main.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 165,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/tests/test_tasks.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 165,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Nested test directory"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/app/__init__.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/conftest.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 4266,
+      "evidence": [
+        "pytest conftest"
+      ]
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/pyproject.toml",
+      "bucket": "unknown",
+      "extension": ".toml",
+      "size_bytes": 30,
+      "evidence": []
+    },
+    {
+      "path": "{{cookiecutter.project_slug}}/backend/requirements.txt",
+      "bucket": "unknown",
+      "extension": ".txt",
+      "size_bytes": 329,
+      "evidence": []
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/alembic/env.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/alembic/env.py",
+      "raw_specifier": "from logging.config import fileConfig",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "logging",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/alembic/env.py",
+      "raw_specifier": "from alembic import context",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "alembic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/alembic/env.py",
+      "raw_specifier": "from sqlalchemy import engine_from_config",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/alembic/env.py",
+      "raw_specifier": "from sqlalchemy import pool",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/alembic/env.py",
+      "raw_specifier": "from app.db.models import Base",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/alembic/versions/91979b40eb38_create_users_table.py",
+      "raw_specifier": "from alembic import op",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "alembic",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/alembic/versions/91979b40eb38_create_users_table.py",
+      "raw_specifier": "sqlalchemy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/auth.py",
+      "raw_specifier": "from fastapi.security import OAuth2PasswordRequestForm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/auth.py",
+      "raw_specifier": "from fastapi import APIRouter, Depends, HTTPException, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/auth.py",
+      "raw_specifier": "from datetime import timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/auth.py",
+      "raw_specifier": "from app.db.session import get_db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/auth.py",
+      "raw_specifier": "from app.core import security",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/auth.py",
+      "raw_specifier": "from app.core.auth import authenticate_user, sign_up_new_user",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/users.py",
+      "raw_specifier": "from fastapi import APIRouter, Request, Depends, Response, encoders",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/users.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/users.py",
+      "raw_specifier": "from app.db.session import get_db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/users.py",
+      "raw_specifier": "from app.db.crud import ( get_users, get_user, create_user, delete_user, edit_user, )",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/users.py",
+      "raw_specifier": "from app.db.schemas import UserCreate, UserEdit, User, UserOut",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/users.py",
+      "raw_specifier": "from app.core.auth import get_current_active_user, get_current_active_superuser",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/core/auth.py",
+      "raw_specifier": "jwt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "jwt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/core/auth.py",
+      "raw_specifier": "from fastapi import Depends, HTTPException, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/core/auth.py",
+      "raw_specifier": "from jwt import PyJWTError",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "jwt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/core/auth.py",
+      "raw_specifier": "from app.db import models, schemas, session",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/core/auth.py",
+      "raw_specifier": "from app.db.crud import get_user_by_email, create_user",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/core/auth.py",
+      "raw_specifier": "from app.core import security",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/core/celery_app.py",
+      "raw_specifier": "from celery import Celery",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "celery",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/core/config.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/core/security.py",
+      "raw_specifier": "jwt",
+      "import_kind": "import",
+      "status": "undeclared_package",
+      "top_level_module": "jwt",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/core/security.py",
+      "raw_specifier": "from fastapi.security import OAuth2PasswordBearer",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/core/security.py",
+      "raw_specifier": "from passlib.context import CryptContext",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "passlib",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/core/security.py",
+      "raw_specifier": "from datetime import datetime, timedelta",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/crud.py",
+      "raw_specifier": "from fastapi import HTTPException, status",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/crud.py",
+      "raw_specifier": "from sqlalchemy.orm import Session",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/crud.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/crud.py",
+      "raw_specifier": "from . import models, schemas",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/crud.py",
+      "raw_specifier": "from app.core.security import get_password_hash",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/models.py",
+      "raw_specifier": "from sqlalchemy import Boolean, Column, Integer, String",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/models.py",
+      "raw_specifier": "from .session import Base",
+      "import_kind": "from_import",
+      "status": "relative_import",
+      "top_level_module": ".session",
+      "confidence": "medium",
+      "note": "Relative import observed; full package resolution not attempted"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/schemas.py",
+      "raw_specifier": "from pydantic import BaseModel",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "pydantic",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/schemas.py",
+      "raw_specifier": "typing",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "typing",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/session.py",
+      "raw_specifier": "from sqlalchemy import create_engine",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/session.py",
+      "raw_specifier": "from sqlalchemy.ext.declarative import declarative_base",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/session.py",
+      "raw_specifier": "from sqlalchemy.orm import sessionmaker",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "sqlalchemy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/db/session.py",
+      "raw_specifier": "from app.core import config",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/initial_data.py",
+      "raw_specifier": "from app.db.session import get_db",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/initial_data.py",
+      "raw_specifier": "from app.db.crud import create_user",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/initial_data.py",
+      "raw_specifier": "from app.db.schemas import UserCreate",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/initial_data.py",
+      "raw_specifier": "from app.db.session import SessionLocal",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/main.py",
+      "raw_specifier": "from fastapi import FastAPI, Depends",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "fastapi",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/main.py",
+      "raw_specifier": "from starlette.requests import Request",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "starlette",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/main.py",
+      "raw_specifier": "uvicorn",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "uvicorn",
+      "confidence": "high"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/main.py",
+      "raw_specifier": "from app.api.api_v1.routers.users import users_router",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/main.py",
+      "raw_specifier": "from app.api.api_v1.routers.auth import auth_router",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/main.py",
+      "raw_specifier": "from app.core import config",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/main.py",
+      "raw_specifier": "from app.db.session import SessionLocal",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/main.py",
+      "raw_specifier": "from app.core.auth import get_current_active_user",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/main.py",
+      "raw_specifier": "from app.core.celery_app import celery_app",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/main.py",
+      "raw_specifier": "from app import tasks",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    },
+    {
+      "from_file": "{{cookiecutter.project_slug}}/backend/app/tasks.py",
+      "raw_specifier": "from app.core.celery_app import celery_app",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "app",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/pyproject.toml",
+      "source_type": "pyproject.toml",
+      "packages": [],
+      "dev_packages": [],
+      "confidence": "low",
+      "warnings": [
+        "No dependencies found in pyproject.toml — may use unsupported format"
+      ]
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "alembic",
+        "authlib",
+        "fastapi",
+        "celery",
+        "redis",
+        "httpx",
+        "ipython",
+        "itsdangerous",
+        "jinja2",
+        "psycopg2",
+        "pytest",
+        "requests",
+        "sqlalchemy",
+        "uvicorn",
+        "passlib",
+        "bcrypt",
+        "sqlalchemy_utils",
+        "python_multipart",
+        "pyjwt"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/alembic/env.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/alembic/tests/test_env.py",
+        "tests/backend/app/alembic/test_env.py",
+        "{{cookiecutter.project_slug}}/backend/app/alembic/tests/test_alembic.py",
+        "test/test_env.py",
+        "tests/test_env.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/alembic/versions/91979b40eb38_create_users_table.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/alembic/versions/tests/test_91979b40eb38_create_users_table.py",
+        "tests/backend/app/alembic/versions/test_91979b40eb38_create_users_table.py",
+        "{{cookiecutter.project_slug}}/backend/app/alembic/versions/tests/test_versions.py",
+        "test/test_91979b40eb38_create_users_table.py",
+        "tests/test_91979b40eb38_create_users_table.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/auth.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/tests/test_auth.py",
+        "tests/backend/app/api/api_v1/routers/test_auth.py",
+        "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/tests/test_routers.py",
+        "test/test_auth.py",
+        "tests/test_auth.py",
+        "tests/api/auth/test_auth_create.py",
+        "tests/api/auth/test_auth_get.py",
+        "tests/api/auth/test_auth_list.py",
+        "tests/api/auth/test_auth_update.py",
+        "tests/api/auth/test_auth_delete.py",
+        "tests/api/auth/test_auth.py",
+        "tests/api/test_auth.py"
+      ],
+      "existing_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/tests/test_auth.py"
+      ],
+      "confidence": "high",
+      "reason": "Exact match in sibling tests/: {{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/tests/test_auth.py"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/users.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/tests/test_users.py",
+        "tests/backend/app/api/api_v1/routers/test_users.py",
+        "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/tests/test_routers.py",
+        "test/test_users.py",
+        "tests/test_users.py",
+        "tests/api/users/test_user_create.py",
+        "tests/api/users/test_user_get.py",
+        "tests/api/users/test_user_list.py",
+        "tests/api/users/test_user_update.py",
+        "tests/api/users/test_user_delete.py",
+        "tests/api/users/test_users.py",
+        "tests/api/test_users.py"
+      ],
+      "existing_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/tests/test_users.py"
+      ],
+      "confidence": "high",
+      "reason": "Exact match in sibling tests/: {{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/tests/test_users.py"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/core/auth.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/core/tests/test_auth.py",
+        "tests/backend/app/core/test_auth.py",
+        "{{cookiecutter.project_slug}}/backend/app/core/tests/test_core.py",
+        "test/test_auth.py",
+        "tests/test_auth.py",
+        "tests/core/test_auth.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/core/celery_app.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/core/tests/test_celery_app.py",
+        "tests/backend/app/core/test_celery_app.py",
+        "{{cookiecutter.project_slug}}/backend/app/core/tests/test_core.py",
+        "test/test_celery_app.py",
+        "tests/test_celery_app.py",
+        "tests/core/test_celery_app.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/core/config.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/core/tests/test_config.py",
+        "tests/backend/app/core/test_config.py",
+        "{{cookiecutter.project_slug}}/backend/app/core/tests/test_core.py",
+        "test/test_config.py",
+        "tests/test_config.py",
+        "tests/core/test_config.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/core/security.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/core/tests/test_security.py",
+        "tests/backend/app/core/test_security.py",
+        "{{cookiecutter.project_slug}}/backend/app/core/tests/test_core.py",
+        "test/test_security.py",
+        "tests/test_security.py",
+        "tests/core/test_security.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/db/crud.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/db/tests/test_crud.py",
+        "tests/backend/app/db/test_crud.py",
+        "{{cookiecutter.project_slug}}/backend/app/db/tests/test_db.py",
+        "test/test_crud.py",
+        "tests/test_crud.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/db/models.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/db/tests/test_models.py",
+        "tests/backend/app/db/test_models.py",
+        "{{cookiecutter.project_slug}}/backend/app/db/tests/test_db.py",
+        "test/test_models.py",
+        "tests/test_models.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/db/schemas.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/db/tests/test_schemas.py",
+        "tests/backend/app/db/test_schemas.py",
+        "{{cookiecutter.project_slug}}/backend/app/db/tests/test_db.py",
+        "test/test_schemas.py",
+        "tests/test_schemas.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/db/session.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/db/tests/test_session.py",
+        "tests/backend/app/db/test_session.py",
+        "{{cookiecutter.project_slug}}/backend/app/db/tests/test_db.py",
+        "test/test_session.py",
+        "tests/test_session.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/initial_data.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/tests/test_initial_data.py",
+        "tests/backend/app/test_initial_data.py",
+        "{{cookiecutter.project_slug}}/backend/app/tests/test_app.py",
+        "test/test_initial_data.py",
+        "tests/test_initial_data.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/main.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/tests/test_main.py",
+        "tests/backend/app/test_main.py",
+        "{{cookiecutter.project_slug}}/backend/app/tests/test_app.py",
+        "test/test_main.py",
+        "tests/test_main.py"
+      ],
+      "existing_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/tests/test_main.py"
+      ],
+      "confidence": "high",
+      "reason": "Exact match in sibling tests/: {{cookiecutter.project_slug}}/backend/app/tests/test_main.py"
+    },
+    {
+      "source_path": "{{cookiecutter.project_slug}}/backend/app/tasks.py",
+      "candidate_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/tests/test_tasks.py",
+        "tests/backend/app/test_tasks.py",
+        "{{cookiecutter.project_slug}}/backend/app/tests/test_app.py",
+        "test/test_tasks.py",
+        "tests/test_tasks.py"
+      ],
+      "existing_test_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/tests/test_tasks.py"
+      ],
+      "confidence": "high",
+      "reason": "Exact match in sibling tests/: {{cookiecutter.project_slug}}/backend/app/tests/test_tasks.py"
+    }
+  ],
+  "sensitive_zones": [
+    {
+      "path_pattern": "**/auth/**",
+      "matched_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/auth.py",
+        "{{cookiecutter.project_slug}}/backend/app/api/api_v1/routers/tests/test_auth.py",
+        "{{cookiecutter.project_slug}}/backend/app/core/auth.py"
+      ],
+      "category": "authentication",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"auth\" found in 3 paths"
+      ]
+    },
+    {
+      "path_pattern": "**/security/**",
+      "matched_paths": [
+        "{{cookiecutter.project_slug}}/backend/app/core/security.py"
+      ],
+      "category": "security",
+      "severity": "high",
+      "source": "keyword",
+      "evidence": [
+        "Keyword \"security\" found in 1 paths"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "unclassified_python_file",
+      "classification": "actionable",
+      "paths": [
+        "{{cookiecutter.project_slug}}/backend/pyproject.toml",
+        "{{cookiecutter.project_slug}}/backend/requirements.txt"
+      ],
+      "count": 2,
+      "note": "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json."
+    },
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "{{cookiecutter.project_slug}}/backend/pyproject.toml"
+      ],
+      "count": 1,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 30,
+    "classified_count": 30,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 60,
+    "project_import_count": 0,
+    "declared_package_count": 20,
+    "undeclared_package_count": 30,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 15,
+    "high_confidence_test_count": 4,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 2,
+    "sensitive_file_count": 4,
+    "manifest_count": 2,
+    "low_confidence_manifest_count": 1
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

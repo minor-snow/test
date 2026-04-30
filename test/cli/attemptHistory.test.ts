@@ -3,7 +3,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { mkdirSync, rmSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { ensurePantheonDirs } from "../../src/cli/artifactLayout.js";
 import {
@@ -55,7 +55,6 @@ describe("attemptHistory", () => {
         diffNameStatus: "M\tsrc/a.ts",
       });
 
-      const { existsSync, readFileSync } = require("node:fs");
       expect(existsSync(join(dir, "report.md"))).toBe(true);
       expect(existsSync(join(dir, "feedback.md"))).toBe(true);
       expect(existsSync(join(dir, "check.json"))).toBe(true);

@@ -15,14 +15,14 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import { promises as fs } from "node:fs";
-import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join, resolve } from "node:path";
 import { generateReportFromStore, generateMultiArtifactReport } from "./reportGenerator.js";
 import {
   generateBacklogItems,
   exportBacklogMarkdown,
   validateReleaseDecision,
   ALLOWED_DECISIONS,
+  isAllowedReleaseDecision,
 } from "./backlogExport.js";
 import type { ReleaseDecision, MultiArtifactReleaseDecision } from "./types.js";
 import type { StoreConfig } from "../artifactStore.js";
@@ -32,8 +32,7 @@ import { appendRiskEntries, readRiskRegister, type RiskEntry } from "./riskRegis
 import { validateDraft } from "../draftValidator.js";
 import { evaluateDraftQuality } from "../domainQualityEvaluator.js";
 import { loadDomainProfile } from "../domainProfile.js";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { resolveTrustedPath, sanitizeFileNameSegment } from "../safePath.js";
 
 // Default to trial data
 const DATA_DIR = process.env.PANTHEON_DATA_DIR
@@ -41,16 +40,53 @@ const DATA_DIR = process.env.PANTHEON_DATA_DIR
 const ARTIFACT_ID = process.env.PANTHEON_ARTIFACT_ID
   ?? "pantheon_architecture";
 
-const config: StoreConfig = { dataDir: DATA_DIR };
+const REPO_ROOT = resolve(process.cwd());
+const DEFAULT_PROFILE_PATH = "data/profiles/software_engineering_architecture.json";
+
+function createStoreConfig(): StoreConfig {
+  return {
+    dataDir: resolveTrustedPath(REPO_ROOT, DATA_DIR),
+  };
+}
+
+function resolveRepoAssetPath(relativePath: string): string {
+  return resolveTrustedPath(REPO_ROOT, relativePath);
+}
+
+function resolveProfilePath(): string {
+  return resolveTrustedPath(
+    REPO_ROOT,
+    process.env.PANTHEON_PROFILE_PATH ?? DEFAULT_PROFILE_PATH,
+  );
+}
+
+function parseQuarantineId(value: string): { ok: true; value: string } | { ok: false; message: string } {
+  try {
+    return { ok: true, value: sanitizeFileNameSegment(value) };
+  } catch (error) {
+    return {
+      ok: false,
+      message: error instanceof Error ? error.message : "Invalid quarantine id.",
+    };
+  }
+}
+
+function isIntakeDecision(value: unknown): value is IntakeDecision {
+  return typeof value === "string" && INTAKE_DECISIONS.includes(value as IntakeDecision);
+}
+
+const INTAKE_DECISIONS = ["reject_draft", "accept_for_cleanup", "accept_as_seed"] as const;
+type IntakeDecision = (typeof INTAKE_DECISIONS)[number];
 
 async function startServer() {
+  const config = createStoreConfig();
   const fastify = Fastify({ logger: true });
   await fastify.register(cors, { origin: true });
 
   // Serve cockpit HTML
   fastify.get("/cockpit", async (_req, reply) => {
     const html = await fs.readFile(
-      join(process.cwd(), "cockpit", "release.html"),
+      resolveRepoAssetPath("cockpit/release.html"),
       "utf8"
     );
     return reply.type("text/html").send(html);
@@ -81,7 +117,7 @@ async function startServer() {
     // --- Runtime input validation ---
 
     // P2 fix: decision type must be one of the three allowed values
-    if (!body.decision || !ALLOWED_DECISIONS.includes(body.decision as any)) {
+    if (!isAllowedReleaseDecision(body.decision)) {
       return {
         valid: false,
         errors: [
@@ -209,7 +245,7 @@ async function startServer() {
   // Serve multi-artifact cockpit
   fastify.get("/cockpit/multi", async (_req, reply) => {
     const html = await fs.readFile(
-      join(process.cwd(), "cockpit", "multi-release.html"),
+      resolveRepoAssetPath("cockpit/multi-release.html"),
       "utf8"
     );
     return reply.type("text/html").send(html);
@@ -228,7 +264,7 @@ async function startServer() {
   fastify.post("/api/release/multi-decide", async (req) => {
     const body = req.body as Partial<MultiArtifactReleaseDecision>;
 
-    if (!body.decision || !ALLOWED_DECISIONS.includes(body.decision as any)) {
+    if (!isAllowedReleaseDecision(body.decision)) {
       return {
         valid: false,
         errors: [
@@ -363,7 +399,7 @@ async function startServer() {
   // Serve draft review cockpit
   fastify.get("/cockpit/draft", async (_req, reply) => {
     const html = await fs.readFile(
-      join(process.cwd(), "cockpit", "draft-review.html"),
+      resolveRepoAssetPath("cockpit/draft-review.html"),
       "utf8"
     );
     return reply.type("text/html").send(html);
@@ -386,10 +422,14 @@ async function startServer() {
   // Get quality report for a quarantined draft
   fastify.get("/api/draft/:quarantine_id/quality", async (req) => {
     const { quarantine_id } = req.params as { quarantine_id: string };
+    const parsedId = parseQuarantineId(quarantine_id);
+    if (!parsedId.ok) {
+      return { error: parsedId.message };
+    }
 
-    const item = await loadFromQuarantine(config, quarantine_id);
+    const item = await loadFromQuarantine(config, parsedId.value);
     if (!item) {
-      return { error: `Quarantine item "${quarantine_id}" not found` };
+      return { error: `Quarantine item "${parsedId.value}" not found` };
     }
 
     const validation = validateDraft(item);
@@ -400,11 +440,8 @@ async function startServer() {
       };
     }
 
-    const profilePath = process.env.PANTHEON_PROFILE_PATH
-      ?? join(process.cwd(), "data", "profiles", "software_engineering_architecture.json");
-
     try {
-      const profile = await loadDomainProfile(profilePath);
+      const profile = await loadDomainProfile(resolveProfilePath());
       const report = evaluateDraftQuality(validation.artifact, profile);
       return { quality_report: report, artifact_id: validation.artifact.artifact_id };
     } catch (e) {
@@ -424,8 +461,7 @@ async function startServer() {
       rationale?: string;
     };
 
-    const INTAKE_DECISIONS = ["reject_draft", "accept_for_cleanup", "accept_as_seed"] as const;
-    if (!body.decision || !INTAKE_DECISIONS.includes(body.decision as any)) {
+    if (!isIntakeDecision(body.decision)) {
       return {
         valid: false,
         errors: [`Invalid decision. Must be one of: ${INTAKE_DECISIONS.join(", ")}`],
@@ -440,9 +476,14 @@ async function startServer() {
       return { valid: false, errors: ["operator_id is required"] };
     }
 
-    const item = await loadFromQuarantine(config, quarantine_id);
+    const parsedId = parseQuarantineId(quarantine_id);
+    if (!parsedId.ok) {
+      return { valid: false, errors: [parsedId.message] };
+    }
+
+    const item = await loadFromQuarantine(config, parsedId.value);
     if (!item) {
-      return { valid: false, errors: [`Quarantine item "${quarantine_id}" not found`] };
+      return { valid: false, errors: [`Quarantine item "${parsedId.value}" not found`] };
     }
 
     // Build quality snapshot for DecisionLog provenance.
@@ -453,9 +494,7 @@ async function startServer() {
     try {
       const validation = validateDraft(item);
       if (validation.status === "accepted") {
-        const profilePath = process.env.PANTHEON_PROFILE_PATH
-          ?? join(process.cwd(), "data", "profiles", "software_engineering_architecture.json");
-        const profile = await loadDomainProfile(profilePath);
+        const profile = await loadDomainProfile(resolveProfilePath());
         const report = evaluateDraftQuality(validation.artifact, profile);
         qualitySnapshot = {
           score: report.score,
@@ -488,7 +527,7 @@ async function startServer() {
       decision_type: `draft_intake:${body.decision}`,
       operator_id: body.operator_id,
       release_decision_id: decisionId,
-      affected_artifacts: [quarantine_id],
+      affected_artifacts: [parsedId.value],
       canonical_revision_ids: {},
       rationale: body.rationale,
       created_at: new Date().toISOString(),
@@ -499,7 +538,7 @@ async function startServer() {
       valid: true,
       decision_id: decisionId,
       decision: body.decision,
-      quarantine_id,
+      quarantine_id: parsedId.value,
       note: body.decision === "accept_as_seed"
         ? "Draft remains in quarantine. Use promoteDraft() for canonical promotion."
         : undefined,

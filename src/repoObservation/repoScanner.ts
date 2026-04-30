@@ -8,7 +8,7 @@
 
 import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
 import { join, relative } from "node:path";
-import { execSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import type {
   RepoObservations, ObservedFile, PathBucket, ExcludedPath,
   RepoObservationRepoMeta, RepoScannerMeta, RepoScanLimits,
@@ -348,8 +348,16 @@ function detectGitStatus(repoRoot: string): RepoObservationRepoMeta {
   }
 
   try {
-    const headHash = execSync("git rev-parse HEAD", { cwd: repoRoot, encoding: "utf-8", stdio: ["ignore", "pipe", "ignore"] }).trim();
-    const statusOutput = execSync("git status --porcelain", { cwd: repoRoot, encoding: "utf-8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+    const headHash = execFileSync("git", ["rev-parse", "HEAD"], {
+      cwd: repoRoot,
+      encoding: "utf-8",
+      stdio: ["ignore", "pipe", "ignore"],
+    }).trim();
+    const statusOutput = execFileSync("git", ["status", "--porcelain"], {
+      cwd: repoRoot,
+      encoding: "utf-8",
+      stdio: ["ignore", "pipe", "ignore"],
+    }).trim();
     const dirtyFiles = statusOutput ? statusOutput.split("\n").length : 0;
 
     return {

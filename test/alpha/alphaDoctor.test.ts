@@ -46,4 +46,14 @@ describe("alphaDoctor", () => {
     expect(process.exitCode).toBe(1);
     expect(console.log).toHaveBeenCalledWith(expect.stringContaining("[FAIL] pantheon.agent.json: Schema validation failed"));
   });
+
+  it("passes when github is disabled and workflow is absent", () => {
+    process.exitCode = undefined;
+
+    cmdAlphaInit({ repoRoot: tmpDir, noGithub: true });
+    cmdAlphaDoctor({ repoRoot: tmpDir });
+
+    expect(process.exitCode).toBeUndefined();
+    expect(console.log).toHaveBeenCalledWith(expect.stringContaining("Agent-usable repo: yes"));
+  });
 });

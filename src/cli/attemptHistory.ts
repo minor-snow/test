@@ -86,7 +86,7 @@ export function loadAttemptHistory(repoRoot: string): AttemptRecord[] {
   if (!existsSync(attemptsDir)) return [];
 
   const records: AttemptRecord[] = [];
-  const entries = readdirSync(attemptsDir).sort();
+  const entries = readdirSync(attemptsDir).sort((left, right) => extractAttemptNumber(left) - extractAttemptNumber(right));
 
   for (const entry of entries) {
     const match = entry.match(/^attempt_(\d+)$/);
@@ -113,6 +113,11 @@ export function loadAttemptHistory(repoRoot: string): AttemptRecord[] {
   }
 
   return records;
+}
+
+function extractAttemptNumber(entry: string): number {
+  const match = entry.match(/^attempt_(\d+)$/);
+  return match ? parseInt(match[1], 10) : Number.MAX_SAFE_INTEGER;
 }
 
 /**

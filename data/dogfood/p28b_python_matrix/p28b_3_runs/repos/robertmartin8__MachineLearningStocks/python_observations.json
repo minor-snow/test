@@ -1,0 +1,559 @@
+{
+  "schema_version": "python_observations.v1",
+  "repo": {
+    "root_label": "robertmartin8__MachineLearningStocks",
+    "observed_file_count": 17,
+    "python_file_count": 11
+  },
+  "layout": {
+    "primary_layout": "library_package",
+    "package_layout": "unknown",
+    "confidence": "low",
+    "signals": [
+      {
+        "signal": "loose_scripts_only",
+        "weight": "weak",
+        "evidence": "6 top-level .py files without package __init__.py"
+      },
+      {
+        "signal": "top_level_tests_pattern",
+        "weight": "weak",
+        "evidence": "Top-level tests/ directory typical of library packages"
+      }
+    ],
+    "unknowns": [
+      {
+        "aspect": "package_layout",
+        "reason": "No package structure detected; only loose scripts"
+      }
+    ],
+    "bucket_summary": {
+      "source": 6,
+      "config": 1,
+      "test": 4
+    }
+  },
+  "framework_profile": {
+    "framework_signals": [
+      {
+        "name": "pytest",
+        "kind": "test_framework",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "dependency_manifest",
+            "detail": "pytest found in dependency manifests"
+          }
+        ]
+      }
+    ],
+    "project_role_signals": [
+      {
+        "role": "python_sdk_library",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "dimension": "layout_classification",
+            "detail": "Layout classified as library_package"
+          }
+        ]
+      }
+    ],
+    "unknowns": []
+  },
+  "risk_preset_validation": {
+    "preset": "python_sdk_library",
+    "validation": "partial",
+    "confidence": "medium",
+    "matched_signals": [
+      "layout: library_package / unknown (low)",
+      "framework: pytest / test_framework (medium)",
+      "project_role: python_sdk_library (medium)"
+    ],
+    "suggested_review": [
+      {
+        "pattern": "**/__init__.py",
+        "reason": "Public API exports — changes affect import compatibility",
+        "severity": "medium",
+        "matched_path_count": 1,
+        "evidence": [
+          "1 paths match pattern **/__init__.py"
+        ]
+      }
+    ],
+    "suggested_forbidden": [],
+    "dormant_patterns": [
+      {
+        "pattern": "**/_client*",
+        "reason": "No client module observed"
+      },
+      {
+        "pattern": "**/_transport*/**",
+        "reason": "No transport module observed"
+      },
+      {
+        "pattern": "**/_auth*",
+        "reason": "No auth module observed"
+      },
+      {
+        "pattern": "**/_config*",
+        "reason": "No config module observed"
+      },
+      {
+        "pattern": "**/_models*",
+        "reason": "No models module observed"
+      },
+      {
+        "pattern": "**/_urls*",
+        "reason": "No URL module observed"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "backtesting.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 3777,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "current_data.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 5014,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "download_historical_prices.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2736,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "parsing_keystats.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 8862,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "requirements.txt",
+      "bucket": "config",
+      "extension": ".txt",
+      "size_bytes": 153,
+      "evidence": [
+        "Requirements file"
+      ]
+    },
+    {
+      "path": "stock_prediction.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 1942,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    },
+    {
+      "path": "tests/test_datasets.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 3756,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_utils.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1769,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/test_variables.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 1218,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "tests/__init__.py",
+      "bucket": "test",
+      "extension": ".py",
+      "size_bytes": 0,
+      "evidence": [
+        "Top-level test directory"
+      ]
+    },
+    {
+      "path": "utils.py",
+      "bucket": "source",
+      "extension": ".py",
+      "size_bytes": 2919,
+      "evidence": [
+        "Default classification: .py file not matching test/config/migration/script patterns"
+      ]
+    }
+  ],
+  "import_observations": [
+    {
+      "from_file": "backtesting.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "backtesting.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pandas",
+      "confidence": "high"
+    },
+    {
+      "from_file": "backtesting.py",
+      "raw_specifier": "from sklearn.model_selection import train_test_split",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "backtesting.py",
+      "raw_specifier": "from sklearn.ensemble import RandomForestClassifier",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "backtesting.py",
+      "raw_specifier": "from sklearn.metrics import precision_score",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "backtesting.py",
+      "raw_specifier": "from utils import status_calc",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "current_data.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pandas",
+      "confidence": "high"
+    },
+    {
+      "from_file": "current_data.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "current_data.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "current_data.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "current_data.py",
+      "raw_specifier": "requests",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "requests",
+      "confidence": "high"
+    },
+    {
+      "from_file": "current_data.py",
+      "raw_specifier": "numpy",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "numpy",
+      "confidence": "high"
+    },
+    {
+      "from_file": "current_data.py",
+      "raw_specifier": "from tqdm import tqdm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "tqdm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "current_data.py",
+      "raw_specifier": "from utils import data_string_to_float",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "download_historical_prices.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "download_historical_prices.py",
+      "raw_specifier": "from pandas_datareader import data as pdr",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "pandas_datareader",
+      "confidence": "high"
+    },
+    {
+      "from_file": "download_historical_prices.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pandas",
+      "confidence": "high"
+    },
+    {
+      "from_file": "download_historical_prices.py",
+      "raw_specifier": "fix_yahoo_finance",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "fix_yahoo_finance",
+      "confidence": "high"
+    },
+    {
+      "from_file": "parsing_keystats.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pandas",
+      "confidence": "high"
+    },
+    {
+      "from_file": "parsing_keystats.py",
+      "raw_specifier": "os",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "os",
+      "confidence": "high"
+    },
+    {
+      "from_file": "parsing_keystats.py",
+      "raw_specifier": "time",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "time",
+      "confidence": "high"
+    },
+    {
+      "from_file": "parsing_keystats.py",
+      "raw_specifier": "re",
+      "import_kind": "import",
+      "status": "builtin_python_package",
+      "top_level_module": "re",
+      "confidence": "high"
+    },
+    {
+      "from_file": "parsing_keystats.py",
+      "raw_specifier": "from datetime import datetime",
+      "import_kind": "from_import",
+      "status": "builtin_python_package",
+      "top_level_module": "datetime",
+      "confidence": "high"
+    },
+    {
+      "from_file": "parsing_keystats.py",
+      "raw_specifier": "from utils import data_string_to_float",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "utils",
+      "confidence": "low"
+    },
+    {
+      "from_file": "parsing_keystats.py",
+      "raw_specifier": "from tqdm import tqdm",
+      "import_kind": "from_import",
+      "status": "declared_package",
+      "top_level_module": "tqdm",
+      "confidence": "high"
+    },
+    {
+      "from_file": "stock_prediction.py",
+      "raw_specifier": "pandas",
+      "import_kind": "import",
+      "status": "declared_package",
+      "top_level_module": "pandas",
+      "confidence": "high"
+    },
+    {
+      "from_file": "stock_prediction.py",
+      "raw_specifier": "from sklearn.ensemble import RandomForestClassifier",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "sklearn",
+      "confidence": "low"
+    },
+    {
+      "from_file": "stock_prediction.py",
+      "raw_specifier": "from utils import data_string_to_float, status_calc",
+      "import_kind": "from_import",
+      "status": "undeclared_package",
+      "top_level_module": "utils",
+      "confidence": "low"
+    }
+  ],
+  "dependency_manifests": [
+    {
+      "source_path": "requirements.txt",
+      "source_type": "requirements.txt",
+      "packages": [
+        "requests",
+        "tqdm",
+        "pytest",
+        "fix_yahoo_finance",
+        "pandas_datareader",
+        "numpy",
+        "pandas",
+        "scikit_learn"
+      ],
+      "dev_packages": [],
+      "confidence": "high",
+      "warnings": []
+    }
+  ],
+  "test_mappings": [
+    {
+      "source_path": "backtesting.py",
+      "candidate_test_paths": [
+        "test/test_backtesting.py",
+        "tests/test_backtesting.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "current_data.py",
+      "candidate_test_paths": [
+        "test/test_current_data.py",
+        "tests/test_current_data.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "download_historical_prices.py",
+      "candidate_test_paths": [
+        "test/test_download_historical_prices.py",
+        "tests/test_download_historical_prices.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "parsing_keystats.py",
+      "candidate_test_paths": [
+        "test/test_parsing_keystats.py",
+        "tests/test_parsing_keystats.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "stock_prediction.py",
+      "candidate_test_paths": [
+        "test/test_stock_prediction.py",
+        "tests/test_stock_prediction.py"
+      ],
+      "existing_test_paths": [],
+      "confidence": "low",
+      "reason": "Candidate test paths generated but none exist"
+    },
+    {
+      "source_path": "utils.py",
+      "candidate_test_paths": [
+        "test/test_utils.py",
+        "tests/test_utils.py"
+      ],
+      "existing_test_paths": [
+        "tests/test_utils.py"
+      ],
+      "confidence": "high",
+      "reason": "Exact match in sibling tests/: tests/test_utils.py"
+    }
+  ],
+  "sensitive_zones": [],
+  "unknowns": [
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ],
+  "quality": {
+    "python_file_count": 10,
+    "classified_count": 10,
+    "classified_ratio": 1,
+    "unknown_count": 0,
+    "unknown_ratio": 0,
+    "import_observation_count": 28,
+    "project_import_count": 0,
+    "declared_package_count": 12,
+    "undeclared_package_count": 8,
+    "dynamic_import_count": 0,
+    "test_mapping_count": 6,
+    "high_confidence_test_count": 1,
+    "medium_confidence_test_count": 0,
+    "sensitive_zone_count": 0,
+    "sensitive_file_count": 0,
+    "manifest_count": 1,
+    "low_confidence_manifest_count": 0
+  },
+  "limitations": [
+    "Python import observations are syntax-level observations, not full runtime import resolution.",
+    "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+    "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+    "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+    "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+    "Namespace packages without __init__.py are not detected as project packages."
+  ]
+}

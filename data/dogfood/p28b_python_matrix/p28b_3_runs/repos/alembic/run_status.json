@@ -1,0 +1,57 @@
+{
+  "runner_version": "p28b_python_matrix_runner@0.3.0",
+  "manifest_entry_hash": "dd233cb78ecf53d7af9192ed1539c1cefe6627b40b8813da9fef1f30e1d82b92",
+  "pinned_commit": "4d1e38cac1080d7ed7c3c952814e3e3bbcf9dd13",
+  "completed_at": "2026-04-30T11:14:22.112Z",
+  "repo_id": "alembic",
+  "category_expected": "python_sdk_library",
+  "category_observed": "generic_service",
+  "support_level": "validated",
+  "status": "completed",
+  "duration_ms": 247,
+  "python_files": 122,
+  "test_files": 0,
+  "manifest_files": [],
+  "framework_signals": [
+    "pytest/high",
+    "click/medium",
+    "sqlalchemy/high"
+  ],
+  "project_role_signals": [
+    "service_backend/medium",
+    "python_sdk_library/high"
+  ],
+  "test_mapping_count": 59,
+  "risk_preset": "generic_service",
+  "sanitizer_violations": 0,
+  "gaps": [
+    {
+      "repo_id": "alembic",
+      "gap_kind": "category_quota_mismatch",
+      "severity": "medium",
+      "blocking": false,
+      "evidence": "Expected python_sdk_library, got generic_service",
+      "recommended_phase": "P28b-later"
+    }
+  ],
+  "unknowns": [
+    {
+      "category": "low_confidence_manifest",
+      "classification": "actionable",
+      "paths": [
+        "noxfile.py",
+        "setup.cfg",
+        "setup.py"
+      ],
+      "count": 3,
+      "note": "Dependency manifests parsed with low confidence. Package declarations may be incomplete."
+    },
+    {
+      "category": "scope_granularity_limit",
+      "classification": "intrinsic",
+      "paths": [],
+      "count": 0,
+      "note": "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work."
+    }
+  ]
+}
