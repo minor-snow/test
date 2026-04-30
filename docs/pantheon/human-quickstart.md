@@ -2,12 +2,21 @@
 
 Pantheon is a repair governance layer for AI coding agents.
 
-Core local commands:
+It makes agents report bugs before repairing them.
 
-- `npx pantheon-alpha doctor`
-- `npx pantheon-alpha review list`
-- `npx pantheon-alpha metrics daily`
+The alpha workflow is:
 
-The repair workflow is:
+bug report -> repair plan -> human audit -> PR diff check
 
-bug report -> repair plan -> human audit -> repair check -> review queue / metrics
+Install:
+
+npx pantheon-alpha init
+npx pantheon-alpha doctor
+
+Review queue:
+
+npx pantheon-alpha review list
+
+Metrics:
+
+npx pantheon-alpha metrics daily

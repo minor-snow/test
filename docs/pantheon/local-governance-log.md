@@ -6,10 +6,10 @@ Pantheon writes local governance events to:
 
 These events are append-only and contain repair metadata only:
 
-- repair id
+- repair_id
 - verdict
 - attention level
 - bucket counts
-- review and blocking reasons
+- review/block reasons
 
-They do not include source code content or diff hunks.
+They do not contain source code content or diff hunks.

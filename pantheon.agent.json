@@ -1,25 +1,21 @@
 {
   "schema_version": "pantheon_agent_entry@0.1.0",
-  "project": "pantheon",
-  "purpose": "AI repair governance closed alpha",
+  "project": "auto",
+  "purpose": "Pantheon repair governance",
   "primary_entrypoints": {
     "read_first": "AGENTS.md",
-    "human_quickstart": "docs/closed-alpha/quickstart-github.md",
-    "agent_quickstart": "docs/closed-alpha/agent-quickstart.md"
+    "agent_quickstart": "docs/pantheon/agent-quickstart.md",
+    "human_quickstart": "docs/pantheon/human-quickstart.md"
   },
   "commands": {
-    "install": "npm install",
-    "build": "npm run build",
-    "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit",
-    "test": "node ./node_modules/vitest/vitest.mjs run --reporter=dot",
-    "doctor": "node dist/src/cli/pantheon-alpha.js doctor",
-    "repair_intake": "node dist/src/cli/pantheon-alpha.js repair intake --from .pantheon/repair/inbox/agent_bug_report.json",
-    "repair_plan": "node dist/src/cli/pantheon-alpha.js repair plan --repair-id <repair_id>",
-    "repair_check": "node dist/src/cli/pantheon-alpha.js repair check --repair-id <repair_id>",
-    "review_list": "node dist/src/cli/pantheon-alpha.js review list",
-    "review_show": "node dist/src/cli/pantheon-alpha.js review show --repair-id <repair_id>",
-    "metrics_daily": "node dist/src/cli/pantheon-alpha.js metrics daily",
-    "metrics_status": "node dist/src/cli/pantheon-alpha.js metrics status"
+    "doctor": "npx pantheon-alpha doctor",
+    "repair_intake": "npx pantheon-alpha repair intake --from .pantheon/repair/inbox/agent_bug_report.json",
+    "repair_plan": "npx pantheon-alpha repair plan --repair-id <repair_id>",
+    "repair_check": "npx pantheon-alpha repair check --repair-id <repair_id>",
+    "review_list": "npx pantheon-alpha review list",
+    "review_show": "npx pantheon-alpha review show --repair-id <repair_id>",
+    "metrics_daily": "npx pantheon-alpha metrics daily",
+    "metrics_status": "npx pantheon-alpha metrics status"
   },
   "repair_protocol": {
     "bug_report_template": ".pantheon/repair/inbox/agent_bug_report.template.json",
@@ -33,13 +29,10 @@
     "review_queue": ".pantheon/reviews/review_queue.json",
     "daily_metrics": ".pantheon/metrics/daily/"
   },
-  "public_artifacts": [
-    "repair_task.md",
-    "repair_report.md",
-    "repair_feedback.md",
-    "repair_check.json",
-    "review_request.md"
-  ],
+  "github": {
+    "workflow": ".github/workflows/pantheon-repair.yml",
+    "action_mode": "repair"
+  },
   "hard_rules": [
     "Do not patch before bug report.",
     "Do not use latest for correctness.",
