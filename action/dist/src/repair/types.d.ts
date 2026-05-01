@@ -239,6 +239,8 @@ export declare const humanAuditDecisionSchema: z.ZodObject<{
         post_repair: "post_repair";
     }>;
     decision: z.ZodEnum<{
+        request_scope_expansion: "request_scope_expansion";
+        keep_for_human_review: "keep_for_human_review";
         needs_more_evidence: "needs_more_evidence";
         accept_report: "accept_report";
         reject_report: "reject_report";
@@ -252,8 +254,6 @@ export declare const humanAuditDecisionSchema: z.ZodObject<{
         require_manual_repair: "require_manual_repair";
         approve_repair: "approve_repair";
         request_revert: "request_revert";
-        request_scope_expansion: "request_scope_expansion";
-        keep_for_human_review: "keep_for_human_review";
         close_as_invalid: "close_as_invalid";
     }>;
     operator_id: z.ZodString;

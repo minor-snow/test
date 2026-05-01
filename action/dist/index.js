@@ -589,7 +589,7 @@ function classifyFinding(kind, severity) {
         return "outside_scope";
     if (severity === "review_required")
         return "review_required";
-    return "forbidden";
+    return "review_required";
 }
 
 
@@ -20121,7 +20121,12 @@ function repairUtils_globToRegex(glob) {
     return sharedGlobToRegex(glob);
 }
 function matchesPattern(path, pattern) {
-    return matchesGlob(path, pattern);
+    // Handle special TS/JS config brace expansion which basic globMatch doesn't support
+    if (pattern === "tsconfig*.json|*.config.{ts,js}") {
+        return /^tsconfig(\.\w+)?\.json$/.test(path) || /\.config\.(ts|js|mjs|cjs)$/.test(path);
+    }
+    // Support | operator for multiple globs
+    return pattern.split("|").some(p => matchesGlob(path, p));
 }
 
 ;// CONCATENATED MODULE: ./src/repair/agentBugReportValidator.ts
@@ -20848,6 +20853,30 @@ function buildRepairScope(input) {
                 pattern: suggestion.pattern,
                 source: "risk_preset",
                 confidence: input.pythonSidecar.risk_preset_validation.confidence,
+                audit_weight: "critical",
+                reason: suggestion.reason,
+                evidence: suggestion.evidence,
+            });
+        }
+    }
+    if (input.typescriptSidecar) {
+        for (const suggestion of input.typescriptSidecar.risk_preset_validation.suggested_review) {
+            if (!review.has(suggestion.pattern) && !forbidden.has(suggestion.pattern)) {
+                review.set(suggestion.pattern, {
+                    pattern: suggestion.pattern,
+                    source: "risk_preset",
+                    confidence: input.typescriptSidecar.risk_preset_validation.confidence,
+                    audit_weight: suggestion.severity === "critical" ? "critical" : "elevated",
+                    reason: suggestion.reason,
+                    evidence: suggestion.evidence,
+                });
+            }
+        }
+        for (const suggestion of input.typescriptSidecar.risk_preset_validation.suggested_forbidden) {
+            forbidden.set(suggestion.pattern, {
+                pattern: suggestion.pattern,
+                source: "risk_preset",
+                confidence: input.typescriptSidecar.risk_preset_validation.confidence,
                 audit_weight: "critical",
                 reason: suggestion.reason,
                 evidence: suggestion.evidence,
@@ -22611,6 +22640,8 @@ function renderAction(action) {
             return "Request scope expansion before modifying additional files.";
         case "revert_file":
             return "Revert forbidden or unsafe file changes before continuing.";
+        case "create_contract":
+            return "Create a valid contract covering the proposed changes.";
     }
 }
 function escapeTableCell(value) {
