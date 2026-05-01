@@ -67,6 +67,8 @@ function renderAction(action: ReviewRequest["recommended_actions"][number]): str
       return "Request scope expansion before modifying additional files.";
     case "revert_file":
       return "Revert forbidden or unsafe file changes before continuing.";
+    case "create_contract":
+      return "Create a valid contract covering the proposed changes.";
   }
 }
 
