@@ -55,6 +55,28 @@ export function renderDailyMetricsReport(report: DailyMetricsReport): string {
     }
   }
   lines.push("");
+
+  // Contract Gate Captures section
+  const contractGateReasons = [
+    ["Uncontracted source changes", report.intercept_reasons.uncontracted_source_change ?? 0],
+    ["Missing contract", report.intercept_reasons.missing_contract ?? 0],
+    ["Policy tamper attempts", report.intercept_reasons.policy_tamper ?? 0],
+    ["Fake approval artifacts ignored", report.intercept_reasons.fake_approval ?? 0],
+    ["Workflow files touched", report.intercept_reasons.workflow_touched ?? 0],
+  ] as const;
+  const hasGateCaptures = contractGateReasons.some(([, count]) => count > 0);
+
+  if (hasGateCaptures) {
+    lines.push("## Contract Gate Captures");
+    lines.push("");
+    for (const [label, count] of contractGateReasons) {
+      if (count > 0) {
+        lines.push(`- ${label}: ${count}`);
+      }
+    }
+    lines.push("");
+  }
+
   lines.push("## Local-only note");
   lines.push("");
   lines.push("This report was generated locally from Pantheon repair artifacts. No source code content or diff hunks are included.");
