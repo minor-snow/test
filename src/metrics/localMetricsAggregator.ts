@@ -170,5 +170,10 @@ function emptyReasonCounts(): Record<GovernanceReasonKind, number> {
     requires_scope_expansion: 0,
     artifact_sanitizer_violation: 0,
     concurrent_repair_overlap: 0,
+    missing_contract: 0,
+    policy_tamper: 0,
+    fake_approval: 0,
+    workflow_touched: 0,
+    uncontracted_source_change: 0,
   };
 }

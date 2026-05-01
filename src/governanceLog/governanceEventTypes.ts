@@ -14,7 +14,15 @@ export type GovernanceEventType =
   | "review_resolved"
   | "repair_blocked"
   | "repair_replanned"
-  | "artifact_sanitizer_violation";
+  | "artifact_sanitizer_violation"
+  | "contract_gate_evaluated"
+  | "uncontracted_change_detected"
+  | "contract_required"
+  | "policy_tamper_detected"
+  | "fake_approval_ignored"
+  | "trusted_approval_missing"
+  | "base_policy_used"
+  | "low_risk_bypass_applied";
 
 export type GovernanceAttentionLevel =
   | "none"
@@ -30,7 +38,12 @@ export type GovernanceReasonKind =
   | "stale_repair_contract"
   | "requires_scope_expansion"
   | "artifact_sanitizer_violation"
-  | "concurrent_repair_overlap";
+  | "concurrent_repair_overlap"
+  | "missing_contract"
+  | "policy_tamper"
+  | "fake_approval"
+  | "workflow_touched"
+  | "uncontracted_source_change";
 
 export type GovernanceReasonAction =
   | "continue"

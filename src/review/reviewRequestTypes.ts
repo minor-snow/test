@@ -17,7 +17,15 @@ export type ReviewRequestAction =
   | "request_scope_expansion"
   | "request_replan"
   | "revert_file"
-  | "approve_repair";
+  | "approve_repair"
+  | "create_contract";
+
+export type ReviewRequestType =
+  | "repair_review"
+  | "contract_request"
+  | "policy_tamper_review"
+  | "trusted_approval_required"
+  | "fake_approval_detected";
 
 export type ReviewRequest = {
   readonly schema_version: "pantheon_review_request@0.1.0";
@@ -25,13 +33,14 @@ export type ReviewRequest = {
   readonly repair_id: string;
   readonly contract_revision: number;
   readonly source: "local_cli" | "github_action";
+  readonly type?: ReviewRequestType;
   readonly status: ReviewRequestStatus;
   readonly attention_level: ReviewAttentionLevel;
   readonly verdict: Exclude<RepairVerdict, "pass">;
   readonly reason: string;
   readonly files: readonly {
     readonly path: string;
-    readonly bucket: "review_required" | "outside_scope" | "forbidden";
+    readonly bucket: "review_required" | "outside_scope" | "forbidden" | "policy_sensitive" | "contract_artifact";
     readonly reason: string;
   }[];
   readonly recommended_actions: readonly ReviewRequestAction[];
