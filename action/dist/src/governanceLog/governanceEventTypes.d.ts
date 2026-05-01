@@ -1,8 +1,8 @@
 import type { RepairVerdict } from "../repair/types.js";
 export type GovernanceEventSource = "local_cli" | "github_action" | "agent" | "human_audit" | "doctor";
-export type GovernanceEventType = "repair_plan_generated" | "repair_check_completed" | "review_requested" | "review_resolved" | "repair_blocked" | "repair_replanned" | "artifact_sanitizer_violation";
+export type GovernanceEventType = "repair_plan_generated" | "repair_check_completed" | "review_requested" | "review_resolved" | "repair_blocked" | "repair_replanned" | "artifact_sanitizer_violation" | "contract_gate_evaluated" | "uncontracted_change_detected" | "contract_required" | "policy_tamper_detected" | "fake_approval_ignored" | "trusted_approval_missing" | "base_policy_used" | "low_risk_bypass_applied";
 export type GovernanceAttentionLevel = "none" | "info" | "human_review" | "blocking" | "urgent";
-export type GovernanceReasonKind = "review_required" | "outside_scope" | "forbidden_file_touched" | "stale_repair_contract" | "requires_scope_expansion" | "artifact_sanitizer_violation" | "concurrent_repair_overlap";
+export type GovernanceReasonKind = "review_required" | "outside_scope" | "forbidden_file_touched" | "stale_repair_contract" | "requires_scope_expansion" | "artifact_sanitizer_violation" | "concurrent_repair_overlap" | "missing_contract" | "policy_tamper" | "fake_approval" | "workflow_touched" | "uncontracted_source_change";
 export type GovernanceReasonAction = "continue" | "human_review" | "request_scope_expansion" | "request_replan" | "revert_file" | "block_merge";
 export type GovernanceEventReason = {
     readonly kind: GovernanceReasonKind;

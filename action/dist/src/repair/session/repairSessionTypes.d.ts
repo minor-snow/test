@@ -12,6 +12,7 @@ export type RepoStateSnapshot = {
     readonly working_tree_status: "clean" | "dirty" | "unknown";
     readonly created_at: string;
     readonly source: "git" | "github" | "synthetic" | "unknown" | "github_pull_request";
+    readonly error?: string;
 };
 export type RepairSession = {
     readonly schema_version: "repair_session@0.1.0";
