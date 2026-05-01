@@ -18,8 +18,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: minor-snow/test/pantheon/action@v0.1.0
+      - uses: ./action
         id: pantheon
+        env:
+          CONTRACT_GATE_ENABLED: "true"
         with:
           mode: repair
           agent_bug_report: .pantheon/repair/inbox/agent_bug_report.json
