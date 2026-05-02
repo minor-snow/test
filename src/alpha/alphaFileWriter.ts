@@ -14,6 +14,7 @@ import {
   generateHumanReviewQueueMd,
 } from "./alphaTemplates.js";
 import type { PantheonAlphaConfig } from "./types.js";
+import { writeBootstrapContract } from "./bootstrapContractWriter.js";
 
 export function ensureAlphaScaffolding(
   repoRoot: string,
@@ -25,6 +26,7 @@ export function ensureAlphaScaffolding(
   } = {},
 ): void {
   const root = resolve(repoRoot);
+  const generatedFiles: { path: string; content: string }[] = [];
 
   const writeSafe = (relativePath: string, content: string) => {
     const fullPath = join(root, relativePath);
@@ -32,8 +34,10 @@ export function ensureAlphaScaffolding(
       mkdirSync(dirname(fullPath), { recursive: true });
       writeFileSync(fullPath, content);
       console.log(`[Pantheon Alpha] Created ${relativePath}`);
+      generatedFiles.push({ path: relativePath, content });
     } else {
       console.log(`[Pantheon Alpha] Skipped existing ${relativePath}`);
+      generatedFiles.push({ path: relativePath, content: readFileSync(fullPath, "utf-8") });
     }
   };
 
@@ -72,10 +76,19 @@ export function ensureAlphaScaffolding(
     writeSafe(".github/workflows/pantheon-repair.yml", generateGithubWorkflow(actionRef));
   }
 
-  ensureGitignore(root);
+  const gitignoreContent = ensureGitignore(root);
+  if (gitignoreContent) {
+    generatedFiles.push({ path: ".gitignore", content: gitignoreContent });
+  }
+
+  writeBootstrapContract({
+    repoRoot,
+    policyVersion: "0.1.0",
+    generatedFiles,
+  });
 }
 
-function ensureGitignore(repoRoot: string): void {
+function ensureGitignore(repoRoot: string): string | undefined {
   const gitignorePath = join(repoRoot, ".gitignore");
   const entriesToIgnore = [
     ".pantheon/repair/runs/",
@@ -84,9 +97,10 @@ function ensureGitignore(repoRoot: string): void {
   ];
 
   if (!existsSync(gitignorePath)) {
-    writeFileSync(gitignorePath, entriesToIgnore.join("\n") + "\n");
+    const content = entriesToIgnore.join("\n") + "\n";
+    writeFileSync(gitignorePath, content);
     console.log(`[Pantheon Alpha] Created .gitignore`);
-    return;
+    return content;
   }
 
   const content = readFileSync(gitignorePath, "utf-8");
@@ -101,7 +115,11 @@ function ensureGitignore(repoRoot: string): void {
 
   if (newLines.length > 0) {
     const suffix = content.endsWith("\n") || content === "" ? "" : "\n";
-    writeFileSync(gitignorePath, content + suffix + newLines.join("\n") + "\n");
+    const newContent = content + suffix + newLines.join("\n") + "\n";
+    writeFileSync(gitignorePath, newContent);
     console.log(`[Pantheon Alpha] Appended entries to .gitignore`);
+    return newContent;
   }
+
+  return content;
 }

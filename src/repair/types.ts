@@ -340,8 +340,9 @@ export type RepairCheckFinding = {
     | "stale_audit_decision"
     | "repair_id_mismatch"
     | "latest_used_for_correctness"
-    | "working_tree_changed";
-  readonly severity: "warning" | "review_required" | "blocking" | "requires_human_audit";
+    | "working_tree_changed"
+    | "bootstrap_scope_mixed_with_repair";
+  readonly severity: "warning" | "review_required" | "blocking" | "requires_human_audit" | "requires_replan";
   readonly file?: string;
   readonly message: string;
   readonly allowed_actions: readonly (

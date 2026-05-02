@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import { buildRepairScope } from "../../src/repair/repairScopeBuilder.js";
 import type { RepairImpactSurface, RepairSuspectSurface } from "../../src/repair/types.js";
 import type { RepoObservations } from "../../src/repoObservation/types.js";
+import type { PythonObservationSidecar } from "../../src/repoObservation/python/types.js";
+import type { TypeScriptObservationSidecar } from "../../src/repoObservation/typescript/types.js";
 
 function makeObservations(paths: string[]): RepoObservations {
   return {
@@ -165,5 +167,110 @@ describe("repairScopeBuilder", () => {
     for (const entry of result.forbidden) {
       expect(entry.audit_weight).toBe("critical");
     }
+  });
+
+  describe("Sidecar Integrations", () => {
+    it("merges python sidecar suggestions", () => {
+      const suspectSurface: RepairSuspectSurface = { files: [], reason: "test" };
+      const impactSurface: RepairImpactSurface = {
+        evidence_level: "bootstrap_conservative",
+        direct_files: [],
+        related_files: [],
+        related_tests: [],
+        risk_areas: [],
+        unknowns: [],
+      };
+      
+      const pythonSidecar = {
+        risk_preset_validation: {
+          confidence: "high" as const,
+          suggested_review: [{ pattern: "pyproject.toml", severity: "high", reason: "config", matched_path_count: 1, evidence: [] }],
+          suggested_forbidden: [{ pattern: "alembic/**", severity: "critical", reason: "migration", matched_path_count: 1, evidence: [] }]
+        }
+      } as PythonObservationSidecar;
+
+      const result = buildRepairScope({
+        suspectSurface,
+        impactSurface,
+        observations: makeObservations(["pyproject.toml", "alembic/env.py"]),
+        pythonSidecar,
+        protectedPatterns: [],
+      });
+
+      expect(result.review_required.some(e => e.pattern === "pyproject.toml")).toBe(true);
+      expect(result.forbidden.some(e => e.pattern === "alembic/**")).toBe(true);
+    });
+
+    it("merges typescript sidecar suggestions", () => {
+      const suspectSurface: RepairSuspectSurface = { files: [], reason: "test" };
+      const impactSurface: RepairImpactSurface = {
+        evidence_level: "bootstrap_conservative",
+        direct_files: [],
+        related_files: [],
+        related_tests: [],
+        risk_areas: [],
+        unknowns: [],
+      };
+      
+      const typescriptSidecar = {
+        risk_preset_validation: {
+          confidence: "high" as const,
+          suggested_review: [{ pattern: "package.json", severity: "high", reason: "config", matched_path_count: 1, evidence: [] }],
+          suggested_forbidden: [{ pattern: "dist/**", severity: "critical", reason: "generated", matched_path_count: 1, evidence: [] }]
+        }
+      } as TypeScriptObservationSidecar;
+
+      const result = buildRepairScope({
+        suspectSurface,
+        impactSurface,
+        observations: makeObservations(["package.json", "dist/index.js"]),
+        pythonSidecar: null,
+        typescriptSidecar,
+        protectedPatterns: [],
+      });
+
+      expect(result.review_required.some(e => e.pattern === "package.json")).toBe(true);
+      expect(result.forbidden.some(e => e.pattern === "dist/**")).toBe(true);
+    });
+
+    it("coexists deterministically when both sidecars are present", () => {
+      const suspectSurface: RepairSuspectSurface = { files: [], reason: "test" };
+      const impactSurface: RepairImpactSurface = {
+        evidence_level: "bootstrap_conservative",
+        direct_files: [],
+        related_files: [],
+        related_tests: [],
+        risk_areas: [],
+        unknowns: [],
+      };
+      
+      const pythonSidecar = {
+        risk_preset_validation: {
+          confidence: "high" as const,
+          suggested_review: [{ pattern: "pyproject.toml", severity: "high", reason: "config", matched_path_count: 1, evidence: [] }],
+          suggested_forbidden: []
+        }
+      } as PythonObservationSidecar;
+
+      const typescriptSidecar = {
+        risk_preset_validation: {
+          confidence: "high" as const,
+          suggested_review: [{ pattern: "package.json", severity: "high", reason: "config", matched_path_count: 1, evidence: [] }],
+          suggested_forbidden: []
+        }
+      } as TypeScriptObservationSidecar;
+
+      const result = buildRepairScope({
+        suspectSurface,
+        impactSurface,
+        observations: makeObservations(["package.json", "pyproject.toml"]),
+        pythonSidecar,
+        typescriptSidecar,
+        protectedPatterns: [],
+      });
+
+      expect(result.review_required.some(e => e.pattern === "package.json")).toBe(true);
+      expect(result.review_required.some(e => e.pattern === "pyproject.toml")).toBe(true);
+    });
   });
 });

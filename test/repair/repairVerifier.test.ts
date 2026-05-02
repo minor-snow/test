@@ -142,4 +142,42 @@ describe("verifyRepairDiff", () => {
 
     expect(result.check.verdict).toBe("requires_scope_expansion");
   });
+
+  it("marks mixed bootstrap + business files as requires_replan by default", () => {
+    const result = verifyRepairDiff({
+      contract: makeContract(),
+      diff: {
+        base_ref: "HEAD",
+        changed_files: [
+          { path: "src/utils/format.ts", status: "modified" },
+          { path: "pantheon.alpha.json", status: "modified" }
+        ],
+        warnings: [],
+      },
+    });
+
+    expect(result.check.verdict).toBe("requires_replan");
+    const finding = result.check.findings.find(f => f.kind === "bootstrap_scope_mixed_with_repair");
+    expect(finding).toBeDefined();
+  });
+
+  it("fails if mixed bootstrap has a forbidden file (precedence fail > requires_replan)", () => {
+    const result = verifyRepairDiff({
+      contract: makeContract(),
+      diff: {
+        base_ref: "HEAD",
+        changed_files: [
+          { path: "src/payment/billing.ts", status: "modified" }, // forbidden => fail
+          { path: "AGENTS.md", status: "modified" }               // mixed => requires_replan
+        ],
+        warnings: [],
+      },
+    });
+
+    expect(result.check.verdict).toBe("fail");
+    const mixedFinding = result.check.findings.find(f => f.kind === "bootstrap_scope_mixed_with_repair");
+    expect(mixedFinding).toBeDefined();
+    const forbiddenFinding = result.check.findings.find(f => f.kind === "forbidden_file");
+    expect(forbiddenFinding).toBeDefined();
+  });
 });

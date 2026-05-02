@@ -1,5 +1,6 @@
 import type { RepoObservations, ObservedFile } from "../repoObservation/types.js";
 import type { PythonObservationSidecar } from "../repoObservation/python/types.js";
+import type { TypeScriptObservationSidecar } from "../repoObservation/typescript/types.js";
 import type {
   RepairImpactSurface,
   RepairScope,
@@ -13,6 +14,7 @@ export function buildRepairScope(input: {
   impactSurface: RepairImpactSurface;
   observations: RepoObservations;
   pythonSidecar: PythonObservationSidecar | null;
+  typescriptSidecar?: TypeScriptObservationSidecar | null;
   protectedPatterns: readonly string[];
 }): RepairScope {
   const filesByPath = new Map(input.observations.observations.files.map(file => [file.path, file] as const));
@@ -108,6 +110,31 @@ export function buildRepairScope(input: {
         pattern: suggestion.pattern,
         source: "risk_preset",
         confidence: input.pythonSidecar.risk_preset_validation.confidence,
+        audit_weight: "critical",
+        reason: suggestion.reason,
+        evidence: suggestion.evidence,
+      });
+    }
+  }
+
+  if (input.typescriptSidecar) {
+    for (const suggestion of input.typescriptSidecar.risk_preset_validation.suggested_review) {
+      if (!review.has(suggestion.pattern) && !forbidden.has(suggestion.pattern)) {
+        review.set(suggestion.pattern, {
+          pattern: suggestion.pattern,
+          source: "risk_preset",
+          confidence: input.typescriptSidecar.risk_preset_validation.confidence,
+          audit_weight: suggestion.severity === "critical" ? "critical" : "elevated",
+          reason: suggestion.reason,
+          evidence: suggestion.evidence,
+        });
+      }
+    }
+    for (const suggestion of input.typescriptSidecar.risk_preset_validation.suggested_forbidden) {
+      forbidden.set(suggestion.pattern, {
+        pattern: suggestion.pattern,
+        source: "risk_preset",
+        confidence: input.typescriptSidecar.risk_preset_validation.confidence,
         audit_weight: "critical",
         reason: suggestion.reason,
         evidence: suggestion.evidence,

@@ -36,8 +36,8 @@ declare const ArchitectureDraftV010Schema: z.ZodObject<{
         commitments: z.ZodArray<z.ZodObject<{
             block_id: z.ZodString;
             type: z.ZodEnum<{
-                decision: "decision";
                 module: "module";
+                decision: "decision";
                 invariant: "invariant";
                 mechanism: "mechanism";
                 constraint: "constraint";
@@ -89,8 +89,8 @@ declare const InterfaceSpecV010Schema: z.ZodObject<{
         commitments: z.ZodArray<z.ZodObject<{
             block_id: z.ZodString;
             type: z.ZodEnum<{
-                decision: "decision";
                 module: "module";
+                decision: "decision";
                 invariant: "invariant";
                 mechanism: "mechanism";
                 constraint: "constraint";
@@ -142,8 +142,8 @@ declare const ModuleSpecV010Schema: z.ZodObject<{
         commitments: z.ZodArray<z.ZodObject<{
             block_id: z.ZodString;
             type: z.ZodEnum<{
-                decision: "decision";
                 module: "module";
+                decision: "decision";
                 invariant: "invariant";
                 mechanism: "mechanism";
                 constraint: "constraint";
@@ -182,9 +182,9 @@ declare const IssueV010Schema: z.ZodObject<{
     target_block_id: z.ZodString;
     issue_type: z.ZodString;
     severity: z.ZodEnum<{
-        high: "high";
-        medium: "medium";
         low: "low";
+        medium: "medium";
+        high: "high";
         critical: "critical";
     }>;
     message: z.ZodString;
@@ -230,8 +230,8 @@ declare const OverridePatchV010Schema: z.ZodObject<{
         new_block: z.ZodObject<{
             block_id: z.ZodString;
             type: z.ZodEnum<{
-                decision: "decision";
                 module: "module";
+                decision: "decision";
                 invariant: "invariant";
                 mechanism: "mechanism";
                 constraint: "constraint";

@@ -163,7 +163,7 @@ __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var _githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_8__ = __nccwpck_require__(298);
 /* harmony import */ var _githubInputParser_js__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(497);
 /* harmony import */ var _githubPrCommentRenderer_js__WEBPACK_IMPORTED_MODULE_9__ = __nccwpck_require__(34);
-/* harmony import */ var _githubRepairRunner_js__WEBPACK_IMPORTED_MODULE_7__ = __nccwpck_require__(881);
+/* harmony import */ var _githubRepairRunner_js__WEBPACK_IMPORTED_MODULE_7__ = __nccwpck_require__(152);
 
 
 
@@ -850,7 +850,7 @@ function formatAllowedActions(actions) {
 
 /***/ }),
 
-/***/ 881:
+/***/ 152:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -21431,7 +21431,58 @@ function deriveAuditStatus(previous, decision) {
     }
 }
 
+;// CONCATENATED MODULE: ./src/alpha/bootstrapScope.ts
+
+function getBootstrapInitFilePatterns() {
+    return [
+        "AGENTS.md",
+        "pantheon.json",
+        "pantheon.alpha.json",
+        "pantheon.agent.json",
+        ".github/workflows/pantheon-repair.yml",
+        ".github/workflows/pantheon-repair.yaml",
+        "docs/pantheon/**",
+        ".gitignore",
+    ];
+}
+function getBootstrapArtifactPatterns() {
+    return [
+        ".pantheon/bootstrap/**",
+    ];
+}
+function classifyBootstrapDiffFile(filePath) {
+    const normalizedPath = filePath.replace(/\\/g, "/");
+    const initPatterns = getBootstrapInitFilePatterns();
+    if (initPatterns.some((pattern) => matchesGlob(normalizedPath, pattern))) {
+        return "bootstrap_init";
+    }
+    const artifactPatterns = getBootstrapArtifactPatterns();
+    if (artifactPatterns.some((pattern) => matchesGlob(normalizedPath, pattern))) {
+        return "bootstrap_artifact";
+    }
+    // Not bootstrap, treat as business
+    return "business";
+}
+function isMixedBootstrapAndRepair(changedFiles) {
+    let hasBootstrap = false;
+    let hasBusiness = false;
+    for (const file of changedFiles) {
+        const fileClass = classifyBootstrapDiffFile(file);
+        if (fileClass === "bootstrap_init" || fileClass === "bootstrap_artifact") {
+            hasBootstrap = true;
+        }
+        else if (fileClass === "business") {
+            hasBusiness = true;
+        }
+        if (hasBootstrap && hasBusiness) {
+            return true;
+        }
+    }
+    return false;
+}
+
 ;// CONCATENATED MODULE: ./src/repair/repairVerifier.ts
+
 
 function verifyRepairDiff(input) {
     const findings = [];
@@ -21439,6 +21490,17 @@ function verifyRepairDiff(input) {
     let reviewRequired = 0;
     let forbidden = 0;
     let outsideScope = 0;
+    const changedPaths = input.diff.changed_files.map(file => file.path);
+    if (isMixedBootstrapAndRepair(changedPaths)) {
+        findings.push({
+            kind: "bootstrap_scope_mixed_with_repair",
+            severity: "requires_replan",
+            message: "This repair also contains Pantheon bootstrap files. Commit or approve the bootstrap change separately, then re-run repair check.",
+            allowed_actions: ["request_replan"],
+            requires_human: true,
+            evidence: ["mixed_bootstrap_repair_scope"],
+        });
+    }
     for (const changed of input.diff.changed_files) {
         const path = changed.path;
         const forbiddenEntry = matchScopeEntry(path, input.contract.repair_scope.forbidden);
@@ -21488,7 +21550,6 @@ function verifyRepairDiff(input) {
             evidence: ["repair_scope:outside"],
         });
     }
-    const changedPaths = input.diff.changed_files.map(file => file.path);
     const touchedAnyRelatedTest = input.contract.test_signals.related.some(path => changedPaths.includes(path));
     if (input.contract.test_signals.related.length > 0 && !touchedAnyRelatedTest) {
         findings.push({
@@ -21529,6 +21590,9 @@ function deriveRepairVerdictFromFindings(findings) {
         return "fail";
     }
     if (findings.some(finding => finding.kind === "stale_repair_contract")) {
+        return "requires_replan";
+    }
+    if (findings.some(finding => finding.kind === "bootstrap_scope_mixed_with_repair")) {
         return "requires_replan";
     }
     if (findings.some(finding => finding.kind === "outside_scope_file")) {
@@ -24669,7 +24733,7 @@ function requireAgentBugReportPath(inputs) {
 /***/ 812:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__.p + "f59df3819cee5d0f8817.ts";
+module.exports = __nccwpck_require__.p + "323ca55d57efda9e6993.ts";
 
 /***/ }),
 

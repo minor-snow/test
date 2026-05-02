@@ -22,6 +22,8 @@ import { cmdFeedback } from "./cmdFeedback.js";
 import { cmdReport } from "./cmdReport.js";
 import { cmdRepair } from "./cmdRepair.js";
 import { cmdAgentDoctor } from "./cmdAgentDoctor.js";
+import { cmdDoctor } from "./cmdDoctor.js";
+import { cmdSelfDoctor } from "./cmdSelfDoctor.js";
 import { cmdAlpha } from "./cmdAlpha.js";
 import { cmdReview } from "./cmdReview.js";
 import { cmdMetrics } from "./cmdMetrics.js";
@@ -68,8 +70,8 @@ function printHelp(): void {
   console.log("  pantheon repair <subcommand>               Run repair governance workflow");
   console.log("  pantheon review <subcommand>               Manage local human review requests");
   console.log("  pantheon metrics <subcommand>              Show local governance metrics");
-  console.log("  pantheon agent doctor                      Verify closed-alpha agent entry surface");
-  console.log("");
+  console.log("  pantheon doctor                            Verify external repository governance harness");
+  console.log("  pantheon self doctor                       Verify Pantheon internal development environment");
   console.log("Options:");
   console.log("  --repo <path>                              Repo root (default: .)");
   console.log("  --scope <path-or-glob>                     Authorized file/directory (guard only, repeatable)");
@@ -162,12 +164,25 @@ switch (command) {
     cmdAlpha(args.slice(1));
     break;
 
+  case "doctor":
+    cmdDoctor(getRepo());
+    break;
+
+  case "self":
+    if (args[1] === "doctor") {
+      cmdSelfDoctor(getRepo());
+      break;
+    }
+    console.error('Unknown self subcommand. Run "pantheon self doctor".');
+    process.exit(1);
+    break;
+
   case "agent":
     if (args[1] === "doctor") {
       cmdAgentDoctor(getRepo());
       break;
     }
-    console.error('Unknown agent subcommand. Run "pantheon agent doctor".');
+    console.error('Unknown agent subcommand.');
     process.exit(1);
     break;
 

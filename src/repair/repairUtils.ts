@@ -40,5 +40,11 @@ export function globToRegex(glob: string): RegExp {
 }
 
 export function matchesPattern(path: string, pattern: string): boolean {
-  return matchesGlob(path, pattern);
+  // Handle special TS/JS config brace expansion which basic globMatch doesn't support
+  if (pattern === "tsconfig*.json|*.config.{ts,js}") {
+    return /^tsconfig(\.\w+)?\.json$/.test(path) || /\.config\.(ts|js|mjs|cjs)$/.test(path);
+  }
+
+  // Support | operator for multiple globs
+  return pattern.split("|").some(p => matchesGlob(path, p));
 }

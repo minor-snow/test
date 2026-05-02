@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { getAllGateIds } from "../gateRegistry.js";
 import { getCriticalFieldBehaviors } from "../governance/fieldBehaviorRegistry.js";
+import { cmdDoctor } from "./cmdDoctor.js";
 
 export type AgentDoctorCheck = {
   readonly id:
@@ -29,29 +30,9 @@ export type AgentDoctorResult = {
   readonly nextCommands: readonly string[];
 };
 
-export function cmdAgentDoctor(repoRoot = "."): AgentDoctorResult {
-  const result = runAgentDoctor(repoRoot);
-
-  console.log("Pantheon Agent Doctor\n");
-  for (const check of result.checks) {
-    console.log(`${check.ok ? "[ok]" : "[missing]"} ${check.label}: ${displayPath(result.repoRoot, check.path)}`);
-    if (check.note) {
-      console.log(`  ${check.note}`);
-    }
-  }
-
-  console.log("");
-  console.log(`Agent-usable repo: ${result.ready ? "yes" : "no"}`);
-  console.log(`Governance registries: ${getAllGateIds().length} gates, ${getCriticalFieldBehaviors().length} critical field-behavior rules`);
-  if (result.nextCommands.length > 0) {
-    console.log("");
-    console.log("Next commands:");
-    for (const command of result.nextCommands) {
-      console.log(`  ${command}`);
-    }
-  }
-
-  return result;
+export function cmdAgentDoctor(repoRoot = "."): void {
+  console.warn("WARN: `pantheon agent doctor` is deprecated. Please use `pantheon doctor` instead.\n");
+  cmdDoctor(repoRoot);
 }
 
 export function runAgentDoctor(repoRoot = "."): AgentDoctorResult {

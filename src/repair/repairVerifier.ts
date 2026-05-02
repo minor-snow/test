@@ -1,6 +1,7 @@
 import type { GitDiffSummary } from "../diffWorkflow/types.js";
 import type { RepairCheck, RepairCheckFinding, RepairContract, RepairFeedback } from "./types.js";
 import { matchesPattern } from "./repairUtils.js";
+import { isMixedBootstrapAndRepair } from "../alpha/bootstrapScope.js";
 
 export function verifyRepairDiff(input: {
   contract: RepairContract;
@@ -11,6 +12,19 @@ export function verifyRepairDiff(input: {
   let reviewRequired = 0;
   let forbidden = 0;
   let outsideScope = 0;
+
+  const changedPaths = input.diff.changed_files.map(file => file.path);
+
+  if (isMixedBootstrapAndRepair(changedPaths)) {
+    findings.push({
+      kind: "bootstrap_scope_mixed_with_repair",
+      severity: "requires_replan",
+      message: "This repair also contains Pantheon bootstrap files. Commit or approve the bootstrap change separately, then re-run repair check.",
+      allowed_actions: ["request_replan"],
+      requires_human: true,
+      evidence: ["mixed_bootstrap_repair_scope"],
+    });
+  }
 
   for (const changed of input.diff.changed_files) {
     const path = changed.path;
@@ -65,7 +79,6 @@ export function verifyRepairDiff(input: {
     });
   }
 
-  const changedPaths = input.diff.changed_files.map(file => file.path);
   const touchedAnyRelatedTest = input.contract.test_signals.related.some(path => changedPaths.includes(path));
   if (input.contract.test_signals.related.length > 0 && !touchedAnyRelatedTest) {
     findings.push({
@@ -110,6 +123,9 @@ export function deriveRepairVerdictFromFindings(findings: readonly RepairCheckFi
     return "fail";
   }
   if (findings.some(finding => finding.kind === "stale_repair_contract")) {
+    return "requires_replan";
+  }
+  if (findings.some(finding => finding.kind === "bootstrap_scope_mixed_with_repair")) {
     return "requires_replan";
   }
   if (findings.some(finding => finding.kind === "outside_scope_file")) {
