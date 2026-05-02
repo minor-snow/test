@@ -180,4 +180,39 @@ describe("verifyRepairDiff", () => {
     const forbiddenFinding = result.check.findings.find(f => f.kind === "forbidden_file");
     expect(forbiddenFinding).toBeDefined();
   });
+
+  it("does not flag bootstrap_scope_mixed_with_repair for bootstrap-only changes", () => {
+    const result = verifyRepairDiff({
+      contract: makeContract(),
+      diff: {
+        base_ref: "HEAD",
+        changed_files: [
+          { path: "pantheon.alpha.json", status: "modified" },
+          { path: "AGENTS.md", status: "modified" }
+        ],
+        warnings: [],
+      },
+    });
+
+    const mixedFinding = result.check.findings.find(f => f.kind === "bootstrap_scope_mixed_with_repair");
+    expect(mixedFinding).toBeUndefined();
+    // It will likely be outside_scope_file, which is fine
+  });
+
+  it("does not flag bootstrap_scope_mixed_with_repair for business-only changes", () => {
+    const result = verifyRepairDiff({
+      contract: makeContract(),
+      diff: {
+        base_ref: "HEAD",
+        changed_files: [
+          { path: "src/utils/format.ts", status: "modified" },
+          { path: "src/elsewhere/other.ts", status: "modified" }
+        ],
+        warnings: [],
+      },
+    });
+
+    const mixedFinding = result.check.findings.find(f => f.kind === "bootstrap_scope_mixed_with_repair");
+    expect(mixedFinding).toBeUndefined();
+  });
 });
