@@ -1,6 +1,6 @@
 # Pantheon — 系统架构文档
 
-> **生成日期**: 2026-04-30 | **当前阶段**: Phase BUG-FULL | **测试**: 1,871 Vitest | **源文件**: 215 (.ts) | **源 LoC**: ~43,400 | **测试文件**: 178 | **测试 LoC**: ~32,100 | **脚本**: 51 | **总 LoC**: ~87,300
+> **生成日期**: 2026-05-02 | **当前阶段**: P29.5 | **测试**: 2,125 Vitest | **源文件**: 244 (.ts) | **源 LoC**: ~51,500 | **测试文件**: 222 | **测试 LoC**: ~36,200 | **脚本**: 88 | **总 LoC**: ~103,500
 
 ---
 
@@ -58,22 +58,36 @@ pantheon/
     metrics/              本地每日治理指标和报告
     repoObservation/      引导仓库扫描器和观测管线
     repoObservation/python/
-                          Python 专项观测、分类、预设和映射（14 个模块）
+                          Python 专项观测、分类、预设和映射（14 模块）
+    repoObservation/typescript/
+                          TypeScript 专项观测、分类、预设和映射（7 模块）
     changeContract/       确定性变更合约构建器和验证器
+    changeContract/lite/  引导模式精简合约构建器和验证器
     diffWorkflow/         Diff 解析、代理范围精简生成、审查者报告
     scopeDiff/            范围 diff 验证和反向问题检测
     scopedHandoff/        范围化实现移交导出器和验证器
     handoff/              移交包投射和不确定性注册表
+    agentFeedback/        代理反馈协议（违规映射、验证、渲染）
+    agentTrial/           代理协议可用性试验（任务包、跨尝试比较）
+    boundary/             边界映射图和爆炸半径引擎
+    codegen/              确定性 Kotlin 代码生成
     cockpit/              面向操作员的发布和试验报告工具
     trial/                狗粮和实时试验工具
-  test/                   Vitest 套件、fixtures、狗粮断言
-  scripts/                阶段运行器、狗粮设置、维护工具
+    contract/             活跃合约解析器
+    policy/               合约门禁评估和策略加载
+    trust/                PR 授权制品门禁和可信批准解析
+    artifacts/            制品安全扫描器和公共策略
+    i18n/                 双语术语表和本地化渲染
+    demo/                 演示 fixtures 和示例
+  test/                   Vitest 套件、fixtures、狗粮断言（216 文件）
+  scripts/                阶段运行器、矩阵编排器、维护工具（88 脚本）
   docs/
     audit/                输入审计文档
     closed-alpha/         封闭 alpha 测试者和 GitHub 修复文档
     internal/             阶段报告、清单、关闭报告
     pantheon/             面向代理的本地治理文档
     phases/               历史阶段摘要
+    reports/              语言主线治理就绪报告
   action/                 打包的 GitHub Action 运行时
   data/                   策划的基准和狗粮证据
   .pantheon/              本地生成的运行时状态（非真实来源）
@@ -206,11 +220,13 @@ data/audit/{artifact_id}.jsonl                     # 追加
 
 6 个一致性门禁：接口-架构覆盖 / 实现-接口覆盖 / 模块-移交覆盖 / 移交-生成覆盖 / 风险+FA-测试覆盖 / 生成反向溯源。
 
-### Layer 12 — 仓库观测（P20a/P25/P27）
+### Layer 12 — 仓库观测（P20a/P25/P27/P28c）
 
 `src/repoObservation/` 是边界和修复流程使用的引导扫描器。它对文件、导入、测试映射、敏感路径、包清单和质量元数据进行分类，无需预先存在的 Pantheon 制品。
 
-Python 观测栈（`src/repoObservation/python/`，14 个模块）支持 P27/P27.5 基准证据，是未来 Python 就绪工作的主要依赖。
+Python 观测栈（`src/repoObservation/python/`，14 个模块）支持 P27/P27.5 基准证据，是 P28b Python 主线治理的主要依赖。覆盖：布局分类、框架检测、项目角色、依赖提取、导入观测、敏感区域检测、风险预设、测试映射、未知分类、治理渲染。
+
+TypeScript/JS 观测栈（`src/repoObservation/typescript/`，7 个模块）镜像 Python 架构，覆盖：框架检测、项目分类、风险预设验证、支持度评估、测试映射。侧重 manifest/config/path 级观测，不含完整编译器 API 分析。与 Python 侧车在修复范围构建器中双轨共存。
 
 ### Layer 13-14 — Diff 工作流与代理反馈（P21/P22）
 
@@ -226,7 +242,7 @@ Python 观测栈（`src/repoObservation/python/`，14 个模块）支持 P27/P27
 
 **核心不变量**: 无反馈构建器解析自由格式的原因/错误/警告字符串。所有违规从结构化字段派生。
 
-### Layer 15 — 修复协议（P28）
+### Layer 15 — 修复协议（P28/P28c）
 
 25 个文件，~2,850 LoC。完整修复生命周期：
 
@@ -238,6 +254,8 @@ AgentBugReport → BugFinding → Suspect Surface → Relation Graph
 ```
 
 3 桶范围：allowed / review_required / forbidden。优先级：forbidden > review > allowed。裁决纯基于桶，`audit_weight` 仅用于排序。
+
+`buildRepairScope()` 支持双语言侧车共存——同时接收 `PythonObservationSidecar` 和 `TypeScriptObservationSidecar`，将两者的风险预设建议合并到 review/forbidden 桶中，确定性去重。
 
 ### Layer 16 — 修复并发（P29）
 
@@ -392,6 +410,9 @@ sequenceDiagram
 | P28-0 | 本地治理表面 | governanceLog, review, metrics, cmdAlpha | ✅ Complete |
 | **Phase BUG** | 核心信任与稳定化 | SHA-256 统一, FSM 强制, shell 注入修复, fail-closed | ✅ Complete |
 | **Phase BUG-FULL** | 公共表面与产品就绪 | 110 issues → 83 fixed, 25 deferred, 0 critical open | ✅ Complete |
+| **P28b** | Python 主线治理 | 50→150→400 repo sweep, 8 archetypes, 400/400 PASS | ✅ Complete |
+| **P28c** | TypeScript/JS 主线治理 | 7 adapter modules, 400-repo sweep, 双 sidecar 共存 | ✅ Complete |
+| **P29.5** | 合约强制门禁与防篡改 | 14 files, 5-stage gate pipeline, base-branch policy, trusted approval | ✅ Complete |
 
 ### 产品状态
 
@@ -415,6 +436,11 @@ sequenceDiagram
 Alpha 治理模式 (Alpha Harness Mode):
   pantheon-alpha init → doctor → repair/review/metrics
   → AGENTS.md + pantheon.agent.json + pantheon.alpha.json
+
+语言主线治理模式 (Mainline Governance Mode):
+  Python (14 modules) + TypeScript (7 modules) 双观测栈
+  → 风险预设验证 → 修复范围构建（双 sidecar 共存）
+  → 400 repo 矩阵 sweep → gap taxonomy → 就绪报告
 ```
 
 ---
@@ -516,6 +542,25 @@ Phase BUG-FULL: Public surface + security audit        (公共表面审计)  —
 
 关键发现：Saleor 商业后台产生**零 allowed 源文件** — 所有源代码被正确分类为 review_required 或 forbidden。
 
+### P28b Python 主线治理（400 仓库）
+
+| 子阶段 | 规模 | 结果 |
+|---|---|---|
+| P28b-1 Baseline | 50 repos | 通过率基准建立 |
+| P28b-2 Repair Dogfood | 3 repos × 6 cases | 修复管线验证 |
+| P28b-3 Validation | 150 repos | **PASS WITH DOCUMENTED VARIANCE (144/150)** |
+| P28b-4 Full Sweep | 400 repos | **400/400 PASS** |
+
+8 原型覆盖：django_commerce, fastapi_service, flask_framework, python_sdk_library, python_cli_tool, data_pipeline, ml_scientific, packaging, python_monorepo
+
+### P28c TypeScript/JS 主线治理
+
+| 组件 | 规模 |
+|---|---|
+| TS 观测适配器 | 7 模块（框架检测、项目分类、风险预设、支持评估、测试映射） |
+| 双 sidecar 共存 | `buildRepairScope()` 同时接受 Python + TypeScript sidecar |
+| 矩阵 sweep | 400 repos, 多原型覆盖 |
+
 ---
 
 ## 10. 生成状态 vs 真实来源
@@ -586,83 +631,41 @@ Pantheon 尚未声称：
 - 补丁的语义正确性证明
 - 超出已记录证据的语言主线就绪
 
-**P28b 就绪裁决: cleared。**
+**P29.5 就绪裁决: cleared。**
 
-此文档之后的下一个就绪门禁是 P28b，它将使用上述稳定的公共和本地治理表面，在更大的外部仓库矩阵上评估 Python 主线质量。
+此文档之后的下一个就绪门禁将建立在严格的合约门禁和信任模型（P29.5）之上，保证高风险变更始终受到合约约束或得到代码库核心维护者的审查。
 
 ---
 
-## 14. P28b — Python Mainline Readiness（执行中）
+## 14. P29.5 — Contract Required Gate & Policy Tamper Protection（已完成）
 
-**当前阶段**: P28b-2 — Repair Dogfood
+**当前阶段**: P29.5 — Closeout (Local + Hosted Enforcement Validated)
 
-**设计文档**: [`docs/phases/p28b-python-mainline-readiness.md`](docs/phases/p28b-python-mainline-readiness.md)
+**设计文档**: [`docs/phases/p29-5-contract-required-gate.md`](docs/phases/p29-5-contract-required-gate.md)
 
-### P28b 5 阶段进度
+### P29.5 阶段概览
 
-| 阶段 | 状态 | 完成时间 |
+系统现已由**代理配合模式**正式转入**严格强制门禁模式 (Enforcement-First Model)**。
+高风险文件变更现在强制要求以下二者之一，否则拦截并报错：
+1. 拥有**有效且无篡改**的修复/变更合约 (Contract)
+2. 获得当前代码库**可信维护者**的人工审查批准 (Trusted Approval)
+
+### 核心实现组件 (14 Modules)
+
+- **Gate Orchestrator**: `contractGateEvaluator.ts` 实现了 5 阶段管线（策略加载、防篡改、工件拦截、合约验证、可信批准）。
+- **Risk-Based Policy**: `contractRequirementPolicy.ts` 基于 Diff 风险进行分类，并能正确处理 Low-Risk Bypass。
+- **Tamper Protection**: `baseBranchPolicyLoader.ts` 确保门禁规则始终来自 Base Branch，防止 PR 中篡改策略；`prAuthoredArtifactGuard.ts` 与 `policyTamperDetector.ts` 拒绝由 PR 伪造的审批工件或配置文件。
+- **GitHub Trust Integration**: `trustedApprovalResolver.ts` 利用 GitHub API 判定审查者权限及 Label 标签的有效性。
+
+### 测试矩阵与验证
+
+| 测试类别 | 覆盖范围 | 结果 |
 |---|---|---|
-| P28b-0: Harness + Repo Selection | ✅ **完成** | 2026-04-30 |
-| P28b-1: 50 Repo Baseline + Gap Fix | ✅ **完成** | 2026-04-30 |
-| P28b-2: Repair Dogfood | ✅ **完成** | 2026-04-30 |
-| P28b-3: 150 Repo Validation | ✅ **PASS WITH DOCUMENTED VARIANCE (144/150)** | 2026-04-30 |
-| P28b-4: 400 Sweep + Closure | 🔵 就绪 | — |
+| 单元测试 | 策略篡改、风险分级、审批校验、PR评论生成 | 93/93 PASS |
+| Dogfood Matrix | 14 Case 本地决策引擎 (覆盖 fake approval/tamper/bypass) | PASS |
+| Hosted Validation | 远程 Action 执行（私有 `test` 仓库 3 个 PR 现场拦截验证） | PASS |
 
-### P28b-1 50 Repo Raw Baseline 结果（已完成）
-
-**Step 1**: 50 repos cloned，无超时，无错误（3个替换: nox/build/nameko）
-
-**Step 2**: Raw baseline scan 完成
-
-| 指标 | 值 | 目标 |
-|---|---|---|
-| Repos scanned | 50 | 50 |
-| Crashes | **0** | 0 |
-| Timeouts | **0** | — |
-| Sanitizer violations | **0** | 0 |
-| Smoke+ | **100%** | 90% |
-| Supported+ | **98%** | 70% |
-| P0 Blockers | **0** | 0 |
-
-**Step 3**: Gap taxonomy 生成完成
-
-| Gap | Priority | Repos | Impact |
-|---|---|---:|---|
-| test_mapping_gap | P2 Medium | 12 | 24% — test discovery pattern coverage |
-| framework_detection_gap | P1 High | 4 | 8% — build/loguru/tiktoken/monorepo |
-| risk_preset_gap | P2 Medium | 2 | 4% — loguru/nltk |
-| layout_classification_gap | P1 High | 1 | 2% — build (PyPA build tool) |
-
-**Step 4 决定**: 不做 adapter fix round — baseline 已大幅超过验收标准（Smoke+ 100% vs 目标 90%，Supported+ 98% vs 目标 70%）。4 个已知 gap 全部 deferred 进入 P28b-3 gap list。
-
-### P28b-1 验收结果
-
-所有 14 条验收标准已确认：
-
-```
-✅ 1. 50 repos cloned or replaced
-✅ 2. Every repo has pinned_commit
-✅ 3. First raw baseline completed
-✅ 4. No unhandled crash (0 crashes)
-✅ 5. Sanitizer violations = 0
-✅ 6. Every repo has support_level
-✅ 7. Every unsupported repo has reason (0 unsupported)
-✅ 8. gap_taxonomy.json generated
-✅ 9. Top gaps explicitly deferred (below fix threshold)
-✅ 10. Baseline completed — no re-run needed (100% smoke+)
-✅ 11. smoke-or-better >= 90% (100%)
-✅ 12. supported-or-better >= 70% (98%)
-✅ 13. tsc clean
-✅ 14. targeted Vitest green (existing suite)
-```
-
-### P28b-0 性能基线（Core 3 + Extended 5 实测）
-
-p50: 2509ms | p95: 3704ms | 超时: 0 | **预算远优于 30s 目标**
-
-### Scanner 接口冻结
-
-> P28b-0 完成后，`repoScanner` 公共接口已冻结。P28b-1 及之后只允许修改 Python adapter / classifier / mapper / preset。
+**结论**: Local + hosted enforcement validated.
 
 ---
 
