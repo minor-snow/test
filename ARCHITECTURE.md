@@ -656,6 +656,8 @@ Pantheon 尚未声称：
 - **Risk-Based Policy**: `contractRequirementPolicy.ts` 基于 Diff 风险进行分类，并能正确处理 Low-Risk Bypass。
 - **Tamper Protection**: `baseBranchPolicyLoader.ts` 确保门禁规则始终来自 Base Branch，防止 PR 中篡改策略；`prAuthoredArtifactGuard.ts` 与 `policyTamperDetector.ts` 拒绝由 PR 伪造的审批工件或配置文件。
 - **GitHub Trust Integration**: `trustedApprovalResolver.ts` 利用 GitHub API 判定审查者权限及 Label 标签的有效性。
+- **Bootstrap Scope Isolation**: `bootstrapScope.ts` 将环境配置（如 `pantheon.alpha.json`, `AGENTS.md`）隔离为 bootstrap 范围，通过内容哈希实现环境无关的 `bootstrap_change_id` 追踪。通过 `repairVerifier.ts`，任何混合了 bootstrap 变更与业务修复的提交将自动获得 `requires_replan` 状态。
+- **Diagnostic Modes**: 分离了诊断逻辑。`pantheon doctor` (位于 `externalDoctor.ts`) 仅校验外部仓库治理工件是否就绪，而 `pantheon self doctor` (`selfDoctor.ts`) 仅用于 Pantheon 开发环境内部自检。旧有的 `pantheon agent doctor` 被弃用。
 
 ### 测试矩阵与验证
 
