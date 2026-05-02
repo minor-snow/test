@@ -26,9 +26,9 @@ export type BugEvidence = z.infer<typeof bugEvidenceSchema>;
 export declare const suspectedFileSchema: z.ZodObject<{
     path: z.ZodString;
     confidence: z.ZodEnum<{
-        high: "high";
-        medium: "medium";
         low: "low";
+        medium: "medium";
+        high: "high";
     }>;
     reason: z.ZodString;
 }, z.core.$strip>;
@@ -58,9 +58,9 @@ export declare const agentBugReportSchema: z.ZodObject<{
     suspected_files: z.ZodArray<z.ZodObject<{
         path: z.ZodString;
         confidence: z.ZodEnum<{
-            high: "high";
-            medium: "medium";
             low: "low";
+            medium: "medium";
+            high: "high";
         }>;
         reason: z.ZodString;
     }, z.core.$strip>>;
@@ -92,9 +92,9 @@ export declare const userBugReportSchema: z.ZodObject<{
     suspected_files: z.ZodArray<z.ZodObject<{
         path: z.ZodString;
         confidence: z.ZodEnum<{
-            high: "high";
-            medium: "medium";
             low: "low";
+            medium: "medium";
+            high: "high";
         }>;
         reason: z.ZodString;
     }, z.core.$strip>>;
@@ -239,8 +239,6 @@ export declare const humanAuditDecisionSchema: z.ZodObject<{
         post_repair: "post_repair";
     }>;
     decision: z.ZodEnum<{
-        request_scope_expansion: "request_scope_expansion";
-        keep_for_human_review: "keep_for_human_review";
         needs_more_evidence: "needs_more_evidence";
         accept_report: "accept_report";
         reject_report: "reject_report";
@@ -254,6 +252,8 @@ export declare const humanAuditDecisionSchema: z.ZodObject<{
         require_manual_repair: "require_manual_repair";
         approve_repair: "approve_repair";
         request_revert: "request_revert";
+        request_scope_expansion: "request_scope_expansion";
+        keep_for_human_review: "keep_for_human_review";
         close_as_invalid: "close_as_invalid";
     }>;
     operator_id: z.ZodString;
@@ -276,8 +276,8 @@ export type RepairAuditLogEvent = {
     readonly detail?: string;
 };
 export type RepairCheckFinding = {
-    readonly kind: "review_required_file" | "forbidden_file" | "outside_scope_file" | "missing_related_test_signal" | "stale_repair_contract" | "active_scope_pattern_overlap" | "actual_changed_file_overlap" | "stale_audit_decision" | "repair_id_mismatch" | "latest_used_for_correctness" | "working_tree_changed";
-    readonly severity: "warning" | "review_required" | "blocking" | "requires_human_audit";
+    readonly kind: "review_required_file" | "forbidden_file" | "outside_scope_file" | "missing_related_test_signal" | "stale_repair_contract" | "active_scope_pattern_overlap" | "actual_changed_file_overlap" | "stale_audit_decision" | "repair_id_mismatch" | "latest_used_for_correctness" | "working_tree_changed" | "bootstrap_scope_mixed_with_repair";
+    readonly severity: "warning" | "review_required" | "blocking" | "requires_human_audit" | "requires_replan";
     readonly file?: string;
     readonly message: string;
     readonly allowed_actions: readonly ("revert_file" | "request_scope_expansion" | "request_replan" | "keep_for_human_review" | "add_or_run_related_test" | "needs_more_evidence")[];
@@ -331,8 +331,8 @@ export declare const syntheticRepairDiffSchema: z.ZodObject<{
     changed_files: z.ZodArray<z.ZodObject<{
         path: z.ZodString;
         change_kind: z.ZodEnum<{
-            added: "added";
             modified: "modified";
+            added: "added";
             deleted: "deleted";
             renamed: "renamed";
         }>;

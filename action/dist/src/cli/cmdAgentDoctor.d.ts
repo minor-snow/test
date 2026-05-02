@@ -11,5 +11,5 @@ export type AgentDoctorResult = {
     readonly checks: readonly AgentDoctorCheck[];
     readonly nextCommands: readonly string[];
 };
-export declare function cmdAgentDoctor(repoRoot?: string): AgentDoctorResult;
+export declare function cmdAgentDoctor(repoRoot?: string): void;
 export declare function runAgentDoctor(repoRoot?: string): AgentDoctorResult;
