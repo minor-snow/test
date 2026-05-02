@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { execSync } from "node:child_process";
 import { matchesGlob } from "../../globMatch.js";
-import { readdirSync } from "node:fs";
+import { readdirSync, accessSync, constants } from "node:fs";
 
 export type DoctorCheckResult = {
   id: string;
@@ -65,7 +65,12 @@ export function runExternalDoctor(repoRoot = "."): ExternalDoctorResult {
   if (existsSync(pantheonDir)) {
     checks.push({ id: "pantheon_dir", label: ".pantheon directory", status: "pass", path: pantheonDir });
   } else {
-    checks.push({ id: "pantheon_dir", label: ".pantheon directory", status: "fail", message: "Directory missing", path: pantheonDir });
+    try {
+      accessSync(root, constants.W_OK);
+      checks.push({ id: "pantheon_dir", label: ".pantheon directory", status: "warning", message: "Directory missing (can be created)", path: pantheonDir });
+    } catch {
+      checks.push({ id: "pantheon_dir", label: ".pantheon directory", status: "fail", message: "Directory missing and root is unwritable", path: pantheonDir });
+    }
   }
 
   // 5. AGENTS.md or docs/pantheon/**

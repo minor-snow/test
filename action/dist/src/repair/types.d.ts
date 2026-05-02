@@ -26,9 +26,9 @@ export type BugEvidence = z.infer<typeof bugEvidenceSchema>;
 export declare const suspectedFileSchema: z.ZodObject<{
     path: z.ZodString;
     confidence: z.ZodEnum<{
-        low: "low";
-        medium: "medium";
         high: "high";
+        medium: "medium";
+        low: "low";
     }>;
     reason: z.ZodString;
 }, z.core.$strip>;
@@ -58,9 +58,9 @@ export declare const agentBugReportSchema: z.ZodObject<{
     suspected_files: z.ZodArray<z.ZodObject<{
         path: z.ZodString;
         confidence: z.ZodEnum<{
-            low: "low";
-            medium: "medium";
             high: "high";
+            medium: "medium";
+            low: "low";
         }>;
         reason: z.ZodString;
     }, z.core.$strip>>;
@@ -92,9 +92,9 @@ export declare const userBugReportSchema: z.ZodObject<{
     suspected_files: z.ZodArray<z.ZodObject<{
         path: z.ZodString;
         confidence: z.ZodEnum<{
-            low: "low";
-            medium: "medium";
             high: "high";
+            medium: "medium";
+            low: "low";
         }>;
         reason: z.ZodString;
     }, z.core.$strip>>;
@@ -331,8 +331,8 @@ export declare const syntheticRepairDiffSchema: z.ZodObject<{
     changed_files: z.ZodArray<z.ZodObject<{
         path: z.ZodString;
         change_kind: z.ZodEnum<{
-            modified: "modified";
             added: "added";
+            modified: "modified";
             deleted: "deleted";
             renamed: "renamed";
         }>;
