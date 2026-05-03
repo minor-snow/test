@@ -42,8 +42,8 @@ export declare const pantheonAgentConfigSchema: z.ZodObject<{
     github: z.ZodOptional<z.ZodObject<{
         workflow: z.ZodString;
         action_mode: z.ZodEnum<{
-            repair: "repair";
             boundary: "boundary";
+            repair: "repair";
         }>;
     }, z.core.$strip>>;
     hard_rules: z.ZodArray<z.ZodString>;
