@@ -24,6 +24,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install runtime dependencies
+        run: npm ci --ignore-scripts --no-fund
+
       - name: Resolve scenario
         id: scenario
         shell: bash
