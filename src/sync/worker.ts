@@ -1,7 +1,2 @@
-import { Queue } from "./queue.js";
-const retry = require("retry-lib");
+export const worker = () => 's2-policy-tamper';
 
-export async function runWorker(): Promise<void> {
-  const q = new Queue();
-  await q.process();
-}
