@@ -929,9 +929,16 @@ function prepareActionOutputDir(outputDir) {
     };
 }
 function resolveCliEntryPath(env) {
-    if (env.PANTHEON_CLI_ENTRY)
-        return (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.PANTHEON_CLI_ENTRY);
-    return (0,node_url__WEBPACK_IMPORTED_MODULE_2__.fileURLToPath)(new URL(/* asset import */ __nccwpck_require__(812), __nccwpck_require__.b));
+    const candidates = [
+        env.PANTHEON_CLI_ENTRY ? (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.PANTHEON_CLI_ENTRY) : null,
+        (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.GITHUB_WORKSPACE ?? process.cwd(), "dist", "src", "cli", "pantheon.js"),
+        (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(process.cwd(), "dist", "src", "cli", "pantheon.js"),
+    ].filter((candidate) => candidate !== null);
+    const cliEntry = candidates.find(candidate => (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.existsSync)(candidate));
+    if (!cliEntry) {
+        throw new Error("Pantheon CLI entry not found. Set PANTHEON_CLI_ENTRY or include dist/src/cli/pantheon.js in the repository.");
+    }
+    return cliEntry;
 }
 function repeatFlag(flag, values) {
     return values.flatMap(value => [flag, value]);
@@ -1229,17 +1236,14 @@ function collectGitHubRepairArtifacts(input) {
 /* harmony import */ var node_fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(node_fs__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var node_path__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(760);
 /* harmony import */ var node_path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(node_path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var node_url__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(136);
-/* harmony import */ var node_url__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(node_url__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var node_child_process__WEBPACK_IMPORTED_MODULE_3__ = __nccwpck_require__(421);
-/* harmony import */ var node_child_process__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__nccwpck_require__.n(node_child_process__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _change_changeArtifactLayout_js__WEBPACK_IMPORTED_MODULE_4__ = __nccwpck_require__(634);
-/* harmony import */ var _githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_5__ = __nccwpck_require__(755);
-/* harmony import */ var _githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(978);
-/* harmony import */ var _githubCommentClient_js__WEBPACK_IMPORTED_MODULE_9__ = __nccwpck_require__(379);
-/* harmony import */ var _githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_8__ = __nccwpck_require__(298);
-/* harmony import */ var _githubInputParser_js__WEBPACK_IMPORTED_MODULE_7__ = __nccwpck_require__(497);
-
+/* harmony import */ var node_child_process__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(421);
+/* harmony import */ var node_child_process__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(node_child_process__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _change_changeArtifactLayout_js__WEBPACK_IMPORTED_MODULE_3__ = __nccwpck_require__(634);
+/* harmony import */ var _githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__ = __nccwpck_require__(755);
+/* harmony import */ var _githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_5__ = __nccwpck_require__(978);
+/* harmony import */ var _githubCommentClient_js__WEBPACK_IMPORTED_MODULE_8__ = __nccwpck_require__(379);
+/* harmony import */ var _githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_7__ = __nccwpck_require__(298);
+/* harmony import */ var _githubInputParser_js__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(497);
 
 
 
@@ -1251,7 +1255,7 @@ function collectGitHubRepairArtifacts(input) {
 
 async function runGitHubChangeAction(env = process.env) {
     const repoRoot = (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.GITHUB_WORKSPACE ?? process.cwd());
-    const { inputs, prContext } = (0,_githubInputParser_js__WEBPACK_IMPORTED_MODULE_7__/* .parseGitHubChangeInputs */ ._d)(env);
+    const { inputs, prContext } = (0,_githubInputParser_js__WEBPACK_IMPORTED_MODULE_6__/* .parseGitHubChangeInputs */ ._d)(env);
     const cliEntry = resolveCliEntryPath(env);
     const checkArgs = [
         "change",
@@ -1261,7 +1265,7 @@ async function runGitHubChangeAction(env = process.env) {
         ...(inputs.baseSha ? ["--base", inputs.baseSha] : []),
     ];
     const cliResult = runCli(cliEntry, checkArgs, repoRoot);
-    const checkPath = (0,_change_changeArtifactLayout_js__WEBPACK_IMPORTED_MODULE_4__/* .getChangeCheckPath */ .i3)(repoRoot, inputs.changeId);
+    const checkPath = (0,_change_changeArtifactLayout_js__WEBPACK_IMPORTED_MODULE_3__/* .getChangeCheckPath */ .i3)(repoRoot, inputs.changeId);
     if (!(0,node_fs__WEBPACK_IMPORTED_MODULE_0__.existsSync)(checkPath)) {
         throw new Error(`Pantheon change check did not produce check.json at ${checkPath} (exit status: ${cliResult.status ?? "unknown"})`);
     }
@@ -1269,7 +1273,7 @@ async function runGitHubChangeAction(env = process.env) {
     const contract = loadChangeContract(repoRoot, inputs.changeId);
     const artifactOutputDirRelative = "pantheon-report";
     const artifactCollection = inputs.uploadArtifacts
-        ? (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_5__/* .collectGitHubActionArtifacts */ .xH)({
+        ? (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .collectGitHubActionArtifacts */ .xH)({
             repoRoot,
             outputDirRelative: artifactOutputDirRelative,
             artifactMode: inputs.artifactMode,
@@ -1277,22 +1281,22 @@ async function runGitHubChangeAction(env = process.env) {
             includeArchitecture: true,
         })
         : prepareActionOutputDir((0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(repoRoot, artifactOutputDirRelative));
-    const comment = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_6__/* .renderChangePrComment */ .wN)(check, {
+    const comment = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_5__/* .renderChangePrComment */ .wN)(check, {
         baseSha: inputs.baseSha,
         headSha: inputs.headSha,
         type: contract?.change_type ?? "unknown",
     });
-    const summary = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_6__/* .renderChangeStepSummary */ .fb)(check, {
+    const summary = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_5__/* .renderChangeStepSummary */ .fb)(check, {
         baseSha: inputs.baseSha,
         headSha: inputs.headSha,
         type: contract?.change_type ?? "unknown",
     });
-    const sanitizedComment = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_5__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
+    const sanitizedComment = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
         target: "pr_comment.md",
         content: comment.markdown,
         artifactMode: inputs.artifactMode,
     });
-    const sanitizedSummary = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_5__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
+    const sanitizedSummary = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
         target: "step_summary.md",
         content: summary.markdown,
         artifactMode: inputs.artifactMode,
@@ -1314,13 +1318,13 @@ async function runGitHubChangeAction(env = process.env) {
         }
         : artifactCollection;
     if (inputs.uploadArtifacts) {
-        (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_5__/* .writeGitHubArtifactManifest */ .Ej)({
+        (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .writeGitHubArtifactManifest */ .Ej)({
             outputDir: artifactCollection.outputDir,
             collection: finalArtifactCollection,
             metadata: { change_id: inputs.changeId, type: "change" },
         });
     }
-    const exitDecision = (0,_githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_8__/* .decideGitHubActionExit */ .o)({
+    const exitDecision = (0,_githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_7__/* .decideGitHubActionExit */ .o)({
         verdict: check.verdict,
         sanitizerViolations: finalArtifactCollection.sanitizerViolations.length,
         failOn: inputs.failOn,
@@ -1347,7 +1351,7 @@ async function runGitHubChangeAction(env = process.env) {
     }
     let commentResult = { status: "skipped", reason: "PR comment disabled." };
     if (inputs.postComment && inputs.commentMode !== "off") {
-        commentResult = await (0,_githubCommentClient_js__WEBPACK_IMPORTED_MODULE_9__/* .postOrUpdatePantheonComment */ .b)({
+        commentResult = await (0,_githubCommentClient_js__WEBPACK_IMPORTED_MODULE_8__/* .postOrUpdatePantheonComment */ .b)({
             prContext,
             githubToken: env.GITHUB_TOKEN,
             marker: comment.marker,
@@ -1370,11 +1374,11 @@ async function runGitHubChangeAction(env = process.env) {
     };
 }
 function loadChangeContract(repoRoot, changeId) {
-    const path = (0,_change_changeArtifactLayout_js__WEBPACK_IMPORTED_MODULE_4__/* .getChangeContractPath */ .sK)(repoRoot, changeId, "latest");
+    const path = (0,_change_changeArtifactLayout_js__WEBPACK_IMPORTED_MODULE_3__/* .getChangeContractPath */ .sK)(repoRoot, changeId, "latest");
     return (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.existsSync)(path) ? JSON.parse((0,node_fs__WEBPACK_IMPORTED_MODULE_0__.readFileSync)(path, "utf-8")) : null;
 }
 function runCli(cliEntry, args, cwd) {
-    const result = (0,node_child_process__WEBPACK_IMPORTED_MODULE_3__.spawnSync)(process.execPath, [cliEntry, ...args], {
+    const result = (0,node_child_process__WEBPACK_IMPORTED_MODULE_2__.spawnSync)(process.execPath, [cliEntry, ...args], {
         cwd,
         encoding: "utf-8",
         stdio: ["inherit", "pipe", "pipe"],
@@ -1401,9 +1405,16 @@ function prepareActionOutputDir(outputDir) {
     };
 }
 function resolveCliEntryPath(env) {
-    if (env.PANTHEON_CLI_ENTRY)
-        return (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.PANTHEON_CLI_ENTRY);
-    return (0,node_url__WEBPACK_IMPORTED_MODULE_2__.fileURLToPath)(new URL(/* asset import */ __nccwpck_require__(812), __nccwpck_require__.b));
+    const candidates = [
+        env.PANTHEON_CLI_ENTRY ? (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.PANTHEON_CLI_ENTRY) : null,
+        (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.GITHUB_WORKSPACE ?? process.cwd(), "dist", "src", "cli", "pantheon.js"),
+        (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(process.cwd(), "dist", "src", "cli", "pantheon.js"),
+    ].filter((candidate) => candidate !== null);
+    const cliEntry = candidates.find(candidate => (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.existsSync)(candidate));
+    if (!cliEntry) {
+        throw new Error("Pantheon CLI entry not found. Set PANTHEON_CLI_ENTRY or include dist/src/cli/pantheon.js in the repository.");
+    }
+    return cliEntry;
 }
 
 
@@ -27559,13 +27570,6 @@ function stableSerialize(value) {
 
 /***/ }),
 
-/***/ 812:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-module.exports = __nccwpck_require__.p + "c6c94b5694c6c702af43.ts";
-
-/***/ }),
-
 /***/ 421:
 /***/ ((module) => {
 
@@ -27632,9 +27636,6 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:url");
 /******/ 	// Return the exports of the module
 /******/ 	return module.exports;
 /******/ }
-/******/ 
-/******/ // expose the modules object (__webpack_modules__)
-/******/ __nccwpck_require__.m = __webpack_modules__;
 /******/ 
 /************************************************************************/
 /******/ /* webpack/runtime/async module */
@@ -27746,44 +27747,9 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:url");
 /******/ 	};
 /******/ })();
 /******/ 
-/******/ /* webpack/runtime/publicPath */
-/******/ (() => {
-/******/ 	var scriptUrl;
-/******/ 	if (typeof import.meta.url === "string") scriptUrl = import.meta.url
-/******/ 	// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 	// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 	if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 	scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 	__nccwpck_require__.p = scriptUrl;
-/******/ })();
-/******/ 
 /******/ /* webpack/runtime/compat */
 /******/ 
 /******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
-/******/ 
-/******/ /* webpack/runtime/import chunk loading */
-/******/ (() => {
-/******/ 	__nccwpck_require__.b = new URL("./", import.meta.url);
-/******/ 	
-/******/ 	// object to store loaded and loading chunks
-/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 	// [resolve, Promise] = chunk loading, 0 = chunk loaded
-/******/ 	var installedChunks = {
-/******/ 		792: 0
-/******/ 	};
-/******/ 	
-/******/ 	// no install chunk
-/******/ 	
-/******/ 	// no chunk on demand loading
-/******/ 	
-/******/ 	// no prefetching
-/******/ 	
-/******/ 	// no preloaded
-/******/ 	
-/******/ 	// no external install chunk
-/******/ 	
-/******/ 	// no on chunks loaded
-/******/ })();
 /******/ 
 /************************************************************************/
 /******/ 
