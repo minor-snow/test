@@ -12,9 +12,9 @@ export declare const repairAuditDecisionValues: readonly ["accept_report", "reje
 export type RepairAuditDecisionType = typeof repairAuditDecisionValues[number];
 export declare const bugEvidenceSchema: z.ZodObject<{
     kind: z.ZodEnum<{
-        stack_trace: "stack_trace";
         failing_test: "failing_test";
         code_observation: "code_observation";
+        stack_trace: "stack_trace";
         user_reference: "user_reference";
     }>;
     path: z.ZodOptional<z.ZodString>;
@@ -45,9 +45,9 @@ export declare const agentBugReportSchema: z.ZodObject<{
     expected_behavior: z.ZodString;
     evidence: z.ZodArray<z.ZodObject<{
         kind: z.ZodEnum<{
-            stack_trace: "stack_trace";
             failing_test: "failing_test";
             code_observation: "code_observation";
+            stack_trace: "stack_trace";
             user_reference: "user_reference";
         }>;
         path: z.ZodOptional<z.ZodString>;
@@ -79,9 +79,9 @@ export declare const userBugReportSchema: z.ZodObject<{
     expected_behavior: z.ZodOptional<z.ZodString>;
     evidence: z.ZodArray<z.ZodObject<{
         kind: z.ZodEnum<{
-            stack_trace: "stack_trace";
             failing_test: "failing_test";
             code_observation: "code_observation";
+            stack_trace: "stack_trace";
             user_reference: "user_reference";
         }>;
         path: z.ZodOptional<z.ZodString>;
@@ -234,12 +234,15 @@ export declare const humanAuditDecisionSchema: z.ZodObject<{
     repair_id: z.ZodString;
     target_revision: z.ZodNumber;
     gate: z.ZodEnum<{
-        bug_intake: "bug_intake";
         repair_plan: "repair_plan";
+        bug_intake: "bug_intake";
         post_repair: "post_repair";
     }>;
     decision: z.ZodEnum<{
+        request_scope_expansion: "request_scope_expansion";
+        keep_for_human_review: "keep_for_human_review";
         needs_more_evidence: "needs_more_evidence";
+        approve_repair: "approve_repair";
         accept_report: "accept_report";
         reject_report: "reject_report";
         mark_duplicate: "mark_duplicate";
@@ -250,10 +253,7 @@ export declare const humanAuditDecisionSchema: z.ZodObject<{
         add_must_preserve: "add_must_preserve";
         add_forbidden_area: "add_forbidden_area";
         require_manual_repair: "require_manual_repair";
-        approve_repair: "approve_repair";
         request_revert: "request_revert";
-        request_scope_expansion: "request_scope_expansion";
-        keep_for_human_review: "keep_for_human_review";
         close_as_invalid: "close_as_invalid";
     }>;
     operator_id: z.ZodString;
@@ -331,8 +331,8 @@ export declare const syntheticRepairDiffSchema: z.ZodObject<{
     changed_files: z.ZodArray<z.ZodObject<{
         path: z.ZodString;
         change_kind: z.ZodEnum<{
-            added: "added";
             modified: "modified";
+            added: "added";
             deleted: "deleted";
             renamed: "renamed";
         }>;

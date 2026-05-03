@@ -1,45 +1,79 @@
 {
-    "version":  1,
-    "protected":  [
-                      ".pantheon/**",
-                      ".git/**",
-                      "node_modules/**",
-                      ".github/workflows/**"
-                  ],
-    "review_required":  [
-                            "package.json",
-                            "src/auth/**",
-                            ".pantheon/architecture/**"
-                        ],
-    "generated":  [
-                      "action/dist/**"
-                  ],
-    "path_roles":  {
-                       "action/dist/**":  "generated"
-                   },
-    "repo_observation":  {
-
-                         },
-    "contract_gate":  {
-                          "enabled":  true,
-                          "risk_threshold_for_contract":  "high",
-                          "low_risk_bypass":  {
-                                                  "enabled":  true,
-                                                  "docs_only":  true,
-                                                  "test_only":  "allow_low_risk"
-                                              },
-                          "protected_policy_paths":  [
-                                                         "AGENTS.md",
-                                                         "pantheon.json",
-                                                         "pantheon.alpha.json",
-                                                         "pantheon.agent.json",
-                                                         ".pantheon/policy/**",
-                                                         ".pantheon/architecture/**",
-                                                         "CODEOWNERS"
-                                                     ],
-                          "contract_artifact_paths":  [
-                                                          ".pantheon/repair/runs/**",
-                                                          ".pantheon/change/runs/**"
-                                                      ]
-                      }
+  "schema_version": "pantheon_alpha_config@0.1.0",
+  "artifact_mode": "public",
+  "default_fail_on": [
+    "fail",
+    "requires_replan",
+    "requires_scope_expansion"
+  ],
+  "review_required_fails_ci": false,
+  "repair": {
+    "require_repair_id": true,
+    "allow_inline_repair_intent": false,
+    "default_audit_mode": "require_plan_approval"
+  },
+  "github": {
+    "enabled": true,
+    "workflow_path": ".github/workflows/pantheon-repair.yml",
+    "post_comment": true,
+    "upload_artifact": true
+  },
+  "privacy": {
+    "public_artifacts_only": true,
+    "sanitize_public_artifacts": true,
+    "allow_debug_artifacts": false
+  },
+  "version": 1,
+  "protected": [],
+  "review_required": [],
+  "generated": [
+    "action/dist/**"
+  ],
+  "path_roles": {
+    "action/dist/**": "generated"
+  },
+  "repo_observation": {},
+  "contract_gate": {
+    "enabled": false,
+    "risk_threshold_for_contract": "high",
+    "low_risk_bypass": {
+      "enabled": true,
+      "docs_only": true,
+      "test_only": "allow_low_risk"
+    },
+    "protected_policy_paths": [
+      "AGENTS.md",
+      "pantheon.json",
+      "pantheon.alpha.json",
+      "pantheon.agent.json",
+      ".pantheon/policy/**",
+      ".pantheon/architecture/**",
+      "CODEOWNERS"
+    ],
+    "contract_artifact_paths": [
+      ".pantheon/repair/runs/**",
+      ".pantheon/change/runs/**"
+    ]
+  },
+  "metrics": {
+    "enabled": true,
+    "mode": "local",
+    "generate_daily_report": true,
+    "include_file_paths": true,
+    "anonymize_paths": false,
+    "retention_days": 30
+  },
+  "review_queue": {
+    "enabled": true,
+    "local_only": true
+  },
+  "notifications": {
+    "github": {
+      "label_pr": true,
+      "mention_reviewers": false
+    },
+    "webhook": {
+      "enabled": false
+    }
+  }
 }
