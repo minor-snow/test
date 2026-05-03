@@ -36,7 +36,11 @@ export function cmdCheck(input) {
         observations = JSON.parse(readFileSync(int.observations, "utf-8"));
     }
     // 2. Read git diff
-    const diff = readGitDiffSummary({ repoRoot, baseRef });
+    const diff = readGitDiffSummary({
+        repoRoot,
+        baseRef,
+        headRef: input.headRef,
+    });
     if (diff.warnings.length > 0) {
         for (const w of diff.warnings)
             console.log("  Warning:", w);

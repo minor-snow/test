@@ -81,6 +81,7 @@ export function cmdRepair(args) {
                 repoRoot: getFlag(args, "repo") ?? ".",
                 repairId: requireRepairId(args, getFlag(args, "repo") ?? "."),
                 baseRef: getFlag(args, "base"),
+                headRef: getFlag(args, "head"),
                 diffJsonPath: getFlag(args, "diff-json"),
             });
             return;
@@ -338,6 +339,7 @@ export function cmdRepairCheck(input) {
     const diff = readRepairDiff({
         repoRoot,
         baseRef: input.baseRef,
+        headRef: input.headRef,
         diffJsonPath: input.diffJsonPath,
         changedFilesOverride: input.changedFilesOverride,
     });
@@ -690,6 +692,7 @@ function readRepairDiff(input) {
     return readGitDiffSummary({
         repoRoot: input.repoRoot,
         baseRef: input.baseRef ?? "",
+        headRef: input.headRef,
         changedFilesOverride: input.changedFilesOverride,
     });
 }

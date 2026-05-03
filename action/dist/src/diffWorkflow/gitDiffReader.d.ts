@@ -15,6 +15,7 @@ import type { GitDiffSummary } from "./types.js";
 export declare function readGitDiffSummary(input: {
     repoRoot: string;
     baseRef: string;
+    headRef?: string;
     changedFilesOverride?: string[];
 }): GitDiffSummary;
 /**

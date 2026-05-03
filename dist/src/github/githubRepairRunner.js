@@ -58,6 +58,7 @@ export async function runGitHubRepairAction(env = process.env) {
                 repoRoot,
                 repairId,
                 baseRef: inputs.baseSha,
+                headRef: inputs.headSha,
                 sourceOverride: "github_action",
                 prNumber: prContext?.prNumber,
                 prBaseSha: inputs.baseSha,
@@ -73,6 +74,7 @@ export async function runGitHubRepairAction(env = process.env) {
             repoRoot,
             repairId,
             baseRef: inputs.baseSha,
+            headRef: inputs.headSha,
             sourceOverride: "github_action",
             prNumber: prContext?.prNumber,
             prBaseSha: inputs.baseSha,
@@ -192,7 +194,11 @@ export async function runGitHubRepairAction(env = process.env) {
     writeFileSync(join(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
         base_sha: inputs.baseSha ?? null,
         head_sha: inputs.headSha ?? null,
-        diff_mode: inputs.baseSha ? "github_pr_base_sha" : "working_tree_fallback",
+        diff_mode: inputs.baseSha && inputs.headSha
+            ? "github_pr_base_head_sha"
+            : inputs.baseSha
+                ? "github_pr_base_sha"
+                : "working_tree_fallback",
         fail_on: inputs.failOn,
         artifact_mode: inputs.artifactMode,
         artifacts_prepared: true,

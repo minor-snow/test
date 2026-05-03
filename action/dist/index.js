@@ -434,7 +434,7 @@ function relativePantheonPath(fullPath, repoRoot) {
  * If `changedFilesOverride` is provided, it takes precedence over git.
  */
 function readGitDiffSummary(input) {
-    const { repoRoot, baseRef, changedFilesOverride } = input;
+    const { repoRoot, baseRef, headRef, changedFilesOverride } = input;
     // Override takes precedence
     if (changedFilesOverride && changedFilesOverride.length > 0) {
         return {
@@ -448,7 +448,11 @@ function readGitDiffSummary(input) {
     }
     const warnings = [];
     const files = [];
-    const diffArgs = ["diff", "--name-status", ...(baseRef ? [baseRef] : [])];
+    const diffArgs = [
+        "diff",
+        "--name-status",
+        ...(baseRef && headRef ? [baseRef, headRef] : baseRef ? [baseRef] : []),
+    ];
     // 1. Read name-status diff
     try {
         const nameStatus = (0,node_child_process__WEBPACK_IMPORTED_MODULE_0__.execFileSync)("git", diffArgs, {
@@ -617,6 +621,7 @@ async function runGitHubAction(env = process.env) {
         "--repo",
         repoRoot,
         ...(config.baseSha ? ["--base", config.baseSha] : []),
+        ...(config.headSha ? ["--head", config.headSha] : []),
     ];
     runCli(cliEntry, checkArgs, repoRoot);
     const checkPath = (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(repoRoot, ".pantheon", "check.json");
@@ -676,7 +681,7 @@ async function runGitHubAction(env = process.env) {
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
         base_sha: config.baseSha ?? null,
         head_sha: config.headSha ?? null,
-        diff_mode: config.baseSha ? "github_pr_base_sha" : "working_tree_fallback",
+        diff_mode: resolveGitHubDiffMode(config.baseSha, config.headSha),
         fail_on: config.failOn,
         artifact_mode: config.artifactMode,
         artifacts_prepared: config.uploadArtifacts,
@@ -721,7 +726,8 @@ async function runGitHubWorkflowAction(env = process.env) {
     const generalConfig = (0,_githubInputParser_js__WEBPACK_IMPORTED_MODULE_6__/* .parseGitHubActionConfig */ .ZP)(env);
     const diff = (0,_diffWorkflow_gitDiffReader_js__WEBPACK_IMPORTED_MODULE_11__/* .readGitDiffSummary */ .S)({
         repoRoot,
-        baseRef: generalConfig.baseSha ?? ""
+        baseRef: generalConfig.baseSha ?? "",
+        headRef: generalConfig.headSha,
     });
     const changedPaths = (0,_diffWorkflow_gitDiffReader_js__WEBPACK_IMPORTED_MODULE_11__/* .extractChangedFilePaths */ ._)(diff);
     const gateResult = (0,_policy_contractGateEvaluator_js__WEBPACK_IMPORTED_MODULE_10__/* .evaluateContractGate */ .n)({
@@ -789,7 +795,7 @@ async function runGitHubGateAction(env, gateResult, config) {
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
         base_sha: config.baseSha ?? null,
         head_sha: config.headSha ?? null,
-        diff_mode: config.baseSha ? "github_pr_base_sha" : "working_tree_fallback",
+        diff_mode: resolveGitHubDiffMode(config.baseSha, config.headSha),
         fail_on: config.failOn,
         artifact_mode: config.artifactMode,
         artifacts_prepared: true,
@@ -942,6 +948,13 @@ function resolveCliEntryPath(env) {
 }
 function repeatFlag(flag, values) {
     return values.flatMap(value => [flag, value]);
+}
+function resolveGitHubDiffMode(baseSha, headSha) {
+    if (baseSha && headSha)
+        return "github_pr_base_head_sha";
+    if (baseSha)
+        return "github_pr_base_sha";
+    return "working_tree_fallback";
 }
 function logSummary(result) {
     console.log(`[Pantheon Action] Verdict: ${result.check.verdict}`);
@@ -1263,6 +1276,7 @@ async function runGitHubChangeAction(env = process.env) {
         "--change-id",
         inputs.changeId,
         ...(inputs.baseSha ? ["--base", inputs.baseSha] : []),
+        ...(inputs.headSha ? ["--head", inputs.headSha] : []),
     ];
     const cliResult = runCli(cliEntry, checkArgs, repoRoot);
     const checkPath = (0,_change_changeArtifactLayout_js__WEBPACK_IMPORTED_MODULE_3__/* .getChangeCheckPath */ .i3)(repoRoot, inputs.changeId);
@@ -1336,7 +1350,11 @@ async function runGitHubChangeAction(env = process.env) {
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
         base_sha: inputs.baseSha ?? null,
         head_sha: inputs.headSha ?? null,
-        diff_mode: inputs.baseSha ? "github_pr_base_sha" : "working_tree_fallback",
+        diff_mode: inputs.baseSha && inputs.headSha
+            ? "github_pr_base_head_sha"
+            : inputs.baseSha
+                ? "github_pr_base_sha"
+                : "working_tree_fallback",
         fail_on: inputs.failOn,
         artifact_mode: inputs.artifactMode,
         artifacts_prepared: inputs.uploadArtifacts,
@@ -24235,6 +24253,7 @@ function cmdRepair(args) {
                 repoRoot: getFlag(args, "repo") ?? ".",
                 repairId: requireRepairId(args, getFlag(args, "repo") ?? "."),
                 baseRef: getFlag(args, "base"),
+                headRef: getFlag(args, "head"),
                 diffJsonPath: getFlag(args, "diff-json"),
             });
             return;
@@ -24492,6 +24511,7 @@ function cmdRepairCheck(input) {
     const diff = readRepairDiff({
         repoRoot,
         baseRef: input.baseRef,
+        headRef: input.headRef,
         diffJsonPath: input.diffJsonPath,
         changedFilesOverride: input.changedFilesOverride,
     });
@@ -24844,6 +24864,7 @@ function readRepairDiff(input) {
     return (0,gitDiffReader/* readGitDiffSummary */.S)({
         repoRoot: input.repoRoot,
         baseRef: input.baseRef ?? "",
+        headRef: input.headRef,
         changedFilesOverride: input.changedFilesOverride,
     });
 }
@@ -25355,6 +25376,7 @@ async function runGitHubRepairAction(env = process.env) {
                 repoRoot,
                 repairId,
                 baseRef: inputs.baseSha,
+                headRef: inputs.headSha,
                 sourceOverride: "github_action",
                 prNumber: prContext?.prNumber,
                 prBaseSha: inputs.baseSha,
@@ -25370,6 +25392,7 @@ async function runGitHubRepairAction(env = process.env) {
             repoRoot,
             repairId,
             baseRef: inputs.baseSha,
+            headRef: inputs.headSha,
             sourceOverride: "github_action",
             prNumber: prContext?.prNumber,
             prBaseSha: inputs.baseSha,
@@ -25489,7 +25512,11 @@ async function runGitHubRepairAction(env = process.env) {
     (0,external_node_fs_.writeFileSync)((0,external_node_path_.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
         base_sha: inputs.baseSha ?? null,
         head_sha: inputs.headSha ?? null,
-        diff_mode: inputs.baseSha ? "github_pr_base_sha" : "working_tree_fallback",
+        diff_mode: inputs.baseSha && inputs.headSha
+            ? "github_pr_base_head_sha"
+            : inputs.baseSha
+                ? "github_pr_base_sha"
+                : "working_tree_fallback",
         fail_on: inputs.failOn,
         artifact_mode: inputs.artifactMode,
         artifacts_prepared: true,

@@ -17,6 +17,7 @@ export async function runGitHubChangeAction(env = process.env) {
         "--change-id",
         inputs.changeId,
         ...(inputs.baseSha ? ["--base", inputs.baseSha] : []),
+        ...(inputs.headSha ? ["--head", inputs.headSha] : []),
     ];
     const cliResult = runCli(cliEntry, checkArgs, repoRoot);
     const checkPath = getChangeCheckPath(repoRoot, inputs.changeId);
@@ -90,7 +91,11 @@ export async function runGitHubChangeAction(env = process.env) {
     writeFileSync(join(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
         base_sha: inputs.baseSha ?? null,
         head_sha: inputs.headSha ?? null,
-        diff_mode: inputs.baseSha ? "github_pr_base_sha" : "working_tree_fallback",
+        diff_mode: inputs.baseSha && inputs.headSha
+            ? "github_pr_base_head_sha"
+            : inputs.baseSha
+                ? "github_pr_base_sha"
+                : "working_tree_fallback",
         fail_on: inputs.failOn,
         artifact_mode: inputs.artifactMode,
         artifacts_prepared: inputs.uploadArtifacts,

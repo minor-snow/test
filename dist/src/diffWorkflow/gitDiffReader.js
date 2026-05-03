@@ -17,7 +17,7 @@ import { normalizeRepoRelativePath } from "../repoObservation/pathUtils.js";
  * If `changedFilesOverride` is provided, it takes precedence over git.
  */
 export function readGitDiffSummary(input) {
-    const { repoRoot, baseRef, changedFilesOverride } = input;
+    const { repoRoot, baseRef, headRef, changedFilesOverride } = input;
     // Override takes precedence
     if (changedFilesOverride && changedFilesOverride.length > 0) {
         return {
@@ -31,7 +31,11 @@ export function readGitDiffSummary(input) {
     }
     const warnings = [];
     const files = [];
-    const diffArgs = ["diff", "--name-status", ...(baseRef ? [baseRef] : [])];
+    const diffArgs = [
+        "diff",
+        "--name-status",
+        ...(baseRef && headRef ? [baseRef, headRef] : baseRef ? [baseRef] : []),
+    ];
     // 1. Read name-status diff
     try {
         const nameStatus = execFileSync("git", diffArgs, {

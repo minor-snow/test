@@ -7,4 +7,5 @@
 export declare function cmdCheck(input: {
     repoRoot: string;
     baseRef?: string;
+    headRef?: string;
 }): void;

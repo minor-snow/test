@@ -138,7 +138,11 @@ switch (command) {
         break;
     }
     case "check":
-        cmdCheck({ repoRoot: getRepo(), baseRef: getFlag("base") });
+        cmdCheck({
+            repoRoot: getRepo(),
+            baseRef: getFlag("base"),
+            headRef: getFlag("head"),
+        });
         break;
     case "feedback":
         cmdFeedback(getRepo(), getFlagInt("attempt"));

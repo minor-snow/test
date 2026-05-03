@@ -37,6 +37,7 @@ export async function runGitHubAction(env = process.env) {
         "--repo",
         repoRoot,
         ...(config.baseSha ? ["--base", config.baseSha] : []),
+        ...(config.headSha ? ["--head", config.headSha] : []),
     ];
     runCli(cliEntry, checkArgs, repoRoot);
     const checkPath = join(repoRoot, ".pantheon", "check.json");
@@ -96,7 +97,7 @@ export async function runGitHubAction(env = process.env) {
     writeFileSync(join(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
         base_sha: config.baseSha ?? null,
         head_sha: config.headSha ?? null,
-        diff_mode: config.baseSha ? "github_pr_base_sha" : "working_tree_fallback",
+        diff_mode: resolveGitHubDiffMode(config.baseSha, config.headSha),
         fail_on: config.failOn,
         artifact_mode: config.artifactMode,
         artifacts_prepared: config.uploadArtifacts,
@@ -141,7 +142,8 @@ export async function runGitHubWorkflowAction(env = process.env) {
     const generalConfig = parseGitHubActionConfig(env);
     const diff = readGitDiffSummary({
         repoRoot,
-        baseRef: generalConfig.baseSha ?? ""
+        baseRef: generalConfig.baseSha ?? "",
+        headRef: generalConfig.headSha,
     });
     const changedPaths = extractChangedFilePaths(diff);
     const gateResult = evaluateContractGate({
@@ -209,7 +211,7 @@ async function runGitHubGateAction(env, gateResult, config) {
     writeFileSync(join(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
         base_sha: config.baseSha ?? null,
         head_sha: config.headSha ?? null,
-        diff_mode: config.baseSha ? "github_pr_base_sha" : "working_tree_fallback",
+        diff_mode: resolveGitHubDiffMode(config.baseSha, config.headSha),
         fail_on: config.failOn,
         artifact_mode: config.artifactMode,
         artifacts_prepared: true,
@@ -362,6 +364,13 @@ function resolveCliEntryPath(env) {
 }
 function repeatFlag(flag, values) {
     return values.flatMap(value => [flag, value]);
+}
+function resolveGitHubDiffMode(baseSha, headSha) {
+    if (baseSha && headSha)
+        return "github_pr_base_head_sha";
+    if (baseSha)
+        return "github_pr_base_sha";
+    return "working_tree_fallback";
 }
 function logSummary(result) {
     console.log(`[Pantheon Action] Verdict: ${result.check.verdict}`);
