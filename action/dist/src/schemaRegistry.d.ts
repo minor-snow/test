@@ -182,10 +182,10 @@ declare const IssueV010Schema: z.ZodObject<{
     target_block_id: z.ZodString;
     issue_type: z.ZodString;
     severity: z.ZodEnum<{
-        critical: "critical";
         low: "low";
         medium: "medium";
         high: "high";
+        critical: "critical";
     }>;
     message: z.ZodString;
     schema_version: z.ZodLiteral<"issue@0.1.0">;

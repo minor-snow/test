@@ -1,4 +1,4 @@
-import type { GitHubArtifactCollectionResult, GitHubArtifactMode } from "./githubActionTypes.js";
+import type { GitHubArtifactCollectionResult, GitHubArtifactMode, GitHubSanitizerViolation } from "./githubActionTypes.js";
 /**
  * Unified artifact collector for all Pantheon GitHub Action modes.
  */
@@ -18,6 +18,15 @@ export declare function writeGitHubArtifactManifest(input: {
     collection: GitHubArtifactCollectionResult;
     metadata?: Record<string, any>;
 }): void;
+export declare function sanitizeGeneratedGitHubArtifact(input: {
+    target: string;
+    content: string;
+    artifactMode: GitHubArtifactMode;
+}): {
+    content: string;
+    violation: GitHubSanitizerViolation | null;
+    withheld: boolean;
+};
 /** @deprecated use writeGitHubArtifactManifest */
 export declare function writeGitHubRepairSupportArtifacts(input: {
     outputDir: string;

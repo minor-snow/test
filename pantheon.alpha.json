@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "protected": [
+    ".pantheon/**",
+    ".git/**",
+    "node_modules/**",
+    ".github/workflows/**"
+  ],
+  "review_required": [
+    "package.json",
+    "src/auth/**",
+    ".pantheon/architecture/**"
+  ],
+  "generated": [
+    "action/dist/**"
+  ],
+  "path_roles": {
+    "action/dist/**": "generated"
+  },
+  "repo_observation": {},
+  "contract_gate": {
+    "enabled": true,
+    "risk_threshold_for_contract": "medium",
+    "low_risk_bypass": {
+      "enabled": true,
+      "docs_only": true,
+      "test_only": "allow_low_risk"
+    },
+    "protected_policy_paths": [
+      "AGENTS.md",
+      "pantheon.json",
+      "pantheon.alpha.json",
+      "pantheon.agent.json",
+      ".pantheon/policy/**",
+      ".pantheon/architecture/**",
+      "CODEOWNERS"
+    ],
+    "contract_artifact_paths": [
+      ".pantheon/repair/runs/**",
+      ".pantheon/change/runs/**"
+    ]
+  }
+}

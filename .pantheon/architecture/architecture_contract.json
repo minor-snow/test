@@ -1,0 +1,41 @@
+{
+  "schema_version": "architecture_contract@0.1.0",
+  "architecture_contract_id": "archc_hosted_matrix_v1",
+  "source_arch_id": "arch_hosted_matrix",
+  "source_document_hash": "hash_hosted_matrix_v1",
+  "revision": 1,
+  "accepted_relations": [],
+  "rejected_claims": [],
+  "unresolved_claims": [],
+  "constraints": [
+    {
+      "constraint_id": "cst_review_auth",
+      "constraint_type": "review_required_path",
+      "constraint_tier": "global",
+      "subject": "Auth",
+      "path_patterns": [
+        "src/auth/**"
+      ],
+      "severity": "review",
+      "source_relation_ids": [],
+      "source_claim_ids": []
+    },
+    {
+      "constraint_id": "cst_forbidden_payment",
+      "constraint_type": "forbidden_path",
+      "constraint_tier": "global",
+      "subject": "Payment",
+      "path_patterns": [
+        "src/payment/**"
+      ],
+      "severity": "blocking",
+      "source_relation_ids": [],
+      "source_claim_ids": []
+    }
+  ],
+  "limitations": [
+    "Hosted verification contract for public GitHub PR scenarios.",
+    "The contract is used to prove base-branch trust during PR evaluation."
+  ],
+  "contract_hash": "arch_contract_hash_hosted_matrix_v1"
+}

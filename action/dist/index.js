@@ -633,27 +633,46 @@ async function runGitHubAction(env = process.env) {
             includeArchitecture: true,
         })
         : prepareActionOutputDir((0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(repoRoot, artifactOutputDirRelative));
-    const exitDecision = (0,_githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_12__/* .decideGitHubActionExit */ .o)({
-        verdict: check.verdict,
-        failOn: config.failOn,
-        sanitizerViolations: artifactCollection.sanitizerViolations.length
-    });
-    if (config.uploadArtifacts) {
-        (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .writeGitHubArtifactManifest */ .Ej)({
-            outputDir: artifactCollection.outputDir,
-            collection: artifactCollection,
-            metadata: { type: "boundary" },
-        });
-    }
     const comment = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderGitHubPrComment */ .z3)(check);
     const summary = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderGitHubStepSummary */ .Qr)(check, {
         baseSha: config.baseSha,
         headSha: config.headSha,
     });
+    const sanitizedComment = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
+        target: "pr_comment.md",
+        content: comment.markdown,
+        artifactMode: config.artifactMode,
+    });
+    const sanitizedSummary = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
+        target: "step_summary.md",
+        content: summary.markdown,
+        artifactMode: config.artifactMode,
+    });
+    const generatedViolations = [sanitizedComment.violation, sanitizedSummary.violation]
+        .filter((violation) => violation !== null);
+    const finalArtifactCollection = generatedViolations.length > 0 || sanitizedComment.withheld || sanitizedSummary.withheld
+        ? {
+            ...artifactCollection,
+            withheldArtifacts: [
+                ...artifactCollection.withheldArtifacts,
+                ...(sanitizedComment.withheld ? ["pr_comment.md"] : []),
+                ...(sanitizedSummary.withheld ? ["step_summary.md"] : []),
+            ],
+            sanitizerViolations: [
+                ...artifactCollection.sanitizerViolations,
+                ...generatedViolations,
+            ],
+        }
+        : artifactCollection;
+    const exitDecision = (0,_githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_12__/* .decideGitHubActionExit */ .o)({
+        verdict: check.verdict,
+        failOn: config.failOn,
+        sanitizerViolations: finalArtifactCollection.sanitizerViolations.length
+    });
     const commentPath = (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "pr_comment.md");
     const summaryPath = env.GITHUB_STEP_SUMMARY ? (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.GITHUB_STEP_SUMMARY) : null;
-    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(commentPath, comment.markdown);
-    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "step_summary.md"), summary.markdown);
+    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(commentPath, sanitizedComment.content);
+    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "step_summary.md"), sanitizedSummary.content);
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
         base_sha: config.baseSha ?? null,
         head_sha: config.headSha ?? null,
@@ -662,9 +681,16 @@ async function runGitHubAction(env = process.env) {
         artifact_mode: config.artifactMode,
         artifacts_prepared: config.uploadArtifacts,
     }, null, 2));
+    if (config.uploadArtifacts) {
+        (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .writeGitHubArtifactManifest */ .Ej)({
+            outputDir: artifactCollection.outputDir,
+            collection: finalArtifactCollection,
+            metadata: { type: "boundary" },
+        });
+    }
     if (summaryPath) {
         (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.dirname)(summaryPath), { recursive: true });
-        (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(summaryPath, summary.markdown);
+        (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(summaryPath, sanitizedSummary.content);
     }
     let commentResult = { status: "skipped", reason: "PR comment disabled." };
     if (config.postComment && config.commentMode !== "off") {
@@ -672,7 +698,7 @@ async function runGitHubAction(env = process.env) {
             prContext,
             githubToken: env.GITHUB_TOKEN,
             marker: comment.marker,
-            markdown: comment.markdown,
+            markdown: sanitizedComment.content,
             githubApiUrl: env.GITHUB_API_URL,
         });
     }
@@ -682,7 +708,7 @@ async function runGitHubAction(env = process.env) {
         check,
         exitDecision,
         artifactOutputDir: artifactCollection.outputDir,
-        artifactCollection,
+        artifactCollection: finalArtifactCollection,
         summaryPath,
         commentPath,
         commentResult,
@@ -723,19 +749,60 @@ async function runGitHubGateAction(env, gateResult, config) {
     const prContext = (0,_githubInputParser_js__WEBPACK_IMPORTED_MODULE_6__/* .extractPullRequestContext */ .Lh)(event);
     const artifactOutputDirRelative = "pantheon-report";
     const artifactCollection = prepareActionOutputDir((0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(repoRoot, artifactOutputDirRelative));
+    const comment = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderContractGatePrComment */ .Nr)(gateResult);
+    const summary = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderContractGateStepSummary */ .mZ)(gateResult);
+    const sanitizedComment = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
+        target: "pr_comment.md",
+        content: comment.markdown,
+        artifactMode: config.artifactMode,
+    });
+    const sanitizedSummary = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
+        target: "step_summary.md",
+        content: summary.markdown,
+        artifactMode: config.artifactMode,
+    });
+    const generatedViolations = [sanitizedComment.violation, sanitizedSummary.violation]
+        .filter((violation) => violation !== null);
+    const finalArtifactCollection = generatedViolations.length > 0 || sanitizedComment.withheld || sanitizedSummary.withheld
+        ? {
+            ...artifactCollection,
+            withheldArtifacts: [
+                ...artifactCollection.withheldArtifacts,
+                ...(sanitizedComment.withheld ? ["pr_comment.md"] : []),
+                ...(sanitizedSummary.withheld ? ["step_summary.md"] : []),
+            ],
+            sanitizerViolations: [
+                ...artifactCollection.sanitizerViolations,
+                ...generatedViolations,
+            ],
+        }
+        : artifactCollection;
     const exitDecision = (0,_githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_12__/* .decideGitHubActionExit */ .o)({
         verdict: gateResult.verdict,
         failOn: config.failOn,
-        sanitizerViolations: 0
+        sanitizerViolations: finalArtifactCollection.sanitizerViolations.length
     });
-    const comment = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderContractGatePrComment */ .Nr)(gateResult);
-    const summary = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderContractGateStepSummary */ .mZ)(gateResult);
     const commentPath = (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "pr_comment.md");
     const summaryPath = env.GITHUB_STEP_SUMMARY ? (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.GITHUB_STEP_SUMMARY) : null;
-    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(commentPath, comment.markdown);
+    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(commentPath, sanitizedComment.content);
+    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "step_summary.md"), sanitizedSummary.content);
+    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
+        base_sha: config.baseSha ?? null,
+        head_sha: config.headSha ?? null,
+        diff_mode: config.baseSha ? "github_pr_base_sha" : "working_tree_fallback",
+        fail_on: config.failOn,
+        artifact_mode: config.artifactMode,
+        artifacts_prepared: true,
+        gate_short_circuit: true,
+    }, null, 2));
+    (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .writeGitHubArtifactManifest */ .Ej)({
+        outputDir: artifactCollection.outputDir,
+        collection: finalArtifactCollection,
+        metadata: { type: "contract_gate" },
+    });
     if (summaryPath) {
         (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.dirname)(summaryPath), { recursive: true });
-        (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(summaryPath, summary.markdown);
+        (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(summaryPath, sanitizedSummary.content);
     }
     let commentResult = { status: "skipped", reason: "PR comment disabled." };
     if (config.postComment && config.commentMode !== "off") {
@@ -743,7 +810,7 @@ async function runGitHubGateAction(env, gateResult, config) {
             prContext,
             githubToken: env.GITHUB_TOKEN,
             marker: comment.marker,
-            markdown: comment.markdown,
+            markdown: sanitizedComment.content,
             githubApiUrl: env.GITHUB_API_URL,
         });
     }
@@ -753,7 +820,7 @@ async function runGitHubGateAction(env, gateResult, config) {
         gateResult,
         exitDecision,
         artifactOutputDir: artifactCollection.outputDir,
-        artifactCollection,
+        artifactCollection: finalArtifactCollection,
         summaryPath,
         commentPath,
         commentResult,
@@ -979,6 +1046,7 @@ function writeOutputValue(outputPath, key, value) {
 
 /* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
 /* harmony export */   Ej: () => (/* binding */ writeGitHubArtifactManifest),
+/* harmony export */   kU: () => (/* binding */ sanitizeGeneratedGitHubArtifact),
 /* harmony export */   xH: () => (/* binding */ collectGitHubActionArtifacts)
 /* harmony export */ });
 /* unused harmony exports writeGitHubRepairSupportArtifacts, collectGitHubRepairArtifacts */
@@ -1096,6 +1164,32 @@ function writeGitHubArtifactManifest(input) {
     const { outputDir, ...portableManifest } = manifest;
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(input.outputDir, "artifact_manifest.json"), JSON.stringify(portableManifest, null, 2));
 }
+function sanitizeGeneratedGitHubArtifact(input) {
+    if (input.artifactMode === "debug") {
+        return {
+            content: input.content,
+            violation: null,
+            withheld: false,
+        };
+    }
+    const sanitized = (0,_artifacts_artifactSanitizer_js__WEBPACK_IMPORTED_MODULE_3__/* .sanitizeArtifact */ .k)(input.content, "public");
+    if (sanitized.clean) {
+        return {
+            content: input.content,
+            violation: null,
+            withheld: false,
+        };
+    }
+    return {
+        content: placeholderArtifactContent(input.target, "text"),
+        violation: {
+            file: input.target,
+            count: sanitized.violations.length,
+            messages: sanitized.violations.map(v => v.message),
+        },
+        withheld: true,
+    };
+}
 /** @deprecated use writeGitHubArtifactManifest */
 function writeGitHubRepairSupportArtifacts(input) {
     writeFileSync(join(input.outputDir, "step_summary.md"), input.summaryMarkdown);
@@ -1183,18 +1277,6 @@ async function runGitHubChangeAction(env = process.env) {
             includeArchitecture: true,
         })
         : prepareActionOutputDir((0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(repoRoot, artifactOutputDirRelative));
-    if (inputs.uploadArtifacts) {
-        (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_5__/* .writeGitHubArtifactManifest */ .Ej)({
-            outputDir: artifactCollection.outputDir,
-            collection: artifactCollection,
-            metadata: { change_id: inputs.changeId, type: "change" },
-        });
-    }
-    const exitDecision = (0,_githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_8__/* .decideGitHubActionExit */ .o)({
-        verdict: check.verdict,
-        sanitizerViolations: artifactCollection.sanitizerViolations.length,
-        failOn: inputs.failOn,
-    });
     const comment = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_6__/* .renderChangePrComment */ .wN)(check, {
         baseSha: inputs.baseSha,
         headSha: inputs.headSha,
@@ -1205,10 +1287,48 @@ async function runGitHubChangeAction(env = process.env) {
         headSha: inputs.headSha,
         type: contract?.change_type ?? "unknown",
     });
+    const sanitizedComment = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_5__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
+        target: "pr_comment.md",
+        content: comment.markdown,
+        artifactMode: inputs.artifactMode,
+    });
+    const sanitizedSummary = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_5__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
+        target: "step_summary.md",
+        content: summary.markdown,
+        artifactMode: inputs.artifactMode,
+    });
+    const generatedViolations = [sanitizedComment.violation, sanitizedSummary.violation]
+        .filter((violation) => violation !== null);
+    const finalArtifactCollection = generatedViolations.length > 0 || sanitizedComment.withheld || sanitizedSummary.withheld
+        ? {
+            ...artifactCollection,
+            withheldArtifacts: [
+                ...artifactCollection.withheldArtifacts,
+                ...(sanitizedComment.withheld ? ["pr_comment.md"] : []),
+                ...(sanitizedSummary.withheld ? ["step_summary.md"] : []),
+            ],
+            sanitizerViolations: [
+                ...artifactCollection.sanitizerViolations,
+                ...generatedViolations,
+            ],
+        }
+        : artifactCollection;
+    if (inputs.uploadArtifacts) {
+        (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_5__/* .writeGitHubArtifactManifest */ .Ej)({
+            outputDir: artifactCollection.outputDir,
+            collection: finalArtifactCollection,
+            metadata: { change_id: inputs.changeId, type: "change" },
+        });
+    }
+    const exitDecision = (0,_githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_8__/* .decideGitHubActionExit */ .o)({
+        verdict: check.verdict,
+        sanitizerViolations: finalArtifactCollection.sanitizerViolations.length,
+        failOn: inputs.failOn,
+    });
     const commentPath = (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "pr_comment.md");
     const summaryPath = env.GITHUB_STEP_SUMMARY ? (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.GITHUB_STEP_SUMMARY) : null;
-    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(commentPath, comment.markdown);
-    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "step_summary.md"), summary.markdown);
+    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(commentPath, sanitizedComment.content);
+    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "step_summary.md"), sanitizedSummary.content);
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
         base_sha: inputs.baseSha ?? null,
         head_sha: inputs.headSha ?? null,
@@ -1223,7 +1343,7 @@ async function runGitHubChangeAction(env = process.env) {
     }, null, 2));
     if (summaryPath) {
         (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.dirname)(summaryPath), { recursive: true });
-        (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(summaryPath, summary.markdown);
+        (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(summaryPath, sanitizedSummary.content);
     }
     let commentResult = { status: "skipped", reason: "PR comment disabled." };
     if (inputs.postComment && inputs.commentMode !== "off") {
@@ -1231,7 +1351,7 @@ async function runGitHubChangeAction(env = process.env) {
             prContext,
             githubToken: env.GITHUB_TOKEN,
             marker: comment.marker,
-            markdown: comment.markdown,
+            markdown: sanitizedComment.content,
             githubApiUrl: env.GITHUB_API_URL,
         });
     }
@@ -1243,7 +1363,7 @@ async function runGitHubChangeAction(env = process.env) {
         changeType: contract?.change_type ?? "unknown",
         exitDecision,
         artifactOutputDir: artifactCollection.outputDir,
-        artifactCollection,
+        artifactCollection: finalArtifactCollection,
         summaryPath,
         commentPath,
         commentResult,
@@ -25259,44 +25379,6 @@ async function runGitHubRepairAction(env = process.env) {
         artifactMode: inputs.artifactMode,
         includeArchitecture: true,
     });
-    (0,githubArtifactCollector/* writeGitHubArtifactManifest */.Ej)({
-        outputDir: artifactCollection.outputDir,
-        collection: artifactCollection,
-        metadata: { repair_id: repairId, type: "repair", verdict },
-    });
-    if (artifactCollection.sanitizerViolations.length > 0) {
-        const governanceResult = tryAppendGovernanceEvent(repoRoot, {
-            schema_version: "pantheon_governance_event@0.1.0",
-            event_id: `gov_${repairId}_github_sanitizer_${Date.now().toString(36)}`,
-            timestamp: new Date().toISOString(),
-            source: "github_action",
-            event_type: "artifact_sanitizer_violation",
-            repair_id: repairId,
-            contract_revision: contract?.revision,
-            pr: prContext ? {
-                provider: "github",
-                number: prContext.prNumber,
-                base_sha: inputs.baseSha,
-                head_sha: inputs.headSha,
-            } : undefined,
-            verdict: "fail",
-            attention_level: "urgent",
-            sanitizer_violations: artifactCollection.sanitizerViolations.length,
-            artifact_dir: artifactCollection.outputDirRelative,
-            reasons: [{
-                    kind: "artifact_sanitizer_violation",
-                    action: "block_merge",
-                }],
-        });
-        if (!governanceResult.ok) {
-            console.warn(`[Pantheon Repair Action] Failed to record governance event: ${governanceResult.message}`);
-        }
-    }
-    const exitDecision = (0,githubExitPolicy/* decideGitHubActionExit */.o)({
-        verdict,
-        sanitizerViolations: artifactCollection.sanitizerViolations.length,
-        failOn: inputs.failOn,
-    });
     const preliminaryResult = {
         inputs,
         prContext,
@@ -25317,14 +25399,82 @@ async function runGitHubRepairAction(env = process.env) {
         repairFeedbackPath: (0,external_node_fs_.existsSync)((0,external_node_path_.join)(artifactCollection.outputDir, "repair_feedback.md"))
             ? (0,external_node_path_.join)(artifactCollection.outputDir, "repair_feedback.md")
             : null,
-        exitDecision,
+        exitDecision: {
+            shouldFail: false,
+            matchedConditions: [],
+            reason: "Pre-sanitization preview only.",
+        },
         commentResult: { status: "skipped", reason: "PR comment not attempted yet." },
     };
     const summary = (0,githubCommentRenderer/* renderGitHubRepairStepSummary */.JP)(preliminaryResult);
     // Manifest handled
     const comment = (0,githubCommentRenderer/* renderGitHubRepairComment */._Q)(preliminaryResult);
-    (0,external_node_fs_.writeFileSync)(preliminaryResult.commentPath, comment.markdown);
-    (0,external_node_fs_.writeFileSync)((0,external_node_path_.join)(artifactCollection.outputDir, "step_summary.md"), summary.markdown);
+    const sanitizedComment = (0,githubArtifactCollector/* sanitizeGeneratedGitHubArtifact */.kU)({
+        target: "pr_comment.md",
+        content: comment.markdown,
+        artifactMode: inputs.artifactMode,
+    });
+    const sanitizedSummary = (0,githubArtifactCollector/* sanitizeGeneratedGitHubArtifact */.kU)({
+        target: "step_summary.md",
+        content: summary.markdown,
+        artifactMode: inputs.artifactMode,
+    });
+    const generatedViolations = [sanitizedComment.violation, sanitizedSummary.violation]
+        .filter((violation) => violation !== null);
+    const finalArtifactCollection = generatedViolations.length > 0 || sanitizedComment.withheld || sanitizedSummary.withheld
+        ? {
+            ...artifactCollection,
+            withheldArtifacts: [
+                ...artifactCollection.withheldArtifacts,
+                ...(sanitizedComment.withheld ? ["pr_comment.md"] : []),
+                ...(sanitizedSummary.withheld ? ["step_summary.md"] : []),
+            ],
+            sanitizerViolations: [
+                ...artifactCollection.sanitizerViolations,
+                ...generatedViolations,
+            ],
+        }
+        : artifactCollection;
+    if (finalArtifactCollection.sanitizerViolations.length > 0) {
+        const governanceResult = tryAppendGovernanceEvent(repoRoot, {
+            schema_version: "pantheon_governance_event@0.1.0",
+            event_id: `gov_${repairId}_github_sanitizer_${Date.now().toString(36)}`,
+            timestamp: new Date().toISOString(),
+            source: "github_action",
+            event_type: "artifact_sanitizer_violation",
+            repair_id: repairId,
+            contract_revision: contract?.revision,
+            pr: prContext ? {
+                provider: "github",
+                number: prContext.prNumber,
+                base_sha: inputs.baseSha,
+                head_sha: inputs.headSha,
+            } : undefined,
+            verdict: "fail",
+            attention_level: "urgent",
+            sanitizer_violations: finalArtifactCollection.sanitizerViolations.length,
+            artifact_dir: finalArtifactCollection.outputDirRelative,
+            reasons: [{
+                    kind: "artifact_sanitizer_violation",
+                    action: "block_merge",
+                }],
+        });
+        if (!governanceResult.ok) {
+            console.warn(`[Pantheon Repair Action] Failed to record governance event: ${governanceResult.message}`);
+        }
+    }
+    (0,githubArtifactCollector/* writeGitHubArtifactManifest */.Ej)({
+        outputDir: artifactCollection.outputDir,
+        collection: finalArtifactCollection,
+        metadata: { repair_id: repairId, type: "repair", verdict },
+    });
+    const exitDecision = (0,githubExitPolicy/* decideGitHubActionExit */.o)({
+        verdict,
+        sanitizerViolations: finalArtifactCollection.sanitizerViolations.length,
+        failOn: inputs.failOn,
+    });
+    (0,external_node_fs_.writeFileSync)(preliminaryResult.commentPath, sanitizedComment.content);
+    (0,external_node_fs_.writeFileSync)((0,external_node_path_.join)(artifactCollection.outputDir, "step_summary.md"), sanitizedSummary.content);
     (0,external_node_fs_.writeFileSync)((0,external_node_path_.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
         base_sha: inputs.baseSha ?? null,
         head_sha: inputs.headSha ?? null,
@@ -25335,7 +25485,7 @@ async function runGitHubRepairAction(env = process.env) {
     }, null, 2));
     if (preliminaryResult.summaryPath) {
         (0,external_node_fs_.mkdirSync)((0,external_node_path_.dirname)(preliminaryResult.summaryPath), { recursive: true });
-        (0,external_node_fs_.writeFileSync)(preliminaryResult.summaryPath, summary.markdown);
+        (0,external_node_fs_.writeFileSync)(preliminaryResult.summaryPath, sanitizedSummary.content);
     }
     let commentResult = { status: "skipped", reason: "PR comment disabled." };
     if (inputs.postComment) {
@@ -25343,13 +25493,15 @@ async function runGitHubRepairAction(env = process.env) {
             prContext,
             githubToken: env.GITHUB_TOKEN,
             marker: comment.marker,
-            markdown: comment.markdown,
+            markdown: sanitizedComment.content,
             githubApiUrl: env.GITHUB_API_URL,
         });
     }
     // Manifest handled
     return {
         ...preliminaryResult,
+        artifactCollection: finalArtifactCollection,
+        exitDecision,
         commentResult,
     };
 }
@@ -27410,7 +27562,7 @@ function stableSerialize(value) {
 /***/ 812:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__.p + "06df9c76f60f92b8b2ce.ts";
+module.exports = __nccwpck_require__.p + "c6c94b5694c6c702af43.ts";
 
 /***/ }),
 

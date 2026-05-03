@@ -1,5 +1,5 @@
 /**
- * Pantheon CLI
+ * Pantheon CLI [S1-TEST]
  *
  * Usage:
  *   pantheon init
