@@ -4,4 +4,5 @@ const retry = require("retry-lib");
 export async function runWorker(): Promise<void> {
   const q = new Queue();
   await q.process();
+  await q.process();
 }
