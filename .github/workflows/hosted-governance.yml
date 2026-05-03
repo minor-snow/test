@@ -37,39 +37,36 @@ jobs:
 
           {
             echo "scope<<__PANTHEON__"
-            cat <<'EOF'
-src/**
-test/**
-tests/**
-docs/**
-package.json
-AGENTS.md
-pantheon.json
-pantheon.alpha.json
-.pantheon/architecture/**
-EOF
+            printf '%s\n' \
+              'src/**' \
+              'test/**' \
+              'tests/**' \
+              'docs/**' \
+              'package.json' \
+              'AGENTS.md' \
+              'pantheon.json' \
+              'pantheon.alpha.json' \
+              '.pantheon/architecture/**'
             echo "__PANTHEON__"
           } >> "$GITHUB_OUTPUT"
 
           {
             echo "review<<__PANTHEON__"
-            cat <<'EOF'
-src/auth/**
-package.json
-.pantheon/architecture/**
-.github/workflows/**
-EOF
+            printf '%s\n' \
+              'src/auth/**' \
+              'package.json' \
+              '.pantheon/architecture/**' \
+              '.github/workflows/**'
             echo "__PANTHEON__"
           } >> "$GITHUB_OUTPUT"
 
           {
             echo "forbid<<__PANTHEON__"
-            cat <<'EOF'
-.pantheon/audit/**
-.pantheon/reviews/**
-.pantheon/change/**
-.pantheon/repair/**
-EOF
+            printf '%s\n' \
+              '.pantheon/audit/**' \
+              '.pantheon/reviews/**' \
+              '.pantheon/change/**' \
+              '.pantheon/repair/**'
             echo "__PANTHEON__"
           } >> "$GITHUB_OUTPUT"
 
@@ -93,16 +90,12 @@ EOF
               echo "repair_intent=Fix formatting regression in formatValue" >> "$GITHUB_OUTPUT"
               {
                 echo "suspect<<__PANTHEON__"
-                cat <<'EOF'
-src/utils/format.ts
-EOF
+                printf '%s\n' 'src/utils/format.ts'
                 echo "__PANTHEON__"
               } >> "$GITHUB_OUTPUT"
               {
                 echo "failing_tests<<__PANTHEON__"
-                cat <<'EOF'
-tests/utils/format.test.ts
-EOF
+                printf '%s\n' 'tests/utils/format.test.ts'
                 echo "__PANTHEON__"
               } >> "$GITHUB_OUTPUT"
               echo "fail_on=fail,requires_replan,requires_scope_expansion,sanitizer_violation" >> "$GITHUB_OUTPUT"
