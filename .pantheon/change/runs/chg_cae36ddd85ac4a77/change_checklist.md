@@ -1,0 +1,6 @@
+# Change Checklist
+
+Change ID: `chg_cae36ddd85ac4a77`
+
+- [ ] **no_forbidden_access**: Ensure no files in the forbidden bucket are modified.
+- [ ] **adhere_to_non_goals**: Ensure the declared non-goals are strictly avoided.

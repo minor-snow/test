@@ -1,0 +1,28 @@
+{
+  "schema_version": "user_bug_report@0.1.0",
+  "report_id": "seed_bug_format",
+  "reported_by": {
+    "operator_id": "seed"
+  },
+  "summary": "Fix formatting regression in formatValue",
+  "observed_behavior": "formatValue drops separators on edge cases.",
+  "expected_behavior": "formatValue preserves formatting separators.",
+  "evidence": [
+    {
+      "kind": "failing_test",
+      "path": "tests/utils/format.test.ts",
+      "test_name": "formats values consistently"
+    }
+  ],
+  "suspected_files": [
+    {
+      "path": "src/utils/format.ts",
+      "confidence": "high",
+      "reason": "Target formatter implementation"
+    }
+  ],
+  "must_preserve": [
+    "Do not change auth or payment behavior."
+  ],
+  "requested_action": "repair_analysis"
+}

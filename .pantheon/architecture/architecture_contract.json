@@ -1,41 +1,90 @@
 {
   "schema_version": "architecture_contract@0.1.0",
-  "architecture_contract_id": "archc_hosted_matrix_v1",
-  "source_arch_id": "arch_hosted_matrix",
-  "source_document_hash": "hash_hosted_matrix_v1",
+  "architecture_contract_id": "archc_e46351768e6f2dc4",
+  "source_arch_id": "arch_755cbc3be3b419c4",
+  "source_document_hash": "371528e41a7235a2",
   "revision": 1,
-  "accepted_relations": [],
+  "accepted_relations": [
+    {
+      "relation_id": "rel_844e9a4bcddc74bd",
+      "relation_type": "review_required_for",
+      "subject": "Auth",
+      "object": "src/auth/login.ts",
+      "subject_kind": "module",
+      "object_kind": "path_group",
+      "path_patterns": [
+        "src/auth/login.ts"
+      ],
+      "source_claim_ids": [],
+      "evidence_ids": [],
+      "override_ids": [
+        "ovr_1ca707ed73260b2b"
+      ],
+      "confidence": "high",
+      "review_status": "accepted"
+    },
+    {
+      "relation_id": "rel_10d274d05a2c0070",
+      "relation_type": "forbidden_change",
+      "subject": "Billing",
+      "object": "src/payment/billing.ts",
+      "subject_kind": "module",
+      "object_kind": "path_group",
+      "path_patterns": [
+        "src/payment/billing.ts"
+      ],
+      "source_claim_ids": [],
+      "evidence_ids": [],
+      "override_ids": [
+        "ovr_4075351be7e38f2c"
+      ],
+      "confidence": "high",
+      "review_status": "accepted"
+    }
+  ],
   "rejected_claims": [],
-  "unresolved_claims": [],
+  "unresolved_claims": [
+    "claim_68b33cc1b17610b0",
+    "claim_bed4c6386dbc10ba",
+    "claim_ca3f1b342c087611",
+    "claim_d24fe8d1349dcecc"
+  ],
   "constraints": [
     {
-      "constraint_id": "cst_review_auth",
+      "constraint_id": "cst_966889c82987e37a",
       "constraint_type": "review_required_path",
       "constraint_tier": "global",
       "subject": "Auth",
       "path_patterns": [
-        "src/auth/**"
+        "src/auth/login.ts"
       ],
       "severity": "review",
-      "source_relation_ids": [],
+      "source_relation_ids": [
+        "rel_844e9a4bcddc74bd"
+      ],
       "source_claim_ids": []
     },
     {
-      "constraint_id": "cst_forbidden_payment",
+      "constraint_id": "cst_0a9f7602617b5e0c",
       "constraint_type": "forbidden_path",
       "constraint_tier": "global",
-      "subject": "Payment",
+      "subject": "Billing",
       "path_patterns": [
-        "src/payment/**"
+        "src/payment/billing.ts"
       ],
       "severity": "blocking",
-      "source_relation_ids": [],
+      "source_relation_ids": [
+        "rel_10d274d05a2c0070"
+      ],
       "source_claim_ids": []
     }
   ],
   "limitations": [
-    "Hosted verification contract for public GitHub PR scenarios.",
-    "The contract is used to prove base-branch trust during PR evaluation."
+    "Architecture contracts are governance constraints derived from reviewed documentation and repository evidence.",
+    "They do not prove semantic correctness or complete dependency structure.",
+    "Unreviewed claims are advisory only and do not affect verdicts.",
+    "must_not_depend_on enforcement is path-pattern based; no full import/call graph analysis.",
+    "Contextual ownership constraints only apply when the change/repair target matches the owning module."
   ],
-  "contract_hash": "arch_contract_hash_hosted_matrix_v1"
+  "contract_hash": "sha256:6e66a33ebc713b5f4ddea0195fc398138f57fcab81a6a6ca2ece9d1cd218b700"
 }
