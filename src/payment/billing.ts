@@ -7,5 +7,5 @@ try { stripe = require("stripe"); } catch { /* intentionally undeclared */ }
 
 export function processBilling(amount: number): string {
   void stripe;
-  return formatCurrency(amount);
+  return `${formatCurrency(amount)} billed`;
 }
