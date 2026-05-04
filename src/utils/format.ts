@@ -1,5 +1,5 @@
 export function formatCurrency(amount: number): string {
-  return `$${amount.toFixed(2)}`;
+  return `$${amount.toFixed(2)}`.replace(".00", "");
 }
 
 export function authenticate(user: string, pass: string): boolean {
