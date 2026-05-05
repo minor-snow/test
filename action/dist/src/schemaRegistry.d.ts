@@ -52,8 +52,8 @@ declare const ArchitectureDraftV010Schema: z.ZodObject<{
             linked_architecture_blocks: z.ZodOptional<z.ZodArray<z.ZodString>>;
             linked_interface_blocks: z.ZodOptional<z.ZodArray<z.ZodString>>;
             status: z.ZodEnum<{
-                suspect: "suspect";
                 approved: "approved";
+                suspect: "suspect";
                 candidate: "candidate";
                 draft: "draft";
                 revoked: "revoked";
@@ -105,8 +105,8 @@ declare const InterfaceSpecV010Schema: z.ZodObject<{
             linked_architecture_blocks: z.ZodOptional<z.ZodArray<z.ZodString>>;
             linked_interface_blocks: z.ZodOptional<z.ZodArray<z.ZodString>>;
             status: z.ZodEnum<{
-                suspect: "suspect";
                 approved: "approved";
+                suspect: "suspect";
                 candidate: "candidate";
                 draft: "draft";
                 revoked: "revoked";
@@ -158,8 +158,8 @@ declare const ModuleSpecV010Schema: z.ZodObject<{
             linked_architecture_blocks: z.ZodOptional<z.ZodArray<z.ZodString>>;
             linked_interface_blocks: z.ZodOptional<z.ZodArray<z.ZodString>>;
             status: z.ZodEnum<{
-                suspect: "suspect";
                 approved: "approved";
+                suspect: "suspect";
                 candidate: "candidate";
                 draft: "draft";
                 revoked: "revoked";
@@ -182,9 +182,9 @@ declare const IssueV010Schema: z.ZodObject<{
     target_block_id: z.ZodString;
     issue_type: z.ZodString;
     severity: z.ZodEnum<{
-        low: "low";
-        medium: "medium";
         high: "high";
+        medium: "medium";
+        low: "low";
         critical: "critical";
     }>;
     message: z.ZodString;
@@ -246,8 +246,8 @@ declare const OverridePatchV010Schema: z.ZodObject<{
             linked_architecture_blocks: z.ZodOptional<z.ZodArray<z.ZodString>>;
             linked_interface_blocks: z.ZodOptional<z.ZodArray<z.ZodString>>;
             status: z.ZodEnum<{
-                suspect: "suspect";
                 approved: "approved";
+                suspect: "suspect";
                 candidate: "candidate";
                 draft: "draft";
                 revoked: "revoked";
