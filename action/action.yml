@@ -41,6 +41,18 @@ inputs:
     required: false
     default: "public"
     description: "public or debug. Debug includes .pantheon internals."
+  disclosure:
+    required: false
+    default: "minimal"
+    description: "minimal, balanced, or full. Controls PR comment disclosure only."
+  artifact_level:
+    required: false
+    default: "summary"
+    description: "none, summary, or full. Controls how many sanitized artifacts are staged into artifact_dir."
+  log_level:
+    required: false
+    default: "quiet"
+    description: "quiet, info, or debug. Controls workflow log verbosity only."
   comment_mode:
     required: false
     default: "update"
@@ -114,6 +126,9 @@ runs:
         INPUT_POST_COMMENT: ${{ inputs.post_comment }}
         INPUT_UPLOAD_ARTIFACTS: ${{ inputs.upload_artifacts }}
         INPUT_ARTIFACT_MODE: ${{ inputs.artifact_mode }}
+        INPUT_DISCLOSURE: ${{ inputs.disclosure }}
+        INPUT_ARTIFACT_LEVEL: ${{ inputs.artifact_level }}
+        INPUT_LOG_LEVEL: ${{ inputs.log_level }}
         INPUT_COMMENT_MODE: ${{ inputs.comment_mode }}
         INPUT_REPAIR_ID: ${{ inputs.repair_id }}
         INPUT_AGENT_BUG_REPORT: ${{ inputs.agent_bug_report }}

@@ -1,4 +1,4 @@
-import type { GitHubArtifactCollectionResult, GitHubArtifactMode, GitHubSanitizerViolation } from "./githubActionTypes.js";
+import type { GitHubArtifactCollectionResult, GitHubArtifactLevel, GitHubArtifactMode, GitHubSanitizerViolation } from "./githubActionTypes.js";
 /**
  * Unified artifact collector for all Pantheon GitHub Action modes.
  */
@@ -6,6 +6,7 @@ export declare function collectGitHubActionArtifacts(input: {
     repoRoot: string;
     outputDirRelative: string;
     artifactMode: GitHubArtifactMode;
+    artifactLevel?: GitHubArtifactLevel;
     changeId?: string;
     repairId?: string;
     includeArchitecture?: boolean;
@@ -17,6 +18,13 @@ export declare function writeGitHubArtifactManifest(input: {
     outputDir: string;
     collection: GitHubArtifactCollectionResult;
     metadata?: Record<string, any>;
+}): void;
+export declare function writeGitHubVerdictArtifact(input: {
+    outputDir: string;
+    mode: "boundary" | "change" | "repair" | "contract_gate";
+    verdict: string;
+    targetId?: string;
+    extra?: Record<string, unknown>;
 }): void;
 export declare function sanitizeGeneratedGitHubArtifact(input: {
     target: string;
