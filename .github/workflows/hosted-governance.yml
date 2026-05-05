@@ -66,6 +66,7 @@ jobs:
           echo "artifact_mode=public" >> "$GITHUB_OUTPUT"
           echo "post_comment=true" >> "$GITHUB_OUTPUT"
           echo "audit_mode=auto" >> "$GITHUB_OUTPUT"
+          echo "full_disclosure=false" >> "$GITHUB_OUTPUT"
 
           case "$ref" in
             std/s4-*)
@@ -81,6 +82,9 @@ jobs:
               mode="change"
               change_id="chg_301581a3e2a42b6d"
               fail_on="fail,requires_contract,requires_replan,requires_scope_expansion,sanitizer_violation"
+              if [[ "$ref" == *"full-disclosure"* ]]; then
+                echo "full_disclosure=true" >> "$GITHUB_OUTPUT"
+              fi
               ;;
             rep/r2-*)
               mode="repair"
@@ -175,7 +179,8 @@ jobs:
           EOF
 
       - name: Run Pantheon governance gate
-        id: pantheon
+        id: pantheon_default
+        if: steps.scenario.outputs.full_disclosure != 'true'
         uses: ./action
         with:
           mode: ${{ steps.scenario.outputs.mode }}
@@ -193,12 +198,38 @@ jobs:
           post_comment: ${{ steps.scenario.outputs.post_comment }}
           audit_mode: ${{ steps.scenario.outputs.audit_mode }}
 
+      - name: Run Pantheon governance gate (full disclosure)
+        id: pantheon_full
+        if: steps.scenario.outputs.full_disclosure == 'true'
+        uses: ./action
+        with:
+          mode: ${{ steps.scenario.outputs.mode }}
+          change_id: ${{ steps.scenario.outputs.change_id }}
+          repair_id: ${{ steps.scenario.outputs.repair_id }}
+          repair_intent: ${{ steps.scenario.outputs.repair_intent }}
+          suspect: ${{ steps.scenario.outputs.suspect }}
+          failing_tests: ${{ steps.scenario.outputs.failing_tests }}
+          scope: ${{ steps.scenario.outputs.scope }}
+          review: ${{ steps.scenario.outputs.review }}
+          forbid: ${{ steps.scenario.outputs.forbid }}
+          config_path: ${{ steps.scenario.outputs.config_path }}
+          fail_on: ${{ steps.scenario.outputs.fail_on }}
+          artifact_mode: ${{ steps.scenario.outputs.artifact_mode }}
+          disclosure: full
+          artifact_level: full
+          log_level: info
+          post_comment: ${{ steps.scenario.outputs.post_comment }}
+          audit_mode: ${{ steps.scenario.outputs.audit_mode }}
+
       - name: Resolve artifact dir
         if: always()
         id: artifacts
         shell: bash
         run: |
-          dir="${{ steps.pantheon.outputs.artifact_dir }}"
+          dir="${{ steps.pantheon_default.outputs.artifact_dir }}"
+          if [ -z "$dir" ]; then
+            dir="${{ steps.pantheon_full.outputs.artifact_dir }}"
+          fi
           if [ -z "$dir" ]; then
             if [ -d pantheon-repair-report ]; then
               dir="pantheon-repair-report"

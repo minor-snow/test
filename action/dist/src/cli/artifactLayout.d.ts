@@ -1,16 +1,7 @@
 /**
- * P24: Artifact Layout
+ * Backward-compatible re-export for legacy CLI imports.
  *
- * Canonical .pantheon/ directory structure.
- * Public artifacts go in .pantheon/ root.
- * Internal machine objects go in .pantheon/internal/.
+ * New shared code should import from `src/pantheonPaths.ts` directly so core state layout does not
+ * depend on the CLI namespace.
  */
-import type { PublicArtifactPaths, InternalArtifactPaths } from "./types.js";
-export declare function resolvePantheonDir(repoRoot: string): string;
-export declare function ensurePantheonDirs(repoRoot: string): void;
-export declare function publicPaths(repoRoot: string): PublicArtifactPaths;
-export declare function internalPaths(repoRoot: string): InternalArtifactPaths;
-/**
- * Relative path from repo root for display purposes.
- */
-export declare function relativePantheonPath(fullPath: string, repoRoot: string): string;
+export { ensurePantheonDirs, internalPaths, publicPaths, relativePantheonPath, resolvePantheonDir, type InternalArtifactPaths, type PublicArtifactPaths, } from "../pantheonPaths.js";

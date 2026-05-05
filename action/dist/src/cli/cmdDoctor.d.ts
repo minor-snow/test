@@ -1,1 +1,3 @@
-export declare function cmdDoctor(repoRoot?: string): void;
+export declare function cmdDoctor(repoRoot?: string, options?: {
+    json?: boolean;
+}): void;

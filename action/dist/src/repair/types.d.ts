@@ -26,9 +26,9 @@ export type BugEvidence = z.infer<typeof bugEvidenceSchema>;
 export declare const suspectedFileSchema: z.ZodObject<{
     path: z.ZodString;
     confidence: z.ZodEnum<{
-        low: "low";
-        medium: "medium";
         high: "high";
+        medium: "medium";
+        low: "low";
     }>;
     reason: z.ZodString;
 }, z.core.$strip>;
@@ -58,9 +58,9 @@ export declare const agentBugReportSchema: z.ZodObject<{
     suspected_files: z.ZodArray<z.ZodObject<{
         path: z.ZodString;
         confidence: z.ZodEnum<{
-            low: "low";
-            medium: "medium";
             high: "high";
+            medium: "medium";
+            low: "low";
         }>;
         reason: z.ZodString;
     }, z.core.$strip>>;
@@ -92,9 +92,9 @@ export declare const userBugReportSchema: z.ZodObject<{
     suspected_files: z.ZodArray<z.ZodObject<{
         path: z.ZodString;
         confidence: z.ZodEnum<{
-            low: "low";
-            medium: "medium";
             high: "high";
+            medium: "medium";
+            low: "low";
         }>;
         reason: z.ZodString;
     }, z.core.$strip>>;
@@ -239,10 +239,10 @@ export declare const humanAuditDecisionSchema: z.ZodObject<{
         post_repair: "post_repair";
     }>;
     decision: z.ZodEnum<{
-        request_scope_expansion: "request_scope_expansion";
-        keep_for_human_review: "keep_for_human_review";
         needs_more_evidence: "needs_more_evidence";
+        request_scope_expansion: "request_scope_expansion";
         approve_repair: "approve_repair";
+        keep_for_human_review: "keep_for_human_review";
         accept_report: "accept_report";
         reject_report: "reject_report";
         mark_duplicate: "mark_duplicate";
