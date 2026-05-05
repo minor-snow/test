@@ -9,3 +9,5 @@ export function processBilling(amount: number): string {
   void stripe;
   return formatCurrency(amount);
 }
+
+export const architectureForbiddenSmoke = 'd3';
