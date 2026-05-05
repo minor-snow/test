@@ -67,6 +67,9 @@ jobs:
           echo "post_comment=true" >> "$GITHUB_OUTPUT"
           echo "audit_mode=auto" >> "$GITHUB_OUTPUT"
           echo "full_disclosure=false" >> "$GITHUB_OUTPUT"
+          if [[ "$ref" == *"full-disclosure"* ]]; then
+            echo "full_disclosure=true" >> "$GITHUB_OUTPUT"
+          fi
 
           case "$ref" in
             std/s4-*)
@@ -82,9 +85,6 @@ jobs:
               mode="change"
               change_id="chg_ed1c4bbf7e6138e8"
               fail_on="fail,requires_contract,requires_replan,requires_scope_expansion,sanitizer_violation"
-              if [[ "$ref" == *"full-disclosure"* ]]; then
-                echo "full_disclosure=true" >> "$GITHUB_OUTPUT"
-              fi
               ;;
             rep/r2-*)
               mode="repair"
