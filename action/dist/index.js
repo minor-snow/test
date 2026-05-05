@@ -78,7 +78,7 @@ module.exports = function (data, opts) {
 /* harmony import */ var node_fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(node_fs__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var node_path__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(760);
 /* harmony import */ var node_path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(node_path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _cli_artifactLayout_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(932);
+/* harmony import */ var _pantheonPaths_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(618);
 /**
  * P30: Architecture Artifact Layout
  *
@@ -107,7 +107,7 @@ module.exports = function (data, opts) {
 // Public API
 // ---------------------------------------------------------------------------
 function resolveArchitectureDir(repoRoot) {
-    return (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)((0,_cli_artifactLayout_js__WEBPACK_IMPORTED_MODULE_2__/* .resolvePantheonDir */ .NJ)(repoRoot), "architecture");
+    return (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)((0,_pantheonPaths_js__WEBPACK_IMPORTED_MODULE_2__/* .resolvePantheonDir */ .NJ)(repoRoot), "architecture");
 }
 function ensureArchitectureDirs(repoRoot) {
     ensurePantheonDirs(repoRoot);
@@ -331,80 +331,6 @@ function getChangeIndexStorePath(repoRoot) {
 
 /***/ }),
 
-/***/ 932:
-/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
-
-/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
-/* harmony export */   NJ: () => (/* binding */ resolvePantheonDir),
-/* harmony export */   O2: () => (/* binding */ ensurePantheonDirs),
-/* harmony export */   gT: () => (/* binding */ publicPaths)
-/* harmony export */ });
-/* unused harmony exports internalPaths, relativePantheonPath */
-/* harmony import */ var node_path__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(760);
-/* harmony import */ var node_path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(node_path__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var node_fs__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(24);
-/* harmony import */ var node_fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(node_fs__WEBPACK_IMPORTED_MODULE_1__);
-/**
- * P24: Artifact Layout
- *
- * Canonical .pantheon/ directory structure.
- * Public artifacts go in .pantheon/ root.
- * Internal machine objects go in .pantheon/internal/.
- */
-
-
-const PANTHEON_DIR = ".pantheon";
-const INTERNAL_DIR = "internal";
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-function resolvePantheonDir(repoRoot) {
-    return (0,node_path__WEBPACK_IMPORTED_MODULE_0__.join)(repoRoot, PANTHEON_DIR);
-}
-function ensurePantheonDirs(repoRoot) {
-    const pantheonDir = resolvePantheonDir(repoRoot);
-    (0,node_fs__WEBPACK_IMPORTED_MODULE_1__.mkdirSync)(pantheonDir, { recursive: true });
-    (0,node_fs__WEBPACK_IMPORTED_MODULE_1__.mkdirSync)((0,node_path__WEBPACK_IMPORTED_MODULE_0__.join)(pantheonDir, INTERNAL_DIR), { recursive: true });
-}
-function publicPaths(repoRoot) {
-    const dir = resolvePantheonDir(repoRoot);
-    return {
-        dir,
-        task: (0,node_path__WEBPACK_IMPORTED_MODULE_0__.join)(dir, "task.md"),
-        scope: (0,node_path__WEBPACK_IMPORTED_MODULE_0__.join)(dir, "scope.md"),
-        report: (0,node_path__WEBPACK_IMPORTED_MODULE_0__.join)(dir, "report.md"),
-        feedback: (0,node_path__WEBPACK_IMPORTED_MODULE_0__.join)(dir, "feedback.md"),
-        check: (0,node_path__WEBPACK_IMPORTED_MODULE_0__.join)(dir, "check.json"),
-    };
-}
-function internalPaths(repoRoot) {
-    const dir = join(resolvePantheonDir(repoRoot), INTERNAL_DIR);
-    return {
-        dir,
-        observations: join(dir, "observations.json"),
-        contract: join(dir, "change_contract_lite.json"),
-        scope: join(dir, "agent_scope.json"),
-        verification: join(dir, "diff_verification.json"),
-        feedback: join(dir, "agent_feedback.json"),
-    };
-}
-/**
- * Relative path from repo root for display purposes.
- */
-function relativePantheonPath(fullPath, repoRoot) {
-    let prefix = join(repoRoot, "").replace(/\\/g, "/");
-    if (!prefix.endsWith("/"))
-        prefix += "/";
-    const normalized = fullPath.replace(/\\/g, "/");
-    if (normalized.startsWith(prefix)) {
-        return normalized.slice(prefix.length);
-    }
-    return normalized;
-}
-
-
-/***/ }),
-
 /***/ 254:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
@@ -577,8 +503,8 @@ __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var _githubCommentClient_js__WEBPACK_IMPORTED_MODULE_13__ = __nccwpck_require__(379);
 /* harmony import */ var _githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_12__ = __nccwpck_require__(298);
 /* harmony import */ var _githubInputParser_js__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(497);
-/* harmony import */ var _githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__ = __nccwpck_require__(978);
-/* harmony import */ var _githubRepairRunner_js__WEBPACK_IMPORTED_MODULE_8__ = __nccwpck_require__(944);
+/* harmony import */ var _githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__ = __nccwpck_require__(597);
+/* harmony import */ var _githubRepairRunner_js__WEBPACK_IMPORTED_MODULE_8__ = __nccwpck_require__(642);
 /* harmony import */ var _githubChangeRunner_js__WEBPACK_IMPORTED_MODULE_9__ = __nccwpck_require__(990);
 /* harmony import */ var _policy_contractGateEvaluator_js__WEBPACK_IMPORTED_MODULE_10__ = __nccwpck_require__(841);
 /* harmony import */ var _diffWorkflow_gitDiffReader_js__WEBPACK_IMPORTED_MODULE_11__ = __nccwpck_require__(254);
@@ -635,13 +561,18 @@ async function runGitHubAction(env = process.env) {
             repoRoot,
             outputDirRelative: artifactOutputDirRelative,
             artifactMode: config.artifactMode,
+            artifactLevel: config.artifactLevel,
             includeArchitecture: true,
         })
         : prepareActionOutputDir((0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(repoRoot, artifactOutputDirRelative));
-    const comment = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderGitHubPrComment */ .z3)(check);
+    const comment = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderGitHubPrComment */ .z3)(check, {
+        disclosure: config.disclosure,
+    });
     const summary = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderGitHubStepSummary */ .Qr)(check, {
         baseSha: config.baseSha,
         headSha: config.headSha,
+    }, {
+        disclosure: config.disclosure,
     });
     const sanitizedComment = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
         target: "pr_comment.md",
@@ -678,15 +609,30 @@ async function runGitHubAction(env = process.env) {
     const summaryPath = env.GITHUB_STEP_SUMMARY ? (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.GITHUB_STEP_SUMMARY) : null;
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(commentPath, sanitizedComment.content);
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "step_summary.md"), sanitizedSummary.content);
-    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
-        base_sha: config.baseSha ?? null,
-        head_sha: config.headSha ?? null,
-        diff_mode: resolveGitHubDiffMode(config.baseSha, config.headSha),
-        fail_on: config.failOn,
-        artifact_mode: config.artifactMode,
-        artifacts_prepared: config.uploadArtifacts,
-    }, null, 2));
-    if (config.uploadArtifacts) {
+    if (config.artifactLevel !== "none") {
+        (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "summary.md"), sanitizedSummary.content);
+        (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .writeGitHubVerdictArtifact */ .gg)({
+            outputDir: artifactCollection.outputDir,
+            mode: "boundary",
+            verdict: check.verdict,
+            extra: {
+                disclosure: config.disclosure,
+                artifact_level: config.artifactLevel,
+            },
+        });
+        (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
+            base_sha: config.baseSha ?? null,
+            head_sha: config.headSha ?? null,
+            diff_mode: resolveGitHubDiffMode(config.baseSha, config.headSha),
+            fail_on: config.failOn,
+            artifact_mode: config.artifactMode,
+            artifact_level: config.artifactLevel,
+            disclosure: config.disclosure,
+            log_level: config.logLevel,
+            artifacts_prepared: config.uploadArtifacts,
+        }, null, 2));
+    }
+    if (config.uploadArtifacts && config.artifactLevel !== "none") {
         (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .writeGitHubArtifactManifest */ .Ej)({
             outputDir: artifactCollection.outputDir,
             collection: finalArtifactCollection,
@@ -755,8 +701,12 @@ async function runGitHubGateAction(env, gateResult, config) {
     const prContext = (0,_githubInputParser_js__WEBPACK_IMPORTED_MODULE_6__/* .extractPullRequestContext */ .Lh)(event);
     const artifactOutputDirRelative = "pantheon-report";
     const artifactCollection = prepareActionOutputDir((0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(repoRoot, artifactOutputDirRelative));
-    const comment = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderContractGatePrComment */ .Nr)(gateResult);
-    const summary = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderContractGateStepSummary */ .mZ)(gateResult);
+    const comment = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderContractGatePrComment */ .Nr)(gateResult, {
+        disclosure: config.disclosure,
+    });
+    const summary = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_7__/* .renderContractGateStepSummary */ .mZ)(gateResult, {
+        disclosure: config.disclosure,
+    });
     const sanitizedComment = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
         target: "pr_comment.md",
         content: comment.markdown,
@@ -792,20 +742,37 @@ async function runGitHubGateAction(env, gateResult, config) {
     const summaryPath = env.GITHUB_STEP_SUMMARY ? (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.GITHUB_STEP_SUMMARY) : null;
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(commentPath, sanitizedComment.content);
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "step_summary.md"), sanitizedSummary.content);
-    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
-        base_sha: config.baseSha ?? null,
-        head_sha: config.headSha ?? null,
-        diff_mode: resolveGitHubDiffMode(config.baseSha, config.headSha),
-        fail_on: config.failOn,
-        artifact_mode: config.artifactMode,
-        artifacts_prepared: true,
-        gate_short_circuit: true,
-    }, null, 2));
-    (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .writeGitHubArtifactManifest */ .Ej)({
-        outputDir: artifactCollection.outputDir,
-        collection: finalArtifactCollection,
-        metadata: { type: "contract_gate" },
-    });
+    if (config.artifactLevel !== "none") {
+        (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "summary.md"), sanitizedSummary.content);
+        (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .writeGitHubVerdictArtifact */ .gg)({
+            outputDir: artifactCollection.outputDir,
+            mode: "contract_gate",
+            verdict: gateResult.verdict,
+            extra: {
+                disclosure: config.disclosure,
+                artifact_level: config.artifactLevel,
+            },
+        });
+        (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
+            base_sha: config.baseSha ?? null,
+            head_sha: config.headSha ?? null,
+            diff_mode: resolveGitHubDiffMode(config.baseSha, config.headSha),
+            fail_on: config.failOn,
+            artifact_mode: config.artifactMode,
+            artifact_level: config.artifactLevel,
+            disclosure: config.disclosure,
+            log_level: config.logLevel,
+            artifacts_prepared: true,
+            gate_short_circuit: true,
+        }, null, 2));
+    }
+    if (config.artifactLevel !== "none") {
+        (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .writeGitHubArtifactManifest */ .Ej)({
+            outputDir: artifactCollection.outputDir,
+            collection: finalArtifactCollection,
+            metadata: { type: "contract_gate" },
+        });
+    }
     if (summaryPath) {
         (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.dirname)(summaryPath), { recursive: true });
         (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(summaryPath, sanitizedSummary.content);
@@ -1066,6 +1033,7 @@ function writeOutputValue(outputPath, key, value) {
 
 /* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
 /* harmony export */   Ej: () => (/* binding */ writeGitHubArtifactManifest),
+/* harmony export */   gg: () => (/* binding */ writeGitHubVerdictArtifact),
 /* harmony export */   kU: () => (/* binding */ sanitizeGeneratedGitHubArtifact),
 /* harmony export */   xH: () => (/* binding */ collectGitHubActionArtifacts)
 /* harmony export */ });
@@ -1074,7 +1042,7 @@ function writeOutputValue(outputPath, key, value) {
 /* harmony import */ var node_fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(node_fs__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var node_path__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(760);
 /* harmony import */ var node_path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(node_path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _cli_artifactLayout_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(932);
+/* harmony import */ var _pantheonPaths_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(618);
 /* harmony import */ var _artifacts_artifactSanitizer_js__WEBPACK_IMPORTED_MODULE_3__ = __nccwpck_require__(398);
 /* harmony import */ var _change_changeArtifactLayout_js__WEBPACK_IMPORTED_MODULE_4__ = __nccwpck_require__(634);
 /* harmony import */ var _repair_repairArtifactLayout_js__WEBPACK_IMPORTED_MODULE_5__ = __nccwpck_require__(768);
@@ -1092,19 +1060,32 @@ function writeOutputValue(outputPath, key, value) {
  * Unified artifact collector for all Pantheon GitHub Action modes.
  */
 function collectGitHubActionArtifacts(input) {
-    const { repoRoot, outputDirRelative, artifactMode, changeId, repairId, includeArchitecture } = input;
+    const { repoRoot, outputDirRelative, artifactMode, artifactLevel = "full", changeId, repairId, includeArchitecture } = input;
     const outputDir = (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(repoRoot, outputDirRelative);
-    const pantheonDir = (0,_cli_artifactLayout_js__WEBPACK_IMPORTED_MODULE_2__/* .resolvePantheonDir */ .NJ)(repoRoot);
+    const pantheonDir = (0,_pantheonPaths_js__WEBPACK_IMPORTED_MODULE_2__/* .resolvePantheonDir */ .NJ)(repoRoot);
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.rmSync)(outputDir, { recursive: true, force: true });
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync)(outputDir, { recursive: true });
     const copiedPublicArtifacts = [];
     const copiedDebugArtifacts = [];
     const withheldArtifacts = [];
     const sanitizerViolations = [];
+    if (artifactLevel === "none" || artifactLevel === "summary") {
+        if (artifactMode === "debug" && artifactLevel === "none") {
+            copiedDebugArtifacts.push(".pantheon/** (not staged because artifact_level=none)");
+        }
+        return {
+            outputDir,
+            outputDirRelative,
+            copiedPublicArtifacts,
+            copiedDebugArtifacts,
+            withheldArtifacts,
+            sanitizerViolations
+        };
+    }
     // 1. Define artifacts to collect
     const publicFiles = [];
     // Base Boundary Artifacts
-    const basePaths = (0,_cli_artifactLayout_js__WEBPACK_IMPORTED_MODULE_2__/* .publicPaths */ .gT)(repoRoot);
+    const basePaths = (0,_pantheonPaths_js__WEBPACK_IMPORTED_MODULE_2__/* .publicPaths */ .gT)(repoRoot);
     publicFiles.push([basePaths.task, "task.md", "text"], [basePaths.scope, "scope.md", "text"], [basePaths.check, "check.json", "json"], [basePaths.report, "report.md", "text"], [basePaths.feedback, "feedback.md", "text"]);
     // Change Artifacts
     if (changeId) {
@@ -1184,6 +1165,16 @@ function writeGitHubArtifactManifest(input) {
     const { outputDir, ...portableManifest } = manifest;
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(input.outputDir, "artifact_manifest.json"), JSON.stringify(portableManifest, null, 2));
 }
+function writeGitHubVerdictArtifact(input) {
+    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(input.outputDir, "verdict.json"), JSON.stringify({
+        schema_version: "pantheon_github_verdict@0.1.0",
+        generated_at: new Date().toISOString(),
+        mode: input.mode,
+        verdict: input.verdict,
+        target_id: input.targetId ?? null,
+        ...input.extra,
+    }, null, 2));
+}
 function sanitizeGeneratedGitHubArtifact(input) {
     if (input.artifactMode === "debug") {
         return {
@@ -1253,7 +1244,7 @@ function collectGitHubRepairArtifacts(input) {
 /* harmony import */ var node_child_process__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(node_child_process__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _change_changeArtifactLayout_js__WEBPACK_IMPORTED_MODULE_3__ = __nccwpck_require__(634);
 /* harmony import */ var _githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__ = __nccwpck_require__(755);
-/* harmony import */ var _githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_5__ = __nccwpck_require__(978);
+/* harmony import */ var _githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_5__ = __nccwpck_require__(597);
 /* harmony import */ var _githubCommentClient_js__WEBPACK_IMPORTED_MODULE_8__ = __nccwpck_require__(379);
 /* harmony import */ var _githubExitPolicy_js__WEBPACK_IMPORTED_MODULE_7__ = __nccwpck_require__(298);
 /* harmony import */ var _githubInputParser_js__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(497);
@@ -1291,6 +1282,7 @@ async function runGitHubChangeAction(env = process.env) {
             repoRoot,
             outputDirRelative: artifactOutputDirRelative,
             artifactMode: inputs.artifactMode,
+            artifactLevel: inputs.artifactLevel,
             changeId: inputs.changeId,
             includeArchitecture: true,
         })
@@ -1299,11 +1291,15 @@ async function runGitHubChangeAction(env = process.env) {
         baseSha: inputs.baseSha,
         headSha: inputs.headSha,
         type: contract?.change_type ?? "unknown",
+    }, {
+        disclosure: inputs.disclosure,
     });
     const summary = (0,_githubCommentRenderer_js__WEBPACK_IMPORTED_MODULE_5__/* .renderChangeStepSummary */ .fb)(check, {
         baseSha: inputs.baseSha,
         headSha: inputs.headSha,
         type: contract?.change_type ?? "unknown",
+    }, {
+        disclosure: inputs.disclosure,
     });
     const sanitizedComment = (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .sanitizeGeneratedGitHubArtifact */ .kU)({
         target: "pr_comment.md",
@@ -1331,7 +1327,7 @@ async function runGitHubChangeAction(env = process.env) {
             ],
         }
         : artifactCollection;
-    if (inputs.uploadArtifacts) {
+    if (inputs.uploadArtifacts && inputs.artifactLevel !== "none") {
         (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .writeGitHubArtifactManifest */ .Ej)({
             outputDir: artifactCollection.outputDir,
             collection: finalArtifactCollection,
@@ -1347,22 +1343,38 @@ async function runGitHubChangeAction(env = process.env) {
     const summaryPath = env.GITHUB_STEP_SUMMARY ? (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.GITHUB_STEP_SUMMARY) : null;
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(commentPath, sanitizedComment.content);
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "step_summary.md"), sanitizedSummary.content);
-    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
-        base_sha: inputs.baseSha ?? null,
-        head_sha: inputs.headSha ?? null,
-        diff_mode: inputs.baseSha && inputs.headSha
-            ? "github_pr_base_head_sha"
-            : inputs.baseSha
-                ? "github_pr_base_sha"
+    if (inputs.artifactLevel !== "none") {
+        (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "summary.md"), sanitizedSummary.content);
+        (0,_githubArtifactCollector_js__WEBPACK_IMPORTED_MODULE_4__/* .writeGitHubVerdictArtifact */ .gg)({
+            outputDir: artifactCollection.outputDir,
+            mode: "change",
+            verdict: check.verdict,
+            targetId: inputs.changeId,
+            extra: {
+                disclosure: inputs.disclosure,
+                artifact_level: inputs.artifactLevel,
+            },
+        });
+        (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
+            base_sha: inputs.baseSha ?? null,
+            head_sha: inputs.headSha ?? null,
+            diff_mode: inputs.baseSha && inputs.headSha
+                ? "github_pr_base_head_sha"
+                : inputs.baseSha
+                    ? "github_pr_base_sha"
+                    : "working_tree_fallback",
+            fail_on: inputs.failOn,
+            artifact_mode: inputs.artifactMode,
+            artifact_level: inputs.artifactLevel,
+            disclosure: inputs.disclosure,
+            log_level: inputs.logLevel,
+            artifacts_prepared: inputs.uploadArtifacts,
+            change_id: inputs.changeId,
+            base_architecture_contract_source: inputs.baseSha
+                ? `base_branch:${inputs.baseSha}`
                 : "working_tree_fallback",
-        fail_on: inputs.failOn,
-        artifact_mode: inputs.artifactMode,
-        artifacts_prepared: inputs.uploadArtifacts,
-        change_id: inputs.changeId,
-        base_architecture_contract_source: inputs.baseSha
-            ? `base_branch:${inputs.baseSha}`
-            : "working_tree_fallback",
-    }, null, 2));
+        }, null, 2));
+    }
     if (summaryPath) {
         (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.dirname)(summaryPath), { recursive: true });
         (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(summaryPath, sanitizedSummary.content);
@@ -1425,6 +1437,7 @@ function prepareActionOutputDir(outputDir) {
 function resolveCliEntryPath(env) {
     const candidates = [
         env.PANTHEON_CLI_ENTRY ? (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.PANTHEON_CLI_ENTRY) : null,
+        (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(import.meta.dirname, "..", "..", "dist", "src", "cli", "pantheon.js"),
         (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(env.GITHUB_WORKSPACE ?? process.cwd(), "dist", "src", "cli", "pantheon.js"),
         (0,node_path__WEBPACK_IMPORTED_MODULE_1__.resolve)(process.cwd(), "dist", "src", "cli", "pantheon.js"),
     ].filter((candidate) => candidate !== null);
@@ -1507,20 +1520,20 @@ function isPantheonManagedComment(comment, marker) {
 
 /***/ }),
 
-/***/ 978:
+/***/ 597:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 
 // EXPORTS
 __nccwpck_require__.d(__webpack_exports__, {
-  wN: () => (/* binding */ renderChangePrComment),
-  fb: () => (/* binding */ renderChangeStepSummary),
-  Nr: () => (/* binding */ renderContractGatePrComment),
-  mZ: () => (/* binding */ renderContractGateStepSummary),
-  z3: () => (/* binding */ renderGitHubPrComment),
-  _Q: () => (/* binding */ renderGitHubRepairComment),
-  JP: () => (/* binding */ renderGitHubRepairStepSummary),
-  Qr: () => (/* binding */ renderGitHubStepSummary)
+  wN: () => (/* reexport */ renderChangePrComment),
+  fb: () => (/* reexport */ renderChangeStepSummary),
+  Nr: () => (/* reexport */ renderContractGatePrComment),
+  mZ: () => (/* reexport */ renderContractGateStepSummary),
+  z3: () => (/* reexport */ renderGitHubPrComment),
+  _Q: () => (/* reexport */ renderGitHubRepairComment),
+  JP: () => (/* reexport */ renderGitHubRepairStepSummary),
+  Qr: () => (/* reexport */ renderGitHubStepSummary)
 });
 
 // UNUSED EXPORTS: PANTHEON_BOUNDARY_CHECK_MARKER, PANTHEON_CHANGE_COMMENT_MARKER, PANTHEON_GATE_COMMENT_MARKER, PANTHEON_REPAIR_COMMENT_MARKER, renderArchitectureFindingsSection
@@ -1727,10 +1740,7 @@ function sanitizePath(filePath) {
     return filePath;
 }
 
-// EXTERNAL MODULE: ./src/repair/repairUtils.ts + 1 modules
-var repairUtils = __nccwpck_require__(57);
-;// CONCATENATED MODULE: ./src/github/githubCommentRenderer.ts
-
+;// CONCATENATED MODULE: ./src/github/renderers/githubArchitectureSectionRenderer.ts
 
 function renderArchitectureFindingsSection(findings, baseSha) {
     const sharedFindings = findings
@@ -1787,11 +1797,86 @@ function normalizeArchitectureFinding(finding) {
             return null;
     }
 }
-// ---------------------------------------------------------------------------
-// Standard Boundary Check Renderer
-// ---------------------------------------------------------------------------
+
+;// CONCATENATED MODULE: ./src/github/renderers/githubRendererUtils.ts
+function labelForVerdict(verdict) {
+    if (verdict === "pass") {
+        return "PASS";
+    }
+    if (verdict === "requires_review") {
+        return "WARN";
+    }
+    return "BLOCKED";
+}
+function labelForGateVerdict(verdict) {
+    switch (verdict) {
+        case "pass":
+            return "PASS";
+        case "requires_review":
+            return "WARN";
+        default:
+            return "BLOCKED";
+    }
+}
+function summarizeBoundaryReason(finding) {
+    if (finding.kind === "forbidden_file_modified") {
+        if (finding.file.includes(".pantheon/")) {
+            return "governance policy tamper attempt";
+        }
+        return "forbidden boundary";
+    }
+    if (finding.kind === "outside_scope_file") {
+        return "outside authorized scope";
+    }
+    if (finding.kind === "fake_approval") {
+        return "unauthorized or untrusted approval bypass attempt";
+    }
+    if (finding.severity === "review_required") {
+        return "matched review-required boundary";
+    }
+    return finding.message;
+}
+function formatAllowedActions(actions) {
+    if (actions.length === 0) {
+        return "review manually";
+    }
+    return actions.map(action => `\`${action}\``).join(" or ");
+}
+function escapeTableCell(value) {
+    return value.replace(/\|/g, "\\|");
+}
+function summarizeFindingKinds(findings) {
+    const kinds = [...new Set(findings.map(finding => finding.kind))];
+    return kinds.length > 0 ? kinds : ["none"];
+}
+function summarizeContractGateKinds(findings) {
+    return summarizeFindingKinds(findings);
+}
+function summarizeRepairKinds(result) {
+    const kinds = new Set();
+    if (result.check) {
+        for (const finding of result.check.findings) {
+            kinds.add(finding.kind);
+        }
+        for (const finding of result.check.concurrent_findings) {
+            kinds.add(finding.kind);
+        }
+    }
+    else if (result.runPhase === "plan_pending_audit") {
+        kinds.add("plan_pending_audit");
+    }
+    else if (result.runPhase === "intake_pending_audit") {
+        kinds.add("intake_pending_audit");
+    }
+    return kinds.size > 0 ? [...kinds] : ["none"];
+}
+
+;// CONCATENATED MODULE: ./src/github/renderers/githubBoundaryRenderer.ts
+
+
 const PANTHEON_BOUNDARY_CHECK_MARKER = "<!-- pantheon-boundary-check-v0 -->";
-function renderGitHubPrComment(check) {
+function renderGitHubPrComment(check, options) {
+    const disclosure = options?.disclosure ?? "full";
     const lines = [];
     const reviewFindings = check.findings.filter(f => f.severity === "review_required");
     const blockingFindings = check.findings.filter(f => f.kind === "forbidden_file_modified" || f.kind === "outside_scope_file");
@@ -1801,6 +1886,20 @@ function renderGitHubPrComment(check) {
     lines.push("");
     lines.push(`**Verdict:** \`${check.verdict}\``);
     lines.push("");
+    if (disclosure === "minimal") {
+        lines.push("Reason categories:");
+        for (const kind of summarizeFindingKinds(check.findings)) {
+            lines.push(`- ${kind}`);
+        }
+        lines.push("");
+        lines.push("Next:");
+        lines.push("- Run locally: `pantheon check`");
+        lines.push("- Open local Pantheon artifacts for detailed findings.");
+        return {
+            marker: PANTHEON_BOUNDARY_CHECK_MARKER,
+            markdown: lines.join("\n"),
+        };
+    }
     lines.push(renderBoundarySummaryTable(check));
     lines.push("");
     if (blockingFindings.length > 0) {
@@ -1838,14 +1937,29 @@ function renderGitHubPrComment(check) {
     lines.push("Artifacts:");
     lines.push("- `report.md`");
     lines.push("- `check.json`");
-    if (check.findings.length > 0)
+    if (check.findings.length > 0) {
         lines.push("- `feedback.md`");
+    }
     return {
         marker: PANTHEON_BOUNDARY_CHECK_MARKER,
         markdown: lines.join("\n"),
     };
 }
-function renderGitHubStepSummary(check, metadata) {
+function renderGitHubStepSummary(check, metadata, options) {
+    if ((options?.disclosure ?? "full") === "minimal") {
+        return {
+            markdown: [
+                "# Pantheon Boundary Check",
+                "",
+                `Verdict: \`${check.verdict}\``,
+                "",
+                "Reason categories:",
+                ...summarizeFindingKinds(check.findings).map(kind => `- ${kind}`),
+                "",
+                "Run locally: `pantheon check`",
+            ].join("\n"),
+        };
+    }
     const lines = [];
     lines.push("# Pantheon Boundary Check");
     lines.push("");
@@ -1903,43 +2017,29 @@ function renderBoundarySummaryTable(check) {
         `| Outside scope | ${check.summary.outside_scope} |`,
     ].join("\n");
 }
-function labelForVerdict(verdict) {
-    if (verdict === "pass")
-        return "PASS";
-    if (verdict === "requires_review")
-        return "WARN";
-    return "BLOCKED";
-}
-function summarizeBoundaryReason(finding) {
-    if (finding.kind === "forbidden_file_modified") {
-        if (finding.file.includes(".pantheon/"))
-            return "governance policy tamper attempt";
-        return "forbidden boundary";
-    }
-    if (finding.kind === "outside_scope_file")
-        return "outside authorized scope";
-    if (finding.kind === "fake_approval")
-        return "unauthorized or untrusted approval bypass attempt";
-    if (finding.severity === "review_required")
-        return "matched review-required boundary";
-    return finding.message;
-}
-function formatAllowedActions(actions) {
-    if (actions.length === 0)
-        return "review manually";
-    return actions.map(action => `\`${action}\``).join(" or ");
-}
-// ---------------------------------------------------------------------------
-// Change Mode Renderer
-// ---------------------------------------------------------------------------
+
+;// CONCATENATED MODULE: ./src/github/renderers/githubChangeRenderer.ts
+
+
 const PANTHEON_CHANGE_COMMENT_MARKER = "<!-- pantheon_change_governance_comment -->";
-function renderChangePrComment(check, context) {
+function renderChangePrComment(check, context, options) {
     const marker = PANTHEON_CHANGE_COMMENT_MARKER;
+    const disclosure = options?.disclosure ?? "full";
     let md = `${marker}\n`;
     md += "## Pantheon Change Governance\n\n";
     md += `**Verdict:** \`${check.verdict}\`\n\n`;
     if (context?.type) {
         md += `**Change type:** \`${context.type}\`\n\n`;
+    }
+    if (disclosure === "minimal") {
+        md += "Reason categories:\n\n";
+        for (const kind of summarizeFindingKinds(check.findings)) {
+            md += `- ${kind}\n`;
+        }
+        md += "\nNext:\n\n";
+        md += "- Run locally: `pantheon check`\n";
+        md += `- Or inspect the active contract with: \`pantheon change check --change-id ${check.change_id}\`\n`;
+        return { marker, markdown: md };
     }
     const archSection = renderArchitectureFindingsSection(check.findings, context?.baseSha || null);
     if (archSection) {
@@ -1975,15 +2075,16 @@ function renderChangePrComment(check, context) {
     md += `- Outside scope: ${check.bucket_counts.outside_scope}\n`;
     return { marker, markdown: md };
 }
-function renderChangeStepSummary(check, context) {
-    const { markdown } = renderChangePrComment(check, context);
+function renderChangeStepSummary(check, context, options) {
+    const { markdown } = renderChangePrComment(check, context, options);
     return { markdown };
 }
-// ---------------------------------------------------------------------------
-// Contract Gate (P29.5) Renderer
-// ---------------------------------------------------------------------------
+
+;// CONCATENATED MODULE: ./src/github/renderers/githubContractGateRenderer.ts
+
 const PANTHEON_GATE_COMMENT_MARKER = "<!-- pantheon-contract-gate-v1 -->";
-function renderContractGatePrComment(result) {
+function renderContractGatePrComment(result, options) {
+    const disclosure = options?.disclosure ?? "full";
     const lines = [];
     lines.push(PANTHEON_GATE_COMMENT_MARKER);
     lines.push(`## Pantheon Governance Gate [${labelForGateVerdict(result.verdict)}]`);
@@ -1991,6 +2092,26 @@ function renderContractGatePrComment(result) {
     lines.push(`**Verdict:** \`${result.verdict}\``);
     lines.push(`**Risk Level:** \`${result.risk_level}\``);
     lines.push("");
+    if (disclosure === "minimal") {
+        lines.push("Reason categories:");
+        for (const kind of summarizeContractGateKinds(result.findings)) {
+            lines.push(`- ${kind}`);
+        }
+        lines.push("");
+        lines.push("Next:");
+        lines.push("- Run locally: `pantheon check`");
+        if (result.required_action.next.length > 0) {
+            for (const next of result.required_action.next.slice(0, 3)) {
+                lines.push(`- ${next}`);
+            }
+        }
+        lines.push("");
+        lines.push(`*Policy Source: ${result.policy_source.status === "loaded" ? `base branch (\`${result.policy_source.base_sha?.slice(0, 8)}\`)` : "missing (using defaults)"}*`);
+        return {
+            marker: PANTHEON_GATE_COMMENT_MARKER,
+            markdown: lines.join("\n"),
+        };
+    }
     if (result.required_action.why.length > 0) {
         lines.push("### Why this PR is blocked");
         for (const why of result.required_action.why) {
@@ -2033,26 +2154,24 @@ function renderContractGatePrComment(result) {
         markdown: lines.join("\n"),
     };
 }
-function renderContractGateStepSummary(result) {
-    const { markdown } = renderContractGatePrComment(result);
+function renderContractGateStepSummary(result, options) {
+    const { markdown } = renderContractGatePrComment(result, options);
     return { markdown };
 }
-function labelForGateVerdict(verdict) {
-    switch (verdict) {
-        case "pass": return "PASS";
-        case "requires_review": return "WARN";
-        default: return "BLOCKED";
-    }
-}
-// ---------------------------------------------------------------------------
-// Repair Mode Renderer
-// ---------------------------------------------------------------------------
+
+// EXTERNAL MODULE: ./src/repair/repairUtils.ts + 1 modules
+var repairUtils = __nccwpck_require__(57);
+;// CONCATENATED MODULE: ./src/github/renderers/githubRepairRenderer.ts
+
+
+
 const PANTHEON_REPAIR_COMMENT_MARKER = "<!-- pantheon-repair-gate-v0 -->";
-function renderGitHubRepairComment(result) {
+function renderGitHubRepairComment(result, options) {
     const lines = [];
     const contract = result.contract;
     const check = result.check;
     const hypothesis = "agent_hypothesis" in result.report ? result.report.agent_hypothesis : undefined;
+    const disclosure = options?.disclosure ?? "full";
     lines.push(PANTHEON_REPAIR_COMMENT_MARKER);
     lines.push("# Pantheon Repair Gate");
     lines.push("");
@@ -2060,6 +2179,21 @@ function renderGitHubRepairComment(result) {
     lines.push("");
     lines.push(`\`${result.verdict}\``);
     lines.push("");
+    if (disclosure === "minimal") {
+        lines.push("Reason categories:");
+        for (const kind of summarizeRepairKinds(result)) {
+            lines.push(`- ${kind}`);
+        }
+        lines.push("");
+        lines.push("## Agent next steps");
+        lines.push("");
+        lines.push("- Run locally: `pantheon check`");
+        lines.push(`- Or inspect the active repair with: \`pantheon repair check --repair-id ${result.repairId}\``);
+        return {
+            marker: PANTHEON_REPAIR_COMMENT_MARKER,
+            markdown: lines.join("\n"),
+        };
+    }
     const archSection = check ? renderArchitectureFindingsSection(check.findings, result.inputs.baseSha || null) : "";
     if (archSection) {
         lines.push(archSection);
@@ -2234,7 +2368,21 @@ function renderGitHubRepairComment(result) {
         markdown: lines.join("\n"),
     };
 }
-function renderGitHubRepairStepSummary(result) {
+function renderGitHubRepairStepSummary(result, options) {
+    if ((options?.disclosure ?? "full") === "minimal") {
+        return {
+            markdown: [
+                "# Pantheon Repair Summary",
+                "",
+                `Verdict: \`${result.verdict}\``,
+                "",
+                "Reason categories:",
+                ...summarizeRepairKinds(result).map(kind => `- ${kind}`),
+                "",
+                "Run locally: `pantheon check`",
+            ].join("\n"),
+        };
+    }
     const lines = [];
     const check = result.check;
     lines.push("# Pantheon Repair Summary");
@@ -2270,9 +2418,6 @@ function renderGitHubRepairStepSummary(result) {
         markdown: lines.join("\n"),
     };
 }
-// ---------------------------------------------------------------------------
-// Helpers (Private)
-// ---------------------------------------------------------------------------
 function appendRepairScopeSection(lines, title, patterns) {
     lines.push(`### ${title}`);
     lines.push("");
@@ -2347,9 +2492,13 @@ function buildRepairNextSteps(result) {
     }
     return [...steps];
 }
-function escapeTableCell(value) {
-    return value.replace(/\|/g, "\\|");
-}
+
+;// CONCATENATED MODULE: ./src/github/githubCommentRenderer.ts
+
+
+
+
+
 
 
 /***/ }),
@@ -2467,7 +2616,8 @@ function parseGitHubActionConfig(env) {
     const event = loadGitHubEvent(env);
     const prContext = extractPullRequestContext(event);
     const scopePatterns = parseMultilinePatterns(env.INPUT_SCOPE);
-    if (scopePatterns.length === 0) {
+    const requiresBoundaryScope = (env.INPUT_MODE ?? "change").trim().toLowerCase() === "boundary";
+    if (requiresBoundaryScope && scopePatterns.length === 0) {
         throw new Error("GitHub Action input 'scope' is required and must contain at least one non-empty pattern.");
     }
     const intent = firstNonEmpty(env.INPUT_INTENT, prContext?.title, "GitHub PR boundary check");
@@ -2484,6 +2634,9 @@ function parseGitHubActionConfig(env) {
         uploadArtifacts: parseBoolean(env.INPUT_UPLOAD_ARTIFACTS, true),
         artifactMode: parseArtifactMode(env.INPUT_ARTIFACT_MODE),
         commentMode: parseCommentMode(env.INPUT_COMMENT_MODE),
+        disclosure: parseDisclosureLevel(env.INPUT_DISCLOSURE),
+        artifactLevel: parseArtifactLevel(env.INPUT_ARTIFACT_LEVEL),
+        logLevel: parseLogLevel(env.INPUT_LOG_LEVEL),
         baseSha: prContext?.baseSha,
         headSha: prContext?.headSha,
     };
@@ -2563,6 +2716,9 @@ function parseGitHubChangeInputs(env) {
             configPath: firstNonEmpty(env.INPUT_CONFIG_PATH, "pantheon.alpha.json"),
             artifactMode: parseArtifactMode(env.INPUT_ARTIFACT_MODE),
             commentMode: parseCommentMode(env.INPUT_COMMENT_MODE),
+            disclosure: parseDisclosureLevel(env.INPUT_DISCLOSURE),
+            artifactLevel: parseArtifactLevel(env.INPUT_ARTIFACT_LEVEL),
+            logLevel: parseLogLevel(env.INPUT_LOG_LEVEL),
             postComment: parseBoolean(env.INPUT_POST_COMMENT, true),
             uploadArtifacts: parseBoolean(env.INPUT_UPLOAD_ARTIFACTS, true),
             failOn: parseChangeFailConditions(env.INPUT_FAIL_ON),
@@ -2601,6 +2757,9 @@ function parseGitHubRepairInputs(env) {
             mustPreserve,
             auditMode: parseRepairAuditMode(env.INPUT_AUDIT_MODE),
             artifactMode: parseArtifactMode(env.INPUT_ARTIFACT_MODE),
+            disclosure: parseDisclosureLevel(env.INPUT_DISCLOSURE),
+            artifactLevel: parseArtifactLevel(env.INPUT_ARTIFACT_LEVEL),
+            logLevel: parseLogLevel(env.INPUT_LOG_LEVEL),
             postComment: parseBoolean(env.INPUT_POST_COMMENT, true),
             uploadArtifacts: parseBoolean(env.INPUT_UPLOAD_ARTIFACTS, true),
             failOn: parseRepairFailConditions(env.INPUT_FAIL_ON),
@@ -2636,6 +2795,27 @@ function parseArtifactMode(raw) {
 function parseCommentMode(raw) {
     return raw?.trim().toLowerCase() === "off" ? "off" : "update";
 }
+function parseDisclosureLevel(raw) {
+    const normalized = raw?.trim().toLowerCase();
+    if (normalized === "balanced" || normalized === "full") {
+        return normalized;
+    }
+    return "minimal";
+}
+function parseArtifactLevel(raw) {
+    const normalized = raw?.trim().toLowerCase();
+    if (normalized === "none" || normalized === "full") {
+        return normalized;
+    }
+    return "summary";
+}
+function parseLogLevel(raw) {
+    const normalized = raw?.trim().toLowerCase();
+    if (normalized === "info" || normalized === "debug") {
+        return normalized;
+    }
+    return "quiet";
+}
 function firstNonEmpty(...values) {
     for (const value of values) {
         if (value && value.trim().length > 0)
@@ -2649,7 +2829,7 @@ const parseDelimitedList = (/* unused pure expression or super */ null && (parse
 
 /***/ }),
 
-/***/ 944:
+/***/ 642:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -2945,4698 +3125,6 @@ __nccwpck_require__.d(classic_schemas_namespaceObject, {
 var external_node_fs_ = __nccwpck_require__(24);
 // EXTERNAL MODULE: external "node:path"
 var external_node_path_ = __nccwpck_require__(760);
-// EXTERNAL MODULE: ./src/diffWorkflow/gitDiffReader.ts
-var gitDiffReader = __nccwpck_require__(254);
-;// CONCATENATED MODULE: ./src/cli/types.ts
-/**
- * P24: Public Interface Types
- *
- * Stable public-facing types for the Pantheon CLI.
- * These types form the external contract — do not expose internal objects.
- */
-const DEFAULT_PANTHEON_CONFIG = {
-    version: 1,
-    protected: [".pantheon/**", ".cursor/**", ".git/**", "node_modules/**"],
-    review_required: [],
-    generated: [],
-    path_roles: {},
-    python: undefined,
-};
-
-;// CONCATENATED MODULE: ./src/cli/pantheonConfig.ts
-/**
- * P24: Pantheon Config Loader
- *
- * Extends existing pantheon.json with P24 public interface fields:
- * protected, review_required, generated, path_roles.
- *
- * Reuses existing repoObservationConfigLoader for path_roles/excluded_dirs.
- * Does NOT use YAML — pantheon.json is the v1 public config.
- */
-
-
-
-function loadPantheonConfig(repoRoot, configPathInput = "pantheon.json") {
-    const configPath = (0,external_node_path_.join)(repoRoot, configPathInput);
-    const warnings = [];
-    const errors = [];
-    if (!(0,external_node_fs_.existsSync)(configPath)) {
-        return { config: DEFAULT_PANTHEON_CONFIG, warnings: [], loaded_from: null };
-    }
-    let raw;
-    try {
-        raw = JSON.parse((0,external_node_fs_.readFileSync)(configPath, "utf-8"));
-    }
-    catch (e) {
-        throw new Error(`Failed to parse ${configPathInput}: ${e.message}`);
-    }
-    if (typeof raw !== "object" || raw === null) {
-        throw new Error(`${configPathInput} must be a JSON object`);
-    }
-    return parseConfigJson(raw, warnings, errors, configPathInput);
-}
-/**
- * Generate default pantheon.json content for `pantheon init`.
- */
-function generateDefaultConfigJson() {
-    return JSON.stringify({
-        version: 1,
-        protected: [
-            ".pantheon/**",
-            ".cursor/**",
-            ".git/**",
-            "node_modules/**",
-        ],
-        review_required: [],
-        generated: [],
-        path_roles: {},
-        repo_observation: {},
-    }, null, 2) + "\n";
-}
-// ---------------------------------------------------------------------------
-// JSON parser
-// ---------------------------------------------------------------------------
-function parseConfigJson(root, warnings, errors, loadedFrom = "pantheon.json") {
-    const version = typeof root.version === "number" ? root.version : 1;
-    if (version !== 1) {
-        warnings.push(`pantheon.json: unsupported version ${version}, using 1`);
-    }
-    const protectedList = parseStringArray(root, "protected", warnings, errors);
-    const reviewRequired = parseStringArray(root, "review_required", warnings, errors);
-    const generated = parseStringArray(root, "generated", warnings, errors);
-    const pathRoles = parseStringMap(root, "path_roles", warnings, errors);
-    // Python observation config (optional)
-    const pythonConfig = parsePythonConfig(root, warnings, errors);
-    // Warn on unknown top-level keys
-    const knownKeys = new Set([
-        "version", "protected", "review_required", "generated",
-        "path_roles", "repo_observation", "python",
-    ]);
-    for (const key of Object.keys(root)) {
-        if (!knownKeys.has(key)) {
-            warnings.push(`pantheon.json: unknown key "${key}" (ignored)`);
-        }
-    }
-    if (errors.length > 0) {
-        throw new Error(`${loadedFrom} is invalid:\n${errors.join("\n")}`);
-    }
-    const finalProtected = protectedList.length > 0
-        ? protectedList
-        : [...DEFAULT_PANTHEON_CONFIG.protected];
-    return {
-        config: {
-            version: 1,
-            protected: finalProtected,
-            review_required: reviewRequired,
-            generated,
-            path_roles: pathRoles,
-            python: pythonConfig,
-        },
-        warnings,
-        loaded_from: loadedFrom,
-    };
-}
-function parseStringArray(root, key, warnings, errors) {
-    const val = root[key];
-    if (val === undefined)
-        return [];
-    if (!Array.isArray(val)) {
-        errors.push(`pantheon.json: "${key}" must be an array`);
-        return [];
-    }
-    const result = [];
-    for (const item of val) {
-        if (typeof item === "string" && item.length > 0) {
-            result.push(item);
-        }
-        else {
-            errors.push(`pantheon.json: ${key} contains invalid entry: ${JSON.stringify(item)}`);
-        }
-    }
-    return result;
-}
-function parseStringMap(root, key, warnings, errors) {
-    const val = root[key];
-    if (val === undefined)
-        return {};
-    if (typeof val !== "object" || val === null || Array.isArray(val)) {
-        errors.push(`pantheon.json: "${key}" must be an object`);
-        return {};
-    }
-    const result = {};
-    for (const [k, v] of Object.entries(val)) {
-        if (typeof v === "string") {
-            result[k] = v;
-        }
-        else {
-            errors.push(`pantheon.json: ${key}["${k}"] must be a string`);
-        }
-    }
-    return result;
-}
-function parsePythonConfig(root, warnings, errors) {
-    const section = root.python;
-    if (section === undefined)
-        return undefined;
-    if (typeof section !== "object" || section === null || Array.isArray(section)) {
-        errors.push('pantheon.json: "python" must be an object');
-        return undefined;
-    }
-    const pyObj = section;
-    const result = {};
-    // project_packages: string[]
-    if (pyObj.project_packages !== undefined) {
-        if (Array.isArray(pyObj.project_packages)) {
-            const valid = [];
-            for (const item of pyObj.project_packages) {
-                if (typeof item === "string" && item.length > 0)
-                    valid.push(item);
-                else
-                    errors.push(`pantheon.json: python.project_packages contains invalid entry: ${JSON.stringify(item)}`);
-            }
-            result.project_packages = valid;
-        }
-        else {
-            errors.push('pantheon.json: python.project_packages must be an array of strings');
-        }
-    }
-    // sensitive_overrides: Record<string, string>
-    if (pyObj.sensitive_overrides !== undefined) {
-        if (typeof pyObj.sensitive_overrides === "object" && pyObj.sensitive_overrides !== null && !Array.isArray(pyObj.sensitive_overrides)) {
-            const map = {};
-            for (const [k, v] of Object.entries(pyObj.sensitive_overrides)) {
-                if (typeof v === "string")
-                    map[k] = v;
-                else
-                    errors.push(`pantheon.json: python.sensitive_overrides["${k}"] must be a string`);
-            }
-            result.sensitive_overrides = map;
-        }
-        else {
-            errors.push('pantheon.json: python.sensitive_overrides must be an object');
-        }
-    }
-    return Object.keys(result).length > 0 ? result : undefined;
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/repoObservationConfigLoader.ts
-/**
- * P20a.2: Repo Observation Config Loader
- *
- * Loads `pantheon.json` from repo root and extracts `repo_observation` config.
- * Only supports exact-match patterns — no globs, no regex.
- *
- * Config schema:
- * {
- *   "repo_observation": {
- *     "excluded_dirs": ["dir1", "dir2"],
- *     "path_roles": { "prefix/path": "generated" },
- *     "test_mapping_overrides": { "src/file.ts": ["test/file.test.ts"] }
- *   }
- * }
- */
-
-
-const VALID_BUCKETS = new Set([
-    "src", "test", "config", "generated", "docs", "script", "asset", "unknown",
-]);
-function loadRepoObservationConfig(repoRoot) {
-    const warnings = [];
-    const configPath = (0,external_node_path_.join)(repoRoot, "pantheon.json");
-    if (!(0,external_node_fs_.existsSync)(configPath)) {
-        return {
-            config: {},
-            warnings: [],
-            loaded_from: null,
-        };
-    }
-    let raw;
-    try {
-        raw = JSON.parse((0,external_node_fs_.readFileSync)(configPath, "utf-8"));
-    }
-    catch (e) {
-        warnings.push(`Failed to parse pantheon.json: ${e.message}`);
-        return { config: {}, warnings, loaded_from: "pantheon.json" };
-    }
-    if (typeof raw !== "object" || raw === null) {
-        warnings.push("pantheon.json must be a JSON object");
-        return { config: {}, warnings, loaded_from: "pantheon.json" };
-    }
-    const root = raw;
-    const repoObs = root["repo_observation"];
-    if (repoObs === undefined) {
-        return { config: {}, warnings: [], loaded_from: "pantheon.json" };
-    }
-    if (typeof repoObs !== "object" || repoObs === null) {
-        warnings.push("pantheon.json: repo_observation must be an object");
-        return { config: {}, warnings, loaded_from: "pantheon.json" };
-    }
-    const section = repoObs;
-    // Parse excluded_dirs
-    let excluded_dirs;
-    if (section["excluded_dirs"] !== undefined) {
-        if (Array.isArray(section["excluded_dirs"])) {
-            excluded_dirs = [];
-            for (const item of section["excluded_dirs"]) {
-                if (typeof item === "string" && item.length > 0) {
-                    excluded_dirs.push(item);
-                }
-                else {
-                    warnings.push(`pantheon.json: excluded_dirs contains invalid entry: ${JSON.stringify(item)}`);
-                }
-            }
-        }
-        else {
-            warnings.push("pantheon.json: excluded_dirs must be an array");
-        }
-    }
-    // Parse path_roles
-    let path_roles;
-    if (section["path_roles"] !== undefined) {
-        if (typeof section["path_roles"] === "object" && section["path_roles"] !== null && !Array.isArray(section["path_roles"])) {
-            path_roles = {};
-            for (const [key, value] of Object.entries(section["path_roles"])) {
-                if (typeof value === "string" && VALID_BUCKETS.has(value)) {
-                    path_roles[key] = value;
-                }
-                else {
-                    warnings.push(`pantheon.json: path_roles["${key}"] has invalid bucket: ${JSON.stringify(value)}`);
-                }
-            }
-        }
-        else {
-            warnings.push("pantheon.json: path_roles must be an object");
-        }
-    }
-    // Parse test_mapping_overrides
-    let test_mapping_overrides;
-    if (section["test_mapping_overrides"] !== undefined) {
-        if (typeof section["test_mapping_overrides"] === "object" && section["test_mapping_overrides"] !== null && !Array.isArray(section["test_mapping_overrides"])) {
-            test_mapping_overrides = {};
-            for (const [key, value] of Object.entries(section["test_mapping_overrides"])) {
-                if (Array.isArray(value) && value.every(v => typeof v === "string")) {
-                    test_mapping_overrides[key] = value;
-                }
-                else {
-                    warnings.push(`pantheon.json: test_mapping_overrides["${key}"] must be an array of strings`);
-                }
-            }
-        }
-        else {
-            warnings.push("pantheon.json: test_mapping_overrides must be an object");
-        }
-    }
-    return {
-        config: {
-            ...(excluded_dirs !== undefined ? { excluded_dirs } : {}),
-            ...(path_roles !== undefined ? { path_roles } : {}),
-            ...(test_mapping_overrides !== undefined ? { test_mapping_overrides } : {}),
-        },
-        warnings,
-        loaded_from: "pantheon.json",
-    };
-}
-
-// EXTERNAL MODULE: external "node:child_process"
-var external_node_child_process_ = __nccwpck_require__(421);
-;// CONCATENATED MODULE: ./src/repoObservation/types.ts
-/**
- * P20a: Deterministic Repo Observations — Domain Types
- *
- * Core invariants:
- *   - All paths are repo-relative POSIX (no absolute, no escaping ..)
- *   - observation_hash is deterministic: same repo state → same hash
- *   - scanner.llm_used is always false in P20a
- *   - RepoObservations is an observed index, NOT canonical architecture truth
- */
-const DEFAULT_EXCLUDED_DIRS = [
-    "node_modules",
-    "dist",
-    "build",
-    "coverage",
-    ".git",
-    ".next",
-    "out",
-    ".cache",
-    "tmp",
-    ".tmp-pet-build",
-    ".worktrees",
-    ".test-tmp",
-];
-const DEFAULT_SCAN_LIMITS = {
-    max_file_bytes: 512 * 1024, // 512 KB
-    max_total_files: 10_000,
-    max_import_edges: 50_000,
-    scan_timeout_ms: 60_000, // 60 seconds
-    excluded_dirs: DEFAULT_EXCLUDED_DIRS,
-};
-
-// EXTERNAL MODULE: ./src/repoObservation/pathUtils.ts
-var pathUtils = __nccwpck_require__(738);
-;// CONCATENATED MODULE: ./src/repoObservation/fileClassifier.ts
-/**
- * P20a: File Classification
- *
- * Classifies files by path into buckets and languages.
- * Uses only path-based rules — no content inspection.
- */
-// ---------------------------------------------------------------------------
-// Bucket classification
-// ---------------------------------------------------------------------------
-const BUCKET_RULES = [
-    // Test files (must come before src to catch test files inside src/)
-    { test: p => /\.(test|spec)\.[tj]sx?$/.test(p), bucket: "test" },
-    { test: p => p.startsWith("test/") || p.startsWith("tests/"), bucket: "test" },
-    { test: p => p.includes("__tests__/"), bucket: "test" },
-    // Generated / data (pipeline outputs, trial data, dogfood artifacts)
-    { test: p => p.startsWith("generated/"), bucket: "generated" },
-    { test: p => p.includes("build/generated/"), bucket: "generated" },
-    { test: p => /\.generated\.[tj]sx?$/.test(p), bucket: "generated" },
-    { test: p => p.startsWith("data/"), bucket: "generated" },
-    { test: p => p.startsWith(".pantheon/"), bucket: "generated" },
-    // Config
-    { test: p => /^tsconfig(\..+)?\.json$/.test(p), bucket: "config" },
-    { test: p => p === "package.json", bucket: "config" },
-    { test: p => p === "package-lock.json", bucket: "config" },
-    { test: p => /^vite\.config\.[tj]sx?$/.test(p), bucket: "config" },
-    { test: p => /^vitest\.config\.[tj]sx?$/.test(p), bucket: "config" },
-    { test: p => /^webpack\.config\.[tj]sx?$/.test(p), bucket: "config" },
-    { test: p => /^jest\.config\.[tj]sx?$/.test(p), bucket: "config" },
-    { test: p => /^pantheon(\..+)?\.json$/.test(p), bucket: "config" },
-    { test: p => p.startsWith(".github/"), bucket: "config" },
-    { test: p => /^\.?eslint/.test(p), bucket: "config" },
-    { test: p => p.startsWith("config/"), bucket: "config" },
-    { test: p => p.startsWith("action/"), bucket: "config" },
-    // Docs
-    { test: p => p.startsWith("docs/"), bucket: "docs" },
-    { test: p => p.startsWith("examples/"), bucket: "docs" },
-    { test: p => /\.md$/i.test(p) && !p.startsWith("src/"), bucket: "docs" },
-    // Scripts
-    { test: p => p.startsWith("scripts/"), bucket: "script" },
-    { test: p => p.startsWith("bin/"), bucket: "script" },
-    // Assets (cockpit UI, static files)
-    { test: p => p.startsWith("cockpit/"), bucket: "asset" },
-    { test: p => p.startsWith("cockpit-mock/"), bucket: "asset" },
-    // Source (catch-all for src/, lib/, app/)
-    { test: p => p.startsWith("src/"), bucket: "src" },
-    { test: p => p.startsWith("lib/"), bucket: "src" },
-    { test: p => p.startsWith("app/"), bucket: "src" },
-];
-/**
- * Classify a repo-relative path into a bucket.
- */
-function classifyFile(path) {
-    const lower = path.toLowerCase();
-    for (const rule of BUCKET_RULES) {
-        if (rule.test(lower)) {
-            return rule.bucket;
-        }
-    }
-    // Asset detection by extension
-    if (/\.(png|jpe?g|gif|svg|ico|webp|mp4|webm|woff2?|ttf|eot|pdf)$/i.test(path)) {
-        return "asset";
-    }
-    return "unknown";
-}
-// ---------------------------------------------------------------------------
-// Language detection
-// ---------------------------------------------------------------------------
-const LANGUAGE_MAP = [
-    { test: /\.tsx?$/, language: "typescript" },
-    { test: /\.jsx?$/, language: "javascript" },
-    { test: /\.json$/, language: "json" },
-    { test: /\.md$/i, language: "markdown" },
-    { test: /\.(ya?ml)$/i, language: "yaml" },
-];
-/**
- * Detect the language of a file by its extension.
- */
-function detectLanguage(path) {
-    for (const rule of LANGUAGE_MAP) {
-        if (rule.test.test(path)) {
-            return rule.language;
-        }
-    }
-    return "other";
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/importExtractor.ts
-/**
- * P20a: Import Extractor
- *
- * Extracts literal import/export/require specifiers from TS/JS files.
- * Uses deterministic regex — no TypeScript parser dependency.
- * Records resolution_status for each edge. Dynamic imports → unknown.
- */
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-function extractImportsFromFile(input) {
-    const edges = [];
-    const dynamicImports = [];
-    const unresolvedImports = [];
-    // Static imports: import x from "..."  /  import { x } from "..."  /  import "..."
-    for (const m of input.content.matchAll(/import\s+(?:(?:type\s+)?(?:\{[^}]*\}|\*\s+as\s+\w+|\w+)(?:\s*,\s*(?:\{[^}]*\}|\*\s+as\s+\w+))?\s+from\s+)?["']([^"']+)["']/g)) {
-        const edge = buildEdge(input.path, m[1], "static");
-        edges.push(edge);
-        if (edge.resolution_status === "unresolved_package" || edge.resolution_status === "unresolved_alias") {
-            unresolvedImports.push(`${input.path}:${m[1]}`);
-        }
-    }
-    // Export-from: export { x } from "..."  /  export * from "..."
-    for (const m of input.content.matchAll(/export\s+(?:\{[^}]*\}|\*(?:\s+as\s+\w+)?)\s+from\s+["']([^"']+)["']/g)) {
-        const edge = buildEdge(input.path, m[1], "export_from");
-        edges.push(edge);
-        if (edge.resolution_status === "unresolved_package" || edge.resolution_status === "unresolved_alias") {
-            unresolvedImports.push(`${input.path}:${m[1]}`);
-        }
-    }
-    // Require: const x = require("...")  /  require("...")
-    for (const m of input.content.matchAll(/require\s*\(\s*["']([^"']+)["']\s*\)/g)) {
-        const edge = buildEdge(input.path, m[1], "require");
-        edges.push(edge);
-        if (edge.resolution_status === "unresolved_package" || edge.resolution_status === "unresolved_alias") {
-            unresolvedImports.push(`${input.path}:${m[1]}`);
-        }
-    }
-    // Dynamic imports: import(...)
-    for (const m of input.content.matchAll(/import\s*\(\s*["']([^"']+)["']\s*\)/g)) {
-        edges.push(buildEdge(input.path, m[1], "dynamic"));
-        dynamicImports.push(`${input.path}:${m[1]}`);
-    }
-    // Dynamic imports with non-literal: import(expr)
-    for (const m of input.content.matchAll(/import\s*\(\s*(?!["'])([^)]+)\s*\)/g)) {
-        dynamicImports.push(`${input.path}:<dynamic expression>`);
-        edges.push({
-            from_file: input.path,
-            raw_specifier: `<dynamic:${m[1].trim().slice(0, 50)}>`,
-            import_kind: "dynamic",
-            resolution_status: "dynamic_unknown",
-            evidence: [{ type: "import_literal", source_path: input.path, value: `dynamic import expression: ${m[1].trim().slice(0, 100)}` }],
-        });
-    }
-    return {
-        import_edges: edges,
-        unknowns: { dynamic_imports: dynamicImports, unresolved_imports: unresolvedImports },
-    };
-}
-// ---------------------------------------------------------------------------
-// Internal
-// ---------------------------------------------------------------------------
-function buildEdge(fromFile, specifier, kind) {
-    const resolution = resolveSpecifier(specifier);
-    return {
-        from_file: fromFile,
-        raw_specifier: specifier,
-        import_kind: kind,
-        ...(resolution.targetHint ? { target_hint: resolution.targetHint } : {}),
-        resolution_status: kind === "dynamic" ? "dynamic_unknown" : resolution.status,
-        evidence: [{ type: "import_literal", source_path: fromFile, value: specifier }],
-    };
-}
-function resolveSpecifier(specifier) {
-    // Relative path
-    if (specifier.startsWith("./") || specifier.startsWith("../")) {
-        return { status: "resolved_relative", targetHint: specifier };
-    }
-    // Node builtins (node:fs, node:path, etc.) — handled here for early classification
-    if (specifier.startsWith("node:")) {
-        return { status: "builtin_node_package" };
-    }
-    // Scoped package (@org/pkg)
-    if (specifier.startsWith("@")) {
-        return { status: "unresolved_package" };
-    }
-    // Bare specifier — could be package or alias
-    // Package classification (declared/undeclared/builtin) is done later by packageDependencyClassifier
-    if (!specifier.includes("/") || specifier.split("/").length <= 2) {
-        if (/^[a-z@]/.test(specifier)) {
-            return { status: "unresolved_package" };
-        }
-        return { status: "unresolved_alias" };
-    }
-    // Anything else
-    return { status: "literal_extracted" };
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/testMapper.ts
-/**
- * P20a: Test Mapper
- *
- * Maps source files to test files by path convention.
- * Does NOT do coverage analysis or content inspection.
- */
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-function inferTestMappings(input) {
-    const srcFiles = input.files.filter(f => f.bucket === "src");
-    const testFiles = input.files.filter(f => f.bucket === "test");
-    const overrides = input.overrides ?? {};
-    const testPaths = new Set(testFiles.map(f => f.path));
-    const mappedTests = new Set();
-    const mappings = [];
-    const unmappedSources = [];
-    const ambiguous = [];
-    for (const src of srcFiles) {
-        // Config overrides take priority
-        const overrideTests = overrides[src.path];
-        if (overrideTests && overrideTests.length > 0) {
-            for (const testPath of overrideTests) {
-                mappings.push({
-                    source_path: src.path,
-                    test_path: testPath,
-                    mapping_kind: "config_override",
-                    confidence: "high",
-                    evidence: [{ type: "config", source_path: "pantheon.json", value: `test_mapping_override: ${src.path} → ${testPath}` }],
-                });
-                mappedTests.add(testPath);
-            }
-            continue;
-        }
-        const candidates = findTestCandidates(src.path, testPaths);
-        if (candidates.length === 0) {
-            unmappedSources.push(src.path);
-        }
-        else if (candidates.length === 1) {
-            const c = candidates[0];
-            mappings.push({
-                source_path: src.path,
-                test_path: c.testPath,
-                mapping_kind: c.kind,
-                confidence: c.confidence,
-                evidence: [{ type: "test_convention", source_path: src.path, value: `Matched by ${c.kind}: ${c.testPath}` }],
-            });
-            mappedTests.add(c.testPath);
-        }
-        else {
-            // Multiple candidates — record first but mark ambiguous
-            const c = candidates[0];
-            mappings.push({
-                source_path: src.path,
-                test_path: c.testPath,
-                mapping_kind: c.kind,
-                confidence: "low",
-                evidence: [{ type: "test_convention", source_path: src.path, value: `Ambiguous: ${candidates.length} candidates` }],
-            });
-            mappedTests.add(c.testPath);
-            ambiguous.push(src.path);
-        }
-    }
-    const unmappedTests = testFiles
-        .filter(f => !mappedTests.has(f.path))
-        .map(f => f.path);
-    return { test_mappings: mappings, unmapped_sources: unmappedSources, unmapped_tests: unmappedTests, ambiguous_test_mappings: ambiguous };
-}
-function findTestCandidates(srcPath, testPaths) {
-    const candidates = [];
-    const basename = getBasename(srcPath);
-    const dirParts = srcPath.split("/").slice(1, -1); // remove bucket prefix and filename
-    const subPath = dirParts.join("/");
-    const extensions = ["ts", "tsx", "js", "jsx"];
-    for (const extension of extensions) {
-        // Convention 1: test/<subpath>/<basename>.test.tsx|ts|js|jsx
-        tryCandidate(candidates, testPaths, `test/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "parallel_test_dir", extension === "ts" ? "high" : "medium");
-        // Convention 2: tests/<subpath>/<basename>.test.*
-        tryCandidate(candidates, testPaths, `tests/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "parallel_test_dir", extension === "ts" ? "high" : "medium");
-        // Convention 3: src/<subpath>/<basename>.test.* (co-located)
-        tryCandidate(candidates, testPaths, `src/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "same_basename", extension === "ts" ? "high" : "medium");
-        // Convention 4: __tests__/<subpath>/<basename>.test.*
-        tryCandidate(candidates, testPaths, `__tests__/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "parallel_test_dir", "medium");
-        // Convention 5/6/7: *.spec.*
-        tryCandidate(candidates, testPaths, `test/${subPath ? subPath + "/" : ""}${basename}.spec.${extension}`, "suffix_spec", "medium");
-        tryCandidate(candidates, testPaths, `tests/${subPath ? subPath + "/" : ""}${basename}.spec.${extension}`, "suffix_spec", "medium");
-        tryCandidate(candidates, testPaths, `src/${subPath ? subPath + "/" : ""}${basename}.spec.${extension}`, "suffix_spec", "medium");
-    }
-    return candidates;
-}
-function tryCandidate(out, testPaths, testPath, kind, confidence) {
-    if (testPaths.has(testPath)) {
-        out.push({ testPath, kind, confidence });
-    }
-}
-function getBasename(filePath) {
-    const fileName = filePath.split("/").pop() ?? "";
-    // Strip extension (.ts, .tsx, .js, .jsx)
-    return fileName.replace(/\.[tj]sx?$/, "");
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/pathKeywordMatcher.ts
-function normalizeSegmentTokens(segment) {
-    return segment
-        .toLowerCase()
-        .replace(/\.[a-z0-9]+$/i, "")
-        .split(/[^a-z0-9]+/)
-        .filter(Boolean);
-}
-function pathContainsKeyword(path, keyword) {
-    const normalizedKeyword = keyword.toLowerCase();
-    for (const segment of path.split("/")) {
-        const tokens = normalizeSegmentTokens(segment);
-        if (tokens.some(token => token === normalizedKeyword || token === `${normalizedKeyword}s`)) {
-            return true;
-        }
-    }
-    return false;
-}
-function filenameContainsToken(path, token) {
-    const filename = path.split("/").pop() ?? "";
-    return normalizeSegmentTokens(filename).includes(token.toLowerCase());
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/sensitivePathDetector.ts
-/**
- * P20a: Sensitive Path Detector
- *
- * Detects sensitive paths by keyword matching in path segments.
- * No content inspection — path-only analysis.
- */
-
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-const SENSITIVE_KEYWORDS = [
-    { keyword: "auth", reason: "auth_keyword" },
-    { keyword: "payment", reason: "payment_keyword" },
-    { keyword: "billing", reason: "payment_keyword" },
-    { keyword: "admin", reason: "admin_keyword" },
-    { keyword: "secret", reason: "secret_keyword" },
-    { keyword: "secrets", reason: "secret_keyword" },
-    { keyword: "infra", reason: "infra_keyword" },
-    { keyword: "migration", reason: "migration_keyword" },
-    { keyword: "migrations", reason: "migration_keyword" },
-    { keyword: "prod", reason: "config_keyword" },
-    { keyword: "production", reason: "config_keyword" },
-];
-/**
- * Detect sensitive paths by keyword matching in path segments.
- */
-function detectSensitivePaths(files) {
-    const results = [];
-    const seen = new Set();
-    for (const file of files) {
-        const segments = file.path.toLowerCase().split("/");
-        for (const { keyword, reason } of SENSITIVE_KEYWORDS) {
-            if (pathContainsKeyword(file.path, keyword)) {
-                const key = `${file.path}:${reason}`;
-                if (!seen.has(key)) {
-                    seen.add(key);
-                    results.push({
-                        path: file.path,
-                        reason,
-                        review_required: true,
-                        evidence: [{ type: "keyword", source_path: file.path, value: `Path contains sensitive segment: ${keyword}` }],
-                    });
-                }
-            }
-        }
-    }
-    return results;
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/codeownersParser.ts
-/**
- * P20a: CODEOWNERS Parser
- *
- * Conservative CODEOWNERS parsing.
- * Supports root, .github/, docs/ locations.
- * Complex patterns marked as unresolved.
- */
-
-
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-function parseCodeowners(repoRoot) {
-    const hints = [];
-    const unresolved = [];
-    const locations = [
-        (0,external_node_path_.join)(repoRoot, "CODEOWNERS"),
-        (0,external_node_path_.join)(repoRoot, ".github", "CODEOWNERS"),
-        (0,external_node_path_.join)(repoRoot, "docs", "CODEOWNERS"),
-    ];
-    for (const loc of locations) {
-        if (!(0,external_node_fs_.existsSync)(loc))
-            continue;
-        const content = (0,external_node_fs_.readFileSync)(loc, "utf-8");
-        const lines = content.split(/\r?\n/);
-        for (const rawLine of lines) {
-            const line = rawLine.trim();
-            if (!line || line.startsWith("#"))
-                continue;
-            const parts = line.split(/\s+/);
-            if (parts.length < 2)
-                continue;
-            const pattern = parts[0];
-            const owners = parts.slice(1).filter(p => p.startsWith("@"));
-            if (owners.length === 0)
-                continue;
-            const source = loc.includes(".github")
-                ? "CODEOWNERS:.github"
-                : loc.includes("docs")
-                    ? "CODEOWNERS:docs"
-                    : "CODEOWNERS";
-            const expandedPatterns = expandBracePatterns(pattern);
-            for (const expandedPattern of expandedPatterns) {
-                const isComplex = isComplexPattern(expandedPattern);
-                if (isComplex) {
-                    unresolved.push(expandedPattern);
-                }
-                hints.push({
-                    path_pattern: expandedPattern,
-                    owners,
-                    source,
-                    match_status: isComplex ? "unresolved_complex_pattern" : "simple_pattern",
-                    evidence: [{ type: "codeowners", source_path: loc.replace(repoRoot, "").replace(/\\/g, "/").replace(/^\//, ""), value: line }],
-                });
-            }
-        }
-    }
-    return { owner_hints: hints, unresolved_patterns: unresolved };
-}
-// ---------------------------------------------------------------------------
-// Internal
-// ---------------------------------------------------------------------------
-/**
- * Determine if a CODEOWNERS pattern is "complex" and cannot be
- * confidently interpreted by simple prefix matching.
- *
- * Complex patterns include: **, *, ?, [, !
- * Simple patterns: path/ or path/file
- */
-function isComplexPattern(pattern) {
-    // Double star glob
-    if (pattern.includes("**"))
-        return true;
-    // Single star or question mark wildcard
-    if (pattern.includes("*") || pattern.includes("?"))
-        return true;
-    // Character class
-    if (pattern.includes("["))
-        return true;
-    // Negation
-    if (pattern.startsWith("!"))
-        return true;
-    return false;
-}
-function expandBracePatterns(pattern) {
-    const match = /\{([^{}]+)\}/.exec(pattern);
-    if (!match || match.index === undefined) {
-        return [pattern];
-    }
-    const before = pattern.slice(0, match.index);
-    const after = pattern.slice(match.index + match[0].length);
-    const options = match[1]
-        .split(",")
-        .map(option => option.trim())
-        .filter(option => option.length > 0);
-    if (options.length === 0) {
-        return [pattern];
-    }
-    return options.flatMap(option => expandBracePatterns(`${before}${option}${after}`));
-}
-
-// EXTERNAL MODULE: external "node:crypto"
-var external_node_crypto_ = __nccwpck_require__(598);
-// EXTERNAL MODULE: ./src/stableSerialize.ts
-var src_stableSerialize = __nccwpck_require__(120);
-;// CONCATENATED MODULE: ./src/hash.ts
-/**
- * Hash Module
- *
- * Implements the four core hash functions required by Day 1:
- *   1. computeBlockContentHash()   – ref: H-02
- *   2. computeArtifactHash()       – ref: H-03
- *   3. computeRevisionId()         – derives a revision identifier
- *   4. computeHash()               – low-level sha256 helper
- *
- * Design decisions:
- *   - content_hash includes ONLY semantic fields: { type, text, rationale, terms }
- *     (ref: H-02). Metadata, status, timestamps are excluded.
- *   - revision_hash includes the artifact's canonical representation:
- *     { artifact_id, artifact_type, schema_version, parent_revision_id, sections }
- *     where each block contributes its content_hash (ref: H-03).
- *     ArtifactMetadata is explicitly excluded (ref: §4.1.1).
- *   - All hashing uses stableSerialize (ref: H-01) then SHA-256.
- *   - Hash strings are prefixed with "sha256:" (ref: H-04).
- */
-
-
-// ---------------------------------------------------------------------------
-// Constants
-// ---------------------------------------------------------------------------
-const HASH_ALGORITHM = "sha256";
-const HASH_PREFIX = "sha256:";
-// ---------------------------------------------------------------------------
-// Low-level helper
-// ---------------------------------------------------------------------------
-/**
- * Compute SHA-256 of an arbitrary string and return the prefixed hex digest.
- */
-function computeHash(input) {
-    const digest = (0,external_node_crypto_.createHash)(HASH_ALGORITHM).update(input, "utf8").digest("hex");
-    return `${HASH_PREFIX}${digest}`;
-}
-// ---------------------------------------------------------------------------
-// Block content hash  – ref: H-02
-// ---------------------------------------------------------------------------
-/**
- * Extract the semantic-only fields from a CommitmentBlock.
- *
- * ref: H-02 – content_hash input is { type, text, rationale, terms }.
- * Everything else (block_id, status, content_hash itself, timestamps) is excluded.
- */
-function extractContentHashInput(block) {
-    const input = {
-        type: block.type,
-        text: block.text,
-    };
-    // Only include optional fields when they are defined.
-    // undefined values are omitted by stableSerialize, but being explicit
-    // makes the hash boundary clear and testable.
-    if (block.rationale !== undefined) {
-        input.rationale = block.rationale;
-    }
-    if (block.terms !== undefined) {
-        input.terms = block.terms;
-    }
-    return input;
-}
-/**
- * Compute the content_hash for a CommitmentBlock.
- *
- * ref: H-02
- * This hash changes if and only if { type, text, rationale, terms } changes.
- */
-function computeBlockContentHash(block) {
-    const semanticPayload = extractContentHashInput(block);
-    return computeHash(stableSerialize(semanticPayload));
-}
-// ---------------------------------------------------------------------------
-// Artifact / revision hash  – ref: H-03
-// ---------------------------------------------------------------------------
-/**
- * Build the canonical representation of an artifact for revision hashing.
- *
- * ref: H-03 – includes artifact_id, artifact_type, schema_version,
- * parent_revision_id, and sections with blocks (using content_hashes).
- * ArtifactMetadata is excluded (ref: §4.1.1).
- */
-function extractRevisionHashInput(artifact) {
-    return {
-        artifact_id: artifact.artifact_id,
-        artifact_type: artifact.artifact_type,
-        schema_version: artifact.schema_version,
-        parent_revision_id: artifact.parent_revision_id ?? null,
-        sections: artifact.sections.map((s) => ({
-            section_id: s.section_id,
-            title: s.title,
-            commitments: s.commitments.map((b) => ({
-                block_id: b.block_id,
-                content_hash: b.content_hash,
-            })),
-        })),
-    };
-}
-/**
- * Compute the artifact-level hash for a given revision state.
- *
- * ref: H-03
- * This hash changes if any structural or semantic content changes,
- * but is immune to metadata, timestamps, and UI state.
- */
-function computeArtifactHash(artifact) {
-    const payload = extractRevisionHashInput(artifact);
-    return computeHash(stableSerialize(payload));
-}
-/**
- * Compute a revision_id for a given artifact state.
- *
- * The revision_id is derived from the artifact hash so that identical
- * artifact content always yields the same revision identifier.
- *
- * Format: "rev_<first12chars_of_hex_digest>"
- */
-function computeRevisionId(artifact) {
-    const artifactHash = computeArtifactHash(artifact);
-    // Strip the "sha256:" prefix, take first 12 hex characters.
-    const hexDigest = artifactHash.slice(HASH_PREFIX.length);
-    return `rev_${hexDigest.slice(0, 12)}`;
-}
-// ---------------------------------------------------------------------------
-// Hash metadata helper  – ref: H-04
-// ---------------------------------------------------------------------------
-/**
- * Returns the hash metadata record that must be stored with every revision.
- * ref: H-04
- */
-function getHashMeta() {
-    return {
-        hash_algorithm: HASH_ALGORITHM,
-        serialization_version: SERIALIZATION_VERSION,
-    };
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/observationHasher.ts
-/**
- * P20a: Observation Hash
- *
- * Computes a deterministic hash over the full observation content.
- * Excludes: scanned_at, absolute repo_root, meta.observation_hash.
- * Includes: scanner_version, limits, observations, unknowns, excluded,
- *           meta.partial_scan, meta.file_count, meta.unknown_count,
- *           meta.excluded_count, repo_state, head_commit_hash,
- *           has_uncommitted_changes, uncommitted_file_count.
- *
- * All arrays sorted before hash for order-independence.
- */
-
-
-/**
- * Compute the observation hash for a set of repo observations.
- *
- * The hash is deterministic: identical observations produce identical hashes
- * regardless of array ordering, absolute repo root, or scan timestamp.
- */
-function computeObservationHash(obs) {
-    const payload = buildHashPayload(obs);
-    return computeHash((0,src_stableSerialize/* stableSerialize */.r)(payload));
-}
-// ---------------------------------------------------------------------------
-// Internal
-// ---------------------------------------------------------------------------
-function buildHashPayload(obs) {
-    return {
-        schema_version: obs.schema_version,
-        // Repo identity (without absolute path or timestamp)
-        repo_state: obs.repo.repo_state,
-        head_commit_hash: obs.repo.head_commit_hash,
-        has_uncommitted_changes: obs.repo.has_uncommitted_changes,
-        uncommitted_file_count: obs.repo.uncommitted_file_count,
-        // Scanner config
-        scanner_version: obs.scanner.scanner_version,
-        limits: obs.limits,
-        // Observations (all arrays sorted)
-        files: sortBy([...obs.observations.files], f => f.path),
-        path_buckets: sortBy([...obs.observations.path_buckets].map(b => ({
-            ...b,
-            paths: [...b.paths].sort(),
-        })), b => b.bucket),
-        import_edges: sortBy([...obs.observations.import_edges], e => `${e.from_file}\0${e.raw_specifier}\0${e.import_kind}`),
-        test_mappings: sortBy([...obs.observations.test_mappings], m => `${m.source_path}\0${m.test_path}`),
-        sensitive_paths: sortBy([...obs.observations.sensitive_paths], s => `${s.path}\0${s.reason}`),
-        owner_hints: sortBy([...obs.observations.owner_hints], h => `${h.path_pattern}\0${h.owners.join(",")}`),
-        config_hints: sortBy([...obs.observations.config_hints], c => c.config_path),
-        package_manifests: sortBy([...obs.observations.package_manifests], m => m.package_json_path),
-        // Unknowns (all arrays sorted)
-        unknowns: sortUnknowns(obs.unknowns),
-        // Excluded (sorted)
-        excluded: sortBy([...obs.excluded], e => `${e.path}\0${e.reason}`),
-        // Quality
-        quality: obs.quality,
-        // Meta (excluding observation_hash itself)
-        partial_scan: obs.meta.partial_scan,
-        file_count: obs.meta.file_count,
-        unknown_count: obs.meta.unknown_count,
-        excluded_count: obs.meta.excluded_count,
-    };
-}
-function sortUnknowns(u) {
-    return {
-        skipped_large_files: [...u.skipped_large_files].sort(),
-        unsupported_files: [...u.unsupported_files].sort(),
-        dynamic_imports: [...u.dynamic_imports].sort(),
-        unresolved_imports: [...u.unresolved_imports].sort(),
-        unmapped_sources: [...u.unmapped_sources].sort(),
-        unmapped_tests: [...u.unmapped_tests].sort(),
-        ambiguous_test_mappings: [...u.ambiguous_test_mappings].sort(),
-        scan_limit_exceeded: [...u.scan_limit_exceeded].sort(),
-        owner_patterns_unresolved: [...u.owner_patterns_unresolved].sort(),
-        changed_files_not_observed: [...u.changed_files_not_observed].sort(),
-    };
-}
-function sortBy(arr, keyFn) {
-    return arr.sort((a, b) => keyFn(a).localeCompare(keyFn(b)));
-}
-
-;// CONCATENATED MODULE: external "node:module"
-const external_node_module_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:module");
-;// CONCATENATED MODULE: ./src/repoObservation/packageDependencyClassifier.ts
-/**
- * P20a.2: Package Dependency Classifier
- *
- * Classifies package imports using package.json manifests and Node builtins.
- * Replaces the brittle WELLKNOWN_PACKAGES list with ground-truth resolution.
- *
- * Resolution order:
- *   1. node: prefix or builtin module → builtin_node_package
- *   2. Declared in any package.json dep group → declared_package
- *   3. package.json exists but not declared → undeclared_package
- *   4. No package.json found → unknown_package
- */
-
-// ---------------------------------------------------------------------------
-// Node builtins set (includes both "fs" and "node:fs" forms)
-// ---------------------------------------------------------------------------
-const NODE_BUILTINS = new Set([
-    ...external_node_module_namespaceObject.builtinModules,
-    ...external_node_module_namespaceObject.builtinModules.map(m => `node:${m}`),
-]);
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-/**
- * Classify a package import specifier against known package manifests.
- *
- * Only call this for non-relative, non-dynamic specifiers.
- */
-function classifyPackageImport(input) {
-    const { rawSpecifier, packageManifests } = input;
-    // 1. Node builtin
-    if (isNodeBuiltin(rawSpecifier)) {
-        return "builtin_node_package";
-    }
-    // 2. Extract package name root
-    const packageName = extractPackageName(rawSpecifier);
-    if (!packageName) {
-        return "unknown_package";
-    }
-    // 3. No manifests → unknown
-    if (packageManifests.length === 0) {
-        return "unknown_package";
-    }
-    // 4. Check all manifests
-    for (const manifest of packageManifests) {
-        if (isDeclaredIn(packageName, manifest)) {
-            return "declared_package";
-        }
-    }
-    // 5. Manifests exist but package not declared
-    return "undeclared_package";
-}
-/**
- * Check if a specifier is a Node.js builtin module.
- */
-function isNodeBuiltin(specifier) {
-    // node: prefix
-    if (specifier.startsWith("node:"))
-        return true;
-    // Bare builtin name
-    return NODE_BUILTINS.has(specifier);
-}
-/**
- * Extract the root package name from an import specifier.
- *
- * Examples:
- *   "lodash/fp"           → "lodash"
- *   "@scope/pkg/sub"      → "@scope/pkg"
- *   "zod"                 → "zod"
- *   "@scope/pkg"          → "@scope/pkg"
- *   "./relative"          → null (not a package)
- */
-function extractPackageName(specifier) {
-    // Relative path — not a package
-    if (specifier.startsWith("./") || specifier.startsWith("../")) {
-        return null;
-    }
-    // node: prefix — builtin, not a package
-    if (specifier.startsWith("node:")) {
-        return null;
-    }
-    // Scoped package: @scope/pkg or @scope/pkg/subpath
-    if (specifier.startsWith("@")) {
-        const parts = specifier.split("/");
-        if (parts.length >= 2) {
-            return `${parts[0]}/${parts[1]}`;
-        }
-        return null; // Malformed scoped package
-    }
-    // Bare package: pkg or pkg/subpath
-    const slashIdx = specifier.indexOf("/");
-    if (slashIdx === -1) {
-        return specifier;
-    }
-    return specifier.substring(0, slashIdx);
-}
-// ---------------------------------------------------------------------------
-// Internal
-// ---------------------------------------------------------------------------
-function isDeclaredIn(packageName, manifest) {
-    return (manifest.dependencies.includes(packageName) ||
-        manifest.dev_dependencies.includes(packageName) ||
-        manifest.peer_dependencies.includes(packageName) ||
-        manifest.optional_dependencies.includes(packageName));
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/observationQuality.ts
-/**
- * P20a.2: Observation Quality Metrics
- *
- * Computes quality metrics and unknown taxonomy from repo observations.
- * Splits unknowns into three categories:
- *   - out_of_scope: unsupported files/languages (scanner can't help)
- *   - actionable: unmapped sources, undeclared packages (user can fix)
- *   - intrinsic: dynamic imports, large files (deterministic scanner limit)
- */
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-/**
- * Compute quality metrics from observations.
- * Call after unknowns are populated but before hash computation.
- */
-function computeObservationQuality(obs) {
-    const taxonomy = computeUnknownTaxonomy(obs);
-    const fileCount = obs.meta.file_count || 1; // avoid division by zero
-    const outOfScopeCount = taxonomy.out_of_scope.unsupported_files.length;
-    const actionableCount = taxonomy.actionable.unmapped_sources.length +
-        taxonomy.actionable.unmapped_tests.length +
-        taxonomy.actionable.undeclared_packages.length +
-        taxonomy.actionable.unresolved_aliases.length +
-        taxonomy.actionable.unknown_packages.length +
-        taxonomy.actionable.owner_patterns_unresolved.length;
-    const intrinsicCount = taxonomy.intrinsic.dynamic_imports.length +
-        taxonomy.intrinsic.skipped_large_files.length +
-        taxonomy.intrinsic.scan_limit_exceeded.length;
-    const rawUnknownCount = obs.meta.unknown_count;
-    // Undeclared packages: count import edges with undeclared_package status
-    const undeclaredPackageCount = obs.observations.import_edges.filter(e => e.resolution_status === "undeclared_package").length;
-    // Unknown bucket files
-    const unknownBucketFileCount = obs.observations.files.filter(f => f.bucket === "unknown").length;
-    return {
-        raw_unknown_count: rawUnknownCount,
-        raw_unknown_ratio: rawUnknownCount / fileCount,
-        out_of_scope_count: outOfScopeCount,
-        out_of_scope_ratio: outOfScopeCount / fileCount,
-        actionable_count: actionableCount,
-        actionable_ratio: actionableCount / fileCount,
-        intrinsic_count: intrinsicCount,
-        intrinsic_ratio: intrinsicCount / fileCount,
-        unknown_bucket_file_count: unknownBucketFileCount,
-        undeclared_package_count: undeclaredPackageCount,
-        taxonomy,
-    };
-}
-/**
- * Generate operator-facing recommendations based on quality metrics.
- */
-function generateObservationRecommendations(input) {
-    const { quality } = input;
-    const recs = [];
-    if (quality.taxonomy.actionable.unmapped_sources.length > 0) {
-        recs.push(`Add test_mapping_overrides in pantheon.json for ${quality.taxonomy.actionable.unmapped_sources.length} unmapped source file(s).`);
-    }
-    if (quality.taxonomy.actionable.unmapped_tests.length > 0) {
-        recs.push(`Review ${quality.taxonomy.actionable.unmapped_tests.length} unmapped test file(s): rename to follow convention or add test_mapping_overrides.`);
-    }
-    if (quality.taxonomy.actionable.undeclared_packages.length > 0) {
-        recs.push(`Add ${quality.taxonomy.actionable.undeclared_packages.length} undeclared package(s) to package.json or review import usage.`);
-    }
-    if (quality.taxonomy.actionable.unknown_packages.length > 0) {
-        recs.push(`${quality.taxonomy.actionable.unknown_packages.length} package(s) could not be classified (no package.json found). Ensure package.json exists.`);
-    }
-    if (quality.unknown_bucket_file_count > 0) {
-        recs.push(`Add path_roles in pantheon.json for ${quality.unknown_bucket_file_count} file(s) in the 'unknown' bucket.`);
-    }
-    if (quality.taxonomy.out_of_scope.unsupported_files.length > 0) {
-        recs.push(`${quality.taxonomy.out_of_scope.unsupported_files.length} file(s) use unsupported languages. Add language support only if they are in governance scope.`);
-    }
-    if (quality.taxonomy.intrinsic.dynamic_imports.length > 0) {
-        recs.push(`Review ${quality.taxonomy.intrinsic.dynamic_imports.length} dynamic import(s) manually; deterministic scanner cannot resolve them.`);
-    }
-    return recs;
-}
-// ---------------------------------------------------------------------------
-// Internal
-// ---------------------------------------------------------------------------
-function computeUnknownTaxonomy(obs) {
-    // Undeclared packages from import edges
-    const undeclaredPackages = new Set();
-    const unknownPackages = new Set();
-    for (const edge of obs.observations.import_edges) {
-        if (edge.resolution_status === "undeclared_package") {
-            undeclaredPackages.add(`${edge.from_file}:${edge.raw_specifier}`);
-        }
-        if (edge.resolution_status === "unknown_package") {
-            unknownPackages.add(`${edge.from_file}:${edge.raw_specifier}`);
-        }
-    }
-    // Unresolved aliases from import edges
-    const unresolvedAliases = obs.observations.import_edges
-        .filter(e => e.resolution_status === "unresolved_alias")
-        .map(e => `${e.from_file}:${e.raw_specifier}`);
-    return {
-        out_of_scope: {
-            unsupported_files: [...obs.unknowns.unsupported_files],
-        },
-        actionable: {
-            unmapped_sources: [...obs.unknowns.unmapped_sources],
-            unmapped_tests: [...obs.unknowns.unmapped_tests],
-            undeclared_packages: [...undeclaredPackages],
-            unresolved_aliases: unresolvedAliases,
-            unknown_packages: [...unknownPackages],
-            owner_patterns_unresolved: [...obs.unknowns.owner_patterns_unresolved],
-        },
-        intrinsic: {
-            dynamic_imports: [...obs.unknowns.dynamic_imports],
-            skipped_large_files: [...obs.unknowns.skipped_large_files],
-            scan_limit_exceeded: [...obs.unknowns.scan_limit_exceeded],
-        },
-    };
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/repoScanner.ts
-/**
- * P20a.2: Repo Scanner Orchestrator
- *
- * Enumerates files, applies limits/exclusions, calls all sub-modules,
- * classifies package imports via manifests, computes quality metrics,
- * collects git status, computes observation hash.
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-const SCANNER_VERSION = "0.2.0";
-const ANALYZABLE_LANGUAGES = new Set(["typescript", "javascript"]);
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-function scanRepo(input) {
-    const limits = resolveLimits(input.config?.limits);
-    // Merge config excluded_dirs with default
-    const configExcludedDirs = input.config?.excluded_dirs ?? [];
-    const allExcludedDirs = [...limits.excluded_dirs, ...configExcludedDirs];
-    const excludedDirSet = new Set(allExcludedDirs.map(d => d.toLowerCase()));
-    // Config path roles (exact prefix match)
-    const pathRoles = input.config?.path_roles ?? {};
-    // 1. Enumerate files
-    const { observedFiles, excludedPaths } = enumerateFiles(input.repoRoot, input.repoRoot, excludedDirSet, limits);
-    // 2. Classify + detect language (with config path_roles override)
-    const files = observedFiles.map(f => classifyObservedFile(f, limits, pathRoles));
-    // 3. Extract package manifests
-    const packageManifests = collectPackageManifests(input.repoRoot, files);
-    // 4. Extract imports from analyzable files
-    const rawImportEdges = [];
-    const dynamicImports = [];
-    for (const file of files) {
-        if (file.analysis_status !== "analyzed" || !ANALYZABLE_LANGUAGES.has(file.language))
-            continue;
-        try {
-            const content = (0,external_node_fs_.readFileSync)((0,external_node_path_.join)(input.repoRoot, file.path), "utf-8");
-            const extracted = extractImportsFromFile({ path: file.path, content });
-            rawImportEdges.push(...extracted.import_edges);
-            dynamicImports.push(...extracted.unknowns.dynamic_imports);
-        }
-        catch {
-            // File read error — skip silently, still recorded in files
-        }
-    }
-    // 5. Reclassify import edges through package dependency classifier
-    const allImportEdges = reclassifyImportEdges(rawImportEdges, packageManifests);
-    // Compute unresolved imports after reclassification
-    const unresolvedImports = allImportEdges
-        .filter(e => e.resolution_status === "unresolved_package" || e.resolution_status === "unresolved_alias")
-        .map(e => `${e.from_file}:${e.raw_specifier}`);
-    // 6. Test mappings (with config overrides)
-    const testMappingOverrides = input.config?.test_mapping_overrides ?? {};
-    const testResult = inferTestMappings({ files, overrides: testMappingOverrides });
-    // 7. Sensitive paths
-    const sensitivePaths = detectSensitivePaths(files);
-    // 8. CODEOWNERS
-    const codeownersResult = parseCodeowners(input.repoRoot);
-    // 9. Config hints
-    const configHints = collectConfigHints(input.repoRoot, files);
-    // 10. Path buckets
-    const pathBuckets = buildPathBuckets(files);
-    // 11. Git status
-    const repoMeta = detectGitStatus(input.repoRoot);
-    // 12. Build unknowns
-    const unknowns = {
-        skipped_large_files: files.filter(f => f.analysis_status === "skipped_large_file").map(f => f.path),
-        unsupported_files: files.filter(f => f.analysis_status === "unsupported_language").map(f => f.path),
-        dynamic_imports: dynamicImports,
-        unresolved_imports: unresolvedImports,
-        unmapped_sources: testResult.unmapped_sources,
-        unmapped_tests: testResult.unmapped_tests,
-        ambiguous_test_mappings: testResult.ambiguous_test_mappings,
-        scan_limit_exceeded: excludedPaths
-            .filter(e => e.reason === "max_file_limit" || e.reason === "scanner_timeout")
-            .map(e => e.path),
-        owner_patterns_unresolved: codeownersResult.unresolved_patterns,
-        changed_files_not_observed: [],
-    };
-    const unknownCount = unknowns.skipped_large_files.length + unknowns.unsupported_files.length +
-        unknowns.dynamic_imports.length + unknowns.unresolved_imports.length +
-        unknowns.unmapped_sources.length + unknowns.unmapped_tests.length +
-        unknowns.ambiguous_test_mappings.length + unknowns.scan_limit_exceeded.length +
-        unknowns.owner_patterns_unresolved.length;
-    const partialScan = excludedPaths.some(e => e.reason === "max_file_limit" || e.reason === "scanner_timeout");
-    // 13. Build observations (without hash and quality)
-    const preQualityObs = {
-        schema_version: "repo_observations.v1",
-        repo: repoMeta,
-        scanner: {
-            scanner_version: SCANNER_VERSION,
-            mode: "deterministic",
-            language_targets: ["typescript", "javascript"],
-            llm_used: false,
-        },
-        limits,
-        observations: {
-            files,
-            path_buckets: pathBuckets,
-            import_edges: allImportEdges,
-            test_mappings: testResult.test_mappings,
-            sensitive_paths: sensitivePaths,
-            owner_hints: codeownersResult.owner_hints,
-            config_hints: configHints,
-            package_manifests: packageManifests,
-        },
-        unknowns,
-        excluded: excludedPaths,
-        quality: null, // placeholder
-        meta: {
-            observation_hash: "", // computed below
-            partial_scan: partialScan,
-            file_count: files.length,
-            unknown_count: unknownCount,
-            excluded_count: excludedPaths.length,
-        },
-    };
-    // 14. Compute quality
-    const quality = computeObservationQuality(preQualityObs);
-    const withQuality = { ...preQualityObs, quality };
-    // 15. Compute hash
-    const hash = computeObservationHash(withQuality);
-    return { ...withQuality, meta: { ...withQuality.meta, observation_hash: hash } };
-}
-function enumerateFiles(dir, repoRoot, excludedDirs, limits) {
-    const observed = [];
-    const excluded = [];
-    function walk(current) {
-        if (observed.length >= limits.max_total_files)
-            return;
-        let entries;
-        try {
-            entries = (0,external_node_fs_.readdirSync)(current);
-        }
-        catch {
-            return;
-        }
-        for (const entry of entries) {
-            if (observed.length >= limits.max_total_files) {
-                excluded.push({
-                    path: (0,pathUtils/* normalizeRepoRelativePath */.t)((0,external_node_path_.relative)(repoRoot, (0,external_node_path_.join)(current, entry))),
-                    reason: "max_file_limit",
-                    evidence: [{ type: "scanner_limit", source_path: "", value: `max_total_files=${limits.max_total_files}` }],
-                });
-                break;
-            }
-            const fullPath = (0,external_node_path_.join)(current, entry);
-            let stat;
-            try {
-                stat = (0,external_node_fs_.statSync)(fullPath);
-            }
-            catch {
-                continue;
-            }
-            if (stat.isDirectory()) {
-                if (excludedDirs.has(entry.toLowerCase())) {
-                    excluded.push({
-                        path: (0,pathUtils/* normalizeRepoRelativePath */.t)((0,external_node_path_.relative)(repoRoot, fullPath)),
-                        reason: "excluded_dir",
-                        evidence: [{ type: "path", source_path: (0,external_node_path_.relative)(repoRoot, fullPath).replace(/\\/g, "/"), value: `excluded dir: ${entry}` }],
-                    });
-                    continue;
-                }
-                walk(fullPath);
-            }
-            else if (stat.isFile()) {
-                const relPath = (0,pathUtils/* normalizeRepoRelativePath */.t)((0,external_node_path_.relative)(repoRoot, fullPath));
-                observed.push({ path: relPath, size_bytes: stat.size });
-            }
-        }
-    }
-    walk(repoRoot);
-    return { observedFiles: observed, excludedPaths: excluded };
-}
-function classifyObservedFile(raw, limits, pathRoles = {}) {
-    // Config path_roles override: exact prefix match
-    let bucket;
-    let overridePrefix;
-    for (const [prefix, role] of Object.entries(pathRoles)) {
-        if (raw.path.startsWith(prefix + "/") || raw.path === prefix) {
-            bucket = role;
-            overridePrefix = prefix;
-            break;
-        }
-    }
-    if (!bucket) {
-        bucket = classifyFile(raw.path);
-    }
-    const language = detectLanguage(raw.path);
-    let analysisStatus;
-    const evidence = [{ type: "path", source_path: raw.path, value: `bucket=${bucket}` }];
-    // Record config provenance when a path_roles override changed the bucket
-    if (overridePrefix !== undefined) {
-        evidence.push({ type: "config", source_path: "pantheon.json", value: `path_roles.${overridePrefix}=${bucket}` });
-    }
-    if (raw.size_bytes > limits.max_file_bytes) {
-        analysisStatus = "skipped_large_file";
-        evidence.push({ type: "scanner_limit", source_path: raw.path, value: `size=${raw.size_bytes} > max=${limits.max_file_bytes}` });
-    }
-    else if (!ANALYZABLE_LANGUAGES.has(language) && language !== "json" && language !== "yaml" && language !== "markdown") {
-        analysisStatus = "unsupported_language";
-    }
-    else {
-        analysisStatus = "analyzed";
-    }
-    return { path: raw.path, bucket, language, size_bytes: raw.size_bytes, analysis_status: analysisStatus, evidence };
-}
-function reclassifyImportEdges(edges, packageManifests) {
-    return edges.map(edge => {
-        // Only reclassify unresolved_package edges — leave relative, builtin, dynamic, alias untouched
-        if (edge.resolution_status !== "unresolved_package") {
-            return edge;
-        }
-        const newStatus = classifyPackageImport({
-            rawSpecifier: edge.raw_specifier,
-            packageManifests,
-        });
-        return { ...edge, resolution_status: newStatus };
-    });
-}
-function collectPackageManifests(repoRoot, _files) {
-    const manifests = [];
-    // Root package.json
-    const rootPkgPath = (0,external_node_path_.join)(repoRoot, "package.json");
-    if ((0,external_node_fs_.existsSync)(rootPkgPath)) {
-        try {
-            const content = JSON.parse((0,external_node_fs_.readFileSync)(rootPkgPath, "utf-8"));
-            manifests.push({
-                package_json_path: "package.json",
-                package_name: content.name ?? undefined,
-                dependencies: Object.keys(content.dependencies ?? {}),
-                dev_dependencies: Object.keys(content.devDependencies ?? {}),
-                peer_dependencies: Object.keys(content.peerDependencies ?? {}),
-                optional_dependencies: Object.keys(content.optionalDependencies ?? {}),
-                evidence: [{ type: "config", source_path: "package.json", value: "root package manifest" }],
-            });
-        }
-        catch {
-            // JSON parse error — skip
-        }
-    }
-    return manifests;
-}
-function buildPathBuckets(files) {
-    const map = new Map();
-    for (const f of files) {
-        if (!map.has(f.bucket))
-            map.set(f.bucket, []);
-        map.get(f.bucket).push(f.path);
-    }
-    return Array.from(map.entries()).map(([bucket, paths]) => ({
-        bucket,
-        paths: paths.sort(),
-        count: paths.length,
-    }));
-}
-function detectGitStatus(repoRoot) {
-    const gitDir = (0,external_node_path_.join)(repoRoot, ".git");
-    const isGit = (0,external_node_fs_.existsSync)(gitDir);
-    if (!isGit) {
-        return {
-            repo_root_label: repoRoot.split(/[/\\]/).pop() ?? "repo",
-            repo_state: "working_tree_only",
-            head_commit_hash: null,
-            has_uncommitted_changes: null,
-            uncommitted_file_count: null,
-            scanned_at: new Date().toISOString(),
-        };
-    }
-    try {
-        const headHash = (0,external_node_child_process_.execFileSync)("git", ["rev-parse", "HEAD"], {
-            cwd: repoRoot,
-            encoding: "utf-8",
-            stdio: ["ignore", "pipe", "ignore"],
-        }).trim();
-        const statusOutput = (0,external_node_child_process_.execFileSync)("git", ["status", "--porcelain"], {
-            cwd: repoRoot,
-            encoding: "utf-8",
-            stdio: ["ignore", "pipe", "ignore"],
-        }).trim();
-        const dirtyFiles = statusOutput ? statusOutput.split("\n").length : 0;
-        return {
-            repo_root_label: repoRoot.split(/[/\\]/).pop() ?? "repo",
-            repo_state: dirtyFiles > 0 ? "git_dirty" : "git_clean",
-            head_commit_hash: headHash,
-            has_uncommitted_changes: dirtyFiles > 0,
-            uncommitted_file_count: dirtyFiles,
-            scanned_at: new Date().toISOString(),
-        };
-    }
-    catch {
-        return {
-            repo_root_label: repoRoot.split(/[/\\]/).pop() ?? "repo",
-            repo_state: "working_tree_only",
-            head_commit_hash: null,
-            has_uncommitted_changes: null,
-            uncommitted_file_count: null,
-            scanned_at: new Date().toISOString(),
-        };
-    }
-}
-function collectConfigHints(repoRoot, files) {
-    const hints = [];
-    // JSON-based configs
-    const JSON_CONFIGS = [
-        { path: "package.json", kind: "package_json", fields: ["name", "type", "main", "module"] },
-        { path: "tsconfig.json", kind: "tsconfig", fields: ["compilerOptions.target", "compilerOptions.module", "compilerOptions.strict"] },
-        { path: "jest.config.json", kind: "jest", fields: ["testEnvironment", "transform", "preset"] },
-    ];
-    for (const cfg of JSON_CONFIGS) {
-        const fullPath = (0,external_node_path_.join)(repoRoot, cfg.path);
-        if (!(0,external_node_fs_.existsSync)(fullPath))
-            continue;
-        try {
-            const content = JSON.parse((0,external_node_fs_.readFileSync)(fullPath, "utf-8"));
-            const detectedFields = extractJsonFields(content, cfg.fields);
-            hints.push({
-                config_path: cfg.path,
-                kind: cfg.kind,
-                detected_fields: detectedFields,
-                evidence: [{ type: "config", source_path: cfg.path, value: `config file: ${cfg.kind}` }],
-            });
-        }
-        catch {
-            // JSON parse error — skip
-        }
-    }
-    // JS/TS-based configs (presence detection only, no content parsing)
-    const SCRIPT_CONFIGS = [
-        { paths: ["vitest.config.ts", "vitest.config.js", "vitest.config.mts"], kind: "vitest" },
-        { paths: ["jest.config.ts", "jest.config.js", "jest.config.mjs"], kind: "jest" },
-        { paths: [".eslintrc.js", ".eslintrc.cjs", "eslint.config.js", "eslint.config.mjs", ".eslintrc.json", ".eslintrc.yml"], kind: "eslint" },
-    ];
-    for (const cfg of SCRIPT_CONFIGS) {
-        for (const p of cfg.paths) {
-            const fullPath = (0,external_node_path_.join)(repoRoot, p);
-            if (!(0,external_node_fs_.existsSync)(fullPath))
-                continue;
-            // Already covered by JSON configs?
-            if (hints.some(h => h.kind === cfg.kind))
-                break;
-            hints.push({
-                config_path: p,
-                kind: cfg.kind,
-                detected_fields: [{ field_name: "config_detected", field_value_preview: `${p} exists` }],
-                evidence: [{ type: "config", source_path: p, value: `config file: ${cfg.kind}` }],
-            });
-            break; // only first match
-        }
-    }
-    // GitHub Actions (directory-based)
-    const ghActionsDir = (0,external_node_path_.join)(repoRoot, ".github", "workflows");
-    if ((0,external_node_fs_.existsSync)(ghActionsDir)) {
-        try {
-            const workflows = (0,external_node_fs_.readdirSync)(ghActionsDir).filter(f => f.endsWith(".yml") || f.endsWith(".yaml"));
-            if (workflows.length > 0) {
-                hints.push({
-                    config_path: ".github/workflows",
-                    kind: "github_actions",
-                    detected_fields: workflows.slice(0, 10).map(w => ({
-                        field_name: "workflow",
-                        field_value_preview: w.slice(0, 200),
-                    })),
-                    evidence: [{ type: "config", source_path: ".github/workflows", value: `${workflows.length} workflow(s) detected` }],
-                });
-            }
-        }
-        catch {
-            // directory read error — skip
-        }
-    }
-    return hints;
-}
-function extractJsonFields(content, fields) {
-    const result = [];
-    for (const field of fields) {
-        const parts = field.split(".");
-        let val = content;
-        for (const p of parts) {
-            if (val && typeof val === "object" && p in val) {
-                val = val[p];
-            }
-            else {
-                val = undefined;
-                break;
-            }
-        }
-        if (val !== undefined) {
-            const preview = String(val).slice(0, 200);
-            result.push({ field_name: field, field_value_preview: preview });
-        }
-    }
-    return result;
-}
-function resolveLimits(overrides) {
-    if (!overrides)
-        return { ...DEFAULT_SCAN_LIMITS };
-    return {
-        max_file_bytes: overrides.max_file_bytes ?? DEFAULT_SCAN_LIMITS.max_file_bytes,
-        max_total_files: overrides.max_total_files ?? DEFAULT_SCAN_LIMITS.max_total_files,
-        max_import_edges: overrides.max_import_edges ?? DEFAULT_SCAN_LIMITS.max_import_edges,
-        scan_timeout_ms: overrides.scan_timeout_ms ?? DEFAULT_SCAN_LIMITS.scan_timeout_ms,
-        excluded_dirs: overrides.excluded_dirs ?? [...DEFAULT_SCAN_LIMITS.excluded_dirs],
-    };
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/python/pythonEcosystemPatterns.ts
-/**
- * P25a.1: Shared Python Ecosystem Patterns
- *
- * Single source of truth for Python file detection patterns.
- * Used by both pythonFileClassifier and pythonObservationEnhancer
- * to eliminate duplication.
- */
-// ---------------------------------------------------------------------------
-// Python file extensions
-// ---------------------------------------------------------------------------
-const PYTHON_EXTENSIONS = new Set([".py", ".pyi", ".pyx", ".ipynb"]);
-// ---------------------------------------------------------------------------
-// Python ecosystem config files (not .py but part of Python projects)
-// ---------------------------------------------------------------------------
-const PYTHON_ECOSYSTEM_BASENAMES = new Set([
-    "pyproject.toml",
-    "setup.cfg",
-    "setup.py",
-    "pipfile",
-    "pipfile.lock",
-    "poetry.lock",
-    "uv.lock",
-    "pdm.lock",
-    "tox.ini",
-    "noxfile.py",
-    "pytest.ini",
-    "mypy.ini",
-    ".flake8",
-    ".pre-commit-config.yaml",
-    "environment.yml",
-    "environment.yaml",
-]);
-const PYTHON_ECOSYSTEM_PREFIXES = [
-    "requirements",
-];
-/**
- * Check if a file path refers to a Python ecosystem file (config/manifest).
- * These are not .py files but are part of the Python project infrastructure.
- */
-function isPythonEcosystemFile(path) {
-    const basename = path.split("/").pop()?.toLowerCase() ?? "";
-    if (PYTHON_ECOSYSTEM_BASENAMES.has(basename))
-        return true;
-    for (const prefix of PYTHON_ECOSYSTEM_PREFIXES) {
-        if (basename.startsWith(prefix) && basename.endsWith(".txt"))
-            return true;
-    }
-    return false;
-}
-/**
- * Check if a file path refers to a Python source file (.py/.pyi/.pyx/.ipynb).
- */
-function isPythonSourceExtension(path) {
-    const lastDot = path.lastIndexOf(".");
-    if (lastDot < 0)
-        return false;
-    return PYTHON_EXTENSIONS.has(path.slice(lastDot).toLowerCase());
-}
-/**
- * Check if a file is relevant to Python observation (source or ecosystem).
- */
-function isPythonRelevantFile(path) {
-    return isPythonSourceExtension(path) || isPythonEcosystemFile(path);
-}
-// ---------------------------------------------------------------------------
-// Manifest file detection
-// ---------------------------------------------------------------------------
-const PYTHON_MANIFEST_BASENAMES = new Set([
-    "pyproject.toml",
-    "setup.cfg",
-    "setup.py",
-    "pipfile",
-    "uv.lock",
-    "poetry.lock",
-    "pdm.lock",
-    "environment.yml",
-    "environment.yaml",
-    "tox.ini",
-    "noxfile.py",
-]);
-function isPythonManifestFile(path) {
-    const basename = path.split("/").pop()?.toLowerCase() ?? "";
-    if (PYTHON_MANIFEST_BASENAMES.has(basename))
-        return true;
-    return basename.startsWith("requirements") && basename.endsWith(".txt");
-}
-// ---------------------------------------------------------------------------
-// Heuristic: does this repo look like a Python project?
-// ---------------------------------------------------------------------------
-/**
- * Detect if a repo likely contains Python code worth analyzing.
- * Cheap heuristic: check if >5% of files are .py or if key ecosystem files exist.
- */
-function hasPythonSignals(filePaths) {
-    let pyCount = 0;
-    let hasEcosystem = false;
-    for (const path of filePaths) {
-        if (isPythonSourceExtension(path))
-            pyCount++;
-        if (!hasEcosystem && isPythonEcosystemFile(path))
-            hasEcosystem = true;
-    }
-    if (hasEcosystem)
-        return true;
-    return pyCount > 0 && (pyCount / filePaths.length) > 0.05;
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/python/pythonFileClassifier.ts
-/**
- * P25a: Python File Classifier
- *
- * Path-based classification for Python files.
- * No content inspection — uses only path patterns and extensions.
- */
-
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-function classifyPythonFile(path, sizeBytes) {
-    const ext = extractExtension(path);
-    const bucket = classifyPythonBucket(path, ext);
-    const evidence = explainClassification(path, ext, bucket);
-    return {
-        path,
-        bucket,
-        extension: ext,
-        size_bytes: sizeBytes,
-        evidence,
-    };
-}
-function isPythonFile(path) {
-    return isPythonSourceExtension(path);
-}
-const PYTHON_BUCKET_RULES = [
-    // Generated / excluded (must be early to catch __pycache__ etc)
-    { test: p => p.includes("__pycache__/"), bucket: "generated", reason: "Python bytecode cache" },
-    { test: p => p.includes(".pytest_cache/"), bucket: "generated", reason: "pytest cache" },
-    { test: p => p.includes(".mypy_cache/"), bucket: "generated", reason: "mypy cache" },
-    { test: p => p.startsWith("dist/"), bucket: "generated", reason: "Distribution output" },
-    { test: p => p.startsWith("build/"), bucket: "generated", reason: "Build output" },
-    { test: p => p.includes(".egg-info/"), bucket: "generated", reason: "Egg metadata" },
-    // Test files
-    { test: p => p.startsWith("tests/") || p.startsWith("test/"), bucket: "test", reason: "Top-level test directory" },
-    { test: p => p.includes("/tests/"), bucket: "test", reason: "Nested test directory" },
-    { test: p => /\/test_[^/]+\.py$/.test(p), bucket: "test", reason: "test_ prefix convention" },
-    { test: p => /_test\.py$/.test(p), bucket: "test", reason: "_test suffix convention" },
-    { test: p => /\/conftest\.py$/.test(p) || p === "conftest.py", bucket: "test", reason: "pytest conftest" },
-    // Migration
-    { test: p => p.includes("/migrations/"), bucket: "migration", reason: "Django/Alembic migration directory" },
-    { test: p => p.startsWith("alembic/versions/"), bucket: "migration", reason: "Alembic versions" },
-    // Script
-    { test: p => p === "manage.py", bucket: "script", reason: "Django manage.py" },
-    { test: p => p.startsWith("scripts/"), bucket: "script", reason: "Scripts directory" },
-    { test: p => p.startsWith("tools/"), bucket: "script", reason: "Tools directory" },
-    { test: p => p.startsWith("bin/"), bucket: "script", reason: "Bin directory" },
-    // Config
-    { test: p => p === "pyproject.toml" || p === "setup.cfg" || p === "setup.py", bucket: "config", reason: "Project config" },
-    { test: p => /^requirements.*\.txt$/.test(p), bucket: "config", reason: "Requirements file" },
-    { test: p => p === "tox.ini" || p === "pytest.ini" || p === ".flake8", bucket: "config", reason: "Tool config" },
-    { test: p => p === "Pipfile" || p === "Pipfile.lock" || p === "poetry.lock", bucket: "config", reason: "Lock/manifest" },
-    { test: p => /settings\.py$/.test(p), bucket: "config", reason: "Settings module" },
-    { test: p => p.includes("/settings/") && p.endsWith(".py"), bucket: "config", reason: "Settings package" },
-    { test: p => p === ".pre-commit-config.yaml" || p === "mypy.ini", bucket: "config", reason: "Tool config" },
-    // Docs
-    { test: p => p.startsWith("docs/"), bucket: "docs", reason: "Documentation directory" },
-    { test: p => p.endsWith(".rst"), bucket: "docs", reason: "reStructuredText" },
-];
-function classifyPythonBucket(path, ext) {
-    // Special extensions first
-    if (ext === ".ipynb")
-        return "notebook";
-    if (ext === ".pyx")
-        return "unsupported";
-    // Apply path-based rules for ALL files (catches .toml, .txt, .cfg, .pyc, etc.)
-    for (const rule of PYTHON_BUCKET_RULES) {
-        if (rule.test(path))
-            return rule.bucket;
-    }
-    // Type stubs default to source
-    if (ext === ".pyi")
-        return "source";
-    // Regular .py files default to source
-    if (ext === ".py")
-        return "source";
-    return "unknown";
-}
-function explainClassification(path, ext, bucket) {
-    if (ext === ".ipynb")
-        return ["Jupyter notebook — unsupported for import analysis"];
-    if (ext === ".pyx")
-        return ["Cython extension — unsupported for import analysis"];
-    for (const rule of PYTHON_BUCKET_RULES) {
-        if (rule.test(path))
-            return [rule.reason];
-    }
-    if (ext === ".py" && bucket === "source") {
-        return ["Default classification: .py file not matching test/config/migration/script patterns"];
-    }
-    return [];
-}
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-function extractExtension(path) {
-    const lastDot = path.lastIndexOf(".");
-    if (lastDot < 0)
-        return "";
-    return path.slice(lastDot).toLowerCase();
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/python/pythonImportObserver.ts
-/**
- * P25a: Python Import Observer
- *
- * Regex-based extraction of Python import statements.
- * Produces syntax-level observations, NOT full runtime import resolution.
- *
- * Supported:
- *   import os
- *   import saleor.checkout
- *   from saleor.checkout import calculations
- *   from .models import Checkout
- *   from ..core import permissions
- *   __import__("x")
- *   importlib.import_module("x")
- */
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-function observePythonImports(input) {
-    const results = [];
-    // Pre-process: join multiline imports into single lines
-    const preprocessed = joinMultilineImports(input.content);
-    const lines = preprocessed.split("\n");
-    for (const line of lines) {
-        const trimmed = line.trim();
-        // Skip comments and empty lines
-        if (trimmed.startsWith("#") || trimmed.length === 0)
-            continue;
-        // Dynamic imports
-        const dynamicMatch = matchDynamicImport(trimmed);
-        if (dynamicMatch) {
-            results.push({
-                from_file: input.filePath,
-                raw_specifier: dynamicMatch.specifier,
-                import_kind: "dynamic_import",
-                status: "dynamic_or_unresolved",
-                top_level_module: dynamicMatch.specifier,
-                confidence: "low",
-                note: `Dynamic import detected: ${dynamicMatch.pattern}`,
-            });
-            continue;
-        }
-        // from X import Y
-        const fromMatch = matchFromImport(trimmed);
-        if (fromMatch) {
-            const status = classifyImport(fromMatch.module, input.projectPackages, input.declaredPackages);
-            const topLevel = extractTopLevelModule(fromMatch.module);
-            results.push({
-                from_file: input.filePath,
-                raw_specifier: fromMatch.full,
-                import_kind: "from_import",
-                status: status.status,
-                top_level_module: topLevel,
-                confidence: status.confidence,
-                note: status.note,
-            });
-            continue;
-        }
-        // import X [, Y, Z]
-        const importMatch = matchPlainImport(trimmed);
-        if (importMatch) {
-            for (const mod of importMatch.modules) {
-                const status = classifyImport(mod, input.projectPackages, input.declaredPackages);
-                const topLevel = extractTopLevelModule(mod);
-                results.push({
-                    from_file: input.filePath,
-                    raw_specifier: mod,
-                    import_kind: "import",
-                    status: status.status,
-                    top_level_module: topLevel,
-                    confidence: status.confidence,
-                    note: status.note,
-                });
-            }
-        }
-    }
-    return results;
-}
-/**
- * Pre-process Python source to join multiline import statements.
- * Handles:
- *   from x import (
- *     a,
- *     b,
- *   )
- * Joins them into: from x import (a, b)
- */
-function joinMultilineImports(content) {
-    const lines = content.split("\n");
-    const result = [];
-    let i = 0;
-    while (i < lines.length) {
-        const line = lines[i];
-        const trimmed = line.trim();
-        // Detect "from x import (" or "import (" opening
-        if (/^(?:from\s+[\w.]+\s+import|import)\s+.*\(\s*$/.test(trimmed)) {
-            // Accumulate until closing paren
-            let joined = trimmed.replace(/\(\s*$/, "(");
-            i++;
-            while (i < lines.length) {
-                const continuation = lines[i].trim();
-                if (continuation.includes(")")) {
-                    joined += " " + continuation.replace(/\)\s*$/, ")");
-                    break;
-                }
-                if (continuation.length > 0 && !continuation.startsWith("#")) {
-                    joined += " " + continuation;
-                }
-                i++;
-            }
-            result.push(joined);
-        }
-        else {
-            result.push(line);
-        }
-        i++;
-    }
-    return result.join("\n");
-}
-/**
- * Detect top-level project package directories by finding dirs with __init__.py.
- */
-function detectProjectPackages(observedPaths) {
-    const initFiles = new Set();
-    for (const p of observedPaths) {
-        if (p.endsWith("__init__.py")) {
-            const parts = p.split("/");
-            if (parts.length === 2) {
-                // top-level-dir/__init__.py
-                initFiles.add(parts[0]);
-            }
-        }
-    }
-    return [...initFiles].sort();
-}
-// ---------------------------------------------------------------------------
-// Import pattern matching
-// ---------------------------------------------------------------------------
-const FROM_IMPORT_RE = /^from\s+(\.{0,3}[\w.]*)\s+import\s+/;
-const PLAIN_IMPORT_RE = /^import\s+([\w.,\s]+)/;
-const DUNDER_IMPORT_RE = /__import__\s*\(\s*['"]([^'"]+)['"]\s*\)/;
-const IMPORTLIB_RE = /importlib\.import_module\s*\(\s*['"]([^'"]+)['"]\s*\)/;
-function matchFromImport(line) {
-    const m = FROM_IMPORT_RE.exec(line);
-    if (!m)
-        return null;
-    return { module: m[1], full: line };
-}
-function matchPlainImport(line) {
-    const m = PLAIN_IMPORT_RE.exec(line);
-    if (!m)
-        return null;
-    // Handle "import os, sys, json" and "import saleor.checkout as checkout"
-    const raw = m[1];
-    const modules = raw.split(",").map(s => {
-        // Remove "as alias" suffix
-        const asIdx = s.indexOf(" as ");
-        return (asIdx >= 0 ? s.slice(0, asIdx) : s).trim();
-    }).filter(s => s.length > 0 && /^[\w.]+$/.test(s));
-    return modules.length > 0 ? { modules } : null;
-}
-function matchDynamicImport(line) {
-    const d = DUNDER_IMPORT_RE.exec(line);
-    if (d)
-        return { specifier: d[1], pattern: "__import__" };
-    const i = IMPORTLIB_RE.exec(line);
-    if (i)
-        return { specifier: i[1], pattern: "importlib.import_module" };
-    return null;
-}
-// ---------------------------------------------------------------------------
-// Import classification
-// ---------------------------------------------------------------------------
-function classifyImport(module, projectPackages, declaredPackages) {
-    // Relative import
-    if (module.startsWith(".")) {
-        return {
-            status: "relative_import",
-            confidence: "medium",
-            note: "Relative import observed; full package resolution not attempted",
-        };
-    }
-    const topLevel = extractTopLevelModule(module);
-    // Builtin
-    if (PYTHON_STDLIB.has(topLevel)) {
-        return { status: "builtin_python_package", confidence: "high" };
-    }
-    // Project package
-    for (const pkg of projectPackages) {
-        if (topLevel === pkg) {
-            return { status: "project_import", confidence: "high" };
-        }
-    }
-    // Declared third-party
-    // Normalize: packages use underscores in imports but hyphens in manifests
-    const normalized = topLevel.replace(/-/g, "_").toLowerCase();
-    if (declaredPackages.has(topLevel) || declaredPackages.has(normalized)) {
-        return { status: "declared_package", confidence: "high" };
-    }
-    // Check if it's a common alias (django → django, graphene → graphene, etc)
-    // that might be declared under a different name
-    if (declaredPackages.has(topLevel.toLowerCase())) {
-        return { status: "declared_package", confidence: "medium" };
-    }
-    return { status: "undeclared_package", confidence: "low" };
-}
-function extractTopLevelModule(module) {
-    // "saleor.checkout.calculations" → "saleor"
-    // ".models" → "."
-    if (module.startsWith("."))
-        return module;
-    const dot = module.indexOf(".");
-    return dot >= 0 ? module.slice(0, dot) : module;
-}
-// ---------------------------------------------------------------------------
-// Python standard library (3.10+, ~200 modules)
-// ---------------------------------------------------------------------------
-const PYTHON_STDLIB = new Set([
-    // Core
-    "abc", "ast", "asyncio", "atexit", "base64", "bisect", "builtins",
-    "calendar", "cgi", "cgitb", "chunk", "cmath", "cmd", "code", "codecs",
-    "codeop", "collections", "colorsys", "compileall", "concurrent",
-    "configparser", "contextlib", "contextvars", "copy", "copyreg",
-    "cProfile", "crypt", "csv", "ctypes", "curses",
-    // D-F
-    "dataclasses", "datetime", "dbm", "decimal", "difflib", "dis",
-    "distutils", "doctest", "email", "encodings", "enum", "errno",
-    "faulthandler", "fcntl", "filecmp", "fileinput", "fnmatch",
-    "formatter", "fractions", "ftplib", "functools",
-    // G-I
-    "gc", "getopt", "getpass", "gettext", "glob", "grp", "gzip",
-    "hashlib", "heapq", "hmac", "html", "http",
-    "idlelib", "imaplib", "imghdr", "imp", "importlib", "inspect",
-    "io", "ipaddress", "itertools",
-    // J-L
-    "json", "keyword", "lib2to3", "linecache", "locale", "logging",
-    "lzma",
-    // M-O
-    "mailbox", "mailcap", "marshal", "math", "mimetypes", "mmap",
-    "modulefinder", "multiprocessing", "netrc", "nis", "nntplib",
-    "numbers", "operator", "optparse", "os", "ossaudiodev",
-    // P
-    "parser", "pathlib", "pdb", "pickle", "pickletools", "pipes",
-    "pkgutil", "platform", "plistlib", "poplib", "posix", "posixpath",
-    "pprint", "profile", "pstats", "pty", "pwd", "py_compile",
-    "pyclbr", "pydoc",
-    // Q-S
-    "queue", "quopri", "random", "re", "readline", "reprlib",
-    "resource", "rlcompleter", "runpy", "sched", "secrets", "select",
-    "selectors", "shelve", "shlex", "shutil", "signal", "site",
-    "smtpd", "smtplib", "sndhdr", "socket", "socketserver",
-    "sqlite3", "ssl", "stat", "statistics", "string", "stringprep",
-    "struct", "subprocess", "sunau", "symtable", "sys", "sysconfig",
-    "syslog",
-    // T
-    "tabnanny", "tarfile", "telnetlib", "tempfile", "termios", "test",
-    "textwrap", "threading", "time", "timeit", "tkinter", "token",
-    "tokenize", "tomllib", "trace", "traceback", "tracemalloc", "tty",
-    "turtle", "turtledemo", "types", "typing",
-    // U-Z
-    "unicodedata", "unittest", "urllib", "uu", "uuid",
-    "venv", "warnings", "wave", "weakref", "webbrowser",
-    "winreg", "winsound", "wsgiref",
-    "xdrlib", "xml", "xmlrpc",
-    "zipapp", "zipfile", "zipimport", "zlib",
-    // Common aliases / sub-packages often imported directly
-    "_thread", "__future__", "_collections_abc",
-]);
-
-;// CONCATENATED MODULE: ./src/repoObservation/python/pythonDependencyExtractor.ts
-/**
- * P25a: Python Dependency Extractor
- *
- * Conservative extraction from pyproject.toml, requirements*.txt, setup.cfg.
- * NO TOML parser dependency — uses regex-based text extraction.
- *
- * Returns package names (normalized) and confidence levels.
- * Unsupported structures get confidence: "low" + warning.
- */
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-function extractPythonDependencies(input) {
-    const sourceType = detectManifestType(input.filePath);
-    switch (sourceType) {
-        case "pyproject.toml":
-            return extractFromPyproject(input.filePath, input.content);
-        case "requirements.txt":
-        case "requirements-dev.txt":
-            return extractFromRequirements(input.filePath, input.content, sourceType);
-        case "setup.cfg":
-            return extractFromSetupCfg(input.filePath, input.content);
-        case "Pipfile":
-            return extractFromPipfile(input.filePath, input.content);
-        case "setup.py":
-            return extractFromSetupPy(input.filePath, input.content);
-        case "uv.lock":
-            return extractFromUvLock(input.filePath, input.content);
-        case "poetry.lock":
-            return extractFromPoetryLock(input.filePath, input.content);
-        case "pdm.lock":
-            return extractFromPdmLock(input.filePath, input.content);
-        case "environment.yml":
-            return extractFromEnvironmentYml(input.filePath, input.content);
-        case "tox.ini":
-            return extractFromToxIni(input.filePath, input.content);
-        case "noxfile.py":
-            return extractFromNoxfile(input.filePath, input.content);
-    }
-}
-/**
- * Normalize a package name for comparison.
- * PyPI treats - and _ and . as equivalent; lowercase everything.
- */
-function normalizePackageName(name) {
-    return name.toLowerCase().replace(/[-_.]+/g, "_").replace(/\[.*\]$/, "");
-}
-/**
- * Build a lookup set of declared package names from manifests.
- */
-function buildDeclaredPackageSet(manifests) {
-    const result = new Set();
-    for (const m of manifests) {
-        for (const pkg of m.packages)
-            result.add(normalizePackageName(pkg));
-        for (const pkg of m.dev_packages)
-            result.add(normalizePackageName(pkg));
-    }
-    return result;
-}
-// ---------------------------------------------------------------------------
-// Manifest type detection
-// ---------------------------------------------------------------------------
-function detectManifestType(filePath) {
-    const basename = filePath.split("/").pop()?.toLowerCase() ?? "";
-    if (basename === "pyproject.toml")
-        return "pyproject.toml";
-    if (basename === "setup.cfg")
-        return "setup.cfg";
-    if (basename === "setup.py")
-        return "setup.py";
-    if (basename === "pipfile")
-        return "Pipfile";
-    if (basename === "uv.lock")
-        return "uv.lock";
-    if (basename === "poetry.lock")
-        return "poetry.lock";
-    if (basename === "pdm.lock")
-        return "pdm.lock";
-    if (basename === "environment.yml" || basename === "environment.yaml")
-        return "environment.yml";
-    if (basename === "tox.ini")
-        return "tox.ini";
-    if (basename === "noxfile.py")
-        return "noxfile.py";
-    if (basename.startsWith("requirements") && basename.includes("dev"))
-        return "requirements-dev.txt";
-    if (basename.startsWith("requirements") && basename.endsWith(".txt"))
-        return "requirements.txt";
-    return "requirements.txt"; // fallback
-}
-// ---------------------------------------------------------------------------
-// pyproject.toml (regex-based, no TOML parser)
-// ---------------------------------------------------------------------------
-function extractFromPyproject(filePath, content) {
-    const warnings = [];
-    const packages = [];
-    const devPackages = [];
-    let confidence = "high";
-    // [project] dependencies = [...]
-    const projectDeps = extractTomlArray(content, /^\[project\]\s*$/m, /^dependencies\s*=\s*\[/m);
-    if (projectDeps !== null) {
-        packages.push(...projectDeps);
-    }
-    // [project.optional-dependencies] dev = [...]
-    const optionalSections = extractTomlOptionalDeps(content);
-    for (const [group, deps] of Object.entries(optionalSections)) {
-        if (/dev|test|ci|lint/i.test(group)) {
-            devPackages.push(...deps);
-        }
-        else {
-            packages.push(...deps);
-        }
-    }
-    // [tool.poetry.dependencies]
-    const poetryDeps = extractTomlKeyValueSection(content, /^\[tool\.poetry\.dependencies\]\s*$/m);
-    if (poetryDeps) {
-        // Skip python itself
-        for (const [name] of poetryDeps) {
-            if (name !== "python")
-                packages.push(name);
-        }
-    }
-    // [tool.poetry.dev-dependencies] or [tool.poetry.group.dev.dependencies]
-    const poetryDevDeps = extractTomlKeyValueSection(content, /^\[tool\.poetry\.(?:dev-dependencies|group\.dev\.dependencies)\]\s*$/m);
-    if (poetryDevDeps) {
-        for (const [name] of poetryDevDeps) {
-            devPackages.push(name);
-        }
-    }
-    if (packages.length === 0 && devPackages.length === 0) {
-        warnings.push("No dependencies found in pyproject.toml — may use unsupported format");
-        confidence = "low";
-    }
-    return {
-        source_path: filePath,
-        source_type: "pyproject.toml",
-        packages: dedup(packages.map(normalizePackageName)),
-        dev_packages: dedup(devPackages.map(normalizePackageName)),
-        confidence,
-        warnings,
-    };
-}
-/**
- * Extract array value from TOML content.
- * Handles multi-line arrays like:
- *   dependencies = [
- *     "Django>=4.2",
- *     "graphene-django",
- *   ]
- */
-function extractTomlArray(content, sectionRe, keyRe) {
-    const sectionMatch = sectionRe.exec(content);
-    if (!sectionMatch)
-        return null;
-    const afterSection = content.slice(sectionMatch.index);
-    const keyMatch = keyRe.exec(afterSection);
-    if (!keyMatch)
-        return null;
-    const afterKey = afterSection.slice(keyMatch.index + keyMatch[0].length);
-    // Find the closing bracket, handling multi-line
-    let depth = 1;
-    let i = 0;
-    let arrayContent = "";
-    for (; i < afterKey.length && depth > 0; i++) {
-        if (afterKey[i] === "[")
-            depth++;
-        if (afterKey[i] === "]")
-            depth--;
-        if (depth > 0)
-            arrayContent += afterKey[i];
-    }
-    return parsePackageList(arrayContent);
-}
-function extractTomlOptionalDeps(content) {
-    const result = {};
-    const sectionRe = /^\[project\.optional-dependencies\]\s*$/m;
-    const match = sectionRe.exec(content);
-    if (!match)
-        return result;
-    const afterSection = content.slice(match.index + match[0].length);
-    // Parse key = [...] entries until next section
-    const lines = afterSection.split("\n");
-    let currentKey = null;
-    let arrayContent = "";
-    let depth = 0;
-    for (const line of lines) {
-        if (/^\[/.test(line.trim()) && depth === 0)
-            break; // next section
-        if (depth === 0) {
-            const keyMatch = /^(\w+)\s*=\s*\[(.*)$/m.exec(line);
-            if (keyMatch) {
-                currentKey = keyMatch[1];
-                arrayContent = keyMatch[2];
-                depth = 1;
-                // Check if closes on same line
-                if (arrayContent.includes("]")) {
-                    result[currentKey] = parsePackageList(arrayContent.split("]")[0]);
-                    depth = 0;
-                    currentKey = null;
-                }
-            }
-        }
-        else {
-            if (line.includes("]")) {
-                arrayContent += line.split("]")[0];
-                if (currentKey)
-                    result[currentKey] = parsePackageList(arrayContent);
-                depth = 0;
-                currentKey = null;
-            }
-            else {
-                arrayContent += line;
-            }
-        }
-    }
-    return result;
-}
-function extractTomlKeyValueSection(content, sectionRe) {
-    const match = sectionRe.exec(content);
-    if (!match)
-        return null;
-    const afterSection = content.slice(match.index + match[0].length);
-    const pairs = [];
-    const lines = afterSection.split("\n");
-    for (const line of lines) {
-        const trimmed = line.trim();
-        if (trimmed.startsWith("["))
-            break; // next section
-        if (trimmed.startsWith("#") || trimmed.length === 0)
-            continue;
-        const kvMatch = /^([\w-]+)\s*=\s*(.+)$/.exec(trimmed);
-        if (kvMatch) {
-            pairs.push([kvMatch[1], kvMatch[2].replace(/["'{}^~>=<*]/g, "").trim()]);
-        }
-    }
-    return pairs.length > 0 ? pairs : null;
-}
-function parsePackageList(raw) {
-    const results = [];
-    // Match quoted strings
-    const re = /["']([^"']+)["']/g;
-    let m;
-    while ((m = re.exec(raw)) !== null) {
-        // Strip version specifiers: "Django>=4.2" → "Django"
-        const name = m[1].replace(/[><=~!;].*/g, "").replace(/\[.*\]/, "").trim();
-        if (name.length > 0)
-            results.push(name);
-    }
-    return results;
-}
-// ---------------------------------------------------------------------------
-// requirements.txt
-// ---------------------------------------------------------------------------
-function extractFromRequirements(filePath, content, sourceType) {
-    const packages = [];
-    const isDev = sourceType === "requirements-dev.txt";
-    for (const line of content.split("\n")) {
-        const trimmed = line.trim();
-        if (trimmed.startsWith("#") || trimmed.length === 0)
-            continue;
-        if (trimmed.startsWith("-r ") || trimmed.startsWith("-c ") || trimmed.startsWith("--"))
-            continue;
-        if (trimmed.startsWith("-e ") || trimmed.startsWith("git+"))
-            continue;
-        // Strip version, extras, environment markers
-        const name = trimmed
-            .replace(/[><=~!=;].*/g, "")
-            .replace(/\[.*\]/, "")
-            .trim();
-        if (name.length > 0 && /^[\w-]+$/.test(name)) {
-            packages.push(name);
-        }
-    }
-    return {
-        source_path: filePath,
-        source_type: sourceType,
-        packages: isDev ? [] : dedup(packages.map(normalizePackageName)),
-        dev_packages: isDev ? dedup(packages.map(normalizePackageName)) : [],
-        confidence: "high",
-        warnings: [],
-    };
-}
-// ---------------------------------------------------------------------------
-// setup.cfg
-// ---------------------------------------------------------------------------
-function extractFromSetupCfg(filePath, content) {
-    const packages = [];
-    const warnings = [];
-    // [options] install_requires = ...
-    const sectionMatch = /^\[options\]\s*$/m.exec(content);
-    if (sectionMatch) {
-        const afterSection = content.slice(sectionMatch.index + sectionMatch[0].length);
-        const irMatch = /^install_requires\s*=\s*(.*)$/m.exec(afterSection);
-        if (irMatch) {
-            // Content on same line (if any)
-            const sameLine = irMatch[1].trim();
-            if (sameLine.length > 0 && !sameLine.startsWith("#")) {
-                const name = sameLine.replace(/[><=~!=;].*/g, "").replace(/\[.*\]/, "").trim();
-                if (name.length > 0 && /^[\w-]+$/.test(name))
-                    packages.push(name);
-            }
-            // Continuation lines (indented with spaces/tabs)
-            const afterKey = afterSection.slice(irMatch.index + irMatch[0].length);
-            const lines = afterKey.split("\n");
-            for (const line of lines) {
-                // Continuation lines must be indented
-                if (line.length > 0 && line[0] !== " " && line[0] !== "\t")
-                    break;
-                const trimmed = line.trim();
-                if (trimmed.startsWith("["))
-                    break;
-                if (trimmed.startsWith("#") || trimmed.length === 0)
-                    continue;
-                const name = trimmed.replace(/[><=~!=;].*/g, "").replace(/\[.*\]/, "").trim();
-                if (name.length > 0 && /^[\w-]+$/.test(name))
-                    packages.push(name);
-            }
-        }
-    }
-    if (packages.length === 0) {
-        warnings.push("No install_requires found in setup.cfg");
-    }
-    return {
-        source_path: filePath,
-        source_type: "setup.cfg",
-        packages: dedup(packages.map(normalizePackageName)),
-        dev_packages: [],
-        confidence: packages.length > 0 ? "medium" : "low",
-        warnings,
-    };
-}
-// ---------------------------------------------------------------------------
-// setup.py (weak detection only)
-// ---------------------------------------------------------------------------
-function extractFromSetupPy(filePath, content) {
-    const packages = [];
-    const warnings = [];
-    // Very conservative: look for install_requires=[...]
-    const match = /install_requires\s*=\s*\[([\s\S]*?)\]/m.exec(content);
-    if (match) {
-        packages.push(...parsePackageList(match[1]));
-    }
-    else {
-        warnings.push("Could not extract install_requires from setup.py — weak detection");
-    }
-    return {
-        source_path: filePath,
-        source_type: "setup.py",
-        packages: dedup(packages.map(normalizePackageName)),
-        dev_packages: [],
-        confidence: packages.length > 0 ? "medium" : "low",
-        warnings: warnings.length > 0 ? warnings : ["setup.py parsing is weak detection — consider using pyproject.toml"],
-    };
-}
-// ---------------------------------------------------------------------------
-// Pipfile (basic)
-// ---------------------------------------------------------------------------
-function extractFromPipfile(filePath, content) {
-    const packages = [];
-    const devPackages = [];
-    let section = null;
-    for (const line of content.split("\n")) {
-        const trimmed = line.trim();
-        if (trimmed === "[packages]") {
-            section = "packages";
-            continue;
-        }
-        if (trimmed === "[dev-packages]") {
-            section = "dev-packages";
-            continue;
-        }
-        if (trimmed.startsWith("[")) {
-            section = null;
-            continue;
-        }
-        if (section && trimmed.length > 0 && !trimmed.startsWith("#")) {
-            const name = trimmed.split("=")[0].trim().replace(/["']/g, "");
-            if (name.length > 0 && /^[\w-]+$/.test(name)) {
-                if (section === "packages")
-                    packages.push(name);
-                else
-                    devPackages.push(name);
-            }
-        }
-    }
-    return {
-        source_path: filePath,
-        source_type: "Pipfile",
-        packages: dedup(packages.map(normalizePackageName)),
-        dev_packages: dedup(devPackages.map(normalizePackageName)),
-        confidence: "medium",
-        warnings: [],
-    };
-}
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-function dedup(arr) {
-    return [...new Set(arr)];
-}
-// ---------------------------------------------------------------------------
-// uv.lock
-// ---------------------------------------------------------------------------
-/**
- * Extract packages from uv.lock.
- * uv.lock uses TOML-like format with [[package]] sections.
- * Each package has `name = "..."` and `version = "..."`.
- * The project's own package (source = { virtual = "." }) is skipped.
- */
-function extractFromUvLock(filePath, content) {
-    const packages = [];
-    const warnings = [];
-    // Split by [[package]] sections
-    const sections = content.split(/^\[\[package\]\]\s*$/m);
-    for (const section of sections) {
-        // Skip the project's own virtual package
-        if (section.includes('source = { virtual = "." }'))
-            continue;
-        const nameMatch = /^name\s*=\s*"([^"]+)"/m.exec(section);
-        if (nameMatch) {
-            packages.push(nameMatch[1]);
-        }
-    }
-    if (packages.length === 0) {
-        warnings.push("No packages found in uv.lock — may be empty or use unsupported format");
-    }
-    return {
-        source_path: filePath,
-        source_type: "uv.lock",
-        packages: dedup(packages.map(normalizePackageName)),
-        dev_packages: [], // uv.lock does not distinguish dev in the lockfile body
-        confidence: packages.length > 0 ? "high" : "low",
-        warnings,
-    };
-}
-// ---------------------------------------------------------------------------
-// poetry.lock
-// ---------------------------------------------------------------------------
-/**
- * Extract packages from poetry.lock.
- * poetry.lock uses TOML with [[package]] sections.
- * Each has `name = "..."`, `category = "dev"` (poetry v1) or
- * belongs to optional groups (poetry v2).
- */
-function extractFromPoetryLock(filePath, content) {
-    const packages = [];
-    const devPackages = [];
-    const warnings = [];
-    const sections = content.split(/^\[\[package\]\]\s*$/m);
-    for (const section of sections) {
-        const nameMatch = /^name\s*=\s*"([^"]+)"/m.exec(section);
-        if (!nameMatch)
-            continue;
-        const name = nameMatch[1];
-        // poetry v1: category = "dev" / "main"
-        const categoryMatch = /^category\s*=\s*"([^"]+)"/m.exec(section);
-        if (categoryMatch && categoryMatch[1] === "dev") {
-            devPackages.push(name);
-        }
-        else {
-            packages.push(name);
-        }
-    }
-    if (packages.length === 0 && devPackages.length === 0) {
-        warnings.push("No packages found in poetry.lock");
-    }
-    return {
-        source_path: filePath,
-        source_type: "poetry.lock",
-        packages: dedup(packages.map(normalizePackageName)),
-        dev_packages: dedup(devPackages.map(normalizePackageName)),
-        confidence: (packages.length + devPackages.length) > 0 ? "high" : "low",
-        warnings,
-    };
-}
-// ---------------------------------------------------------------------------
-// pdm.lock
-// ---------------------------------------------------------------------------
-/**
- * Extract packages from pdm.lock.
- * pdm.lock uses TOML with [[package]] sections, similar to poetry.lock.
- */
-function extractFromPdmLock(filePath, content) {
-    const packages = [];
-    const devPackages = [];
-    const warnings = [];
-    const sections = content.split(/^\[\[package\]\]\s*$/m);
-    for (const section of sections) {
-        const nameMatch = /^name\s*=\s*"([^"]+)"/m.exec(section);
-        if (!nameMatch)
-            continue;
-        const name = nameMatch[1];
-        // pdm uses groups = ["dev"] to indicate dev dependencies
-        const groupsMatch = /^groups\s*=\s*\[([^\]]*)\]/m.exec(section);
-        if (groupsMatch && /"dev"|'dev'/.test(groupsMatch[1])) {
-            devPackages.push(name);
-        }
-        else {
-            packages.push(name);
-        }
-    }
-    if (packages.length === 0 && devPackages.length === 0) {
-        warnings.push("No packages found in pdm.lock");
-    }
-    return {
-        source_path: filePath,
-        source_type: "pdm.lock",
-        packages: dedup(packages.map(normalizePackageName)),
-        dev_packages: dedup(devPackages.map(normalizePackageName)),
-        confidence: (packages.length + devPackages.length) > 0 ? "medium" : "low",
-        warnings,
-    };
-}
-// ---------------------------------------------------------------------------
-// environment.yml (Conda)
-// ---------------------------------------------------------------------------
-/**
- * Extract packages from Conda environment.yml.
- * Looks for `dependencies:` section with `- package` or `- pip:` sub-list.
- */
-function extractFromEnvironmentYml(filePath, content) {
-    const packages = [];
-    const warnings = [];
-    const lines = content.split("\n");
-    let inDeps = false;
-    let inPip = false;
-    for (const line of lines) {
-        const trimmed = line.trim();
-        // Detect top-level sections
-        if (/^\w/.test(line) && !line.startsWith(" ") && !line.startsWith("\t")) {
-            if (trimmed.startsWith("dependencies:")) {
-                inDeps = true;
-                inPip = false;
-                continue;
-            }
-            if (inDeps && !trimmed.startsWith("-") && !trimmed.startsWith("#")) {
-                inDeps = false;
-                inPip = false;
-                continue;
-            }
-        }
-        if (!inDeps)
-            continue;
-        if (trimmed === "- pip:") {
-            inPip = true;
-            continue;
-        }
-        if (trimmed.startsWith("- ")) {
-            const dep = trimmed.slice(2).trim();
-            if (dep === "pip:" || dep.startsWith("#"))
-                continue;
-            // Strip version specifiers
-            const name = dep.replace(/[>=<!=~].*/g, "").replace(/\[.*\]/g, "").trim();
-            if (name.length > 0 && /^[\w-]+$/.test(name)) {
-                packages.push(name);
-            }
-        }
-    }
-    if (packages.length === 0) {
-        warnings.push("No dependencies found in environment.yml");
-    }
-    return {
-        source_path: filePath,
-        source_type: "environment.yml",
-        packages: dedup(packages.map(normalizePackageName)),
-        dev_packages: [],
-        confidence: packages.length > 0 ? "medium" : "low",
-        warnings,
-    };
-}
-// ---------------------------------------------------------------------------
-// tox.ini (dependency signal extraction)
-// ---------------------------------------------------------------------------
-/**
- * Extract dependency signals from tox.ini.
- * Looks for `deps =` lines within [testenv] or [testenv:*] sections.
- * These are test/CI dependencies, not project runtime deps.
- */
-function extractFromToxIni(filePath, content) {
-    const devPackages = [];
-    const warnings = [];
-    // Find deps = ... in testenv sections
-    const depsRe = /^deps\s*=\s*(.*)$/gm;
-    let match;
-    while ((match = depsRe.exec(content)) !== null) {
-        // Handle same-line deps
-        const sameLine = match[1].trim();
-        if (sameLine.length > 0 && !sameLine.startsWith("#")) {
-            const name = sameLine.replace(/[>=<!=~].*/g, "").replace(/\[.*\]/g, "").trim();
-            if (name.length > 0 && /^[\w-]+$/.test(name))
-                devPackages.push(name);
-        }
-        // Handle continuation lines
-        const afterKey = content.slice(match.index + match[0].length);
-        const lines = afterKey.split("\n");
-        for (const line of lines) {
-            if (line.length > 0 && line[0] !== " " && line[0] !== "\t")
-                break;
-            const trimmed = line.trim();
-            if (trimmed.startsWith("["))
-                break;
-            if (trimmed.startsWith("#") || trimmed.length === 0)
-                continue;
-            if (trimmed.startsWith("-r"))
-                continue; // requirements file reference
-            const name = trimmed.replace(/[>=<!=~].*/g, "").replace(/\[.*\]/g, "").trim();
-            if (name.length > 0 && /^[\w-]+$/.test(name))
-                devPackages.push(name);
-        }
-    }
-    if (devPackages.length === 0) {
-        warnings.push("No deps found in tox.ini — may use requirements file references");
-    }
-    return {
-        source_path: filePath,
-        source_type: "tox.ini",
-        packages: [],
-        dev_packages: dedup(devPackages.map(normalizePackageName)),
-        confidence: devPackages.length > 0 ? "medium" : "low",
-        warnings,
-    };
-}
-// ---------------------------------------------------------------------------
-// noxfile.py (weak signal extraction)
-// ---------------------------------------------------------------------------
-/**
- * Extract dependency signals from noxfile.py.
- * Very conservative: looks for session.install("...") calls.
- */
-function extractFromNoxfile(filePath, content) {
-    const devPackages = [];
-    const warnings = [];
-    // Match session.install("pkg", "pkg2", ...)
-    const installRe = /session\.install\(([^)]+)\)/g;
-    let match;
-    while ((match = installRe.exec(content)) !== null) {
-        const args = match[1];
-        const pkgRe = /["']([^"']+)["']/g;
-        let pkgMatch;
-        while ((pkgMatch = pkgRe.exec(args)) !== null) {
-            const val = pkgMatch[1];
-            // Skip flags, paths, and requirements file refs
-            if (val.startsWith("-") || val.startsWith(".") || val.includes("/"))
-                continue;
-            const name = val.replace(/[>=<!=~].*/g, "").replace(/\[.*\]/g, "").trim();
-            if (name.length > 0 && /^[\w-]+$/.test(name))
-                devPackages.push(name);
-        }
-    }
-    if (devPackages.length === 0) {
-        warnings.push("No session.install() calls found in noxfile.py");
-    }
-    return {
-        source_path: filePath,
-        source_type: "noxfile.py",
-        packages: [],
-        dev_packages: dedup(devPackages.map(normalizePackageName)),
-        confidence: devPackages.length > 0 ? "low" : "low",
-        warnings: warnings.length > 0 ? warnings : ["noxfile.py parsing is weak detection"],
-    };
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/python/pythonTestMapper.ts
-/**
- * P25a + P27-1d: Python Test Mapper
- *
- * Maps Python source files to candidate test files using Python conventions.
- * P27-1d: Enhanced with framework-aware candidate generation using
- * layout, framework, and project-role context from P27-1b/1c.
- *
- * Hard rules:
- *   - Does NOT execute tests
- *   - Does NOT generate tests
- *   - Does NOT claim suggested tests are sufficient
- *   - All mappings carry confidence + reason
- *   - High confidence requires path convention + framework context evidence
- */
-
-function mapPythonTests(input) {
-    const results = [];
-    const context = buildMappingContext(input);
-    for (const source of input.sourcePaths) {
-        if (!source.endsWith(".py"))
-            continue;
-        // Skip __init__.py, conftest.py, and non-source
-        const basename = source.split("/").pop();
-        if (basename === "__init__.py" || basename === "conftest.py")
-            continue;
-        if (basename.startsWith("test_") || basename.endsWith("_test.py"))
-            continue;
-        const candidates = generateCandidates(source, context);
-        const existing = candidates.filter(c => input.observedPaths.has(c));
-        const confidence = assessConfidence(source, candidates, existing, context);
-        results.push({
-            source_path: source,
-            candidate_test_paths: candidates,
-            existing_test_paths: existing,
-            confidence: confidence.level,
-            reason: confidence.reason,
-        });
-    }
-    return results;
-}
-function buildMappingContext(input) {
-    const frameworks = input.frameworkProfile?.framework_signals ?? [];
-    const roles = input.frameworkProfile?.project_role_signals ?? [];
-    const layout = input.layout;
-    const hasFw = (name) => frameworks.some(f => f.name === name);
-    const hasRole = (role) => roles.some(r => r.role === role);
-    // Detect observed test directory patterns from existing paths
-    const testDirPatterns = [];
-    const paths = [...input.observedPaths];
-    if (paths.some(p => /^tests\/test_[^/]+\.py$/.test(p))) {
-        testDirPatterns.push("top_level_tests");
-    }
-    if (paths.some(p => /^tests\/[^/]+\/[^/]+\/test_[^/]+\.py$/.test(p))) {
-        testDirPatterns.push("top_level_tests_domain");
-    }
-    if (paths.some(p => /^[^/]+\/[^/]+\/tests\/test_[^/]+\.py$/.test(p) || /^[^/]+\/tests\/test_[^/]+\.py$/.test(p))) {
-        testDirPatterns.push("sibling_tests");
-    }
-    if (paths.some(p => /^tests\/[^/]+\/test_[^/]+\.py$/.test(p))) {
-        testDirPatterns.push("test_subdirectory");
-    }
-    return {
-        isDjango: hasFw("django"),
-        isFastApiService: hasFw("fastapi") || hasRole("service_backend"),
-        isLibrary: hasRole("python_sdk_library") || hasRole("http_client_library") || layout?.primary_layout === "library_package",
-        isCliApp: hasRole("cli_application") || layout?.primary_layout === "cli_app",
-        primaryLayout: layout?.primary_layout ?? "unknown",
-        packageLayout: layout?.package_layout ?? "unknown",
-        testDirPatterns,
-    };
-}
-// ---------------------------------------------------------------------------
-// Candidate generation
-// ---------------------------------------------------------------------------
-function generateCandidates(sourcePath, ctx) {
-    const candidates = [];
-    const parts = sourcePath.split("/");
-    const filename = parts[parts.length - 1];
-    const nameNoExt = filename.replace(/\.py$/, "");
-    // Strip leading underscore for library private modules (httpx/_auth.py → auth)
-    const cleanName = nameNoExt.startsWith("_") && nameNoExt !== "__init__" && nameNoExt !== "__main__"
-        ? nameNoExt.slice(1)
-        : nameNoExt;
-    const candidateName = cleanName;
-    // === Django-style patterns (always included for backward compat) ===
-    // Pattern 1: Sibling tests/ directory — Django app convention
-    // saleor/checkout/actions.py → saleor/checkout/tests/test_actions.py
-    if (parts.length >= 2) {
-        const dirParts = parts.slice(0, -1);
-        candidates.push([...dirParts, "tests", `test_${candidateName}.py`].join("/"));
-    }
-    // Pattern 2: Top-level tests/ mirror
-    // saleor/checkout/actions.py → tests/checkout/test_actions.py
-    if (parts.length >= 2) {
-        const relativeParts = parts.slice(1, -1); // skip top-level package
-        candidates.push(["tests", ...relativeParts, `test_${candidateName}.py`].join("/"));
-    }
-    // Pattern 3: Module-level test file
-    // saleor/checkout/actions.py → saleor/checkout/tests/test_checkout.py
-    if (parts.length >= 2) {
-        const dirParts = parts.slice(0, -1);
-        const moduleName = dirParts[dirParts.length - 1];
-        candidates.push([...dirParts, "tests", `test_${moduleName}.py`].join("/"));
-    }
-    // Pattern 4: Root test mirror with test_ prefix
-    candidates.push(`test/test_${candidateName}.py`);
-    candidates.push(`tests/test_${candidateName}.py`);
-    // === P27-1d: Library/SDK patterns ===
-    if (ctx.isLibrary) {
-        // Library pattern: <package>/_module.py → tests/test_module.py
-        // httpx/_auth.py → tests/test_auth.py
-        if (cleanName !== nameNoExt) {
-            candidates.push(`tests/test_${cleanName}.py`);
-            candidates.push(`test/test_${cleanName}.py`);
-        }
-        // Library pattern: <package>/_module.py → tests/<related>/test_<module>.py
-        // httpx/_models.py → tests/models/test_*.py
-        if (parts.length >= 2) {
-            candidates.push(`tests/${cleanName}/test_${cleanName}.py`);
-            // Also try plural/singular
-            if (!cleanName.endsWith("s")) {
-                candidates.push(`tests/${cleanName}s/test_${cleanName}.py`);
-            }
-        }
-        // Library pattern: <package>/<subpackage>/<module>.py → tests/<subpackage>/test_<module>.py
-        // httpx/_transports/asgi.py → tests/test_asgi.py
-        if (parts.length >= 3) {
-            const subpackage = parts[parts.length - 2];
-            const cleanSub = subpackage.startsWith("_") ? subpackage.slice(1) : subpackage;
-            candidates.push(`tests/test_${nameNoExt}.py`);
-            candidates.push(`tests/${cleanSub}/test_${nameNoExt}.py`);
-        }
-    }
-    // === P27-1d: FastAPI/service patterns ===
-    if (ctx.isFastApiService) {
-        // Service pattern: app/api/routes/<domain>.py → tests/api/<domain>/test_<domain>_*.py
-        // app/api/routes/articles.py → tests/api/articles/test_article_*.py
-        if (parts.includes("routes") || parts.includes("api")) {
-            const domainName = nameNoExt;
-            // Try singular form for test directory
-            const singularDomain = domainName.endsWith("s") ? domainName.slice(0, -1) : domainName;
-            // tests/api/<domain>/test_<domain>_<action>.py pattern
-            candidates.push(`tests/api/${domainName}/test_${singularDomain}_create.py`);
-            candidates.push(`tests/api/${domainName}/test_${singularDomain}_get.py`);
-            candidates.push(`tests/api/${domainName}/test_${singularDomain}_list.py`);
-            candidates.push(`tests/api/${domainName}/test_${singularDomain}_update.py`);
-            candidates.push(`tests/api/${domainName}/test_${singularDomain}_delete.py`);
-            // Generic test file
-            candidates.push(`tests/api/${domainName}/test_${domainName}.py`);
-            candidates.push(`tests/api/test_${domainName}.py`);
-            candidates.push(`tests/test_${domainName}.py`);
-        }
-        // Service pattern: app/crud/crud_<entity>.py → tests/test_crud_<entity>.py
-        if (parts.includes("crud")) {
-            candidates.push(`tests/test_${nameNoExt}.py`);
-            candidates.push(`tests/crud/test_${nameNoExt}.py`);
-        }
-        // Service pattern: app/models/<entity>.py → tests/test_<entity>.py
-        if (parts.includes("models") || parts.includes("schemas")) {
-            candidates.push(`tests/test_${nameNoExt}.py`);
-            candidates.push(`tests/models/test_${nameNoExt}.py`);
-            candidates.push(`tests/schemas/test_${nameNoExt}.py`);
-        }
-        // Service pattern: app/core/<module>.py → tests/test_<module>.py
-        if (parts.includes("core") || parts.includes("services")) {
-            candidates.push(`tests/test_${nameNoExt}.py`);
-            candidates.push(`tests/core/test_${nameNoExt}.py`);
-        }
-    }
-    // === P27-1d: CLI app patterns ===
-    if (ctx.isCliApp) {
-        candidates.push(`tests/test_cli.py`);
-        candidates.push(`tests/test_${nameNoExt}.py`);
-    }
-    // Deduplicate
-    return [...new Set(candidates)];
-}
-// ---------------------------------------------------------------------------
-// Confidence assessment (P27-1d enhanced)
-// ---------------------------------------------------------------------------
-function assessConfidence(source, candidates, existing, ctx) {
-    if (existing.length === 0) {
-        if (candidates.length > 0) {
-            return { level: "low", reason: "Candidate test paths generated but none exist" };
-        }
-        return { level: "unknown", reason: "No reasonable test path could be derived" };
-    }
-    const sourceFilename = source.split("/").pop().replace(/\.py$/, "");
-    const cleanSourceName = sourceFilename.startsWith("_") && sourceFilename !== "__init__" && sourceFilename !== "__main__"
-        ? sourceFilename.slice(1)
-        : sourceFilename;
-    const sourceParentDir = source.split("/").slice(-2, -1)[0] ?? "";
-    const isGenericUtilityModule = ["util", "utils", "helper", "helpers", "common"].includes(cleanSourceName);
-    for (const ex of existing) {
-        const testFilename = ex.split("/").pop().replace(/\.py$/, "");
-        // === High confidence: exact match in expected location ===
-        // Django/traditional: sibling tests/ dir
-        if (testFilename === `test_${sourceFilename}`) {
-            const sourceDirParts = source.split("/").slice(0, -1);
-            const testDirParts = ex.split("/").slice(0, -1);
-            const expectedTestDir = [...sourceDirParts, "tests"].join("/");
-            if (testDirParts.join("/") === expectedTestDir) {
-                return { level: "high", reason: `Exact match in sibling tests/: ${ex}` };
-            }
-        }
-        // Library: _module → tests/test_module (strip underscore match)
-        if (ctx.isLibrary && testFilename === `test_${cleanSourceName}` && ex.startsWith("tests/")) {
-            if (isGenericUtilityModule && !ex.includes(`/${sourceParentDir}/`)) {
-                return { level: "medium", reason: `Generic library helper match without directory context: ${ex}` };
-            }
-            const contextNote = ctx.primaryLayout === "library_package" ? " [library_package layout]" : "";
-            return { level: "high", reason: `Library module match: ${ex}${contextNote}` };
-        }
-        // Service: route domain → tests/api/<domain>/test_<singular>_*.py
-        if (ctx.isFastApiService && ex.includes("/api/") && ex.startsWith("tests/")) {
-            return { level: "high", reason: `API route domain test match: ${ex} [service_backend context]` };
-        }
-        // Standard: test_<name> in tests/ root
-        if (testFilename === `test_${sourceFilename}` || testFilename === `test_${cleanSourceName}`) {
-            if (ex.startsWith("tests/") || ex.startsWith("test/")) {
-                const contextNote = ctx.isLibrary ? " [library context]" : ctx.isFastApiService ? " [service context]" : "";
-                return { level: "medium", reason: `Name match in tests/ directory: ${ex}${contextNote}` };
-            }
-            return { level: "medium", reason: `Name match but different directory: ${ex}` };
-        }
-    }
-    // Domain-level match (test_article_create for articles route)
-    for (const ex of existing) {
-        const testFilename = ex.split("/").pop().replace(/\.py$/, "");
-        // Check if test name contains the source module name (partial domain match)
-        const singularSource = sourceFilename.endsWith("s") ? sourceFilename.slice(0, -1) : sourceFilename;
-        if (filenameContainsToken(ex, singularSource) && ex.startsWith("tests/")) {
-            return { level: "medium", reason: `Domain test match: ${ex} (contains ${singularSource})` };
-        }
-    }
-    // Module-level match
-    return { level: "medium", reason: `Module-level test file found: ${existing[0]}` };
-}
-
-// EXTERNAL MODULE: ./src/globMatch.ts
-var globMatch = __nccwpck_require__(248);
-;// CONCATENATED MODULE: ./src/repoObservation/python/pythonSensitiveZoneDetector.ts
-/**
- * P25a: Python Sensitive Zone Detector
- *
- * Keyword matching + config overrides for identifying high-risk code areas.
- */
-
-
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-function detectPythonSensitiveZones(input) {
-    const results = [];
-    // 1. Keyword-based detection
-    for (const kw of pythonSensitiveZoneDetector_SENSITIVE_KEYWORDS) {
-        const matched = input.pythonPaths.filter(p => matchesKeyword(p, kw.keyword));
-        if (matched.length > 0) {
-            results.push({
-                path_pattern: `**/${kw.keyword}/**`,
-                matched_paths: matched,
-                category: kw.category,
-                severity: kw.severity,
-                source: "keyword",
-                evidence: [`Keyword "${kw.keyword}" found in ${matched.length} paths`],
-            });
-        }
-    }
-    // 2. Config overrides
-    if (input.sensitiveOverrides) {
-        for (const [pattern, category] of Object.entries(input.sensitiveOverrides)) {
-            const matched = input.pythonPaths.filter(p => matchGlob(p, pattern));
-            if (matched.length > 0) {
-                results.push({
-                    path_pattern: pattern,
-                    matched_paths: matched,
-                    category,
-                    severity: "high",
-                    source: "config_override",
-                    evidence: [`Config override: ${pattern} → ${category}`],
-                });
-            }
-        }
-    }
-    return deduplicateZones(results);
-}
-const pythonSensitiveZoneDetector_SENSITIVE_KEYWORDS = [
-    // Critical
-    { keyword: "payment", category: "financial_transactions", severity: "critical" },
-    { keyword: "billing", category: "financial_transactions", severity: "critical" },
-    { keyword: "invoice", category: "financial_transactions", severity: "critical" },
-    { keyword: "refund", category: "financial_transactions", severity: "critical" },
-    // High
-    { keyword: "checkout", category: "purchase_flow", severity: "high" },
-    { keyword: "order", category: "order_lifecycle", severity: "high" },
-    { keyword: "account", category: "identity", severity: "high" },
-    { keyword: "auth", category: "authentication", severity: "high" },
-    { keyword: "permission", category: "authorization", severity: "high" },
-    { keyword: "security", category: "security", severity: "high" },
-    { keyword: "admin", category: "administration", severity: "high" },
-    { keyword: "migration", category: "schema_migration", severity: "high" },
-    // Medium
-    { keyword: "discount", category: "pricing_adjustment", severity: "medium" },
-    { keyword: "tax", category: "regulatory_calculation", severity: "medium" },
-    { keyword: "plugin", category: "runtime_extension", severity: "medium" },
-    { keyword: "webhook", category: "external_integration", severity: "medium" },
-    { keyword: "settings", category: "infrastructure_config", severity: "medium" },
-];
-// ---------------------------------------------------------------------------
-// Matching
-// ---------------------------------------------------------------------------
-function matchesKeyword(path, keyword) {
-    return pathContainsKeyword(path, keyword);
-}
-function matchGlob(path, pattern) {
-    return (0,globMatch/* matchesGlob */.k)(path, pattern);
-}
-// ---------------------------------------------------------------------------
-// Deduplication
-// ---------------------------------------------------------------------------
-function deduplicateZones(zones) {
-    // Remove zones whose matched_paths are fully subsumed by a higher-severity zone
-    // This prevents "auth" and "account" from producing overlapping results
-    const seen = new Map();
-    for (const zone of zones) {
-        const key = zone.category;
-        const existing = seen.get(key);
-        if (!existing) {
-            seen.set(key, zone);
-        }
-        else {
-            // Merge paths
-            const mergedPaths = [...new Set([...existing.matched_paths, ...zone.matched_paths])];
-            const mergedEvidence = [...existing.evidence, ...zone.evidence];
-            seen.set(key, {
-                ...existing,
-                matched_paths: mergedPaths,
-                evidence: mergedEvidence,
-                severity: higherSeverity(existing.severity, zone.severity),
-            });
-        }
-    }
-    return [...seen.values()];
-}
-function higherSeverity(a, b) {
-    const order = { medium: 0, high: 1, critical: 2 };
-    return order[a] >= order[b] ? a : b;
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/python/pythonUnknownTaxonomy.ts
-/**
- * P25a: Python Unknown Taxonomy
- *
- * Classifies Python observation unknowns into specific categories,
- * each tagged as out_of_scope, actionable, or intrinsic.
- */
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-function buildPythonUnknownTaxonomy(input) {
-    const unknowns = [];
-    // 1. Unclassified Python files
-    const unclassified = input.files.filter(f => f.bucket === "unknown");
-    if (unclassified.length > 0) {
-        unknowns.push({
-            category: "unclassified_python_file",
-            classification: "actionable",
-            paths: unclassified.map(f => f.path),
-            count: unclassified.length,
-            note: "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json.",
-        });
-    }
-    // 2. Dynamic / unresolved imports
-    const dynamicImports = input.imports.filter(i => i.status === "dynamic_or_unresolved");
-    if (dynamicImports.length > 0) {
-        unknowns.push({
-            category: "dynamic_or_unresolved_import",
-            classification: "intrinsic",
-            paths: [...new Set(dynamicImports.map(i => i.from_file))],
-            count: dynamicImports.length,
-            note: "Imports using __import__(), importlib.import_module(), or computed paths. Cannot be statically resolved — this is inherent to Python.",
-        });
-    }
-    // 3. Unsupported Python artifacts
-    const unsupported = input.files.filter(f => f.bucket === "unsupported" || f.bucket === "notebook");
-    if (unsupported.length > 0) {
-        unknowns.push({
-            category: "unsupported_python_artifact",
-            classification: "out_of_scope",
-            paths: unsupported.map(f => f.path),
-            count: unsupported.length,
-            note: "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported.",
-        });
-    }
-    // 4. Low confidence manifests
-    const lowConfManifests = input.manifests.filter(m => m.confidence === "low");
-    if (lowConfManifests.length > 0) {
-        unknowns.push({
-            category: "low_confidence_manifest",
-            classification: "actionable",
-            paths: lowConfManifests.map(m => m.source_path),
-            count: lowConfManifests.length,
-            note: "Dependency manifests parsed with low confidence. Package declarations may be incomplete.",
-        });
-    }
-    // 5. Test mapping unknowns
-    const unmappedTests = input.testMappings.filter(m => m.confidence === "unknown");
-    if (unmappedTests.length > 0) {
-        unknowns.push({
-            category: "test_mapping_unknown",
-            classification: "actionable",
-            paths: unmappedTests.map(m => m.source_path),
-            count: unmappedTests.length,
-            note: "Source files for which no test file could be derived using Python conventions.",
-        });
-    }
-    // 6. Scope granularity limit (always present)
-    unknowns.push({
-        category: "scope_granularity_limit",
-        classification: "intrinsic",
-        paths: [],
-        count: 0,
-        note: "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work.",
-    });
-    return unknowns;
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/python/pythonLayoutClassifier.ts
-/**
- * P27-1b: Python Layout Classifier
- *
- * Classifies the physical organization (layout) of a Python repository
- * into two orthogonal dimensions:
- *
- *   1. primary_layout — project form (django_project, api_service, library_package, etc.)
- *   2. package_layout — Python packaging structure (src_layout, flat_package, etc.)
- *
- * Uses only paths, file buckets, and manifest presence — NOT framework role inference.
- * Framework/project-role detection is deferred to P27-1c.
- */
-function classifyPythonLayout(input) {
-    const signals = [];
-    const unknowns = [];
-    // Build bucket summary
-    const bucketSummary = {};
-    for (const f of input.files) {
-        bucketSummary[f.bucket] = (bucketSummary[f.bucket] ?? 0) + 1;
-    }
-    // Collect structural facts
-    const facts = extractStructuralFacts(input.allPaths, input.files, input.manifests);
-    // Classify package layout (independent of primary layout)
-    const { packageLayout, packageSignals, packageUnknowns } = classifyPackageLayout(facts);
-    signals.push(...packageSignals);
-    unknowns.push(...packageUnknowns);
-    // Classify primary layout
-    const { primaryLayout, primarySignals, primaryUnknowns } = classifyPrimaryLayout(facts, packageLayout);
-    signals.push(...primarySignals);
-    unknowns.push(...primaryUnknowns);
-    // Compute confidence
-    const strongCount = signals.filter(s => s.weight === "strong").length;
-    const moderateCount = signals.filter(s => s.weight === "moderate").length;
-    const confidence = strongCount >= 2 ? "high" :
-        strongCount >= 1 || moderateCount >= 2 ? "medium" :
-            "low";
-    return {
-        primary_layout: primaryLayout,
-        package_layout: packageLayout,
-        confidence,
-        signals,
-        unknowns,
-        bucket_summary: bucketSummary,
-    };
-}
-function extractStructuralFacts(allPaths, files, manifests) {
-    const pathSet = new Set(allPaths);
-    // Detect root-level __init__.py packages (flat_package indicator)
-    const rootInitPyPackages = [];
-    const srcInitPyPackages = [];
-    const srcNamespacePackages = new Set();
-    for (const p of allPaths) {
-        const match = /^([^/]+)\/__init__\.py$/.exec(p);
-        if (match && match[1] !== "tests" && match[1] !== "test" && match[1] !== "docs") {
-            rootInitPyPackages.push(match[1]);
-        }
-        const srcMatch = /^src\/([^/]+)\/__init__\.py$/.exec(p);
-        if (srcMatch) {
-            srcInitPyPackages.push(srcMatch[1]);
-        }
-        const srcNamespaceMatch = /^src\/([^/]+)\/.+\.pyi?$/.exec(p);
-        if (srcNamespaceMatch && !p.endsWith("/__init__.py")) {
-            srcNamespacePackages.add(srcNamespaceMatch[1]);
-        }
-    }
-    // Top-level .py files (not inside any subdirectory)
-    const topLevelPyFiles = allPaths.filter(p => !p.includes("/") && p.endsWith(".py"));
-    // Bucket counts
-    const migrationCount = files.filter(f => f.bucket === "migration").length;
-    const testCount = files.filter(f => f.bucket === "test").length;
-    const sourceCount = files.filter(f => f.bucket === "source").length;
-    const totalPyFiles = files.filter(f => f.extension === ".py" || f.extension === ".pyi").length;
-    // Test directory pattern
-    const hasTopTests = allPaths.some(p => p.startsWith("tests/") || p.startsWith("test/"));
-    const hasNestedTests = allPaths.some(p => /^[^/]+\/tests\//.test(p) || /^[^/]+\/test\//.test(p));
-    const testDirPattern = hasTopTests && hasNestedTests ? "mixed" :
-        hasTopTests ? "top_level" :
-            hasNestedTests ? "nested" :
-                "none";
-    // CLI signals
-    const hasCli = allPaths.some(p => p === "cli.py" || p.includes("/cli.py") || p.includes("/cli/") ||
-        p === "__main__.py" || p.includes("/__main__.py") ||
-        topLevelPyFiles.includes("__main__.py"));
-    // Data pipeline signals (paths only, not imports)
-    const hasDataPipeline = allPaths.some(p => p.includes("/pipelines/") || p.includes("/pipeline/") ||
-        p.includes("/dags/") || p.includes("/etl/") ||
-        p.includes("/data/") && p.endsWith(".py"));
-    // ML signals (paths only)
-    const hasMLSignals = allPaths.some(p => p.includes("/models/") && (p.includes("train") || p.includes("predict") || p.includes("infer")) ||
-        p.includes("/notebooks/") || p.includes("/experiments/"));
-    return {
-        hasSrcDir: allPaths.some(p => p.startsWith("src/")),
-        hasManagePy: pathSet.has("manage.py"),
-        hasAppDir: allPaths.some(p => p.startsWith("app/") && p.endsWith(".py")),
-        hasAlembicDir: allPaths.some(p => p.startsWith("alembic/")),
-        hasDjangoMigrations: allPaths.some(p => p.includes("/migrations/") && p.endsWith(".py")),
-        hasSetupPyOrCfg: pathSet.has("setup.py") || pathSet.has("setup.cfg"),
-        hasPyprojectToml: pathSet.has("pyproject.toml"),
-        hasPyTyped: allPaths.some(p => p.endsWith("/py.typed") || p === "py.typed"),
-        hasDocDir: allPaths.some(p => p.startsWith("docs/")),
-        hasNotebooks: files.some(f => f.bucket === "notebook" || f.extension === ".ipynb"),
-        hasConftest: pathSet.has("conftest.py") || allPaths.some(p => p.endsWith("/conftest.py")),
-        rootInitPyPackages,
-        srcInitPyPackages,
-        srcNamespacePackages: [...srcNamespacePackages].filter(name => !srcInitPyPackages.includes(name)).sort(),
-        topLevelPyFiles,
-        migrationCount,
-        testCount,
-        sourceCount,
-        totalPyFiles,
-        testDirPattern,
-        hasMultipleTopPackages: rootInitPyPackages.length > 1,
-        hasCli,
-        hasDataPipeline,
-        hasMLSignals,
-    };
-}
-// ---------------------------------------------------------------------------
-// Package layout classification
-// ---------------------------------------------------------------------------
-function classifyPackageLayout(facts) {
-    const signals = [];
-    const unknowns = [];
-    // src layout: src/<package>/__init__.py
-    if (facts.hasSrcDir && facts.srcInitPyPackages.length > 0) {
-        signals.push({
-            signal: "src_layout_detected",
-            weight: "strong",
-            evidence: `src/ directory with package(s): ${facts.srcInitPyPackages.join(", ")}`,
-        });
-        return { packageLayout: "src_layout", packageSignals: signals, packageUnknowns: unknowns };
-    }
-    if (facts.hasSrcDir && facts.srcNamespacePackages.length > 0) {
-        signals.push({
-            signal: "namespace_package_detected",
-            weight: "strong",
-            evidence: `src/ namespace package(s) without __init__.py: ${facts.srcNamespacePackages.join(", ")}`,
-        });
-        return { packageLayout: "namespace_package", packageSignals: signals, packageUnknowns: unknowns };
-    }
-    // Django app layout: multiple top-level packages with migrations
-    if (facts.hasDjangoMigrations && facts.hasManagePy && facts.rootInitPyPackages.length >= 1) {
-        signals.push({
-            signal: "django_app_layout_detected",
-            weight: "strong",
-            evidence: `Django manage.py + migrations + packages: ${facts.rootInitPyPackages.join(", ")}`,
-        });
-        return { packageLayout: "django_app_layout", packageSignals: signals, packageUnknowns: unknowns };
-    }
-    // Flat package: single or multiple top-level __init__.py packages
-    if (facts.rootInitPyPackages.length >= 1) {
-        signals.push({
-            signal: "flat_package_detected",
-            weight: "strong",
-            evidence: `Root-level package(s) with __init__.py: ${facts.rootInitPyPackages.join(", ")}`,
-        });
-        return { packageLayout: "flat_package", packageSignals: signals, packageUnknowns: unknowns };
-    }
-    // app/ directory without __init__.py at root — common in FastAPI/Flask service layouts
-    if (facts.hasAppDir) {
-        signals.push({
-            signal: "app_directory_layout",
-            weight: "moderate",
-            evidence: "app/ directory with Python files (service-style layout)",
-        });
-        return { packageLayout: "flat_package", packageSignals: signals, packageUnknowns: unknowns };
-    }
-    // Only top-level .py files, no package structure
-    if (facts.topLevelPyFiles.length > 0 && facts.rootInitPyPackages.length === 0) {
-        signals.push({
-            signal: "loose_scripts_only",
-            weight: "weak",
-            evidence: `${facts.topLevelPyFiles.length} top-level .py files without package __init__.py`,
-        });
-        unknowns.push({
-            aspect: "package_layout",
-            reason: "No package structure detected; only loose scripts",
-        });
-        return { packageLayout: "unknown", packageSignals: signals, packageUnknowns: unknowns };
-    }
-    unknowns.push({
-        aspect: "package_layout",
-        reason: "Unable to determine package layout from file paths",
-    });
-    return { packageLayout: "unknown", packageSignals: signals, packageUnknowns: unknowns };
-}
-// ---------------------------------------------------------------------------
-// Primary layout classification
-// ---------------------------------------------------------------------------
-function classifyPrimaryLayout(facts, packageLayout) {
-    const signals = [];
-    const unknowns = [];
-    // Score-based: accumulate evidence for each candidate
-    const scores = {
-        django_project: 0,
-        api_service: 0,
-        library_package: 0,
-        cli_app: 0,
-        data_pipeline: 0,
-        ml_project: 0,
-        monorepo: 0,
-        mixed: 0,
-        unknown: 0,
-    };
-    // --- Django project signals ---
-    if (facts.hasManagePy) {
-        scores.django_project += 3;
-        signals.push({ signal: "manage_py_found", weight: "strong", evidence: "manage.py in repo root" });
-    }
-    if (facts.hasDjangoMigrations) {
-        scores.django_project += 2;
-        signals.push({ signal: "django_migrations_found", weight: "moderate", evidence: `${facts.migrationCount} migration files` });
-    }
-    if (packageLayout === "django_app_layout") {
-        scores.django_project += 2;
-    }
-    // --- API service signals ---
-    if (facts.hasAppDir && !facts.hasManagePy) {
-        scores.api_service += 2;
-        signals.push({ signal: "app_dir_without_manage_py", weight: "moderate", evidence: "app/ directory without Django manage.py" });
-    }
-    if (facts.hasAlembicDir) {
-        scores.api_service += 1;
-        signals.push({ signal: "alembic_dir_found", weight: "moderate", evidence: "alembic/ migration directory (non-Django)" });
-    }
-    // --- Library package signals ---
-    if (facts.hasPyTyped) {
-        scores.library_package += 2;
-        signals.push({ signal: "py_typed_marker", weight: "strong", evidence: "py.typed marker file (PEP 561 typed package)" });
-    }
-    if (facts.hasSetupPyOrCfg || facts.hasPyprojectToml) {
-        // Having packaging config is necessary but not sufficient for library
-        if (!facts.hasManagePy && !facts.hasAppDir && !facts.hasDjangoMigrations) {
-            scores.library_package += 1;
-            signals.push({ signal: "packaging_config_no_framework", weight: "weak", evidence: "Packaging config present without framework indicators" });
-        }
-    }
-    if (facts.hasDocDir && !facts.hasManagePy) {
-        scores.library_package += 1;
-        signals.push({ signal: "docs_directory", weight: "weak", evidence: "docs/ directory suggests library documentation" });
-    }
-    if (facts.testDirPattern === "top_level" && !facts.hasManagePy && !facts.hasAppDir) {
-        scores.library_package += 1;
-        signals.push({ signal: "top_level_tests_pattern", weight: "weak", evidence: "Top-level tests/ directory typical of library packages" });
-    }
-    // Single root package with py.typed = very likely library
-    if (facts.rootInitPyPackages.length === 1 && facts.hasPyTyped) {
-        scores.library_package += 2;
-    }
-    // --- CLI app signals ---
-    if (facts.hasCli) {
-        scores.cli_app += 2;
-        signals.push({ signal: "cli_entry_point", weight: "moderate", evidence: "CLI entry point detected (__main__.py or cli.py)" });
-    }
-    // --- Data pipeline signals ---
-    if (facts.hasDataPipeline) {
-        scores.data_pipeline += 2;
-        signals.push({ signal: "pipeline_structure", weight: "moderate", evidence: "Pipeline/DAG/ETL directory structure" });
-    }
-    // --- ML project signals ---
-    if (facts.hasMLSignals) {
-        scores.ml_project += 2;
-        signals.push({ signal: "ml_project_structure", weight: "moderate", evidence: "ML-related paths (train/predict/experiments)" });
-    }
-    if (facts.hasNotebooks) {
-        scores.ml_project += 1;
-        signals.push({ signal: "jupyter_notebooks", weight: "weak", evidence: "Jupyter notebooks present" });
-    }
-    // --- Monorepo signals ---
-    if (facts.hasMultipleTopPackages && facts.rootInitPyPackages.length >= 3) {
-        scores.monorepo += 2;
-        signals.push({ signal: "multiple_top_packages", weight: "moderate", evidence: `${facts.rootInitPyPackages.length} top-level packages: ${facts.rootInitPyPackages.join(", ")}` });
-    }
-    // Find winner
-    const candidates = Object.entries(scores)
-        .filter(([key]) => key !== "unknown" && key !== "mixed")
-        .sort(([, a], [, b]) => b - a);
-    if (candidates.length === 0 || candidates[0][1] === 0) {
-        unknowns.push({
-            aspect: "primary_layout",
-            reason: "No structural signals matched known project forms",
-        });
-        return { primaryLayout: "unknown", primarySignals: signals, primaryUnknowns: unknowns };
-    }
-    const [topName, topScore] = candidates[0];
-    const [, secondScore] = candidates.length > 1 ? candidates[1] : ["", 0];
-    // If top two are close, consider "mixed"
-    if (topScore > 0 && secondScore > 0 && topScore - secondScore <= 1) {
-        signals.push({
-            signal: "ambiguous_layout",
-            weight: "weak",
-            evidence: `Close scores: ${candidates[0][0]}=${topScore}, ${candidates[1]?.[0]}=${secondScore}`,
-        });
-        // Still pick the winner unless truly tied
-        if (topScore === secondScore) {
-            unknowns.push({
-                aspect: "primary_layout",
-                reason: `Tied between ${candidates[0][0]} and ${candidates[1][0]}`,
-            });
-            return { primaryLayout: "mixed", primarySignals: signals, primaryUnknowns: unknowns };
-        }
-    }
-    return { primaryLayout: topName, primarySignals: signals, primaryUnknowns: unknowns };
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/python/pythonFrameworkDetector.ts
-/**
- * P27-1c: Python Framework & Project-Role Detector
- *
- * Detects frameworks and project roles from multiple evidence dimensions:
- *   1. dependency_manifest — packages declared in manifests
- *   2. layout_classification — primary_layout / package_layout from P27-1b
- *   3. path_pattern — structural path patterns (manage.py, migrations/, etc.)
- *   4. import_pattern — what top-level modules are imported
- *
- * Hard rules:
- *   - At least 2 evidence dimensions required for "high" confidence
- *   - Dependency-only evidence caps at "medium"
- *   - pytest is "test_framework" kind, never a project role
- *   - Unknown outputs when no framework/role can be determined
- *   - Does NOT modify layout, test mapping, or risk presets
- */
-function detectPythonFrameworkProfile(input) {
-    // Collect all available evidence
-    const evidence = collectEvidence(input);
-    // Detect frameworks
-    const frameworkSignals = detectFrameworks(evidence);
-    // Detect project roles
-    const projectRoleSignals = detectProjectRoles(evidence, input.layout);
-    // Build unknowns
-    const unknowns = [];
-    if (frameworkSignals.length === 0) {
-        unknowns.push({
-            kind: "unknown_framework_or_domain_role",
-            reason: "No framework could be detected from dependencies, paths, or imports",
-        });
-    }
-    if (projectRoleSignals.length === 0) {
-        unknowns.push({
-            kind: "unknown_framework_or_domain_role",
-            reason: "No project role could be inferred from layout, dependencies, or path families",
-        });
-    }
-    return {
-        framework_signals: frameworkSignals,
-        project_role_signals: projectRoleSignals,
-        unknowns,
-    };
-}
-function collectEvidence(input) {
-    // Declared packages (main + dev, normalized to lowercase)
-    const declaredPackages = new Set();
-    const devPackages = new Set();
-    for (const m of input.manifests) {
-        for (const p of m.packages)
-            declaredPackages.add(p.toLowerCase());
-        for (const p of m.dev_packages)
-            devPackages.add(p.toLowerCase());
-    }
-    // Imported top-level modules
-    const importedModules = new Set();
-    for (const imp of input.imports) {
-        if (imp.status === "declared_package" || imp.status === "undeclared_package") {
-            importedModules.add(imp.top_level_module.toLowerCase());
-        }
-    }
-    // Path-based facts
-    const pathSet = new Set(input.allPaths);
-    const pathFamilies = new Set();
-    // Detect commerce/domain path families
-    const domainFamilyPatterns = [
-        { pattern: /\bcheckout\b/i, family: "checkout" },
-        { pattern: /\bpayment\b/i, family: "payment" },
-        { pattern: /\border\b/i, family: "order" },
-        { pattern: /\bcart\b/i, family: "cart" },
-        { pattern: /\bdiscount\b/i, family: "discount" },
-        { pattern: /\binvoice\b/i, family: "invoice" },
-        { pattern: /\bshipping\b/i, family: "shipping" },
-        { pattern: /\bwarehouse\b/i, family: "warehouse" },
-        { pattern: /\baccount\b/i, family: "account" },
-        { pattern: /\bauth\b/i, family: "auth" },
-        { pattern: /\bgraphql\b/i, family: "graphql" },
-        { pattern: /\bapi\b/i, family: "api" },
-    ];
-    for (const p of input.allPaths) {
-        for (const { pattern, family } of domainFamilyPatterns) {
-            if (pattern.test(p))
-                pathFamilies.add(family);
-        }
-    }
-    const pathFacts = {
-        hasManagePy: pathSet.has("manage.py"),
-        hasMigrations: input.allPaths.some(p => p.includes("/migrations/") && p.endsWith(".py")),
-        hasAlembicDir: input.allPaths.some(p => p.startsWith("alembic/")),
-        hasAppDir: input.allPaths.some(p => p.startsWith("app/") && p.endsWith(".py")),
-        hasCli: input.allPaths.some(p => p === "cli.py" || p.includes("/cli.py") || p.includes("/cli/") ||
-            p === "__main__.py" || p.includes("/__main__.py")),
-        hasMainPy: pathSet.has("__main__.py") || input.allPaths.some(p => p.includes("/__main__.py")),
-        hasPyTyped: input.allPaths.some(p => p.endsWith("/py.typed") || p === "py.typed"),
-        hasDocsDir: input.allPaths.some(p => p.startsWith("docs/")),
-        hasSetupPy: pathSet.has("setup.py"),
-        hasPyprojectToml: pathSet.has("pyproject.toml"),
-        hasGraphqlDir: input.allPaths.some(p => p.includes("/graphql/")),
-        hasApiDir: input.allPaths.some(p => p.startsWith("api/") || p.includes("/api/")),
-        pathFamilies,
-    };
-    return { declaredPackages, devPackages, importedModules, pathFacts };
-}
-function detectFrameworks(ev) {
-    const candidates = [];
-    // --- Django ---
-    {
-        const evidence = [];
-        if (ev.declaredPackages.has("django"))
-            evidence.push({ dimension: "dependency_manifest", detail: "django found in dependency manifests" });
-        if (ev.pathFacts.hasManagePy)
-            evidence.push({ dimension: "path_pattern", detail: "manage.py found in repo root" });
-        if (ev.pathFacts.hasMigrations)
-            evidence.push({ dimension: "path_pattern", detail: "Django-style migrations/ directories found" });
-        if (ev.importedModules.has("django"))
-            evidence.push({ dimension: "import_pattern", detail: "django imported in source files" });
-        if (evidence.length > 0)
-            candidates.push({ name: "django", kind: "web_framework", evidence });
-    }
-    // --- FastAPI ---
-    {
-        const evidence = [];
-        if (ev.declaredPackages.has("fastapi"))
-            evidence.push({ dimension: "dependency_manifest", detail: "fastapi found in dependency manifests" });
-        if (ev.importedModules.has("fastapi"))
-            evidence.push({ dimension: "import_pattern", detail: "fastapi imported in source files" });
-        if (ev.pathFacts.hasAppDir && !ev.pathFacts.hasManagePy)
-            evidence.push({ dimension: "path_pattern", detail: "app/ directory without manage.py (service pattern)" });
-        if (evidence.length > 0)
-            candidates.push({ name: "fastapi", kind: "web_framework", evidence });
-    }
-    // --- Flask ---
-    {
-        const evidence = [];
-        if (ev.declaredPackages.has("flask"))
-            evidence.push({ dimension: "dependency_manifest", detail: "flask found in dependency manifests" });
-        if (ev.importedModules.has("flask"))
-            evidence.push({ dimension: "import_pattern", detail: "flask imported in source files" });
-        if (evidence.length > 0)
-            candidates.push({ name: "flask", kind: "web_framework", evidence });
-    }
-    // --- pytest ---
-    {
-        const evidence = [];
-        if (ev.declaredPackages.has("pytest") || ev.devPackages.has("pytest")) {
-            evidence.push({ dimension: "dependency_manifest", detail: "pytest found in dependency manifests" });
-        }
-        if (ev.importedModules.has("pytest"))
-            evidence.push({ dimension: "import_pattern", detail: "pytest imported in source files" });
-        if (evidence.length > 0)
-            candidates.push({ name: "pytest", kind: "test_framework", evidence });
-    }
-    // --- click ---
-    {
-        const evidence = [];
-        if (ev.declaredPackages.has("click"))
-            evidence.push({ dimension: "dependency_manifest", detail: "click found in dependency manifests" });
-        if (ev.importedModules.has("click"))
-            evidence.push({ dimension: "import_pattern", detail: "click imported in source files" });
-        if (ev.pathFacts.hasCli)
-            evidence.push({ dimension: "path_pattern", detail: "CLI entry points detected" });
-        if (evidence.length > 0)
-            candidates.push({ name: "click", kind: "cli_framework", evidence });
-    }
-    // --- typer ---
-    {
-        const evidence = [];
-        if (ev.declaredPackages.has("typer"))
-            evidence.push({ dimension: "dependency_manifest", detail: "typer found in dependency manifests" });
-        if (ev.importedModules.has("typer"))
-            evidence.push({ dimension: "import_pattern", detail: "typer imported in source files" });
-        if (evidence.length > 0)
-            candidates.push({ name: "typer", kind: "cli_framework", evidence });
-    }
-    // --- SQLAlchemy ---
-    {
-        const evidence = [];
-        if (ev.declaredPackages.has("sqlalchemy"))
-            evidence.push({ dimension: "dependency_manifest", detail: "sqlalchemy found in dependency manifests" });
-        if (ev.importedModules.has("sqlalchemy"))
-            evidence.push({ dimension: "import_pattern", detail: "sqlalchemy imported in source files" });
-        if (ev.pathFacts.hasAlembicDir)
-            evidence.push({ dimension: "path_pattern", detail: "alembic/ migration directory present" });
-        if (evidence.length > 0)
-            candidates.push({ name: "sqlalchemy", kind: "orm", evidence });
-    }
-    // --- Celery ---
-    {
-        const evidence = [];
-        if (ev.declaredPackages.has("celery"))
-            evidence.push({ dimension: "dependency_manifest", detail: "celery found in dependency manifests" });
-        if (ev.importedModules.has("celery"))
-            evidence.push({ dimension: "import_pattern", detail: "celery imported in source files" });
-        if (evidence.length > 0)
-            candidates.push({ name: "celery", kind: "task_queue", evidence });
-    }
-    // --- httpx (as framework/library, not role) ---
-    {
-        const evidence = [];
-        if (ev.declaredPackages.has("httpx"))
-            evidence.push({ dimension: "dependency_manifest", detail: "httpx found in dependency manifests" });
-        if (ev.importedModules.has("httpx"))
-            evidence.push({ dimension: "import_pattern", detail: "httpx imported in source files" });
-        if (evidence.length > 0)
-            candidates.push({ name: "httpx", kind: "http_client", evidence });
-    }
-    // --- Airflow ---
-    {
-        const evidence = [];
-        if (ev.declaredPackages.has("apache-airflow") || ev.declaredPackages.has("airflow")) {
-            evidence.push({ dimension: "dependency_manifest", detail: "airflow found in dependency manifests" });
-        }
-        if (ev.importedModules.has("airflow"))
-            evidence.push({ dimension: "import_pattern", detail: "airflow imported in source files" });
-        if (evidence.length > 0)
-            candidates.push({ name: "airflow", kind: "workflow_orchestration", evidence });
-    }
-    // --- Prefect ---
-    {
-        const evidence = [];
-        if (ev.declaredPackages.has("prefect"))
-            evidence.push({ dimension: "dependency_manifest", detail: "prefect found in dependency manifests" });
-        if (ev.importedModules.has("prefect"))
-            evidence.push({ dimension: "import_pattern", detail: "prefect imported in source files" });
-        if (evidence.length > 0)
-            candidates.push({ name: "prefect", kind: "workflow_orchestration", evidence });
-    }
-    // Apply confidence rules
-    return candidates.map(c => ({
-        name: c.name,
-        kind: c.kind,
-        confidence: computeFrameworkConfidence(c.evidence),
-        evidence: c.evidence,
-    }));
-}
-/**
- * Confidence rules:
- *   - 2+ distinct dimensions → "high"
- *   - 1 dimension only (dependency-only, path-only, or import-only) → "medium"
- *   - This ensures dependency-only never exceeds "medium" per hard rule
- */
-function computeFrameworkConfidence(evidence) {
-    const dimensions = new Set(evidence.map(e => e.dimension));
-    if (dimensions.size >= 2)
-        return "high";
-    if (dimensions.size === 1)
-        return "medium";
-    return "low";
-}
-// ---------------------------------------------------------------------------
-// Project role detection
-// ---------------------------------------------------------------------------
-function detectProjectRoles(ev, layout) {
-    const roles = [];
-    // Commerce backend detection
-    {
-        const evidence = [];
-        const commerceFamilies = ["checkout", "payment", "order", "cart", "discount", "invoice", "shipping", "warehouse"];
-        const matchedFamilies = commerceFamilies.filter(f => ev.pathFacts.pathFamilies.has(f));
-        if (matchedFamilies.length >= 3) {
-            evidence.push({ dimension: "path_pattern", detail: `Commerce path families: ${matchedFamilies.join(", ")}` });
-        }
-        if (layout.primary_layout === "django_project") {
-            evidence.push({ dimension: "layout_classification", detail: "Layout classified as django_project" });
-        }
-        if (ev.declaredPackages.has("django") && matchedFamilies.length >= 2) {
-            evidence.push({ dimension: "dependency_manifest", detail: "Django with commerce-domain directories" });
-        }
-        if (evidence.length > 0) {
-            roles.push({
-                role: "commerce_backend",
-                confidence: computeRoleConfidence(evidence),
-                evidence,
-            });
-        }
-    }
-    // API/Service backend detection
-    {
-        const evidence = [];
-        if (layout.primary_layout === "api_service") {
-            evidence.push({ dimension: "layout_classification", detail: "Layout classified as api_service" });
-        }
-        if (ev.declaredPackages.has("fastapi") || ev.declaredPackages.has("flask") || ev.declaredPackages.has("starlette")) {
-            evidence.push({ dimension: "dependency_manifest", detail: "API framework found in dependencies" });
-        }
-        if (ev.pathFacts.hasAppDir && !ev.pathFacts.hasManagePy) {
-            evidence.push({ dimension: "path_pattern", detail: "app/ directory without manage.py (service layout)" });
-        }
-        if (ev.pathFacts.hasAlembicDir) {
-            evidence.push({ dimension: "path_pattern", detail: "Alembic migrations (service DB pattern)" });
-        }
-        if (ev.pathFacts.hasApiDir) {
-            evidence.push({ dimension: "path_pattern", detail: "api/ directory present" });
-        }
-        // Avoid double-counting: don't label as service_backend if already strong commerce_backend
-        const commerceEvDims = new Set(roles.find(r => r.role === "commerce_backend")?.evidence.map(e => e.dimension) ?? []);
-        const isStrongCommerce = commerceEvDims.size >= 2;
-        if (evidence.length > 0 && !isStrongCommerce) {
-            roles.push({
-                role: "service_backend",
-                confidence: computeRoleConfidence(evidence),
-                evidence,
-            });
-        }
-    }
-    // Python SDK / Library detection
-    {
-        const evidence = [];
-        if (layout.primary_layout === "library_package") {
-            evidence.push({ dimension: "layout_classification", detail: "Layout classified as library_package" });
-        }
-        if (ev.pathFacts.hasPyTyped) {
-            evidence.push({ dimension: "path_pattern", detail: "py.typed marker (PEP 561 typed package)" });
-        }
-        if (ev.pathFacts.hasDocsDir && !ev.pathFacts.hasManagePy && !ev.pathFacts.hasAppDir) {
-            evidence.push({ dimension: "path_pattern", detail: "docs/ directory without web framework signals" });
-        }
-        if ((ev.pathFacts.hasSetupPy || ev.pathFacts.hasPyprojectToml) && !ev.pathFacts.hasManagePy) {
-            evidence.push({ dimension: "dependency_manifest", detail: "Packaging config without web framework" });
-        }
-        if (evidence.length > 0) {
-            roles.push({
-                role: "python_sdk_library",
-                confidence: computeRoleConfidence(evidence),
-                evidence,
-            });
-        }
-    }
-    // HTTP client library detection (specific sub-role of sdk_library)
-    {
-        const evidence = [];
-        // Check if the project's own package is an HTTP client
-        if (ev.declaredPackages.has("httpx") || ev.declaredPackages.has("httpcore")) {
-            // This is httpx as a dependency, but for httpx itself, check path patterns
-        }
-        if (ev.importedModules.has("httpcore") || ev.declaredPackages.has("httpcore")) {
-            evidence.push({ dimension: "dependency_manifest", detail: "httpcore dependency (HTTP transport layer)" });
-        }
-        if (ev.pathFacts.pathFamilies.has("api") && layout.primary_layout === "library_package") {
-            evidence.push({ dimension: "path_pattern", detail: "API-related paths in library package" });
-        }
-        // Check for HTTP-specific path patterns
-        const httpPaths = ["_transports", "_client", "_models", "_urls", "_content"];
-        const hasHttpPaths = httpPaths.some(p => ev.pathFacts.pathFamilies.has(p) || // unlikely via families
-            // fallback: check raw paths
-            false);
-        // Use layout + dependency as dimensions for HTTP client role
-        if (layout.primary_layout === "library_package" && ev.declaredPackages.has("httpcore")) {
-            evidence.push({ dimension: "layout_classification", detail: "Library package with HTTP core dependency" });
-        }
-        if (evidence.length >= 2) {
-            roles.push({
-                role: "http_client_library",
-                confidence: computeRoleConfidence(evidence),
-                evidence,
-            });
-        }
-    }
-    // CLI app detection
-    {
-        const evidence = [];
-        if (layout.primary_layout === "cli_app") {
-            evidence.push({ dimension: "layout_classification", detail: "Layout classified as cli_app" });
-        }
-        if (ev.pathFacts.hasCli || ev.pathFacts.hasMainPy) {
-            evidence.push({ dimension: "path_pattern", detail: "CLI entry points (__main__.py or cli.py)" });
-        }
-        if (ev.declaredPackages.has("click") || ev.declaredPackages.has("typer") || ev.declaredPackages.has("argparse")) {
-            evidence.push({ dimension: "dependency_manifest", detail: "CLI framework in dependencies" });
-        }
-        if (evidence.length >= 2) {
-            roles.push({
-                role: "cli_application",
-                confidence: computeRoleConfidence(evidence),
-                evidence,
-            });
-        }
-    }
-    // Workflow orchestration detection
-    {
-        const evidence = [];
-        if (frameworksInclude(ev, "airflow", "prefect")) {
-            evidence.push({ dimension: "dependency_manifest", detail: "Workflow orchestration framework dependency found" });
-        }
-        if (ev.importedModules.has("airflow") || ev.importedModules.has("prefect")) {
-            evidence.push({ dimension: "import_pattern", detail: "Workflow orchestration framework imported in source files" });
-        }
-        if (evidence.length > 0) {
-            roles.push({
-                role: "workflow_orchestration",
-                confidence: computeRoleConfidence(evidence),
-                evidence,
-            });
-        }
-    }
-    return roles;
-}
-/**
- * Role confidence rules (same as framework):
- *   - 2+ distinct dimensions → "high"
- *   - 1 dimension only → "medium"
- */
-function computeRoleConfidence(evidence) {
-    const dimensions = new Set(evidence.map(e => e.dimension));
-    if (dimensions.size >= 2)
-        return "high";
-    if (dimensions.size === 1)
-        return "medium";
-    return "low";
-}
-function frameworksInclude(ev, ...packages) {
-    return packages.some(pkg => ev.declaredPackages.has(pkg) || ev.declaredPackages.has(`apache-${pkg}`));
-}
-
-;// CONCATENATED MODULE: ./src/repoObservation/python/pythonRiskPresetValidator.ts
-/**
- * P27-1e: Python Risk Preset Validator
- *
- * Produces suggested review/forbid boundary candidates based on observed
- * layout, framework, project-role, sensitive zones, and path signals.
- *
- * Hard rules:
- *   - Does NOT auto-decide allowed/review/forbid
- *   - Only outputs suggestions with matched_signals + reason
- *   - Unobserved paths go to dormant_patterns
- *   - SDK/library defaults to review, not forbid
- *   - Unvalidated presets cannot produce strong recommendations
- *   - Does NOT modify test mapper, layout, or framework detector
- */
-
-function validatePythonRiskPreset(input) {
-    // 1. Select preset based on project role + layout
-    const presetName = selectPreset(input);
-    // 2. Collect observed evidence
-    const matchedSignals = collectMatchedSignals(input);
-    // 3. Generate suggestions from matching preset rules
-    const presetRules = getPresetRules(presetName);
-    const suggestedReview = [];
-    const suggestedForbidden = [];
-    const dormantPatterns = [];
-    const pathSet = new Set(input.allPaths);
-    for (const rule of presetRules) {
-        // Count how many paths match this rule's pattern
-        const matchedPaths = input.allPaths.filter(p => matchPattern(p, rule.pattern));
-        const matchedCount = matchedPaths.length;
-        // Also check if sensitive zones corroborate
-        const corroboratingZone = input.sensitiveZones.find(z => z.category === rule.sensitiveCategory || matchedPaths.some(mp => z.matched_paths.includes(mp)));
-        if (matchedCount === 0) {
-            // Unobserved — goes to dormant
-            dormantPatterns.push({
-                pattern: rule.pattern,
-                reason: rule.dormantReason,
-            });
-            continue;
-        }
-        // Build evidence
-        const evidence = [];
-        evidence.push(`${matchedCount} paths match pattern ${rule.pattern}`);
-        if (corroboratingZone) {
-            evidence.push(`Sensitive zone "${corroboratingZone.category}" (${corroboratingZone.severity}) corroborates`);
-        }
-        if (rule.frameworkEvidence) {
-            evidence.push(rule.frameworkEvidence);
-        }
-        const suggestion = {
-            pattern: rule.pattern,
-            reason: rule.reason,
-            severity: rule.severity,
-            matched_path_count: matchedCount,
-            evidence,
-        };
-        if (rule.suggestedLevel === "forbidden") {
-            suggestedForbidden.push(suggestion);
-        }
-        else {
-            suggestedReview.push(suggestion);
-        }
-    }
-    // 4. Determine validation status
-    const totalRules = presetRules.length;
-    const activeRules = totalRules - dormantPatterns.length;
-    const minimumValidatedRules = Math.max(3, Math.ceil(totalRules * 0.6));
-    const validation = activeRules >= minimumValidatedRules ? "validated" :
-        activeRules > 0 ? "partial" :
-            "unvalidated";
-    // 5. Confidence from matched signals
-    const confidence = matchedSignals.length >= 3 && validation === "validated" ? "high" :
-        matchedSignals.length >= 2 || validation === "partial" ? "medium" :
-            "low";
-    return {
-        preset: presetName,
-        validation,
-        confidence,
-        matched_signals: matchedSignals,
-        suggested_review: suggestedReview,
-        suggested_forbidden: suggestedForbidden,
-        dormant_patterns: dormantPatterns,
-    };
-}
-// ---------------------------------------------------------------------------
-// Preset selection
-// ---------------------------------------------------------------------------
-function selectPreset(input) {
-    const roles = input.frameworkProfile.project_role_signals;
-    const frameworks = input.frameworkProfile.framework_signals;
-    const layout = input.layout;
-    // Priority order: most specific role first
-    const roleNames = roles.map(r => r.role);
-    if (roleNames.includes("commerce_backend") && frameworks.some(f => f.name === "django")) {
-        return "django_commerce";
-    }
-    if (roleNames.includes("service_backend")) {
-        const fw = frameworks.find(f => f.kind === "web_framework");
-        if (fw?.name === "fastapi")
-            return "fastapi_service";
-        if (fw?.name === "flask")
-            return "flask_service";
-        return "generic_service";
-    }
-    if (roleNames.includes("http_client_library") || roleNames.includes("python_sdk_library")) {
-        return "python_sdk_library";
-    }
-    if (roleNames.includes("cli_application")) {
-        return "cli_application";
-    }
-    if (layout.primary_layout === "django_project")
-        return "django_generic";
-    if (layout.primary_layout === "library_package")
-        return "python_sdk_library";
-    if (layout.primary_layout === "api_service")
-        return "generic_service";
-    return "unknown";
-}
-// ---------------------------------------------------------------------------
-// Signal collection
-// ---------------------------------------------------------------------------
-function collectMatchedSignals(input) {
-    const signals = [];
-    // Layout signals
-    signals.push(`layout: ${input.layout.primary_layout} / ${input.layout.package_layout} (${input.layout.confidence})`);
-    // Framework signals
-    for (const fw of input.frameworkProfile.framework_signals) {
-        if (fw.confidence === "high" || fw.confidence === "medium") {
-            signals.push(`framework: ${fw.name} / ${fw.kind} (${fw.confidence})`);
-        }
-    }
-    // Project role signals
-    for (const role of input.frameworkProfile.project_role_signals) {
-        signals.push(`project_role: ${role.role} (${role.confidence})`);
-    }
-    // Sensitive zone signals
-    for (const zone of input.sensitiveZones) {
-        if (zone.severity === "critical" || zone.severity === "high") {
-            signals.push(`sensitive_zone: ${zone.category} (${zone.severity}, ${zone.matched_paths.length} paths)`);
-        }
-    }
-    return signals;
-}
-// ---------------------------------------------------------------------------
-// Pattern matching
-// ---------------------------------------------------------------------------
-function matchPattern(path, pattern) {
-    return (0,globMatch/* matchesGlob */.k)(path, pattern);
-}
-function getPresetRules(presetName) {
-    switch (presetName) {
-        case "django_commerce": return DJANGO_COMMERCE_RULES;
-        case "fastapi_service": return FASTAPI_SERVICE_RULES;
-        case "python_sdk_library": return PYTHON_SDK_LIBRARY_RULES;
-        case "django_generic": return DJANGO_GENERIC_RULES;
-        case "flask_service": return FLASK_SERVICE_RULES;
-        case "generic_service": return GENERIC_SERVICE_RULES;
-        case "cli_application": return CLI_APPLICATION_RULES;
-        default: return GENERIC_RULES;
-    }
-}
-// ---------------------------------------------------------------------------
-// Django Commerce rules
-// ---------------------------------------------------------------------------
-const DJANGO_COMMERCE_RULES = [
-    // Forbidden candidates (very selective)
-    {
-        pattern: "**/migrations/**",
-        reason: "Schema migrations should not be auto-generated by AI agents",
-        severity: "critical",
-        suggestedLevel: "forbidden",
-        sensitiveCategory: "schema_migration",
-        frameworkEvidence: "Django migration framework detected",
-        dormantReason: "No migrations directory observed",
-    },
-    // Review candidates
-    {
-        pattern: "**/payment/**",
-        reason: "Financial transaction logic requires human review",
-        severity: "critical",
-        suggestedLevel: "review",
-        sensitiveCategory: "financial_transactions",
-        dormantReason: "No payment directory observed",
-    },
-    {
-        pattern: "**/billing/**",
-        reason: "Billing logic requires human review",
-        severity: "critical",
-        suggestedLevel: "review",
-        sensitiveCategory: "financial_transactions",
-        dormantReason: "No billing directory observed",
-    },
-    {
-        pattern: "**/checkout/**",
-        reason: "Purchase flow logic requires human review",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "purchase_flow",
-        dormantReason: "No checkout directory observed",
-    },
-    {
-        pattern: "**/order/**",
-        reason: "Order lifecycle logic requires human review",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "order_lifecycle",
-        dormantReason: "No order directory observed",
-    },
-    {
-        pattern: "**/account/**",
-        reason: "Identity and account management requires human review",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "identity",
-        dormantReason: "No account directory observed",
-    },
-    {
-        pattern: "**/auth/**",
-        reason: "Authentication logic requires human review",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "authentication",
-        dormantReason: "No auth directory observed",
-    },
-    {
-        pattern: "**/discount/**",
-        reason: "Pricing adjustment logic is money-flow adjacent",
-        severity: "medium",
-        suggestedLevel: "review",
-        sensitiveCategory: "pricing_adjustment",
-        dormantReason: "No discount directory observed",
-    },
-    {
-        pattern: "**/tax/**",
-        reason: "Tax calculation has regulatory implications",
-        severity: "medium",
-        suggestedLevel: "review",
-        sensitiveCategory: "regulatory_calculation",
-        dormantReason: "No tax directory observed",
-    },
-    {
-        pattern: "**/plugin*/**",
-        reason: "Plugin/extension points affect runtime behavior",
-        severity: "medium",
-        suggestedLevel: "review",
-        sensitiveCategory: "runtime_extension",
-        dormantReason: "No plugin directory observed",
-    },
-    {
-        pattern: "**/settings*",
-        reason: "Infrastructure configuration affects system behavior",
-        severity: "medium",
-        suggestedLevel: "review",
-        sensitiveCategory: "infrastructure_config",
-        dormantReason: "No settings files observed",
-    },
-];
-// ---------------------------------------------------------------------------
-// FastAPI / service rules
-// ---------------------------------------------------------------------------
-const FASTAPI_SERVICE_RULES = [
-    // Forbidden candidates
-    {
-        pattern: "alembic/**",
-        reason: "Database migrations should not be auto-generated by AI agents",
-        severity: "critical",
-        suggestedLevel: "forbidden",
-        frameworkEvidence: "Alembic migration framework detected",
-        dormantReason: "No alembic directory observed",
-    },
-    // Review candidates
-    {
-        pattern: "**/auth*",
-        reason: "Authentication logic requires human review",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "authentication",
-        dormantReason: "No auth files observed",
-    },
-    {
-        pattern: "**/security*",
-        reason: "Security module requires human review",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "security",
-        dormantReason: "No security files observed",
-    },
-    {
-        pattern: "**/config*",
-        reason: "Application configuration affects system behavior",
-        severity: "medium",
-        suggestedLevel: "review",
-        sensitiveCategory: "infrastructure_config",
-        dormantReason: "No config files observed",
-    },
-    {
-        pattern: "**/db/**",
-        reason: "Database layer changes affect data integrity",
-        severity: "high",
-        suggestedLevel: "review",
-        dormantReason: "No db directory observed",
-    },
-    {
-        pattern: "**/middleware*",
-        reason: "Middleware affects request processing pipeline",
-        severity: "medium",
-        suggestedLevel: "review",
-        dormantReason: "No middleware files observed",
-    },
-    {
-        pattern: "**/deps*",
-        reason: "Dependency injection affects route behavior",
-        severity: "medium",
-        suggestedLevel: "review",
-        frameworkEvidence: "FastAPI dependency injection pattern",
-        dormantReason: "No deps files observed",
-    },
-];
-const FLASK_SERVICE_RULES = [
-    {
-        pattern: "**/auth*",
-        reason: "Authentication logic requires human review",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "authentication",
-        dormantReason: "No auth files observed",
-    },
-    {
-        pattern: "**/security*",
-        reason: "Security module requires human review",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "security",
-        dormantReason: "No security files observed",
-    },
-    {
-        pattern: "**/blueprints/**",
-        reason: "Flask blueprint routing affects request behavior",
-        severity: "medium",
-        suggestedLevel: "review",
-        dormantReason: "No Flask blueprint directory observed",
-    },
-    {
-        pattern: "**/config*",
-        reason: "Application configuration affects runtime behavior",
-        severity: "medium",
-        suggestedLevel: "review",
-        dormantReason: "No config files observed",
-    },
-    {
-        pattern: "**/extensions*",
-        reason: "Flask extensions influence app wiring and security hooks",
-        severity: "medium",
-        suggestedLevel: "review",
-        dormantReason: "No extensions files observed",
-    },
-];
-// ---------------------------------------------------------------------------
-// Python SDK / Library rules
-// ---------------------------------------------------------------------------
-const PYTHON_SDK_LIBRARY_RULES = [
-    // SDK/library: prefer review over forbid
-    {
-        pattern: "**/_client*",
-        reason: "Public client behavior surface — changes affect all consumers",
-        severity: "high",
-        suggestedLevel: "review",
-        dormantReason: "No client module observed",
-    },
-    {
-        pattern: "**/_transport*/**",
-        reason: "Transport layer affects request execution semantics",
-        severity: "high",
-        suggestedLevel: "review",
-        dormantReason: "No transport module observed",
-    },
-    {
-        pattern: "**/_auth*",
-        reason: "Authentication affects security surface",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "authentication",
-        dormantReason: "No auth module observed",
-    },
-    {
-        pattern: "**/_config*",
-        reason: "Configuration affects default behavior for all consumers",
-        severity: "medium",
-        suggestedLevel: "review",
-        dormantReason: "No config module observed",
-    },
-    {
-        pattern: "**/__init__.py",
-        reason: "Public API exports — changes affect import compatibility",
-        severity: "medium",
-        suggestedLevel: "review",
-        dormantReason: "No __init__.py observed (unusual)",
-    },
-    {
-        pattern: "**/_models*",
-        reason: "Data model changes affect serialization and API compatibility",
-        severity: "medium",
-        suggestedLevel: "review",
-        dormantReason: "No models module observed",
-    },
-    {
-        pattern: "**/_urls*",
-        reason: "URL handling affects request routing",
-        severity: "medium",
-        suggestedLevel: "review",
-        dormantReason: "No URL module observed",
-    },
-];
-// ---------------------------------------------------------------------------
-// Django generic rules (non-commerce)
-// ---------------------------------------------------------------------------
-const DJANGO_GENERIC_RULES = [
-    {
-        pattern: "**/migrations/**",
-        reason: "Schema migrations should not be auto-generated by AI agents",
-        severity: "critical",
-        suggestedLevel: "forbidden",
-        sensitiveCategory: "schema_migration",
-        frameworkEvidence: "Django migration framework detected",
-        dormantReason: "No migrations directory observed",
-    },
-    {
-        pattern: "**/auth/**",
-        reason: "Authentication logic requires human review",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "authentication",
-        dormantReason: "No auth directory observed",
-    },
-    {
-        pattern: "**/settings*",
-        reason: "Django settings affect system-wide behavior",
-        severity: "medium",
-        suggestedLevel: "review",
-        sensitiveCategory: "infrastructure_config",
-        dormantReason: "No settings files observed",
-    },
-    {
-        pattern: "**/admin*",
-        reason: "Admin interface affects data access controls",
-        severity: "medium",
-        suggestedLevel: "review",
-        sensitiveCategory: "administration",
-        dormantReason: "No admin files observed",
-    },
-];
-// ---------------------------------------------------------------------------
-// Generic service rules
-// ---------------------------------------------------------------------------
-const GENERIC_SERVICE_RULES = [
-    {
-        pattern: "**/auth*",
-        reason: "Authentication logic requires human review",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "authentication",
-        dormantReason: "No auth files observed",
-    },
-    {
-        pattern: "**/security*",
-        reason: "Security module requires human review",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "security",
-        dormantReason: "No security files observed",
-    },
-    {
-        pattern: "**/config*",
-        reason: "Configuration affects system behavior",
-        severity: "medium",
-        suggestedLevel: "review",
-        dormantReason: "No config files observed",
-    },
-];
-// ---------------------------------------------------------------------------
-// CLI application rules
-// ---------------------------------------------------------------------------
-const CLI_APPLICATION_RULES = [
-    {
-        pattern: "**/config*",
-        reason: "CLI configuration affects default behavior",
-        severity: "medium",
-        suggestedLevel: "review",
-        dormantReason: "No config files observed",
-    },
-    {
-        pattern: "**/__main__*",
-        reason: "CLI entry point affects invocation behavior",
-        severity: "medium",
-        suggestedLevel: "review",
-        dormantReason: "No __main__.py observed",
-    },
-];
-// ---------------------------------------------------------------------------
-// Fallback generic rules
-// ---------------------------------------------------------------------------
-const GENERIC_RULES = [
-    {
-        pattern: "**/auth*",
-        reason: "Authentication logic requires human review",
-        severity: "high",
-        suggestedLevel: "review",
-        sensitiveCategory: "authentication",
-        dormantReason: "No auth files observed",
-    },
-    {
-        pattern: "**/config*",
-        reason: "Configuration affects system behavior",
-        severity: "medium",
-        suggestedLevel: "review",
-        dormantReason: "No config files observed",
-    },
-];
-
-;// CONCATENATED MODULE: ./src/repoObservation/python/pythonObservationEnhancer.ts
-/**
- * P25a: Python Observation Enhancer (Orchestrator)
- *
- * Sidecar enhancer that runs all Python observation sub-modules
- * on top of existing RepoObservations, producing python_observations.json.
- *
- * Does NOT modify scanner. Does NOT add to RepoObservations.
- * The sidecar is a standalone artifact.
- */
-
-
-
-
-
-
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-function enhanceWithPythonObservations(observations, repoRoot, config) {
-    const allPaths = observations.observations.files.map(f => f.path);
-    const observedPathSet = new Set(allPaths);
-    // 1. Identify and classify Python files
-    const pythonFiles = [];
-    const pythonSourcePaths = [];
-    for (const file of observations.observations.files) {
-        if (isPythonFile(file.path)) {
-            const classified = classifyPythonFile(file.path, file.size_bytes);
-            pythonFiles.push(classified);
-            if (classified.bucket === "source") {
-                pythonSourcePaths.push(file.path);
-            }
-        }
-        // Also classify Python ecosystem config files (pyproject.toml, etc.)
-        else if (isPythonEcosystemFile(file.path)) {
-            const classified = classifyPythonFile(file.path, file.size_bytes);
-            pythonFiles.push(classified);
-        }
-    }
-    // 2. Extract dependency manifests
-    const manifests = extractManifests(repoRoot, allPaths);
-    // 2b. Classify layout (P27-1b)
-    const layout = classifyPythonLayout({
-        files: pythonFiles,
-        manifests,
-        allPaths,
-    });
-    // 3. Build declared package set
-    const declaredPackages = buildDeclaredPackageSet(manifests);
-    // 4. Detect project packages
-    const projectPackages = config?.project_packages
-        ? [...config.project_packages]
-        : detectProjectPackages(allPaths);
-    // 5. Observe imports from Python source files
-    const imports = [];
-    for (const sourcePath of pythonSourcePaths) {
-        try {
-            const fullPath = (0,external_node_path_.join)(repoRoot, sourcePath);
-            if (!(0,external_node_fs_.existsSync)(fullPath))
-                continue;
-            const content = (0,external_node_fs_.readFileSync)(fullPath, "utf-8");
-            const fileImports = observePythonImports({
-                filePath: sourcePath,
-                content,
-                projectPackages,
-                declaredPackages,
-            });
-            imports.push(...fileImports);
-        }
-        catch {
-            // Skip files that can't be read
-        }
-    }
-    // 6. Detect framework and project-role profile (P27-1c)
-    //    Moved before test mapping so mapper can use framework context (P27-1d)
-    const frameworkProfile = detectPythonFrameworkProfile({
-        files: pythonFiles,
-        manifests,
-        imports,
-        layout,
-        allPaths,
-    });
-    // 7. Map tests (P27-1d: framework-aware)
-    const testMappings = mapPythonTests({
-        sourcePaths: pythonSourcePaths,
-        observedPaths: observedPathSet,
-        layout,
-        frameworkProfile,
-    });
-    // 8. Detect sensitive zones
-    const pythonPaths = pythonFiles
-        .filter(f => f.bucket !== "generated" && f.bucket !== "unsupported")
-        .map(f => f.path);
-    const sensitiveZones = detectPythonSensitiveZones({
-        pythonPaths,
-        sensitiveOverrides: config?.sensitive_overrides,
-    });
-    // 8b. Validate risk preset (P27-1e)
-    const riskPresetValidation = validatePythonRiskPreset({
-        layout,
-        frameworkProfile,
-        sensitiveZones,
-        allPaths,
-    });
-    // 8. Build unknown taxonomy
-    const unknowns = buildPythonUnknownTaxonomy({
-        files: pythonFiles,
-        imports,
-        manifests,
-        testMappings,
-    });
-    // 9. Compute quality
-    const quality = computePythonQuality(pythonFiles, imports, testMappings, sensitiveZones, manifests);
-    // 10. Limitations
-    const limitations = [
-        "Python import observations are syntax-level observations, not full runtime import resolution.",
-        "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
-        "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
-        "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
-        "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
-        "Namespace packages without __init__.py are not detected as project packages.",
-    ];
-    return {
-        schema_version: "python_observations.v1",
-        repo: {
-            root_label: observations.repo.repo_root_label,
-            observed_file_count: observations.meta.file_count,
-            python_file_count: pythonFiles.length,
-        },
-        layout,
-        framework_profile: frameworkProfile,
-        risk_preset_validation: riskPresetValidation,
-        files: pythonFiles,
-        import_observations: imports,
-        dependency_manifests: manifests,
-        test_mappings: testMappings,
-        sensitive_zones: sensitiveZones,
-        unknowns,
-        quality,
-        limitations,
-    };
-}
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-function extractManifests(repoRoot, allPaths) {
-    const results = [];
-    for (const path of allPaths) {
-        if (!isPythonManifestFile(path))
-            continue;
-        try {
-            const fullPath = (0,external_node_path_.join)(repoRoot, path);
-            if (!(0,external_node_fs_.existsSync)(fullPath))
-                continue;
-            const content = (0,external_node_fs_.readFileSync)(fullPath, "utf-8");
-            results.push(extractPythonDependencies({ filePath: path, content }));
-        }
-        catch {
-            // Skip unreadable files
-        }
-    }
-    return results;
-}
-function computePythonQuality(files, imports, testMappings, sensitiveZones, manifests) {
-    const pyFiles = files.filter(f => f.extension === ".py" || f.extension === ".pyi");
-    const classified = pyFiles.filter(f => f.bucket !== "unknown");
-    const unknown = pyFiles.filter(f => f.bucket === "unknown");
-    const projectImports = imports.filter(i => i.status === "project_import");
-    const declaredImports = imports.filter(i => i.status === "declared_package");
-    const undeclaredImports = imports.filter(i => i.status === "undeclared_package");
-    const dynamicImports = imports.filter(i => i.status === "dynamic_or_unresolved");
-    const highTests = testMappings.filter(m => m.confidence === "high");
-    const medTests = testMappings.filter(m => m.confidence === "medium");
-    const sensitiveFileCount = new Set(sensitiveZones.flatMap(z => z.matched_paths)).size;
-    const lowConfManifests = manifests.filter(m => m.confidence === "low");
-    return {
-        python_file_count: pyFiles.length,
-        classified_count: classified.length,
-        classified_ratio: pyFiles.length > 0 ? classified.length / pyFiles.length : 0,
-        unknown_count: unknown.length,
-        unknown_ratio: pyFiles.length > 0 ? unknown.length / pyFiles.length : 0,
-        import_observation_count: imports.length,
-        project_import_count: projectImports.length,
-        declared_package_count: declaredImports.length,
-        undeclared_package_count: undeclaredImports.length,
-        dynamic_import_count: dynamicImports.length,
-        test_mapping_count: testMappings.length,
-        high_confidence_test_count: highTests.length,
-        medium_confidence_test_count: medTests.length,
-        sensitive_zone_count: sensitiveZones.length,
-        sensitive_file_count: sensitiveFileCount,
-        manifest_count: manifests.length,
-        low_confidence_manifest_count: lowConfManifests.length,
-    };
-}
-
 // EXTERNAL MODULE: ./src/repair/repairArtifactLayout.ts
 var repairArtifactLayout = __nccwpck_require__(768);
 ;// CONCATENATED MODULE: ./src/repair/repairAuditLog.ts
@@ -21498,6 +16986,5162 @@ const syntheticRepairDiffSchema = object({
 
 // EXTERNAL MODULE: ./src/repair/repairUtils.ts + 1 modules
 var repairUtils = __nccwpck_require__(57);
+;// CONCATENATED MODULE: ./src/repair/humanAuditDecisionWriter.ts
+
+
+
+
+
+function buildHumanAuditDecision(input) {
+    const createdAt = new Date().toISOString();
+    return humanAuditDecisionSchema.parse({
+        schema_version: "human_audit_decision@0.1.0",
+        decision_id: (0,repairUtils/* deterministicId */.UV)("audit", {
+            repairId: input.repairId,
+            gate: input.gate,
+            decision: input.decision,
+            reason: input.reason,
+            createdAt,
+        }),
+        repair_id: input.repairId,
+        target_revision: input.targetRevision,
+        gate: input.gate,
+        decision: input.decision,
+        operator_id: input.operatorId,
+        reason: input.reason,
+        changes_to_scope: {
+            add_review: [...(input.addReview ?? [])],
+            add_forbid: [...(input.addForbid ?? [])],
+        },
+        added_must_preserve: [...(input.addMustPreserve ?? [])],
+        created_at: createdAt,
+    });
+}
+function writeHumanAuditDecision(repoRoot, decision) {
+    const target = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, decision.repair_id).humanAuditDecision(decision.decision_id);
+    (0,external_node_fs_.mkdirSync)((0,external_node_path_.dirname)(target), { recursive: true });
+    (0,external_node_fs_.writeFileSync)(target, JSON.stringify(decision, null, 2));
+    return target;
+}
+
+;// CONCATENATED MODULE: ./src/repair/repairPlanRevisioner.ts
+
+function applyHumanAuditDecision(contract, decision) {
+    if (decision.repair_id !== contract.repair_id) {
+        throw new Error(`Audit decision ${decision.decision_id} does not match repair ${contract.repair_id}.`);
+    }
+    if (decision.target_revision !== contract.revision) {
+        throw new Error(`stale_audit_decision: decision targets revision ${decision.target_revision}, but current revision is ${contract.revision}.`);
+    }
+    const review = new Map(contract.repair_scope.review_required.map(entry => [entry.pattern, entry]));
+    const forbid = new Map(contract.repair_scope.forbidden.map(entry => [entry.pattern, entry]));
+    const allow = new Map(contract.repair_scope.allowed.map(entry => [entry.pattern, entry]));
+    const mustPreserve = new Set(contract.must_preserve);
+    for (const pattern of decision.changes_to_scope.add_review) {
+        review.set(pattern, buildHumanScopeEntry(pattern, "review"));
+    }
+    for (const pattern of decision.changes_to_scope.add_forbid) {
+        forbid.set(pattern, buildHumanScopeEntry(pattern, "forbid"));
+    }
+    for (const statement of decision.added_must_preserve) {
+        mustPreserve.add(statement);
+    }
+    for (const pattern of [...forbid.keys()]) {
+        for (const allowPattern of [...allow.keys()]) {
+            if ((0,repairUtils/* matchesPattern */.MT)(allowPattern, pattern) || (0,repairUtils/* matchesPattern */.MT)(pattern, allowPattern)) {
+                allow.delete(allowPattern);
+            }
+        }
+        for (const reviewPattern of [...review.keys()]) {
+            if ((0,repairUtils/* matchesPattern */.MT)(reviewPattern, pattern) || (0,repairUtils/* matchesPattern */.MT)(pattern, reviewPattern)) {
+                review.delete(reviewPattern);
+            }
+        }
+    }
+    for (const pattern of [...review.keys()]) {
+        for (const allowPattern of [...allow.keys()]) {
+            if ((0,repairUtils/* matchesPattern */.MT)(allowPattern, pattern) || (0,repairUtils/* matchesPattern */.MT)(pattern, allowPattern)) {
+                allow.delete(allowPattern);
+            }
+        }
+    }
+    const auditStatus = deriveAuditStatus(contract.audit_status, decision);
+    return {
+        ...contract,
+        revision: contract.revision + 1,
+        audit_status: auditStatus,
+        repair_scope: {
+            allowed: [...allow.values()].sort((a, b) => a.pattern.localeCompare(b.pattern)),
+            review_required: [...review.values()].sort((a, b) => a.pattern.localeCompare(b.pattern)),
+            forbidden: [...forbid.values()].sort((a, b) => a.pattern.localeCompare(b.pattern)),
+        },
+        must_preserve: (0,repairUtils/* uniqueSorted */.pj)([...mustPreserve]),
+        consistency_checks: decision.added_must_preserve.length > 0
+            ? [
+                ...contract.consistency_checks,
+                ...decision.added_must_preserve.map(statement => ({
+                    id: `human_audit_${contract.revision + 1}_${statement.length}`,
+                    statement,
+                    source: "human_audit_decision",
+                    severity: "hard",
+                    evidence: [`decision:${decision.decision_id}`],
+                    reason: "Added by human audit decision.",
+                })),
+            ]
+            : contract.consistency_checks,
+    };
+}
+function buildHumanScopeEntry(pattern, target) {
+    return {
+        pattern,
+        source: "human_audit_decision",
+        confidence: "high",
+        audit_weight: "critical",
+        reason: target === "forbid"
+            ? "Forbidden by human audit decision."
+            : "Review-required by human audit decision.",
+        evidence: ["human_audit_decision"],
+    };
+}
+function deriveAuditStatus(previous, decision) {
+    switch (decision.decision) {
+        case "approve_repair_plan":
+            return "approved_repair_plan";
+        case "restrict_scope":
+        case "expand_review_scope":
+        case "add_must_preserve":
+        case "add_forbidden_area":
+            return "approved_with_modifications";
+        case "require_manual_repair":
+            return "manual_repair_required";
+        case "approve_repair":
+        case "request_revert":
+        case "request_scope_expansion":
+        case "keep_for_human_review":
+        case "close_as_invalid":
+            return "post_repair_reviewed";
+        default:
+            return previous;
+    }
+}
+
+// EXTERNAL MODULE: ./src/repair/session/atomicWrite.ts
+var atomicWrite = __nccwpck_require__(282);
+;// CONCATENATED MODULE: ./src/repair/session/repairSessionIndex.ts
+function createEmptyRepairSessionIndex() {
+    return {
+        schema_version: "repair_session_index@0.1.0",
+        active_repairs: [],
+        closed_repairs: [],
+    };
+}
+function upsertRepairSessionInIndex(index, session) {
+    const isClosed = session.status === "closed" || session.status === "abandoned";
+    const active = index.active_repairs.filter(item => item.repair_id !== session.repair_id);
+    const closed = index.closed_repairs.filter(item => item.repair_id !== session.repair_id);
+    if (isClosed) {
+        closed.push(session);
+    }
+    else {
+        active.push(session);
+    }
+    return {
+        schema_version: "repair_session_index@0.1.0",
+        active_repairs: active.sort((a, b) => a.created_at.localeCompare(b.created_at)),
+        closed_repairs: closed.sort((a, b) => a.created_at.localeCompare(b.created_at)),
+    };
+}
+
+;// CONCATENATED MODULE: ./src/repair/session/repairSessionStore.ts
+
+
+
+
+
+
+const LOCK_TIMEOUT_MS = 5_000;
+const LOCK_POLL_MS = 25;
+let repairSessionNonce = 0;
+const ALLOWED_SESSION_TRANSITIONS = {
+    intake_created: ["intake_created", "intake_accepted", "intake_rejected", "plan_generated", "plan_pending_audit", "manual_repair_required"],
+    intake_accepted: ["intake_accepted", "plan_generated", "plan_pending_audit", "manual_repair_required", "closed", "abandoned"],
+    intake_rejected: ["intake_rejected", "closed", "abandoned"],
+    plan_generated: ["plan_generated", "plan_pending_audit", "plan_approved", "plan_restricted", "manual_repair_required", "closed", "abandoned"],
+    plan_pending_audit: ["plan_pending_audit", "plan_approved", "plan_restricted", "manual_repair_required", "repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "closed", "abandoned"],
+    plan_approved: ["plan_approved", "plan_pending_audit", "plan_restricted", "manual_repair_required", "repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "closed", "abandoned"],
+    plan_restricted: ["plan_restricted", "plan_pending_audit", "plan_approved", "manual_repair_required", "repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "closed", "abandoned"],
+    manual_repair_required: ["manual_repair_required", "plan_pending_audit", "plan_approved", "plan_restricted", "closed", "abandoned"],
+    repair_checked_pass: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "plan_approved", "plan_restricted", "closed", "abandoned"],
+    repair_checked_requires_review: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "plan_approved", "plan_restricted", "manual_repair_required", "closed", "abandoned"],
+    repair_checked_requires_scope_expansion: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "manual_repair_required", "closed", "abandoned"],
+    repair_checked_requires_replan: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "plan_approved", "plan_restricted", "manual_repair_required", "closed", "abandoned"],
+    repair_checked_fail: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "manual_repair_required", "closed", "abandoned"],
+    closed: [],
+    abandoned: [],
+};
+const VALID_SESSION_STATUSES = new Set([
+    "intake_created",
+    "intake_accepted",
+    "intake_rejected",
+    "plan_generated",
+    "plan_pending_audit",
+    "plan_approved",
+    "plan_restricted",
+    "manual_repair_required",
+    "repair_checked_pass",
+    "repair_checked_requires_review",
+    "repair_checked_requires_scope_expansion",
+    "repair_checked_requires_replan",
+    "repair_checked_fail",
+    "closed",
+    "abandoned",
+]);
+function createRepairSession(input) {
+    const repoRoot = input.repoRoot;
+    (0,repairArtifactLayout/* ensureRepairDirs */.CF)(repoRoot);
+    const createdAt = new Date().toISOString();
+    repairSessionNonce += 1;
+    const repairId = (0,repairUtils/* deterministicId */.UV)("repair", {
+        source: input.source,
+        agent_id: input.agentId ?? null,
+        created_at: createdAt,
+        nonce: repairSessionNonce,
+    });
+    const session = {
+        schema_version: "repair_session@0.1.0",
+        repair_id: repairId,
+        agent_id: input.agentId,
+        source: input.source,
+        status: input.status,
+        current_revision: 0,
+        base_sha: null,
+        risk_level: "unknown",
+        scope_summary: emptyScopeSummary(),
+        created_at: createdAt,
+        updated_at: createdAt,
+    };
+    withRepairIndexLock(repoRoot, "create_repair_session", () => {
+        const paths = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, repairId);
+        ensureRepairRunDir(paths);
+        (0,atomicWrite/* atomicWriteJson */.h)(paths.session, session);
+        writeLatestPointer(paths.root, repairId);
+        const currentIndex = loadRepairSessionIndex(repoRoot);
+        const updatedIndex = upsertRepairSessionInIndex(currentIndex, session);
+        (0,atomicWrite/* atomicWriteJson */.h)(paths.root.sessionsIndex, updatedIndex);
+    });
+    return session;
+}
+function repairSessionStore_loadRepairSession(repoRoot, repairId) {
+    const path = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, repairId).session;
+    if (!(0,external_node_fs_.existsSync)(path)) {
+        throw new Error(`Unknown repair session: ${repairId}`);
+    }
+    return validateRepairSession((0,repairUtils/* readJsonFile */.JE)(path), repairId, path);
+}
+function saveRepairSession(repoRoot, session) {
+    persistRepairSession(repoRoot, session);
+}
+function updateRepairSession(repoRoot, repairId, updater) {
+    return withRepairIndexLock(repoRoot, "update_repair_session", () => withRepairSessionLock(repoRoot, repairId, "update_repair_session", () => {
+        const current = repairSessionStore_loadRepairSession(repoRoot, repairId);
+        const next = validateNextSession(current, updater(current));
+        persistRepairSession(repoRoot, next);
+        return next;
+    }));
+}
+function repairSessionStore_closeRepairSession(input) {
+    return updateRepairSession(input.repoRoot, input.repairId, session => ({
+        ...session,
+        status: input.status,
+        close_reason: input.reason,
+        closed_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+    }));
+}
+function loadRepairSessionIndex(repoRoot) {
+    const paths = (0,repairArtifactLayout/* repairRootPaths */.Gi)(repoRoot);
+    if (!(0,external_node_fs_.existsSync)(paths.sessionsIndex)) {
+        return createEmptyRepairSessionIndex();
+    }
+    return validateRepairSessionIndex((0,repairUtils/* readJsonFile */.JE)(paths.sessionsIndex), paths.sessionsIndex);
+}
+function repairSessionStore_listRepairSessions(repoRoot) {
+    return loadRepairSessionIndex(repoRoot);
+}
+function repairSessionStore_loadLatestRepairId(repoRoot) {
+    const path = repairRootPaths(repoRoot).latestPointer;
+    try {
+        const text = readFileSync(path, "utf-8").trim();
+        if (!text)
+            return null;
+        const parsed = JSON.parse(text);
+        return parsed.repair_id ?? null;
+    }
+    catch (error) {
+        if (isErrnoException(error) && error.code === "ENOENT") {
+            return null;
+        }
+        return null;
+    }
+}
+function withRepairIndexLock(repoRoot, operation, fn) {
+    const lockPath = (0,repairArtifactLayout/* repairRootPaths */.Gi)(repoRoot).globalLock;
+    return withFileLock(lockPath, { operation }, fn);
+}
+function withRepairSessionLock(repoRoot, repairId, operation, fn) {
+    const lockPath = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, repairId).lock;
+    return withFileLock(lockPath, { operation, repair_id: repairId }, fn);
+}
+function emptyScopeSummary() {
+    return {
+        allowed: [],
+        review_required: [],
+        forbidden: [],
+    };
+}
+function updateSessionFromContract(input) {
+    return updateRepairSession(input.repoRoot, input.repairId, session => ({
+        ...session,
+        status: input.status,
+        current_revision: Math.max(session.current_revision, input.revision),
+        scope_summary: input.scopeSummary,
+        risk_level: input.riskLevel,
+        base_sha: input.baseSha ?? null,
+        updated_at: new Date().toISOString(),
+    }));
+}
+function persistRepairSession(repoRoot, session) {
+    const paths = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, session.repair_id);
+    ensureRepairRunDir(paths);
+    (0,atomicWrite/* atomicWriteJson */.h)(paths.session, session);
+    writeLatestPointer(paths.root, session.repair_id);
+    const currentIndex = loadRepairSessionIndex(repoRoot);
+    const updatedIndex = upsertRepairSessionInIndex(currentIndex, session);
+    (0,atomicWrite/* atomicWriteJson */.h)(paths.root.sessionsIndex, updatedIndex);
+}
+function ensureRepairRunDir(paths) {
+    (0,external_node_fs_.mkdirSync)(paths.dir, { recursive: true });
+}
+function writeLatestPointer(root, repairId) {
+    (0,atomicWrite/* atomicWriteText */.Y)(root.latestPointer, `${JSON.stringify({ repair_id: repairId, updated_at: new Date().toISOString() }, null, 2)}\n`);
+}
+function withFileLock(lockPath, input, fn) {
+    const createdAt = new Date().toISOString();
+    const deadline = Date.now() + LOCK_TIMEOUT_MS;
+    while (true) {
+        try {
+            (0,external_node_fs_.mkdirSync)((0,external_node_path_.dirname)(lockPath), { recursive: true });
+            const fd = (0,external_node_fs_.openSync)(lockPath, "wx");
+            try {
+                const metadata = {
+                    pid: process.pid,
+                    created_at: createdAt,
+                    operation: input.operation,
+                    repair_id: input.repair_id,
+                };
+                (0,external_node_fs_.writeFileSync)(fd, `${JSON.stringify(metadata, null, 2)}\n`);
+            }
+            finally {
+                (0,external_node_fs_.closeSync)(fd);
+            }
+            break;
+        }
+        catch (error) {
+            if (!isErrnoException(error) || error.code !== "EEXIST") {
+                throw error;
+            }
+            if (Date.now() >= deadline) {
+                throw new Error("Another Pantheon repair operation is active. Retry after it completes, or remove a stale lock if no process is running.");
+            }
+            sleepSync(LOCK_POLL_MS);
+        }
+    }
+    try {
+        return fn();
+    }
+    finally {
+        (0,external_node_fs_.rmSync)(lockPath, { force: true });
+    }
+}
+function sleepSync(ms) {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+}
+function validateNextSession(current, next) {
+    if (current.repair_id !== next.repair_id) {
+        throw new Error("Repair session update cannot change repair_id.");
+    }
+    if (next.current_revision < current.current_revision) {
+        throw new Error(`Repair session revision regression for ${current.repair_id}: ${next.current_revision} < ${current.current_revision}.`);
+    }
+    if (current.status !== next.status) {
+        const allowed = ALLOWED_SESSION_TRANSITIONS[current.status];
+        if (!allowed.includes(next.status)) {
+            throw new Error(`Invalid repair session transition: ${current.status} -> ${next.status} for ${current.repair_id}.`);
+        }
+    }
+    return next;
+}
+function isErrnoException(error) {
+    return typeof error === "object" && error !== null && "code" in error;
+}
+function validateRepairSession(value, expectedRepairId, sourcePath) {
+    if (typeof value !== "object" || value === null || Array.isArray(value)) {
+        throw new Error(`Invalid repair session at ${sourcePath}: expected object.`);
+    }
+    const session = value;
+    if (session.schema_version !== "repair_session@0.1.0") {
+        throw new Error(`Invalid repair session schema at ${sourcePath}: expected repair_session@0.1.0, got ${String(session.schema_version)}.`);
+    }
+    if (session.repair_id !== expectedRepairId) {
+        throw new Error(`Invalid repair session at ${sourcePath}: expected repair_id ${expectedRepairId}, got ${String(session.repair_id)}.`);
+    }
+    if (typeof session.current_revision !== "number" || !Number.isInteger(session.current_revision) || session.current_revision < 0) {
+        throw new Error(`Invalid repair session at ${sourcePath}: current_revision must be a non-negative integer.`);
+    }
+    if (!VALID_SESSION_STATUSES.has(session.status)) {
+        throw new Error(`Invalid repair session at ${sourcePath}: unknown status ${String(session.status)}.`);
+    }
+    const scopeSummary = session.scope_summary;
+    if (typeof scopeSummary !== "object" || scopeSummary === null || Array.isArray(scopeSummary)) {
+        throw new Error(`Invalid repair session at ${sourcePath}: scope_summary must be an object.`);
+    }
+    const scope = scopeSummary;
+    if (!Array.isArray(scope.allowed) || !Array.isArray(scope.review_required) || !Array.isArray(scope.forbidden)) {
+        throw new Error(`Invalid repair session at ${sourcePath}: scope_summary arrays are missing.`);
+    }
+    return session;
+}
+function validateRepairSessionIndex(value, sourcePath) {
+    if (typeof value !== "object" || value === null || Array.isArray(value)) {
+        throw new Error(`Invalid repair session index at ${sourcePath}: expected object.`);
+    }
+    const index = value;
+    if (index.schema_version !== "repair_session_index@0.1.0") {
+        throw new Error(`Invalid repair session index schema at ${sourcePath}: expected repair_session_index@0.1.0, got ${String(index.schema_version)}.`);
+    }
+    if (!Array.isArray(index.active_repairs) || !Array.isArray(index.closed_repairs)) {
+        throw new Error(`Invalid repair session index at ${sourcePath}: active_repairs and closed_repairs must be arrays.`);
+    }
+    for (const session of [...index.active_repairs, ...index.closed_repairs]) {
+        if (typeof session !== "object" || session === null || Array.isArray(session)) {
+            throw new Error(`Invalid repair session index at ${sourcePath}: session entry must be an object.`);
+        }
+        const repairId = session.repair_id;
+        if (typeof repairId !== "string" || repairId.length === 0) {
+            throw new Error(`Invalid repair session index at ${sourcePath}: session entry missing repair_id.`);
+        }
+        validateRepairSession(session, repairId, sourcePath);
+    }
+    return index;
+}
+
+// EXTERNAL MODULE: ./src/diffWorkflow/gitDiffReader.ts
+var gitDiffReader = __nccwpck_require__(254);
+;// CONCATENATED MODULE: ./src/cli/types.ts
+/**
+ * P24: Public Interface Types
+ *
+ * Stable public-facing types for the Pantheon CLI.
+ * These types form the external contract — do not expose internal objects.
+ */
+const DEFAULT_PANTHEON_CONFIG = {
+    version: 1,
+    protected: [".pantheon/**", ".cursor/**", ".git/**", "node_modules/**"],
+    review_required: [],
+    generated: [],
+    path_roles: {},
+    python: undefined,
+};
+
+;// CONCATENATED MODULE: ./src/cli/pantheonConfig.ts
+/**
+ * P24: Pantheon Config Loader
+ *
+ * Extends existing pantheon.json with P24 public interface fields:
+ * protected, review_required, generated, path_roles.
+ *
+ * Reuses existing repoObservationConfigLoader for path_roles/excluded_dirs.
+ * Does NOT use YAML — pantheon.json is the v1 public config.
+ */
+
+
+
+function loadPantheonConfig(repoRoot, configPathInput = "pantheon.json") {
+    const configPath = (0,external_node_path_.join)(repoRoot, configPathInput);
+    const warnings = [];
+    const errors = [];
+    if (!(0,external_node_fs_.existsSync)(configPath)) {
+        return { config: DEFAULT_PANTHEON_CONFIG, warnings: [], loaded_from: null };
+    }
+    let raw;
+    try {
+        raw = JSON.parse((0,external_node_fs_.readFileSync)(configPath, "utf-8"));
+    }
+    catch (e) {
+        throw new Error(`Failed to parse ${configPathInput}: ${e.message}`);
+    }
+    if (typeof raw !== "object" || raw === null) {
+        throw new Error(`${configPathInput} must be a JSON object`);
+    }
+    return parseConfigJson(raw, warnings, errors, configPathInput);
+}
+/**
+ * Generate default pantheon.json content for `pantheon init`.
+ */
+function generateDefaultConfigJson() {
+    return JSON.stringify({
+        version: 1,
+        protected: [
+            ".pantheon/**",
+            ".cursor/**",
+            ".git/**",
+            "node_modules/**",
+        ],
+        review_required: [],
+        generated: [],
+        path_roles: {},
+        repo_observation: {},
+    }, null, 2) + "\n";
+}
+// ---------------------------------------------------------------------------
+// JSON parser
+// ---------------------------------------------------------------------------
+function parseConfigJson(root, warnings, errors, loadedFrom = "pantheon.json") {
+    const version = typeof root.version === "number" ? root.version : 1;
+    if (version !== 1) {
+        warnings.push(`pantheon.json: unsupported version ${version}, using 1`);
+    }
+    const protectedList = parseStringArray(root, "protected", warnings, errors);
+    const reviewRequired = parseStringArray(root, "review_required", warnings, errors);
+    const generated = parseStringArray(root, "generated", warnings, errors);
+    const pathRoles = parseStringMap(root, "path_roles", warnings, errors);
+    // Python observation config (optional)
+    const pythonConfig = parsePythonConfig(root, warnings, errors);
+    // Warn on unknown top-level keys
+    const knownKeys = new Set([
+        "version", "protected", "review_required", "generated",
+        "path_roles", "repo_observation", "python",
+    ]);
+    for (const key of Object.keys(root)) {
+        if (!knownKeys.has(key)) {
+            warnings.push(`pantheon.json: unknown key "${key}" (ignored)`);
+        }
+    }
+    if (errors.length > 0) {
+        throw new Error(`${loadedFrom} is invalid:\n${errors.join("\n")}`);
+    }
+    const finalProtected = protectedList.length > 0
+        ? protectedList
+        : [...DEFAULT_PANTHEON_CONFIG.protected];
+    return {
+        config: {
+            version: 1,
+            protected: finalProtected,
+            review_required: reviewRequired,
+            generated,
+            path_roles: pathRoles,
+            python: pythonConfig,
+        },
+        warnings,
+        loaded_from: loadedFrom,
+    };
+}
+function parseStringArray(root, key, warnings, errors) {
+    const val = root[key];
+    if (val === undefined)
+        return [];
+    if (!Array.isArray(val)) {
+        errors.push(`pantheon.json: "${key}" must be an array`);
+        return [];
+    }
+    const result = [];
+    for (const item of val) {
+        if (typeof item === "string" && item.length > 0) {
+            result.push(item);
+        }
+        else {
+            errors.push(`pantheon.json: ${key} contains invalid entry: ${JSON.stringify(item)}`);
+        }
+    }
+    return result;
+}
+function parseStringMap(root, key, warnings, errors) {
+    const val = root[key];
+    if (val === undefined)
+        return {};
+    if (typeof val !== "object" || val === null || Array.isArray(val)) {
+        errors.push(`pantheon.json: "${key}" must be an object`);
+        return {};
+    }
+    const result = {};
+    for (const [k, v] of Object.entries(val)) {
+        if (typeof v === "string") {
+            result[k] = v;
+        }
+        else {
+            errors.push(`pantheon.json: ${key}["${k}"] must be a string`);
+        }
+    }
+    return result;
+}
+function parsePythonConfig(root, warnings, errors) {
+    const section = root.python;
+    if (section === undefined)
+        return undefined;
+    if (typeof section !== "object" || section === null || Array.isArray(section)) {
+        errors.push('pantheon.json: "python" must be an object');
+        return undefined;
+    }
+    const pyObj = section;
+    const result = {};
+    // project_packages: string[]
+    if (pyObj.project_packages !== undefined) {
+        if (Array.isArray(pyObj.project_packages)) {
+            const valid = [];
+            for (const item of pyObj.project_packages) {
+                if (typeof item === "string" && item.length > 0)
+                    valid.push(item);
+                else
+                    errors.push(`pantheon.json: python.project_packages contains invalid entry: ${JSON.stringify(item)}`);
+            }
+            result.project_packages = valid;
+        }
+        else {
+            errors.push('pantheon.json: python.project_packages must be an array of strings');
+        }
+    }
+    // sensitive_overrides: Record<string, string>
+    if (pyObj.sensitive_overrides !== undefined) {
+        if (typeof pyObj.sensitive_overrides === "object" && pyObj.sensitive_overrides !== null && !Array.isArray(pyObj.sensitive_overrides)) {
+            const map = {};
+            for (const [k, v] of Object.entries(pyObj.sensitive_overrides)) {
+                if (typeof v === "string")
+                    map[k] = v;
+                else
+                    errors.push(`pantheon.json: python.sensitive_overrides["${k}"] must be a string`);
+            }
+            result.sensitive_overrides = map;
+        }
+        else {
+            errors.push('pantheon.json: python.sensitive_overrides must be an object');
+        }
+    }
+    return Object.keys(result).length > 0 ? result : undefined;
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/repoObservationConfigLoader.ts
+/**
+ * P20a.2: Repo Observation Config Loader
+ *
+ * Loads `pantheon.json` from repo root and extracts `repo_observation` config.
+ * Only supports exact-match patterns — no globs, no regex.
+ *
+ * Config schema:
+ * {
+ *   "repo_observation": {
+ *     "excluded_dirs": ["dir1", "dir2"],
+ *     "path_roles": { "prefix/path": "generated" },
+ *     "test_mapping_overrides": { "src/file.ts": ["test/file.test.ts"] }
+ *   }
+ * }
+ */
+
+
+const VALID_BUCKETS = new Set([
+    "src", "test", "config", "generated", "docs", "script", "asset", "unknown",
+]);
+function loadRepoObservationConfig(repoRoot) {
+    const warnings = [];
+    const configPath = (0,external_node_path_.join)(repoRoot, "pantheon.json");
+    if (!(0,external_node_fs_.existsSync)(configPath)) {
+        return {
+            config: {},
+            warnings: [],
+            loaded_from: null,
+        };
+    }
+    let raw;
+    try {
+        raw = JSON.parse((0,external_node_fs_.readFileSync)(configPath, "utf-8"));
+    }
+    catch (e) {
+        warnings.push(`Failed to parse pantheon.json: ${e.message}`);
+        return { config: {}, warnings, loaded_from: "pantheon.json" };
+    }
+    if (typeof raw !== "object" || raw === null) {
+        warnings.push("pantheon.json must be a JSON object");
+        return { config: {}, warnings, loaded_from: "pantheon.json" };
+    }
+    const root = raw;
+    const repoObs = root["repo_observation"];
+    if (repoObs === undefined) {
+        return { config: {}, warnings: [], loaded_from: "pantheon.json" };
+    }
+    if (typeof repoObs !== "object" || repoObs === null) {
+        warnings.push("pantheon.json: repo_observation must be an object");
+        return { config: {}, warnings, loaded_from: "pantheon.json" };
+    }
+    const section = repoObs;
+    // Parse excluded_dirs
+    let excluded_dirs;
+    if (section["excluded_dirs"] !== undefined) {
+        if (Array.isArray(section["excluded_dirs"])) {
+            excluded_dirs = [];
+            for (const item of section["excluded_dirs"]) {
+                if (typeof item === "string" && item.length > 0) {
+                    excluded_dirs.push(item);
+                }
+                else {
+                    warnings.push(`pantheon.json: excluded_dirs contains invalid entry: ${JSON.stringify(item)}`);
+                }
+            }
+        }
+        else {
+            warnings.push("pantheon.json: excluded_dirs must be an array");
+        }
+    }
+    // Parse path_roles
+    let path_roles;
+    if (section["path_roles"] !== undefined) {
+        if (typeof section["path_roles"] === "object" && section["path_roles"] !== null && !Array.isArray(section["path_roles"])) {
+            path_roles = {};
+            for (const [key, value] of Object.entries(section["path_roles"])) {
+                if (typeof value === "string" && VALID_BUCKETS.has(value)) {
+                    path_roles[key] = value;
+                }
+                else {
+                    warnings.push(`pantheon.json: path_roles["${key}"] has invalid bucket: ${JSON.stringify(value)}`);
+                }
+            }
+        }
+        else {
+            warnings.push("pantheon.json: path_roles must be an object");
+        }
+    }
+    // Parse test_mapping_overrides
+    let test_mapping_overrides;
+    if (section["test_mapping_overrides"] !== undefined) {
+        if (typeof section["test_mapping_overrides"] === "object" && section["test_mapping_overrides"] !== null && !Array.isArray(section["test_mapping_overrides"])) {
+            test_mapping_overrides = {};
+            for (const [key, value] of Object.entries(section["test_mapping_overrides"])) {
+                if (Array.isArray(value) && value.every(v => typeof v === "string")) {
+                    test_mapping_overrides[key] = value;
+                }
+                else {
+                    warnings.push(`pantheon.json: test_mapping_overrides["${key}"] must be an array of strings`);
+                }
+            }
+        }
+        else {
+            warnings.push("pantheon.json: test_mapping_overrides must be an object");
+        }
+    }
+    return {
+        config: {
+            ...(excluded_dirs !== undefined ? { excluded_dirs } : {}),
+            ...(path_roles !== undefined ? { path_roles } : {}),
+            ...(test_mapping_overrides !== undefined ? { test_mapping_overrides } : {}),
+        },
+        warnings,
+        loaded_from: "pantheon.json",
+    };
+}
+
+// EXTERNAL MODULE: external "node:child_process"
+var external_node_child_process_ = __nccwpck_require__(421);
+;// CONCATENATED MODULE: ./src/repoObservation/types.ts
+/**
+ * P20a: Deterministic Repo Observations — Domain Types
+ *
+ * Core invariants:
+ *   - All paths are repo-relative POSIX (no absolute, no escaping ..)
+ *   - observation_hash is deterministic: same repo state → same hash
+ *   - scanner.llm_used is always false in P20a
+ *   - RepoObservations is an observed index, NOT canonical architecture truth
+ */
+const DEFAULT_EXCLUDED_DIRS = [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    ".git",
+    ".next",
+    "out",
+    ".cache",
+    "tmp",
+    ".tmp",
+    ".tmp-pet-build",
+    ".worktrees",
+    ".test-tmp",
+    ".hosted_prs",
+    "public_release",
+    "scratch",
+];
+const DEFAULT_SCAN_LIMITS = {
+    max_file_bytes: 512 * 1024, // 512 KB
+    max_total_files: 10_000,
+    max_import_edges: 50_000,
+    scan_timeout_ms: 60_000, // 60 seconds
+    excluded_dirs: DEFAULT_EXCLUDED_DIRS,
+};
+
+// EXTERNAL MODULE: ./src/repoObservation/pathUtils.ts
+var pathUtils = __nccwpck_require__(738);
+;// CONCATENATED MODULE: ./src/repoObservation/fileClassifier.ts
+/**
+ * P20a: File Classification
+ *
+ * Classifies files by path into buckets and languages.
+ * Uses only path-based rules — no content inspection.
+ */
+// ---------------------------------------------------------------------------
+// Bucket classification
+// ---------------------------------------------------------------------------
+const BUCKET_RULES = [
+    // Test files (must come before src to catch test files inside src/)
+    { test: p => /\.(test|spec)\.[tj]sx?$/.test(p), bucket: "test" },
+    { test: p => p.startsWith("test/") || p.startsWith("tests/"), bucket: "test" },
+    { test: p => p.includes("__tests__/"), bucket: "test" },
+    // Generated / data (pipeline outputs, trial data, dogfood artifacts)
+    { test: p => p.startsWith("generated/"), bucket: "generated" },
+    { test: p => p.includes("build/generated/"), bucket: "generated" },
+    { test: p => /\.generated\.[tj]sx?$/.test(p), bucket: "generated" },
+    { test: p => p.startsWith("data/"), bucket: "generated" },
+    { test: p => p.startsWith(".pantheon/"), bucket: "generated" },
+    // Config
+    { test: p => /^tsconfig(\..+)?\.json$/.test(p), bucket: "config" },
+    { test: p => p === "package.json", bucket: "config" },
+    { test: p => p === "package-lock.json", bucket: "config" },
+    { test: p => /^vite\.config\.[tj]sx?$/.test(p), bucket: "config" },
+    { test: p => /^vitest\.config\.[tj]sx?$/.test(p), bucket: "config" },
+    { test: p => /^webpack\.config\.[tj]sx?$/.test(p), bucket: "config" },
+    { test: p => /^jest\.config\.[tj]sx?$/.test(p), bucket: "config" },
+    { test: p => /^pantheon(\..+)?\.json$/.test(p), bucket: "config" },
+    { test: p => p.startsWith(".github/"), bucket: "config" },
+    { test: p => /^\.?eslint/.test(p), bucket: "config" },
+    { test: p => p === ".gitignore" || p === ".gitattributes" || p === ".editorconfig" || p === ".npmignore", bucket: "config" },
+    { test: p => p.startsWith("config/"), bucket: "config" },
+    { test: p => p.startsWith("action/"), bucket: "config" },
+    // Docs
+    { test: p => p.startsWith("docs/"), bucket: "docs" },
+    { test: p => p.startsWith("examples/"), bucket: "docs" },
+    { test: p => /\.md$/i.test(p) && !p.startsWith("src/"), bucket: "docs" },
+    // Scripts
+    { test: p => p.startsWith("scripts/"), bucket: "script" },
+    { test: p => p.startsWith("bin/"), bucket: "script" },
+    // Assets (cockpit UI, static files)
+    { test: p => p.startsWith("cockpit/"), bucket: "asset" },
+    { test: p => p.startsWith("cockpit-mock/"), bucket: "asset" },
+    // Source (catch-all for src/, lib/, app/)
+    { test: p => p.startsWith("src/"), bucket: "src" },
+    { test: p => p.startsWith("lib/"), bucket: "src" },
+    { test: p => p.startsWith("app/"), bucket: "src" },
+];
+/**
+ * Classify a repo-relative path into a bucket.
+ */
+function classifyFile(path) {
+    const lower = path.toLowerCase();
+    for (const rule of BUCKET_RULES) {
+        if (rule.test(lower)) {
+            return rule.bucket;
+        }
+    }
+    // Asset detection by extension
+    if (/\.(png|jpe?g|gif|svg|ico|webp|mp4|webm|woff2?|ttf|eot|pdf)$/i.test(path)) {
+        return "asset";
+    }
+    return "unknown";
+}
+// ---------------------------------------------------------------------------
+// Language detection
+// ---------------------------------------------------------------------------
+const LANGUAGE_MAP = [
+    { test: /\.tsx?$/, language: "typescript" },
+    { test: /\.jsx?$/, language: "javascript" },
+    { test: /\.json$/, language: "json" },
+    { test: /\.md$/i, language: "markdown" },
+    { test: /\.(ya?ml)$/i, language: "yaml" },
+];
+/**
+ * Detect the language of a file by its extension.
+ */
+function detectLanguage(path) {
+    for (const rule of LANGUAGE_MAP) {
+        if (rule.test.test(path)) {
+            return rule.language;
+        }
+    }
+    return "other";
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/importExtractor.ts
+/**
+ * P20a: Import Extractor
+ *
+ * Extracts literal import/export/require specifiers from TS/JS files.
+ * Uses deterministic regex — no TypeScript parser dependency.
+ * Records resolution_status for each edge. Dynamic imports → unknown.
+ */
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+function extractImportsFromFile(input) {
+    const edges = [];
+    const dynamicImports = [];
+    const unresolvedImports = [];
+    // Static imports: import x from "..."  /  import { x } from "..."  /  import "..."
+    for (const m of input.content.matchAll(/import\s+(?:(?:type\s+)?(?:\{[^}]*\}|\*\s+as\s+\w+|\w+)(?:\s*,\s*(?:\{[^}]*\}|\*\s+as\s+\w+))?\s+from\s+)?["']([^"']+)["']/g)) {
+        const edge = buildEdge(input.path, m[1], "static");
+        edges.push(edge);
+        if (edge.resolution_status === "unresolved_package" || edge.resolution_status === "unresolved_alias") {
+            unresolvedImports.push(`${input.path}:${m[1]}`);
+        }
+    }
+    // Export-from: export { x } from "..."  /  export * from "..."
+    for (const m of input.content.matchAll(/export\s+(?:\{[^}]*\}|\*(?:\s+as\s+\w+)?)\s+from\s+["']([^"']+)["']/g)) {
+        const edge = buildEdge(input.path, m[1], "export_from");
+        edges.push(edge);
+        if (edge.resolution_status === "unresolved_package" || edge.resolution_status === "unresolved_alias") {
+            unresolvedImports.push(`${input.path}:${m[1]}`);
+        }
+    }
+    // Require: const x = require("...")  /  require("...")
+    for (const m of input.content.matchAll(/require\s*\(\s*["']([^"']+)["']\s*\)/g)) {
+        const edge = buildEdge(input.path, m[1], "require");
+        edges.push(edge);
+        if (edge.resolution_status === "unresolved_package" || edge.resolution_status === "unresolved_alias") {
+            unresolvedImports.push(`${input.path}:${m[1]}`);
+        }
+    }
+    // Dynamic imports: import(...)
+    for (const m of input.content.matchAll(/import\s*\(\s*["']([^"']+)["']\s*\)/g)) {
+        edges.push(buildEdge(input.path, m[1], "dynamic"));
+        dynamicImports.push(`${input.path}:${m[1]}`);
+    }
+    // Dynamic imports with non-literal: import(expr)
+    for (const m of input.content.matchAll(/import\s*\(\s*(?!["'])([^)]+)\s*\)/g)) {
+        dynamicImports.push(`${input.path}:<dynamic expression>`);
+        edges.push({
+            from_file: input.path,
+            raw_specifier: `<dynamic:${m[1].trim().slice(0, 50)}>`,
+            import_kind: "dynamic",
+            resolution_status: "dynamic_unknown",
+            evidence: [{ type: "import_literal", source_path: input.path, value: `dynamic import expression: ${m[1].trim().slice(0, 100)}` }],
+        });
+    }
+    return {
+        import_edges: edges,
+        unknowns: { dynamic_imports: dynamicImports, unresolved_imports: unresolvedImports },
+    };
+}
+// ---------------------------------------------------------------------------
+// Internal
+// ---------------------------------------------------------------------------
+function buildEdge(fromFile, specifier, kind) {
+    const resolution = resolveSpecifier(specifier);
+    return {
+        from_file: fromFile,
+        raw_specifier: specifier,
+        import_kind: kind,
+        ...(resolution.targetHint ? { target_hint: resolution.targetHint } : {}),
+        resolution_status: kind === "dynamic" ? "dynamic_unknown" : resolution.status,
+        evidence: [{ type: "import_literal", source_path: fromFile, value: specifier }],
+    };
+}
+function resolveSpecifier(specifier) {
+    // Relative path
+    if (specifier.startsWith("./") || specifier.startsWith("../")) {
+        return { status: "resolved_relative", targetHint: specifier };
+    }
+    // Node builtins (node:fs, node:path, etc.) — handled here for early classification
+    if (specifier.startsWith("node:")) {
+        return { status: "builtin_node_package" };
+    }
+    // Scoped package (@org/pkg)
+    if (specifier.startsWith("@")) {
+        return { status: "unresolved_package" };
+    }
+    // Bare specifier — could be package or alias
+    // Package classification (declared/undeclared/builtin) is done later by packageDependencyClassifier
+    if (!specifier.includes("/") || specifier.split("/").length <= 2) {
+        if (/^[a-z@]/.test(specifier)) {
+            return { status: "unresolved_package" };
+        }
+        return { status: "unresolved_alias" };
+    }
+    // Anything else
+    return { status: "literal_extracted" };
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/testMapper.ts
+/**
+ * P20a: Test Mapper
+ *
+ * Maps source files to test files by path convention.
+ * Does NOT do coverage analysis or content inspection.
+ */
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+function inferTestMappings(input) {
+    const srcFiles = input.files.filter(f => f.bucket === "src");
+    const testFiles = input.files.filter(f => f.bucket === "test");
+    const overrides = input.overrides ?? {};
+    const testPaths = new Set(testFiles.map(f => f.path));
+    const mappedTests = new Set();
+    const mappings = [];
+    const unmappedSources = [];
+    const ambiguous = [];
+    for (const src of srcFiles) {
+        // Config overrides take priority
+        const overrideTests = overrides[src.path];
+        if (overrideTests && overrideTests.length > 0) {
+            for (const testPath of overrideTests) {
+                mappings.push({
+                    source_path: src.path,
+                    test_path: testPath,
+                    mapping_kind: "config_override",
+                    confidence: "high",
+                    evidence: [{ type: "config", source_path: "pantheon.json", value: `test_mapping_override: ${src.path} → ${testPath}` }],
+                });
+                mappedTests.add(testPath);
+            }
+            continue;
+        }
+        const candidates = findTestCandidates(src.path, testPaths);
+        if (candidates.length === 0) {
+            unmappedSources.push(src.path);
+        }
+        else if (candidates.length === 1) {
+            const c = candidates[0];
+            mappings.push({
+                source_path: src.path,
+                test_path: c.testPath,
+                mapping_kind: c.kind,
+                confidence: c.confidence,
+                evidence: [{ type: "test_convention", source_path: src.path, value: `Matched by ${c.kind}: ${c.testPath}` }],
+            });
+            mappedTests.add(c.testPath);
+        }
+        else {
+            // Multiple candidates — record first but mark ambiguous
+            const c = candidates[0];
+            mappings.push({
+                source_path: src.path,
+                test_path: c.testPath,
+                mapping_kind: c.kind,
+                confidence: "low",
+                evidence: [{ type: "test_convention", source_path: src.path, value: `Ambiguous: ${candidates.length} candidates` }],
+            });
+            mappedTests.add(c.testPath);
+            ambiguous.push(src.path);
+        }
+    }
+    const unmappedTests = testFiles
+        .filter(f => !mappedTests.has(f.path))
+        .map(f => f.path);
+    return { test_mappings: mappings, unmapped_sources: unmappedSources, unmapped_tests: unmappedTests, ambiguous_test_mappings: ambiguous };
+}
+function findTestCandidates(srcPath, testPaths) {
+    const candidates = [];
+    const basename = getBasename(srcPath);
+    const dirParts = srcPath.split("/").slice(1, -1); // remove bucket prefix and filename
+    const subPath = dirParts.join("/");
+    const extensions = ["ts", "tsx", "js", "jsx"];
+    for (const extension of extensions) {
+        // Convention 1: test/<subpath>/<basename>.test.tsx|ts|js|jsx
+        tryCandidate(candidates, testPaths, `test/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "parallel_test_dir", extension === "ts" ? "high" : "medium");
+        // Convention 2: tests/<subpath>/<basename>.test.*
+        tryCandidate(candidates, testPaths, `tests/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "parallel_test_dir", extension === "ts" ? "high" : "medium");
+        // Convention 3: src/<subpath>/<basename>.test.* (co-located)
+        tryCandidate(candidates, testPaths, `src/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "same_basename", extension === "ts" ? "high" : "medium");
+        // Convention 4: __tests__/<subpath>/<basename>.test.*
+        tryCandidate(candidates, testPaths, `__tests__/${subPath ? subPath + "/" : ""}${basename}.test.${extension}`, "parallel_test_dir", "medium");
+        // Convention 5/6/7: *.spec.*
+        tryCandidate(candidates, testPaths, `test/${subPath ? subPath + "/" : ""}${basename}.spec.${extension}`, "suffix_spec", "medium");
+        tryCandidate(candidates, testPaths, `tests/${subPath ? subPath + "/" : ""}${basename}.spec.${extension}`, "suffix_spec", "medium");
+        tryCandidate(candidates, testPaths, `src/${subPath ? subPath + "/" : ""}${basename}.spec.${extension}`, "suffix_spec", "medium");
+    }
+    return candidates;
+}
+function tryCandidate(out, testPaths, testPath, kind, confidence) {
+    if (testPaths.has(testPath)) {
+        out.push({ testPath, kind, confidence });
+    }
+}
+function getBasename(filePath) {
+    const fileName = filePath.split("/").pop() ?? "";
+    // Strip extension (.ts, .tsx, .js, .jsx)
+    return fileName.replace(/\.[tj]sx?$/, "");
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/pathKeywordMatcher.ts
+function normalizeSegmentTokens(segment) {
+    return segment
+        .toLowerCase()
+        .replace(/\.[a-z0-9]+$/i, "")
+        .split(/[^a-z0-9]+/)
+        .filter(Boolean);
+}
+function pathContainsKeyword(path, keyword) {
+    const normalizedKeyword = keyword.toLowerCase();
+    for (const segment of path.split("/")) {
+        const tokens = normalizeSegmentTokens(segment);
+        if (tokens.some(token => token === normalizedKeyword || token === `${normalizedKeyword}s`)) {
+            return true;
+        }
+    }
+    return false;
+}
+function filenameContainsToken(path, token) {
+    const filename = path.split("/").pop() ?? "";
+    return normalizeSegmentTokens(filename).includes(token.toLowerCase());
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/sensitivePathDetector.ts
+/**
+ * P20a: Sensitive Path Detector
+ *
+ * Detects sensitive paths by keyword matching in path segments.
+ * No content inspection — path-only analysis.
+ */
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+const SENSITIVE_KEYWORDS = [
+    { keyword: "auth", reason: "auth_keyword" },
+    { keyword: "payment", reason: "payment_keyword" },
+    { keyword: "billing", reason: "payment_keyword" },
+    { keyword: "admin", reason: "admin_keyword" },
+    { keyword: "secret", reason: "secret_keyword" },
+    { keyword: "secrets", reason: "secret_keyword" },
+    { keyword: "infra", reason: "infra_keyword" },
+    { keyword: "migration", reason: "migration_keyword" },
+    { keyword: "migrations", reason: "migration_keyword" },
+    { keyword: "prod", reason: "config_keyword" },
+    { keyword: "production", reason: "config_keyword" },
+];
+/**
+ * Detect sensitive paths by keyword matching in path segments.
+ */
+function detectSensitivePaths(files) {
+    const results = [];
+    const seen = new Set();
+    for (const file of files) {
+        const segments = file.path.toLowerCase().split("/");
+        for (const { keyword, reason } of SENSITIVE_KEYWORDS) {
+            if (pathContainsKeyword(file.path, keyword)) {
+                const key = `${file.path}:${reason}`;
+                if (!seen.has(key)) {
+                    seen.add(key);
+                    results.push({
+                        path: file.path,
+                        reason,
+                        review_required: true,
+                        evidence: [{ type: "keyword", source_path: file.path, value: `Path contains sensitive segment: ${keyword}` }],
+                    });
+                }
+            }
+        }
+    }
+    return results;
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/codeownersParser.ts
+/**
+ * P20a: CODEOWNERS Parser
+ *
+ * Conservative CODEOWNERS parsing.
+ * Supports root, .github/, docs/ locations.
+ * Complex patterns marked as unresolved.
+ */
+
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+function parseCodeowners(repoRoot) {
+    const hints = [];
+    const unresolved = [];
+    const locations = [
+        (0,external_node_path_.join)(repoRoot, "CODEOWNERS"),
+        (0,external_node_path_.join)(repoRoot, ".github", "CODEOWNERS"),
+        (0,external_node_path_.join)(repoRoot, "docs", "CODEOWNERS"),
+    ];
+    for (const loc of locations) {
+        if (!(0,external_node_fs_.existsSync)(loc))
+            continue;
+        const content = (0,external_node_fs_.readFileSync)(loc, "utf-8");
+        const lines = content.split(/\r?\n/);
+        for (const rawLine of lines) {
+            const line = rawLine.trim();
+            if (!line || line.startsWith("#"))
+                continue;
+            const parts = line.split(/\s+/);
+            if (parts.length < 2)
+                continue;
+            const pattern = parts[0];
+            const owners = parts.slice(1).filter(p => p.startsWith("@"));
+            if (owners.length === 0)
+                continue;
+            const source = loc.includes(".github")
+                ? "CODEOWNERS:.github"
+                : loc.includes("docs")
+                    ? "CODEOWNERS:docs"
+                    : "CODEOWNERS";
+            const expandedPatterns = expandBracePatterns(pattern);
+            for (const expandedPattern of expandedPatterns) {
+                const isComplex = isComplexPattern(expandedPattern);
+                if (isComplex) {
+                    unresolved.push(expandedPattern);
+                }
+                hints.push({
+                    path_pattern: expandedPattern,
+                    owners,
+                    source,
+                    match_status: isComplex ? "unresolved_complex_pattern" : "simple_pattern",
+                    evidence: [{ type: "codeowners", source_path: loc.replace(repoRoot, "").replace(/\\/g, "/").replace(/^\//, ""), value: line }],
+                });
+            }
+        }
+    }
+    return { owner_hints: hints, unresolved_patterns: unresolved };
+}
+// ---------------------------------------------------------------------------
+// Internal
+// ---------------------------------------------------------------------------
+/**
+ * Determine if a CODEOWNERS pattern is "complex" and cannot be
+ * confidently interpreted by simple prefix matching.
+ *
+ * Complex patterns include: **, *, ?, [, !
+ * Simple patterns: path/ or path/file
+ */
+function isComplexPattern(pattern) {
+    // Double star glob
+    if (pattern.includes("**"))
+        return true;
+    // Single star or question mark wildcard
+    if (pattern.includes("*") || pattern.includes("?"))
+        return true;
+    // Character class
+    if (pattern.includes("["))
+        return true;
+    // Negation
+    if (pattern.startsWith("!"))
+        return true;
+    return false;
+}
+function expandBracePatterns(pattern) {
+    const match = /\{([^{}]+)\}/.exec(pattern);
+    if (!match || match.index === undefined) {
+        return [pattern];
+    }
+    const before = pattern.slice(0, match.index);
+    const after = pattern.slice(match.index + match[0].length);
+    const options = match[1]
+        .split(",")
+        .map(option => option.trim())
+        .filter(option => option.length > 0);
+    if (options.length === 0) {
+        return [pattern];
+    }
+    return options.flatMap(option => expandBracePatterns(`${before}${option}${after}`));
+}
+
+// EXTERNAL MODULE: external "node:crypto"
+var external_node_crypto_ = __nccwpck_require__(598);
+// EXTERNAL MODULE: ./src/stableSerialize.ts
+var src_stableSerialize = __nccwpck_require__(120);
+;// CONCATENATED MODULE: ./src/hash.ts
+/**
+ * Hash Module
+ *
+ * Implements the four core hash functions required by Day 1:
+ *   1. computeBlockContentHash()   – ref: H-02
+ *   2. computeArtifactHash()       – ref: H-03
+ *   3. computeRevisionId()         – derives a revision identifier
+ *   4. computeHash()               – low-level sha256 helper
+ *
+ * Design decisions:
+ *   - content_hash includes ONLY semantic fields: { type, text, rationale, terms }
+ *     (ref: H-02). Metadata, status, timestamps are excluded.
+ *   - revision_hash includes the artifact's canonical representation:
+ *     { artifact_id, artifact_type, schema_version, parent_revision_id, sections }
+ *     where each block contributes its content_hash (ref: H-03).
+ *     ArtifactMetadata is explicitly excluded (ref: §4.1.1).
+ *   - All hashing uses stableSerialize (ref: H-01) then SHA-256.
+ *   - Hash strings are prefixed with "sha256:" (ref: H-04).
+ */
+
+
+// ---------------------------------------------------------------------------
+// Constants
+// ---------------------------------------------------------------------------
+const HASH_ALGORITHM = "sha256";
+const HASH_PREFIX = "sha256:";
+// ---------------------------------------------------------------------------
+// Low-level helper
+// ---------------------------------------------------------------------------
+/**
+ * Compute SHA-256 of an arbitrary string and return the prefixed hex digest.
+ */
+function computeHash(input) {
+    const digest = (0,external_node_crypto_.createHash)(HASH_ALGORITHM).update(input, "utf8").digest("hex");
+    return `${HASH_PREFIX}${digest}`;
+}
+// ---------------------------------------------------------------------------
+// Block content hash  – ref: H-02
+// ---------------------------------------------------------------------------
+/**
+ * Extract the semantic-only fields from a CommitmentBlock.
+ *
+ * ref: H-02 – content_hash input is { type, text, rationale, terms }.
+ * Everything else (block_id, status, content_hash itself, timestamps) is excluded.
+ */
+function extractContentHashInput(block) {
+    const input = {
+        type: block.type,
+        text: block.text,
+    };
+    // Only include optional fields when they are defined.
+    // undefined values are omitted by stableSerialize, but being explicit
+    // makes the hash boundary clear and testable.
+    if (block.rationale !== undefined) {
+        input.rationale = block.rationale;
+    }
+    if (block.terms !== undefined) {
+        input.terms = block.terms;
+    }
+    return input;
+}
+/**
+ * Compute the content_hash for a CommitmentBlock.
+ *
+ * ref: H-02
+ * This hash changes if and only if { type, text, rationale, terms } changes.
+ */
+function computeBlockContentHash(block) {
+    const semanticPayload = extractContentHashInput(block);
+    return computeHash(stableSerialize(semanticPayload));
+}
+// ---------------------------------------------------------------------------
+// Artifact / revision hash  – ref: H-03
+// ---------------------------------------------------------------------------
+/**
+ * Build the canonical representation of an artifact for revision hashing.
+ *
+ * ref: H-03 – includes artifact_id, artifact_type, schema_version,
+ * parent_revision_id, and sections with blocks (using content_hashes).
+ * ArtifactMetadata is excluded (ref: §4.1.1).
+ */
+function extractRevisionHashInput(artifact) {
+    return {
+        artifact_id: artifact.artifact_id,
+        artifact_type: artifact.artifact_type,
+        schema_version: artifact.schema_version,
+        parent_revision_id: artifact.parent_revision_id ?? null,
+        sections: artifact.sections.map((s) => ({
+            section_id: s.section_id,
+            title: s.title,
+            commitments: s.commitments.map((b) => ({
+                block_id: b.block_id,
+                content_hash: b.content_hash,
+            })),
+        })),
+    };
+}
+/**
+ * Compute the artifact-level hash for a given revision state.
+ *
+ * ref: H-03
+ * This hash changes if any structural or semantic content changes,
+ * but is immune to metadata, timestamps, and UI state.
+ */
+function computeArtifactHash(artifact) {
+    const payload = extractRevisionHashInput(artifact);
+    return computeHash(stableSerialize(payload));
+}
+/**
+ * Compute a revision_id for a given artifact state.
+ *
+ * The revision_id is derived from the artifact hash so that identical
+ * artifact content always yields the same revision identifier.
+ *
+ * Format: "rev_<first12chars_of_hex_digest>"
+ */
+function computeRevisionId(artifact) {
+    const artifactHash = computeArtifactHash(artifact);
+    // Strip the "sha256:" prefix, take first 12 hex characters.
+    const hexDigest = artifactHash.slice(HASH_PREFIX.length);
+    return `rev_${hexDigest.slice(0, 12)}`;
+}
+// ---------------------------------------------------------------------------
+// Hash metadata helper  – ref: H-04
+// ---------------------------------------------------------------------------
+/**
+ * Returns the hash metadata record that must be stored with every revision.
+ * ref: H-04
+ */
+function getHashMeta() {
+    return {
+        hash_algorithm: HASH_ALGORITHM,
+        serialization_version: SERIALIZATION_VERSION,
+    };
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/observationHasher.ts
+/**
+ * P20a: Observation Hash
+ *
+ * Computes a deterministic hash over the full observation content.
+ * Excludes: scanned_at, absolute repo_root, meta.observation_hash.
+ * Includes: scanner_version, limits, observations, unknowns, excluded,
+ *           meta.partial_scan, meta.file_count, meta.unknown_count,
+ *           meta.excluded_count, repo_state, head_commit_hash,
+ *           has_uncommitted_changes, uncommitted_file_count.
+ *
+ * All arrays sorted before hash for order-independence.
+ */
+
+
+/**
+ * Compute the observation hash for a set of repo observations.
+ *
+ * The hash is deterministic: identical observations produce identical hashes
+ * regardless of array ordering, absolute repo root, or scan timestamp.
+ */
+function computeObservationHash(obs) {
+    const payload = buildHashPayload(obs);
+    return computeHash((0,src_stableSerialize/* stableSerialize */.r)(payload));
+}
+// ---------------------------------------------------------------------------
+// Internal
+// ---------------------------------------------------------------------------
+function buildHashPayload(obs) {
+    return {
+        schema_version: obs.schema_version,
+        // Repo identity (without absolute path or timestamp)
+        repo_state: obs.repo.repo_state,
+        head_commit_hash: obs.repo.head_commit_hash,
+        has_uncommitted_changes: obs.repo.has_uncommitted_changes,
+        uncommitted_file_count: obs.repo.uncommitted_file_count,
+        // Scanner config
+        scanner_version: obs.scanner.scanner_version,
+        limits: obs.limits,
+        // Observations (all arrays sorted)
+        files: sortBy([...obs.observations.files], f => f.path),
+        path_buckets: sortBy([...obs.observations.path_buckets].map(b => ({
+            ...b,
+            paths: [...b.paths].sort(),
+        })), b => b.bucket),
+        import_edges: sortBy([...obs.observations.import_edges], e => `${e.from_file}\0${e.raw_specifier}\0${e.import_kind}`),
+        test_mappings: sortBy([...obs.observations.test_mappings], m => `${m.source_path}\0${m.test_path}`),
+        sensitive_paths: sortBy([...obs.observations.sensitive_paths], s => `${s.path}\0${s.reason}`),
+        owner_hints: sortBy([...obs.observations.owner_hints], h => `${h.path_pattern}\0${h.owners.join(",")}`),
+        config_hints: sortBy([...obs.observations.config_hints], c => c.config_path),
+        package_manifests: sortBy([...obs.observations.package_manifests], m => m.package_json_path),
+        // Unknowns (all arrays sorted)
+        unknowns: sortUnknowns(obs.unknowns),
+        // Excluded (sorted)
+        excluded: sortBy([...obs.excluded], e => `${e.path}\0${e.reason}`),
+        // Quality
+        quality: obs.quality,
+        // Meta (excluding observation_hash itself)
+        partial_scan: obs.meta.partial_scan,
+        file_count: obs.meta.file_count,
+        unknown_count: obs.meta.unknown_count,
+        excluded_count: obs.meta.excluded_count,
+    };
+}
+function sortUnknowns(u) {
+    return {
+        skipped_large_files: [...u.skipped_large_files].sort(),
+        unsupported_files: [...u.unsupported_files].sort(),
+        dynamic_imports: [...u.dynamic_imports].sort(),
+        unresolved_imports: [...u.unresolved_imports].sort(),
+        unmapped_sources: [...u.unmapped_sources].sort(),
+        unmapped_tests: [...u.unmapped_tests].sort(),
+        ambiguous_test_mappings: [...u.ambiguous_test_mappings].sort(),
+        scan_limit_exceeded: [...u.scan_limit_exceeded].sort(),
+        owner_patterns_unresolved: [...u.owner_patterns_unresolved].sort(),
+        changed_files_not_observed: [...u.changed_files_not_observed].sort(),
+    };
+}
+function sortBy(arr, keyFn) {
+    return arr.sort((a, b) => keyFn(a).localeCompare(keyFn(b)));
+}
+
+;// CONCATENATED MODULE: external "node:module"
+const external_node_module_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:module");
+;// CONCATENATED MODULE: ./src/repoObservation/packageDependencyClassifier.ts
+/**
+ * P20a.2: Package Dependency Classifier
+ *
+ * Classifies package imports using package.json manifests and Node builtins.
+ * Replaces the brittle WELLKNOWN_PACKAGES list with ground-truth resolution.
+ *
+ * Resolution order:
+ *   1. node: prefix or builtin module → builtin_node_package
+ *   2. Declared in any package.json dep group → declared_package
+ *   3. package.json exists but not declared → undeclared_package
+ *   4. No package.json found → unknown_package
+ */
+
+// ---------------------------------------------------------------------------
+// Node builtins set (includes both "fs" and "node:fs" forms)
+// ---------------------------------------------------------------------------
+const NODE_BUILTINS = new Set([
+    ...external_node_module_namespaceObject.builtinModules,
+    ...external_node_module_namespaceObject.builtinModules.map(m => `node:${m}`),
+]);
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+/**
+ * Classify a package import specifier against known package manifests.
+ *
+ * Only call this for non-relative, non-dynamic specifiers.
+ */
+function classifyPackageImport(input) {
+    const { rawSpecifier, packageManifests } = input;
+    // 1. Node builtin
+    if (isNodeBuiltin(rawSpecifier)) {
+        return "builtin_node_package";
+    }
+    // 2. Extract package name root
+    const packageName = extractPackageName(rawSpecifier);
+    if (!packageName) {
+        return "unknown_package";
+    }
+    // 3. No manifests → unknown
+    if (packageManifests.length === 0) {
+        return "unknown_package";
+    }
+    // 4. Check all manifests
+    for (const manifest of packageManifests) {
+        if (isDeclaredIn(packageName, manifest)) {
+            return "declared_package";
+        }
+    }
+    // 5. Manifests exist but package not declared
+    return "undeclared_package";
+}
+/**
+ * Check if a specifier is a Node.js builtin module.
+ */
+function isNodeBuiltin(specifier) {
+    // node: prefix
+    if (specifier.startsWith("node:"))
+        return true;
+    // Bare builtin name
+    return NODE_BUILTINS.has(specifier);
+}
+/**
+ * Extract the root package name from an import specifier.
+ *
+ * Examples:
+ *   "lodash/fp"           → "lodash"
+ *   "@scope/pkg/sub"      → "@scope/pkg"
+ *   "zod"                 → "zod"
+ *   "@scope/pkg"          → "@scope/pkg"
+ *   "./relative"          → null (not a package)
+ */
+function extractPackageName(specifier) {
+    // Relative path — not a package
+    if (specifier.startsWith("./") || specifier.startsWith("../")) {
+        return null;
+    }
+    // node: prefix — builtin, not a package
+    if (specifier.startsWith("node:")) {
+        return null;
+    }
+    // Scoped package: @scope/pkg or @scope/pkg/subpath
+    if (specifier.startsWith("@")) {
+        const parts = specifier.split("/");
+        if (parts.length >= 2) {
+            return `${parts[0]}/${parts[1]}`;
+        }
+        return null; // Malformed scoped package
+    }
+    // Bare package: pkg or pkg/subpath
+    const slashIdx = specifier.indexOf("/");
+    if (slashIdx === -1) {
+        return specifier;
+    }
+    return specifier.substring(0, slashIdx);
+}
+// ---------------------------------------------------------------------------
+// Internal
+// ---------------------------------------------------------------------------
+function isDeclaredIn(packageName, manifest) {
+    return (manifest.dependencies.includes(packageName) ||
+        manifest.dev_dependencies.includes(packageName) ||
+        manifest.peer_dependencies.includes(packageName) ||
+        manifest.optional_dependencies.includes(packageName));
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/observationQuality.ts
+/**
+ * P20a.2: Observation Quality Metrics
+ *
+ * Computes quality metrics and unknown taxonomy from repo observations.
+ * Splits unknowns into three categories:
+ *   - out_of_scope: unsupported files/languages (scanner can't help)
+ *   - actionable: unmapped sources, undeclared packages (user can fix)
+ *   - intrinsic: dynamic imports, large files (deterministic scanner limit)
+ */
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+/**
+ * Compute quality metrics from observations.
+ * Call after unknowns are populated but before hash computation.
+ */
+function computeObservationQuality(obs) {
+    const taxonomy = computeUnknownTaxonomy(obs);
+    const fileCount = obs.meta.file_count || 1; // avoid division by zero
+    const outOfScopeCount = taxonomy.out_of_scope.unsupported_files.length;
+    const actionableCount = taxonomy.actionable.unmapped_sources.length +
+        taxonomy.actionable.unmapped_tests.length +
+        taxonomy.actionable.undeclared_packages.length +
+        taxonomy.actionable.unresolved_aliases.length +
+        taxonomy.actionable.unknown_packages.length +
+        taxonomy.actionable.owner_patterns_unresolved.length;
+    const intrinsicCount = taxonomy.intrinsic.dynamic_imports.length +
+        taxonomy.intrinsic.skipped_large_files.length +
+        taxonomy.intrinsic.scan_limit_exceeded.length;
+    const rawUnknownCount = obs.meta.unknown_count;
+    // Undeclared packages: count import edges with undeclared_package status
+    const undeclaredPackageCount = obs.observations.import_edges.filter(e => e.resolution_status === "undeclared_package").length;
+    // Unknown bucket files
+    const unknownBucketFileCount = obs.observations.files.filter(f => f.bucket === "unknown").length;
+    return {
+        raw_unknown_count: rawUnknownCount,
+        raw_unknown_ratio: rawUnknownCount / fileCount,
+        out_of_scope_count: outOfScopeCount,
+        out_of_scope_ratio: outOfScopeCount / fileCount,
+        actionable_count: actionableCount,
+        actionable_ratio: actionableCount / fileCount,
+        intrinsic_count: intrinsicCount,
+        intrinsic_ratio: intrinsicCount / fileCount,
+        unknown_bucket_file_count: unknownBucketFileCount,
+        undeclared_package_count: undeclaredPackageCount,
+        taxonomy,
+    };
+}
+/**
+ * Generate operator-facing recommendations based on quality metrics.
+ */
+function generateObservationRecommendations(input) {
+    const { quality } = input;
+    const recs = [];
+    if (quality.taxonomy.actionable.unmapped_sources.length > 0) {
+        recs.push(`Add test_mapping_overrides in pantheon.json for ${quality.taxonomy.actionable.unmapped_sources.length} unmapped source file(s).`);
+    }
+    if (quality.taxonomy.actionable.unmapped_tests.length > 0) {
+        recs.push(`Review ${quality.taxonomy.actionable.unmapped_tests.length} unmapped test file(s): rename to follow convention or add test_mapping_overrides.`);
+    }
+    if (quality.taxonomy.actionable.undeclared_packages.length > 0) {
+        recs.push(`Add ${quality.taxonomy.actionable.undeclared_packages.length} undeclared package(s) to package.json or review import usage.`);
+    }
+    if (quality.taxonomy.actionable.unknown_packages.length > 0) {
+        recs.push(`${quality.taxonomy.actionable.unknown_packages.length} package(s) could not be classified (no package.json found). Ensure package.json exists.`);
+    }
+    if (quality.unknown_bucket_file_count > 0) {
+        recs.push(`Add path_roles in pantheon.json for ${quality.unknown_bucket_file_count} file(s) in the 'unknown' bucket.`);
+    }
+    if (quality.taxonomy.out_of_scope.unsupported_files.length > 0) {
+        recs.push(`${quality.taxonomy.out_of_scope.unsupported_files.length} file(s) use unsupported languages. Add language support only if they are in governance scope.`);
+    }
+    if (quality.taxonomy.intrinsic.dynamic_imports.length > 0) {
+        recs.push(`Review ${quality.taxonomy.intrinsic.dynamic_imports.length} dynamic import(s) manually; deterministic scanner cannot resolve them.`);
+    }
+    return recs;
+}
+// ---------------------------------------------------------------------------
+// Internal
+// ---------------------------------------------------------------------------
+function computeUnknownTaxonomy(obs) {
+    // Undeclared packages from import edges
+    const undeclaredPackages = new Set();
+    const unknownPackages = new Set();
+    for (const edge of obs.observations.import_edges) {
+        if (edge.resolution_status === "undeclared_package") {
+            undeclaredPackages.add(`${edge.from_file}:${edge.raw_specifier}`);
+        }
+        if (edge.resolution_status === "unknown_package") {
+            unknownPackages.add(`${edge.from_file}:${edge.raw_specifier}`);
+        }
+    }
+    // Unresolved aliases from import edges
+    const unresolvedAliases = obs.observations.import_edges
+        .filter(e => e.resolution_status === "unresolved_alias")
+        .map(e => `${e.from_file}:${e.raw_specifier}`);
+    return {
+        out_of_scope: {
+            unsupported_files: [...obs.unknowns.unsupported_files],
+        },
+        actionable: {
+            unmapped_sources: [...obs.unknowns.unmapped_sources],
+            unmapped_tests: [...obs.unknowns.unmapped_tests],
+            undeclared_packages: [...undeclaredPackages],
+            unresolved_aliases: unresolvedAliases,
+            unknown_packages: [...unknownPackages],
+            owner_patterns_unresolved: [...obs.unknowns.owner_patterns_unresolved],
+        },
+        intrinsic: {
+            dynamic_imports: [...obs.unknowns.dynamic_imports],
+            skipped_large_files: [...obs.unknowns.skipped_large_files],
+            scan_limit_exceeded: [...obs.unknowns.scan_limit_exceeded],
+        },
+    };
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/repoScanner.ts
+/**
+ * P20a.2: Repo Scanner Orchestrator
+ *
+ * Enumerates files, applies limits/exclusions, calls all sub-modules,
+ * classifies package imports via manifests, computes quality metrics,
+ * collects git status, computes observation hash.
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+const SCANNER_VERSION = "0.2.0";
+const ANALYZABLE_LANGUAGES = new Set(["typescript", "javascript"]);
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+function scanRepo(input) {
+    const limits = resolveLimits(input.config?.limits);
+    // Merge config excluded_dirs with default
+    const configExcludedDirs = input.config?.excluded_dirs ?? [];
+    const allExcludedDirs = [...limits.excluded_dirs, ...configExcludedDirs];
+    const excludedDirSet = new Set(allExcludedDirs.map(d => d.toLowerCase()));
+    // Config path roles (exact prefix match)
+    const pathRoles = input.config?.path_roles ?? {};
+    // 1. Enumerate files
+    const { observedFiles, excludedPaths } = enumerateFiles(input.repoRoot, input.repoRoot, excludedDirSet, limits);
+    // 2. Classify + detect language (with config path_roles override)
+    const files = observedFiles.map(f => classifyObservedFile(f, limits, pathRoles));
+    // 3. Extract package manifests
+    const packageManifests = collectPackageManifests(input.repoRoot, files);
+    // 4. Extract imports from analyzable files
+    const rawImportEdges = [];
+    const dynamicImports = [];
+    for (const file of files) {
+        if (file.analysis_status !== "analyzed" || !ANALYZABLE_LANGUAGES.has(file.language))
+            continue;
+        try {
+            const content = (0,external_node_fs_.readFileSync)((0,external_node_path_.join)(input.repoRoot, file.path), "utf-8");
+            const extracted = extractImportsFromFile({ path: file.path, content });
+            rawImportEdges.push(...extracted.import_edges);
+            dynamicImports.push(...extracted.unknowns.dynamic_imports);
+        }
+        catch {
+            // File read error — skip silently, still recorded in files
+        }
+    }
+    // 5. Reclassify import edges through package dependency classifier
+    const allImportEdges = reclassifyImportEdges(rawImportEdges, packageManifests);
+    // Compute unresolved imports after reclassification
+    const unresolvedImports = allImportEdges
+        .filter(e => e.resolution_status === "unresolved_package" || e.resolution_status === "unresolved_alias")
+        .map(e => `${e.from_file}:${e.raw_specifier}`);
+    // 6. Test mappings (with config overrides)
+    const testMappingOverrides = input.config?.test_mapping_overrides ?? {};
+    const testResult = inferTestMappings({ files, overrides: testMappingOverrides });
+    // 7. Sensitive paths
+    const sensitivePaths = detectSensitivePaths(files);
+    // 8. CODEOWNERS
+    const codeownersResult = parseCodeowners(input.repoRoot);
+    // 9. Config hints
+    const configHints = collectConfigHints(input.repoRoot, files);
+    // 10. Path buckets
+    const pathBuckets = buildPathBuckets(files);
+    // 11. Git status
+    const repoMeta = detectGitStatus(input.repoRoot);
+    // 12. Build unknowns
+    const unknowns = {
+        skipped_large_files: files.filter(f => f.analysis_status === "skipped_large_file").map(f => f.path),
+        unsupported_files: files.filter(f => f.analysis_status === "unsupported_language").map(f => f.path),
+        dynamic_imports: dynamicImports,
+        unresolved_imports: unresolvedImports,
+        unmapped_sources: testResult.unmapped_sources,
+        unmapped_tests: testResult.unmapped_tests,
+        ambiguous_test_mappings: testResult.ambiguous_test_mappings,
+        scan_limit_exceeded: excludedPaths
+            .filter(e => e.reason === "max_file_limit" || e.reason === "scanner_timeout")
+            .map(e => e.path),
+        owner_patterns_unresolved: codeownersResult.unresolved_patterns,
+        changed_files_not_observed: [],
+    };
+    const unknownCount = unknowns.skipped_large_files.length + unknowns.unsupported_files.length +
+        unknowns.dynamic_imports.length + unknowns.unresolved_imports.length +
+        unknowns.unmapped_sources.length + unknowns.unmapped_tests.length +
+        unknowns.ambiguous_test_mappings.length + unknowns.scan_limit_exceeded.length +
+        unknowns.owner_patterns_unresolved.length;
+    const partialScan = excludedPaths.some(e => e.reason === "max_file_limit" || e.reason === "scanner_timeout");
+    // 13. Build observations (without hash and quality)
+    const preQualityObs = {
+        schema_version: "repo_observations.v1",
+        repo: repoMeta,
+        scanner: {
+            scanner_version: SCANNER_VERSION,
+            mode: "deterministic",
+            language_targets: ["typescript", "javascript"],
+            llm_used: false,
+        },
+        limits,
+        observations: {
+            files,
+            path_buckets: pathBuckets,
+            import_edges: allImportEdges,
+            test_mappings: testResult.test_mappings,
+            sensitive_paths: sensitivePaths,
+            owner_hints: codeownersResult.owner_hints,
+            config_hints: configHints,
+            package_manifests: packageManifests,
+        },
+        unknowns,
+        excluded: excludedPaths,
+        quality: null, // placeholder
+        meta: {
+            observation_hash: "", // computed below
+            partial_scan: partialScan,
+            file_count: files.length,
+            unknown_count: unknownCount,
+            excluded_count: excludedPaths.length,
+        },
+    };
+    // 14. Compute quality
+    const quality = computeObservationQuality(preQualityObs);
+    const withQuality = { ...preQualityObs, quality };
+    // 15. Compute hash
+    const hash = computeObservationHash(withQuality);
+    return { ...withQuality, meta: { ...withQuality.meta, observation_hash: hash } };
+}
+function enumerateFiles(dir, repoRoot, excludedDirs, limits) {
+    const observed = [];
+    const excluded = [];
+    function walk(current) {
+        if (observed.length >= limits.max_total_files)
+            return;
+        let entries;
+        try {
+            entries = (0,external_node_fs_.readdirSync)(current);
+        }
+        catch {
+            return;
+        }
+        for (const entry of entries) {
+            if (observed.length >= limits.max_total_files) {
+                excluded.push({
+                    path: (0,pathUtils/* normalizeRepoRelativePath */.t)((0,external_node_path_.relative)(repoRoot, (0,external_node_path_.join)(current, entry))),
+                    reason: "max_file_limit",
+                    evidence: [{ type: "scanner_limit", source_path: "", value: `max_total_files=${limits.max_total_files}` }],
+                });
+                break;
+            }
+            const fullPath = (0,external_node_path_.join)(current, entry);
+            let stat;
+            try {
+                stat = (0,external_node_fs_.statSync)(fullPath);
+            }
+            catch {
+                continue;
+            }
+            if (stat.isDirectory()) {
+                if (shouldExcludeDirectoryEntry(entry, excludedDirs)) {
+                    excluded.push({
+                        path: (0,pathUtils/* normalizeRepoRelativePath */.t)((0,external_node_path_.relative)(repoRoot, fullPath)),
+                        reason: "excluded_dir",
+                        evidence: [{ type: "path", source_path: (0,external_node_path_.relative)(repoRoot, fullPath).replace(/\\/g, "/"), value: `excluded dir: ${entry}` }],
+                    });
+                    continue;
+                }
+                walk(fullPath);
+            }
+            else if (stat.isFile()) {
+                const relPath = (0,pathUtils/* normalizeRepoRelativePath */.t)((0,external_node_path_.relative)(repoRoot, fullPath));
+                observed.push({ path: relPath, size_bytes: stat.size });
+            }
+        }
+    }
+    walk(repoRoot);
+    return { observedFiles: observed, excludedPaths: excluded };
+}
+function shouldExcludeDirectoryEntry(entry, excludedDirs) {
+    const lower = entry.toLowerCase();
+    if (excludedDirs.has(lower)) {
+        return true;
+    }
+    if (lower.startsWith(".hosted_matrix")) {
+        return true;
+    }
+    return false;
+}
+function classifyObservedFile(raw, limits, pathRoles = {}) {
+    // Config path_roles override: exact prefix match
+    let bucket;
+    let overridePrefix;
+    for (const [prefix, role] of Object.entries(pathRoles)) {
+        if (raw.path.startsWith(prefix + "/") || raw.path === prefix) {
+            bucket = role;
+            overridePrefix = prefix;
+            break;
+        }
+    }
+    if (!bucket) {
+        bucket = classifyFile(raw.path);
+    }
+    const language = detectLanguage(raw.path);
+    let analysisStatus;
+    const evidence = [{ type: "path", source_path: raw.path, value: `bucket=${bucket}` }];
+    // Record config provenance when a path_roles override changed the bucket
+    if (overridePrefix !== undefined) {
+        evidence.push({ type: "config", source_path: "pantheon.json", value: `path_roles.${overridePrefix}=${bucket}` });
+    }
+    if (raw.size_bytes > limits.max_file_bytes) {
+        analysisStatus = "skipped_large_file";
+        evidence.push({ type: "scanner_limit", source_path: raw.path, value: `size=${raw.size_bytes} > max=${limits.max_file_bytes}` });
+    }
+    else if (!ANALYZABLE_LANGUAGES.has(language) && language !== "json" && language !== "yaml" && language !== "markdown") {
+        analysisStatus = "unsupported_language";
+    }
+    else {
+        analysisStatus = "analyzed";
+    }
+    return { path: raw.path, bucket, language, size_bytes: raw.size_bytes, analysis_status: analysisStatus, evidence };
+}
+function reclassifyImportEdges(edges, packageManifests) {
+    return edges.map(edge => {
+        // Only reclassify unresolved_package edges — leave relative, builtin, dynamic, alias untouched
+        if (edge.resolution_status !== "unresolved_package") {
+            return edge;
+        }
+        const newStatus = classifyPackageImport({
+            rawSpecifier: edge.raw_specifier,
+            packageManifests,
+        });
+        return { ...edge, resolution_status: newStatus };
+    });
+}
+function collectPackageManifests(repoRoot, _files) {
+    const manifests = [];
+    // Root package.json
+    const rootPkgPath = (0,external_node_path_.join)(repoRoot, "package.json");
+    if ((0,external_node_fs_.existsSync)(rootPkgPath)) {
+        try {
+            const content = JSON.parse((0,external_node_fs_.readFileSync)(rootPkgPath, "utf-8"));
+            manifests.push({
+                package_json_path: "package.json",
+                package_name: content.name ?? undefined,
+                dependencies: Object.keys(content.dependencies ?? {}),
+                dev_dependencies: Object.keys(content.devDependencies ?? {}),
+                peer_dependencies: Object.keys(content.peerDependencies ?? {}),
+                optional_dependencies: Object.keys(content.optionalDependencies ?? {}),
+                evidence: [{ type: "config", source_path: "package.json", value: "root package manifest" }],
+            });
+        }
+        catch {
+            // JSON parse error — skip
+        }
+    }
+    return manifests;
+}
+function buildPathBuckets(files) {
+    const map = new Map();
+    for (const f of files) {
+        if (!map.has(f.bucket))
+            map.set(f.bucket, []);
+        map.get(f.bucket).push(f.path);
+    }
+    return Array.from(map.entries()).map(([bucket, paths]) => ({
+        bucket,
+        paths: paths.sort(),
+        count: paths.length,
+    }));
+}
+function detectGitStatus(repoRoot) {
+    const gitDir = (0,external_node_path_.join)(repoRoot, ".git");
+    const isGit = (0,external_node_fs_.existsSync)(gitDir);
+    if (!isGit) {
+        return {
+            repo_root_label: repoRoot.split(/[/\\]/).pop() ?? "repo",
+            repo_state: "working_tree_only",
+            head_commit_hash: null,
+            has_uncommitted_changes: null,
+            uncommitted_file_count: null,
+            scanned_at: new Date().toISOString(),
+        };
+    }
+    try {
+        const headHash = (0,external_node_child_process_.execFileSync)("git", ["rev-parse", "HEAD"], {
+            cwd: repoRoot,
+            encoding: "utf-8",
+            stdio: ["ignore", "pipe", "ignore"],
+        }).trim();
+        const statusOutput = (0,external_node_child_process_.execFileSync)("git", ["status", "--porcelain"], {
+            cwd: repoRoot,
+            encoding: "utf-8",
+            stdio: ["ignore", "pipe", "ignore"],
+        }).trim();
+        const dirtyFiles = statusOutput ? statusOutput.split("\n").length : 0;
+        return {
+            repo_root_label: repoRoot.split(/[/\\]/).pop() ?? "repo",
+            repo_state: dirtyFiles > 0 ? "git_dirty" : "git_clean",
+            head_commit_hash: headHash,
+            has_uncommitted_changes: dirtyFiles > 0,
+            uncommitted_file_count: dirtyFiles,
+            scanned_at: new Date().toISOString(),
+        };
+    }
+    catch {
+        return {
+            repo_root_label: repoRoot.split(/[/\\]/).pop() ?? "repo",
+            repo_state: "working_tree_only",
+            head_commit_hash: null,
+            has_uncommitted_changes: null,
+            uncommitted_file_count: null,
+            scanned_at: new Date().toISOString(),
+        };
+    }
+}
+function collectConfigHints(repoRoot, files) {
+    const hints = [];
+    // JSON-based configs
+    const JSON_CONFIGS = [
+        { path: "package.json", kind: "package_json", fields: ["name", "type", "main", "module"] },
+        { path: "tsconfig.json", kind: "tsconfig", fields: ["compilerOptions.target", "compilerOptions.module", "compilerOptions.strict"] },
+        { path: "jest.config.json", kind: "jest", fields: ["testEnvironment", "transform", "preset"] },
+    ];
+    for (const cfg of JSON_CONFIGS) {
+        const fullPath = (0,external_node_path_.join)(repoRoot, cfg.path);
+        if (!(0,external_node_fs_.existsSync)(fullPath))
+            continue;
+        try {
+            const content = JSON.parse((0,external_node_fs_.readFileSync)(fullPath, "utf-8"));
+            const detectedFields = extractJsonFields(content, cfg.fields);
+            hints.push({
+                config_path: cfg.path,
+                kind: cfg.kind,
+                detected_fields: detectedFields,
+                evidence: [{ type: "config", source_path: cfg.path, value: `config file: ${cfg.kind}` }],
+            });
+        }
+        catch {
+            // JSON parse error — skip
+        }
+    }
+    // JS/TS-based configs (presence detection only, no content parsing)
+    const SCRIPT_CONFIGS = [
+        { paths: ["vitest.config.ts", "vitest.config.js", "vitest.config.mts"], kind: "vitest" },
+        { paths: ["jest.config.ts", "jest.config.js", "jest.config.mjs"], kind: "jest" },
+        { paths: [".eslintrc.js", ".eslintrc.cjs", "eslint.config.js", "eslint.config.mjs", ".eslintrc.json", ".eslintrc.yml"], kind: "eslint" },
+    ];
+    for (const cfg of SCRIPT_CONFIGS) {
+        for (const p of cfg.paths) {
+            const fullPath = (0,external_node_path_.join)(repoRoot, p);
+            if (!(0,external_node_fs_.existsSync)(fullPath))
+                continue;
+            // Already covered by JSON configs?
+            if (hints.some(h => h.kind === cfg.kind))
+                break;
+            hints.push({
+                config_path: p,
+                kind: cfg.kind,
+                detected_fields: [{ field_name: "config_detected", field_value_preview: `${p} exists` }],
+                evidence: [{ type: "config", source_path: p, value: `config file: ${cfg.kind}` }],
+            });
+            break; // only first match
+        }
+    }
+    // GitHub Actions (directory-based)
+    const ghActionsDir = (0,external_node_path_.join)(repoRoot, ".github", "workflows");
+    if ((0,external_node_fs_.existsSync)(ghActionsDir)) {
+        try {
+            const workflows = (0,external_node_fs_.readdirSync)(ghActionsDir).filter(f => f.endsWith(".yml") || f.endsWith(".yaml"));
+            if (workflows.length > 0) {
+                hints.push({
+                    config_path: ".github/workflows",
+                    kind: "github_actions",
+                    detected_fields: workflows.slice(0, 10).map(w => ({
+                        field_name: "workflow",
+                        field_value_preview: w.slice(0, 200),
+                    })),
+                    evidence: [{ type: "config", source_path: ".github/workflows", value: `${workflows.length} workflow(s) detected` }],
+                });
+            }
+        }
+        catch {
+            // directory read error — skip
+        }
+    }
+    return hints;
+}
+function extractJsonFields(content, fields) {
+    const result = [];
+    for (const field of fields) {
+        const parts = field.split(".");
+        let val = content;
+        for (const p of parts) {
+            if (val && typeof val === "object" && p in val) {
+                val = val[p];
+            }
+            else {
+                val = undefined;
+                break;
+            }
+        }
+        if (val !== undefined) {
+            const preview = String(val).slice(0, 200);
+            result.push({ field_name: field, field_value_preview: preview });
+        }
+    }
+    return result;
+}
+function resolveLimits(overrides) {
+    if (!overrides)
+        return { ...DEFAULT_SCAN_LIMITS };
+    return {
+        max_file_bytes: overrides.max_file_bytes ?? DEFAULT_SCAN_LIMITS.max_file_bytes,
+        max_total_files: overrides.max_total_files ?? DEFAULT_SCAN_LIMITS.max_total_files,
+        max_import_edges: overrides.max_import_edges ?? DEFAULT_SCAN_LIMITS.max_import_edges,
+        scan_timeout_ms: overrides.scan_timeout_ms ?? DEFAULT_SCAN_LIMITS.scan_timeout_ms,
+        excluded_dirs: overrides.excluded_dirs ?? [...DEFAULT_SCAN_LIMITS.excluded_dirs],
+    };
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/python/pythonEcosystemPatterns.ts
+/**
+ * P25a.1: Shared Python Ecosystem Patterns
+ *
+ * Single source of truth for Python file detection patterns.
+ * Used by both pythonFileClassifier and pythonObservationEnhancer
+ * to eliminate duplication.
+ */
+// ---------------------------------------------------------------------------
+// Python file extensions
+// ---------------------------------------------------------------------------
+const PYTHON_EXTENSIONS = new Set([".py", ".pyi", ".pyx", ".ipynb"]);
+// ---------------------------------------------------------------------------
+// Python ecosystem config files (not .py but part of Python projects)
+// ---------------------------------------------------------------------------
+const PYTHON_ECOSYSTEM_BASENAMES = new Set([
+    "pyproject.toml",
+    "setup.cfg",
+    "setup.py",
+    "pipfile",
+    "pipfile.lock",
+    "poetry.lock",
+    "uv.lock",
+    "pdm.lock",
+    "tox.ini",
+    "noxfile.py",
+    "pytest.ini",
+    "mypy.ini",
+    ".flake8",
+    ".pre-commit-config.yaml",
+    "environment.yml",
+    "environment.yaml",
+]);
+const PYTHON_ECOSYSTEM_PREFIXES = [
+    "requirements",
+];
+/**
+ * Check if a file path refers to a Python ecosystem file (config/manifest).
+ * These are not .py files but are part of the Python project infrastructure.
+ */
+function isPythonEcosystemFile(path) {
+    const basename = path.split("/").pop()?.toLowerCase() ?? "";
+    if (PYTHON_ECOSYSTEM_BASENAMES.has(basename))
+        return true;
+    for (const prefix of PYTHON_ECOSYSTEM_PREFIXES) {
+        if (basename.startsWith(prefix) && basename.endsWith(".txt"))
+            return true;
+    }
+    return false;
+}
+/**
+ * Check if a file path refers to a Python source file (.py/.pyi/.pyx/.ipynb).
+ */
+function isPythonSourceExtension(path) {
+    const lastDot = path.lastIndexOf(".");
+    if (lastDot < 0)
+        return false;
+    return PYTHON_EXTENSIONS.has(path.slice(lastDot).toLowerCase());
+}
+/**
+ * Check if a file is relevant to Python observation (source or ecosystem).
+ */
+function isPythonRelevantFile(path) {
+    return isPythonSourceExtension(path) || isPythonEcosystemFile(path);
+}
+// ---------------------------------------------------------------------------
+// Manifest file detection
+// ---------------------------------------------------------------------------
+const PYTHON_MANIFEST_BASENAMES = new Set([
+    "pyproject.toml",
+    "setup.cfg",
+    "setup.py",
+    "pipfile",
+    "uv.lock",
+    "poetry.lock",
+    "pdm.lock",
+    "environment.yml",
+    "environment.yaml",
+    "tox.ini",
+    "noxfile.py",
+]);
+function isPythonManifestFile(path) {
+    const basename = path.split("/").pop()?.toLowerCase() ?? "";
+    if (PYTHON_MANIFEST_BASENAMES.has(basename))
+        return true;
+    return basename.startsWith("requirements") && basename.endsWith(".txt");
+}
+// ---------------------------------------------------------------------------
+// Heuristic: does this repo look like a Python project?
+// ---------------------------------------------------------------------------
+/**
+ * Detect if a repo likely contains Python code worth analyzing.
+ * Cheap heuristic: check if >5% of files are .py or if key ecosystem files exist.
+ */
+function hasPythonSignals(filePaths) {
+    let pyCount = 0;
+    let hasEcosystem = false;
+    for (const path of filePaths) {
+        if (isPythonSourceExtension(path))
+            pyCount++;
+        if (!hasEcosystem && isPythonEcosystemFile(path))
+            hasEcosystem = true;
+    }
+    if (hasEcosystem)
+        return true;
+    return pyCount > 0 && (pyCount / filePaths.length) > 0.05;
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/python/pythonFileClassifier.ts
+/**
+ * P25a: Python File Classifier
+ *
+ * Path-based classification for Python files.
+ * No content inspection — uses only path patterns and extensions.
+ */
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+function classifyPythonFile(path, sizeBytes) {
+    const ext = extractExtension(path);
+    const bucket = classifyPythonBucket(path, ext);
+    const evidence = explainClassification(path, ext, bucket);
+    return {
+        path,
+        bucket,
+        extension: ext,
+        size_bytes: sizeBytes,
+        evidence,
+    };
+}
+function isPythonFile(path) {
+    return isPythonSourceExtension(path);
+}
+const PYTHON_BUCKET_RULES = [
+    // Generated / excluded (must be early to catch __pycache__ etc)
+    { test: p => p.includes("__pycache__/"), bucket: "generated", reason: "Python bytecode cache" },
+    { test: p => p.includes(".pytest_cache/"), bucket: "generated", reason: "pytest cache" },
+    { test: p => p.includes(".mypy_cache/"), bucket: "generated", reason: "mypy cache" },
+    { test: p => p.startsWith("dist/"), bucket: "generated", reason: "Distribution output" },
+    { test: p => p.startsWith("build/"), bucket: "generated", reason: "Build output" },
+    { test: p => p.includes(".egg-info/"), bucket: "generated", reason: "Egg metadata" },
+    // Test files
+    { test: p => p.startsWith("tests/") || p.startsWith("test/"), bucket: "test", reason: "Top-level test directory" },
+    { test: p => p.includes("/tests/"), bucket: "test", reason: "Nested test directory" },
+    { test: p => /\/test_[^/]+\.py$/.test(p), bucket: "test", reason: "test_ prefix convention" },
+    { test: p => /_test\.py$/.test(p), bucket: "test", reason: "_test suffix convention" },
+    { test: p => /\/conftest\.py$/.test(p) || p === "conftest.py", bucket: "test", reason: "pytest conftest" },
+    // Migration
+    { test: p => p.includes("/migrations/"), bucket: "migration", reason: "Django/Alembic migration directory" },
+    { test: p => p.startsWith("alembic/versions/"), bucket: "migration", reason: "Alembic versions" },
+    // Script
+    { test: p => p === "manage.py", bucket: "script", reason: "Django manage.py" },
+    { test: p => p.startsWith("scripts/"), bucket: "script", reason: "Scripts directory" },
+    { test: p => p.startsWith("tools/"), bucket: "script", reason: "Tools directory" },
+    { test: p => p.startsWith("bin/"), bucket: "script", reason: "Bin directory" },
+    // Config
+    { test: p => p === "pyproject.toml" || p === "setup.cfg" || p === "setup.py", bucket: "config", reason: "Project config" },
+    { test: p => /^requirements.*\.txt$/.test(p), bucket: "config", reason: "Requirements file" },
+    { test: p => p === "tox.ini" || p === "pytest.ini" || p === ".flake8", bucket: "config", reason: "Tool config" },
+    { test: p => p === "Pipfile" || p === "Pipfile.lock" || p === "poetry.lock", bucket: "config", reason: "Lock/manifest" },
+    { test: p => /settings\.py$/.test(p), bucket: "config", reason: "Settings module" },
+    { test: p => p.includes("/settings/") && p.endsWith(".py"), bucket: "config", reason: "Settings package" },
+    { test: p => p === ".pre-commit-config.yaml" || p === "mypy.ini", bucket: "config", reason: "Tool config" },
+    // Docs
+    { test: p => p.startsWith("docs/"), bucket: "docs", reason: "Documentation directory" },
+    { test: p => p.endsWith(".rst"), bucket: "docs", reason: "reStructuredText" },
+];
+function classifyPythonBucket(path, ext) {
+    // Special extensions first
+    if (ext === ".ipynb")
+        return "notebook";
+    if (ext === ".pyx")
+        return "unsupported";
+    // Apply path-based rules for ALL files (catches .toml, .txt, .cfg, .pyc, etc.)
+    for (const rule of PYTHON_BUCKET_RULES) {
+        if (rule.test(path))
+            return rule.bucket;
+    }
+    // Type stubs default to source
+    if (ext === ".pyi")
+        return "source";
+    // Regular .py files default to source
+    if (ext === ".py")
+        return "source";
+    return "unknown";
+}
+function explainClassification(path, ext, bucket) {
+    if (ext === ".ipynb")
+        return ["Jupyter notebook — unsupported for import analysis"];
+    if (ext === ".pyx")
+        return ["Cython extension — unsupported for import analysis"];
+    for (const rule of PYTHON_BUCKET_RULES) {
+        if (rule.test(path))
+            return [rule.reason];
+    }
+    if (ext === ".py" && bucket === "source") {
+        return ["Default classification: .py file not matching test/config/migration/script patterns"];
+    }
+    return [];
+}
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+function extractExtension(path) {
+    const lastDot = path.lastIndexOf(".");
+    if (lastDot < 0)
+        return "";
+    return path.slice(lastDot).toLowerCase();
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/python/pythonImportObserver.ts
+/**
+ * P25a: Python Import Observer
+ *
+ * Regex-based extraction of Python import statements.
+ * Produces syntax-level observations, NOT full runtime import resolution.
+ *
+ * Supported:
+ *   import os
+ *   import saleor.checkout
+ *   from saleor.checkout import calculations
+ *   from .models import Checkout
+ *   from ..core import permissions
+ *   __import__("x")
+ *   importlib.import_module("x")
+ */
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+function observePythonImports(input) {
+    const results = [];
+    // Pre-process: join multiline imports into single lines
+    const preprocessed = joinMultilineImports(input.content);
+    const lines = preprocessed.split("\n");
+    for (const line of lines) {
+        const trimmed = line.trim();
+        // Skip comments and empty lines
+        if (trimmed.startsWith("#") || trimmed.length === 0)
+            continue;
+        // Dynamic imports
+        const dynamicMatch = matchDynamicImport(trimmed);
+        if (dynamicMatch) {
+            results.push({
+                from_file: input.filePath,
+                raw_specifier: dynamicMatch.specifier,
+                import_kind: "dynamic_import",
+                status: "dynamic_or_unresolved",
+                top_level_module: dynamicMatch.specifier,
+                confidence: "low",
+                note: `Dynamic import detected: ${dynamicMatch.pattern}`,
+            });
+            continue;
+        }
+        // from X import Y
+        const fromMatch = matchFromImport(trimmed);
+        if (fromMatch) {
+            const status = classifyImport(fromMatch.module, input.projectPackages, input.declaredPackages);
+            const topLevel = extractTopLevelModule(fromMatch.module);
+            results.push({
+                from_file: input.filePath,
+                raw_specifier: fromMatch.full,
+                import_kind: "from_import",
+                status: status.status,
+                top_level_module: topLevel,
+                confidence: status.confidence,
+                note: status.note,
+            });
+            continue;
+        }
+        // import X [, Y, Z]
+        const importMatch = matchPlainImport(trimmed);
+        if (importMatch) {
+            for (const mod of importMatch.modules) {
+                const status = classifyImport(mod, input.projectPackages, input.declaredPackages);
+                const topLevel = extractTopLevelModule(mod);
+                results.push({
+                    from_file: input.filePath,
+                    raw_specifier: mod,
+                    import_kind: "import",
+                    status: status.status,
+                    top_level_module: topLevel,
+                    confidence: status.confidence,
+                    note: status.note,
+                });
+            }
+        }
+    }
+    return results;
+}
+/**
+ * Pre-process Python source to join multiline import statements.
+ * Handles:
+ *   from x import (
+ *     a,
+ *     b,
+ *   )
+ * Joins them into: from x import (a, b)
+ */
+function joinMultilineImports(content) {
+    const lines = content.split("\n");
+    const result = [];
+    let i = 0;
+    while (i < lines.length) {
+        const line = lines[i];
+        const trimmed = line.trim();
+        // Detect "from x import (" or "import (" opening
+        if (/^(?:from\s+[\w.]+\s+import|import)\s+.*\(\s*$/.test(trimmed)) {
+            // Accumulate until closing paren
+            let joined = trimmed.replace(/\(\s*$/, "(");
+            i++;
+            while (i < lines.length) {
+                const continuation = lines[i].trim();
+                if (continuation.includes(")")) {
+                    joined += " " + continuation.replace(/\)\s*$/, ")");
+                    break;
+                }
+                if (continuation.length > 0 && !continuation.startsWith("#")) {
+                    joined += " " + continuation;
+                }
+                i++;
+            }
+            result.push(joined);
+        }
+        else {
+            result.push(line);
+        }
+        i++;
+    }
+    return result.join("\n");
+}
+/**
+ * Detect top-level project package directories by finding dirs with __init__.py.
+ */
+function detectProjectPackages(observedPaths) {
+    const initFiles = new Set();
+    for (const p of observedPaths) {
+        if (p.endsWith("__init__.py")) {
+            const parts = p.split("/");
+            if (parts.length === 2) {
+                // top-level-dir/__init__.py
+                initFiles.add(parts[0]);
+            }
+        }
+    }
+    return [...initFiles].sort();
+}
+// ---------------------------------------------------------------------------
+// Import pattern matching
+// ---------------------------------------------------------------------------
+const FROM_IMPORT_RE = /^from\s+(\.{0,3}[\w.]*)\s+import\s+/;
+const PLAIN_IMPORT_RE = /^import\s+([\w.,\s]+)/;
+const DUNDER_IMPORT_RE = /__import__\s*\(\s*['"]([^'"]+)['"]\s*\)/;
+const IMPORTLIB_RE = /importlib\.import_module\s*\(\s*['"]([^'"]+)['"]\s*\)/;
+function matchFromImport(line) {
+    const m = FROM_IMPORT_RE.exec(line);
+    if (!m)
+        return null;
+    return { module: m[1], full: line };
+}
+function matchPlainImport(line) {
+    const m = PLAIN_IMPORT_RE.exec(line);
+    if (!m)
+        return null;
+    // Handle "import os, sys, json" and "import saleor.checkout as checkout"
+    const raw = m[1];
+    const modules = raw.split(",").map(s => {
+        // Remove "as alias" suffix
+        const asIdx = s.indexOf(" as ");
+        return (asIdx >= 0 ? s.slice(0, asIdx) : s).trim();
+    }).filter(s => s.length > 0 && /^[\w.]+$/.test(s));
+    return modules.length > 0 ? { modules } : null;
+}
+function matchDynamicImport(line) {
+    const d = DUNDER_IMPORT_RE.exec(line);
+    if (d)
+        return { specifier: d[1], pattern: "__import__" };
+    const i = IMPORTLIB_RE.exec(line);
+    if (i)
+        return { specifier: i[1], pattern: "importlib.import_module" };
+    return null;
+}
+// ---------------------------------------------------------------------------
+// Import classification
+// ---------------------------------------------------------------------------
+function classifyImport(module, projectPackages, declaredPackages) {
+    // Relative import
+    if (module.startsWith(".")) {
+        return {
+            status: "relative_import",
+            confidence: "medium",
+            note: "Relative import observed; full package resolution not attempted",
+        };
+    }
+    const topLevel = extractTopLevelModule(module);
+    // Builtin
+    if (PYTHON_STDLIB.has(topLevel)) {
+        return { status: "builtin_python_package", confidence: "high" };
+    }
+    // Project package
+    for (const pkg of projectPackages) {
+        if (topLevel === pkg) {
+            return { status: "project_import", confidence: "high" };
+        }
+    }
+    // Declared third-party
+    // Normalize: packages use underscores in imports but hyphens in manifests
+    const normalized = topLevel.replace(/-/g, "_").toLowerCase();
+    if (declaredPackages.has(topLevel) || declaredPackages.has(normalized)) {
+        return { status: "declared_package", confidence: "high" };
+    }
+    // Check if it's a common alias (django → django, graphene → graphene, etc)
+    // that might be declared under a different name
+    if (declaredPackages.has(topLevel.toLowerCase())) {
+        return { status: "declared_package", confidence: "medium" };
+    }
+    return { status: "undeclared_package", confidence: "low" };
+}
+function extractTopLevelModule(module) {
+    // "saleor.checkout.calculations" → "saleor"
+    // ".models" → "."
+    if (module.startsWith("."))
+        return module;
+    const dot = module.indexOf(".");
+    return dot >= 0 ? module.slice(0, dot) : module;
+}
+// ---------------------------------------------------------------------------
+// Python standard library (3.10+, ~200 modules)
+// ---------------------------------------------------------------------------
+const PYTHON_STDLIB = new Set([
+    // Core
+    "abc", "ast", "asyncio", "atexit", "base64", "bisect", "builtins",
+    "calendar", "cgi", "cgitb", "chunk", "cmath", "cmd", "code", "codecs",
+    "codeop", "collections", "colorsys", "compileall", "concurrent",
+    "configparser", "contextlib", "contextvars", "copy", "copyreg",
+    "cProfile", "crypt", "csv", "ctypes", "curses",
+    // D-F
+    "dataclasses", "datetime", "dbm", "decimal", "difflib", "dis",
+    "distutils", "doctest", "email", "encodings", "enum", "errno",
+    "faulthandler", "fcntl", "filecmp", "fileinput", "fnmatch",
+    "formatter", "fractions", "ftplib", "functools",
+    // G-I
+    "gc", "getopt", "getpass", "gettext", "glob", "grp", "gzip",
+    "hashlib", "heapq", "hmac", "html", "http",
+    "idlelib", "imaplib", "imghdr", "imp", "importlib", "inspect",
+    "io", "ipaddress", "itertools",
+    // J-L
+    "json", "keyword", "lib2to3", "linecache", "locale", "logging",
+    "lzma",
+    // M-O
+    "mailbox", "mailcap", "marshal", "math", "mimetypes", "mmap",
+    "modulefinder", "multiprocessing", "netrc", "nis", "nntplib",
+    "numbers", "operator", "optparse", "os", "ossaudiodev",
+    // P
+    "parser", "pathlib", "pdb", "pickle", "pickletools", "pipes",
+    "pkgutil", "platform", "plistlib", "poplib", "posix", "posixpath",
+    "pprint", "profile", "pstats", "pty", "pwd", "py_compile",
+    "pyclbr", "pydoc",
+    // Q-S
+    "queue", "quopri", "random", "re", "readline", "reprlib",
+    "resource", "rlcompleter", "runpy", "sched", "secrets", "select",
+    "selectors", "shelve", "shlex", "shutil", "signal", "site",
+    "smtpd", "smtplib", "sndhdr", "socket", "socketserver",
+    "sqlite3", "ssl", "stat", "statistics", "string", "stringprep",
+    "struct", "subprocess", "sunau", "symtable", "sys", "sysconfig",
+    "syslog",
+    // T
+    "tabnanny", "tarfile", "telnetlib", "tempfile", "termios", "test",
+    "textwrap", "threading", "time", "timeit", "tkinter", "token",
+    "tokenize", "tomllib", "trace", "traceback", "tracemalloc", "tty",
+    "turtle", "turtledemo", "types", "typing",
+    // U-Z
+    "unicodedata", "unittest", "urllib", "uu", "uuid",
+    "venv", "warnings", "wave", "weakref", "webbrowser",
+    "winreg", "winsound", "wsgiref",
+    "xdrlib", "xml", "xmlrpc",
+    "zipapp", "zipfile", "zipimport", "zlib",
+    // Common aliases / sub-packages often imported directly
+    "_thread", "__future__", "_collections_abc",
+]);
+
+;// CONCATENATED MODULE: ./src/repoObservation/python/pythonDependencyExtractor.ts
+/**
+ * P25a: Python Dependency Extractor
+ *
+ * Conservative extraction from pyproject.toml, requirements*.txt, setup.cfg.
+ * NO TOML parser dependency — uses regex-based text extraction.
+ *
+ * Returns package names (normalized) and confidence levels.
+ * Unsupported structures get confidence: "low" + warning.
+ */
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+function extractPythonDependencies(input) {
+    const sourceType = detectManifestType(input.filePath);
+    switch (sourceType) {
+        case "pyproject.toml":
+            return extractFromPyproject(input.filePath, input.content);
+        case "requirements.txt":
+        case "requirements-dev.txt":
+            return extractFromRequirements(input.filePath, input.content, sourceType);
+        case "setup.cfg":
+            return extractFromSetupCfg(input.filePath, input.content);
+        case "Pipfile":
+            return extractFromPipfile(input.filePath, input.content);
+        case "setup.py":
+            return extractFromSetupPy(input.filePath, input.content);
+        case "uv.lock":
+            return extractFromUvLock(input.filePath, input.content);
+        case "poetry.lock":
+            return extractFromPoetryLock(input.filePath, input.content);
+        case "pdm.lock":
+            return extractFromPdmLock(input.filePath, input.content);
+        case "environment.yml":
+            return extractFromEnvironmentYml(input.filePath, input.content);
+        case "tox.ini":
+            return extractFromToxIni(input.filePath, input.content);
+        case "noxfile.py":
+            return extractFromNoxfile(input.filePath, input.content);
+    }
+}
+/**
+ * Normalize a package name for comparison.
+ * PyPI treats - and _ and . as equivalent; lowercase everything.
+ */
+function normalizePackageName(name) {
+    return name.toLowerCase().replace(/[-_.]+/g, "_").replace(/\[.*\]$/, "");
+}
+/**
+ * Build a lookup set of declared package names from manifests.
+ */
+function buildDeclaredPackageSet(manifests) {
+    const result = new Set();
+    for (const m of manifests) {
+        for (const pkg of m.packages)
+            result.add(normalizePackageName(pkg));
+        for (const pkg of m.dev_packages)
+            result.add(normalizePackageName(pkg));
+    }
+    return result;
+}
+// ---------------------------------------------------------------------------
+// Manifest type detection
+// ---------------------------------------------------------------------------
+function detectManifestType(filePath) {
+    const basename = filePath.split("/").pop()?.toLowerCase() ?? "";
+    if (basename === "pyproject.toml")
+        return "pyproject.toml";
+    if (basename === "setup.cfg")
+        return "setup.cfg";
+    if (basename === "setup.py")
+        return "setup.py";
+    if (basename === "pipfile")
+        return "Pipfile";
+    if (basename === "uv.lock")
+        return "uv.lock";
+    if (basename === "poetry.lock")
+        return "poetry.lock";
+    if (basename === "pdm.lock")
+        return "pdm.lock";
+    if (basename === "environment.yml" || basename === "environment.yaml")
+        return "environment.yml";
+    if (basename === "tox.ini")
+        return "tox.ini";
+    if (basename === "noxfile.py")
+        return "noxfile.py";
+    if (basename.startsWith("requirements") && basename.includes("dev"))
+        return "requirements-dev.txt";
+    if (basename.startsWith("requirements") && basename.endsWith(".txt"))
+        return "requirements.txt";
+    return "requirements.txt"; // fallback
+}
+// ---------------------------------------------------------------------------
+// pyproject.toml (regex-based, no TOML parser)
+// ---------------------------------------------------------------------------
+function extractFromPyproject(filePath, content) {
+    const warnings = [];
+    const packages = [];
+    const devPackages = [];
+    let confidence = "high";
+    // [project] dependencies = [...]
+    const projectDeps = extractTomlArray(content, /^\[project\]\s*$/m, /^dependencies\s*=\s*\[/m);
+    if (projectDeps !== null) {
+        packages.push(...projectDeps);
+    }
+    // [project.optional-dependencies] dev = [...]
+    const optionalSections = extractTomlOptionalDeps(content);
+    for (const [group, deps] of Object.entries(optionalSections)) {
+        if (/dev|test|ci|lint/i.test(group)) {
+            devPackages.push(...deps);
+        }
+        else {
+            packages.push(...deps);
+        }
+    }
+    // [tool.poetry.dependencies]
+    const poetryDeps = extractTomlKeyValueSection(content, /^\[tool\.poetry\.dependencies\]\s*$/m);
+    if (poetryDeps) {
+        // Skip python itself
+        for (const [name] of poetryDeps) {
+            if (name !== "python")
+                packages.push(name);
+        }
+    }
+    // [tool.poetry.dev-dependencies] or [tool.poetry.group.dev.dependencies]
+    const poetryDevDeps = extractTomlKeyValueSection(content, /^\[tool\.poetry\.(?:dev-dependencies|group\.dev\.dependencies)\]\s*$/m);
+    if (poetryDevDeps) {
+        for (const [name] of poetryDevDeps) {
+            devPackages.push(name);
+        }
+    }
+    if (packages.length === 0 && devPackages.length === 0) {
+        warnings.push("No dependencies found in pyproject.toml — may use unsupported format");
+        confidence = "low";
+    }
+    return {
+        source_path: filePath,
+        source_type: "pyproject.toml",
+        packages: dedup(packages.map(normalizePackageName)),
+        dev_packages: dedup(devPackages.map(normalizePackageName)),
+        confidence,
+        warnings,
+    };
+}
+/**
+ * Extract array value from TOML content.
+ * Handles multi-line arrays like:
+ *   dependencies = [
+ *     "Django>=4.2",
+ *     "graphene-django",
+ *   ]
+ */
+function extractTomlArray(content, sectionRe, keyRe) {
+    const sectionMatch = sectionRe.exec(content);
+    if (!sectionMatch)
+        return null;
+    const afterSection = content.slice(sectionMatch.index);
+    const keyMatch = keyRe.exec(afterSection);
+    if (!keyMatch)
+        return null;
+    const afterKey = afterSection.slice(keyMatch.index + keyMatch[0].length);
+    // Find the closing bracket, handling multi-line
+    let depth = 1;
+    let i = 0;
+    let arrayContent = "";
+    for (; i < afterKey.length && depth > 0; i++) {
+        if (afterKey[i] === "[")
+            depth++;
+        if (afterKey[i] === "]")
+            depth--;
+        if (depth > 0)
+            arrayContent += afterKey[i];
+    }
+    return parsePackageList(arrayContent);
+}
+function extractTomlOptionalDeps(content) {
+    const result = {};
+    const sectionRe = /^\[project\.optional-dependencies\]\s*$/m;
+    const match = sectionRe.exec(content);
+    if (!match)
+        return result;
+    const afterSection = content.slice(match.index + match[0].length);
+    // Parse key = [...] entries until next section
+    const lines = afterSection.split("\n");
+    let currentKey = null;
+    let arrayContent = "";
+    let depth = 0;
+    for (const line of lines) {
+        if (/^\[/.test(line.trim()) && depth === 0)
+            break; // next section
+        if (depth === 0) {
+            const keyMatch = /^(\w+)\s*=\s*\[(.*)$/m.exec(line);
+            if (keyMatch) {
+                currentKey = keyMatch[1];
+                arrayContent = keyMatch[2];
+                depth = 1;
+                // Check if closes on same line
+                if (arrayContent.includes("]")) {
+                    result[currentKey] = parsePackageList(arrayContent.split("]")[0]);
+                    depth = 0;
+                    currentKey = null;
+                }
+            }
+        }
+        else {
+            if (line.includes("]")) {
+                arrayContent += line.split("]")[0];
+                if (currentKey)
+                    result[currentKey] = parsePackageList(arrayContent);
+                depth = 0;
+                currentKey = null;
+            }
+            else {
+                arrayContent += line;
+            }
+        }
+    }
+    return result;
+}
+function extractTomlKeyValueSection(content, sectionRe) {
+    const match = sectionRe.exec(content);
+    if (!match)
+        return null;
+    const afterSection = content.slice(match.index + match[0].length);
+    const pairs = [];
+    const lines = afterSection.split("\n");
+    for (const line of lines) {
+        const trimmed = line.trim();
+        if (trimmed.startsWith("["))
+            break; // next section
+        if (trimmed.startsWith("#") || trimmed.length === 0)
+            continue;
+        const kvMatch = /^([\w-]+)\s*=\s*(.+)$/.exec(trimmed);
+        if (kvMatch) {
+            pairs.push([kvMatch[1], kvMatch[2].replace(/["'{}^~>=<*]/g, "").trim()]);
+        }
+    }
+    return pairs.length > 0 ? pairs : null;
+}
+function parsePackageList(raw) {
+    const results = [];
+    // Match quoted strings
+    const re = /["']([^"']+)["']/g;
+    let m;
+    while ((m = re.exec(raw)) !== null) {
+        // Strip version specifiers: "Django>=4.2" → "Django"
+        const name = m[1].replace(/[><=~!;].*/g, "").replace(/\[.*\]/, "").trim();
+        if (name.length > 0)
+            results.push(name);
+    }
+    return results;
+}
+// ---------------------------------------------------------------------------
+// requirements.txt
+// ---------------------------------------------------------------------------
+function extractFromRequirements(filePath, content, sourceType) {
+    const packages = [];
+    const isDev = sourceType === "requirements-dev.txt";
+    for (const line of content.split("\n")) {
+        const trimmed = line.trim();
+        if (trimmed.startsWith("#") || trimmed.length === 0)
+            continue;
+        if (trimmed.startsWith("-r ") || trimmed.startsWith("-c ") || trimmed.startsWith("--"))
+            continue;
+        if (trimmed.startsWith("-e ") || trimmed.startsWith("git+"))
+            continue;
+        // Strip version, extras, environment markers
+        const name = trimmed
+            .replace(/[><=~!=;].*/g, "")
+            .replace(/\[.*\]/, "")
+            .trim();
+        if (name.length > 0 && /^[\w-]+$/.test(name)) {
+            packages.push(name);
+        }
+    }
+    return {
+        source_path: filePath,
+        source_type: sourceType,
+        packages: isDev ? [] : dedup(packages.map(normalizePackageName)),
+        dev_packages: isDev ? dedup(packages.map(normalizePackageName)) : [],
+        confidence: "high",
+        warnings: [],
+    };
+}
+// ---------------------------------------------------------------------------
+// setup.cfg
+// ---------------------------------------------------------------------------
+function extractFromSetupCfg(filePath, content) {
+    const packages = [];
+    const warnings = [];
+    // [options] install_requires = ...
+    const sectionMatch = /^\[options\]\s*$/m.exec(content);
+    if (sectionMatch) {
+        const afterSection = content.slice(sectionMatch.index + sectionMatch[0].length);
+        const irMatch = /^install_requires\s*=\s*(.*)$/m.exec(afterSection);
+        if (irMatch) {
+            // Content on same line (if any)
+            const sameLine = irMatch[1].trim();
+            if (sameLine.length > 0 && !sameLine.startsWith("#")) {
+                const name = sameLine.replace(/[><=~!=;].*/g, "").replace(/\[.*\]/, "").trim();
+                if (name.length > 0 && /^[\w-]+$/.test(name))
+                    packages.push(name);
+            }
+            // Continuation lines (indented with spaces/tabs)
+            const afterKey = afterSection.slice(irMatch.index + irMatch[0].length);
+            const lines = afterKey.split("\n");
+            for (const line of lines) {
+                // Continuation lines must be indented
+                if (line.length > 0 && line[0] !== " " && line[0] !== "\t")
+                    break;
+                const trimmed = line.trim();
+                if (trimmed.startsWith("["))
+                    break;
+                if (trimmed.startsWith("#") || trimmed.length === 0)
+                    continue;
+                const name = trimmed.replace(/[><=~!=;].*/g, "").replace(/\[.*\]/, "").trim();
+                if (name.length > 0 && /^[\w-]+$/.test(name))
+                    packages.push(name);
+            }
+        }
+    }
+    if (packages.length === 0) {
+        warnings.push("No install_requires found in setup.cfg");
+    }
+    return {
+        source_path: filePath,
+        source_type: "setup.cfg",
+        packages: dedup(packages.map(normalizePackageName)),
+        dev_packages: [],
+        confidence: packages.length > 0 ? "medium" : "low",
+        warnings,
+    };
+}
+// ---------------------------------------------------------------------------
+// setup.py (weak detection only)
+// ---------------------------------------------------------------------------
+function extractFromSetupPy(filePath, content) {
+    const packages = [];
+    const warnings = [];
+    // Very conservative: look for install_requires=[...]
+    const match = /install_requires\s*=\s*\[([\s\S]*?)\]/m.exec(content);
+    if (match) {
+        packages.push(...parsePackageList(match[1]));
+    }
+    else {
+        warnings.push("Could not extract install_requires from setup.py — weak detection");
+    }
+    return {
+        source_path: filePath,
+        source_type: "setup.py",
+        packages: dedup(packages.map(normalizePackageName)),
+        dev_packages: [],
+        confidence: packages.length > 0 ? "medium" : "low",
+        warnings: warnings.length > 0 ? warnings : ["setup.py parsing is weak detection — consider using pyproject.toml"],
+    };
+}
+// ---------------------------------------------------------------------------
+// Pipfile (basic)
+// ---------------------------------------------------------------------------
+function extractFromPipfile(filePath, content) {
+    const packages = [];
+    const devPackages = [];
+    let section = null;
+    for (const line of content.split("\n")) {
+        const trimmed = line.trim();
+        if (trimmed === "[packages]") {
+            section = "packages";
+            continue;
+        }
+        if (trimmed === "[dev-packages]") {
+            section = "dev-packages";
+            continue;
+        }
+        if (trimmed.startsWith("[")) {
+            section = null;
+            continue;
+        }
+        if (section && trimmed.length > 0 && !trimmed.startsWith("#")) {
+            const name = trimmed.split("=")[0].trim().replace(/["']/g, "");
+            if (name.length > 0 && /^[\w-]+$/.test(name)) {
+                if (section === "packages")
+                    packages.push(name);
+                else
+                    devPackages.push(name);
+            }
+        }
+    }
+    return {
+        source_path: filePath,
+        source_type: "Pipfile",
+        packages: dedup(packages.map(normalizePackageName)),
+        dev_packages: dedup(devPackages.map(normalizePackageName)),
+        confidence: "medium",
+        warnings: [],
+    };
+}
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+function dedup(arr) {
+    return [...new Set(arr)];
+}
+// ---------------------------------------------------------------------------
+// uv.lock
+// ---------------------------------------------------------------------------
+/**
+ * Extract packages from uv.lock.
+ * uv.lock uses TOML-like format with [[package]] sections.
+ * Each package has `name = "..."` and `version = "..."`.
+ * The project's own package (source = { virtual = "." }) is skipped.
+ */
+function extractFromUvLock(filePath, content) {
+    const packages = [];
+    const warnings = [];
+    // Split by [[package]] sections
+    const sections = content.split(/^\[\[package\]\]\s*$/m);
+    for (const section of sections) {
+        // Skip the project's own virtual package
+        if (section.includes('source = { virtual = "." }'))
+            continue;
+        const nameMatch = /^name\s*=\s*"([^"]+)"/m.exec(section);
+        if (nameMatch) {
+            packages.push(nameMatch[1]);
+        }
+    }
+    if (packages.length === 0) {
+        warnings.push("No packages found in uv.lock — may be empty or use unsupported format");
+    }
+    return {
+        source_path: filePath,
+        source_type: "uv.lock",
+        packages: dedup(packages.map(normalizePackageName)),
+        dev_packages: [], // uv.lock does not distinguish dev in the lockfile body
+        confidence: packages.length > 0 ? "high" : "low",
+        warnings,
+    };
+}
+// ---------------------------------------------------------------------------
+// poetry.lock
+// ---------------------------------------------------------------------------
+/**
+ * Extract packages from poetry.lock.
+ * poetry.lock uses TOML with [[package]] sections.
+ * Each has `name = "..."`, `category = "dev"` (poetry v1) or
+ * belongs to optional groups (poetry v2).
+ */
+function extractFromPoetryLock(filePath, content) {
+    const packages = [];
+    const devPackages = [];
+    const warnings = [];
+    const sections = content.split(/^\[\[package\]\]\s*$/m);
+    for (const section of sections) {
+        const nameMatch = /^name\s*=\s*"([^"]+)"/m.exec(section);
+        if (!nameMatch)
+            continue;
+        const name = nameMatch[1];
+        // poetry v1: category = "dev" / "main"
+        const categoryMatch = /^category\s*=\s*"([^"]+)"/m.exec(section);
+        if (categoryMatch && categoryMatch[1] === "dev") {
+            devPackages.push(name);
+        }
+        else {
+            packages.push(name);
+        }
+    }
+    if (packages.length === 0 && devPackages.length === 0) {
+        warnings.push("No packages found in poetry.lock");
+    }
+    return {
+        source_path: filePath,
+        source_type: "poetry.lock",
+        packages: dedup(packages.map(normalizePackageName)),
+        dev_packages: dedup(devPackages.map(normalizePackageName)),
+        confidence: (packages.length + devPackages.length) > 0 ? "high" : "low",
+        warnings,
+    };
+}
+// ---------------------------------------------------------------------------
+// pdm.lock
+// ---------------------------------------------------------------------------
+/**
+ * Extract packages from pdm.lock.
+ * pdm.lock uses TOML with [[package]] sections, similar to poetry.lock.
+ */
+function extractFromPdmLock(filePath, content) {
+    const packages = [];
+    const devPackages = [];
+    const warnings = [];
+    const sections = content.split(/^\[\[package\]\]\s*$/m);
+    for (const section of sections) {
+        const nameMatch = /^name\s*=\s*"([^"]+)"/m.exec(section);
+        if (!nameMatch)
+            continue;
+        const name = nameMatch[1];
+        // pdm uses groups = ["dev"] to indicate dev dependencies
+        const groupsMatch = /^groups\s*=\s*\[([^\]]*)\]/m.exec(section);
+        if (groupsMatch && /"dev"|'dev'/.test(groupsMatch[1])) {
+            devPackages.push(name);
+        }
+        else {
+            packages.push(name);
+        }
+    }
+    if (packages.length === 0 && devPackages.length === 0) {
+        warnings.push("No packages found in pdm.lock");
+    }
+    return {
+        source_path: filePath,
+        source_type: "pdm.lock",
+        packages: dedup(packages.map(normalizePackageName)),
+        dev_packages: dedup(devPackages.map(normalizePackageName)),
+        confidence: (packages.length + devPackages.length) > 0 ? "medium" : "low",
+        warnings,
+    };
+}
+// ---------------------------------------------------------------------------
+// environment.yml (Conda)
+// ---------------------------------------------------------------------------
+/**
+ * Extract packages from Conda environment.yml.
+ * Looks for `dependencies:` section with `- package` or `- pip:` sub-list.
+ */
+function extractFromEnvironmentYml(filePath, content) {
+    const packages = [];
+    const warnings = [];
+    const lines = content.split("\n");
+    let inDeps = false;
+    let inPip = false;
+    for (const line of lines) {
+        const trimmed = line.trim();
+        // Detect top-level sections
+        if (/^\w/.test(line) && !line.startsWith(" ") && !line.startsWith("\t")) {
+            if (trimmed.startsWith("dependencies:")) {
+                inDeps = true;
+                inPip = false;
+                continue;
+            }
+            if (inDeps && !trimmed.startsWith("-") && !trimmed.startsWith("#")) {
+                inDeps = false;
+                inPip = false;
+                continue;
+            }
+        }
+        if (!inDeps)
+            continue;
+        if (trimmed === "- pip:") {
+            inPip = true;
+            continue;
+        }
+        if (trimmed.startsWith("- ")) {
+            const dep = trimmed.slice(2).trim();
+            if (dep === "pip:" || dep.startsWith("#"))
+                continue;
+            // Strip version specifiers
+            const name = dep.replace(/[>=<!=~].*/g, "").replace(/\[.*\]/g, "").trim();
+            if (name.length > 0 && /^[\w-]+$/.test(name)) {
+                packages.push(name);
+            }
+        }
+    }
+    if (packages.length === 0) {
+        warnings.push("No dependencies found in environment.yml");
+    }
+    return {
+        source_path: filePath,
+        source_type: "environment.yml",
+        packages: dedup(packages.map(normalizePackageName)),
+        dev_packages: [],
+        confidence: packages.length > 0 ? "medium" : "low",
+        warnings,
+    };
+}
+// ---------------------------------------------------------------------------
+// tox.ini (dependency signal extraction)
+// ---------------------------------------------------------------------------
+/**
+ * Extract dependency signals from tox.ini.
+ * Looks for `deps =` lines within [testenv] or [testenv:*] sections.
+ * These are test/CI dependencies, not project runtime deps.
+ */
+function extractFromToxIni(filePath, content) {
+    const devPackages = [];
+    const warnings = [];
+    // Find deps = ... in testenv sections
+    const depsRe = /^deps\s*=\s*(.*)$/gm;
+    let match;
+    while ((match = depsRe.exec(content)) !== null) {
+        // Handle same-line deps
+        const sameLine = match[1].trim();
+        if (sameLine.length > 0 && !sameLine.startsWith("#")) {
+            const name = sameLine.replace(/[>=<!=~].*/g, "").replace(/\[.*\]/g, "").trim();
+            if (name.length > 0 && /^[\w-]+$/.test(name))
+                devPackages.push(name);
+        }
+        // Handle continuation lines
+        const afterKey = content.slice(match.index + match[0].length);
+        const lines = afterKey.split("\n");
+        for (const line of lines) {
+            if (line.length > 0 && line[0] !== " " && line[0] !== "\t")
+                break;
+            const trimmed = line.trim();
+            if (trimmed.startsWith("["))
+                break;
+            if (trimmed.startsWith("#") || trimmed.length === 0)
+                continue;
+            if (trimmed.startsWith("-r"))
+                continue; // requirements file reference
+            const name = trimmed.replace(/[>=<!=~].*/g, "").replace(/\[.*\]/g, "").trim();
+            if (name.length > 0 && /^[\w-]+$/.test(name))
+                devPackages.push(name);
+        }
+    }
+    if (devPackages.length === 0) {
+        warnings.push("No deps found in tox.ini — may use requirements file references");
+    }
+    return {
+        source_path: filePath,
+        source_type: "tox.ini",
+        packages: [],
+        dev_packages: dedup(devPackages.map(normalizePackageName)),
+        confidence: devPackages.length > 0 ? "medium" : "low",
+        warnings,
+    };
+}
+// ---------------------------------------------------------------------------
+// noxfile.py (weak signal extraction)
+// ---------------------------------------------------------------------------
+/**
+ * Extract dependency signals from noxfile.py.
+ * Very conservative: looks for session.install("...") calls.
+ */
+function extractFromNoxfile(filePath, content) {
+    const devPackages = [];
+    const warnings = [];
+    // Match session.install("pkg", "pkg2", ...)
+    const installRe = /session\.install\(([^)]+)\)/g;
+    let match;
+    while ((match = installRe.exec(content)) !== null) {
+        const args = match[1];
+        const pkgRe = /["']([^"']+)["']/g;
+        let pkgMatch;
+        while ((pkgMatch = pkgRe.exec(args)) !== null) {
+            const val = pkgMatch[1];
+            // Skip flags, paths, and requirements file refs
+            if (val.startsWith("-") || val.startsWith(".") || val.includes("/"))
+                continue;
+            const name = val.replace(/[>=<!=~].*/g, "").replace(/\[.*\]/g, "").trim();
+            if (name.length > 0 && /^[\w-]+$/.test(name))
+                devPackages.push(name);
+        }
+    }
+    if (devPackages.length === 0) {
+        warnings.push("No session.install() calls found in noxfile.py");
+    }
+    return {
+        source_path: filePath,
+        source_type: "noxfile.py",
+        packages: [],
+        dev_packages: dedup(devPackages.map(normalizePackageName)),
+        confidence: devPackages.length > 0 ? "low" : "low",
+        warnings: warnings.length > 0 ? warnings : ["noxfile.py parsing is weak detection"],
+    };
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/python/pythonTestMapper.ts
+/**
+ * P25a + P27-1d: Python Test Mapper
+ *
+ * Maps Python source files to candidate test files using Python conventions.
+ * P27-1d: Enhanced with framework-aware candidate generation using
+ * layout, framework, and project-role context from P27-1b/1c.
+ *
+ * Hard rules:
+ *   - Does NOT execute tests
+ *   - Does NOT generate tests
+ *   - Does NOT claim suggested tests are sufficient
+ *   - All mappings carry confidence + reason
+ *   - High confidence requires path convention + framework context evidence
+ */
+
+function mapPythonTests(input) {
+    const results = [];
+    const context = buildMappingContext(input);
+    for (const source of input.sourcePaths) {
+        if (!source.endsWith(".py"))
+            continue;
+        // Skip __init__.py, conftest.py, and non-source
+        const basename = source.split("/").pop();
+        if (basename === "__init__.py" || basename === "conftest.py")
+            continue;
+        if (basename.startsWith("test_") || basename.endsWith("_test.py"))
+            continue;
+        const candidates = generateCandidates(source, context);
+        const existing = candidates.filter(c => input.observedPaths.has(c));
+        const confidence = assessConfidence(source, candidates, existing, context);
+        results.push({
+            source_path: source,
+            candidate_test_paths: candidates,
+            existing_test_paths: existing,
+            confidence: confidence.level,
+            reason: confidence.reason,
+        });
+    }
+    return results;
+}
+function buildMappingContext(input) {
+    const frameworks = input.frameworkProfile?.framework_signals ?? [];
+    const roles = input.frameworkProfile?.project_role_signals ?? [];
+    const layout = input.layout;
+    const hasFw = (name) => frameworks.some(f => f.name === name);
+    const hasRole = (role) => roles.some(r => r.role === role);
+    // Detect observed test directory patterns from existing paths
+    const testDirPatterns = [];
+    const paths = [...input.observedPaths];
+    if (paths.some(p => /^tests\/test_[^/]+\.py$/.test(p))) {
+        testDirPatterns.push("top_level_tests");
+    }
+    if (paths.some(p => /^tests\/[^/]+\/[^/]+\/test_[^/]+\.py$/.test(p))) {
+        testDirPatterns.push("top_level_tests_domain");
+    }
+    if (paths.some(p => /^[^/]+\/[^/]+\/tests\/test_[^/]+\.py$/.test(p) || /^[^/]+\/tests\/test_[^/]+\.py$/.test(p))) {
+        testDirPatterns.push("sibling_tests");
+    }
+    if (paths.some(p => /^tests\/[^/]+\/test_[^/]+\.py$/.test(p))) {
+        testDirPatterns.push("test_subdirectory");
+    }
+    return {
+        isDjango: hasFw("django"),
+        isFastApiService: hasFw("fastapi") || hasRole("service_backend"),
+        isLibrary: hasRole("python_sdk_library") || hasRole("http_client_library") || layout?.primary_layout === "library_package",
+        isCliApp: hasRole("cli_application") || layout?.primary_layout === "cli_app",
+        primaryLayout: layout?.primary_layout ?? "unknown",
+        packageLayout: layout?.package_layout ?? "unknown",
+        testDirPatterns,
+    };
+}
+// ---------------------------------------------------------------------------
+// Candidate generation
+// ---------------------------------------------------------------------------
+function generateCandidates(sourcePath, ctx) {
+    const candidates = [];
+    const parts = sourcePath.split("/");
+    const filename = parts[parts.length - 1];
+    const nameNoExt = filename.replace(/\.py$/, "");
+    // Strip leading underscore for library private modules (httpx/_auth.py → auth)
+    const cleanName = nameNoExt.startsWith("_") && nameNoExt !== "__init__" && nameNoExt !== "__main__"
+        ? nameNoExt.slice(1)
+        : nameNoExt;
+    const candidateName = cleanName;
+    // === Django-style patterns (always included for backward compat) ===
+    // Pattern 1: Sibling tests/ directory — Django app convention
+    // saleor/checkout/actions.py → saleor/checkout/tests/test_actions.py
+    if (parts.length >= 2) {
+        const dirParts = parts.slice(0, -1);
+        candidates.push([...dirParts, "tests", `test_${candidateName}.py`].join("/"));
+    }
+    // Pattern 2: Top-level tests/ mirror
+    // saleor/checkout/actions.py → tests/checkout/test_actions.py
+    if (parts.length >= 2) {
+        const relativeParts = parts.slice(1, -1); // skip top-level package
+        candidates.push(["tests", ...relativeParts, `test_${candidateName}.py`].join("/"));
+    }
+    // Pattern 3: Module-level test file
+    // saleor/checkout/actions.py → saleor/checkout/tests/test_checkout.py
+    if (parts.length >= 2) {
+        const dirParts = parts.slice(0, -1);
+        const moduleName = dirParts[dirParts.length - 1];
+        candidates.push([...dirParts, "tests", `test_${moduleName}.py`].join("/"));
+    }
+    // Pattern 4: Root test mirror with test_ prefix
+    candidates.push(`test/test_${candidateName}.py`);
+    candidates.push(`tests/test_${candidateName}.py`);
+    // === P27-1d: Library/SDK patterns ===
+    if (ctx.isLibrary) {
+        // Library pattern: <package>/_module.py → tests/test_module.py
+        // httpx/_auth.py → tests/test_auth.py
+        if (cleanName !== nameNoExt) {
+            candidates.push(`tests/test_${cleanName}.py`);
+            candidates.push(`test/test_${cleanName}.py`);
+        }
+        // Library pattern: <package>/_module.py → tests/<related>/test_<module>.py
+        // httpx/_models.py → tests/models/test_*.py
+        if (parts.length >= 2) {
+            candidates.push(`tests/${cleanName}/test_${cleanName}.py`);
+            // Also try plural/singular
+            if (!cleanName.endsWith("s")) {
+                candidates.push(`tests/${cleanName}s/test_${cleanName}.py`);
+            }
+        }
+        // Library pattern: <package>/<subpackage>/<module>.py → tests/<subpackage>/test_<module>.py
+        // httpx/_transports/asgi.py → tests/test_asgi.py
+        if (parts.length >= 3) {
+            const subpackage = parts[parts.length - 2];
+            const cleanSub = subpackage.startsWith("_") ? subpackage.slice(1) : subpackage;
+            candidates.push(`tests/test_${nameNoExt}.py`);
+            candidates.push(`tests/${cleanSub}/test_${nameNoExt}.py`);
+        }
+    }
+    // === P27-1d: FastAPI/service patterns ===
+    if (ctx.isFastApiService) {
+        // Service pattern: app/api/routes/<domain>.py → tests/api/<domain>/test_<domain>_*.py
+        // app/api/routes/articles.py → tests/api/articles/test_article_*.py
+        if (parts.includes("routes") || parts.includes("api")) {
+            const domainName = nameNoExt;
+            // Try singular form for test directory
+            const singularDomain = domainName.endsWith("s") ? domainName.slice(0, -1) : domainName;
+            // tests/api/<domain>/test_<domain>_<action>.py pattern
+            candidates.push(`tests/api/${domainName}/test_${singularDomain}_create.py`);
+            candidates.push(`tests/api/${domainName}/test_${singularDomain}_get.py`);
+            candidates.push(`tests/api/${domainName}/test_${singularDomain}_list.py`);
+            candidates.push(`tests/api/${domainName}/test_${singularDomain}_update.py`);
+            candidates.push(`tests/api/${domainName}/test_${singularDomain}_delete.py`);
+            // Generic test file
+            candidates.push(`tests/api/${domainName}/test_${domainName}.py`);
+            candidates.push(`tests/api/test_${domainName}.py`);
+            candidates.push(`tests/test_${domainName}.py`);
+        }
+        // Service pattern: app/crud/crud_<entity>.py → tests/test_crud_<entity>.py
+        if (parts.includes("crud")) {
+            candidates.push(`tests/test_${nameNoExt}.py`);
+            candidates.push(`tests/crud/test_${nameNoExt}.py`);
+        }
+        // Service pattern: app/models/<entity>.py → tests/test_<entity>.py
+        if (parts.includes("models") || parts.includes("schemas")) {
+            candidates.push(`tests/test_${nameNoExt}.py`);
+            candidates.push(`tests/models/test_${nameNoExt}.py`);
+            candidates.push(`tests/schemas/test_${nameNoExt}.py`);
+        }
+        // Service pattern: app/core/<module>.py → tests/test_<module>.py
+        if (parts.includes("core") || parts.includes("services")) {
+            candidates.push(`tests/test_${nameNoExt}.py`);
+            candidates.push(`tests/core/test_${nameNoExt}.py`);
+        }
+    }
+    // === P27-1d: CLI app patterns ===
+    if (ctx.isCliApp) {
+        candidates.push(`tests/test_cli.py`);
+        candidates.push(`tests/test_${nameNoExt}.py`);
+    }
+    // Deduplicate
+    return [...new Set(candidates)];
+}
+// ---------------------------------------------------------------------------
+// Confidence assessment (P27-1d enhanced)
+// ---------------------------------------------------------------------------
+function assessConfidence(source, candidates, existing, ctx) {
+    if (existing.length === 0) {
+        if (candidates.length > 0) {
+            return { level: "low", reason: "Candidate test paths generated but none exist" };
+        }
+        return { level: "unknown", reason: "No reasonable test path could be derived" };
+    }
+    const sourceFilename = source.split("/").pop().replace(/\.py$/, "");
+    const cleanSourceName = sourceFilename.startsWith("_") && sourceFilename !== "__init__" && sourceFilename !== "__main__"
+        ? sourceFilename.slice(1)
+        : sourceFilename;
+    const sourceParentDir = source.split("/").slice(-2, -1)[0] ?? "";
+    const isGenericUtilityModule = ["util", "utils", "helper", "helpers", "common"].includes(cleanSourceName);
+    for (const ex of existing) {
+        const testFilename = ex.split("/").pop().replace(/\.py$/, "");
+        // === High confidence: exact match in expected location ===
+        // Django/traditional: sibling tests/ dir
+        if (testFilename === `test_${sourceFilename}`) {
+            const sourceDirParts = source.split("/").slice(0, -1);
+            const testDirParts = ex.split("/").slice(0, -1);
+            const expectedTestDir = [...sourceDirParts, "tests"].join("/");
+            if (testDirParts.join("/") === expectedTestDir) {
+                return { level: "high", reason: `Exact match in sibling tests/: ${ex}` };
+            }
+        }
+        // Library: _module → tests/test_module (strip underscore match)
+        if (ctx.isLibrary && testFilename === `test_${cleanSourceName}` && ex.startsWith("tests/")) {
+            if (isGenericUtilityModule && !ex.includes(`/${sourceParentDir}/`)) {
+                return { level: "medium", reason: `Generic library helper match without directory context: ${ex}` };
+            }
+            const contextNote = ctx.primaryLayout === "library_package" ? " [library_package layout]" : "";
+            return { level: "high", reason: `Library module match: ${ex}${contextNote}` };
+        }
+        // Service: route domain → tests/api/<domain>/test_<singular>_*.py
+        if (ctx.isFastApiService && ex.includes("/api/") && ex.startsWith("tests/")) {
+            return { level: "high", reason: `API route domain test match: ${ex} [service_backend context]` };
+        }
+        // Standard: test_<name> in tests/ root
+        if (testFilename === `test_${sourceFilename}` || testFilename === `test_${cleanSourceName}`) {
+            if (ex.startsWith("tests/") || ex.startsWith("test/")) {
+                const contextNote = ctx.isLibrary ? " [library context]" : ctx.isFastApiService ? " [service context]" : "";
+                return { level: "medium", reason: `Name match in tests/ directory: ${ex}${contextNote}` };
+            }
+            return { level: "medium", reason: `Name match but different directory: ${ex}` };
+        }
+    }
+    // Domain-level match (test_article_create for articles route)
+    for (const ex of existing) {
+        const testFilename = ex.split("/").pop().replace(/\.py$/, "");
+        // Check if test name contains the source module name (partial domain match)
+        const singularSource = sourceFilename.endsWith("s") ? sourceFilename.slice(0, -1) : sourceFilename;
+        if (filenameContainsToken(ex, singularSource) && ex.startsWith("tests/")) {
+            return { level: "medium", reason: `Domain test match: ${ex} (contains ${singularSource})` };
+        }
+    }
+    // Module-level match
+    return { level: "medium", reason: `Module-level test file found: ${existing[0]}` };
+}
+
+// EXTERNAL MODULE: ./src/globMatch.ts
+var globMatch = __nccwpck_require__(248);
+;// CONCATENATED MODULE: ./src/repoObservation/python/pythonSensitiveZoneDetector.ts
+/**
+ * P25a: Python Sensitive Zone Detector
+ *
+ * Keyword matching + config overrides for identifying high-risk code areas.
+ */
+
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+function detectPythonSensitiveZones(input) {
+    const results = [];
+    // 1. Keyword-based detection
+    for (const kw of pythonSensitiveZoneDetector_SENSITIVE_KEYWORDS) {
+        const matched = input.pythonPaths.filter(p => matchesKeyword(p, kw.keyword));
+        if (matched.length > 0) {
+            results.push({
+                path_pattern: `**/${kw.keyword}/**`,
+                matched_paths: matched,
+                category: kw.category,
+                severity: kw.severity,
+                source: "keyword",
+                evidence: [`Keyword "${kw.keyword}" found in ${matched.length} paths`],
+            });
+        }
+    }
+    // 2. Config overrides
+    if (input.sensitiveOverrides) {
+        for (const [pattern, category] of Object.entries(input.sensitiveOverrides)) {
+            const matched = input.pythonPaths.filter(p => matchGlob(p, pattern));
+            if (matched.length > 0) {
+                results.push({
+                    path_pattern: pattern,
+                    matched_paths: matched,
+                    category,
+                    severity: "high",
+                    source: "config_override",
+                    evidence: [`Config override: ${pattern} → ${category}`],
+                });
+            }
+        }
+    }
+    return deduplicateZones(results);
+}
+const pythonSensitiveZoneDetector_SENSITIVE_KEYWORDS = [
+    // Critical
+    { keyword: "payment", category: "financial_transactions", severity: "critical" },
+    { keyword: "billing", category: "financial_transactions", severity: "critical" },
+    { keyword: "invoice", category: "financial_transactions", severity: "critical" },
+    { keyword: "refund", category: "financial_transactions", severity: "critical" },
+    // High
+    { keyword: "checkout", category: "purchase_flow", severity: "high" },
+    { keyword: "order", category: "order_lifecycle", severity: "high" },
+    { keyword: "account", category: "identity", severity: "high" },
+    { keyword: "auth", category: "authentication", severity: "high" },
+    { keyword: "permission", category: "authorization", severity: "high" },
+    { keyword: "security", category: "security", severity: "high" },
+    { keyword: "admin", category: "administration", severity: "high" },
+    { keyword: "migration", category: "schema_migration", severity: "high" },
+    // Medium
+    { keyword: "discount", category: "pricing_adjustment", severity: "medium" },
+    { keyword: "tax", category: "regulatory_calculation", severity: "medium" },
+    { keyword: "plugin", category: "runtime_extension", severity: "medium" },
+    { keyword: "webhook", category: "external_integration", severity: "medium" },
+    { keyword: "settings", category: "infrastructure_config", severity: "medium" },
+];
+// ---------------------------------------------------------------------------
+// Matching
+// ---------------------------------------------------------------------------
+function matchesKeyword(path, keyword) {
+    return pathContainsKeyword(path, keyword);
+}
+function matchGlob(path, pattern) {
+    return (0,globMatch/* matchesGlob */.k)(path, pattern);
+}
+// ---------------------------------------------------------------------------
+// Deduplication
+// ---------------------------------------------------------------------------
+function deduplicateZones(zones) {
+    // Remove zones whose matched_paths are fully subsumed by a higher-severity zone
+    // This prevents "auth" and "account" from producing overlapping results
+    const seen = new Map();
+    for (const zone of zones) {
+        const key = zone.category;
+        const existing = seen.get(key);
+        if (!existing) {
+            seen.set(key, zone);
+        }
+        else {
+            // Merge paths
+            const mergedPaths = [...new Set([...existing.matched_paths, ...zone.matched_paths])];
+            const mergedEvidence = [...existing.evidence, ...zone.evidence];
+            seen.set(key, {
+                ...existing,
+                matched_paths: mergedPaths,
+                evidence: mergedEvidence,
+                severity: higherSeverity(existing.severity, zone.severity),
+            });
+        }
+    }
+    return [...seen.values()];
+}
+function higherSeverity(a, b) {
+    const order = { medium: 0, high: 1, critical: 2 };
+    return order[a] >= order[b] ? a : b;
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/python/pythonUnknownTaxonomy.ts
+/**
+ * P25a: Python Unknown Taxonomy
+ *
+ * Classifies Python observation unknowns into specific categories,
+ * each tagged as out_of_scope, actionable, or intrinsic.
+ */
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+function buildPythonUnknownTaxonomy(input) {
+    const unknowns = [];
+    // 1. Unclassified Python files
+    const unclassified = input.files.filter(f => f.bucket === "unknown");
+    if (unclassified.length > 0) {
+        unknowns.push({
+            category: "unclassified_python_file",
+            classification: "actionable",
+            paths: unclassified.map(f => f.path),
+            count: unclassified.length,
+            note: "Python files that could not be classified into source/test/config/migration/script buckets. May need custom path_roles in pantheon.json.",
+        });
+    }
+    // 2. Dynamic / unresolved imports
+    const dynamicImports = input.imports.filter(i => i.status === "dynamic_or_unresolved");
+    if (dynamicImports.length > 0) {
+        unknowns.push({
+            category: "dynamic_or_unresolved_import",
+            classification: "intrinsic",
+            paths: [...new Set(dynamicImports.map(i => i.from_file))],
+            count: dynamicImports.length,
+            note: "Imports using __import__(), importlib.import_module(), or computed paths. Cannot be statically resolved — this is inherent to Python.",
+        });
+    }
+    // 3. Unsupported Python artifacts
+    const unsupported = input.files.filter(f => f.bucket === "unsupported" || f.bucket === "notebook");
+    if (unsupported.length > 0) {
+        unknowns.push({
+            category: "unsupported_python_artifact",
+            classification: "out_of_scope",
+            paths: unsupported.map(f => f.path),
+            count: unsupported.length,
+            note: "Cython (.pyx) and Jupyter notebooks (.ipynb) — import analysis not supported.",
+        });
+    }
+    // 4. Low confidence manifests
+    const lowConfManifests = input.manifests.filter(m => m.confidence === "low");
+    if (lowConfManifests.length > 0) {
+        unknowns.push({
+            category: "low_confidence_manifest",
+            classification: "actionable",
+            paths: lowConfManifests.map(m => m.source_path),
+            count: lowConfManifests.length,
+            note: "Dependency manifests parsed with low confidence. Package declarations may be incomplete.",
+        });
+    }
+    // 5. Test mapping unknowns
+    const unmappedTests = input.testMappings.filter(m => m.confidence === "unknown");
+    if (unmappedTests.length > 0) {
+        unknowns.push({
+            category: "test_mapping_unknown",
+            classification: "actionable",
+            paths: unmappedTests.map(m => m.source_path),
+            count: unmappedTests.length,
+            note: "Source files for which no test file could be derived using Python conventions.",
+        });
+    }
+    // 6. Scope granularity limit (always present)
+    unknowns.push({
+        category: "scope_granularity_limit",
+        classification: "intrinsic",
+        paths: [],
+        count: 0,
+        note: "Scope granularity in P25 is file/path-level. Function-level and semantic delta constraints are future work.",
+    });
+    return unknowns;
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/python/pythonLayoutClassifier.ts
+/**
+ * P27-1b: Python Layout Classifier
+ *
+ * Classifies the physical organization (layout) of a Python repository
+ * into two orthogonal dimensions:
+ *
+ *   1. primary_layout — project form (django_project, api_service, library_package, etc.)
+ *   2. package_layout — Python packaging structure (src_layout, flat_package, etc.)
+ *
+ * Uses only paths, file buckets, and manifest presence — NOT framework role inference.
+ * Framework/project-role detection is deferred to P27-1c.
+ */
+function classifyPythonLayout(input) {
+    const signals = [];
+    const unknowns = [];
+    // Build bucket summary
+    const bucketSummary = {};
+    for (const f of input.files) {
+        bucketSummary[f.bucket] = (bucketSummary[f.bucket] ?? 0) + 1;
+    }
+    // Collect structural facts
+    const facts = extractStructuralFacts(input.allPaths, input.files, input.manifests);
+    // Classify package layout (independent of primary layout)
+    const { packageLayout, packageSignals, packageUnknowns } = classifyPackageLayout(facts);
+    signals.push(...packageSignals);
+    unknowns.push(...packageUnknowns);
+    // Classify primary layout
+    const { primaryLayout, primarySignals, primaryUnknowns } = classifyPrimaryLayout(facts, packageLayout);
+    signals.push(...primarySignals);
+    unknowns.push(...primaryUnknowns);
+    // Compute confidence
+    const strongCount = signals.filter(s => s.weight === "strong").length;
+    const moderateCount = signals.filter(s => s.weight === "moderate").length;
+    const confidence = strongCount >= 2 ? "high" :
+        strongCount >= 1 || moderateCount >= 2 ? "medium" :
+            "low";
+    return {
+        primary_layout: primaryLayout,
+        package_layout: packageLayout,
+        confidence,
+        signals,
+        unknowns,
+        bucket_summary: bucketSummary,
+    };
+}
+function extractStructuralFacts(allPaths, files, manifests) {
+    const pathSet = new Set(allPaths);
+    // Detect root-level __init__.py packages (flat_package indicator)
+    const rootInitPyPackages = [];
+    const srcInitPyPackages = [];
+    const srcNamespacePackages = new Set();
+    for (const p of allPaths) {
+        const match = /^([^/]+)\/__init__\.py$/.exec(p);
+        if (match && match[1] !== "tests" && match[1] !== "test" && match[1] !== "docs") {
+            rootInitPyPackages.push(match[1]);
+        }
+        const srcMatch = /^src\/([^/]+)\/__init__\.py$/.exec(p);
+        if (srcMatch) {
+            srcInitPyPackages.push(srcMatch[1]);
+        }
+        const srcNamespaceMatch = /^src\/([^/]+)\/.+\.pyi?$/.exec(p);
+        if (srcNamespaceMatch && !p.endsWith("/__init__.py")) {
+            srcNamespacePackages.add(srcNamespaceMatch[1]);
+        }
+    }
+    // Top-level .py files (not inside any subdirectory)
+    const topLevelPyFiles = allPaths.filter(p => !p.includes("/") && p.endsWith(".py"));
+    // Bucket counts
+    const migrationCount = files.filter(f => f.bucket === "migration").length;
+    const testCount = files.filter(f => f.bucket === "test").length;
+    const sourceCount = files.filter(f => f.bucket === "source").length;
+    const totalPyFiles = files.filter(f => f.extension === ".py" || f.extension === ".pyi").length;
+    // Test directory pattern
+    const hasTopTests = allPaths.some(p => p.startsWith("tests/") || p.startsWith("test/"));
+    const hasNestedTests = allPaths.some(p => /^[^/]+\/tests\//.test(p) || /^[^/]+\/test\//.test(p));
+    const testDirPattern = hasTopTests && hasNestedTests ? "mixed" :
+        hasTopTests ? "top_level" :
+            hasNestedTests ? "nested" :
+                "none";
+    // CLI signals
+    const hasCli = allPaths.some(p => p === "cli.py" || p.includes("/cli.py") || p.includes("/cli/") ||
+        p === "__main__.py" || p.includes("/__main__.py") ||
+        topLevelPyFiles.includes("__main__.py"));
+    // Data pipeline signals (paths only, not imports)
+    const hasDataPipeline = allPaths.some(p => p.includes("/pipelines/") || p.includes("/pipeline/") ||
+        p.includes("/dags/") || p.includes("/etl/") ||
+        p.includes("/data/") && p.endsWith(".py"));
+    // ML signals (paths only)
+    const hasMLSignals = allPaths.some(p => p.includes("/models/") && (p.includes("train") || p.includes("predict") || p.includes("infer")) ||
+        p.includes("/notebooks/") || p.includes("/experiments/"));
+    return {
+        hasSrcDir: allPaths.some(p => p.startsWith("src/")),
+        hasManagePy: pathSet.has("manage.py"),
+        hasAppDir: allPaths.some(p => p.startsWith("app/") && p.endsWith(".py")),
+        hasAlembicDir: allPaths.some(p => p.startsWith("alembic/")),
+        hasDjangoMigrations: allPaths.some(p => p.includes("/migrations/") && p.endsWith(".py")),
+        hasSetupPyOrCfg: pathSet.has("setup.py") || pathSet.has("setup.cfg"),
+        hasPyprojectToml: pathSet.has("pyproject.toml"),
+        hasPyTyped: allPaths.some(p => p.endsWith("/py.typed") || p === "py.typed"),
+        hasDocDir: allPaths.some(p => p.startsWith("docs/")),
+        hasNotebooks: files.some(f => f.bucket === "notebook" || f.extension === ".ipynb"),
+        hasConftest: pathSet.has("conftest.py") || allPaths.some(p => p.endsWith("/conftest.py")),
+        rootInitPyPackages,
+        srcInitPyPackages,
+        srcNamespacePackages: [...srcNamespacePackages].filter(name => !srcInitPyPackages.includes(name)).sort(),
+        topLevelPyFiles,
+        migrationCount,
+        testCount,
+        sourceCount,
+        totalPyFiles,
+        testDirPattern,
+        hasMultipleTopPackages: rootInitPyPackages.length > 1,
+        hasCli,
+        hasDataPipeline,
+        hasMLSignals,
+    };
+}
+// ---------------------------------------------------------------------------
+// Package layout classification
+// ---------------------------------------------------------------------------
+function classifyPackageLayout(facts) {
+    const signals = [];
+    const unknowns = [];
+    // src layout: src/<package>/__init__.py
+    if (facts.hasSrcDir && facts.srcInitPyPackages.length > 0) {
+        signals.push({
+            signal: "src_layout_detected",
+            weight: "strong",
+            evidence: `src/ directory with package(s): ${facts.srcInitPyPackages.join(", ")}`,
+        });
+        return { packageLayout: "src_layout", packageSignals: signals, packageUnknowns: unknowns };
+    }
+    if (facts.hasSrcDir && facts.srcNamespacePackages.length > 0) {
+        signals.push({
+            signal: "namespace_package_detected",
+            weight: "strong",
+            evidence: `src/ namespace package(s) without __init__.py: ${facts.srcNamespacePackages.join(", ")}`,
+        });
+        return { packageLayout: "namespace_package", packageSignals: signals, packageUnknowns: unknowns };
+    }
+    // Django app layout: multiple top-level packages with migrations
+    if (facts.hasDjangoMigrations && facts.hasManagePy && facts.rootInitPyPackages.length >= 1) {
+        signals.push({
+            signal: "django_app_layout_detected",
+            weight: "strong",
+            evidence: `Django manage.py + migrations + packages: ${facts.rootInitPyPackages.join(", ")}`,
+        });
+        return { packageLayout: "django_app_layout", packageSignals: signals, packageUnknowns: unknowns };
+    }
+    // Flat package: single or multiple top-level __init__.py packages
+    if (facts.rootInitPyPackages.length >= 1) {
+        signals.push({
+            signal: "flat_package_detected",
+            weight: "strong",
+            evidence: `Root-level package(s) with __init__.py: ${facts.rootInitPyPackages.join(", ")}`,
+        });
+        return { packageLayout: "flat_package", packageSignals: signals, packageUnknowns: unknowns };
+    }
+    // app/ directory without __init__.py at root — common in FastAPI/Flask service layouts
+    if (facts.hasAppDir) {
+        signals.push({
+            signal: "app_directory_layout",
+            weight: "moderate",
+            evidence: "app/ directory with Python files (service-style layout)",
+        });
+        return { packageLayout: "flat_package", packageSignals: signals, packageUnknowns: unknowns };
+    }
+    // Only top-level .py files, no package structure
+    if (facts.topLevelPyFiles.length > 0 && facts.rootInitPyPackages.length === 0) {
+        signals.push({
+            signal: "loose_scripts_only",
+            weight: "weak",
+            evidence: `${facts.topLevelPyFiles.length} top-level .py files without package __init__.py`,
+        });
+        unknowns.push({
+            aspect: "package_layout",
+            reason: "No package structure detected; only loose scripts",
+        });
+        return { packageLayout: "unknown", packageSignals: signals, packageUnknowns: unknowns };
+    }
+    unknowns.push({
+        aspect: "package_layout",
+        reason: "Unable to determine package layout from file paths",
+    });
+    return { packageLayout: "unknown", packageSignals: signals, packageUnknowns: unknowns };
+}
+// ---------------------------------------------------------------------------
+// Primary layout classification
+// ---------------------------------------------------------------------------
+function classifyPrimaryLayout(facts, packageLayout) {
+    const signals = [];
+    const unknowns = [];
+    // Score-based: accumulate evidence for each candidate
+    const scores = {
+        django_project: 0,
+        api_service: 0,
+        library_package: 0,
+        cli_app: 0,
+        data_pipeline: 0,
+        ml_project: 0,
+        monorepo: 0,
+        mixed: 0,
+        unknown: 0,
+    };
+    // --- Django project signals ---
+    if (facts.hasManagePy) {
+        scores.django_project += 3;
+        signals.push({ signal: "manage_py_found", weight: "strong", evidence: "manage.py in repo root" });
+    }
+    if (facts.hasDjangoMigrations) {
+        scores.django_project += 2;
+        signals.push({ signal: "django_migrations_found", weight: "moderate", evidence: `${facts.migrationCount} migration files` });
+    }
+    if (packageLayout === "django_app_layout") {
+        scores.django_project += 2;
+    }
+    // --- API service signals ---
+    if (facts.hasAppDir && !facts.hasManagePy) {
+        scores.api_service += 2;
+        signals.push({ signal: "app_dir_without_manage_py", weight: "moderate", evidence: "app/ directory without Django manage.py" });
+    }
+    if (facts.hasAlembicDir) {
+        scores.api_service += 1;
+        signals.push({ signal: "alembic_dir_found", weight: "moderate", evidence: "alembic/ migration directory (non-Django)" });
+    }
+    // --- Library package signals ---
+    if (facts.hasPyTyped) {
+        scores.library_package += 2;
+        signals.push({ signal: "py_typed_marker", weight: "strong", evidence: "py.typed marker file (PEP 561 typed package)" });
+    }
+    if (facts.hasSetupPyOrCfg || facts.hasPyprojectToml) {
+        // Having packaging config is necessary but not sufficient for library
+        if (!facts.hasManagePy && !facts.hasAppDir && !facts.hasDjangoMigrations) {
+            scores.library_package += 1;
+            signals.push({ signal: "packaging_config_no_framework", weight: "weak", evidence: "Packaging config present without framework indicators" });
+        }
+    }
+    if (facts.hasDocDir && !facts.hasManagePy) {
+        scores.library_package += 1;
+        signals.push({ signal: "docs_directory", weight: "weak", evidence: "docs/ directory suggests library documentation" });
+    }
+    if (facts.testDirPattern === "top_level" && !facts.hasManagePy && !facts.hasAppDir) {
+        scores.library_package += 1;
+        signals.push({ signal: "top_level_tests_pattern", weight: "weak", evidence: "Top-level tests/ directory typical of library packages" });
+    }
+    // Single root package with py.typed = very likely library
+    if (facts.rootInitPyPackages.length === 1 && facts.hasPyTyped) {
+        scores.library_package += 2;
+    }
+    // --- CLI app signals ---
+    if (facts.hasCli) {
+        scores.cli_app += 2;
+        signals.push({ signal: "cli_entry_point", weight: "moderate", evidence: "CLI entry point detected (__main__.py or cli.py)" });
+    }
+    // --- Data pipeline signals ---
+    if (facts.hasDataPipeline) {
+        scores.data_pipeline += 2;
+        signals.push({ signal: "pipeline_structure", weight: "moderate", evidence: "Pipeline/DAG/ETL directory structure" });
+    }
+    // --- ML project signals ---
+    if (facts.hasMLSignals) {
+        scores.ml_project += 2;
+        signals.push({ signal: "ml_project_structure", weight: "moderate", evidence: "ML-related paths (train/predict/experiments)" });
+    }
+    if (facts.hasNotebooks) {
+        scores.ml_project += 1;
+        signals.push({ signal: "jupyter_notebooks", weight: "weak", evidence: "Jupyter notebooks present" });
+    }
+    // --- Monorepo signals ---
+    if (facts.hasMultipleTopPackages && facts.rootInitPyPackages.length >= 3) {
+        scores.monorepo += 2;
+        signals.push({ signal: "multiple_top_packages", weight: "moderate", evidence: `${facts.rootInitPyPackages.length} top-level packages: ${facts.rootInitPyPackages.join(", ")}` });
+    }
+    // Find winner
+    const candidates = Object.entries(scores)
+        .filter(([key]) => key !== "unknown" && key !== "mixed")
+        .sort(([, a], [, b]) => b - a);
+    if (candidates.length === 0 || candidates[0][1] === 0) {
+        unknowns.push({
+            aspect: "primary_layout",
+            reason: "No structural signals matched known project forms",
+        });
+        return { primaryLayout: "unknown", primarySignals: signals, primaryUnknowns: unknowns };
+    }
+    const [topName, topScore] = candidates[0];
+    const [, secondScore] = candidates.length > 1 ? candidates[1] : ["", 0];
+    // If top two are close, consider "mixed"
+    if (topScore > 0 && secondScore > 0 && topScore - secondScore <= 1) {
+        signals.push({
+            signal: "ambiguous_layout",
+            weight: "weak",
+            evidence: `Close scores: ${candidates[0][0]}=${topScore}, ${candidates[1]?.[0]}=${secondScore}`,
+        });
+        // Still pick the winner unless truly tied
+        if (topScore === secondScore) {
+            unknowns.push({
+                aspect: "primary_layout",
+                reason: `Tied between ${candidates[0][0]} and ${candidates[1][0]}`,
+            });
+            return { primaryLayout: "mixed", primarySignals: signals, primaryUnknowns: unknowns };
+        }
+    }
+    return { primaryLayout: topName, primarySignals: signals, primaryUnknowns: unknowns };
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/python/pythonFrameworkDetector.ts
+/**
+ * P27-1c: Python Framework & Project-Role Detector
+ *
+ * Detects frameworks and project roles from multiple evidence dimensions:
+ *   1. dependency_manifest — packages declared in manifests
+ *   2. layout_classification — primary_layout / package_layout from P27-1b
+ *   3. path_pattern — structural path patterns (manage.py, migrations/, etc.)
+ *   4. import_pattern — what top-level modules are imported
+ *
+ * Hard rules:
+ *   - At least 2 evidence dimensions required for "high" confidence
+ *   - Dependency-only evidence caps at "medium"
+ *   - pytest is "test_framework" kind, never a project role
+ *   - Unknown outputs when no framework/role can be determined
+ *   - Does NOT modify layout, test mapping, or risk presets
+ */
+function detectPythonFrameworkProfile(input) {
+    // Collect all available evidence
+    const evidence = collectEvidence(input);
+    // Detect frameworks
+    const frameworkSignals = detectFrameworks(evidence);
+    // Detect project roles
+    const projectRoleSignals = detectProjectRoles(evidence, input.layout);
+    // Build unknowns
+    const unknowns = [];
+    if (frameworkSignals.length === 0) {
+        unknowns.push({
+            kind: "unknown_framework_or_domain_role",
+            reason: "No framework could be detected from dependencies, paths, or imports",
+        });
+    }
+    if (projectRoleSignals.length === 0) {
+        unknowns.push({
+            kind: "unknown_framework_or_domain_role",
+            reason: "No project role could be inferred from layout, dependencies, or path families",
+        });
+    }
+    return {
+        framework_signals: frameworkSignals,
+        project_role_signals: projectRoleSignals,
+        unknowns,
+    };
+}
+function collectEvidence(input) {
+    // Declared packages (main + dev, normalized to lowercase)
+    const declaredPackages = new Set();
+    const devPackages = new Set();
+    for (const m of input.manifests) {
+        for (const p of m.packages)
+            declaredPackages.add(p.toLowerCase());
+        for (const p of m.dev_packages)
+            devPackages.add(p.toLowerCase());
+    }
+    // Imported top-level modules
+    const importedModules = new Set();
+    for (const imp of input.imports) {
+        if (imp.status === "declared_package" || imp.status === "undeclared_package") {
+            importedModules.add(imp.top_level_module.toLowerCase());
+        }
+    }
+    // Path-based facts
+    const pathSet = new Set(input.allPaths);
+    const pathFamilies = new Set();
+    // Detect commerce/domain path families
+    const domainFamilyPatterns = [
+        { pattern: /\bcheckout\b/i, family: "checkout" },
+        { pattern: /\bpayment\b/i, family: "payment" },
+        { pattern: /\border\b/i, family: "order" },
+        { pattern: /\bcart\b/i, family: "cart" },
+        { pattern: /\bdiscount\b/i, family: "discount" },
+        { pattern: /\binvoice\b/i, family: "invoice" },
+        { pattern: /\bshipping\b/i, family: "shipping" },
+        { pattern: /\bwarehouse\b/i, family: "warehouse" },
+        { pattern: /\baccount\b/i, family: "account" },
+        { pattern: /\bauth\b/i, family: "auth" },
+        { pattern: /\bgraphql\b/i, family: "graphql" },
+        { pattern: /\bapi\b/i, family: "api" },
+    ];
+    for (const p of input.allPaths) {
+        for (const { pattern, family } of domainFamilyPatterns) {
+            if (pattern.test(p))
+                pathFamilies.add(family);
+        }
+    }
+    const pathFacts = {
+        hasManagePy: pathSet.has("manage.py"),
+        hasMigrations: input.allPaths.some(p => p.includes("/migrations/") && p.endsWith(".py")),
+        hasAlembicDir: input.allPaths.some(p => p.startsWith("alembic/")),
+        hasAppDir: input.allPaths.some(p => p.startsWith("app/") && p.endsWith(".py")),
+        hasCli: input.allPaths.some(p => p === "cli.py" || p.includes("/cli.py") || p.includes("/cli/") ||
+            p === "__main__.py" || p.includes("/__main__.py")),
+        hasMainPy: pathSet.has("__main__.py") || input.allPaths.some(p => p.includes("/__main__.py")),
+        hasPyTyped: input.allPaths.some(p => p.endsWith("/py.typed") || p === "py.typed"),
+        hasDocsDir: input.allPaths.some(p => p.startsWith("docs/")),
+        hasSetupPy: pathSet.has("setup.py"),
+        hasPyprojectToml: pathSet.has("pyproject.toml"),
+        hasGraphqlDir: input.allPaths.some(p => p.includes("/graphql/")),
+        hasApiDir: input.allPaths.some(p => p.startsWith("api/") || p.includes("/api/")),
+        pathFamilies,
+    };
+    return { declaredPackages, devPackages, importedModules, pathFacts };
+}
+function detectFrameworks(ev) {
+    const candidates = [];
+    // --- Django ---
+    {
+        const evidence = [];
+        if (ev.declaredPackages.has("django"))
+            evidence.push({ dimension: "dependency_manifest", detail: "django found in dependency manifests" });
+        if (ev.pathFacts.hasManagePy)
+            evidence.push({ dimension: "path_pattern", detail: "manage.py found in repo root" });
+        if (ev.pathFacts.hasMigrations)
+            evidence.push({ dimension: "path_pattern", detail: "Django-style migrations/ directories found" });
+        if (ev.importedModules.has("django"))
+            evidence.push({ dimension: "import_pattern", detail: "django imported in source files" });
+        if (evidence.length > 0)
+            candidates.push({ name: "django", kind: "web_framework", evidence });
+    }
+    // --- FastAPI ---
+    {
+        const evidence = [];
+        if (ev.declaredPackages.has("fastapi"))
+            evidence.push({ dimension: "dependency_manifest", detail: "fastapi found in dependency manifests" });
+        if (ev.importedModules.has("fastapi"))
+            evidence.push({ dimension: "import_pattern", detail: "fastapi imported in source files" });
+        if (ev.pathFacts.hasAppDir && !ev.pathFacts.hasManagePy)
+            evidence.push({ dimension: "path_pattern", detail: "app/ directory without manage.py (service pattern)" });
+        if (evidence.length > 0)
+            candidates.push({ name: "fastapi", kind: "web_framework", evidence });
+    }
+    // --- Flask ---
+    {
+        const evidence = [];
+        if (ev.declaredPackages.has("flask"))
+            evidence.push({ dimension: "dependency_manifest", detail: "flask found in dependency manifests" });
+        if (ev.importedModules.has("flask"))
+            evidence.push({ dimension: "import_pattern", detail: "flask imported in source files" });
+        if (evidence.length > 0)
+            candidates.push({ name: "flask", kind: "web_framework", evidence });
+    }
+    // --- pytest ---
+    {
+        const evidence = [];
+        if (ev.declaredPackages.has("pytest") || ev.devPackages.has("pytest")) {
+            evidence.push({ dimension: "dependency_manifest", detail: "pytest found in dependency manifests" });
+        }
+        if (ev.importedModules.has("pytest"))
+            evidence.push({ dimension: "import_pattern", detail: "pytest imported in source files" });
+        if (evidence.length > 0)
+            candidates.push({ name: "pytest", kind: "test_framework", evidence });
+    }
+    // --- click ---
+    {
+        const evidence = [];
+        if (ev.declaredPackages.has("click"))
+            evidence.push({ dimension: "dependency_manifest", detail: "click found in dependency manifests" });
+        if (ev.importedModules.has("click"))
+            evidence.push({ dimension: "import_pattern", detail: "click imported in source files" });
+        if (ev.pathFacts.hasCli)
+            evidence.push({ dimension: "path_pattern", detail: "CLI entry points detected" });
+        if (evidence.length > 0)
+            candidates.push({ name: "click", kind: "cli_framework", evidence });
+    }
+    // --- typer ---
+    {
+        const evidence = [];
+        if (ev.declaredPackages.has("typer"))
+            evidence.push({ dimension: "dependency_manifest", detail: "typer found in dependency manifests" });
+        if (ev.importedModules.has("typer"))
+            evidence.push({ dimension: "import_pattern", detail: "typer imported in source files" });
+        if (evidence.length > 0)
+            candidates.push({ name: "typer", kind: "cli_framework", evidence });
+    }
+    // --- SQLAlchemy ---
+    {
+        const evidence = [];
+        if (ev.declaredPackages.has("sqlalchemy"))
+            evidence.push({ dimension: "dependency_manifest", detail: "sqlalchemy found in dependency manifests" });
+        if (ev.importedModules.has("sqlalchemy"))
+            evidence.push({ dimension: "import_pattern", detail: "sqlalchemy imported in source files" });
+        if (ev.pathFacts.hasAlembicDir)
+            evidence.push({ dimension: "path_pattern", detail: "alembic/ migration directory present" });
+        if (evidence.length > 0)
+            candidates.push({ name: "sqlalchemy", kind: "orm", evidence });
+    }
+    // --- Celery ---
+    {
+        const evidence = [];
+        if (ev.declaredPackages.has("celery"))
+            evidence.push({ dimension: "dependency_manifest", detail: "celery found in dependency manifests" });
+        if (ev.importedModules.has("celery"))
+            evidence.push({ dimension: "import_pattern", detail: "celery imported in source files" });
+        if (evidence.length > 0)
+            candidates.push({ name: "celery", kind: "task_queue", evidence });
+    }
+    // --- httpx (as framework/library, not role) ---
+    {
+        const evidence = [];
+        if (ev.declaredPackages.has("httpx"))
+            evidence.push({ dimension: "dependency_manifest", detail: "httpx found in dependency manifests" });
+        if (ev.importedModules.has("httpx"))
+            evidence.push({ dimension: "import_pattern", detail: "httpx imported in source files" });
+        if (evidence.length > 0)
+            candidates.push({ name: "httpx", kind: "http_client", evidence });
+    }
+    // --- Airflow ---
+    {
+        const evidence = [];
+        if (ev.declaredPackages.has("apache-airflow") || ev.declaredPackages.has("airflow")) {
+            evidence.push({ dimension: "dependency_manifest", detail: "airflow found in dependency manifests" });
+        }
+        if (ev.importedModules.has("airflow"))
+            evidence.push({ dimension: "import_pattern", detail: "airflow imported in source files" });
+        if (evidence.length > 0)
+            candidates.push({ name: "airflow", kind: "workflow_orchestration", evidence });
+    }
+    // --- Prefect ---
+    {
+        const evidence = [];
+        if (ev.declaredPackages.has("prefect"))
+            evidence.push({ dimension: "dependency_manifest", detail: "prefect found in dependency manifests" });
+        if (ev.importedModules.has("prefect"))
+            evidence.push({ dimension: "import_pattern", detail: "prefect imported in source files" });
+        if (evidence.length > 0)
+            candidates.push({ name: "prefect", kind: "workflow_orchestration", evidence });
+    }
+    // Apply confidence rules
+    return candidates.map(c => ({
+        name: c.name,
+        kind: c.kind,
+        confidence: computeFrameworkConfidence(c.evidence),
+        evidence: c.evidence,
+    }));
+}
+/**
+ * Confidence rules:
+ *   - 2+ distinct dimensions → "high"
+ *   - 1 dimension only (dependency-only, path-only, or import-only) → "medium"
+ *   - This ensures dependency-only never exceeds "medium" per hard rule
+ */
+function computeFrameworkConfidence(evidence) {
+    const dimensions = new Set(evidence.map(e => e.dimension));
+    if (dimensions.size >= 2)
+        return "high";
+    if (dimensions.size === 1)
+        return "medium";
+    return "low";
+}
+// ---------------------------------------------------------------------------
+// Project role detection
+// ---------------------------------------------------------------------------
+function detectProjectRoles(ev, layout) {
+    const roles = [];
+    // Commerce backend detection
+    {
+        const evidence = [];
+        const commerceFamilies = ["checkout", "payment", "order", "cart", "discount", "invoice", "shipping", "warehouse"];
+        const matchedFamilies = commerceFamilies.filter(f => ev.pathFacts.pathFamilies.has(f));
+        if (matchedFamilies.length >= 3) {
+            evidence.push({ dimension: "path_pattern", detail: `Commerce path families: ${matchedFamilies.join(", ")}` });
+        }
+        if (layout.primary_layout === "django_project") {
+            evidence.push({ dimension: "layout_classification", detail: "Layout classified as django_project" });
+        }
+        if (ev.declaredPackages.has("django") && matchedFamilies.length >= 2) {
+            evidence.push({ dimension: "dependency_manifest", detail: "Django with commerce-domain directories" });
+        }
+        if (evidence.length > 0) {
+            roles.push({
+                role: "commerce_backend",
+                confidence: computeRoleConfidence(evidence),
+                evidence,
+            });
+        }
+    }
+    // API/Service backend detection
+    {
+        const evidence = [];
+        if (layout.primary_layout === "api_service") {
+            evidence.push({ dimension: "layout_classification", detail: "Layout classified as api_service" });
+        }
+        if (ev.declaredPackages.has("fastapi") || ev.declaredPackages.has("flask") || ev.declaredPackages.has("starlette")) {
+            evidence.push({ dimension: "dependency_manifest", detail: "API framework found in dependencies" });
+        }
+        if (ev.pathFacts.hasAppDir && !ev.pathFacts.hasManagePy) {
+            evidence.push({ dimension: "path_pattern", detail: "app/ directory without manage.py (service layout)" });
+        }
+        if (ev.pathFacts.hasAlembicDir) {
+            evidence.push({ dimension: "path_pattern", detail: "Alembic migrations (service DB pattern)" });
+        }
+        if (ev.pathFacts.hasApiDir) {
+            evidence.push({ dimension: "path_pattern", detail: "api/ directory present" });
+        }
+        // Avoid double-counting: don't label as service_backend if already strong commerce_backend
+        const commerceEvDims = new Set(roles.find(r => r.role === "commerce_backend")?.evidence.map(e => e.dimension) ?? []);
+        const isStrongCommerce = commerceEvDims.size >= 2;
+        if (evidence.length > 0 && !isStrongCommerce) {
+            roles.push({
+                role: "service_backend",
+                confidence: computeRoleConfidence(evidence),
+                evidence,
+            });
+        }
+    }
+    // Python SDK / Library detection
+    {
+        const evidence = [];
+        if (layout.primary_layout === "library_package") {
+            evidence.push({ dimension: "layout_classification", detail: "Layout classified as library_package" });
+        }
+        if (ev.pathFacts.hasPyTyped) {
+            evidence.push({ dimension: "path_pattern", detail: "py.typed marker (PEP 561 typed package)" });
+        }
+        if (ev.pathFacts.hasDocsDir && !ev.pathFacts.hasManagePy && !ev.pathFacts.hasAppDir) {
+            evidence.push({ dimension: "path_pattern", detail: "docs/ directory without web framework signals" });
+        }
+        if ((ev.pathFacts.hasSetupPy || ev.pathFacts.hasPyprojectToml) && !ev.pathFacts.hasManagePy) {
+            evidence.push({ dimension: "dependency_manifest", detail: "Packaging config without web framework" });
+        }
+        if (evidence.length > 0) {
+            roles.push({
+                role: "python_sdk_library",
+                confidence: computeRoleConfidence(evidence),
+                evidence,
+            });
+        }
+    }
+    // HTTP client library detection (specific sub-role of sdk_library)
+    {
+        const evidence = [];
+        // Check if the project's own package is an HTTP client
+        if (ev.declaredPackages.has("httpx") || ev.declaredPackages.has("httpcore")) {
+            // This is httpx as a dependency, but for httpx itself, check path patterns
+        }
+        if (ev.importedModules.has("httpcore") || ev.declaredPackages.has("httpcore")) {
+            evidence.push({ dimension: "dependency_manifest", detail: "httpcore dependency (HTTP transport layer)" });
+        }
+        if (ev.pathFacts.pathFamilies.has("api") && layout.primary_layout === "library_package") {
+            evidence.push({ dimension: "path_pattern", detail: "API-related paths in library package" });
+        }
+        // Check for HTTP-specific path patterns
+        const httpPaths = ["_transports", "_client", "_models", "_urls", "_content"];
+        const hasHttpPaths = httpPaths.some(p => ev.pathFacts.pathFamilies.has(p) || // unlikely via families
+            // fallback: check raw paths
+            false);
+        // Use layout + dependency as dimensions for HTTP client role
+        if (layout.primary_layout === "library_package" && ev.declaredPackages.has("httpcore")) {
+            evidence.push({ dimension: "layout_classification", detail: "Library package with HTTP core dependency" });
+        }
+        if (evidence.length >= 2) {
+            roles.push({
+                role: "http_client_library",
+                confidence: computeRoleConfidence(evidence),
+                evidence,
+            });
+        }
+    }
+    // CLI app detection
+    {
+        const evidence = [];
+        if (layout.primary_layout === "cli_app") {
+            evidence.push({ dimension: "layout_classification", detail: "Layout classified as cli_app" });
+        }
+        if (ev.pathFacts.hasCli || ev.pathFacts.hasMainPy) {
+            evidence.push({ dimension: "path_pattern", detail: "CLI entry points (__main__.py or cli.py)" });
+        }
+        if (ev.declaredPackages.has("click") || ev.declaredPackages.has("typer") || ev.declaredPackages.has("argparse")) {
+            evidence.push({ dimension: "dependency_manifest", detail: "CLI framework in dependencies" });
+        }
+        if (evidence.length >= 2) {
+            roles.push({
+                role: "cli_application",
+                confidence: computeRoleConfidence(evidence),
+                evidence,
+            });
+        }
+    }
+    // Workflow orchestration detection
+    {
+        const evidence = [];
+        if (frameworksInclude(ev, "airflow", "prefect")) {
+            evidence.push({ dimension: "dependency_manifest", detail: "Workflow orchestration framework dependency found" });
+        }
+        if (ev.importedModules.has("airflow") || ev.importedModules.has("prefect")) {
+            evidence.push({ dimension: "import_pattern", detail: "Workflow orchestration framework imported in source files" });
+        }
+        if (evidence.length > 0) {
+            roles.push({
+                role: "workflow_orchestration",
+                confidence: computeRoleConfidence(evidence),
+                evidence,
+            });
+        }
+    }
+    return roles;
+}
+/**
+ * Role confidence rules (same as framework):
+ *   - 2+ distinct dimensions → "high"
+ *   - 1 dimension only → "medium"
+ */
+function computeRoleConfidence(evidence) {
+    const dimensions = new Set(evidence.map(e => e.dimension));
+    if (dimensions.size >= 2)
+        return "high";
+    if (dimensions.size === 1)
+        return "medium";
+    return "low";
+}
+function frameworksInclude(ev, ...packages) {
+    return packages.some(pkg => ev.declaredPackages.has(pkg) || ev.declaredPackages.has(`apache-${pkg}`));
+}
+
+;// CONCATENATED MODULE: ./src/repoObservation/python/pythonRiskPresetValidator.ts
+/**
+ * P27-1e: Python Risk Preset Validator
+ *
+ * Produces suggested review/forbid boundary candidates based on observed
+ * layout, framework, project-role, sensitive zones, and path signals.
+ *
+ * Hard rules:
+ *   - Does NOT auto-decide allowed/review/forbid
+ *   - Only outputs suggestions with matched_signals + reason
+ *   - Unobserved paths go to dormant_patterns
+ *   - SDK/library defaults to review, not forbid
+ *   - Unvalidated presets cannot produce strong recommendations
+ *   - Does NOT modify test mapper, layout, or framework detector
+ */
+
+function validatePythonRiskPreset(input) {
+    // 1. Select preset based on project role + layout
+    const presetName = selectPreset(input);
+    // 2. Collect observed evidence
+    const matchedSignals = collectMatchedSignals(input);
+    // 3. Generate suggestions from matching preset rules
+    const presetRules = getPresetRules(presetName);
+    const suggestedReview = [];
+    const suggestedForbidden = [];
+    const dormantPatterns = [];
+    const pathSet = new Set(input.allPaths);
+    for (const rule of presetRules) {
+        // Count how many paths match this rule's pattern
+        const matchedPaths = input.allPaths.filter(p => matchPattern(p, rule.pattern));
+        const matchedCount = matchedPaths.length;
+        // Also check if sensitive zones corroborate
+        const corroboratingZone = input.sensitiveZones.find(z => z.category === rule.sensitiveCategory || matchedPaths.some(mp => z.matched_paths.includes(mp)));
+        if (matchedCount === 0) {
+            // Unobserved — goes to dormant
+            dormantPatterns.push({
+                pattern: rule.pattern,
+                reason: rule.dormantReason,
+            });
+            continue;
+        }
+        // Build evidence
+        const evidence = [];
+        evidence.push(`${matchedCount} paths match pattern ${rule.pattern}`);
+        if (corroboratingZone) {
+            evidence.push(`Sensitive zone "${corroboratingZone.category}" (${corroboratingZone.severity}) corroborates`);
+        }
+        if (rule.frameworkEvidence) {
+            evidence.push(rule.frameworkEvidence);
+        }
+        const suggestion = {
+            pattern: rule.pattern,
+            reason: rule.reason,
+            severity: rule.severity,
+            matched_path_count: matchedCount,
+            evidence,
+        };
+        if (rule.suggestedLevel === "forbidden") {
+            suggestedForbidden.push(suggestion);
+        }
+        else {
+            suggestedReview.push(suggestion);
+        }
+    }
+    // 4. Determine validation status
+    const totalRules = presetRules.length;
+    const activeRules = totalRules - dormantPatterns.length;
+    const minimumValidatedRules = Math.max(3, Math.ceil(totalRules * 0.6));
+    const validation = activeRules >= minimumValidatedRules ? "validated" :
+        activeRules > 0 ? "partial" :
+            "unvalidated";
+    // 5. Confidence from matched signals
+    const confidence = matchedSignals.length >= 3 && validation === "validated" ? "high" :
+        matchedSignals.length >= 2 || validation === "partial" ? "medium" :
+            "low";
+    return {
+        preset: presetName,
+        validation,
+        confidence,
+        matched_signals: matchedSignals,
+        suggested_review: suggestedReview,
+        suggested_forbidden: suggestedForbidden,
+        dormant_patterns: dormantPatterns,
+    };
+}
+// ---------------------------------------------------------------------------
+// Preset selection
+// ---------------------------------------------------------------------------
+function selectPreset(input) {
+    const roles = input.frameworkProfile.project_role_signals;
+    const frameworks = input.frameworkProfile.framework_signals;
+    const layout = input.layout;
+    // Priority order: most specific role first
+    const roleNames = roles.map(r => r.role);
+    if (roleNames.includes("commerce_backend") && frameworks.some(f => f.name === "django")) {
+        return "django_commerce";
+    }
+    if (roleNames.includes("service_backend")) {
+        const fw = frameworks.find(f => f.kind === "web_framework");
+        if (fw?.name === "fastapi")
+            return "fastapi_service";
+        if (fw?.name === "flask")
+            return "flask_service";
+        return "generic_service";
+    }
+    if (roleNames.includes("http_client_library") || roleNames.includes("python_sdk_library")) {
+        return "python_sdk_library";
+    }
+    if (roleNames.includes("cli_application")) {
+        return "cli_application";
+    }
+    if (layout.primary_layout === "django_project")
+        return "django_generic";
+    if (layout.primary_layout === "library_package")
+        return "python_sdk_library";
+    if (layout.primary_layout === "api_service")
+        return "generic_service";
+    return "unknown";
+}
+// ---------------------------------------------------------------------------
+// Signal collection
+// ---------------------------------------------------------------------------
+function collectMatchedSignals(input) {
+    const signals = [];
+    // Layout signals
+    signals.push(`layout: ${input.layout.primary_layout} / ${input.layout.package_layout} (${input.layout.confidence})`);
+    // Framework signals
+    for (const fw of input.frameworkProfile.framework_signals) {
+        if (fw.confidence === "high" || fw.confidence === "medium") {
+            signals.push(`framework: ${fw.name} / ${fw.kind} (${fw.confidence})`);
+        }
+    }
+    // Project role signals
+    for (const role of input.frameworkProfile.project_role_signals) {
+        signals.push(`project_role: ${role.role} (${role.confidence})`);
+    }
+    // Sensitive zone signals
+    for (const zone of input.sensitiveZones) {
+        if (zone.severity === "critical" || zone.severity === "high") {
+            signals.push(`sensitive_zone: ${zone.category} (${zone.severity}, ${zone.matched_paths.length} paths)`);
+        }
+    }
+    return signals;
+}
+// ---------------------------------------------------------------------------
+// Pattern matching
+// ---------------------------------------------------------------------------
+function matchPattern(path, pattern) {
+    return (0,globMatch/* matchesGlob */.k)(path, pattern);
+}
+function getPresetRules(presetName) {
+    switch (presetName) {
+        case "django_commerce": return DJANGO_COMMERCE_RULES;
+        case "fastapi_service": return FASTAPI_SERVICE_RULES;
+        case "python_sdk_library": return PYTHON_SDK_LIBRARY_RULES;
+        case "django_generic": return DJANGO_GENERIC_RULES;
+        case "flask_service": return FLASK_SERVICE_RULES;
+        case "generic_service": return GENERIC_SERVICE_RULES;
+        case "cli_application": return CLI_APPLICATION_RULES;
+        default: return GENERIC_RULES;
+    }
+}
+// ---------------------------------------------------------------------------
+// Django Commerce rules
+// ---------------------------------------------------------------------------
+const DJANGO_COMMERCE_RULES = [
+    // Forbidden candidates (very selective)
+    {
+        pattern: "**/migrations/**",
+        reason: "Schema migrations should not be auto-generated by AI agents",
+        severity: "critical",
+        suggestedLevel: "forbidden",
+        sensitiveCategory: "schema_migration",
+        frameworkEvidence: "Django migration framework detected",
+        dormantReason: "No migrations directory observed",
+    },
+    // Review candidates
+    {
+        pattern: "**/payment/**",
+        reason: "Financial transaction logic requires human review",
+        severity: "critical",
+        suggestedLevel: "review",
+        sensitiveCategory: "financial_transactions",
+        dormantReason: "No payment directory observed",
+    },
+    {
+        pattern: "**/billing/**",
+        reason: "Billing logic requires human review",
+        severity: "critical",
+        suggestedLevel: "review",
+        sensitiveCategory: "financial_transactions",
+        dormantReason: "No billing directory observed",
+    },
+    {
+        pattern: "**/checkout/**",
+        reason: "Purchase flow logic requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "purchase_flow",
+        dormantReason: "No checkout directory observed",
+    },
+    {
+        pattern: "**/order/**",
+        reason: "Order lifecycle logic requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "order_lifecycle",
+        dormantReason: "No order directory observed",
+    },
+    {
+        pattern: "**/account/**",
+        reason: "Identity and account management requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "identity",
+        dormantReason: "No account directory observed",
+    },
+    {
+        pattern: "**/auth/**",
+        reason: "Authentication logic requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "authentication",
+        dormantReason: "No auth directory observed",
+    },
+    {
+        pattern: "**/discount/**",
+        reason: "Pricing adjustment logic is money-flow adjacent",
+        severity: "medium",
+        suggestedLevel: "review",
+        sensitiveCategory: "pricing_adjustment",
+        dormantReason: "No discount directory observed",
+    },
+    {
+        pattern: "**/tax/**",
+        reason: "Tax calculation has regulatory implications",
+        severity: "medium",
+        suggestedLevel: "review",
+        sensitiveCategory: "regulatory_calculation",
+        dormantReason: "No tax directory observed",
+    },
+    {
+        pattern: "**/plugin*/**",
+        reason: "Plugin/extension points affect runtime behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        sensitiveCategory: "runtime_extension",
+        dormantReason: "No plugin directory observed",
+    },
+    {
+        pattern: "**/settings*",
+        reason: "Infrastructure configuration affects system behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        sensitiveCategory: "infrastructure_config",
+        dormantReason: "No settings files observed",
+    },
+];
+// ---------------------------------------------------------------------------
+// FastAPI / service rules
+// ---------------------------------------------------------------------------
+const FASTAPI_SERVICE_RULES = [
+    // Forbidden candidates
+    {
+        pattern: "alembic/**",
+        reason: "Database migrations should not be auto-generated by AI agents",
+        severity: "critical",
+        suggestedLevel: "forbidden",
+        frameworkEvidence: "Alembic migration framework detected",
+        dormantReason: "No alembic directory observed",
+    },
+    // Review candidates
+    {
+        pattern: "**/auth*",
+        reason: "Authentication logic requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "authentication",
+        dormantReason: "No auth files observed",
+    },
+    {
+        pattern: "**/security*",
+        reason: "Security module requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "security",
+        dormantReason: "No security files observed",
+    },
+    {
+        pattern: "**/config*",
+        reason: "Application configuration affects system behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        sensitiveCategory: "infrastructure_config",
+        dormantReason: "No config files observed",
+    },
+    {
+        pattern: "**/db/**",
+        reason: "Database layer changes affect data integrity",
+        severity: "high",
+        suggestedLevel: "review",
+        dormantReason: "No db directory observed",
+    },
+    {
+        pattern: "**/middleware*",
+        reason: "Middleware affects request processing pipeline",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No middleware files observed",
+    },
+    {
+        pattern: "**/deps*",
+        reason: "Dependency injection affects route behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        frameworkEvidence: "FastAPI dependency injection pattern",
+        dormantReason: "No deps files observed",
+    },
+];
+const FLASK_SERVICE_RULES = [
+    {
+        pattern: "**/auth*",
+        reason: "Authentication logic requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "authentication",
+        dormantReason: "No auth files observed",
+    },
+    {
+        pattern: "**/security*",
+        reason: "Security module requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "security",
+        dormantReason: "No security files observed",
+    },
+    {
+        pattern: "**/blueprints/**",
+        reason: "Flask blueprint routing affects request behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No Flask blueprint directory observed",
+    },
+    {
+        pattern: "**/config*",
+        reason: "Application configuration affects runtime behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No config files observed",
+    },
+    {
+        pattern: "**/extensions*",
+        reason: "Flask extensions influence app wiring and security hooks",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No extensions files observed",
+    },
+];
+// ---------------------------------------------------------------------------
+// Python SDK / Library rules
+// ---------------------------------------------------------------------------
+const PYTHON_SDK_LIBRARY_RULES = [
+    // SDK/library: prefer review over forbid
+    {
+        pattern: "**/_client*",
+        reason: "Public client behavior surface — changes affect all consumers",
+        severity: "high",
+        suggestedLevel: "review",
+        dormantReason: "No client module observed",
+    },
+    {
+        pattern: "**/_transport*/**",
+        reason: "Transport layer affects request execution semantics",
+        severity: "high",
+        suggestedLevel: "review",
+        dormantReason: "No transport module observed",
+    },
+    {
+        pattern: "**/_auth*",
+        reason: "Authentication affects security surface",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "authentication",
+        dormantReason: "No auth module observed",
+    },
+    {
+        pattern: "**/_config*",
+        reason: "Configuration affects default behavior for all consumers",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No config module observed",
+    },
+    {
+        pattern: "**/__init__.py",
+        reason: "Public API exports — changes affect import compatibility",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No __init__.py observed (unusual)",
+    },
+    {
+        pattern: "**/_models*",
+        reason: "Data model changes affect serialization and API compatibility",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No models module observed",
+    },
+    {
+        pattern: "**/_urls*",
+        reason: "URL handling affects request routing",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No URL module observed",
+    },
+];
+// ---------------------------------------------------------------------------
+// Django generic rules (non-commerce)
+// ---------------------------------------------------------------------------
+const DJANGO_GENERIC_RULES = [
+    {
+        pattern: "**/migrations/**",
+        reason: "Schema migrations should not be auto-generated by AI agents",
+        severity: "critical",
+        suggestedLevel: "forbidden",
+        sensitiveCategory: "schema_migration",
+        frameworkEvidence: "Django migration framework detected",
+        dormantReason: "No migrations directory observed",
+    },
+    {
+        pattern: "**/auth/**",
+        reason: "Authentication logic requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "authentication",
+        dormantReason: "No auth directory observed",
+    },
+    {
+        pattern: "**/settings*",
+        reason: "Django settings affect system-wide behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        sensitiveCategory: "infrastructure_config",
+        dormantReason: "No settings files observed",
+    },
+    {
+        pattern: "**/admin*",
+        reason: "Admin interface affects data access controls",
+        severity: "medium",
+        suggestedLevel: "review",
+        sensitiveCategory: "administration",
+        dormantReason: "No admin files observed",
+    },
+];
+// ---------------------------------------------------------------------------
+// Generic service rules
+// ---------------------------------------------------------------------------
+const GENERIC_SERVICE_RULES = [
+    {
+        pattern: "**/auth*",
+        reason: "Authentication logic requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "authentication",
+        dormantReason: "No auth files observed",
+    },
+    {
+        pattern: "**/security*",
+        reason: "Security module requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "security",
+        dormantReason: "No security files observed",
+    },
+    {
+        pattern: "**/config*",
+        reason: "Configuration affects system behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No config files observed",
+    },
+];
+// ---------------------------------------------------------------------------
+// CLI application rules
+// ---------------------------------------------------------------------------
+const CLI_APPLICATION_RULES = [
+    {
+        pattern: "**/config*",
+        reason: "CLI configuration affects default behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No config files observed",
+    },
+    {
+        pattern: "**/__main__*",
+        reason: "CLI entry point affects invocation behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No __main__.py observed",
+    },
+];
+// ---------------------------------------------------------------------------
+// Fallback generic rules
+// ---------------------------------------------------------------------------
+const GENERIC_RULES = [
+    {
+        pattern: "**/auth*",
+        reason: "Authentication logic requires human review",
+        severity: "high",
+        suggestedLevel: "review",
+        sensitiveCategory: "authentication",
+        dormantReason: "No auth files observed",
+    },
+    {
+        pattern: "**/config*",
+        reason: "Configuration affects system behavior",
+        severity: "medium",
+        suggestedLevel: "review",
+        dormantReason: "No config files observed",
+    },
+];
+
+;// CONCATENATED MODULE: ./src/repoObservation/python/pythonObservationEnhancer.ts
+/**
+ * P25a: Python Observation Enhancer (Orchestrator)
+ *
+ * Sidecar enhancer that runs all Python observation sub-modules
+ * on top of existing RepoObservations, producing python_observations.json.
+ *
+ * Does NOT modify scanner. Does NOT add to RepoObservations.
+ * The sidecar is a standalone artifact.
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+function enhanceWithPythonObservations(observations, repoRoot, config) {
+    const allPaths = observations.observations.files.map(f => f.path);
+    const observedPathSet = new Set(allPaths);
+    // 1. Identify and classify Python files
+    const pythonFiles = [];
+    const pythonSourcePaths = [];
+    for (const file of observations.observations.files) {
+        if (isPythonFile(file.path)) {
+            const classified = classifyPythonFile(file.path, file.size_bytes);
+            pythonFiles.push(classified);
+            if (classified.bucket === "source") {
+                pythonSourcePaths.push(file.path);
+            }
+        }
+        // Also classify Python ecosystem config files (pyproject.toml, etc.)
+        else if (isPythonEcosystemFile(file.path)) {
+            const classified = classifyPythonFile(file.path, file.size_bytes);
+            pythonFiles.push(classified);
+        }
+    }
+    // 2. Extract dependency manifests
+    const manifests = extractManifests(repoRoot, allPaths);
+    // 2b. Classify layout (P27-1b)
+    const layout = classifyPythonLayout({
+        files: pythonFiles,
+        manifests,
+        allPaths,
+    });
+    // 3. Build declared package set
+    const declaredPackages = buildDeclaredPackageSet(manifests);
+    // 4. Detect project packages
+    const projectPackages = config?.project_packages
+        ? [...config.project_packages]
+        : detectProjectPackages(allPaths);
+    // 5. Observe imports from Python source files
+    const imports = [];
+    for (const sourcePath of pythonSourcePaths) {
+        try {
+            const fullPath = (0,external_node_path_.join)(repoRoot, sourcePath);
+            if (!(0,external_node_fs_.existsSync)(fullPath))
+                continue;
+            const content = (0,external_node_fs_.readFileSync)(fullPath, "utf-8");
+            const fileImports = observePythonImports({
+                filePath: sourcePath,
+                content,
+                projectPackages,
+                declaredPackages,
+            });
+            imports.push(...fileImports);
+        }
+        catch {
+            // Skip files that can't be read
+        }
+    }
+    // 6. Detect framework and project-role profile (P27-1c)
+    //    Moved before test mapping so mapper can use framework context (P27-1d)
+    const frameworkProfile = detectPythonFrameworkProfile({
+        files: pythonFiles,
+        manifests,
+        imports,
+        layout,
+        allPaths,
+    });
+    // 7. Map tests (P27-1d: framework-aware)
+    const testMappings = mapPythonTests({
+        sourcePaths: pythonSourcePaths,
+        observedPaths: observedPathSet,
+        layout,
+        frameworkProfile,
+    });
+    // 8. Detect sensitive zones
+    const pythonPaths = pythonFiles
+        .filter(f => f.bucket !== "generated" && f.bucket !== "unsupported")
+        .map(f => f.path);
+    const sensitiveZones = detectPythonSensitiveZones({
+        pythonPaths,
+        sensitiveOverrides: config?.sensitive_overrides,
+    });
+    // 8b. Validate risk preset (P27-1e)
+    const riskPresetValidation = validatePythonRiskPreset({
+        layout,
+        frameworkProfile,
+        sensitiveZones,
+        allPaths,
+    });
+    // 8. Build unknown taxonomy
+    const unknowns = buildPythonUnknownTaxonomy({
+        files: pythonFiles,
+        imports,
+        manifests,
+        testMappings,
+    });
+    // 9. Compute quality
+    const quality = computePythonQuality(pythonFiles, imports, testMappings, sensitiveZones, manifests);
+    // 10. Limitations
+    const limitations = [
+        "Python import observations are syntax-level observations, not full runtime import resolution.",
+        "Multi-line Python import statements (from x import (\n  a,\n  b)) are parsed as a single observation on the module, not per-symbol.",
+        "Scope granularity in P25 is file/path-level. Function-level scope is future work.",
+        "pyproject.toml parsing uses regex-based extraction, not a full TOML parser.",
+        "Dynamic imports (__import__, importlib) cannot be statically analyzed.",
+        "Namespace packages without __init__.py are not detected as project packages.",
+    ];
+    return {
+        schema_version: "python_observations.v1",
+        repo: {
+            root_label: observations.repo.repo_root_label,
+            observed_file_count: observations.meta.file_count,
+            python_file_count: pythonFiles.length,
+        },
+        layout,
+        framework_profile: frameworkProfile,
+        risk_preset_validation: riskPresetValidation,
+        files: pythonFiles,
+        import_observations: imports,
+        dependency_manifests: manifests,
+        test_mappings: testMappings,
+        sensitive_zones: sensitiveZones,
+        unknowns,
+        quality,
+        limitations,
+    };
+}
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+function extractManifests(repoRoot, allPaths) {
+    const results = [];
+    for (const path of allPaths) {
+        if (!isPythonManifestFile(path))
+            continue;
+        try {
+            const fullPath = (0,external_node_path_.join)(repoRoot, path);
+            if (!(0,external_node_fs_.existsSync)(fullPath))
+                continue;
+            const content = (0,external_node_fs_.readFileSync)(fullPath, "utf-8");
+            results.push(extractPythonDependencies({ filePath: path, content }));
+        }
+        catch {
+            // Skip unreadable files
+        }
+    }
+    return results;
+}
+function computePythonQuality(files, imports, testMappings, sensitiveZones, manifests) {
+    const pyFiles = files.filter(f => f.extension === ".py" || f.extension === ".pyi");
+    const classified = pyFiles.filter(f => f.bucket !== "unknown");
+    const unknown = pyFiles.filter(f => f.bucket === "unknown");
+    const projectImports = imports.filter(i => i.status === "project_import");
+    const declaredImports = imports.filter(i => i.status === "declared_package");
+    const undeclaredImports = imports.filter(i => i.status === "undeclared_package");
+    const dynamicImports = imports.filter(i => i.status === "dynamic_or_unresolved");
+    const highTests = testMappings.filter(m => m.confidence === "high");
+    const medTests = testMappings.filter(m => m.confidence === "medium");
+    const sensitiveFileCount = new Set(sensitiveZones.flatMap(z => z.matched_paths)).size;
+    const lowConfManifests = manifests.filter(m => m.confidence === "low");
+    return {
+        python_file_count: pyFiles.length,
+        classified_count: classified.length,
+        classified_ratio: pyFiles.length > 0 ? classified.length / pyFiles.length : 0,
+        unknown_count: unknown.length,
+        unknown_ratio: pyFiles.length > 0 ? unknown.length / pyFiles.length : 0,
+        import_observation_count: imports.length,
+        project_import_count: projectImports.length,
+        declared_package_count: declaredImports.length,
+        undeclared_package_count: undeclaredImports.length,
+        dynamic_import_count: dynamicImports.length,
+        test_mapping_count: testMappings.length,
+        high_confidence_test_count: highTests.length,
+        medium_confidence_test_count: medTests.length,
+        sensitive_zone_count: sensitiveZones.length,
+        sensitive_file_count: sensitiveFileCount,
+        manifest_count: manifests.length,
+        low_confidence_manifest_count: lowConfManifests.length,
+    };
+}
+
 ;// CONCATENATED MODULE: ./src/repair/agentBugReportValidator.ts
 
 
@@ -21666,6 +22310,2289 @@ function buildUserBugReport(input) {
 }
 function getReportKind(report) {
     return report.schema_version === "agent_bug_report@0.1.0" ? "agent_bug_report" : "user_bug_report";
+}
+
+;// CONCATENATED MODULE: ./src/repair/repairTaskRenderer.ts
+function renderRepairTaskMarkdown(input) {
+    const lines = [];
+    const hypothesis = "agent_hypothesis" in input.report ? input.report.agent_hypothesis : undefined;
+    lines.push("# Pantheon Repair Task");
+    lines.push("");
+    lines.push("## Bug");
+    lines.push("");
+    lines.push(`> ${input.contract.intent}`);
+    lines.push("");
+    lines.push("## Confirmed facts");
+    lines.push("");
+    for (const fact of input.finding.confirmed_facts) {
+        lines.push(`- ${fact}`);
+    }
+    if (input.finding.confirmed_facts.length === 0) {
+        lines.push("- No confirmed facts were established beyond the report structure.");
+    }
+    lines.push("");
+    if (hypothesis) {
+        lines.push("## Agent suspected cause");
+        lines.push("");
+        lines.push(hypothesis);
+        lines.push("");
+        lines.push("This is an unverified hypothesis. Do not treat it as confirmed.");
+        lines.push("");
+    }
+    lines.push("## Suspected repair surface");
+    lines.push("");
+    for (const file of input.contract.suspect_surface.files) {
+        lines.push(`- \`${file.path}\` (${file.confidence}) — ${file.reason}`);
+    }
+    lines.push("");
+    lines.push("## Repair relation graph summary");
+    lines.push("");
+    const graphPreview = input.contract.repair_relation_graph.slice(0, 12);
+    for (const edge of graphPreview) {
+        lines.push(`- \`${edge.from}\` -> \`${edge.to}\` (${edge.relation}, ${edge.confidence}) — ${edge.reason}`);
+    }
+    if (input.contract.repair_relation_graph.length > graphPreview.length) {
+        lines.push(`- ... ${input.contract.repair_relation_graph.length - graphPreview.length} more relation edges`);
+    }
+    if (input.contract.graph_build_stats) {
+        const stats = input.contract.graph_build_stats;
+        const truncated = stats.truncation_entries.filter(t => t.truncated);
+        if (truncated.length > 0) {
+            lines.push("");
+            lines.push("**Truncated areas:**");
+            for (const t of truncated.slice(0, 5)) {
+                lines.push(`- \`${t.pattern ?? t.relation}\` matched ${t.total_matches} files, showing ${t.displayed_edges}`);
+            }
+            if (truncated.length > 5) {
+                lines.push(`- ... ${truncated.length - 5} more truncated areas`);
+            }
+        }
+        lines.push("");
+        lines.push(`> ${stats.limitation}`);
+    }
+    lines.push("");
+    lines.push("## Allowed changes");
+    lines.push("");
+    const allowedPreview = input.contract.repair_scope.allowed.slice(0, 25);
+    for (const entry of allowedPreview) {
+        lines.push(`- \`${entry.pattern}\` — ${entry.reason}`);
+    }
+    if (input.contract.repair_scope.allowed.length > 25) {
+        lines.push(`- ... ${input.contract.repair_scope.allowed.length - 25} more allowed entries`);
+    }
+    lines.push("");
+    lines.push("## Review-required changes");
+    lines.push("");
+    if (input.contract.repair_scope.review_required.length === 0) {
+        lines.push("- None");
+    }
+    else {
+        for (const entry of input.contract.repair_scope.review_required) {
+            lines.push(`- \`${entry.pattern}\` — ${entry.reason}`);
+        }
+    }
+    lines.push("");
+    lines.push("## Forbidden changes");
+    lines.push("");
+    const forbiddenPreview = input.contract.repair_scope.forbidden.slice(0, 25);
+    for (const entry of forbiddenPreview) {
+        lines.push(`- \`${entry.pattern}\` — ${entry.reason}`);
+    }
+    if (input.contract.repair_scope.forbidden.length > 25) {
+        lines.push(`- ... ${input.contract.repair_scope.forbidden.length - 25} more forbidden entries`);
+    }
+    lines.push("");
+    if (input.contract.must_preserve.length > 0) {
+        lines.push("## Must preserve");
+        lines.push("");
+        for (const statement of input.contract.must_preserve) {
+            lines.push(`- ${statement}`);
+        }
+        lines.push("");
+    }
+    lines.push("## Consistency checklist");
+    lines.push("");
+    for (const check of input.contract.consistency_checks) {
+        lines.push(`- [${check.severity}] ${check.statement}`);
+    }
+    lines.push("");
+    lines.push("## Test signals");
+    lines.push("");
+    if (input.contract.test_signals.related.length > 0) {
+        lines.push("Related tests:");
+        for (const path of input.contract.test_signals.related) {
+            lines.push(`- \`${path}\``);
+        }
+    }
+    if (input.contract.test_signals.recommended.length > 0) {
+        lines.push("");
+        lines.push("Recommended tests:");
+        for (const path of input.contract.test_signals.recommended) {
+            lines.push(`- \`${path}\``);
+        }
+    }
+    if (input.contract.test_signals.missing_mapping.length > 0) {
+        lines.push("");
+        lines.push("Missing mapping warnings:");
+        for (const item of input.contract.test_signals.missing_mapping) {
+            lines.push(`- ${item}`);
+        }
+    }
+    lines.push("");
+    lines.push("## If you need to go outside scope");
+    lines.push("");
+    lines.push("Request scope expansion. Do not silently modify unrelated or forbidden files.");
+    lines.push("");
+    lines.push("---");
+    lines.push("");
+    lines.push("_Auto-generated by Pantheon. Do not edit._");
+    lines.push("");
+    return lines.join("\n");
+}
+function renderRepairScopeMarkdown(contract) {
+    const lines = [];
+    lines.push("# Repair Scope");
+    lines.push("");
+    lines.push(`**Repair ID:** \`${contract.repair_id}\``);
+    lines.push(`**Audit status:** \`${contract.audit_status}\``);
+    lines.push("");
+    lines.push("## Allowed");
+    lines.push("");
+    for (const entry of contract.repair_scope.allowed) {
+        lines.push(`- \`${entry.pattern}\` (${entry.audit_weight}) — ${entry.reason}`);
+    }
+    lines.push("");
+    lines.push("## Review required");
+    lines.push("");
+    if (contract.repair_scope.review_required.length === 0) {
+        lines.push("- None");
+    }
+    else {
+        for (const entry of contract.repair_scope.review_required) {
+            lines.push(`- \`${entry.pattern}\` (${entry.audit_weight}) — ${entry.reason}`);
+        }
+    }
+    lines.push("");
+    lines.push("## Forbidden");
+    lines.push("");
+    for (const entry of contract.repair_scope.forbidden) {
+        lines.push(`- \`${entry.pattern}\` (${entry.audit_weight}) — ${entry.reason}`);
+    }
+    lines.push("");
+    lines.push("---");
+    lines.push("");
+    lines.push("_Auto-generated by Pantheon. Do not edit._");
+    lines.push("");
+    return lines.join("\n");
+}
+function renderConsistencyChecklistMarkdown(contract) {
+    const lines = [];
+    lines.push("# Consistency Checklist");
+    lines.push("");
+    for (const check of contract.consistency_checks) {
+        lines.push(`## ${check.statement}`);
+        lines.push("");
+        lines.push(`- **Severity:** ${check.severity}`);
+        lines.push(`- **Source:** ${check.source}`);
+        lines.push(`- **Reason:** ${check.reason}`);
+        if (check.evidence.length > 0) {
+            lines.push(`- **Evidence:** ${check.evidence.join(", ")}`);
+        }
+        lines.push("");
+    }
+    lines.push("---");
+    lines.push("");
+    lines.push("_Auto-generated by Pantheon. Do not edit._");
+    lines.push("");
+    return lines.join("\n");
+}
+
+// EXTERNAL MODULE: ./src/pantheonPaths.ts
+var pantheonPaths = __nccwpck_require__(618);
+// EXTERNAL MODULE: ./src/artifacts/artifactSanitizer.ts
+var artifactSanitizer = __nccwpck_require__(398);
+;// CONCATENATED MODULE: ./src/governanceLog/governanceEventSanitizer.ts
+
+const DIFF_HUNK_PATTERNS = [
+    /^@@ /m,
+    /^diff --git /m,
+    /^\+\+\+ /m,
+    /^--- /m,
+];
+function sanitizeGovernanceEvent(event) {
+    const text = JSON.stringify(event, null, 2);
+    const violations = [];
+    const artifactScan = (0,artifactSanitizer/* sanitizeArtifact */.k)(text, "public");
+    for (const violation of artifactScan.violations) {
+        violations.push({
+            kind: violation.kind === "stack_trace"
+                ? "stack_trace"
+                : violation.kind === "secret_like_key"
+                    ? "secret_like_value"
+                    : "absolute_path",
+            message: violation.message,
+            match: violation.match,
+        });
+    }
+    for (const pattern of DIFF_HUNK_PATTERNS) {
+        const match = text.match(pattern);
+        if (match) {
+            violations.push({
+                kind: "diff_hunk",
+                message: "Diff hunk content must not be recorded in governance events.",
+                match: match[0],
+            });
+        }
+    }
+    for (const value of walkStringValues(event)) {
+        if (containsDiffHunkFragment(value)) {
+            violations.push({
+                kind: "diff_hunk",
+                message: "Diff hunk content must not be recorded in governance events.",
+                match: value.slice(0, 80),
+            });
+        }
+    }
+    return {
+        clean: violations.length === 0,
+        violations,
+    };
+}
+function walkStringValues(value) {
+    if (typeof value === "string") {
+        return [value];
+    }
+    if (Array.isArray(value)) {
+        return value.flatMap(item => walkStringValues(item));
+    }
+    if (value && typeof value === "object") {
+        return Object.values(value).flatMap(item => walkStringValues(item));
+    }
+    return [];
+}
+function containsDiffHunkFragment(value) {
+    return value
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .some(line => line.startsWith("@@ ")
+        || line.startsWith("diff --git ")
+        || line.startsWith("+++ ")
+        || line.startsWith("--- "));
+}
+
+;// CONCATENATED MODULE: ./src/governanceLog/governanceEventWriter.ts
+
+
+
+
+function governancePaths(repoRoot) {
+    const dir = (0,external_node_path_.join)((0,pantheonPaths/* resolvePantheonDir */.NJ)(repoRoot), "governance");
+    return {
+        dir,
+        events: (0,external_node_path_.join)(dir, "events.jsonl"),
+    };
+}
+function ensureGovernanceDirs(repoRoot) {
+    const paths = governancePaths(repoRoot);
+    (0,external_node_fs_.mkdirSync)(paths.dir, { recursive: true });
+    return paths;
+}
+function tryAppendGovernanceEvent(repoRoot, event) {
+    const paths = ensureGovernanceDirs(repoRoot);
+    const sanitized = sanitizeGovernanceEvent(event);
+    if (!sanitized.clean) {
+        const detail = sanitized.violations.map(violation => violation.message).join("; ");
+        return {
+            ok: false,
+            error_kind: "invalid_event",
+            path: paths.events,
+            message: `Governance event sanitizer rejected event ${event.event_type}: ${detail}`,
+        };
+    }
+    try {
+        if (!(0,external_node_fs_.existsSync)(paths.events)) {
+            (0,external_node_fs_.appendFileSync)(paths.events, "");
+        }
+        (0,external_node_fs_.appendFileSync)(paths.events, `${JSON.stringify(event)}\n`);
+        return {
+            ok: true,
+            event_id: event.event_id,
+            path: paths.events,
+        };
+    }
+    catch (error) {
+        const code = error?.code;
+        return {
+            ok: false,
+            error_kind: code === "EACCES" || code === "EPERM" ? "permission_denied" : "io_error",
+            path: paths.events,
+            message: error instanceof Error ? error.message : String(error),
+        };
+    }
+}
+function appendGovernanceEvent(repoRoot, event) {
+    const result = tryAppendGovernanceEvent(repoRoot, event);
+    if (!result.ok) {
+        throw new Error(result.message);
+    }
+    return result;
+}
+
+;// CONCATENATED MODULE: ./src/review/reviewAttentionPolicy.ts
+function attentionLevelForVerdict(verdict, sanitizerViolations = 0) {
+    if (sanitizerViolations > 0) {
+        return "urgent";
+    }
+    switch (verdict) {
+        case "requires_review":
+            return "human_review";
+        case "requires_scope_expansion":
+        case "requires_replan":
+            return "blocking";
+        case "fail":
+            return "urgent";
+        case "pass":
+            return null;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/review/reviewRequestBuilder.ts
+
+function buildReviewRequest(input) {
+    if (input.check.verdict === "pass" && (input.sanitizerViolations ?? 0) === 0) {
+        return null;
+    }
+    const effectiveVerdict = deriveReviewVerdict(input.check.verdict, input.sanitizerViolations ?? 0);
+    const attentionLevel = attentionLevelForVerdict(effectiveVerdict, input.sanitizerViolations ?? 0);
+    if (!attentionLevel) {
+        return null;
+    }
+    const files = input.check.findings
+        .flatMap(finding => isFileScopedFinding(finding) ? [{
+            path: finding.file,
+            bucket: (finding.kind === "review_required_file" || finding.kind === "architecture_review_required"
+                ? "review_required"
+                : finding.kind === "forbidden_file" || finding.kind === "architecture_forbidden"
+                    ? "forbidden"
+                    : "outside_scope"),
+            reason: finding.message,
+        }] : []);
+    const recommendedActions = dedupeActions([
+        ...input.check.findings.flatMap(toReviewActions),
+        ...(effectiveVerdict === "requires_review"
+            ? ["human_review"]
+            : []),
+        ...(effectiveVerdict === "requires_replan"
+            ? ["request_replan"]
+            : []),
+        ...(effectiveVerdict === "requires_scope_expansion"
+            ? ["request_scope_expansion"]
+            : []),
+        ...(effectiveVerdict === "fail"
+            ? ["revert_file"]
+            : []),
+    ]);
+    return {
+        schema_version: "pantheon_review_request@0.2.0",
+        review_id: `review_${input.repairId}`,
+        target: {
+            target_type: "repair",
+            target_id: input.repairId,
+            legacy_repair_id: input.repairId,
+        },
+        repair_id: input.repairId,
+        contract_revision: input.contractRevision,
+        source: input.source,
+        type: deriveRepairReviewType(input.check),
+        status: "open",
+        attention_level: attentionLevel,
+        verdict: effectiveVerdict,
+        reason: buildReviewReason(effectiveVerdict, input.check, input.sanitizerViolations ?? 0),
+        files,
+        recommended_actions: recommendedActions,
+        pr: input.pr,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+    };
+}
+function deriveReviewVerdict(verdict, sanitizerViolations) {
+    if (sanitizerViolations > 0) {
+        return "fail";
+    }
+    return verdict === "pass" ? "requires_review" : verdict;
+}
+function buildReviewReason(verdict, check, sanitizerViolations) {
+    if (sanitizerViolations > 0) {
+        return "Pantheon withheld one or more public artifacts because the sanitizer found blocked content.";
+    }
+    switch (verdict) {
+        case "requires_review":
+            return "This repair touched files that require human review.";
+        case "requires_scope_expansion":
+            return "This repair touched files outside the approved repair scope.";
+        case "requires_replan":
+            return "This repair plan is stale and must be regenerated for the current repository state.";
+        case "fail":
+            if (check.findings.some(finding => finding.kind === "forbidden_file")) {
+                return "This repair touched forbidden files under the current repair contract.";
+            }
+            return "Pantheon blocked this repair under the current repair contract.";
+    }
+}
+function isFileScopedFinding(finding) {
+    return ((finding.kind === "review_required_file"
+        || finding.kind === "outside_scope_file"
+        || finding.kind === "forbidden_file"
+        || finding.kind === "architecture_forbidden"
+        || finding.kind === "architecture_review_required")
+        && typeof finding.file === "string");
+}
+function toReviewActions(finding) {
+    return finding.allowed_actions.flatMap(action => {
+        switch (action) {
+            case "keep_for_human_review":
+                return ["human_review"];
+            case "request_scope_expansion":
+                return ["request_scope_expansion"];
+            case "request_replan":
+                return ["request_replan"];
+            case "revert_file":
+                return ["revert_file"];
+            default:
+                return [];
+        }
+    });
+}
+function dedupeActions(actions) {
+    return [...new Set(actions)];
+}
+function deriveRepairReviewType(check) {
+    if (check.findings.some(finding => finding.kind === "architecture_forbidden")) {
+        return "architecture_forbidden_change";
+    }
+    if (check.findings.some(finding => finding.kind === "architecture_review_required"
+        || finding.kind === "architecture_contract_modified")) {
+        return "architecture_boundary_violation";
+    }
+    return "repair_review";
+}
+function buildArchitectureMappingReviewRequest(input) {
+    if (input.unresolvedCount === 0) {
+        return null;
+    }
+    return {
+        schema_version: "pantheon_review_request@0.2.0",
+        review_id: `review_arch_map_${input.archId}`,
+        target: {
+            target_type: "architecture",
+            target_id: input.archId,
+        },
+        contract_revision: 0,
+        source: input.source,
+        type: "architecture_mapping_review",
+        status: "open",
+        attention_level: "human_review",
+        verdict: "requires_review",
+        reason: `Architecture ingestion extracted claims that require human mapping or verification. (${input.unresolvedCount} unresolved)`,
+        files: [],
+        recommended_actions: ["human_review"],
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+    };
+}
+
+// EXTERNAL MODULE: ./src/review/reviewQueueStore.ts + 1 modules
+var reviewQueueStore = __nccwpck_require__(643);
+// EXTERNAL MODULE: ./src/architecture/architectureArtifactLayout.ts
+var architectureArtifactLayout = __nccwpck_require__(756);
+;// CONCATENATED MODULE: ./src/cli/repair/repairShared.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function loadActiveArchitectureContract(repoRoot) {
+    const rootPaths = (0,architectureArtifactLayout/* architectureRootPaths */.Ei)(repoRoot);
+    if ((0,external_node_fs_.existsSync)(rootPaths.activeContract)) {
+        return JSON.parse((0,external_node_fs_.readFileSync)(rootPaths.activeContract, "utf-8"));
+    }
+    return null;
+}
+function resolveIntakeReport(input) {
+    if (input.fromPath) {
+        return loadRepairSourceReport((0,external_node_path_.resolve)(input.fromPath));
+    }
+    if (!input.intent) {
+        throw new Error("repair intake requires --from <report.json> or --intent <summary>.");
+    }
+    if ((input.suspectPaths ?? []).length === 0) {
+        throw new Error("repair intake requires at least one --suspect path for user-initiated repair.");
+    }
+    return buildUserBugReport({
+        intent: input.intent,
+        suspectPaths: input.suspectPaths ?? [],
+        failingTests: input.failingTests ?? [],
+        mustPreserve: input.mustPreserve ?? [],
+        operatorId: input.operatorId ?? "user",
+    });
+}
+function loadRepairPlanningContext(repoRoot, configPath = "pantheon.json") {
+    const pantheonConfig = loadPantheonConfig(repoRoot, configPath);
+    const repoObsConfig = loadRepoObservationConfig(repoRoot);
+    const observations = scanRepo({
+        repoRoot,
+        config: {
+            ...repoObsConfig.config,
+            path_roles: {
+                ...(repoObsConfig.config.path_roles ?? {}),
+                ...Object.fromEntries(Object.entries(pantheonConfig.config.path_roles)
+                    .filter(([, value]) => ["src", "test", "config", "generated", "docs", "script", "asset", "unknown"].includes(value))
+                    .map(([key, value]) => [key, value])),
+            },
+        },
+    });
+    let pythonSidecar = null;
+    if (hasPythonSignals(observations.observations.files.map(file => file.path))) {
+        pythonSidecar = enhanceWithPythonObservations(observations, repoRoot, pantheonConfig.config.python
+            ? {
+                project_packages: pantheonConfig.config.python.project_packages,
+                sensitive_overrides: pantheonConfig.config.python.sensitive_overrides,
+            }
+            : undefined);
+    }
+    return {
+        observations,
+        pythonSidecar,
+        protectedPatterns: pantheonConfig.config.protected,
+        architectureContract: loadActiveArchitectureContract(repoRoot) ?? undefined,
+    };
+}
+function writeRepairPlanArtifacts(repoRoot, report, finding, contract) {
+    const paths = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, contract.repair_id);
+    if (report.schema_version === "agent_bug_report@0.1.0") {
+        (0,external_node_fs_.writeFileSync)(paths.agentBugReport, JSON.stringify(report, null, 2));
+    }
+    else {
+        (0,external_node_fs_.writeFileSync)(paths.userBugReport, JSON.stringify(report, null, 2));
+    }
+    (0,external_node_fs_.writeFileSync)(paths.bugFinding, JSON.stringify(finding, null, 2));
+    (0,external_node_fs_.writeFileSync)(paths.contractRevision(contract.revision), JSON.stringify(contract, null, 2));
+    (0,external_node_fs_.writeFileSync)(paths.contractLatest, JSON.stringify(contract, null, 2));
+    (0,external_node_fs_.writeFileSync)(paths.relationGraph, JSON.stringify(contract.repair_relation_graph, null, 2));
+    (0,external_node_fs_.writeFileSync)(paths.task, renderRepairTaskMarkdown({ report, finding, contract }));
+    (0,external_node_fs_.writeFileSync)(paths.scope, renderRepairScopeMarkdown(contract));
+    (0,external_node_fs_.writeFileSync)(paths.checklist, renderConsistencyChecklistMarkdown(contract));
+}
+function loadStoredRepairReport(paths) {
+    if ((0,external_node_fs_.existsSync)(paths.agentBugReport)) {
+        return (0,repairUtils/* readJsonFile */.JE)(paths.agentBugReport);
+    }
+    if ((0,external_node_fs_.existsSync)(paths.userBugReport)) {
+        return (0,repairUtils/* readJsonFile */.JE)(paths.userBugReport);
+    }
+    throw new Error(`No repair report found for ${paths.repairId}.`);
+}
+function loadBugFinding(paths) {
+    if (!(0,external_node_fs_.existsSync)(paths.bugFinding)) {
+        throw new Error(`No bug finding found for ${paths.repairId}.`);
+    }
+    return (0,repairUtils/* readJsonFile */.JE)(paths.bugFinding);
+}
+function loadCurrentRepairContract(repoRoot, repairId) {
+    const session = repairSessionStore_loadRepairSession(repoRoot, repairId);
+    if (session.current_revision < 1) {
+        throw new Error(`Repair session ${repairId} has no generated repair plan yet.`);
+    }
+    const path = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, repairId).contractRevision(session.current_revision);
+    if (!(0,external_node_fs_.existsSync)(path)) {
+        throw new Error(`Repair contract revision ${session.current_revision} is missing for ${repairId}.`);
+    }
+    return (0,repairUtils/* readJsonFile */.JE)(path);
+}
+function loadOtherActiveContracts(repoRoot, currentRepairId) {
+    const index = repairSessionStore_listRepairSessions(repoRoot);
+    const contracts = [];
+    for (const session of index.active_repairs) {
+        if (session.repair_id === currentRepairId || session.current_revision < 1) {
+            continue;
+        }
+        const contractPath = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, session.repair_id).contractRevision(session.current_revision);
+        if ((0,external_node_fs_.existsSync)(contractPath)) {
+            contracts.push((0,repairUtils/* readJsonFile */.JE)(contractPath));
+        }
+    }
+    return contracts;
+}
+function applyBugIntakeDecision(finding, decision) {
+    switch (decision.decision) {
+        case "accept_report":
+            return { ...finding, status: "accepted", next_action: "repair_analysis" };
+        case "reject_report":
+            return { ...finding, status: "rejected", next_action: "none" };
+        case "needs_more_evidence":
+            return { ...finding, status: "needs_more_evidence", next_action: "await_more_evidence" };
+        case "mark_duplicate":
+            return { ...finding, status: "duplicate", next_action: "none" };
+        case "convert_to_backlog":
+            return { ...finding, status: "backlog_candidate", next_action: "none" };
+        default:
+            return finding;
+    }
+}
+function readRepairDiff(input) {
+    if (input.diffJsonPath) {
+        const rawData = (0,repairUtils/* readJsonFile */.JE)((0,external_node_path_.resolve)(input.diffJsonPath));
+        const synthetic = syntheticRepairDiffSchema.parse(rawData);
+        return {
+            base_ref: "synthetic",
+            changed_files: synthetic.changed_files.map(file => ({
+                path: file.path,
+                status: file.change_kind,
+            })),
+            warnings: [],
+        };
+    }
+    return (0,gitDiffReader/* readGitDiffSummary */.S)({
+        repoRoot: input.repoRoot,
+        baseRef: input.baseRef ?? "",
+        headRef: input.headRef,
+        changedFilesOverride: input.changedFilesOverride,
+    });
+}
+function syncHumanAttention(repoRoot, input) {
+    const event = buildGovernanceEventFromCheck(input);
+    appendGovernanceEvent(repoRoot, event);
+    const reviewRequest = buildReviewRequest({
+        repairId: input.repairId,
+        contractRevision: input.contract.revision,
+        source: input.source,
+        check: input.check,
+        contract: input.contract,
+        sanitizerViolations: input.sanitizerViolations,
+        pr: input.prNumber
+            ? {
+                provider: "github",
+                number: input.prNumber,
+            }
+            : undefined,
+    });
+    if (reviewRequest) {
+        (0,reviewQueueStore/* writeReviewRequest */.Fw)(repoRoot, reviewRequest);
+        appendGovernanceEvent(repoRoot, {
+            schema_version: "pantheon_governance_event@0.1.0",
+            event_id: `gov_${input.repairId}_review_${Date.now().toString(36)}`,
+            timestamp: new Date().toISOString(),
+            source: input.source,
+            event_type: "review_requested",
+            target_type: "repair",
+            target_id: input.repairId,
+            repair_id: input.repairId,
+            contract_revision: input.contract.revision,
+            verdict: reviewRequest.verdict,
+            attention_level: reviewRequest.attention_level,
+            reasons: buildGovernanceReasons(input.check),
+            artifact_dir: input.artifactDir,
+            sanitizer_violations: input.sanitizerViolations,
+        });
+    }
+    else {
+        const closed = (0,reviewQueueStore/* closeReviewRequest */.S4)(repoRoot, "repair", input.repairId);
+        if (closed) {
+            appendGovernanceEvent(repoRoot, {
+                schema_version: "pantheon_governance_event@0.1.0",
+                event_id: `gov_${input.repairId}_review_resolved_${Date.now().toString(36)}`,
+                timestamp: new Date().toISOString(),
+                source: input.source,
+                event_type: "review_resolved",
+                target_type: "repair",
+                target_id: input.repairId,
+                repair_id: input.repairId,
+                contract_revision: input.contract.revision,
+                verdict: input.check.verdict,
+                attention_level: "none",
+            });
+        }
+    }
+    if (input.check.verdict === "requires_replan") {
+        appendGovernanceEvent(repoRoot, {
+            schema_version: "pantheon_governance_event@0.1.0",
+            event_id: `gov_${input.repairId}_replan_${Date.now().toString(36)}`,
+            timestamp: new Date().toISOString(),
+            source: input.source,
+            event_type: "repair_replanned",
+            target_type: "repair",
+            target_id: input.repairId,
+            repair_id: input.repairId,
+            contract_revision: input.contract.revision,
+            verdict: input.check.verdict,
+            attention_level: "blocking",
+            reasons: buildGovernanceReasons(input.check),
+        });
+    }
+    else if (input.check.verdict === "fail" || input.check.verdict === "requires_scope_expansion") {
+        appendGovernanceEvent(repoRoot, {
+            schema_version: "pantheon_governance_event@0.1.0",
+            event_id: `gov_${input.repairId}_blocked_${Date.now().toString(36)}`,
+            timestamp: new Date().toISOString(),
+            source: input.source,
+            event_type: "repair_blocked",
+            target_type: "repair",
+            target_id: input.repairId,
+            repair_id: input.repairId,
+            contract_revision: input.contract.revision,
+            verdict: input.check.verdict,
+            attention_level: input.check.verdict === "fail" ? "urgent" : "blocking",
+            reasons: buildGovernanceReasons(input.check),
+        });
+    }
+    if (input.sanitizerViolations > 0) {
+        appendGovernanceEvent(repoRoot, {
+            schema_version: "pantheon_governance_event@0.1.0",
+            event_id: `gov_${input.repairId}_sanitizer_${Date.now().toString(36)}`,
+            timestamp: new Date().toISOString(),
+            source: input.source,
+            event_type: "artifact_sanitizer_violation",
+            target_type: "repair",
+            target_id: input.repairId,
+            repair_id: input.repairId,
+            contract_revision: input.contract.revision,
+            verdict: "fail",
+            attention_level: "urgent",
+            sanitizer_violations: input.sanitizerViolations,
+            artifact_dir: input.artifactDir,
+            reasons: [{
+                    kind: "artifact_sanitizer_violation",
+                    action: "block_merge",
+                }],
+        });
+    }
+}
+function buildScopeSummary(contract) {
+    return {
+        allowed: contract.repair_scope.allowed.map(entry => entry.pattern),
+        review_required: contract.repair_scope.review_required.map(entry => entry.pattern),
+        forbidden: contract.repair_scope.forbidden.map(entry => entry.pattern),
+    };
+}
+function deriveRiskLevel(contract) {
+    if (contract.repair_scope.forbidden.length > 0
+        || contract.impact_surface.risk_areas.some(area => area.severity === "critical")) {
+        return "high";
+    }
+    if (contract.repair_scope.review_required.length > 0
+        || contract.impact_surface.unknowns.length > 0) {
+        return "medium";
+    }
+    if (contract.repair_scope.allowed.length > 0) {
+        return "low";
+    }
+    return "unknown";
+}
+function buildGovernanceEventFromCheck(input) {
+    return {
+        schema_version: "pantheon_governance_event@0.1.0",
+        event_id: `gov_${input.repairId}_check_${Date.now().toString(36)}`,
+        timestamp: new Date().toISOString(),
+        source: input.source,
+        event_type: "repair_check_completed",
+        target_type: "repair",
+        target_id: input.repairId,
+        repair_id: input.repairId,
+        contract_revision: input.contract.revision,
+        pr: input.prNumber
+            ? {
+                provider: "github",
+                number: input.prNumber,
+                base_sha: input.prBaseSha,
+                head_sha: input.prHeadSha,
+            }
+            : undefined,
+        verdict: input.check.verdict,
+        attention_level: governanceAttentionForVerdict(input.check.verdict, input.sanitizerViolations),
+        changed_files_count: input.check.summary.changed_files,
+        bucket_counts: {
+            allowed: input.check.summary.allowed,
+            review_required: input.check.summary.review_required,
+            forbidden: input.check.summary.forbidden,
+            outside_scope: input.check.summary.outside_scope,
+        },
+        reasons: buildGovernanceReasons(input.check),
+        sanitizer_violations: input.sanitizerViolations,
+        artifact_dir: input.artifactDir,
+    };
+}
+function buildGovernanceReasons(check) {
+    const reasons = [];
+    for (const finding of check.findings) {
+        switch (finding.kind) {
+            case "review_required_file":
+                reasons.push({
+                    kind: "review_required",
+                    file: finding.file,
+                    action: "human_review",
+                });
+                break;
+            case "outside_scope_file":
+                reasons.push({
+                    kind: "outside_scope",
+                    file: finding.file,
+                    action: "request_scope_expansion",
+                });
+                break;
+            case "forbidden_file":
+                reasons.push({
+                    kind: "forbidden_file_touched",
+                    file: finding.file,
+                    action: "revert_file",
+                });
+                break;
+            case "stale_repair_contract":
+                reasons.push({
+                    kind: "stale_repair_contract",
+                    action: "request_replan",
+                });
+                break;
+            case "architecture_forbidden":
+                reasons.push({
+                    kind: "architecture_forbidden",
+                    file: finding.file,
+                    action: "block_merge",
+                });
+                break;
+            case "architecture_review_required":
+                reasons.push({
+                    kind: "architecture_review_required",
+                    file: finding.file,
+                    action: "human_review",
+                });
+                break;
+            case "architecture_contract_modified":
+                reasons.push({
+                    kind: "architecture_contract_modified",
+                    action: "human_review",
+                });
+                break;
+            case "active_scope_pattern_overlap":
+            case "actual_changed_file_overlap":
+                reasons.push({
+                    kind: "concurrent_repair_overlap",
+                    file: finding.file,
+                    action: finding.severity === "blocking" ? "block_merge" : "human_review",
+                });
+                break;
+            default:
+                break;
+        }
+    }
+    return dedupeGovernanceReasons(reasons);
+}
+function dedupeGovernanceReasons(reasons) {
+    const seen = new Set();
+    const result = [];
+    for (const reason of reasons) {
+        const key = `${reason.kind}:${reason.file ?? ""}:${reason.pattern ?? ""}:${reason.action}`;
+        if (seen.has(key)) {
+            continue;
+        }
+        seen.add(key);
+        result.push(reason);
+    }
+    return result;
+}
+function governanceAttentionForVerdict(verdict, sanitizerViolations) {
+    if (sanitizerViolations > 0) {
+        return "urgent";
+    }
+    switch (verdict) {
+        case "pass":
+            return "none";
+        case "requires_review":
+            return "human_review";
+        case "requires_scope_expansion":
+        case "requires_replan":
+            return "blocking";
+        case "fail":
+            return "urgent";
+    }
+}
+function mapFindingStatusToSessionStatus(status) {
+    switch (status) {
+        case "accepted":
+            return "intake_accepted";
+        case "rejected":
+            return "intake_rejected";
+        default:
+            return "intake_created";
+    }
+}
+function mapAuditStatusToSessionStatus(status) {
+    switch (status) {
+        case "approved_repair_plan":
+            return "plan_approved";
+        case "approved_with_modifications":
+            return "plan_restricted";
+        case "manual_repair_required":
+            return "manual_repair_required";
+        default:
+            return "plan_pending_audit";
+    }
+}
+function mapVerdictToSessionStatus(verdict) {
+    switch (verdict) {
+        case "pass":
+            return "repair_checked_pass";
+        case "requires_review":
+            return "repair_checked_requires_review";
+        case "requires_scope_expansion":
+            return "repair_checked_requires_scope_expansion";
+        case "requires_replan":
+            return "repair_checked_requires_replan";
+        case "fail":
+            return "repair_checked_fail";
+    }
+}
+function stalePlanToRepairFinding(finding) {
+    if (finding.kind === "stale_repair_contract") {
+        return {
+            kind: "stale_repair_contract",
+            severity: "blocking",
+            message: finding.reason,
+            allowed_actions: ["request_replan"],
+            requires_human: true,
+            evidence: ["repo_state:base_sha_mismatch"],
+        };
+    }
+    return {
+        kind: "working_tree_changed",
+        severity: "warning",
+        message: finding.reason,
+        allowed_actions: ["keep_for_human_review"],
+        requires_human: false,
+        evidence: ["repo_state:working_tree_changed"],
+    };
+}
+function concurrentToRepairFinding(finding) {
+    const actions = finding.recommended_action === "request_replan"
+        ? ["request_replan"]
+        : ["keep_for_human_review"];
+    const severity = finding.severity === "blocking"
+        ? "blocking"
+        : finding.severity === "requires_human_audit"
+            ? "requires_human_audit"
+            : "warning";
+    return {
+        kind: finding.kind,
+        severity,
+        message: finding.reason,
+        allowed_actions: actions,
+        requires_human: finding.severity === "blocking" || finding.severity === "requires_human_audit",
+        bucket: finding.overlap?.bucket,
+        other_repair_id: finding.other_repair_id,
+        evidence: [
+            `repair:${finding.repair_id}`,
+            ...(finding.other_repair_id ? [`other_repair:${finding.other_repair_id}`] : []),
+        ],
+    };
+}
+function repairFindingToConcurrentFinding(repairId, finding) {
+    return {
+        kind: finding.kind === "stale_repair_contract" ? "stale_repair_contract" : "working_tree_changed",
+        severity: finding.kind === "stale_repair_contract" ? "blocking" : "warning",
+        repair_id: repairId,
+        reason: finding.message,
+        recommended_action: finding.kind === "stale_repair_contract" ? "request_replan" : "continue",
+    };
+}
+function repairShared_normalizeGate(value) {
+    if (value === "intake")
+        return "bug_intake";
+    if (value === "plan")
+        return "repair_plan";
+    if (value === "post")
+        return "post_repair";
+    if (value === "bug_intake" || value === "repair_plan" || value === "post_repair") {
+        return value;
+    }
+    throw new Error(`Unknown repair audit gate: ${value}`);
+}
+function normalizeDecision(gate, value) {
+    const normalized = value.replace(/-/g, "_");
+    const aliases = {
+        bug_intake: {
+            approve: "accept_report",
+            accept: "accept_report",
+            reject: "reject_report",
+            needs_more_evidence: "needs_more_evidence",
+            duplicate: "mark_duplicate",
+            backlog: "convert_to_backlog",
+        },
+        repair_plan: {
+            approve: "approve_repair_plan",
+            restrict_scope: "restrict_scope",
+            expand_review_scope: "expand_review_scope",
+            add_must_preserve: "add_must_preserve",
+            add_forbidden_area: "add_forbidden_area",
+            require_manual_repair: "require_manual_repair",
+        },
+        post_repair: {
+            approve: "approve_repair",
+            request_revert: "request_revert",
+            request_scope_expansion: "request_scope_expansion",
+            keep_for_human_review: "keep_for_human_review",
+            close_as_invalid: "close_as_invalid",
+        },
+    };
+    const directValues = new Set(Object.values(aliases[gate]));
+    if (directValues.has(normalized)) {
+        return normalized;
+    }
+    const resolved = aliases[gate][normalized];
+    if (!resolved) {
+        throw new Error(`Unknown repair audit decision for ${gate}: ${value}`);
+    }
+    return resolved;
+}
+function repairShared_normalizeRepoStateSource(value) {
+    if (!value) {
+        return undefined;
+    }
+    const normalized = value.trim().toLowerCase();
+    if (normalized === "git"
+        || normalized === "github"
+        || normalized === "synthetic"
+        || normalized === "unknown"
+        || normalized === "github_pull_request") {
+        return normalized;
+    }
+    throw new Error(`Unknown repo_state source: ${value}`);
+}
+function repairShared_requireRepairId(args, repoRoot) {
+    const explicit = args.includes("--repair-id")
+        ? args[args.indexOf("--repair-id") + 1]
+        : undefined;
+    if (explicit) {
+        return explicit;
+    }
+    const latest = loadLatestRepairId(resolve(repoRoot));
+    const active = listRepairSessions(resolve(repoRoot)).active_repairs.map(session => session.repair_id);
+    throw new Error(`repair_id is required for correctness. Active sessions: ${active.join(", ") || "none"}. Latest pointer exists: ${latest ?? "no"}.`);
+}
+function buildRepairCliNextActions(verdict, repairId) {
+    if (verdict === "pass") {
+        return ["Proceed with local review or optional PR submission."];
+    }
+    if (verdict === "requires_review") {
+        return ["Keep review-required files for human review before merge."];
+    }
+    if (verdict === "requires_replan") {
+        return [`Re-run pantheon repair plan --repair-id ${repairId}`];
+    }
+    if (verdict === "requires_scope_expansion") {
+        return [
+            "Remove out-of-scope edits.",
+            `Or re-plan with: pantheon repair plan --repair-id ${repairId}`,
+        ];
+    }
+    return ["Revert forbidden changes before continuing."];
+}
+
+;// CONCATENATED MODULE: ./src/cli/repair/repairAuditCommand.ts
+
+
+
+
+
+
+
+
+function repairAuditCommand_cmdRepairAudit(input) {
+    const repoRoot = (0,external_node_path_.resolve)(input.repoRoot);
+    (0,repairArtifactLayout/* ensureRepairDirs */.CF)(repoRoot);
+    const paths = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, input.repairId);
+    const session = repairSessionStore_loadRepairSession(repoRoot, input.repairId);
+    const decision = buildHumanAuditDecision({
+        repairId: input.repairId,
+        targetRevision: input.targetRevision,
+        gate: input.gate,
+        decision: normalizeDecision(input.gate, input.decision),
+        operatorId: input.operatorId,
+        reason: input.reason,
+        addReview: input.addReview,
+        addForbid: input.addForbid,
+        addMustPreserve: input.addMustPreserve,
+    });
+    writeHumanAuditDecision(repoRoot, decision);
+    if (input.gate === "bug_intake") {
+        const finding = loadBugFinding(paths);
+        const updatedFinding = applyBugIntakeDecision(finding, decision);
+        (0,external_node_fs_.writeFileSync)(paths.bugFinding, JSON.stringify(updatedFinding, null, 2));
+        updateRepairSession(repoRoot, input.repairId, current => ({
+            ...current,
+            status: mapFindingStatusToSessionStatus(updatedFinding.status),
+            updated_at: new Date().toISOString(),
+        }));
+    }
+    else {
+        const contract = loadCurrentRepairContract(repoRoot, input.repairId);
+        try {
+            const updatedContract = applyHumanAuditDecision(contract, decision);
+            const report = loadStoredRepairReport(paths);
+            const finding = loadBugFinding(paths);
+            writeRepairPlanArtifacts(repoRoot, report, finding, updatedContract);
+            updateSessionFromContract({
+                repoRoot,
+                repairId: updatedContract.repair_id,
+                revision: updatedContract.revision,
+                status: mapAuditStatusToSessionStatus(updatedContract.audit_status),
+                scopeSummary: buildScopeSummary(updatedContract),
+                riskLevel: deriveRiskLevel(updatedContract),
+                baseSha: updatedContract.repo_state.base_sha,
+            });
+        }
+        catch (error) {
+            repairAuditLog_appendRepairAuditEvent(repoRoot, input.repairId, {
+                timestamp: new Date().toISOString(),
+                event: input.gate === "post_repair" ? "human_post_repair_decision" : "human_plan_decision",
+                repair_id: input.repairId,
+                decision_id: decision.decision_id,
+                detail: error instanceof Error ? error.message : String(error),
+            });
+            throw error;
+        }
+    }
+    repairAuditLog_appendRepairAuditEvent(repoRoot, input.repairId, {
+        timestamp: new Date().toISOString(),
+        event: input.gate === "post_repair"
+            ? "human_post_repair_decision"
+            : input.gate === "repair_plan"
+                ? "human_plan_decision"
+                : "human_intake_decision",
+        repair_id: input.repairId,
+        decision_id: decision.decision_id,
+        detail: `${decision.decision}: ${decision.reason}`,
+    });
+    console.log("Pantheon Repair Audit\n");
+    console.log(`  Repair: ${session.repair_id}`);
+    console.log(`  Gate: ${input.gate}`);
+    console.log(`  Decision: ${decision.decision}`);
+    console.log(`  Output: ${paths.humanAuditDecision(decision.decision_id)}`);
+}
+
+;// CONCATENATED MODULE: ./src/architecture/baseBranchArchitectureLoader.ts
+/**
+ * P30-13: Base Branch Architecture Loader
+ *
+ * Reads the ArchitectureContract from a specific git SHA (base branch),
+ * ensuring PR-modified architecture constraints do not self-authorize.
+ */
+
+function loadBaseArchitectureContract(repoRoot, baseSha) {
+    const filePath = ".pantheon/architecture/architecture_contract.json";
+    try {
+        const raw = (0,external_node_child_process_.execFileSync)("git", ["show", `${baseSha}:${filePath}`], {
+            cwd: repoRoot,
+            encoding: "utf-8",
+            stdio: ["pipe", "pipe", "pipe"],
+            timeout: 5000,
+        });
+        const parsed = JSON.parse(raw);
+        return {
+            status: "loaded",
+            contract: parsed,
+            base_sha: baseSha,
+        };
+    }
+    catch (error) {
+        if (error instanceof SyntaxError) {
+            return {
+                status: "parse_error",
+                contract: null,
+                base_sha: baseSha,
+            };
+        }
+        return {
+            status: "missing",
+            contract: null,
+            base_sha: baseSha,
+        };
+    }
+}
+
+;// CONCATENATED MODULE: ./src/alpha/bootstrapScope.ts
+
+function getBootstrapInitFilePatterns() {
+    return [
+        "AGENTS.md",
+        "pantheon.json",
+        "pantheon.alpha.json",
+        "pantheon.agent.json",
+        ".github/workflows/pantheon-repair.yml",
+        ".github/workflows/pantheon-repair.yaml",
+        "docs/pantheon/**",
+        ".gitignore",
+    ];
+}
+function getBootstrapArtifactPatterns() {
+    return [
+        ".pantheon/bootstrap/**",
+    ];
+}
+function classifyBootstrapDiffFile(filePath) {
+    const normalizedPath = filePath.replace(/\\/g, "/");
+    const initPatterns = getBootstrapInitFilePatterns();
+    if (initPatterns.some((pattern) => (0,globMatch/* matchesGlob */.k)(normalizedPath, pattern))) {
+        return "bootstrap_init";
+    }
+    const artifactPatterns = getBootstrapArtifactPatterns();
+    if (artifactPatterns.some((pattern) => (0,globMatch/* matchesGlob */.k)(normalizedPath, pattern))) {
+        return "bootstrap_artifact";
+    }
+    // Not bootstrap, treat as business
+    return "business";
+}
+function isMixedBootstrapAndRepair(changedFiles) {
+    let hasBootstrap = false;
+    let hasBusiness = false;
+    for (const file of changedFiles) {
+        const fileClass = classifyBootstrapDiffFile(file);
+        if (fileClass === "bootstrap_init" || fileClass === "bootstrap_artifact") {
+            hasBootstrap = true;
+        }
+        else if (fileClass === "business") {
+            hasBusiness = true;
+        }
+        if (hasBootstrap && hasBusiness) {
+            return true;
+        }
+    }
+    return false;
+}
+
+;// CONCATENATED MODULE: ./src/repair/repairVerifier.ts
+
+
+function verifyRepairDiff(input) {
+    const findings = [];
+    let allowed = 0;
+    let reviewRequired = 0;
+    let forbidden = 0;
+    let outsideScope = 0;
+    const changedPaths = input.diff.changed_files.map(file => file.path);
+    if (isMixedBootstrapAndRepair(changedPaths)) {
+        findings.push({
+            kind: "bootstrap_scope_mixed_with_repair",
+            severity: "requires_replan",
+            message: "This repair also contains Pantheon bootstrap files. Commit or approve the bootstrap change separately, then re-run repair check.",
+            allowed_actions: ["request_replan"],
+            requires_human: true,
+            evidence: ["mixed_bootstrap_repair_scope"],
+        });
+    }
+    for (const changed of input.diff.changed_files) {
+        const path = changed.path;
+        const forbiddenEntry = matchScopeEntry(path, input.contract.repair_scope.forbidden);
+        if (forbiddenEntry) {
+            forbidden++;
+            const isArchitecture = forbiddenEntry.evidence.some(e => e.startsWith("architecture:"));
+            findings.push({
+                kind: isArchitecture ? "architecture_forbidden" : "forbidden_file",
+                severity: "blocking",
+                file: path,
+                message: forbiddenEntry.source === "architecture_contract"
+                    ? `This file is forbidden by the accepted architecture contract: ${path}`
+                    : `Forbidden repair change: ${path}`,
+                allowed_actions: forbiddenEntry.source === "architecture_contract"
+                    ? ["revert_file", "request_architecture_review"]
+                    : ["revert_file", "request_scope_expansion"],
+                requires_human: true,
+                bucket: "forbidden",
+                evidence: forbiddenEntry.evidence,
+            });
+            continue;
+        }
+        const reviewEntry = matchScopeEntry(path, input.contract.repair_scope.review_required);
+        if (reviewEntry) {
+            reviewRequired++;
+            const isArchitecture = reviewEntry.evidence.some(e => e.startsWith("architecture:"));
+            findings.push({
+                kind: isArchitecture ? "architecture_review_required" : "review_required_file",
+                severity: "review_required",
+                file: path,
+                message: reviewEntry.source === "architecture_contract"
+                    ? `This file requires review by the accepted architecture contract: ${path}`
+                    : `Repair touches review-required file: ${path}`,
+                allowed_actions: ["keep_for_human_review"],
+                requires_human: true,
+                bucket: "review_required",
+                evidence: reviewEntry.evidence,
+            });
+            continue;
+        }
+        const allowedEntry = matchScopeEntry(path, input.contract.repair_scope.allowed);
+        if (allowedEntry) {
+            allowed++;
+            continue;
+        }
+        outsideScope++;
+        findings.push({
+            kind: "outside_scope_file",
+            severity: "blocking",
+            file: path,
+            message: `Repair change is outside the approved scope: ${path}`,
+            allowed_actions: ["revert_file", "request_scope_expansion"],
+            requires_human: true,
+            bucket: "outside_scope",
+            evidence: ["repair_scope:outside"],
+        });
+    }
+    const touchedAnyRelatedTest = input.contract.test_signals.related.some(path => changedPaths.includes(path));
+    if (input.contract.test_signals.related.length > 0 && !touchedAnyRelatedTest) {
+        findings.push({
+            kind: "missing_related_test_signal",
+            severity: "warning",
+            message: "No related test file was included in the repair diff.",
+            allowed_actions: ["add_or_run_related_test", "keep_for_human_review"],
+            requires_human: false,
+            evidence: input.contract.test_signals.related.map(path => `related_test:${path}`),
+        });
+    }
+    const verdict = deriveRepairVerdictFromFindings(findings);
+    const check = {
+        schema_version: "repair_check.v1",
+        repair_id: input.contract.repair_id,
+        verdict,
+        generated_at: new Date().toISOString(),
+        summary: {
+            changed_files: input.diff.changed_files.length,
+            allowed,
+            review_required: reviewRequired,
+            forbidden,
+            outside_scope: outsideScope,
+            warnings: findings.filter(finding => finding.severity === "warning").length,
+        },
+        findings,
+        concurrent_findings: [],
+        changed_files: changedPaths,
+        audit_status: input.contract.audit_status,
+    };
+    return {
+        check,
+        feedback: buildRepairFeedbackFromCheck(check),
+    };
+}
+function deriveRepairVerdictFromFindings(findings) {
+    if (findings.some(finding => finding.kind === "forbidden_file" || finding.kind === "architecture_forbidden")) {
+        return "fail";
+    }
+    if (findings.some(finding => finding.kind === "stale_repair_contract")) {
+        return "requires_replan";
+    }
+    if (findings.some(finding => finding.kind === "bootstrap_scope_mixed_with_repair")) {
+        return "requires_replan";
+    }
+    if (findings.some(finding => finding.kind === "outside_scope_file")) {
+        return "requires_scope_expansion";
+    }
+    if (findings.some(finding => finding.severity === "review_required" || finding.severity === "requires_human_audit" || finding.kind === "architecture_review_required" || finding.kind === "architecture_contract_modified")) {
+        return "requires_review";
+    }
+    return "pass";
+}
+function buildRepairFeedbackFromCheck(check) {
+    const actions = check.findings.flatMap(finding => finding.allowed_actions.map(action => ({
+        action,
+        file: finding.file,
+        message: finding.message,
+    })));
+    return {
+        schema_version: "repair_feedback.v1",
+        feedback_id: `repair_feedback_${check.repair_id}`,
+        repair_id: check.repair_id,
+        verdict: check.verdict,
+        generated_at: new Date().toISOString(),
+        actions,
+        requires_human: check.findings.some(finding => finding.requires_human),
+        notes: check.findings.map(finding => finding.message),
+    };
+}
+function matchScopeEntry(path, entries) {
+    return entries.find(entry => (0,repairUtils/* matchesPattern */.MT)(path, entry.pattern));
+}
+
+;// CONCATENATED MODULE: ./src/repair/repairFeedbackRenderer.ts
+function renderRepairFeedbackMarkdown(feedback) {
+    const lines = [];
+    lines.push("# Repair Feedback");
+    lines.push("");
+    lines.push(`**Verdict:** \`${feedback.verdict}\``);
+    lines.push("");
+    if (feedback.actions.length === 0) {
+        lines.push("No repair boundary issues were found.");
+        lines.push("");
+    }
+    else {
+        lines.push("## Actions");
+        lines.push("");
+        for (const action of feedback.actions) {
+            lines.push(`- \`${action.action}\`${action.file ? ` on \`${action.file}\`` : ""} — ${action.message}`);
+        }
+        lines.push("");
+    }
+    if (feedback.requires_human) {
+        lines.push("> Human review is required before treating this repair as complete.");
+        lines.push("");
+    }
+    lines.push("---");
+    lines.push("");
+    lines.push("_Auto-generated by Pantheon. Do not edit._");
+    lines.push("");
+    return lines.join("\n");
+}
+
+;// CONCATENATED MODULE: ./src/repair/repairReportRenderer.ts
+function renderRepairReportMarkdown(input) {
+    const { report, contract, check } = input;
+    const lines = [];
+    lines.push("# Repair Report");
+    lines.push("");
+    lines.push(`**Verdict:** \`${check.verdict}\``);
+    lines.push(`**Audit status:** \`${contract.audit_status}\``);
+    lines.push(`**Bug source:** \`${contract.source.kind}\``);
+    lines.push("");
+    lines.push("## Summary");
+    lines.push("");
+    lines.push("| Metric | Count |");
+    lines.push("|---|---:|");
+    lines.push(`| Changed files | ${check.summary.changed_files} |`);
+    lines.push(`| Allowed | ${check.summary.allowed} |`);
+    lines.push(`| Review required | ${check.summary.review_required} |`);
+    lines.push(`| Forbidden | ${check.summary.forbidden} |`);
+    lines.push(`| Outside scope | ${check.summary.outside_scope} |`);
+    lines.push(`| Warnings | ${check.summary.warnings} |`);
+    lines.push("");
+    lines.push("## Confirmed facts");
+    lines.push("");
+    lines.push(`- Repair intent: ${report.summary}`);
+    lines.push(`- Repair scope revision: ${contract.revision}`);
+    lines.push("");
+    if (check.findings.length > 0) {
+        lines.push("## Findings");
+        lines.push("");
+        for (const finding of check.findings) {
+            lines.push(`### ${finding.file ? `\`${finding.file}\`` : finding.kind}`);
+            lines.push("");
+            lines.push(`- **Severity:** ${finding.severity}`);
+            lines.push(`- **Message:** ${finding.message}`);
+            lines.push(`- **Allowed actions:** ${finding.allowed_actions.join(", ")}`);
+            if (finding.requires_human) {
+                lines.push("- **Human review:** required");
+            }
+            lines.push("");
+        }
+    }
+    lines.push("---");
+    lines.push("");
+    lines.push("_Auto-generated by Pantheon. Do not edit._");
+    lines.push("");
+    return lines.join("\n");
+}
+
+;// CONCATENATED MODULE: ./src/architecture/types.ts
+/**
+ * P30: Architecture Governance Types
+ *
+ * All architecture-specific data models for the Architecture Mapping Review MVP.
+ * Covers the full lifecycle: ingest → claims → evidence → relations → overrides → contract → constraints.
+ *
+ * ref: P30
+ */
+/** Relations that generate hard constraints in MVP. */
+const CONSTRAINT_GENERATING_RELATIONS = (/* unused pure expression or super */ null && ([
+    "owns",
+    "located_at",
+    "depends_on",
+    "must_not_depend_on",
+    "review_required_for",
+    "forbidden_change",
+    "allowed_change",
+    "external_service",
+]));
+/** Relations that are advisory-only in MVP. */
+const ADVISORY_ONLY_RELATIONS = [
+    "exposes_interface",
+    "entrypoint_for",
+    "tested_by",
+    "adapter_for",
+    "reads_from",
+    "writes_to",
+    "boundary_between",
+];
+// ---------------------------------------------------------------------------
+// Constants
+// ---------------------------------------------------------------------------
+/** Fixed limitations block per Invariant 5. */
+const ARCHITECTURE_CONTRACT_LIMITATIONS = (/* unused pure expression or super */ null && ([
+    "Architecture contracts are governance constraints derived from reviewed documentation and repository evidence.",
+    "They do not prove semantic correctness or complete dependency structure.",
+    "Unreviewed claims are advisory only and do not affect verdicts.",
+    "must_not_depend_on enforcement is path-pattern based; no full import/call graph analysis.",
+    "Contextual ownership constraints only apply when the change/repair target matches the owning module.",
+]));
+
+;// CONCATENATED MODULE: ./src/repair/architectureConstraintAdapter.ts
+/**
+ * P30-10: Architecture Constraint Adapter (for Repair)
+ *
+ * Converts an accepted ArchitectureContract into RepairScopeEntry[]
+ * that the repairScopeBuilder can consume.
+ *
+ * Same safety properties as the Change adapter (P30-9):
+ * - Only ACCEPTED constraints from reviewed contract produce entries
+ * - forbidden > review_required > allowed precedence maintained
+ * - Advisory-only relations never produce blocking entries
+ * - Repair's existing suspect/impact/scope semantics are preserved
+ *
+ * The repair adapter does NOT replace suspect surface or impact surface.
+ * It ONLY injects architecture-sourced forbidden/review/allowed constraints
+ * that are then merged into the shared precedence resolver.
+ *
+ * ref: P30
+ */
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+/**
+ * Convert accepted architecture contract constraints into repair scope entries.
+ *
+ * Follows the same constraint projection logic as the change adapter,
+ * but produces RepairScopeEntry (pattern + source + confidence + audit_weight).
+ */
+function adaptArchitectureConstraintsForRepair(input) {
+    const { contract, repairSubjects } = input;
+    const entries = [];
+    const normalizedSubjects = repairSubjects.map(s => s.toLowerCase().trim());
+    const summary = { forbidden: 0, review_required: 0, allowed: 0, info: 0 };
+    for (const constraint of contract.constraints) {
+        const constraintEntries = projectConstraintToRepairEntries(constraint, normalizedSubjects);
+        for (const entry of constraintEntries) {
+            entries.push(entry);
+            if (entry.audit_weight === "critical")
+                summary.forbidden++;
+            else if (entry.audit_weight === "elevated")
+                summary.review_required++;
+            else
+                summary.allowed++;
+        }
+    }
+    // Advisory relations produce info-only entries
+    const advisorySet = new Set(ADVISORY_ONLY_RELATIONS);
+    for (const rel of contract.accepted_relations) {
+        if (!advisorySet.has(rel.relation_type))
+            continue;
+        if (rel.path_patterns.length === 0)
+            continue;
+        for (const pattern of rel.path_patterns) {
+            entries.push({
+                pattern,
+                source: "architecture_contract",
+                confidence: "low",
+                audit_weight: "normal",
+                reason: `Advisory: "${rel.subject}" has a "${rel.relation_type}" relation with "${rel.object}". Informational only.`,
+                evidence: [`architecture:advisory:${rel.relation_type}:${rel.subject}`],
+            });
+            summary.info++;
+        }
+    }
+    return { entries, summary };
+}
+// ---------------------------------------------------------------------------
+// Internal
+// ---------------------------------------------------------------------------
+function projectConstraintToRepairEntries(constraint, normalizedSubjects) {
+    const entries = [];
+    for (const pattern of constraint.path_patterns) {
+        switch (constraint.constraint_type) {
+            case "forbidden_path":
+                // GLOBAL: always forbidden
+                entries.push({
+                    pattern,
+                    source: "architecture_contract",
+                    confidence: "high",
+                    audit_weight: "critical",
+                    reason: `Architecture contract forbids changes to "${pattern}" (subject: ${constraint.subject}).`,
+                    evidence: [`architecture:forbidden:${constraint.subject}`],
+                });
+                break;
+            case "review_required_path":
+            case "external_boundary_review":
+                // GLOBAL: always review_required
+                entries.push({
+                    pattern,
+                    source: "architecture_contract",
+                    confidence: "high",
+                    audit_weight: "elevated",
+                    reason: `Architecture contract requires review for changes to "${pattern}" (subject: ${constraint.subject}).`,
+                    evidence: [`architecture:review_required:${constraint.subject}`],
+                });
+                break;
+            case "must_not_touch_together":
+                entries.push({
+                    pattern,
+                    source: "architecture_contract",
+                    confidence: "medium",
+                    audit_weight: "elevated",
+                    reason: `Architecture boundary constraint for "${constraint.subject}".`,
+                    evidence: [`architecture:boundary:${constraint.subject}`],
+                });
+                break;
+            case "allowed_path":
+                // CONTEXTUAL: only allowed when target subject matches
+                if (constraint.constraint_tier === "contextual") {
+                    const subjectMatch = normalizedSubjects.some(s => s === constraint.subject.toLowerCase().trim());
+                    if (subjectMatch) {
+                        entries.push({
+                            pattern,
+                            source: "architecture_contract",
+                            confidence: "high",
+                            audit_weight: "normal",
+                            reason: `Architecture contract: "${constraint.subject}" owns "${pattern}".`,
+                            evidence: [`architecture:ownership:${constraint.subject}`],
+                        });
+                    }
+                    // Non-matching subject: don't project as allowed
+                }
+                else {
+                    entries.push({
+                        pattern,
+                        source: "architecture_contract",
+                        confidence: "high",
+                        audit_weight: "normal",
+                        reason: `Architecture contract allows changes to "${pattern}" (subject: ${constraint.subject}).`,
+                        evidence: [`architecture:allowed:${constraint.subject}`],
+                    });
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    return entries;
+}
+
+;// CONCATENATED MODULE: ./src/repair/session/repoStateSnapshot.ts
+
+function captureRepoStateSnapshot(input) {
+    if (input.source === "synthetic") {
+        return {
+            base_sha: input.diffBase ?? null,
+            head_sha: input.diffBase ?? null,
+            diff_base: input.diffBase ?? null,
+            working_tree_status: "unknown",
+            created_at: new Date().toISOString(),
+            source: "synthetic",
+        };
+    }
+    try {
+        const headSha = (0,external_node_child_process_.execFileSync)("git", ["rev-parse", "HEAD"], {
+            cwd: input.repoRoot,
+            encoding: "utf-8",
+            timeout: 10_000,
+            stdio: ["pipe", "pipe", "pipe"],
+        }).trim();
+        const status = (0,external_node_child_process_.execFileSync)("git", ["status", "--porcelain"], {
+            cwd: input.repoRoot,
+            encoding: "utf-8",
+            timeout: 10_000,
+            stdio: ["pipe", "pipe", "pipe"],
+        }).trim();
+        return {
+            base_sha: headSha || null,
+            head_sha: headSha || null,
+            diff_base: input.diffBase ?? headSha ?? null,
+            working_tree_status: status ? "dirty" : "clean",
+            created_at: new Date().toISOString(),
+            source: input.source ?? "git",
+        };
+    }
+    catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        return {
+            base_sha: null,
+            head_sha: null,
+            diff_base: input.diffBase ?? null,
+            working_tree_status: "unknown",
+            created_at: new Date().toISOString(),
+            source: input.source ?? "unknown",
+            error: message,
+        };
+    }
+}
+
+;// CONCATENATED MODULE: ./src/repair/session/stalePlanDetector.ts
+function detectStaleRepairPlan(input) {
+    const findings = [];
+    const { contractState, currentState } = input;
+    const effectiveCurrentBase = currentState.diff_base ?? currentState.base_sha;
+    if (currentState.error || (contractState.base_sha && !effectiveCurrentBase)) {
+        findings.push({
+            kind: "stale_repair_contract",
+            severity: "blocking",
+            reason: currentState.error
+                ? `Unable to capture current repository state: ${currentState.error}`
+                : "Unable to determine the current repository base for this repair contract.",
+            recommended_action: "request_replan",
+        });
+    }
+    if (contractState.base_sha &&
+        effectiveCurrentBase &&
+        contractState.base_sha !== effectiveCurrentBase) {
+        findings.push({
+            kind: "stale_repair_contract",
+            severity: "blocking",
+            reason: `Repair contract was generated at ${contractState.base_sha}, but repository base is now ${effectiveCurrentBase}.`,
+            recommended_action: "request_replan",
+        });
+    }
+    if (contractState.working_tree_status === "clean" &&
+        currentState.working_tree_status === "dirty") {
+        findings.push({
+            kind: "working_tree_changed",
+            severity: "warning",
+            reason: "Repair contract was generated on a clean working tree, but the repository is now dirty.",
+            recommended_action: "continue",
+        });
+    }
+    return findings;
+}
+
+;// CONCATENATED MODULE: ./src/repair/session/activeRepairOverlapDetector.ts
+
+function detectActiveScopePatternOverlaps(input) {
+    const findings = [];
+    for (const other of input.otherContracts) {
+        const overlap = findPatternOverlap(input.contract, other);
+        if (!overlap)
+            continue;
+        findings.push(overlap);
+    }
+    return findings;
+}
+function detectActualChangedFileOverlaps(input) {
+    const findings = [];
+    for (const other of input.otherContracts) {
+        const matched = [];
+        let bucket;
+        for (const file of input.changedFiles) {
+            const forbidden = other.repair_scope.forbidden.find(entry => (0,repairUtils/* matchesPattern */.MT)(file, entry.pattern));
+            if (forbidden) {
+                matched.push(file);
+                bucket = "forbidden";
+                continue;
+            }
+            const review = other.repair_scope.review_required.find(entry => (0,repairUtils/* matchesPattern */.MT)(file, entry.pattern));
+            if (review) {
+                matched.push(file);
+                bucket = bucket === "forbidden" ? bucket : "review_required";
+                continue;
+            }
+            const allowed = other.repair_scope.allowed.find(entry => (0,repairUtils/* matchesPattern */.MT)(file, entry.pattern));
+            if (allowed) {
+                matched.push(file);
+                bucket = bucket ?? "allowed";
+            }
+        }
+        if (!bucket || matched.length === 0)
+            continue;
+        findings.push(buildActualOverlapFinding(input.repairId, other.repair_id, bucket, matched));
+    }
+    return findings;
+}
+function findPatternOverlap(contract, other) {
+    const currentEntries = [
+        ...contract.repair_scope.allowed.map(entry => ({ bucket: "allowed", pattern: entry.pattern })),
+        ...contract.repair_scope.review_required.map(entry => ({ bucket: "review_required", pattern: entry.pattern })),
+        ...contract.repair_scope.forbidden.map(entry => ({ bucket: "forbidden", pattern: entry.pattern })),
+    ];
+    const otherEntries = [
+        ...other.repair_scope.allowed.map(entry => ({ bucket: "allowed", pattern: entry.pattern })),
+        ...other.repair_scope.review_required.map(entry => ({ bucket: "review_required", pattern: entry.pattern })),
+        ...other.repair_scope.forbidden.map(entry => ({ bucket: "forbidden", pattern: entry.pattern })),
+    ];
+    const overlappingPatterns = [];
+    let strongestBucket = "allowed";
+    for (const current of currentEntries) {
+        for (const candidate of otherEntries) {
+            if (patternsOverlap(current.pattern, candidate.pattern)) {
+                overlappingPatterns.push(current.pattern, candidate.pattern);
+                strongestBucket = strongerBucket(strongestBucket, strongerBucket(current.bucket, candidate.bucket));
+            }
+        }
+    }
+    if (overlappingPatterns.length === 0) {
+        return null;
+    }
+    return buildPatternOverlapFinding(contract.repair_id, other.repair_id, strongestBucket, (0,repairUtils/* uniqueSorted */.pj)(overlappingPatterns));
+}
+function buildPatternOverlapFinding(repairId, otherRepairId, bucket, patterns) {
+    if (bucket === "forbidden") {
+        return {
+            kind: "active_scope_pattern_overlap",
+            severity: "blocking",
+            repair_id: repairId,
+            other_repair_id: otherRepairId,
+            overlap: { bucket, patterns },
+            reason: `This repair overlaps a forbidden scope in active repair ${otherRepairId}.`,
+            recommended_action: "request_replan",
+        };
+    }
+    if (bucket === "review_required") {
+        return {
+            kind: "active_scope_pattern_overlap",
+            severity: "requires_human_audit",
+            repair_id: repairId,
+            other_repair_id: otherRepairId,
+            overlap: { bucket, patterns },
+            reason: `This repair overlaps a review-required scope in active repair ${otherRepairId}.`,
+            recommended_action: "human_review",
+        };
+    }
+    return {
+        kind: "active_scope_pattern_overlap",
+        severity: "warning",
+        repair_id: repairId,
+        other_repair_id: otherRepairId,
+        overlap: { bucket, patterns },
+        reason: `This repair overlaps an allowed scope in active repair ${otherRepairId}.`,
+        recommended_action: "continue",
+    };
+}
+function buildActualOverlapFinding(repairId, otherRepairId, bucket, files) {
+    if (bucket === "forbidden") {
+        return {
+            kind: "actual_changed_file_overlap",
+            severity: "blocking",
+            repair_id: repairId,
+            other_repair_id: otherRepairId,
+            overlap: { bucket, files },
+            reason: `Changed files overlap a forbidden scope in active repair ${otherRepairId}.`,
+            recommended_action: "request_replan",
+        };
+    }
+    if (bucket === "review_required") {
+        return {
+            kind: "actual_changed_file_overlap",
+            severity: "requires_human_audit",
+            repair_id: repairId,
+            other_repair_id: otherRepairId,
+            overlap: { bucket, files },
+            reason: `Changed files overlap a review-required scope in active repair ${otherRepairId}.`,
+            recommended_action: "human_review",
+        };
+    }
+    return {
+        kind: "actual_changed_file_overlap",
+        severity: "warning",
+        repair_id: repairId,
+        other_repair_id: otherRepairId,
+        overlap: { bucket, files },
+        reason: `Changed files overlap an allowed scope in active repair ${otherRepairId}.`,
+        recommended_action: "continue",
+    };
+}
+function patternsOverlap(left, right) {
+    return (0,repairUtils/* matchesPattern */.MT)(left, right) || (0,repairUtils/* matchesPattern */.MT)(right, left) || left === right;
+}
+function strongerBucket(left, right) {
+    const rank = { allowed: 0, review_required: 1, forbidden: 2 };
+    return rank[left] >= rank[right] ? left : right;
+}
+
+;// CONCATENATED MODULE: ./src/cli/cliOutput.ts
+
+function emitCliEnvelope(input) {
+    return {
+        schema_version: "pantheon_cli_result@0.1.0",
+        command: input.command,
+        target_type: input.targetType,
+        target_id: input.targetId,
+        verdict: input.verdict,
+        findings: input.findings ?? [],
+        next_actions: input.nextActions ?? [],
+        artifact_paths: (input.artifactPaths ?? []).map(path => displayPath(input.repoRoot, path, input.redact ?? false)),
+        privacy: {
+            disclosure: input.redact ? "redacted" : "full-local",
+            note: input.redact
+                ? "CLI output was redacted for safe sharing."
+                : "Detailed findings remain local unless you opt into GitHub disclosure.",
+        },
+        details: input.details,
+    };
+}
+function printCliOutcome(input) {
+    console.log(input.title);
+    console.log("");
+    console.log("Result:");
+    console.log(`  Verdict: ${input.verdict}`);
+    if (input.details && input.details.length > 0) {
+        for (const detail of input.details) {
+            console.log(`  ${detail}`);
+        }
+    }
+    if (input.why && input.why.length > 0) {
+        console.log("");
+        console.log("Why:");
+        for (const line of input.why) {
+            console.log(`  - ${line}`);
+        }
+    }
+    console.log("");
+    console.log("Next:");
+    if ((input.nextActions ?? []).length === 0) {
+        console.log("  - No immediate action required.");
+    }
+    else {
+        for (const action of input.nextActions ?? []) {
+            console.log(`  - ${action}`);
+        }
+    }
+    console.log("");
+    console.log("Artifacts:");
+    if ((input.artifactPaths ?? []).length === 0) {
+        console.log("  - No local artifacts were generated.");
+    }
+    else {
+        for (const artifact of input.artifactPaths ?? []) {
+            console.log(`  - ${displayPath(input.repoRoot, artifact, input.redact ?? false)}`);
+        }
+    }
+    console.log("");
+    console.log("Privacy:");
+    if (input.redact) {
+        console.log("  CLI output is redacted for safe sharing. Full artifacts remain local.");
+    }
+    else {
+        console.log("  Detailed findings remain local unless you enable GitHub Action disclosure.");
+    }
+}
+function displayPath(repoRoot, fullPath, redact = false) {
+    if (redact) {
+        return "<redacted-local-artifact>";
+    }
+    const relativePath = (0,external_node_path_.relative)(repoRoot, fullPath).replace(/\\/g, "/");
+    return relativePath.length > 0 && !relativePath.startsWith("..")
+        ? relativePath
+        : fullPath.replace(/\\/g, "/");
+}
+
+;// CONCATENATED MODULE: ./src/cli/repair/repairCheckCommand.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function repairCheckCommand_cmdRepairCheck(input) {
+    const repoRoot = (0,external_node_path_.resolve)(input.repoRoot);
+    let contract = loadCurrentRepairContract(repoRoot, input.repairId);
+    const paths = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, input.repairId);
+    const report = loadStoredRepairReport(paths);
+    const diff = readRepairDiff({
+        repoRoot,
+        baseRef: input.baseRef,
+        headRef: input.headRef,
+        diffJsonPath: input.diffJsonPath,
+        changedFilesOverride: input.changedFilesOverride,
+    });
+    const filteredDiff = {
+        ...diff,
+        changed_files: diff.changed_files.filter((file) => !file.path.startsWith(".pantheon/")),
+    };
+    const archContractModified = diff.changed_files.some(f => f.path === ".pantheon/architecture/architecture_contract.json");
+    let baseArchContract = null;
+    const targetBase = input.baseRef || input.prBaseSha;
+    if (targetBase) {
+        const result = loadBaseArchitectureContract(repoRoot, targetBase);
+        if (result.status === "loaded" && result.contract) {
+            baseArchContract = result.contract;
+            const adapterResult = adaptArchitectureConstraintsForRepair({
+                contract: baseArchContract,
+                repairSubjects: [],
+            });
+            const newForbidden = [...contract.repair_scope.forbidden];
+            const newReviewRequired = [...contract.repair_scope.review_required];
+            const newAllowed = [...contract.repair_scope.allowed];
+            for (const entry of adapterResult.entries) {
+                if (entry.audit_weight === "critical") {
+                    newForbidden.push(entry);
+                }
+                else if (entry.audit_weight === "elevated") {
+                    newReviewRequired.push(entry);
+                }
+                else {
+                    newAllowed.push(entry);
+                }
+            }
+            contract = {
+                ...contract,
+                repair_scope: {
+                    forbidden: newForbidden,
+                    review_required: newReviewRequired,
+                    allowed: newAllowed,
+                },
+            };
+        }
+    }
+    const baseResult = verifyRepairDiff({
+        contract,
+        diff: filteredDiff,
+    });
+    const newFindings = [...baseResult.check.findings];
+    if (archContractModified) {
+        newFindings.push({
+            evidence: ["architecture_contract_modified"],
+            kind: "architecture_contract_modified",
+            allowed_actions: ["request_architecture_review"],
+            message: "This repair modifies the architecture contract. The base branch architecture contract was used to evaluate business code changes.",
+            severity: "review_required",
+            requires_human: true,
+        });
+    }
+    const currentRepoState = input.diffJsonPath || input.changedFilesOverride
+        ? captureRepoStateSnapshot({
+            repoRoot,
+            diffBase: contract.repo_state.base_sha,
+            source: "synthetic",
+        })
+        : captureRepoStateSnapshot({
+            repoRoot,
+            diffBase: input.baseRef,
+            source: "git",
+        });
+    const staleFindings = detectStaleRepairPlan({
+        contractState: contract.repo_state,
+        currentState: currentRepoState,
+    }).map(finding => stalePlanToRepairFinding(finding));
+    const overlapFindings = detectActualChangedFileOverlaps({
+        repairId: contract.repair_id,
+        changedFiles: filteredDiff.changed_files.map(file => file.path),
+        otherContracts: loadOtherActiveContracts(repoRoot, contract.repair_id),
+    });
+    const overlapRepairFindings = overlapFindings.map(finding => concurrentToRepairFinding(finding));
+    const repairFindings = [
+        ...newFindings,
+        ...staleFindings,
+        ...overlapRepairFindings,
+    ];
+    const verdict = deriveRepairVerdictFromFindings(repairFindings);
+    const finalCheck = {
+        ...baseResult.check,
+        verdict,
+        findings: repairFindings,
+        concurrent_findings: [
+            ...staleFindings.map(finding => repairFindingToConcurrentFinding(contract.repair_id, finding)),
+            ...overlapFindings,
+        ],
+        summary: {
+            ...baseResult.check.summary,
+            warnings: repairFindings.filter(finding => finding.severity === "warning").length,
+        },
+    };
+    const feedback = buildRepairFeedbackFromCheck(finalCheck);
+    (0,external_node_fs_.writeFileSync)(paths.check, JSON.stringify(finalCheck, null, 2));
+    (0,external_node_fs_.writeFileSync)(paths.report, renderRepairReportMarkdown({ report, contract, check: finalCheck }));
+    (0,external_node_fs_.writeFileSync)(paths.feedback, renderRepairFeedbackMarkdown(feedback));
+    updateSessionFromContract({
+        repoRoot,
+        repairId: contract.repair_id,
+        revision: contract.revision,
+        status: mapVerdictToSessionStatus(finalCheck.verdict),
+        scopeSummary: buildScopeSummary(contract),
+        riskLevel: deriveRiskLevel(contract),
+        baseSha: contract.repo_state.base_sha,
+    });
+    repairAuditLog_appendRepairAuditEvent(repoRoot, input.repairId, {
+        timestamp: new Date().toISOString(),
+        event: "agent_repair_checked",
+        repair_id: contract.repair_id,
+        detail: finalCheck.verdict,
+    });
+    syncHumanAttention(repoRoot, {
+        source: input.sourceOverride ?? "local_cli",
+        repairId: contract.repair_id,
+        contract,
+        check: finalCheck,
+        prNumber: input.prNumber,
+        prBaseSha: input.prBaseSha,
+        prHeadSha: input.prHeadSha,
+        artifactDir: input.artifactDir,
+        sanitizerViolations: input.sanitizerViolations ?? 0,
+    });
+    const cliFindings = finalCheck.findings.map(finding => ({
+        kind: finding.kind,
+        severity: finding.severity,
+        message: finding.message,
+        file: finding.file,
+    }));
+    const nextActions = feedback.actions.map(action => action.message);
+    const artifactPaths = [paths.report, paths.feedback, paths.check];
+    if (input.json) {
+        console.log(JSON.stringify(emitCliEnvelope({
+            command: "pantheon repair check",
+            targetType: "repair",
+            targetId: contract.repair_id,
+            verdict: finalCheck.verdict,
+            findings: cliFindings,
+            nextActions,
+            artifactPaths,
+            repoRoot,
+            redact: input.redact,
+            details: {
+                changed_files: finalCheck.summary.changed_files,
+                concurrent_findings: finalCheck.concurrent_findings.length,
+                bucket_counts: {
+                    allowed: finalCheck.summary.allowed,
+                    review_required: finalCheck.summary.review_required,
+                    forbidden: finalCheck.summary.forbidden,
+                    outside_scope: finalCheck.summary.outside_scope,
+                },
+            },
+        }), null, 2));
+    }
+    else {
+        printCliOutcome({
+            title: "Pantheon Repair Check",
+            verdict: finalCheck.verdict,
+            why: cliFindings.map(finding => input.redact
+                ? `${finding.kind}: ${finding.message}`
+                : `${finding.file ?? finding.kind}: ${finding.message}`),
+            nextActions: nextActions.length > 0
+                ? nextActions
+                : buildRepairCliNextActions(finalCheck.verdict, contract.repair_id),
+            artifactPaths,
+            repoRoot,
+            redact: input.redact,
+            details: [
+                `Repair ID: ${contract.repair_id}`,
+                `Changed files: ${finalCheck.summary.changed_files}`,
+                `Allowed: ${finalCheck.summary.allowed}`,
+                `Review required: ${finalCheck.summary.review_required}`,
+                `Forbidden: ${finalCheck.summary.forbidden}`,
+                `Outside scope: ${finalCheck.summary.outside_scope}`,
+                `Concurrent findings: ${finalCheck.concurrent_findings.length}`,
+            ],
+        });
+    }
+    if (input.exitOnResult
+        && (finalCheck.verdict === "fail"
+            || finalCheck.verdict === "requires_replan"
+            || finalCheck.verdict === "requires_scope_expansion")) {
+        process.exit(1);
+    }
+}
+
+;// CONCATENATED MODULE: ./src/cli/repair/repairIntakeCommand.ts
+
+
+
+
+
+
+
+
+
+function repairIntakeCommand_cmdRepairIntake(input) {
+    const repoRoot = (0,external_node_path_.resolve)(input.repoRoot);
+    (0,repairArtifactLayout/* ensureRepairDirs */.CF)(repoRoot);
+    const report = resolveIntakeReport(input);
+    const validation = validateRepairSourceReport(report, repoRoot);
+    const finding = buildBugFinding(validation);
+    const session = createRepairSession({
+        repoRoot,
+        agentId: input.agentId,
+        source: report.schema_version === "agent_bug_report@0.1.0" ? "agent_bug_report" : "user_report",
+        status: mapFindingStatusToSessionStatus(finding.status),
+    });
+    const paths = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, session.repair_id);
+    if (report.schema_version === "agent_bug_report@0.1.0") {
+        (0,external_node_fs_.writeFileSync)(paths.agentBugReport, JSON.stringify(report, null, 2));
+    }
+    else {
+        (0,external_node_fs_.writeFileSync)(paths.userBugReport, JSON.stringify(report, null, 2));
+    }
+    (0,external_node_fs_.writeFileSync)(paths.bugFinding, JSON.stringify(finding, null, 2));
+    repairAuditLog_appendRepairAuditEvent(repoRoot, session.repair_id, {
+        timestamp: new Date().toISOString(),
+        event: report.schema_version === "agent_bug_report@0.1.0" ? "agent_report_submitted" : "user_report_submitted",
+        repair_id: session.repair_id,
+        report_id: report.report_id,
+        detail: report.summary,
+    });
+    repairAuditLog_appendRepairAuditEvent(repoRoot, session.repair_id, {
+        timestamp: new Date().toISOString(),
+        event: "bug_report_validated",
+        repair_id: session.repair_id,
+        report_id: report.report_id,
+        finding_id: finding.finding_id,
+        detail: finding.status,
+    });
+    const nextAction = `pantheon repair plan --repair-id ${session.repair_id}`;
+    if (input.json) {
+        console.log(JSON.stringify(emitCliEnvelope({
+            command: "pantheon repair intake",
+            targetType: "repair",
+            targetId: session.repair_id,
+            verdict: finding.status,
+            findings: [{
+                    kind: "bug_finding",
+                    severity: finding.evidence_quality,
+                    message: finding.limitation,
+                }],
+            nextActions: [nextAction],
+            artifactPaths: [paths.session, paths.bugFinding],
+            repoRoot,
+            details: {
+                report_id: report.report_id,
+            },
+        }), null, 2));
+        return session;
+    }
+    printCliOutcome({
+        title: "Pantheon Repair Intake",
+        verdict: finding.status,
+        why: [finding.limitation],
+        nextActions: [nextAction],
+        artifactPaths: [paths.session, paths.bugFinding],
+        repoRoot,
+        details: [
+            `Repair ID: ${session.repair_id}`,
+            `Report ID: ${report.report_id}`,
+        ],
+    });
+    return session;
 }
 
 ;// CONCATENATED MODULE: ./src/repair/suspectSurfaceBuilder.ts
@@ -22130,189 +25057,6 @@ function strongerSeverity(left, right) {
     return rank[left] >= rank[right] ? left : right;
 }
 
-;// CONCATENATED MODULE: ./src/architecture/types.ts
-/**
- * P30: Architecture Governance Types
- *
- * All architecture-specific data models for the Architecture Mapping Review MVP.
- * Covers the full lifecycle: ingest → claims → evidence → relations → overrides → contract → constraints.
- *
- * ref: P30
- */
-/** Relations that generate hard constraints in MVP. */
-const CONSTRAINT_GENERATING_RELATIONS = (/* unused pure expression or super */ null && ([
-    "owns",
-    "located_at",
-    "depends_on",
-    "must_not_depend_on",
-    "review_required_for",
-    "forbidden_change",
-    "allowed_change",
-    "external_service",
-]));
-/** Relations that are advisory-only in MVP. */
-const ADVISORY_ONLY_RELATIONS = [
-    "exposes_interface",
-    "entrypoint_for",
-    "tested_by",
-    "adapter_for",
-    "reads_from",
-    "writes_to",
-    "boundary_between",
-];
-// ---------------------------------------------------------------------------
-// Constants
-// ---------------------------------------------------------------------------
-/** Fixed limitations block per Invariant 5. */
-const ARCHITECTURE_CONTRACT_LIMITATIONS = (/* unused pure expression or super */ null && ([
-    "Architecture contracts are governance constraints derived from reviewed documentation and repository evidence.",
-    "They do not prove semantic correctness or complete dependency structure.",
-    "Unreviewed claims are advisory only and do not affect verdicts.",
-    "must_not_depend_on enforcement is path-pattern based; no full import/call graph analysis.",
-    "Contextual ownership constraints only apply when the change/repair target matches the owning module.",
-]));
-
-;// CONCATENATED MODULE: ./src/repair/architectureConstraintAdapter.ts
-/**
- * P30-10: Architecture Constraint Adapter (for Repair)
- *
- * Converts an accepted ArchitectureContract into RepairScopeEntry[]
- * that the repairScopeBuilder can consume.
- *
- * Same safety properties as the Change adapter (P30-9):
- * - Only ACCEPTED constraints from reviewed contract produce entries
- * - forbidden > review_required > allowed precedence maintained
- * - Advisory-only relations never produce blocking entries
- * - Repair's existing suspect/impact/scope semantics are preserved
- *
- * The repair adapter does NOT replace suspect surface or impact surface.
- * It ONLY injects architecture-sourced forbidden/review/allowed constraints
- * that are then merged into the shared precedence resolver.
- *
- * ref: P30
- */
-
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-/**
- * Convert accepted architecture contract constraints into repair scope entries.
- *
- * Follows the same constraint projection logic as the change adapter,
- * but produces RepairScopeEntry (pattern + source + confidence + audit_weight).
- */
-function adaptArchitectureConstraintsForRepair(input) {
-    const { contract, repairSubjects } = input;
-    const entries = [];
-    const normalizedSubjects = repairSubjects.map(s => s.toLowerCase().trim());
-    const summary = { forbidden: 0, review_required: 0, allowed: 0, info: 0 };
-    for (const constraint of contract.constraints) {
-        const constraintEntries = projectConstraintToRepairEntries(constraint, normalizedSubjects);
-        for (const entry of constraintEntries) {
-            entries.push(entry);
-            if (entry.audit_weight === "critical")
-                summary.forbidden++;
-            else if (entry.audit_weight === "elevated")
-                summary.review_required++;
-            else
-                summary.allowed++;
-        }
-    }
-    // Advisory relations produce info-only entries
-    const advisorySet = new Set(ADVISORY_ONLY_RELATIONS);
-    for (const rel of contract.accepted_relations) {
-        if (!advisorySet.has(rel.relation_type))
-            continue;
-        if (rel.path_patterns.length === 0)
-            continue;
-        for (const pattern of rel.path_patterns) {
-            entries.push({
-                pattern,
-                source: "architecture_contract",
-                confidence: "low",
-                audit_weight: "normal",
-                reason: `Advisory: "${rel.subject}" has a "${rel.relation_type}" relation with "${rel.object}". Informational only.`,
-                evidence: [`architecture:advisory:${rel.relation_type}:${rel.subject}`],
-            });
-            summary.info++;
-        }
-    }
-    return { entries, summary };
-}
-// ---------------------------------------------------------------------------
-// Internal
-// ---------------------------------------------------------------------------
-function projectConstraintToRepairEntries(constraint, normalizedSubjects) {
-    const entries = [];
-    for (const pattern of constraint.path_patterns) {
-        switch (constraint.constraint_type) {
-            case "forbidden_path":
-                // GLOBAL: always forbidden
-                entries.push({
-                    pattern,
-                    source: "architecture_contract",
-                    confidence: "high",
-                    audit_weight: "critical",
-                    reason: `Architecture contract forbids changes to "${pattern}" (subject: ${constraint.subject}).`,
-                    evidence: [`architecture:forbidden:${constraint.subject}`],
-                });
-                break;
-            case "review_required_path":
-            case "external_boundary_review":
-                // GLOBAL: always review_required
-                entries.push({
-                    pattern,
-                    source: "architecture_contract",
-                    confidence: "high",
-                    audit_weight: "elevated",
-                    reason: `Architecture contract requires review for changes to "${pattern}" (subject: ${constraint.subject}).`,
-                    evidence: [`architecture:review_required:${constraint.subject}`],
-                });
-                break;
-            case "must_not_touch_together":
-                entries.push({
-                    pattern,
-                    source: "architecture_contract",
-                    confidence: "medium",
-                    audit_weight: "elevated",
-                    reason: `Architecture boundary constraint for "${constraint.subject}".`,
-                    evidence: [`architecture:boundary:${constraint.subject}`],
-                });
-                break;
-            case "allowed_path":
-                // CONTEXTUAL: only allowed when target subject matches
-                if (constraint.constraint_tier === "contextual") {
-                    const subjectMatch = normalizedSubjects.some(s => s === constraint.subject.toLowerCase().trim());
-                    if (subjectMatch) {
-                        entries.push({
-                            pattern,
-                            source: "architecture_contract",
-                            confidence: "high",
-                            audit_weight: "normal",
-                            reason: `Architecture contract: "${constraint.subject}" owns "${pattern}".`,
-                            evidence: [`architecture:ownership:${constraint.subject}`],
-                        });
-                    }
-                    // Non-matching subject: don't project as allowed
-                }
-                else {
-                    entries.push({
-                        pattern,
-                        source: "architecture_contract",
-                        confidence: "high",
-                        audit_weight: "normal",
-                        reason: `Architecture contract allows changes to "${pattern}" (subject: ${constraint.subject}).`,
-                        evidence: [`architecture:allowed:${constraint.subject}`],
-                    });
-                }
-                break;
-            default:
-                break;
-        }
-    }
-    return entries;
-}
-
 ;// CONCATENATED MODULE: ./src/repair/repairScopeBuilder.ts
 
 
@@ -22680,1671 +25424,18 @@ function deriveMustPreserve(input) {
     return [...mustPreserve].sort((a, b) => a.localeCompare(b));
 }
 
-;// CONCATENATED MODULE: ./src/repair/repairTaskRenderer.ts
-function renderRepairTaskMarkdown(input) {
-    const lines = [];
-    const hypothesis = "agent_hypothesis" in input.report ? input.report.agent_hypothesis : undefined;
-    lines.push("# Pantheon Repair Task");
-    lines.push("");
-    lines.push("## Bug");
-    lines.push("");
-    lines.push(`> ${input.contract.intent}`);
-    lines.push("");
-    lines.push("## Confirmed facts");
-    lines.push("");
-    for (const fact of input.finding.confirmed_facts) {
-        lines.push(`- ${fact}`);
-    }
-    if (input.finding.confirmed_facts.length === 0) {
-        lines.push("- No confirmed facts were established beyond the report structure.");
-    }
-    lines.push("");
-    if (hypothesis) {
-        lines.push("## Agent suspected cause");
-        lines.push("");
-        lines.push(hypothesis);
-        lines.push("");
-        lines.push("This is an unverified hypothesis. Do not treat it as confirmed.");
-        lines.push("");
-    }
-    lines.push("## Suspected repair surface");
-    lines.push("");
-    for (const file of input.contract.suspect_surface.files) {
-        lines.push(`- \`${file.path}\` (${file.confidence}) — ${file.reason}`);
-    }
-    lines.push("");
-    lines.push("## Repair relation graph summary");
-    lines.push("");
-    const graphPreview = input.contract.repair_relation_graph.slice(0, 12);
-    for (const edge of graphPreview) {
-        lines.push(`- \`${edge.from}\` -> \`${edge.to}\` (${edge.relation}, ${edge.confidence}) — ${edge.reason}`);
-    }
-    if (input.contract.repair_relation_graph.length > graphPreview.length) {
-        lines.push(`- ... ${input.contract.repair_relation_graph.length - graphPreview.length} more relation edges`);
-    }
-    if (input.contract.graph_build_stats) {
-        const stats = input.contract.graph_build_stats;
-        const truncated = stats.truncation_entries.filter(t => t.truncated);
-        if (truncated.length > 0) {
-            lines.push("");
-            lines.push("**Truncated areas:**");
-            for (const t of truncated.slice(0, 5)) {
-                lines.push(`- \`${t.pattern ?? t.relation}\` matched ${t.total_matches} files, showing ${t.displayed_edges}`);
-            }
-            if (truncated.length > 5) {
-                lines.push(`- ... ${truncated.length - 5} more truncated areas`);
-            }
-        }
-        lines.push("");
-        lines.push(`> ${stats.limitation}`);
-    }
-    lines.push("");
-    lines.push("## Allowed changes");
-    lines.push("");
-    const allowedPreview = input.contract.repair_scope.allowed.slice(0, 25);
-    for (const entry of allowedPreview) {
-        lines.push(`- \`${entry.pattern}\` — ${entry.reason}`);
-    }
-    if (input.contract.repair_scope.allowed.length > 25) {
-        lines.push(`- ... ${input.contract.repair_scope.allowed.length - 25} more allowed entries`);
-    }
-    lines.push("");
-    lines.push("## Review-required changes");
-    lines.push("");
-    if (input.contract.repair_scope.review_required.length === 0) {
-        lines.push("- None");
-    }
-    else {
-        for (const entry of input.contract.repair_scope.review_required) {
-            lines.push(`- \`${entry.pattern}\` — ${entry.reason}`);
-        }
-    }
-    lines.push("");
-    lines.push("## Forbidden changes");
-    lines.push("");
-    const forbiddenPreview = input.contract.repair_scope.forbidden.slice(0, 25);
-    for (const entry of forbiddenPreview) {
-        lines.push(`- \`${entry.pattern}\` — ${entry.reason}`);
-    }
-    if (input.contract.repair_scope.forbidden.length > 25) {
-        lines.push(`- ... ${input.contract.repair_scope.forbidden.length - 25} more forbidden entries`);
-    }
-    lines.push("");
-    if (input.contract.must_preserve.length > 0) {
-        lines.push("## Must preserve");
-        lines.push("");
-        for (const statement of input.contract.must_preserve) {
-            lines.push(`- ${statement}`);
-        }
-        lines.push("");
-    }
-    lines.push("## Consistency checklist");
-    lines.push("");
-    for (const check of input.contract.consistency_checks) {
-        lines.push(`- [${check.severity}] ${check.statement}`);
-    }
-    lines.push("");
-    lines.push("## Test signals");
-    lines.push("");
-    if (input.contract.test_signals.related.length > 0) {
-        lines.push("Related tests:");
-        for (const path of input.contract.test_signals.related) {
-            lines.push(`- \`${path}\``);
-        }
-    }
-    if (input.contract.test_signals.recommended.length > 0) {
-        lines.push("");
-        lines.push("Recommended tests:");
-        for (const path of input.contract.test_signals.recommended) {
-            lines.push(`- \`${path}\``);
-        }
-    }
-    if (input.contract.test_signals.missing_mapping.length > 0) {
-        lines.push("");
-        lines.push("Missing mapping warnings:");
-        for (const item of input.contract.test_signals.missing_mapping) {
-            lines.push(`- ${item}`);
-        }
-    }
-    lines.push("");
-    lines.push("## If you need to go outside scope");
-    lines.push("");
-    lines.push("Request scope expansion. Do not silently modify unrelated or forbidden files.");
-    lines.push("");
-    lines.push("---");
-    lines.push("");
-    lines.push("_Auto-generated by Pantheon. Do not edit._");
-    lines.push("");
-    return lines.join("\n");
-}
-function renderRepairScopeMarkdown(contract) {
-    const lines = [];
-    lines.push("# Repair Scope");
-    lines.push("");
-    lines.push(`**Repair ID:** \`${contract.repair_id}\``);
-    lines.push(`**Audit status:** \`${contract.audit_status}\``);
-    lines.push("");
-    lines.push("## Allowed");
-    lines.push("");
-    for (const entry of contract.repair_scope.allowed) {
-        lines.push(`- \`${entry.pattern}\` (${entry.audit_weight}) — ${entry.reason}`);
-    }
-    lines.push("");
-    lines.push("## Review required");
-    lines.push("");
-    if (contract.repair_scope.review_required.length === 0) {
-        lines.push("- None");
-    }
-    else {
-        for (const entry of contract.repair_scope.review_required) {
-            lines.push(`- \`${entry.pattern}\` (${entry.audit_weight}) — ${entry.reason}`);
-        }
-    }
-    lines.push("");
-    lines.push("## Forbidden");
-    lines.push("");
-    for (const entry of contract.repair_scope.forbidden) {
-        lines.push(`- \`${entry.pattern}\` (${entry.audit_weight}) — ${entry.reason}`);
-    }
-    lines.push("");
-    lines.push("---");
-    lines.push("");
-    lines.push("_Auto-generated by Pantheon. Do not edit._");
-    lines.push("");
-    return lines.join("\n");
-}
-function renderConsistencyChecklistMarkdown(contract) {
-    const lines = [];
-    lines.push("# Consistency Checklist");
-    lines.push("");
-    for (const check of contract.consistency_checks) {
-        lines.push(`## ${check.statement}`);
-        lines.push("");
-        lines.push(`- **Severity:** ${check.severity}`);
-        lines.push(`- **Source:** ${check.source}`);
-        lines.push(`- **Reason:** ${check.reason}`);
-        if (check.evidence.length > 0) {
-            lines.push(`- **Evidence:** ${check.evidence.join(", ")}`);
-        }
-        lines.push("");
-    }
-    lines.push("---");
-    lines.push("");
-    lines.push("_Auto-generated by Pantheon. Do not edit._");
-    lines.push("");
-    return lines.join("\n");
-}
+;// CONCATENATED MODULE: ./src/cli/repair/repairPlanCommand.ts
 
-;// CONCATENATED MODULE: ./src/repair/humanAuditDecisionWriter.ts
 
 
 
 
 
-function buildHumanAuditDecision(input) {
-    const createdAt = new Date().toISOString();
-    return humanAuditDecisionSchema.parse({
-        schema_version: "human_audit_decision@0.1.0",
-        decision_id: (0,repairUtils/* deterministicId */.UV)("audit", {
-            repairId: input.repairId,
-            gate: input.gate,
-            decision: input.decision,
-            reason: input.reason,
-            createdAt,
-        }),
-        repair_id: input.repairId,
-        target_revision: input.targetRevision,
-        gate: input.gate,
-        decision: input.decision,
-        operator_id: input.operatorId,
-        reason: input.reason,
-        changes_to_scope: {
-            add_review: [...(input.addReview ?? [])],
-            add_forbid: [...(input.addForbid ?? [])],
-        },
-        added_must_preserve: [...(input.addMustPreserve ?? [])],
-        created_at: createdAt,
-    });
-}
-function writeHumanAuditDecision(repoRoot, decision) {
-    const target = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, decision.repair_id).humanAuditDecision(decision.decision_id);
-    (0,external_node_fs_.mkdirSync)((0,external_node_path_.dirname)(target), { recursive: true });
-    (0,external_node_fs_.writeFileSync)(target, JSON.stringify(decision, null, 2));
-    return target;
-}
 
-;// CONCATENATED MODULE: ./src/repair/repairPlanRevisioner.ts
 
-function applyHumanAuditDecision(contract, decision) {
-    if (decision.repair_id !== contract.repair_id) {
-        throw new Error(`Audit decision ${decision.decision_id} does not match repair ${contract.repair_id}.`);
-    }
-    if (decision.target_revision !== contract.revision) {
-        throw new Error(`stale_audit_decision: decision targets revision ${decision.target_revision}, but current revision is ${contract.revision}.`);
-    }
-    const review = new Map(contract.repair_scope.review_required.map(entry => [entry.pattern, entry]));
-    const forbid = new Map(contract.repair_scope.forbidden.map(entry => [entry.pattern, entry]));
-    const allow = new Map(contract.repair_scope.allowed.map(entry => [entry.pattern, entry]));
-    const mustPreserve = new Set(contract.must_preserve);
-    for (const pattern of decision.changes_to_scope.add_review) {
-        review.set(pattern, buildHumanScopeEntry(pattern, "review"));
-    }
-    for (const pattern of decision.changes_to_scope.add_forbid) {
-        forbid.set(pattern, buildHumanScopeEntry(pattern, "forbid"));
-    }
-    for (const statement of decision.added_must_preserve) {
-        mustPreserve.add(statement);
-    }
-    for (const pattern of [...forbid.keys()]) {
-        for (const allowPattern of [...allow.keys()]) {
-            if ((0,repairUtils/* matchesPattern */.MT)(allowPattern, pattern) || (0,repairUtils/* matchesPattern */.MT)(pattern, allowPattern)) {
-                allow.delete(allowPattern);
-            }
-        }
-        for (const reviewPattern of [...review.keys()]) {
-            if ((0,repairUtils/* matchesPattern */.MT)(reviewPattern, pattern) || (0,repairUtils/* matchesPattern */.MT)(pattern, reviewPattern)) {
-                review.delete(reviewPattern);
-            }
-        }
-    }
-    for (const pattern of [...review.keys()]) {
-        for (const allowPattern of [...allow.keys()]) {
-            if ((0,repairUtils/* matchesPattern */.MT)(allowPattern, pattern) || (0,repairUtils/* matchesPattern */.MT)(pattern, allowPattern)) {
-                allow.delete(allowPattern);
-            }
-        }
-    }
-    const auditStatus = deriveAuditStatus(contract.audit_status, decision);
-    return {
-        ...contract,
-        revision: contract.revision + 1,
-        audit_status: auditStatus,
-        repair_scope: {
-            allowed: [...allow.values()].sort((a, b) => a.pattern.localeCompare(b.pattern)),
-            review_required: [...review.values()].sort((a, b) => a.pattern.localeCompare(b.pattern)),
-            forbidden: [...forbid.values()].sort((a, b) => a.pattern.localeCompare(b.pattern)),
-        },
-        must_preserve: (0,repairUtils/* uniqueSorted */.pj)([...mustPreserve]),
-        consistency_checks: decision.added_must_preserve.length > 0
-            ? [
-                ...contract.consistency_checks,
-                ...decision.added_must_preserve.map(statement => ({
-                    id: `human_audit_${contract.revision + 1}_${statement.length}`,
-                    statement,
-                    source: "human_audit_decision",
-                    severity: "hard",
-                    evidence: [`decision:${decision.decision_id}`],
-                    reason: "Added by human audit decision.",
-                })),
-            ]
-            : contract.consistency_checks,
-    };
-}
-function buildHumanScopeEntry(pattern, target) {
-    return {
-        pattern,
-        source: "human_audit_decision",
-        confidence: "high",
-        audit_weight: "critical",
-        reason: target === "forbid"
-            ? "Forbidden by human audit decision."
-            : "Review-required by human audit decision.",
-        evidence: ["human_audit_decision"],
-    };
-}
-function deriveAuditStatus(previous, decision) {
-    switch (decision.decision) {
-        case "approve_repair_plan":
-            return "approved_repair_plan";
-        case "restrict_scope":
-        case "expand_review_scope":
-        case "add_must_preserve":
-        case "add_forbidden_area":
-            return "approved_with_modifications";
-        case "require_manual_repair":
-            return "manual_repair_required";
-        case "approve_repair":
-        case "request_revert":
-        case "request_scope_expansion":
-        case "keep_for_human_review":
-        case "close_as_invalid":
-            return "post_repair_reviewed";
-        default:
-            return previous;
-    }
-}
 
-;// CONCATENATED MODULE: ./src/alpha/bootstrapScope.ts
 
-function getBootstrapInitFilePatterns() {
-    return [
-        "AGENTS.md",
-        "pantheon.json",
-        "pantheon.alpha.json",
-        "pantheon.agent.json",
-        ".github/workflows/pantheon-repair.yml",
-        ".github/workflows/pantheon-repair.yaml",
-        "docs/pantheon/**",
-        ".gitignore",
-    ];
-}
-function getBootstrapArtifactPatterns() {
-    return [
-        ".pantheon/bootstrap/**",
-    ];
-}
-function classifyBootstrapDiffFile(filePath) {
-    const normalizedPath = filePath.replace(/\\/g, "/");
-    const initPatterns = getBootstrapInitFilePatterns();
-    if (initPatterns.some((pattern) => (0,globMatch/* matchesGlob */.k)(normalizedPath, pattern))) {
-        return "bootstrap_init";
-    }
-    const artifactPatterns = getBootstrapArtifactPatterns();
-    if (artifactPatterns.some((pattern) => (0,globMatch/* matchesGlob */.k)(normalizedPath, pattern))) {
-        return "bootstrap_artifact";
-    }
-    // Not bootstrap, treat as business
-    return "business";
-}
-function isMixedBootstrapAndRepair(changedFiles) {
-    let hasBootstrap = false;
-    let hasBusiness = false;
-    for (const file of changedFiles) {
-        const fileClass = classifyBootstrapDiffFile(file);
-        if (fileClass === "bootstrap_init" || fileClass === "bootstrap_artifact") {
-            hasBootstrap = true;
-        }
-        else if (fileClass === "business") {
-            hasBusiness = true;
-        }
-        if (hasBootstrap && hasBusiness) {
-            return true;
-        }
-    }
-    return false;
-}
-
-;// CONCATENATED MODULE: ./src/repair/repairVerifier.ts
-
-
-function verifyRepairDiff(input) {
-    const findings = [];
-    let allowed = 0;
-    let reviewRequired = 0;
-    let forbidden = 0;
-    let outsideScope = 0;
-    const changedPaths = input.diff.changed_files.map(file => file.path);
-    if (isMixedBootstrapAndRepair(changedPaths)) {
-        findings.push({
-            kind: "bootstrap_scope_mixed_with_repair",
-            severity: "requires_replan",
-            message: "This repair also contains Pantheon bootstrap files. Commit or approve the bootstrap change separately, then re-run repair check.",
-            allowed_actions: ["request_replan"],
-            requires_human: true,
-            evidence: ["mixed_bootstrap_repair_scope"],
-        });
-    }
-    for (const changed of input.diff.changed_files) {
-        const path = changed.path;
-        const forbiddenEntry = matchScopeEntry(path, input.contract.repair_scope.forbidden);
-        if (forbiddenEntry) {
-            forbidden++;
-            const isArchitecture = forbiddenEntry.evidence.some(e => e.startsWith("architecture:"));
-            findings.push({
-                kind: isArchitecture ? "architecture_forbidden" : "forbidden_file",
-                severity: "blocking",
-                file: path,
-                message: forbiddenEntry.source === "architecture_contract"
-                    ? `This file is forbidden by the accepted architecture contract: ${path}`
-                    : `Forbidden repair change: ${path}`,
-                allowed_actions: forbiddenEntry.source === "architecture_contract"
-                    ? ["revert_file", "request_architecture_review"]
-                    : ["revert_file", "request_scope_expansion"],
-                requires_human: true,
-                bucket: "forbidden",
-                evidence: forbiddenEntry.evidence,
-            });
-            continue;
-        }
-        const reviewEntry = matchScopeEntry(path, input.contract.repair_scope.review_required);
-        if (reviewEntry) {
-            reviewRequired++;
-            const isArchitecture = reviewEntry.evidence.some(e => e.startsWith("architecture:"));
-            findings.push({
-                kind: isArchitecture ? "architecture_review_required" : "review_required_file",
-                severity: "review_required",
-                file: path,
-                message: reviewEntry.source === "architecture_contract"
-                    ? `This file requires review by the accepted architecture contract: ${path}`
-                    : `Repair touches review-required file: ${path}`,
-                allowed_actions: ["keep_for_human_review"],
-                requires_human: true,
-                bucket: "review_required",
-                evidence: reviewEntry.evidence,
-            });
-            continue;
-        }
-        const allowedEntry = matchScopeEntry(path, input.contract.repair_scope.allowed);
-        if (allowedEntry) {
-            allowed++;
-            continue;
-        }
-        outsideScope++;
-        findings.push({
-            kind: "outside_scope_file",
-            severity: "blocking",
-            file: path,
-            message: `Repair change is outside the approved scope: ${path}`,
-            allowed_actions: ["revert_file", "request_scope_expansion"],
-            requires_human: true,
-            bucket: "outside_scope",
-            evidence: ["repair_scope:outside"],
-        });
-    }
-    const touchedAnyRelatedTest = input.contract.test_signals.related.some(path => changedPaths.includes(path));
-    if (input.contract.test_signals.related.length > 0 && !touchedAnyRelatedTest) {
-        findings.push({
-            kind: "missing_related_test_signal",
-            severity: "warning",
-            message: "No related test file was included in the repair diff.",
-            allowed_actions: ["add_or_run_related_test", "keep_for_human_review"],
-            requires_human: false,
-            evidence: input.contract.test_signals.related.map(path => `related_test:${path}`),
-        });
-    }
-    const verdict = deriveRepairVerdictFromFindings(findings);
-    const check = {
-        schema_version: "repair_check.v1",
-        repair_id: input.contract.repair_id,
-        verdict,
-        generated_at: new Date().toISOString(),
-        summary: {
-            changed_files: input.diff.changed_files.length,
-            allowed,
-            review_required: reviewRequired,
-            forbidden,
-            outside_scope: outsideScope,
-            warnings: findings.filter(finding => finding.severity === "warning").length,
-        },
-        findings,
-        concurrent_findings: [],
-        changed_files: changedPaths,
-        audit_status: input.contract.audit_status,
-    };
-    return {
-        check,
-        feedback: buildRepairFeedbackFromCheck(check),
-    };
-}
-function deriveRepairVerdictFromFindings(findings) {
-    if (findings.some(finding => finding.kind === "forbidden_file" || finding.kind === "architecture_forbidden")) {
-        return "fail";
-    }
-    if (findings.some(finding => finding.kind === "stale_repair_contract")) {
-        return "requires_replan";
-    }
-    if (findings.some(finding => finding.kind === "bootstrap_scope_mixed_with_repair")) {
-        return "requires_replan";
-    }
-    if (findings.some(finding => finding.kind === "outside_scope_file")) {
-        return "requires_scope_expansion";
-    }
-    if (findings.some(finding => finding.severity === "review_required" || finding.severity === "requires_human_audit" || finding.kind === "architecture_review_required" || finding.kind === "architecture_contract_modified")) {
-        return "requires_review";
-    }
-    return "pass";
-}
-function buildRepairFeedbackFromCheck(check) {
-    const actions = check.findings.flatMap(finding => finding.allowed_actions.map(action => ({
-        action,
-        file: finding.file,
-        message: finding.message,
-    })));
-    return {
-        schema_version: "repair_feedback.v1",
-        feedback_id: `repair_feedback_${check.repair_id}`,
-        repair_id: check.repair_id,
-        verdict: check.verdict,
-        generated_at: new Date().toISOString(),
-        actions,
-        requires_human: check.findings.some(finding => finding.requires_human),
-        notes: check.findings.map(finding => finding.message),
-    };
-}
-function matchScopeEntry(path, entries) {
-    return entries.find(entry => (0,repairUtils/* matchesPattern */.MT)(path, entry.pattern));
-}
-
-;// CONCATENATED MODULE: ./src/repair/repairFeedbackRenderer.ts
-function renderRepairFeedbackMarkdown(feedback) {
-    const lines = [];
-    lines.push("# Repair Feedback");
-    lines.push("");
-    lines.push(`**Verdict:** \`${feedback.verdict}\``);
-    lines.push("");
-    if (feedback.actions.length === 0) {
-        lines.push("No repair boundary issues were found.");
-        lines.push("");
-    }
-    else {
-        lines.push("## Actions");
-        lines.push("");
-        for (const action of feedback.actions) {
-            lines.push(`- \`${action.action}\`${action.file ? ` on \`${action.file}\`` : ""} — ${action.message}`);
-        }
-        lines.push("");
-    }
-    if (feedback.requires_human) {
-        lines.push("> Human review is required before treating this repair as complete.");
-        lines.push("");
-    }
-    lines.push("---");
-    lines.push("");
-    lines.push("_Auto-generated by Pantheon. Do not edit._");
-    lines.push("");
-    return lines.join("\n");
-}
-
-;// CONCATENATED MODULE: ./src/repair/repairReportRenderer.ts
-function renderRepairReportMarkdown(input) {
-    const { report, contract, check } = input;
-    const lines = [];
-    lines.push("# Repair Report");
-    lines.push("");
-    lines.push(`**Verdict:** \`${check.verdict}\``);
-    lines.push(`**Audit status:** \`${contract.audit_status}\``);
-    lines.push(`**Bug source:** \`${contract.source.kind}\``);
-    lines.push("");
-    lines.push("## Summary");
-    lines.push("");
-    lines.push("| Metric | Count |");
-    lines.push("|---|---:|");
-    lines.push(`| Changed files | ${check.summary.changed_files} |`);
-    lines.push(`| Allowed | ${check.summary.allowed} |`);
-    lines.push(`| Review required | ${check.summary.review_required} |`);
-    lines.push(`| Forbidden | ${check.summary.forbidden} |`);
-    lines.push(`| Outside scope | ${check.summary.outside_scope} |`);
-    lines.push(`| Warnings | ${check.summary.warnings} |`);
-    lines.push("");
-    lines.push("## Confirmed facts");
-    lines.push("");
-    lines.push(`- Repair intent: ${report.summary}`);
-    lines.push(`- Repair scope revision: ${contract.revision}`);
-    lines.push("");
-    if (check.findings.length > 0) {
-        lines.push("## Findings");
-        lines.push("");
-        for (const finding of check.findings) {
-            lines.push(`### ${finding.file ? `\`${finding.file}\`` : finding.kind}`);
-            lines.push("");
-            lines.push(`- **Severity:** ${finding.severity}`);
-            lines.push(`- **Message:** ${finding.message}`);
-            lines.push(`- **Allowed actions:** ${finding.allowed_actions.join(", ")}`);
-            if (finding.requires_human) {
-                lines.push("- **Human review:** required");
-            }
-            lines.push("");
-        }
-    }
-    lines.push("---");
-    lines.push("");
-    lines.push("_Auto-generated by Pantheon. Do not edit._");
-    lines.push("");
-    return lines.join("\n");
-}
-
-;// CONCATENATED MODULE: ./src/architecture/baseBranchArchitectureLoader.ts
-/**
- * P30-13: Base Branch Architecture Loader
- *
- * Reads the ArchitectureContract from a specific git SHA (base branch),
- * ensuring PR-modified architecture constraints do not self-authorize.
- */
-
-function loadBaseArchitectureContract(repoRoot, baseSha) {
-    const filePath = ".pantheon/architecture/architecture_contract.json";
-    try {
-        const raw = (0,external_node_child_process_.execFileSync)("git", ["show", `${baseSha}:${filePath}`], {
-            cwd: repoRoot,
-            encoding: "utf-8",
-            stdio: ["pipe", "pipe", "pipe"],
-            timeout: 5000,
-        });
-        const parsed = JSON.parse(raw);
-        return {
-            status: "loaded",
-            contract: parsed,
-            base_sha: baseSha,
-        };
-    }
-    catch (error) {
-        if (error instanceof SyntaxError) {
-            return {
-                status: "parse_error",
-                contract: null,
-                base_sha: baseSha,
-            };
-        }
-        return {
-            status: "missing",
-            contract: null,
-            base_sha: baseSha,
-        };
-    }
-}
-
-// EXTERNAL MODULE: ./src/repair/session/atomicWrite.ts
-var atomicWrite = __nccwpck_require__(282);
-;// CONCATENATED MODULE: ./src/repair/session/repairSessionIndex.ts
-function createEmptyRepairSessionIndex() {
-    return {
-        schema_version: "repair_session_index@0.1.0",
-        active_repairs: [],
-        closed_repairs: [],
-    };
-}
-function upsertRepairSessionInIndex(index, session) {
-    const isClosed = session.status === "closed" || session.status === "abandoned";
-    const active = index.active_repairs.filter(item => item.repair_id !== session.repair_id);
-    const closed = index.closed_repairs.filter(item => item.repair_id !== session.repair_id);
-    if (isClosed) {
-        closed.push(session);
-    }
-    else {
-        active.push(session);
-    }
-    return {
-        schema_version: "repair_session_index@0.1.0",
-        active_repairs: active.sort((a, b) => a.created_at.localeCompare(b.created_at)),
-        closed_repairs: closed.sort((a, b) => a.created_at.localeCompare(b.created_at)),
-    };
-}
-
-;// CONCATENATED MODULE: ./src/repair/session/repairSessionStore.ts
-
-
-
-
-
-
-const LOCK_TIMEOUT_MS = 5_000;
-const LOCK_POLL_MS = 25;
-let repairSessionNonce = 0;
-const ALLOWED_SESSION_TRANSITIONS = {
-    intake_created: ["intake_created", "intake_accepted", "intake_rejected", "plan_generated", "plan_pending_audit", "manual_repair_required"],
-    intake_accepted: ["intake_accepted", "plan_generated", "plan_pending_audit", "manual_repair_required", "closed", "abandoned"],
-    intake_rejected: ["intake_rejected", "closed", "abandoned"],
-    plan_generated: ["plan_generated", "plan_pending_audit", "plan_approved", "plan_restricted", "manual_repair_required", "closed", "abandoned"],
-    plan_pending_audit: ["plan_pending_audit", "plan_approved", "plan_restricted", "manual_repair_required", "repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "closed", "abandoned"],
-    plan_approved: ["plan_approved", "plan_pending_audit", "plan_restricted", "manual_repair_required", "repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "closed", "abandoned"],
-    plan_restricted: ["plan_restricted", "plan_pending_audit", "plan_approved", "manual_repair_required", "repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "closed", "abandoned"],
-    manual_repair_required: ["manual_repair_required", "plan_pending_audit", "plan_approved", "plan_restricted", "closed", "abandoned"],
-    repair_checked_pass: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "plan_approved", "plan_restricted", "closed", "abandoned"],
-    repair_checked_requires_review: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "plan_approved", "plan_restricted", "manual_repair_required", "closed", "abandoned"],
-    repair_checked_requires_scope_expansion: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "manual_repair_required", "closed", "abandoned"],
-    repair_checked_requires_replan: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "plan_approved", "plan_restricted", "manual_repair_required", "closed", "abandoned"],
-    repair_checked_fail: ["repair_checked_pass", "repair_checked_requires_review", "repair_checked_requires_scope_expansion", "repair_checked_requires_replan", "repair_checked_fail", "plan_pending_audit", "manual_repair_required", "closed", "abandoned"],
-    closed: [],
-    abandoned: [],
-};
-const VALID_SESSION_STATUSES = new Set([
-    "intake_created",
-    "intake_accepted",
-    "intake_rejected",
-    "plan_generated",
-    "plan_pending_audit",
-    "plan_approved",
-    "plan_restricted",
-    "manual_repair_required",
-    "repair_checked_pass",
-    "repair_checked_requires_review",
-    "repair_checked_requires_scope_expansion",
-    "repair_checked_requires_replan",
-    "repair_checked_fail",
-    "closed",
-    "abandoned",
-]);
-function createRepairSession(input) {
-    const repoRoot = input.repoRoot;
-    (0,repairArtifactLayout/* ensureRepairDirs */.CF)(repoRoot);
-    const createdAt = new Date().toISOString();
-    repairSessionNonce += 1;
-    const repairId = (0,repairUtils/* deterministicId */.UV)("repair", {
-        source: input.source,
-        agent_id: input.agentId ?? null,
-        created_at: createdAt,
-        nonce: repairSessionNonce,
-    });
-    const session = {
-        schema_version: "repair_session@0.1.0",
-        repair_id: repairId,
-        agent_id: input.agentId,
-        source: input.source,
-        status: input.status,
-        current_revision: 0,
-        base_sha: null,
-        risk_level: "unknown",
-        scope_summary: emptyScopeSummary(),
-        created_at: createdAt,
-        updated_at: createdAt,
-    };
-    withRepairIndexLock(repoRoot, "create_repair_session", () => {
-        const paths = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, repairId);
-        ensureRepairRunDir(paths);
-        (0,atomicWrite/* atomicWriteJson */.h)(paths.session, session);
-        writeLatestPointer(paths.root, repairId);
-        const currentIndex = loadRepairSessionIndex(repoRoot);
-        const updatedIndex = upsertRepairSessionInIndex(currentIndex, session);
-        (0,atomicWrite/* atomicWriteJson */.h)(paths.root.sessionsIndex, updatedIndex);
-    });
-    return session;
-}
-function repairSessionStore_loadRepairSession(repoRoot, repairId) {
-    const path = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, repairId).session;
-    if (!(0,external_node_fs_.existsSync)(path)) {
-        throw new Error(`Unknown repair session: ${repairId}`);
-    }
-    return validateRepairSession((0,repairUtils/* readJsonFile */.JE)(path), repairId, path);
-}
-function saveRepairSession(repoRoot, session) {
-    persistRepairSession(repoRoot, session);
-}
-function updateRepairSession(repoRoot, repairId, updater) {
-    return withRepairIndexLock(repoRoot, "update_repair_session", () => withRepairSessionLock(repoRoot, repairId, "update_repair_session", () => {
-        const current = repairSessionStore_loadRepairSession(repoRoot, repairId);
-        const next = validateNextSession(current, updater(current));
-        persistRepairSession(repoRoot, next);
-        return next;
-    }));
-}
-function repairSessionStore_closeRepairSession(input) {
-    return updateRepairSession(input.repoRoot, input.repairId, session => ({
-        ...session,
-        status: input.status,
-        close_reason: input.reason,
-        closed_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-    }));
-}
-function loadRepairSessionIndex(repoRoot) {
-    const paths = (0,repairArtifactLayout/* repairRootPaths */.Gi)(repoRoot);
-    if (!(0,external_node_fs_.existsSync)(paths.sessionsIndex)) {
-        return createEmptyRepairSessionIndex();
-    }
-    return validateRepairSessionIndex((0,repairUtils/* readJsonFile */.JE)(paths.sessionsIndex), paths.sessionsIndex);
-}
-function repairSessionStore_listRepairSessions(repoRoot) {
-    return loadRepairSessionIndex(repoRoot);
-}
-function repairSessionStore_loadLatestRepairId(repoRoot) {
-    const path = repairRootPaths(repoRoot).latestPointer;
-    try {
-        const text = readFileSync(path, "utf-8").trim();
-        if (!text)
-            return null;
-        const parsed = JSON.parse(text);
-        return parsed.repair_id ?? null;
-    }
-    catch (error) {
-        if (isErrnoException(error) && error.code === "ENOENT") {
-            return null;
-        }
-        return null;
-    }
-}
-function withRepairIndexLock(repoRoot, operation, fn) {
-    const lockPath = (0,repairArtifactLayout/* repairRootPaths */.Gi)(repoRoot).globalLock;
-    return withFileLock(lockPath, { operation }, fn);
-}
-function withRepairSessionLock(repoRoot, repairId, operation, fn) {
-    const lockPath = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, repairId).lock;
-    return withFileLock(lockPath, { operation, repair_id: repairId }, fn);
-}
-function emptyScopeSummary() {
-    return {
-        allowed: [],
-        review_required: [],
-        forbidden: [],
-    };
-}
-function updateSessionFromContract(input) {
-    return updateRepairSession(input.repoRoot, input.repairId, session => ({
-        ...session,
-        status: input.status,
-        current_revision: Math.max(session.current_revision, input.revision),
-        scope_summary: input.scopeSummary,
-        risk_level: input.riskLevel,
-        base_sha: input.baseSha ?? null,
-        updated_at: new Date().toISOString(),
-    }));
-}
-function persistRepairSession(repoRoot, session) {
-    const paths = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, session.repair_id);
-    ensureRepairRunDir(paths);
-    (0,atomicWrite/* atomicWriteJson */.h)(paths.session, session);
-    writeLatestPointer(paths.root, session.repair_id);
-    const currentIndex = loadRepairSessionIndex(repoRoot);
-    const updatedIndex = upsertRepairSessionInIndex(currentIndex, session);
-    (0,atomicWrite/* atomicWriteJson */.h)(paths.root.sessionsIndex, updatedIndex);
-}
-function ensureRepairRunDir(paths) {
-    (0,external_node_fs_.mkdirSync)(paths.dir, { recursive: true });
-}
-function writeLatestPointer(root, repairId) {
-    (0,atomicWrite/* atomicWriteText */.Y)(root.latestPointer, `${JSON.stringify({ repair_id: repairId, updated_at: new Date().toISOString() }, null, 2)}\n`);
-}
-function withFileLock(lockPath, input, fn) {
-    const createdAt = new Date().toISOString();
-    const deadline = Date.now() + LOCK_TIMEOUT_MS;
-    while (true) {
-        try {
-            (0,external_node_fs_.mkdirSync)((0,external_node_path_.dirname)(lockPath), { recursive: true });
-            const fd = (0,external_node_fs_.openSync)(lockPath, "wx");
-            try {
-                const metadata = {
-                    pid: process.pid,
-                    created_at: createdAt,
-                    operation: input.operation,
-                    repair_id: input.repair_id,
-                };
-                (0,external_node_fs_.writeFileSync)(fd, `${JSON.stringify(metadata, null, 2)}\n`);
-            }
-            finally {
-                (0,external_node_fs_.closeSync)(fd);
-            }
-            break;
-        }
-        catch (error) {
-            if (!isErrnoException(error) || error.code !== "EEXIST") {
-                throw error;
-            }
-            if (Date.now() >= deadline) {
-                throw new Error("Another Pantheon repair operation is active. Retry after it completes, or remove a stale lock if no process is running.");
-            }
-            sleepSync(LOCK_POLL_MS);
-        }
-    }
-    try {
-        return fn();
-    }
-    finally {
-        (0,external_node_fs_.rmSync)(lockPath, { force: true });
-    }
-}
-function sleepSync(ms) {
-    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
-}
-function validateNextSession(current, next) {
-    if (current.repair_id !== next.repair_id) {
-        throw new Error("Repair session update cannot change repair_id.");
-    }
-    if (next.current_revision < current.current_revision) {
-        throw new Error(`Repair session revision regression for ${current.repair_id}: ${next.current_revision} < ${current.current_revision}.`);
-    }
-    if (current.status !== next.status) {
-        const allowed = ALLOWED_SESSION_TRANSITIONS[current.status];
-        if (!allowed.includes(next.status)) {
-            throw new Error(`Invalid repair session transition: ${current.status} -> ${next.status} for ${current.repair_id}.`);
-        }
-    }
-    return next;
-}
-function isErrnoException(error) {
-    return typeof error === "object" && error !== null && "code" in error;
-}
-function validateRepairSession(value, expectedRepairId, sourcePath) {
-    if (typeof value !== "object" || value === null || Array.isArray(value)) {
-        throw new Error(`Invalid repair session at ${sourcePath}: expected object.`);
-    }
-    const session = value;
-    if (session.schema_version !== "repair_session@0.1.0") {
-        throw new Error(`Invalid repair session schema at ${sourcePath}: expected repair_session@0.1.0, got ${String(session.schema_version)}.`);
-    }
-    if (session.repair_id !== expectedRepairId) {
-        throw new Error(`Invalid repair session at ${sourcePath}: expected repair_id ${expectedRepairId}, got ${String(session.repair_id)}.`);
-    }
-    if (typeof session.current_revision !== "number" || !Number.isInteger(session.current_revision) || session.current_revision < 0) {
-        throw new Error(`Invalid repair session at ${sourcePath}: current_revision must be a non-negative integer.`);
-    }
-    if (!VALID_SESSION_STATUSES.has(session.status)) {
-        throw new Error(`Invalid repair session at ${sourcePath}: unknown status ${String(session.status)}.`);
-    }
-    const scopeSummary = session.scope_summary;
-    if (typeof scopeSummary !== "object" || scopeSummary === null || Array.isArray(scopeSummary)) {
-        throw new Error(`Invalid repair session at ${sourcePath}: scope_summary must be an object.`);
-    }
-    const scope = scopeSummary;
-    if (!Array.isArray(scope.allowed) || !Array.isArray(scope.review_required) || !Array.isArray(scope.forbidden)) {
-        throw new Error(`Invalid repair session at ${sourcePath}: scope_summary arrays are missing.`);
-    }
-    return session;
-}
-function validateRepairSessionIndex(value, sourcePath) {
-    if (typeof value !== "object" || value === null || Array.isArray(value)) {
-        throw new Error(`Invalid repair session index at ${sourcePath}: expected object.`);
-    }
-    const index = value;
-    if (index.schema_version !== "repair_session_index@0.1.0") {
-        throw new Error(`Invalid repair session index schema at ${sourcePath}: expected repair_session_index@0.1.0, got ${String(index.schema_version)}.`);
-    }
-    if (!Array.isArray(index.active_repairs) || !Array.isArray(index.closed_repairs)) {
-        throw new Error(`Invalid repair session index at ${sourcePath}: active_repairs and closed_repairs must be arrays.`);
-    }
-    for (const session of [...index.active_repairs, ...index.closed_repairs]) {
-        if (typeof session !== "object" || session === null || Array.isArray(session)) {
-            throw new Error(`Invalid repair session index at ${sourcePath}: session entry must be an object.`);
-        }
-        const repairId = session.repair_id;
-        if (typeof repairId !== "string" || repairId.length === 0) {
-            throw new Error(`Invalid repair session index at ${sourcePath}: session entry missing repair_id.`);
-        }
-        validateRepairSession(session, repairId, sourcePath);
-    }
-    return index;
-}
-
-;// CONCATENATED MODULE: ./src/repair/session/repoStateSnapshot.ts
-
-function captureRepoStateSnapshot(input) {
-    if (input.source === "synthetic") {
-        return {
-            base_sha: input.diffBase ?? null,
-            head_sha: input.diffBase ?? null,
-            diff_base: input.diffBase ?? null,
-            working_tree_status: "unknown",
-            created_at: new Date().toISOString(),
-            source: "synthetic",
-        };
-    }
-    try {
-        const headSha = (0,external_node_child_process_.execFileSync)("git", ["rev-parse", "HEAD"], {
-            cwd: input.repoRoot,
-            encoding: "utf-8",
-            timeout: 10_000,
-            stdio: ["pipe", "pipe", "pipe"],
-        }).trim();
-        const status = (0,external_node_child_process_.execFileSync)("git", ["status", "--porcelain"], {
-            cwd: input.repoRoot,
-            encoding: "utf-8",
-            timeout: 10_000,
-            stdio: ["pipe", "pipe", "pipe"],
-        }).trim();
-        return {
-            base_sha: headSha || null,
-            head_sha: headSha || null,
-            diff_base: input.diffBase ?? headSha ?? null,
-            working_tree_status: status ? "dirty" : "clean",
-            created_at: new Date().toISOString(),
-            source: input.source ?? "git",
-        };
-    }
-    catch (error) {
-        const message = error instanceof Error ? error.message : String(error);
-        return {
-            base_sha: null,
-            head_sha: null,
-            diff_base: input.diffBase ?? null,
-            working_tree_status: "unknown",
-            created_at: new Date().toISOString(),
-            source: input.source ?? "unknown",
-            error: message,
-        };
-    }
-}
-
-;// CONCATENATED MODULE: ./src/repair/session/stalePlanDetector.ts
-function detectStaleRepairPlan(input) {
-    const findings = [];
-    const { contractState, currentState } = input;
-    const effectiveCurrentBase = currentState.diff_base ?? currentState.base_sha;
-    if (currentState.error || (contractState.base_sha && !effectiveCurrentBase)) {
-        findings.push({
-            kind: "stale_repair_contract",
-            severity: "blocking",
-            reason: currentState.error
-                ? `Unable to capture current repository state: ${currentState.error}`
-                : "Unable to determine the current repository base for this repair contract.",
-            recommended_action: "request_replan",
-        });
-    }
-    if (contractState.base_sha &&
-        effectiveCurrentBase &&
-        contractState.base_sha !== effectiveCurrentBase) {
-        findings.push({
-            kind: "stale_repair_contract",
-            severity: "blocking",
-            reason: `Repair contract was generated at ${contractState.base_sha}, but repository base is now ${effectiveCurrentBase}.`,
-            recommended_action: "request_replan",
-        });
-    }
-    if (contractState.working_tree_status === "clean" &&
-        currentState.working_tree_status === "dirty") {
-        findings.push({
-            kind: "working_tree_changed",
-            severity: "warning",
-            reason: "Repair contract was generated on a clean working tree, but the repository is now dirty.",
-            recommended_action: "continue",
-        });
-    }
-    return findings;
-}
-
-;// CONCATENATED MODULE: ./src/repair/session/activeRepairOverlapDetector.ts
-
-function detectActiveScopePatternOverlaps(input) {
-    const findings = [];
-    for (const other of input.otherContracts) {
-        const overlap = findPatternOverlap(input.contract, other);
-        if (!overlap)
-            continue;
-        findings.push(overlap);
-    }
-    return findings;
-}
-function detectActualChangedFileOverlaps(input) {
-    const findings = [];
-    for (const other of input.otherContracts) {
-        const matched = [];
-        let bucket;
-        for (const file of input.changedFiles) {
-            const forbidden = other.repair_scope.forbidden.find(entry => (0,repairUtils/* matchesPattern */.MT)(file, entry.pattern));
-            if (forbidden) {
-                matched.push(file);
-                bucket = "forbidden";
-                continue;
-            }
-            const review = other.repair_scope.review_required.find(entry => (0,repairUtils/* matchesPattern */.MT)(file, entry.pattern));
-            if (review) {
-                matched.push(file);
-                bucket = bucket === "forbidden" ? bucket : "review_required";
-                continue;
-            }
-            const allowed = other.repair_scope.allowed.find(entry => (0,repairUtils/* matchesPattern */.MT)(file, entry.pattern));
-            if (allowed) {
-                matched.push(file);
-                bucket = bucket ?? "allowed";
-            }
-        }
-        if (!bucket || matched.length === 0)
-            continue;
-        findings.push(buildActualOverlapFinding(input.repairId, other.repair_id, bucket, matched));
-    }
-    return findings;
-}
-function findPatternOverlap(contract, other) {
-    const currentEntries = [
-        ...contract.repair_scope.allowed.map(entry => ({ bucket: "allowed", pattern: entry.pattern })),
-        ...contract.repair_scope.review_required.map(entry => ({ bucket: "review_required", pattern: entry.pattern })),
-        ...contract.repair_scope.forbidden.map(entry => ({ bucket: "forbidden", pattern: entry.pattern })),
-    ];
-    const otherEntries = [
-        ...other.repair_scope.allowed.map(entry => ({ bucket: "allowed", pattern: entry.pattern })),
-        ...other.repair_scope.review_required.map(entry => ({ bucket: "review_required", pattern: entry.pattern })),
-        ...other.repair_scope.forbidden.map(entry => ({ bucket: "forbidden", pattern: entry.pattern })),
-    ];
-    const overlappingPatterns = [];
-    let strongestBucket = "allowed";
-    for (const current of currentEntries) {
-        for (const candidate of otherEntries) {
-            if (patternsOverlap(current.pattern, candidate.pattern)) {
-                overlappingPatterns.push(current.pattern, candidate.pattern);
-                strongestBucket = strongerBucket(strongestBucket, strongerBucket(current.bucket, candidate.bucket));
-            }
-        }
-    }
-    if (overlappingPatterns.length === 0) {
-        return null;
-    }
-    return buildPatternOverlapFinding(contract.repair_id, other.repair_id, strongestBucket, (0,repairUtils/* uniqueSorted */.pj)(overlappingPatterns));
-}
-function buildPatternOverlapFinding(repairId, otherRepairId, bucket, patterns) {
-    if (bucket === "forbidden") {
-        return {
-            kind: "active_scope_pattern_overlap",
-            severity: "blocking",
-            repair_id: repairId,
-            other_repair_id: otherRepairId,
-            overlap: { bucket, patterns },
-            reason: `This repair overlaps a forbidden scope in active repair ${otherRepairId}.`,
-            recommended_action: "request_replan",
-        };
-    }
-    if (bucket === "review_required") {
-        return {
-            kind: "active_scope_pattern_overlap",
-            severity: "requires_human_audit",
-            repair_id: repairId,
-            other_repair_id: otherRepairId,
-            overlap: { bucket, patterns },
-            reason: `This repair overlaps a review-required scope in active repair ${otherRepairId}.`,
-            recommended_action: "human_review",
-        };
-    }
-    return {
-        kind: "active_scope_pattern_overlap",
-        severity: "warning",
-        repair_id: repairId,
-        other_repair_id: otherRepairId,
-        overlap: { bucket, patterns },
-        reason: `This repair overlaps an allowed scope in active repair ${otherRepairId}.`,
-        recommended_action: "continue",
-    };
-}
-function buildActualOverlapFinding(repairId, otherRepairId, bucket, files) {
-    if (bucket === "forbidden") {
-        return {
-            kind: "actual_changed_file_overlap",
-            severity: "blocking",
-            repair_id: repairId,
-            other_repair_id: otherRepairId,
-            overlap: { bucket, files },
-            reason: `Changed files overlap a forbidden scope in active repair ${otherRepairId}.`,
-            recommended_action: "request_replan",
-        };
-    }
-    if (bucket === "review_required") {
-        return {
-            kind: "actual_changed_file_overlap",
-            severity: "requires_human_audit",
-            repair_id: repairId,
-            other_repair_id: otherRepairId,
-            overlap: { bucket, files },
-            reason: `Changed files overlap a review-required scope in active repair ${otherRepairId}.`,
-            recommended_action: "human_review",
-        };
-    }
-    return {
-        kind: "actual_changed_file_overlap",
-        severity: "warning",
-        repair_id: repairId,
-        other_repair_id: otherRepairId,
-        overlap: { bucket, files },
-        reason: `Changed files overlap an allowed scope in active repair ${otherRepairId}.`,
-        recommended_action: "continue",
-    };
-}
-function patternsOverlap(left, right) {
-    return (0,repairUtils/* matchesPattern */.MT)(left, right) || (0,repairUtils/* matchesPattern */.MT)(right, left) || left === right;
-}
-function strongerBucket(left, right) {
-    const rank = { allowed: 0, review_required: 1, forbidden: 2 };
-    return rank[left] >= rank[right] ? left : right;
-}
-
-// EXTERNAL MODULE: ./src/cli/artifactLayout.ts
-var artifactLayout = __nccwpck_require__(932);
-// EXTERNAL MODULE: ./src/artifacts/artifactSanitizer.ts
-var artifactSanitizer = __nccwpck_require__(398);
-;// CONCATENATED MODULE: ./src/governanceLog/governanceEventSanitizer.ts
-
-const DIFF_HUNK_PATTERNS = [
-    /^@@ /m,
-    /^diff --git /m,
-    /^\+\+\+ /m,
-    /^--- /m,
-];
-function sanitizeGovernanceEvent(event) {
-    const text = JSON.stringify(event, null, 2);
-    const violations = [];
-    const artifactScan = (0,artifactSanitizer/* sanitizeArtifact */.k)(text, "public");
-    for (const violation of artifactScan.violations) {
-        violations.push({
-            kind: violation.kind === "stack_trace"
-                ? "stack_trace"
-                : violation.kind === "secret_like_key"
-                    ? "secret_like_value"
-                    : "absolute_path",
-            message: violation.message,
-            match: violation.match,
-        });
-    }
-    for (const pattern of DIFF_HUNK_PATTERNS) {
-        const match = text.match(pattern);
-        if (match) {
-            violations.push({
-                kind: "diff_hunk",
-                message: "Diff hunk content must not be recorded in governance events.",
-                match: match[0],
-            });
-        }
-    }
-    for (const value of walkStringValues(event)) {
-        if (containsDiffHunkFragment(value)) {
-            violations.push({
-                kind: "diff_hunk",
-                message: "Diff hunk content must not be recorded in governance events.",
-                match: value.slice(0, 80),
-            });
-        }
-    }
-    return {
-        clean: violations.length === 0,
-        violations,
-    };
-}
-function walkStringValues(value) {
-    if (typeof value === "string") {
-        return [value];
-    }
-    if (Array.isArray(value)) {
-        return value.flatMap(item => walkStringValues(item));
-    }
-    if (value && typeof value === "object") {
-        return Object.values(value).flatMap(item => walkStringValues(item));
-    }
-    return [];
-}
-function containsDiffHunkFragment(value) {
-    return value
-        .split(/\r?\n/)
-        .map(line => line.trim())
-        .some(line => line.startsWith("@@ ")
-        || line.startsWith("diff --git ")
-        || line.startsWith("+++ ")
-        || line.startsWith("--- "));
-}
-
-;// CONCATENATED MODULE: ./src/governanceLog/governanceEventWriter.ts
-
-
-
-
-function governancePaths(repoRoot) {
-    const dir = (0,external_node_path_.join)((0,artifactLayout/* resolvePantheonDir */.NJ)(repoRoot), "governance");
-    return {
-        dir,
-        events: (0,external_node_path_.join)(dir, "events.jsonl"),
-    };
-}
-function ensureGovernanceDirs(repoRoot) {
-    const paths = governancePaths(repoRoot);
-    (0,external_node_fs_.mkdirSync)(paths.dir, { recursive: true });
-    return paths;
-}
-function tryAppendGovernanceEvent(repoRoot, event) {
-    const paths = ensureGovernanceDirs(repoRoot);
-    const sanitized = sanitizeGovernanceEvent(event);
-    if (!sanitized.clean) {
-        const detail = sanitized.violations.map(violation => violation.message).join("; ");
-        return {
-            ok: false,
-            error_kind: "invalid_event",
-            path: paths.events,
-            message: `Governance event sanitizer rejected event ${event.event_type}: ${detail}`,
-        };
-    }
-    try {
-        if (!(0,external_node_fs_.existsSync)(paths.events)) {
-            (0,external_node_fs_.appendFileSync)(paths.events, "");
-        }
-        (0,external_node_fs_.appendFileSync)(paths.events, `${JSON.stringify(event)}\n`);
-        return {
-            ok: true,
-            event_id: event.event_id,
-            path: paths.events,
-        };
-    }
-    catch (error) {
-        const code = error?.code;
-        return {
-            ok: false,
-            error_kind: code === "EACCES" || code === "EPERM" ? "permission_denied" : "io_error",
-            path: paths.events,
-            message: error instanceof Error ? error.message : String(error),
-        };
-    }
-}
-function appendGovernanceEvent(repoRoot, event) {
-    const result = tryAppendGovernanceEvent(repoRoot, event);
-    if (!result.ok) {
-        throw new Error(result.message);
-    }
-    return result;
-}
-
-;// CONCATENATED MODULE: ./src/review/reviewAttentionPolicy.ts
-function attentionLevelForVerdict(verdict, sanitizerViolations = 0) {
-    if (sanitizerViolations > 0) {
-        return "urgent";
-    }
-    switch (verdict) {
-        case "requires_review":
-            return "human_review";
-        case "requires_scope_expansion":
-        case "requires_replan":
-            return "blocking";
-        case "fail":
-            return "urgent";
-        case "pass":
-            return null;
-    }
-}
-
-;// CONCATENATED MODULE: ./src/review/reviewRequestBuilder.ts
-
-function buildReviewRequest(input) {
-    if (input.check.verdict === "pass" && (input.sanitizerViolations ?? 0) === 0) {
-        return null;
-    }
-    const effectiveVerdict = deriveReviewVerdict(input.check.verdict, input.sanitizerViolations ?? 0);
-    const attentionLevel = attentionLevelForVerdict(effectiveVerdict, input.sanitizerViolations ?? 0);
-    if (!attentionLevel) {
-        return null;
-    }
-    const files = input.check.findings
-        .flatMap(finding => isFileScopedFinding(finding) ? [{
-            path: finding.file,
-            bucket: (finding.kind === "review_required_file" || finding.kind === "architecture_review_required"
-                ? "review_required"
-                : finding.kind === "forbidden_file" || finding.kind === "architecture_forbidden"
-                    ? "forbidden"
-                    : "outside_scope"),
-            reason: finding.message,
-        }] : []);
-    const recommendedActions = dedupeActions([
-        ...input.check.findings.flatMap(toReviewActions),
-        ...(effectiveVerdict === "requires_review"
-            ? ["human_review"]
-            : []),
-        ...(effectiveVerdict === "requires_replan"
-            ? ["request_replan"]
-            : []),
-        ...(effectiveVerdict === "requires_scope_expansion"
-            ? ["request_scope_expansion"]
-            : []),
-        ...(effectiveVerdict === "fail"
-            ? ["revert_file"]
-            : []),
-    ]);
-    return {
-        schema_version: "pantheon_review_request@0.2.0",
-        review_id: `review_${input.repairId}`,
-        target: {
-            target_type: "repair",
-            target_id: input.repairId,
-            legacy_repair_id: input.repairId,
-        },
-        repair_id: input.repairId,
-        contract_revision: input.contractRevision,
-        source: input.source,
-        type: deriveRepairReviewType(input.check),
-        status: "open",
-        attention_level: attentionLevel,
-        verdict: effectiveVerdict,
-        reason: buildReviewReason(effectiveVerdict, input.check, input.sanitizerViolations ?? 0),
-        files,
-        recommended_actions: recommendedActions,
-        pr: input.pr,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-    };
-}
-function deriveReviewVerdict(verdict, sanitizerViolations) {
-    if (sanitizerViolations > 0) {
-        return "fail";
-    }
-    return verdict === "pass" ? "requires_review" : verdict;
-}
-function buildReviewReason(verdict, check, sanitizerViolations) {
-    if (sanitizerViolations > 0) {
-        return "Pantheon withheld one or more public artifacts because the sanitizer found blocked content.";
-    }
-    switch (verdict) {
-        case "requires_review":
-            return "This repair touched files that require human review.";
-        case "requires_scope_expansion":
-            return "This repair touched files outside the approved repair scope.";
-        case "requires_replan":
-            return "This repair plan is stale and must be regenerated for the current repository state.";
-        case "fail":
-            if (check.findings.some(finding => finding.kind === "forbidden_file")) {
-                return "This repair touched forbidden files under the current repair contract.";
-            }
-            return "Pantheon blocked this repair under the current repair contract.";
-    }
-}
-function isFileScopedFinding(finding) {
-    return ((finding.kind === "review_required_file"
-        || finding.kind === "outside_scope_file"
-        || finding.kind === "forbidden_file"
-        || finding.kind === "architecture_forbidden"
-        || finding.kind === "architecture_review_required")
-        && typeof finding.file === "string");
-}
-function toReviewActions(finding) {
-    return finding.allowed_actions.flatMap(action => {
-        switch (action) {
-            case "keep_for_human_review":
-                return ["human_review"];
-            case "request_scope_expansion":
-                return ["request_scope_expansion"];
-            case "request_replan":
-                return ["request_replan"];
-            case "revert_file":
-                return ["revert_file"];
-            default:
-                return [];
-        }
-    });
-}
-function dedupeActions(actions) {
-    return [...new Set(actions)];
-}
-function deriveRepairReviewType(check) {
-    if (check.findings.some(finding => finding.kind === "architecture_forbidden")) {
-        return "architecture_forbidden_change";
-    }
-    if (check.findings.some(finding => finding.kind === "architecture_review_required"
-        || finding.kind === "architecture_contract_modified")) {
-        return "architecture_boundary_violation";
-    }
-    return "repair_review";
-}
-function buildArchitectureMappingReviewRequest(input) {
-    if (input.unresolvedCount === 0) {
-        return null;
-    }
-    return {
-        schema_version: "pantheon_review_request@0.2.0",
-        review_id: `review_arch_map_${input.archId}`,
-        target: {
-            target_type: "architecture",
-            target_id: input.archId,
-        },
-        contract_revision: 0,
-        source: input.source,
-        type: "architecture_mapping_review",
-        status: "open",
-        attention_level: "human_review",
-        verdict: "requires_review",
-        reason: `Architecture ingestion extracted claims that require human mapping or verification. (${input.unresolvedCount} unresolved)`,
-        files: [],
-        recommended_actions: ["human_review"],
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-    };
-}
-
-// EXTERNAL MODULE: ./src/review/reviewQueueStore.ts + 1 modules
-var reviewQueueStore = __nccwpck_require__(643);
-// EXTERNAL MODULE: ./src/architecture/architectureArtifactLayout.ts
-var architectureArtifactLayout = __nccwpck_require__(756);
-;// CONCATENATED MODULE: ./src/cli/cmdRepair.ts
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function loadActiveArchitectureContract(repoRoot) {
-    const rootPaths = (0,architectureArtifactLayout/* architectureRootPaths */.Ei)(repoRoot);
-    if ((0,external_node_fs_.existsSync)(rootPaths.activeContract)) {
-        return JSON.parse((0,external_node_fs_.readFileSync)(rootPaths.activeContract, "utf-8"));
-    }
-    return null;
-}
-function cmdRepair(args) {
-    const subcommand = args[0];
-    switch (subcommand) {
-        case "intake":
-            cmdRepairIntake({
-                repoRoot: getFlag(args, "repo") ?? ".",
-                fromPath: getFlag(args, "from"),
-                intent: getFlag(args, "intent"),
-                suspectPaths: getAllFlags(args, "suspect"),
-                failingTests: getAllFlags(args, "failing-test"),
-                mustPreserve: getAllFlags(args, "must-preserve"),
-                agentId: getFlag(args, "agent-id"),
-                operatorId: getFlag(args, "operator") ?? "user",
-            });
-            return;
-        case "plan":
-            cmdRepairPlan({
-                repoRoot: getFlag(args, "repo") ?? ".",
-                repairId: requireRepairId(args, getFlag(args, "repo") ?? "."),
-                configPath: getFlag(args, "config"),
-                overrideBaseSha: getFlag(args, "override-base-sha"),
-                overrideHeadSha: getFlag(args, "override-head-sha"),
-                overrideCheckoutSha: getFlag(args, "override-checkout-sha"),
-                overrideSource: normalizeRepoStateSource(getFlag(args, "override-source")),
-            });
-            return;
-        case "audit":
-            cmdRepairAudit({
-                repoRoot: getFlag(args, "repo") ?? ".",
-                repairId: requireRepairId(args, getFlag(args, "repo") ?? "."),
-                targetRevision: Number.parseInt(requireFlag(args, "target-revision", "repair audit requires --target-revision <n>."), 10),
-                gate: normalizeGate(requireFlag(args, "gate", "repair audit requires --gate <bug_intake|repair_plan|post_repair>.")),
-                decision: getFlag(args, "decision") ?? "approve",
-                reason: requireFlag(args, "reason", "repair audit requires --reason."),
-                operatorId: getFlag(args, "operator") ?? "human",
-                addReview: getAllFlags(args, "add-review"),
-                addForbid: getAllFlags(args, "add-forbid"),
-                addMustPreserve: getAllFlags(args, "add-must-preserve"),
-            });
-            return;
-        case "check":
-            cmdRepairCheck({
-                repoRoot: getFlag(args, "repo") ?? ".",
-                repairId: requireRepairId(args, getFlag(args, "repo") ?? "."),
-                baseRef: getFlag(args, "base"),
-                headRef: getFlag(args, "head"),
-                diffJsonPath: getFlag(args, "diff-json"),
-            });
-            return;
-        case "list":
-            cmdRepairList({
-                repoRoot: getFlag(args, "repo") ?? ".",
-            });
-            return;
-        case "status":
-            cmdRepairStatus({
-                repoRoot: getFlag(args, "repo") ?? ".",
-            });
-            return;
-        case "show":
-            cmdRepairShow({
-                repoRoot: getFlag(args, "repo") ?? ".",
-                repairId: requireRepairId(args, getFlag(args, "repo") ?? "."),
-            });
-            return;
-        case "close":
-            cmdRepairClose({
-                repoRoot: getFlag(args, "repo") ?? ".",
-                repairId: requireRepairId(args, getFlag(args, "repo") ?? "."),
-                reason: requireFlag(args, "reason", "repair close requires --reason."),
-            });
-            return;
-        case "abandon":
-            cmdRepairAbandon({
-                repoRoot: getFlag(args, "repo") ?? ".",
-                repairId: requireRepairId(args, getFlag(args, "repo") ?? "."),
-                reason: requireFlag(args, "reason", "repair abandon requires --reason."),
-            });
-            return;
-        default:
-            console.error("Usage:");
-            console.error("  pantheon repair intake --from agent_bug_report.json [--agent-id claude-code]");
-            console.error("  pantheon repair intake --intent \"...\" --suspect path [--failing-test path]");
-            console.error("  pantheon repair plan --repair-id repair_abc123 [--config pantheon.alpha.json]");
-            console.error("  pantheon repair audit --repair-id repair_abc123 --target-revision 1 --gate repair_plan --decision approve --reason \"...\"");
-            console.error("  pantheon repair check --repair-id repair_abc123 [--base HEAD] [--diff-json path/to/synthetic_diff.json]");
-            console.error("  pantheon repair list");
-            console.error("  pantheon repair status");
-            console.error("  pantheon repair show --repair-id repair_abc123");
-            console.error("  pantheon repair close --repair-id repair_abc123 --reason \"merged\"");
-            console.error("  pantheon repair abandon --repair-id repair_abc123 --reason \"superseded\"");
-            process.exit(1);
-    }
-}
-function cmdRepairIntake(input) {
-    const repoRoot = (0,external_node_path_.resolve)(input.repoRoot);
-    (0,repairArtifactLayout/* ensureRepairDirs */.CF)(repoRoot);
-    const report = resolveIntakeReport(repoRoot, input);
-    const validation = validateRepairSourceReport(report, repoRoot);
-    const finding = buildBugFinding(validation);
-    const session = createRepairSession({
-        repoRoot,
-        agentId: input.agentId,
-        source: report.schema_version === "agent_bug_report@0.1.0" ? "agent_bug_report" : "user_report",
-        status: mapFindingStatusToSessionStatus(finding.status),
-    });
-    const paths = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, session.repair_id);
-    if (report.schema_version === "agent_bug_report@0.1.0") {
-        (0,external_node_fs_.writeFileSync)(paths.agentBugReport, JSON.stringify(report, null, 2));
-    }
-    else {
-        (0,external_node_fs_.writeFileSync)(paths.userBugReport, JSON.stringify(report, null, 2));
-    }
-    (0,external_node_fs_.writeFileSync)(paths.bugFinding, JSON.stringify(finding, null, 2));
-    repairAuditLog_appendRepairAuditEvent(repoRoot, session.repair_id, {
-        timestamp: new Date().toISOString(),
-        event: report.schema_version === "agent_bug_report@0.1.0" ? "agent_report_submitted" : "user_report_submitted",
-        repair_id: session.repair_id,
-        report_id: report.report_id,
-        detail: report.summary,
-    });
-    repairAuditLog_appendRepairAuditEvent(repoRoot, session.repair_id, {
-        timestamp: new Date().toISOString(),
-        event: "bug_report_validated",
-        repair_id: session.repair_id,
-        report_id: report.report_id,
-        finding_id: finding.finding_id,
-        detail: finding.status,
-    });
-    console.log("Pantheon Repair Intake\n");
-    console.log(`  Repair session: ${session.repair_id}`);
-    console.log(`  Report: ${report.report_id}`);
-    console.log(`  Finding: ${finding.status}`);
-    console.log(`  Run: pantheon repair plan --repair-id ${session.repair_id}`);
-    return session;
-}
-function cmdRepairPlan(input) {
+function repairPlanCommand_cmdRepairPlan(input) {
     const repoRoot = (0,external_node_path_.resolve)(input.repoRoot);
     (0,repairArtifactLayout/* ensureRepairDirs */.CF)(repoRoot);
     const session = repairSessionStore_loadRepairSession(repoRoot, input.repairId);
@@ -24426,227 +25517,51 @@ function cmdRepairPlan(input) {
         contract_revision: contract.revision,
         attention_level: "none",
     });
-    console.log("Pantheon Repair Plan\n");
-    console.log(`  Repair: ${contract.repair_id}`);
-    console.log(`  Revision: ${contract.revision}`);
-    console.log(`  Audit status: ${contract.audit_status}`);
-    if (overlapFindings.length > 0) {
-        console.log(`  Concurrent findings: ${overlapFindings.length}`);
+    const nextAction = `pantheon repair check --repair-id ${contract.repair_id}`;
+    if (input.json) {
+        console.log(JSON.stringify(emitCliEnvelope({
+            command: "pantheon repair plan",
+            targetType: "repair",
+            targetId: contract.repair_id,
+            verdict: contract.audit_status,
+            findings: overlapFindings.map(finding => ({
+                kind: finding.kind,
+                severity: finding.severity,
+                message: finding.reason,
+            })),
+            nextActions: [nextAction],
+            artifactPaths: [paths.task, paths.scope, paths.checklist, paths.contractLatest],
+            repoRoot,
+            details: {
+                revision: contract.revision,
+                audit_status: contract.audit_status,
+                concurrent_findings: overlapFindings.length,
+            },
+        }), null, 2));
+        return;
     }
-    console.log(`  Output: ${paths.task}`);
-}
-function cmdRepairAudit(input) {
-    const repoRoot = (0,external_node_path_.resolve)(input.repoRoot);
-    (0,repairArtifactLayout/* ensureRepairDirs */.CF)(repoRoot);
-    const paths = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, input.repairId);
-    const session = repairSessionStore_loadRepairSession(repoRoot, input.repairId);
-    const decision = buildHumanAuditDecision({
-        repairId: input.repairId,
-        targetRevision: input.targetRevision,
-        gate: input.gate,
-        decision: normalizeDecision(input.gate, input.decision),
-        operatorId: input.operatorId,
-        reason: input.reason,
-        addReview: input.addReview,
-        addForbid: input.addForbid,
-        addMustPreserve: input.addMustPreserve,
-    });
-    writeHumanAuditDecision(repoRoot, decision);
-    if (input.gate === "bug_intake") {
-        const finding = loadBugFinding(paths);
-        const updatedFinding = applyBugIntakeDecision(finding, decision);
-        (0,external_node_fs_.writeFileSync)(paths.bugFinding, JSON.stringify(updatedFinding, null, 2));
-        updateRepairSession(repoRoot, input.repairId, current => ({
-            ...current,
-            status: mapFindingStatusToSessionStatus(updatedFinding.status),
-            updated_at: new Date().toISOString(),
-        }));
-    }
-    else {
-        const contract = loadCurrentRepairContract(repoRoot, input.repairId);
-        try {
-            const updatedContract = applyHumanAuditDecision(contract, decision);
-            const report = loadStoredRepairReport(paths);
-            const finding = loadBugFinding(paths);
-            writeRepairPlanArtifacts(repoRoot, report, finding, updatedContract);
-            updateSessionFromContract({
-                repoRoot,
-                repairId: updatedContract.repair_id,
-                revision: updatedContract.revision,
-                status: mapAuditStatusToSessionStatus(updatedContract.audit_status),
-                scopeSummary: buildScopeSummary(updatedContract),
-                riskLevel: deriveRiskLevel(updatedContract),
-                baseSha: updatedContract.repo_state.base_sha,
-            });
-        }
-        catch (error) {
-            repairAuditLog_appendRepairAuditEvent(repoRoot, input.repairId, {
-                timestamp: new Date().toISOString(),
-                event: input.gate === "post_repair" ? "human_post_repair_decision" : "human_plan_decision",
-                repair_id: input.repairId,
-                decision_id: decision.decision_id,
-                detail: error instanceof Error ? error.message : String(error),
-            });
-            throw error;
-        }
-    }
-    repairAuditLog_appendRepairAuditEvent(repoRoot, input.repairId, {
-        timestamp: new Date().toISOString(),
-        event: input.gate === "post_repair" ? "human_post_repair_decision" : input.gate === "repair_plan" ? "human_plan_decision" : "human_intake_decision",
-        repair_id: input.repairId,
-        decision_id: decision.decision_id,
-        detail: `${decision.decision}: ${decision.reason}`,
-    });
-    console.log("Pantheon Repair Audit\n");
-    console.log(`  Repair: ${session.repair_id}`);
-    console.log(`  Gate: ${input.gate}`);
-    console.log(`  Decision: ${decision.decision}`);
-    console.log(`  Output: ${paths.humanAuditDecision(decision.decision_id)}`);
-}
-function cmdRepairCheck(input) {
-    const repoRoot = (0,external_node_path_.resolve)(input.repoRoot);
-    let contract = loadCurrentRepairContract(repoRoot, input.repairId);
-    const paths = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, input.repairId);
-    const report = loadStoredRepairReport(paths);
-    const diff = readRepairDiff({
+    printCliOutcome({
+        title: "Pantheon Repair Plan",
+        verdict: contract.audit_status,
+        why: overlapFindings.map(finding => finding.reason),
+        nextActions: [nextAction],
+        artifactPaths: [paths.task, paths.scope, paths.checklist, paths.contractLatest],
         repoRoot,
-        baseRef: input.baseRef,
-        headRef: input.headRef,
-        diffJsonPath: input.diffJsonPath,
-        changedFilesOverride: input.changedFilesOverride,
-    });
-    const filteredDiff = {
-        ...diff,
-        // Pantheon-generated local state must never cause a repair to fail itself.
-        changed_files: diff.changed_files.filter((file) => !file.path.startsWith(".pantheon/")),
-    };
-    const archContractModified = diff.changed_files.some(f => f.path === ".pantheon/architecture/architecture_contract.json");
-    let baseArchContract = null;
-    const targetBase = input.baseRef || input.prBaseSha;
-    if (targetBase) {
-        const result = loadBaseArchitectureContract(repoRoot, targetBase);
-        if (result.status === "loaded" && result.contract) {
-            baseArchContract = result.contract;
-            const adapterResult = adaptArchitectureConstraintsForRepair({
-                contract: baseArchContract,
-                repairSubjects: [],
-            });
-            const newForbidden = [...contract.repair_scope.forbidden];
-            const newReviewRequired = [...contract.repair_scope.review_required];
-            const newAllowed = [...contract.repair_scope.allowed];
-            for (const entry of adapterResult.entries) {
-                if (entry.audit_weight === "critical")
-                    newForbidden.push(entry);
-                else if (entry.audit_weight === "elevated")
-                    newReviewRequired.push(entry);
-                else
-                    newAllowed.push(entry);
-            }
-            contract = {
-                ...contract,
-                repair_scope: {
-                    forbidden: newForbidden,
-                    review_required: newReviewRequired,
-                    allowed: newAllowed,
-                }
-            };
-        }
-    }
-    const baseResult = verifyRepairDiff({
-        contract,
-        diff: filteredDiff,
-    });
-    let newFindings = [...baseResult.check.findings];
-    if (archContractModified) {
-        newFindings.push({
-            evidence: ["architecture_contract_modified"],
-            kind: "architecture_contract_modified",
-            allowed_actions: ["request_architecture_review"],
-            message: "This repair modifies the architecture contract. The base branch architecture contract was used to evaluate business code changes.",
-            severity: "review_required",
-            requires_human: true,
-        });
-    }
-    const currentRepoState = input.diffJsonPath || input.changedFilesOverride
-        ? captureRepoStateSnapshot({
-            repoRoot,
-            diffBase: contract.repo_state.base_sha,
-            source: "synthetic",
-        })
-        : captureRepoStateSnapshot({
-            repoRoot,
-            diffBase: input.baseRef,
-            source: "git",
-        });
-    const staleFindings = detectStaleRepairPlan({
-        contractState: contract.repo_state,
-        currentState: currentRepoState,
-    }).map(finding => stalePlanToRepairFinding(finding));
-    const overlapFindings = detectActualChangedFileOverlaps({
-        repairId: contract.repair_id,
-        changedFiles: filteredDiff.changed_files.map(file => file.path),
-        otherContracts: loadOtherActiveContracts(repoRoot, contract.repair_id),
-    });
-    const overlapRepairFindings = overlapFindings.map(finding => concurrentToRepairFinding(finding));
-    const findings = [
-        ...newFindings,
-        ...staleFindings,
-        ...overlapRepairFindings,
-    ];
-    const verdict = deriveRepairVerdictFromFindings(findings);
-    const finalCheck = {
-        ...baseResult.check,
-        verdict,
-        findings,
-        concurrent_findings: [
-            ...staleFindings.map(finding => repairFindingToConcurrentFinding(contract.repair_id, finding)),
-            ...overlapFindings,
+        details: [
+            `Repair ID: ${contract.repair_id}`,
+            `Revision: ${contract.revision}`,
+            `Concurrent findings: ${overlapFindings.length}`,
         ],
-        summary: {
-            ...baseResult.check.summary,
-            warnings: findings.filter(finding => finding.severity === "warning").length,
-        },
-    };
-    const feedback = buildRepairFeedbackFromCheck(finalCheck);
-    (0,external_node_fs_.writeFileSync)(paths.check, JSON.stringify(finalCheck, null, 2));
-    (0,external_node_fs_.writeFileSync)(paths.report, renderRepairReportMarkdown({ report, contract, check: finalCheck }));
-    (0,external_node_fs_.writeFileSync)(paths.feedback, renderRepairFeedbackMarkdown(feedback));
-    updateSessionFromContract({
-        repoRoot,
-        repairId: contract.repair_id,
-        revision: contract.revision,
-        status: mapVerdictToSessionStatus(finalCheck.verdict),
-        scopeSummary: buildScopeSummary(contract),
-        riskLevel: deriveRiskLevel(contract),
-        baseSha: contract.repo_state.base_sha,
     });
-    repairAuditLog_appendRepairAuditEvent(repoRoot, input.repairId, {
-        timestamp: new Date().toISOString(),
-        event: "agent_repair_checked",
-        repair_id: contract.repair_id,
-        detail: finalCheck.verdict,
-    });
-    syncHumanAttention(repoRoot, {
-        source: input.sourceOverride ?? "local_cli",
-        repairId: contract.repair_id,
-        contract,
-        check: finalCheck,
-        prNumber: input.prNumber,
-        prBaseSha: input.prBaseSha,
-        prHeadSha: input.prHeadSha,
-        artifactDir: input.artifactDir,
-        sanitizerViolations: input.sanitizerViolations ?? 0,
-    });
-    console.log("Pantheon Repair Check\n");
-    console.log(`  Repair: ${contract.repair_id}`);
-    console.log(`  Verdict: ${finalCheck.verdict}`);
-    console.log(`  Changed files: ${finalCheck.summary.changed_files}`);
-    if (finalCheck.concurrent_findings.length > 0) {
-        console.log(`  Concurrent findings: ${finalCheck.concurrent_findings.length}`);
-    }
-    console.log(`  Output: ${paths.report}`);
 }
-function cmdRepairList(input) {
+
+;// CONCATENATED MODULE: ./src/cli/repair/repairSessionCommands.ts
+
+
+
+
+
+function repairSessionCommands_cmdRepairList(input) {
     const repoRoot = resolve(input.repoRoot);
     const index = listRepairSessions(repoRoot);
     console.log("Pantheon Repair Sessions\n");
@@ -24661,7 +25576,7 @@ function cmdRepairList(input) {
         console.log(`  ${session.repair_id}  ${session.status}  rev=${session.current_revision}`);
     }
 }
-function cmdRepairStatus(input) {
+function repairSessionCommands_cmdRepairStatus(input) {
     const repoRoot = resolve(input.repoRoot);
     const index = listRepairSessions(repoRoot);
     console.log("Active repair sessions:\n");
@@ -24682,7 +25597,7 @@ function cmdRepairStatus(input) {
         console.log("");
     }
 }
-function cmdRepairShow(input) {
+function repairSessionCommands_cmdRepairShow(input) {
     const repoRoot = resolve(input.repoRoot);
     const session = loadRepairSession(repoRoot, input.repairId);
     const paths = repairRunPaths(repoRoot, input.repairId);
@@ -24695,7 +25610,7 @@ function cmdRepairShow(input) {
         console.log(`  Contract: ${paths.contractLatest}`);
     }
 }
-function cmdRepairClose(input) {
+function repairSessionCommands_cmdRepairClose(input) {
     const repoRoot = resolve(input.repoRoot);
     const session = closeRepairSession({
         repoRoot,
@@ -24711,7 +25626,7 @@ function cmdRepairClose(input) {
     });
     console.log(`Closed repair session ${session.repair_id}.`);
 }
-function cmdRepairAbandon(input) {
+function repairSessionCommands_cmdRepairAbandon(input) {
     const repoRoot = resolve(input.repoRoot);
     const session = closeRepairSession({
         repoRoot,
@@ -24727,588 +25642,117 @@ function cmdRepairAbandon(input) {
     });
     console.log(`Abandoned repair session ${session.repair_id}.`);
 }
-function resolveIntakeReport(repoRoot, input) {
-    if (input.fromPath) {
-        return loadRepairSourceReport((0,external_node_path_.resolve)(input.fromPath));
-    }
-    if (!input.intent) {
-        throw new Error("repair intake requires --from <report.json> or --intent <summary>.");
-    }
-    if ((input.suspectPaths ?? []).length === 0) {
-        throw new Error("repair intake requires at least one --suspect path for user-initiated repair.");
-    }
-    return buildUserBugReport({
-        intent: input.intent,
-        suspectPaths: input.suspectPaths ?? [],
-        failingTests: input.failingTests ?? [],
-        mustPreserve: input.mustPreserve ?? [],
-        operatorId: input.operatorId ?? "user",
-    });
-}
-function loadRepairPlanningContext(repoRoot, configPath = "pantheon.json") {
-    const pantheonConfig = loadPantheonConfig(repoRoot, configPath);
-    const repoObsConfig = loadRepoObservationConfig(repoRoot);
-    const observations = scanRepo({
-        repoRoot,
-        config: {
-            ...repoObsConfig.config,
-            path_roles: {
-                ...(repoObsConfig.config.path_roles ?? {}),
-                ...Object.fromEntries(Object.entries(pantheonConfig.config.path_roles)
-                    .filter(([, value]) => ["src", "test", "config", "generated", "docs", "script", "asset", "unknown"].includes(value))
-                    .map(([key, value]) => [key, value])),
-            },
-        },
-    });
-    let pythonSidecar = null;
-    if (hasPythonSignals(observations.observations.files.map(file => file.path))) {
-        pythonSidecar = enhanceWithPythonObservations(observations, repoRoot, pantheonConfig.config.python
-            ? {
-                project_packages: pantheonConfig.config.python.project_packages,
-                sensitive_overrides: pantheonConfig.config.python.sensitive_overrides,
-            }
-            : undefined);
-    }
-    return {
-        observations,
-        pythonSidecar,
-        protectedPatterns: pantheonConfig.config.protected,
-        architectureContract: loadActiveArchitectureContract(repoRoot) ?? undefined,
-    };
-}
-function writeRepairPlanArtifacts(repoRoot, report, finding, contract) {
-    const paths = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, contract.repair_id);
-    if (report.schema_version === "agent_bug_report@0.1.0") {
-        (0,external_node_fs_.writeFileSync)(paths.agentBugReport, JSON.stringify(report, null, 2));
-    }
-    else {
-        (0,external_node_fs_.writeFileSync)(paths.userBugReport, JSON.stringify(report, null, 2));
-    }
-    (0,external_node_fs_.writeFileSync)(paths.bugFinding, JSON.stringify(finding, null, 2));
-    (0,external_node_fs_.writeFileSync)(paths.contractRevision(contract.revision), JSON.stringify(contract, null, 2));
-    (0,external_node_fs_.writeFileSync)(paths.contractLatest, JSON.stringify(contract, null, 2));
-    (0,external_node_fs_.writeFileSync)(paths.relationGraph, JSON.stringify(contract.repair_relation_graph, null, 2));
-    (0,external_node_fs_.writeFileSync)(paths.task, renderRepairTaskMarkdown({ report, finding, contract }));
-    (0,external_node_fs_.writeFileSync)(paths.scope, renderRepairScopeMarkdown(contract));
-    (0,external_node_fs_.writeFileSync)(paths.checklist, renderConsistencyChecklistMarkdown(contract));
-}
-function loadStoredRepairReport(paths) {
-    if ((0,external_node_fs_.existsSync)(paths.agentBugReport)) {
-        return (0,repairUtils/* readJsonFile */.JE)(paths.agentBugReport);
-    }
-    if ((0,external_node_fs_.existsSync)(paths.userBugReport)) {
-        return (0,repairUtils/* readJsonFile */.JE)(paths.userBugReport);
-    }
-    throw new Error(`No repair report found for ${paths.repairId}.`);
-}
-function loadBugFinding(paths) {
-    if (!(0,external_node_fs_.existsSync)(paths.bugFinding)) {
-        throw new Error(`No bug finding found for ${paths.repairId}.`);
-    }
-    return (0,repairUtils/* readJsonFile */.JE)(paths.bugFinding);
-}
-function loadCurrentRepairContract(repoRoot, repairId) {
-    const session = repairSessionStore_loadRepairSession(repoRoot, repairId);
-    if (session.current_revision < 1) {
-        throw new Error(`Repair session ${repairId} has no generated repair plan yet.`);
-    }
-    const path = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, repairId).contractRevision(session.current_revision);
-    if (!(0,external_node_fs_.existsSync)(path)) {
-        throw new Error(`Repair contract revision ${session.current_revision} is missing for ${repairId}.`);
-    }
-    return (0,repairUtils/* readJsonFile */.JE)(path);
-}
-function loadOtherActiveContracts(repoRoot, currentRepairId) {
-    const index = repairSessionStore_listRepairSessions(repoRoot);
-    const contracts = [];
-    for (const session of index.active_repairs) {
-        if (session.repair_id === currentRepairId || session.current_revision < 1) {
-            continue;
-        }
-        const contractPath = (0,repairArtifactLayout/* repairRunPaths */.by)(repoRoot, session.repair_id).contractRevision(session.current_revision);
-        if ((0,external_node_fs_.existsSync)(contractPath)) {
-            contracts.push((0,repairUtils/* readJsonFile */.JE)(contractPath));
-        }
-    }
-    return contracts;
-}
-function applyBugIntakeDecision(finding, decision) {
-    switch (decision.decision) {
-        case "accept_report":
-            return { ...finding, status: "accepted", next_action: "repair_analysis" };
-        case "reject_report":
-            return { ...finding, status: "rejected", next_action: "none" };
-        case "needs_more_evidence":
-            return { ...finding, status: "needs_more_evidence", next_action: "await_more_evidence" };
-        case "mark_duplicate":
-            return { ...finding, status: "duplicate", next_action: "none" };
-        case "convert_to_backlog":
-            return { ...finding, status: "backlog_candidate", next_action: "none" };
-        default:
-            return finding;
-    }
-}
-function readRepairDiff(input) {
-    if (input.diffJsonPath) {
-        const rawData = (0,repairUtils/* readJsonFile */.JE)((0,external_node_path_.resolve)(input.diffJsonPath));
-        const synthetic = syntheticRepairDiffSchema.parse(rawData);
-        return {
-            base_ref: "synthetic",
-            changed_files: synthetic.changed_files.map(file => ({
-                path: file.path,
-                status: file.change_kind,
-            })),
-            warnings: [],
-        };
-    }
-    return (0,gitDiffReader/* readGitDiffSummary */.S)({
-        repoRoot: input.repoRoot,
-        baseRef: input.baseRef ?? "",
-        headRef: input.headRef,
-        changedFilesOverride: input.changedFilesOverride,
-    });
-}
-function syncHumanAttention(repoRoot, input) {
-    const event = buildGovernanceEventFromCheck(input);
-    appendGovernanceEvent(repoRoot, event);
-    const reviewRequest = buildReviewRequest({
-        repairId: input.repairId,
-        contractRevision: input.contract.revision,
-        source: input.source,
-        check: input.check,
-        contract: input.contract,
-        sanitizerViolations: input.sanitizerViolations,
-        pr: input.prNumber
-            ? {
-                provider: "github",
-                number: input.prNumber,
-            }
-            : undefined,
-    });
-    if (reviewRequest) {
-        (0,reviewQueueStore/* writeReviewRequest */.Fw)(repoRoot, reviewRequest);
-        appendGovernanceEvent(repoRoot, {
-            schema_version: "pantheon_governance_event@0.1.0",
-            event_id: `gov_${input.repairId}_review_${Date.now().toString(36)}`,
-            timestamp: new Date().toISOString(),
-            source: input.source,
-            event_type: "review_requested",
-            target_type: "repair",
-            target_id: input.repairId,
-            repair_id: input.repairId,
-            contract_revision: input.contract.revision,
-            verdict: reviewRequest.verdict,
-            attention_level: reviewRequest.attention_level,
-            reasons: buildGovernanceReasons(input.check),
-            artifact_dir: input.artifactDir,
-            sanitizer_violations: input.sanitizerViolations,
-        });
-    }
-    else {
-        const closed = (0,reviewQueueStore/* closeReviewRequest */.S4)(repoRoot, "repair", input.repairId);
-        if (closed) {
-            appendGovernanceEvent(repoRoot, {
-                schema_version: "pantheon_governance_event@0.1.0",
-                event_id: `gov_${input.repairId}_review_resolved_${Date.now().toString(36)}`,
-                timestamp: new Date().toISOString(),
-                source: input.source,
-                event_type: "review_resolved",
-                target_type: "repair",
-                target_id: input.repairId,
-                repair_id: input.repairId,
-                contract_revision: input.contract.revision,
-                verdict: input.check.verdict,
-                attention_level: "none",
+
+;// CONCATENATED MODULE: ./src/cli/cmdRepair.ts
+
+
+
+
+
+
+
+
+function cmdRepair(args) {
+    const subcommand = args[0];
+    const repoRoot = getFlag(args, "repo") ?? ".";
+    switch (subcommand) {
+        case "intake":
+            cmdRepairIntake({
+                repoRoot,
+                fromPath: getFlag(args, "from"),
+                intent: getFlag(args, "intent"),
+                suspectPaths: getAllFlags(args, "suspect"),
+                failingTests: getAllFlags(args, "failing-test"),
+                mustPreserve: getAllFlags(args, "must-preserve"),
+                agentId: getFlag(args, "agent-id"),
+                operatorId: getFlag(args, "operator") ?? "user",
+                json: hasFlag(args, "json"),
             });
-        }
-    }
-    if (input.check.verdict === "requires_replan") {
-        appendGovernanceEvent(repoRoot, {
-            schema_version: "pantheon_governance_event@0.1.0",
-            event_id: `gov_${input.repairId}_replan_${Date.now().toString(36)}`,
-            timestamp: new Date().toISOString(),
-            source: input.source,
-            event_type: "repair_replanned",
-            target_type: "repair",
-            target_id: input.repairId,
-            repair_id: input.repairId,
-            contract_revision: input.contract.revision,
-            verdict: input.check.verdict,
-            attention_level: "blocking",
-            reasons: buildGovernanceReasons(input.check),
-        });
-    }
-    else if (input.check.verdict === "fail" || input.check.verdict === "requires_scope_expansion") {
-        appendGovernanceEvent(repoRoot, {
-            schema_version: "pantheon_governance_event@0.1.0",
-            event_id: `gov_${input.repairId}_blocked_${Date.now().toString(36)}`,
-            timestamp: new Date().toISOString(),
-            source: input.source,
-            event_type: "repair_blocked",
-            target_type: "repair",
-            target_id: input.repairId,
-            repair_id: input.repairId,
-            contract_revision: input.contract.revision,
-            verdict: input.check.verdict,
-            attention_level: input.check.verdict === "fail" ? "urgent" : "blocking",
-            reasons: buildGovernanceReasons(input.check),
-        });
-    }
-    if (input.sanitizerViolations > 0) {
-        appendGovernanceEvent(repoRoot, {
-            schema_version: "pantheon_governance_event@0.1.0",
-            event_id: `gov_${input.repairId}_sanitizer_${Date.now().toString(36)}`,
-            timestamp: new Date().toISOString(),
-            source: input.source,
-            event_type: "artifact_sanitizer_violation",
-            target_type: "repair",
-            target_id: input.repairId,
-            repair_id: input.repairId,
-            contract_revision: input.contract.revision,
-            verdict: "fail",
-            attention_level: "urgent",
-            sanitizer_violations: input.sanitizerViolations,
-            artifact_dir: input.artifactDir,
-            reasons: [{
-                    kind: "artifact_sanitizer_violation",
-                    action: "block_merge",
-                }],
-        });
-    }
-}
-function buildScopeSummary(contract) {
-    return {
-        allowed: contract.repair_scope.allowed.map(entry => entry.pattern),
-        review_required: contract.repair_scope.review_required.map(entry => entry.pattern),
-        forbidden: contract.repair_scope.forbidden.map(entry => entry.pattern),
-    };
-}
-function deriveRiskLevel(contract) {
-    if (contract.repair_scope.forbidden.length > 0
-        || contract.impact_surface.risk_areas.some(area => area.severity === "critical")) {
-        return "high";
-    }
-    if (contract.repair_scope.review_required.length > 0
-        || contract.impact_surface.unknowns.length > 0) {
-        return "medium";
-    }
-    if (contract.repair_scope.allowed.length > 0) {
-        return "low";
-    }
-    return "unknown";
-}
-function buildGovernanceEventFromCheck(input) {
-    return {
-        schema_version: "pantheon_governance_event@0.1.0",
-        event_id: `gov_${input.repairId}_check_${Date.now().toString(36)}`,
-        timestamp: new Date().toISOString(),
-        source: input.source,
-        event_type: "repair_check_completed",
-        target_type: "repair",
-        target_id: input.repairId,
-        repair_id: input.repairId,
-        contract_revision: input.contract.revision,
-        pr: input.prNumber
-            ? {
-                provider: "github",
-                number: input.prNumber,
-                base_sha: input.prBaseSha,
-                head_sha: input.prHeadSha,
-            }
-            : undefined,
-        verdict: input.check.verdict,
-        attention_level: governanceAttentionForVerdict(input.check.verdict, input.sanitizerViolations),
-        changed_files_count: input.check.summary.changed_files,
-        bucket_counts: {
-            allowed: input.check.summary.allowed,
-            review_required: input.check.summary.review_required,
-            forbidden: input.check.summary.forbidden,
-            outside_scope: input.check.summary.outside_scope,
-        },
-        reasons: buildGovernanceReasons(input.check),
-        sanitizer_violations: input.sanitizerViolations,
-        artifact_dir: input.artifactDir,
-    };
-}
-function buildGovernanceReasons(check) {
-    const reasons = [];
-    for (const finding of check.findings) {
-        switch (finding.kind) {
-            case "review_required_file":
-                reasons.push({
-                    kind: "review_required",
-                    file: finding.file,
-                    action: "human_review",
-                });
-                break;
-            case "outside_scope_file":
-                reasons.push({
-                    kind: "outside_scope",
-                    file: finding.file,
-                    action: "request_scope_expansion",
-                });
-                break;
-            case "forbidden_file":
-                reasons.push({
-                    kind: "forbidden_file_touched",
-                    file: finding.file,
-                    action: "revert_file",
-                });
-                break;
-            case "stale_repair_contract":
-                reasons.push({
-                    kind: "stale_repair_contract",
-                    action: "request_replan",
-                });
-                break;
-            case "architecture_forbidden":
-                reasons.push({
-                    kind: "architecture_forbidden",
-                    file: finding.file,
-                    action: "block_merge",
-                });
-                break;
-            case "architecture_review_required":
-                reasons.push({
-                    kind: "architecture_review_required",
-                    file: finding.file,
-                    action: "human_review",
-                });
-                break;
-            case "architecture_contract_modified":
-                reasons.push({
-                    kind: "architecture_contract_modified",
-                    action: "human_review",
-                });
-                break;
-            case "active_scope_pattern_overlap":
-            case "actual_changed_file_overlap":
-                reasons.push({
-                    kind: "concurrent_repair_overlap",
-                    file: finding.file,
-                    action: finding.severity === "blocking" ? "block_merge" : "human_review",
-                });
-                break;
-            default:
-                break;
-        }
-    }
-    return dedupeGovernanceReasons(reasons);
-}
-function dedupeGovernanceReasons(reasons) {
-    const seen = new Set();
-    const result = [];
-    for (const reason of reasons) {
-        const key = `${reason.kind}:${reason.file ?? ""}:${reason.pattern ?? ""}:${reason.action}`;
-        if (seen.has(key))
-            continue;
-        seen.add(key);
-        result.push(reason);
-    }
-    return result;
-}
-function governanceAttentionForVerdict(verdict, sanitizerViolations) {
-    if (sanitizerViolations > 0)
-        return "urgent";
-    switch (verdict) {
-        case "pass":
-            return "none";
-        case "requires_review":
-            return "human_review";
-        case "requires_scope_expansion":
-        case "requires_replan":
-            return "blocking";
-        case "fail":
-            return "urgent";
-    }
-}
-function mapFindingStatusToSessionStatus(status) {
-    switch (status) {
-        case "accepted":
-            return "intake_accepted";
-        case "rejected":
-            return "intake_rejected";
+            return;
+        case "plan":
+            cmdRepairPlan({
+                repoRoot,
+                repairId: requireRepairId(args, repoRoot),
+                configPath: getFlag(args, "config"),
+                overrideBaseSha: getFlag(args, "override-base-sha"),
+                overrideHeadSha: getFlag(args, "override-head-sha"),
+                overrideCheckoutSha: getFlag(args, "override-checkout-sha"),
+                overrideSource: normalizeRepoStateSource(getFlag(args, "override-source")),
+                json: hasFlag(args, "json"),
+            });
+            return;
+        case "audit":
+            cmdRepairAudit({
+                repoRoot,
+                repairId: requireRepairId(args, repoRoot),
+                targetRevision: Number.parseInt(requireFlag(args, "target-revision", "repair audit requires --target-revision <n>."), 10),
+                gate: normalizeGate(requireFlag(args, "gate", "repair audit requires --gate <bug_intake|repair_plan|post_repair>.")),
+                decision: getFlag(args, "decision") ?? "approve",
+                reason: requireFlag(args, "reason", "repair audit requires --reason."),
+                operatorId: getFlag(args, "operator") ?? "human",
+                addReview: getAllFlags(args, "add-review"),
+                addForbid: getAllFlags(args, "add-forbid"),
+                addMustPreserve: getAllFlags(args, "add-must-preserve"),
+            });
+            return;
+        case "check":
+            cmdRepairCheck({
+                repoRoot,
+                repairId: requireRepairId(args, repoRoot),
+                baseRef: getFlag(args, "base"),
+                headRef: getFlag(args, "head"),
+                diffJsonPath: getFlag(args, "diff-json"),
+                json: hasFlag(args, "json"),
+                redact: hasFlag(args, "redact"),
+                exitOnResult: true,
+            });
+            return;
+        case "list":
+            cmdRepairList({ repoRoot });
+            return;
+        case "status":
+            cmdRepairStatus({ repoRoot });
+            return;
+        case "show":
+            cmdRepairShow({
+                repoRoot,
+                repairId: requireRepairId(args, repoRoot),
+            });
+            return;
+        case "close":
+            cmdRepairClose({
+                repoRoot,
+                repairId: requireRepairId(args, repoRoot),
+                reason: requireFlag(args, "reason", "repair close requires --reason."),
+            });
+            return;
+        case "abandon":
+            cmdRepairAbandon({
+                repoRoot,
+                repairId: requireRepairId(args, repoRoot),
+                reason: requireFlag(args, "reason", "repair abandon requires --reason."),
+            });
+            return;
         default:
-            return "intake_created";
+            console.error("Usage:");
+            console.error("  pantheon repair intake --from agent_bug_report.json [--agent-id claude-code]");
+            console.error("  pantheon repair intake --intent \"...\" --suspect path [--failing-test path]");
+            console.error("  pantheon repair plan --repair-id repair_abc123 [--config pantheon.alpha.json]");
+            console.error("  pantheon repair audit --repair-id repair_abc123 --target-revision 1 --gate repair_plan --decision approve --reason \"...\"");
+            console.error("  pantheon repair check --repair-id repair_abc123 [--base HEAD] [--diff-json path/to/synthetic_diff.json] [--json] [--redact]");
+            console.error("  pantheon repair list");
+            console.error("  pantheon repair status");
+            console.error("  pantheon repair show --repair-id repair_abc123");
+            console.error("  pantheon repair close --repair-id repair_abc123 --reason \"merged\"");
+            console.error("  pantheon repair abandon --repair-id repair_abc123 --reason \"superseded\"");
+            process.exit(1);
     }
-}
-function mapAuditStatusToSessionStatus(status) {
-    switch (status) {
-        case "approved_repair_plan":
-            return "plan_approved";
-        case "approved_with_modifications":
-            return "plan_restricted";
-        case "manual_repair_required":
-            return "manual_repair_required";
-        default:
-            return "plan_pending_audit";
-    }
-}
-function mapVerdictToSessionStatus(verdict) {
-    switch (verdict) {
-        case "pass":
-            return "repair_checked_pass";
-        case "requires_review":
-            return "repair_checked_requires_review";
-        case "requires_scope_expansion":
-            return "repair_checked_requires_scope_expansion";
-        case "requires_replan":
-            return "repair_checked_requires_replan";
-        case "fail":
-            return "repair_checked_fail";
-    }
-}
-function stalePlanToRepairFinding(finding) {
-    if (finding.kind === "stale_repair_contract") {
-        return {
-            kind: "stale_repair_contract",
-            severity: "blocking",
-            message: finding.reason,
-            allowed_actions: ["request_replan"],
-            requires_human: true,
-            evidence: ["repo_state:base_sha_mismatch"],
-        };
-    }
-    return {
-        kind: "working_tree_changed",
-        severity: "warning",
-        message: finding.reason,
-        allowed_actions: ["keep_for_human_review"],
-        requires_human: false,
-        evidence: ["repo_state:working_tree_changed"],
-    };
-}
-function concurrentToRepairFinding(finding) {
-    const actions = finding.recommended_action === "request_replan"
-        ? ["request_replan"]
-        : finding.recommended_action === "human_review"
-            ? ["keep_for_human_review"]
-            : ["keep_for_human_review"];
-    const severity = finding.severity === "blocking"
-        ? "blocking"
-        : finding.severity === "requires_human_audit"
-            ? "requires_human_audit"
-            : "warning";
-    return {
-        kind: finding.kind,
-        severity,
-        message: finding.reason,
-        allowed_actions: actions,
-        requires_human: finding.severity === "blocking" || finding.severity === "requires_human_audit",
-        bucket: finding.overlap?.bucket,
-        other_repair_id: finding.other_repair_id,
-        evidence: [
-            `repair:${finding.repair_id}`,
-            ...(finding.other_repair_id ? [`other_repair:${finding.other_repair_id}`] : []),
-        ],
-    };
-}
-function repairFindingToConcurrentFinding(repairId, finding) {
-    return {
-        kind: finding.kind === "stale_repair_contract" ? "stale_repair_contract" : "working_tree_changed",
-        severity: finding.kind === "stale_repair_contract" ? "blocking" : "warning",
-        repair_id: repairId,
-        reason: finding.message,
-        recommended_action: finding.kind === "stale_repair_contract" ? "request_replan" : "continue",
-    };
-}
-function normalizeGate(value) {
-    if (value === "intake")
-        return "bug_intake";
-    if (value === "plan")
-        return "repair_plan";
-    if (value === "post")
-        return "post_repair";
-    if (value === "bug_intake" || value === "repair_plan" || value === "post_repair") {
-        return value;
-    }
-    throw new Error(`Unknown repair audit gate: ${value}`);
-}
-function normalizeDecision(gate, value) {
-    const normalized = value.replace(/-/g, "_");
-    const aliases = {
-        bug_intake: {
-            approve: "accept_report",
-            accept: "accept_report",
-            reject: "reject_report",
-            needs_more_evidence: "needs_more_evidence",
-            duplicate: "mark_duplicate",
-            backlog: "convert_to_backlog",
-        },
-        repair_plan: {
-            approve: "approve_repair_plan",
-            restrict_scope: "restrict_scope",
-            expand_review_scope: "expand_review_scope",
-            add_must_preserve: "add_must_preserve",
-            add_forbidden_area: "add_forbidden_area",
-            require_manual_repair: "require_manual_repair",
-        },
-        post_repair: {
-            approve: "approve_repair",
-            request_revert: "request_revert",
-            request_scope_expansion: "request_scope_expansion",
-            keep_for_human_review: "keep_for_human_review",
-            close_as_invalid: "close_as_invalid",
-        },
-    };
-    const directValues = new Set(Object.values(aliases[gate]));
-    if (directValues.has(normalized)) {
-        return normalized;
-    }
-    const resolved = aliases[gate][normalized];
-    if (!resolved) {
-        throw new Error(`Unknown repair audit decision for ${gate}: ${value}`);
-    }
-    return resolved;
-}
-function normalizeRepoStateSource(value) {
-    if (!value)
-        return undefined;
-    const normalized = value.trim().toLowerCase();
-    if (normalized === "git"
-        || normalized === "github"
-        || normalized === "synthetic"
-        || normalized === "unknown"
-        || normalized === "github_pull_request") {
-        return normalized;
-    }
-    throw new Error(`Unknown repo_state source: ${value}`);
-}
-function requireRepairId(args, repoRoot) {
-    const explicit = getFlag(args, "repair-id");
-    if (explicit)
-        return explicit;
-    const latest = loadLatestRepairId(resolve(repoRoot));
-    const active = listRepairSessions(resolve(repoRoot)).active_repairs.map(session => session.repair_id);
-    throw new Error(`repair_id is required for correctness. Active sessions: ${active.join(", ") || "none"}. Latest pointer exists: ${latest ?? "no"}.`);
-}
-function getFlag(args, name) {
-    const idx = args.indexOf(`--${name}`);
-    if (idx >= 0 && args[idx + 1])
-        return args[idx + 1];
-    return undefined;
-}
-function getAllFlags(args, name) {
-    const values = [];
-    for (let i = 0; i < args.length; i++) {
-        if (args[i] === `--${name}` && args[i + 1]) {
-            values.push(args[i + 1]);
-            i++;
-        }
-    }
-    return values;
-}
-function requireFlag(args, name, message) {
-    const value = getFlag(args, name);
-    if (!value)
-        throw new Error(message);
-    return value;
 }
 
 // EXTERNAL MODULE: ./src/github/githubCommentClient.ts
 var githubCommentClient = __nccwpck_require__(379);
-// EXTERNAL MODULE: ./src/github/githubCommentRenderer.ts + 1 modules
-var githubCommentRenderer = __nccwpck_require__(978);
+// EXTERNAL MODULE: ./src/github/githubCommentRenderer.ts + 7 modules
+var githubCommentRenderer = __nccwpck_require__(597);
 // EXTERNAL MODULE: ./src/github/githubArtifactCollector.ts
 var githubArtifactCollector = __nccwpck_require__(755);
 // EXTERNAL MODULE: ./src/github/githubExitPolicy.ts
@@ -25341,7 +25785,7 @@ async function runGitHubRepairAction(env = process.env) {
             runPhase = "intake_pending_audit";
         }
         else {
-            cmdRepairPlan({
+            repairPlanCommand_cmdRepairPlan({
                 repoRoot,
                 repairId,
                 configPath: inputs.configPath,
@@ -25356,7 +25800,7 @@ async function runGitHubRepairAction(env = process.env) {
             }
             else {
                 const currentSession = repairSessionStore_loadRepairSession(repoRoot, repairId);
-                cmdRepairAudit({
+                repairAuditCommand_cmdRepairAudit({
                     repoRoot,
                     repairId,
                     targetRevision: currentSession.current_revision,
@@ -25372,7 +25816,7 @@ async function runGitHubRepairAction(env = process.env) {
             }
         }
         if (runPhase === "checked") {
-            cmdRepairCheck({
+            repairCheckCommand_cmdRepairCheck({
                 repoRoot,
                 repairId,
                 baseRef: inputs.baseSha,
@@ -25388,7 +25832,7 @@ async function runGitHubRepairAction(env = process.env) {
         }
     }
     else {
-        cmdRepairCheck({
+        repairCheckCommand_cmdRepairCheck({
             repoRoot,
             repairId,
             baseRef: inputs.baseSha,
@@ -25411,6 +25855,7 @@ async function runGitHubRepairAction(env = process.env) {
         outputDirRelative: "pantheon-repair-report",
         repairId,
         artifactMode: inputs.artifactMode,
+        artifactLevel: inputs.artifactLevel,
         includeArchitecture: true,
     });
     const preliminaryResult = {
@@ -25440,9 +25885,13 @@ async function runGitHubRepairAction(env = process.env) {
         },
         commentResult: { status: "skipped", reason: "PR comment not attempted yet." },
     };
-    const summary = (0,githubCommentRenderer/* renderGitHubRepairStepSummary */.JP)(preliminaryResult);
+    const summary = (0,githubCommentRenderer/* renderGitHubRepairStepSummary */.JP)(preliminaryResult, {
+        disclosure: inputs.disclosure,
+    });
     // Manifest handled
-    const comment = (0,githubCommentRenderer/* renderGitHubRepairComment */._Q)(preliminaryResult);
+    const comment = (0,githubCommentRenderer/* renderGitHubRepairComment */._Q)(preliminaryResult, {
+        disclosure: inputs.disclosure,
+    });
     const sanitizedComment = (0,githubArtifactCollector/* sanitizeGeneratedGitHubArtifact */.kU)({
         target: "pr_comment.md",
         content: comment.markdown,
@@ -25497,11 +25946,13 @@ async function runGitHubRepairAction(env = process.env) {
             console.warn(`[Pantheon Repair Action] Failed to record governance event: ${governanceResult.message}`);
         }
     }
-    (0,githubArtifactCollector/* writeGitHubArtifactManifest */.Ej)({
-        outputDir: artifactCollection.outputDir,
-        collection: finalArtifactCollection,
-        metadata: { repair_id: repairId, type: "repair", verdict },
-    });
+    if (inputs.artifactLevel !== "none") {
+        (0,githubArtifactCollector/* writeGitHubArtifactManifest */.Ej)({
+            outputDir: artifactCollection.outputDir,
+            collection: finalArtifactCollection,
+            metadata: { repair_id: repairId, type: "repair", verdict },
+        });
+    }
     const exitDecision = (0,githubExitPolicy/* decideGitHubActionExit */.o)({
         verdict,
         sanitizerViolations: finalArtifactCollection.sanitizerViolations.length,
@@ -25509,18 +25960,34 @@ async function runGitHubRepairAction(env = process.env) {
     });
     (0,external_node_fs_.writeFileSync)(preliminaryResult.commentPath, sanitizedComment.content);
     (0,external_node_fs_.writeFileSync)((0,external_node_path_.join)(artifactCollection.outputDir, "step_summary.md"), sanitizedSummary.content);
-    (0,external_node_fs_.writeFileSync)((0,external_node_path_.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
-        base_sha: inputs.baseSha ?? null,
-        head_sha: inputs.headSha ?? null,
-        diff_mode: inputs.baseSha && inputs.headSha
-            ? "github_pr_base_head_sha"
-            : inputs.baseSha
-                ? "github_pr_base_sha"
-                : "working_tree_fallback",
-        fail_on: inputs.failOn,
-        artifact_mode: inputs.artifactMode,
-        artifacts_prepared: true,
-    }, null, 2));
+    if (inputs.artifactLevel !== "none") {
+        (0,external_node_fs_.writeFileSync)((0,external_node_path_.join)(artifactCollection.outputDir, "summary.md"), sanitizedSummary.content);
+        (0,githubArtifactCollector/* writeGitHubVerdictArtifact */.gg)({
+            outputDir: artifactCollection.outputDir,
+            mode: "repair",
+            verdict,
+            targetId: repairId,
+            extra: {
+                disclosure: inputs.disclosure,
+                artifact_level: inputs.artifactLevel,
+            },
+        });
+        (0,external_node_fs_.writeFileSync)((0,external_node_path_.join)(artifactCollection.outputDir, "action_context.json"), JSON.stringify({
+            base_sha: inputs.baseSha ?? null,
+            head_sha: inputs.headSha ?? null,
+            diff_mode: inputs.baseSha && inputs.headSha
+                ? "github_pr_base_head_sha"
+                : inputs.baseSha
+                    ? "github_pr_base_sha"
+                    : "working_tree_fallback",
+            fail_on: inputs.failOn,
+            artifact_mode: inputs.artifactMode,
+            artifact_level: inputs.artifactLevel,
+            disclosure: inputs.disclosure,
+            log_level: inputs.logLevel,
+            artifacts_prepared: true,
+        }, null, 2));
+    }
     if (preliminaryResult.summaryPath) {
         (0,external_node_fs_.mkdirSync)((0,external_node_path_.dirname)(preliminaryResult.summaryPath), { recursive: true });
         (0,external_node_fs_.writeFileSync)(preliminaryResult.summaryPath, sanitizedSummary.content);
@@ -25548,14 +26015,14 @@ function resolveRepairSession(repoRoot, inputs) {
         return repairSessionStore_loadRepairSession(repoRoot, requireExistingRepairId(inputs));
     }
     if (inputs.sourceKind === "agent_bug_report") {
-        return cmdRepairIntake({
+        return repairIntakeCommand_cmdRepairIntake({
             repoRoot,
             fromPath: (0,external_node_path_.resolve)(repoRoot, requireAgentBugReportPath(inputs)),
             agentId: "github-action",
             operatorId: "github-action",
         });
     }
-    return cmdRepairIntake({
+    return repairIntakeCommand_cmdRepairIntake({
         repoRoot,
         intent: inputs.repairIntent,
         suspectPaths: [...inputs.suspectPaths],
@@ -25641,6 +26108,74 @@ function globToRegex(glob) {
 }
 function matchesGlob(path, pattern) {
     return globToRegex(pattern).test(path);
+}
+
+
+/***/ }),
+
+/***/ 618:
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
+
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   NJ: () => (/* binding */ resolvePantheonDir),
+/* harmony export */   O2: () => (/* binding */ ensurePantheonDirs),
+/* harmony export */   gT: () => (/* binding */ publicPaths)
+/* harmony export */ });
+/* unused harmony exports internalPaths, relativePantheonPath */
+/* harmony import */ var node_fs__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(24);
+/* harmony import */ var node_fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(node_fs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var node_path__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(760);
+/* harmony import */ var node_path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(node_path__WEBPACK_IMPORTED_MODULE_1__);
+/**
+ * Canonical `.pantheon/` state layout shared by CLI, local governance, and GitHub projection.
+ *
+ * This module lives outside `src/cli/` so domain and infrastructure layers do not depend on a
+ * command-surface namespace for core repository state paths.
+ */
+
+
+const PANTHEON_DIR = ".pantheon";
+const INTERNAL_DIR = "internal";
+function resolvePantheonDir(repoRoot) {
+    return (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(repoRoot, PANTHEON_DIR);
+}
+function ensurePantheonDirs(repoRoot) {
+    const pantheonDir = resolvePantheonDir(repoRoot);
+    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync)(pantheonDir, { recursive: true });
+    (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync)((0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(pantheonDir, INTERNAL_DIR), { recursive: true });
+}
+function publicPaths(repoRoot) {
+    const dir = resolvePantheonDir(repoRoot);
+    return {
+        dir,
+        task: (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(dir, "task.md"),
+        scope: (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(dir, "scope.md"),
+        report: (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(dir, "report.md"),
+        feedback: (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(dir, "feedback.md"),
+        check: (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)(dir, "check.json"),
+    };
+}
+function internalPaths(repoRoot) {
+    const dir = join(resolvePantheonDir(repoRoot), INTERNAL_DIR);
+    return {
+        dir,
+        observations: join(dir, "observations.json"),
+        contract: join(dir, "change_contract_lite.json"),
+        scope: join(dir, "agent_scope.json"),
+        verification: join(dir, "diff_verification.json"),
+        feedback: join(dir, "agent_feedback.json"),
+    };
+}
+function relativePantheonPath(fullPath, repoRoot) {
+    let prefix = join(repoRoot, "").replace(/\\/g, "/");
+    if (!prefix.endsWith("/")) {
+        prefix += "/";
+    }
+    const normalized = fullPath.replace(/\\/g, "/");
+    if (normalized.startsWith(prefix)) {
+        return normalized.slice(prefix.length);
+    }
+    return normalized;
 }
 
 
@@ -26955,7 +27490,7 @@ function buildPassthrough(policySource, changedPaths) {
 /* harmony import */ var node_fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(node_fs__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var node_path__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(760);
 /* harmony import */ var node_path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(node_path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _cli_artifactLayout_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(932);
+/* harmony import */ var _pantheonPaths_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(618);
 
 
 
@@ -26980,13 +27515,13 @@ function repairPaths(repoRoot) {
     };
 }
 function ensureRepairDirs(repoRoot) {
-    (0,_cli_artifactLayout_js__WEBPACK_IMPORTED_MODULE_2__/* .ensurePantheonDirs */ .O2)(repoRoot);
+    (0,_pantheonPaths_js__WEBPACK_IMPORTED_MODULE_2__/* .ensurePantheonDirs */ .O2)(repoRoot);
     const root = repairRootPaths(repoRoot);
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync)(root.dir, { recursive: true });
     (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync)(root.runsDir, { recursive: true });
 }
 function resolveRepairDir(repoRoot) {
-    return (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)((0,_cli_artifactLayout_js__WEBPACK_IMPORTED_MODULE_2__/* .resolvePantheonDir */ .NJ)(repoRoot), "repair");
+    return (0,node_path__WEBPACK_IMPORTED_MODULE_1__.join)((0,_pantheonPaths_js__WEBPACK_IMPORTED_MODULE_2__/* .resolvePantheonDir */ .NJ)(repoRoot), "repair");
 }
 function repairRootPaths(repoRoot) {
     const dir = resolveRepairDir(repoRoot);
@@ -27319,8 +27854,8 @@ var external_node_fs_ = __nccwpck_require__(24);
 var external_node_path_ = __nccwpck_require__(760);
 // EXTERNAL MODULE: ./src/repair/session/atomicWrite.ts
 var atomicWrite = __nccwpck_require__(282);
-// EXTERNAL MODULE: ./src/cli/artifactLayout.ts
-var artifactLayout = __nccwpck_require__(932);
+// EXTERNAL MODULE: ./src/pantheonPaths.ts
+var pantheonPaths = __nccwpck_require__(618);
 ;// CONCATENATED MODULE: ./src/review/reviewRequestRenderer.ts
 function renderReviewRequestMarkdown(request) {
     const lines = [];
@@ -27428,7 +27963,7 @@ function normalizeReviewRequest(raw) {
 const REVIEW_QUEUE_LOCK_TIMEOUT_MS = 5_000;
 const REVIEW_QUEUE_LOCK_POLL_MS = 25;
 function reviewPaths(repoRoot) {
-    const dir = (0,external_node_path_.join)((0,artifactLayout/* resolvePantheonDir */.NJ)(repoRoot), "reviews");
+    const dir = (0,external_node_path_.join)((0,pantheonPaths/* resolvePantheonDir */.NJ)(repoRoot), "reviews");
     return {
         dir,
         requestsDir: (0,external_node_path_.join)(dir, "review_requests"),

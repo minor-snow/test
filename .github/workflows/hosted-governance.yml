@@ -32,81 +32,74 @@ jobs:
         shell: bash
         run: |
           ref="${GITHUB_HEAD_REF}"
+          mode=""
+          fail_on=""
+          change_id=""
+          repair_id=""
+          repair_intent=""
+          scope_lines=(
+            'src/**'
+            'test/**'
+            'tests/**'
+            'docs/**'
+            'package.json'
+            'AGENTS.md'
+            'pantheon.json'
+            'pantheon.alpha.json'
+            '.pantheon/architecture/**'
+          )
+          review_lines=(
+            'src/auth/**'
+            'package.json'
+            '.pantheon/architecture/**'
+            '.github/workflows/**'
+          )
+          forbid_lines=(
+            '.pantheon/audit/**'
+            '.pantheon/reviews/**'
+            '.pantheon/change/**'
+            '.pantheon/repair/**'
+          )
+
           echo "scenario_id=${ref//\//-}" >> "$GITHUB_OUTPUT"
           echo "config_path=pantheon.alpha.json" >> "$GITHUB_OUTPUT"
           echo "artifact_mode=public" >> "$GITHUB_OUTPUT"
           echo "post_comment=true" >> "$GITHUB_OUTPUT"
           echo "audit_mode=auto" >> "$GITHUB_OUTPUT"
-
-          {
-            echo "scope<<__PANTHEON__"
-            printf '%s\n' \
-              'src/**' \
-              'test/**' \
-              'tests/**' \
-              'docs/**' \
-              'package.json' \
-              'AGENTS.md' \
-              'pantheon.json' \
-              'pantheon.alpha.json' \
-              '.pantheon/architecture/**'
-            echo "__PANTHEON__"
-          } >> "$GITHUB_OUTPUT"
-
-          {
-            echo "review<<__PANTHEON__"
-            printf '%s\n' \
-              'src/auth/**' \
-              'package.json' \
-              '.pantheon/architecture/**' \
-              '.github/workflows/**'
-            echo "__PANTHEON__"
-          } >> "$GITHUB_OUTPUT"
-
-          {
-            echo "forbid<<__PANTHEON__"
-            printf '%s\n' \
-              '.pantheon/audit/**' \
-              '.pantheon/reviews/**' \
-              '.pantheon/change/**' \
-              '.pantheon/repair/**'
-            echo "__PANTHEON__"
-          } >> "$GITHUB_OUTPUT"
+          echo "full_disclosure=false" >> "$GITHUB_OUTPUT"
 
           case "$ref" in
+            std/s4-*)
+              mode="boundary"
+              fail_on="fail,requires_contract,requires_replan,requires_scope_expansion,sanitizer_violation"
+              review_lines+=('docs/**')
+              ;;
             std/*)
-              echo "mode=boundary" >> "$GITHUB_OUTPUT"
-              echo "fail_on=all" >> "$GITHUB_OUTPUT"
+              mode="boundary"
+              fail_on="all"
               ;;
             chg/*)
-              echo "mode=change" >> "$GITHUB_OUTPUT"
-              echo "change_id=chg_ed1c4bbf7e6138e8" >> "$GITHUB_OUTPUT"
-              echo "fail_on=fail,requires_contract,requires_replan,requires_scope_expansion,sanitizer_violation" >> "$GITHUB_OUTPUT"
+              mode="change"
+              change_id="chg_ed1c4bbf7e6138e8"
+              fail_on="fail,requires_contract,requires_replan,requires_scope_expansion,sanitizer_violation"
+              if [[ "$ref" == *"full-disclosure"* ]]; then
+                echo "full_disclosure=true" >> "$GITHUB_OUTPUT"
+              fi
               ;;
             rep/r2-*)
-              echo "mode=repair" >> "$GITHUB_OUTPUT"
-              echo "repair_id=repair_aaa1111111111111" >> "$GITHUB_OUTPUT"
-              echo "fail_on=fail,requires_replan,requires_scope_expansion,sanitizer_violation" >> "$GITHUB_OUTPUT"
+              mode="repair"
+              repair_id="repair_aaa1111111111111"
+              fail_on="fail,requires_replan,requires_scope_expansion,sanitizer_violation"
               ;;
             rep/*)
-              echo "mode=repair" >> "$GITHUB_OUTPUT"
-              echo "repair_intent=Fix formatting regression in formatValue" >> "$GITHUB_OUTPUT"
-              {
-                echo "suspect<<__PANTHEON__"
-                printf '%s\n' 'src/utils/format.ts'
-                echo "__PANTHEON__"
-              } >> "$GITHUB_OUTPUT"
-              {
-                echo "failing_tests<<__PANTHEON__"
-                printf '%s\n' 'tests/utils/format.test.ts'
-                echo "__PANTHEON__"
-              } >> "$GITHUB_OUTPUT"
-              echo "fail_on=fail,requires_replan,requires_scope_expansion,sanitizer_violation" >> "$GITHUB_OUTPUT"
+              mode="repair"
+              repair_intent="Fix formatting regression in formatValue"
+              fail_on="fail,requires_replan,requires_scope_expansion,sanitizer_violation"
               ;;
             arch/*)
-              echo "mode=change" >> "$GITHUB_OUTPUT"
-              echo "change_id=chg_9403d049d4ce4563" >> "$GITHUB_OUTPUT"
-              echo "fail_on=fail,requires_contract,requires_replan,requires_scope_expansion,sanitizer_violation" >> "$GITHUB_OUTPUT"
+              mode="change"
+              change_id="chg_9403d049d4ce4563"
+              fail_on="fail,requires_contract,requires_replan,requires_scope_expansion,sanitizer_violation"
               ;;
             *)
               echo "Unknown hosted scenario branch: $ref" >&2
@@ -114,8 +107,52 @@ jobs:
               ;;
           esac
 
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "fail_on=$fail_on" >> "$GITHUB_OUTPUT"
+          if [ -n "$change_id" ]; then
+            echo "change_id=$change_id" >> "$GITHUB_OUTPUT"
+          fi
+          if [ -n "$repair_id" ]; then
+            echo "repair_id=$repair_id" >> "$GITHUB_OUTPUT"
+          fi
+          if [ -n "$repair_intent" ]; then
+            echo "repair_intent=$repair_intent" >> "$GITHUB_OUTPUT"
+          fi
+
+          {
+            echo "scope<<__PANTHEON__"
+            printf '%s\n' "${scope_lines[@]}"
+            echo "__PANTHEON__"
+          } >> "$GITHUB_OUTPUT"
+
+          {
+            echo "review<<__PANTHEON__"
+            printf '%s\n' "${review_lines[@]}"
+            echo "__PANTHEON__"
+          } >> "$GITHUB_OUTPUT"
+
+          {
+            echo "forbid<<__PANTHEON__"
+            printf '%s\n' "${forbid_lines[@]}"
+            echo "__PANTHEON__"
+          } >> "$GITHUB_OUTPUT"
+
+          if [ "$mode" = "repair" ] && [ -n "$repair_intent" ]; then
+            {
+              echo "suspect<<__PANTHEON__"
+              printf '%s\n' 'src/utils/format.ts'
+              echo "__PANTHEON__"
+            } >> "$GITHUB_OUTPUT"
+            {
+              echo "failing_tests<<__PANTHEON__"
+              printf '%s\n' 'tests/utils/format.test.ts'
+              echo "__PANTHEON__"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Run Pantheon governance gate
-        id: pantheon
+        id: pantheon_default
+        if: steps.scenario.outputs.full_disclosure != 'true'
         uses: ./action
         with:
           mode: ${{ steps.scenario.outputs.mode }}
@@ -133,12 +170,38 @@ jobs:
           post_comment: ${{ steps.scenario.outputs.post_comment }}
           audit_mode: ${{ steps.scenario.outputs.audit_mode }}
 
+      - name: Run Pantheon governance gate (full disclosure)
+        id: pantheon_full
+        if: steps.scenario.outputs.full_disclosure == 'true'
+        uses: ./action
+        with:
+          mode: ${{ steps.scenario.outputs.mode }}
+          change_id: ${{ steps.scenario.outputs.change_id }}
+          repair_id: ${{ steps.scenario.outputs.repair_id }}
+          repair_intent: ${{ steps.scenario.outputs.repair_intent }}
+          suspect: ${{ steps.scenario.outputs.suspect }}
+          failing_tests: ${{ steps.scenario.outputs.failing_tests }}
+          scope: ${{ steps.scenario.outputs.scope }}
+          review: ${{ steps.scenario.outputs.review }}
+          forbid: ${{ steps.scenario.outputs.forbid }}
+          config_path: ${{ steps.scenario.outputs.config_path }}
+          fail_on: ${{ steps.scenario.outputs.fail_on }}
+          artifact_mode: ${{ steps.scenario.outputs.artifact_mode }}
+          disclosure: full
+          artifact_level: full
+          log_level: info
+          post_comment: ${{ steps.scenario.outputs.post_comment }}
+          audit_mode: ${{ steps.scenario.outputs.audit_mode }}
+
       - name: Resolve artifact dir
         if: always()
         id: artifacts
         shell: bash
         run: |
-          dir="${{ steps.pantheon.outputs.artifact_dir }}"
+          dir="${{ steps.pantheon_default.outputs.artifact_dir }}"
+          if [ -z "$dir" ]; then
+            dir="${{ steps.pantheon_full.outputs.artifact_dir }}"
+          fi
           if [ -z "$dir" ]; then
             if [ -d pantheon-repair-report ]; then
               dir="pantheon-repair-report"

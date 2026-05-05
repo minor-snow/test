@@ -6,6 +6,9 @@ import type { ContractGateResult } from "../policy/contractGateTypes.js";
 export type GitHubFailCondition = "forbidden" | "outside_scope" | "review_required" | "sanitizer_violation" | "all" | "none" | ChangeCheckVerdict | RepairVerdict;
 export type GitHubArtifactMode = "public" | "debug";
 export type GitHubCommentMode = "update" | "off";
+export type GitHubDisclosureLevel = "minimal" | "balanced" | "full";
+export type GitHubArtifactLevel = "none" | "summary" | "full";
+export type GitHubLogLevel = "quiet" | "info" | "debug";
 export type GitHubActionConfig = {
     readonly intent: string;
     readonly scopePatterns: readonly string[];
@@ -17,6 +20,9 @@ export type GitHubActionConfig = {
     readonly uploadArtifacts: boolean;
     readonly artifactMode: GitHubArtifactMode;
     readonly commentMode: GitHubCommentMode;
+    readonly disclosure: GitHubDisclosureLevel;
+    readonly artifactLevel: GitHubArtifactLevel;
+    readonly logLevel: GitHubLogLevel;
     readonly baseSha?: string;
     readonly headSha?: string;
 };
@@ -113,6 +119,9 @@ export type GitHubChangeInputs = {
     readonly configPath: string;
     readonly artifactMode: GitHubArtifactMode;
     readonly commentMode: GitHubCommentMode;
+    readonly disclosure: GitHubDisclosureLevel;
+    readonly artifactLevel: GitHubArtifactLevel;
+    readonly logLevel: GitHubLogLevel;
     readonly postComment: boolean;
     readonly uploadArtifacts: boolean;
     readonly failOn: readonly GitHubFailCondition[];
@@ -145,6 +154,9 @@ export type GitHubRepairInputs = {
     readonly mustPreserve: readonly string[];
     readonly auditMode: GitHubRepairAuditMode;
     readonly artifactMode: GitHubArtifactMode;
+    readonly disclosure: GitHubDisclosureLevel;
+    readonly artifactLevel: GitHubArtifactLevel;
+    readonly logLevel: GitHubLogLevel;
     readonly postComment: boolean;
     readonly uploadArtifacts: boolean;
     readonly failOn: readonly GitHubFailCondition[];
