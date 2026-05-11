@@ -1,17 +1,24 @@
 {
-  "name": "pantheon-hosted-verification-entry",
+  "name": "clarion-public-conformance-harness",
   "private": true,
-  "version": "0.0.1",
-  "description": "Hosted verification harness for Pantheon governance PR checks.",
+  "version": "0.1.0",
+  "description": "Public black-box conformance harness for Clarion CLI surface.",
   "type": "module",
   "engines": {
     "node": ">=20"
   },
-  "dependencies": {
-    "@fastify/cors": "^11.2.0",
-    "fast-json-stable-stringify": "^2.1.0",
-    "fastify": "^5.8.5",
-    "left-pad": "1.3.0",
-    "zod": "^4.3.6"
+  "scripts": {
+    "test": "vitest run --pool=forks",
+    "test:cli-contract": "vitest run tests/cli_contract.test.ts --pool=forks",
+    "test:safety": "vitest run tests/safety_contract.test.ts --pool=forks",
+    "test:dsa": "vitest run tests/dsa_flow.test.ts --pool=forks",
+    "test:workgraph": "vitest run tests/workgraph_flow.test.ts --pool=forks",
+    "test:agent": "vitest run tests/agent_gateway_flow.test.ts --pool=forks",
+    "public:smoke": "bash scripts/run_public_smoke.sh"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5",
+    "vitest": "^1.5.0"
   }
 }

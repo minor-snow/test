@@ -1,21 +1,36 @@
-# Pantheon Hosted Verification Entry
+# Clarion Public CLI Conformance Harness
 
-This public repository is the hosted verification entry for the Pantheon GitHub Action.
+This repository is a public black-box conformance harness for Clarion's CLI surface.
 
-It exists to exercise the real pull-request governance flow in GitHub-hosted Actions:
+It verifies:
+- stable `--json` CLI output
+- DSA discovery/review surfaces
+- Workgraph lifecycle surfaces
+- Agent Gateway envelope surfaces
+- public-safe metadata projection
+- absence of absolute path and raw payload leaks
 
-- Standard / Contract Gate
-- Change Governance
-- Repair Governance
-- Architecture self-authorization protection
+It does not contain:
+- Clarion engine source code
+- governance implementation logic
+- internal `.pantheon` stores
+- private architecture contracts
+- raw dogfood transcripts
 
-The workflows in `.github/workflows/` map trusted scenario branches to fixed action inputs.
-PR-authored changes do not decide the action mode or the contract identifiers used for evaluation.
+## Usage
+Run the public smoke tests via:
+```bash
+npm install
+npm run public:smoke
+```
 
-By default, the hosted matrix validates Pantheon's minimal-disclosure pull request surface:
+Or execute tests via Vitest:
+```bash
+npm run test
+```
 
-- verdict
-- reason kinds
-- next local command
-
-Detailed governance evidence remains local unless a dedicated full-disclosure scenario branch opts into richer sanitized output.
+## Structure
+- `fixtures/`: Minimal synthetic projects for testing state observation.
+- `examples/`: Agent submission payloads (submit, progress, complete).
+- `expected/`: Sanitized transcripts and expected structured outputs.
+- `tests/`: Subprocess-based Vitest scripts verifying the CLI `CliResultEnvelope` contract.
