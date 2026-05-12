@@ -15,33 +15,22 @@ import re
 import os
 
 # ── 加载配置 ─────────────────────────────────────────────
-try:
-    from config_loader import config as _cfg
-except Exception:
-    _cfg = {}
+from config_loader import conf
+from logger_setup import logger
+from logger_setup import logger
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-def _conf(key, default):
-    keys = key.split(".")
-    val = _cfg
-    for k in keys:
-        if isinstance(val, dict):
-            val = val.get(k)
-        else:
-            return default
-    return val if val is not None else default
-
-DB_FILE = os.path.join(BASE_DIR, _conf("paths.database", "bot_database.db"))
-SIGNER_HOST = _conf("signer.host", "127.0.0.1")
-SIGNER_PORT = _conf("signer.port", 3000)
+DB_FILE = os.path.join(BASE_DIR, conf("paths.database", "bot_database.db"))
+SIGNER_HOST = conf("signer.host", "127.0.0.1")
+SIGNER_PORT = conf("signer.port", 3000)
 RPC_SERVER = f"http://{SIGNER_HOST}:{SIGNER_PORT}/get_sign"
-TARGET_MAJORS = _conf("scout.target_majors", ["计算机科学与技术", "土木工程", "环境工程", "临床医学", "法学"])
-EMOTION_KEYWORDS = _conf("scout.emotion_keywords", ["劝退", "后悔", "坑", "转行", "就业惨"])
-MIN_ANSWER_COUNT = _conf("scout.min_answer_count", 50)
-SEARCH_DELAY_MIN = _conf("scout.search_delay_min", 2.0)
-SEARCH_DELAY_MAX = _conf("scout.search_delay_max", 4.0)
-UA = _conf("browser.user_agent",
+TARGET_MAJORS = conf("scout.target_majors", ["计算机科学与技术", "土木工程", "环境工程", "临床医学", "法学"])
+EMOTION_KEYWORDS = conf("scout.emotion_keywords", ["劝退", "后悔", "坑", "转行", "就业惨"])
+MIN_ANSWER_COUNT = conf("scout.min_answer_count", 50)
+SEARCH_DELAY_MIN = conf("scout.search_delay_min", 2.0)
+SEARCH_DELAY_MAX = conf("scout.search_delay_max", 4.0)
+UA = conf("browser.user_agent",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36")
 
 
@@ -92,7 +81,7 @@ def get_search_signature(session, api_path, dc0):
         if resp.status_code == 200:
             return resp.json().get("signature")
     except Exception as e:
-        print(f"    [RPC Error] {e}")
+        logger.error(f"    [RPC Error] {e}")
     return None
 
 
@@ -119,7 +108,7 @@ def _validate_question_exists(question_id, session, dc0):
 
 
 def run_scout():
-    print("====== 重装狙击侦察兵已上线：执行定点清除与高价值目标锁定 ======")
+    logger.info("====== 重装狙击侦察兵已上线：执行定点清除与高价值目标锁定 ======")
 
     with sqlite3.connect(DB_FILE) as conn:
         c = conn.cursor()
@@ -128,21 +117,21 @@ def run_scout():
         session.trust_env = False
 
         visitor_dc0 = generate_fake_dc0()
-        print(f">>> 临时战术指纹: d_c0={visitor_dc0[:20]}...")
+        logger.info(f">>> 临时战术指纹: d_c0={visitor_dc0[:20]}...")
 
         total_captured = 0
 
         for major in TARGET_MAJORS:
             for keyword in EMOTION_KEYWORDS:
                 search_query = f"{major} {keyword}"
-                print(f"\n>>> 正在执行战略搜索: [{search_query}] ...")
+                logger.info(f"\n>>> 正在执行战略搜索: [{search_query}] ...")
 
                 encoded_query = urllib.parse.quote(search_query)
                 api_path = f"/api/v4/search_v3?t=general&q={encoded_query}&correction=1&offset=0&limit=20"
 
                 sig = get_search_signature(session, api_path, visitor_dc0)
                 if not sig:
-                    print(f"    [Fatal] 签名节点失联，跳过 [{search_query}]")
+                    logger.error(f"    [Fatal] 签名节点失联，跳过 [{search_query}]")
                     continue
 
                 headers = {
@@ -158,16 +147,16 @@ def run_scout():
 
                     if res.status_code != 200:
                         if res.status_code in [401, 403]:
-                            print(f"    [拦截] 遭遇风控 (HTTP {res.status_code})，换马甲后继续")
+                            logger.warning(f"    [拦截] 遭遇风控 (HTTP {res.status_code})，换马甲后继续")
                             visitor_dc0 = generate_fake_dc0()
                         else:
-                            print(f"    [Error] 搜索接口返回: {res.status_code}")
+                            logger.error(f"    [Error] 搜索接口返回: {res.status_code}")
                         continue
 
                     try:
                         data = res.json()
                     except ValueError:
-                        print(f"    [Error] 200 但非 JSON，响应前 200 字: {res.text[:200]}")
+                        logger.error(f"    [Error] 200 但非 JSON，响应前 200 字: {res.text[:200]}")
                         # 可能是验证页面，换马甲
                         visitor_dc0 = generate_fake_dc0()
                         continue
@@ -218,17 +207,17 @@ def run_scout():
                         )
                         valid_targets += 1
                         total_captured += 1
-                        print(f"    [锁定目标] QID:{q_id} | 回答数:{answer_count} | 标题: {q_title[:50]}")
+                        logger.info(f"    [锁定目标] QID:{q_id} | 回答数:{answer_count} | 标题: {q_title[:50]}")
 
                     conn.commit()
-                    print(f"    -> 本轮扫荡结束，成功捕获 {valid_targets} 个高价值母题坐标。")
+                    logger.info(f"    -> 本轮扫荡结束，成功捕获 {valid_targets} 个高价值母题坐标。")
 
                 except Exception as e:
-                    print(f"    [网络异常] {e}")
+                    logger.warning(f"    [网络异常] {e}")
 
                 time.sleep(random.uniform(SEARCH_DELAY_MIN, SEARCH_DELAY_MAX))
 
-    print(f"\n====== 所有专业侦察完毕，共捕获 {total_captured} 个高价值母题坐标 ======")
+    logger.info(f"\n====== 所有专业侦察完毕，共捕获 {total_captured} 个高价值母题坐标 ======")
 
 
 if __name__ == "__main__":

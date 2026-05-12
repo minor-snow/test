@@ -1,0 +1,49 @@
+{
+  "schema_version": "pantheon_agent_entry@0.1.0",
+  "project": "zhihu-rpc-crawler",
+  "purpose": "知乎答案采集系统 — AI Agent 治理入口",
+  "primary_entrypoints": {
+    "read_first": "AGENTS.md",
+    "architecture": "docs/01_system_overview.md",
+    "operations": "docs/09_operations.md"
+  },
+  "commands": {
+    "install_python": "pip install -r requirements.txt",
+    "install_node": "npm install",
+    "test": "python -m pytest tests/ -v",
+    "preflight": "python preflight.py",
+    "start_signer": "node rpc_server.js",
+    "start_spider": "python spider.py",
+    "start_scout": "python scout.py",
+    "start_harvester": "python harvester.py",
+    "start_dashboard": "python dashboard.py",
+    "db_init": "python init_assets.py",
+    "db_backup": "python db_maintenance.py backup",
+    "db_stats": "python db_maintenance.py stats"
+  },
+  "hard_rules": [
+    "绝不修改 accounts.txt 或将其内容输出到日志/终端",
+    "绝不将 d_c0/z_c0 Cookie 值以明文形式写入日志文件",
+    "绝不在代码中硬编码 Cookie、手机号或任何凭证",
+    "rpc_server.js 的签名逻辑（__g._encrypt hook）不得被 AI 自动重写",
+    "spider.py 的状态机转换逻辑修改必须同步更新 tests/test_spider_logic.py",
+    "config.yaml 中的退避参数修改必须经过人工确认",
+    "数据库 schema 变更必须通过 _check_and_migrate_schema() 迁移路径",
+    "不得引入任何模拟人类点击或 DOM 操作的代码到采集流程中"
+  ],
+  "repair_protocol": {
+    "bug_report_flow": [
+      "1. 运行 python preflight.py 确认系统状态",
+      "2. 检查 task_attempts 表最近错误分布",
+      "3. 在 docs/08_error_taxonomy.md 中查找错误分类",
+      "4. 提交修复时必须附带对应的单元测试"
+    ]
+  },
+  "architecture_constraints": {
+    "data_flow": "RPC Signer (Node) → Spider (Python) → SQLite → Dashboard (Flask)",
+    "signing_isolation": "签名计算必须在独立 Chromium 沙盒中完成，不得在 Python 端实现",
+    "account_rotation": "同一账号两次使用间隔不小于 config.yaml 中 account_min_gap_sec 的值",
+    "error_hierarchy": "TRANSIENT < FORMAT < FALSE_EMPTY < HTTP_403 < CAPTCHA < HTTP_401 (致命)",
+    "state_machine": "READY → LEASED → (DONE | BACKOFF | GAP | QUARANTINED | DEAD)"
+  }
+}

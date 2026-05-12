@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "project": "zhihu-rpc-crawler",
+  "description": "知乎 RPC 数据采集系统 VNext Phase 1 — 治理配置",
+  "protected": [
+    ".git/**",
+    "node_modules/**",
+    ".github/workflows/**",
+    "AGENTS.md",
+    "pantheon.json",
+    "pantheon.agent.json"
+  ],
+  "review_required": [
+    "config.yaml",
+    "config.local.yaml",
+    "rpc_server.js",
+    "spider.py",
+    "accounts.txt"
+  ],
+  "generated": [
+    "__pycache__/**",
+    "node_modules/**",
+    "*.pyc"
+  ],
+  "path_roles": {
+    "rpc_server.js": "signing_engine",
+    "spider.py": "crawler_core",
+    "scout.py": "target_discovery",
+    "harvester.py": "credential_extraction",
+    "dashboard.py": "monitoring",
+    "config.yaml": "configuration",
+    "tests/**": "test"
+  },
+  "contract_gate": {
+    "enabled": true,
+    "risk_threshold_for_contract": "medium",
+    "risk_classification": {
+      "high": [
+        "rpc_server.js",
+        "spider.py",
+        "harvester.py",
+        "accounts.txt",
+        "config.yaml"
+      ],
+      "medium": [
+        "scout.py",
+        "dashboard.py",
+        "config_loader.py",
+        "db_maintenance.py"
+      ],
+      "low": [
+        "tests/**",
+        "docs/**",
+        "*.md",
+        "requirements.txt",
+        "package.json"
+      ]
+    },
+    "protected_policy_paths": [
+      "AGENTS.md",
+      "pantheon.json",
+      "pantheon.agent.json"
+    ]
+  },
+  "security": {
+    "sensitive_files": [
+      "accounts.txt",
+      "config.local.yaml",
+      "*.db",
+      "*.db-shm",
+      "*.db-wal",
+      "success.txt"
+    ],
+    "never_commit": [
+      "accounts.txt",
+      "config.local.yaml",
+      "*.db",
+      "success.txt"
+    ],
+    "credential_patterns": [
+      "d_c0=",
+      "z_c0=",
+      "cookie",
+      "api_key",
+      "secret"
+    ]
+  }
+}

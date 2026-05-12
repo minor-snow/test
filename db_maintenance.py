@@ -12,12 +12,15 @@ import time
 from datetime import datetime
 
 try:
-    from config_loader import config as _cfg
+    from config_loader import conf
 except Exception:
-    _cfg = {}
+    def conf(key, default=None):
+        return default
+
+from logger_setup import logger
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_FILE = os.path.join(BASE_DIR, (_cfg.get("paths", {}) or {}).get("database", "bot_database.db"))
+DB_FILE = os.path.join(BASE_DIR, conf("paths.database", "bot_database.db"))
 
 
 def _get_conn():
@@ -42,7 +45,7 @@ def backup():
     dst.close()
 
     size_mb = os.path.getsize(backup_path) / (1024 * 1024)
-    print(f"[Backup] 数据库已备份到: {backup_path} ({size_mb:.1f} MB)")
+    logger.info(f"[Backup] 数据库已备份到: {backup_path} ({size_mb:.1f} MB)")
 
     # 保留最近 10 个备份
     backups = sorted(
@@ -51,19 +54,19 @@ def backup():
     )
     for old in backups[10:]:
         os.remove(os.path.join(backup_dir, old))
-        print(f"[Backup] 清理旧备份: {old}")
+        logger.info(f"[Backup] 清理旧备份: {old}")
 
     return backup_path
 
 
 def vacuum():
     """压缩数据库文件，回收空间"""
-    print("[Vacuum] 开始压缩数据库...")
+    logger.info("[Vacuum] 开始压缩数据库...")
     before = os.path.getsize(DB_FILE) / (1024 * 1024)
     with _get_conn() as conn:
         conn.execute("VACUUM")
     after = os.path.getsize(DB_FILE) / (1024 * 1024)
-    print(f"[Vacuum] 压缩完成: {before:.1f} MB → {after:.1f} MB (减少 {before - after:.1f} MB)")
+    logger.info(f"[Vacuum] 压缩完成: {before:.1f} MB → {after:.1f} MB (减少 {before - after:.1f} MB)")
 
 
 def stats():
@@ -91,18 +94,18 @@ def stats():
         c.execute("SELECT COUNT(*) as n FROM replay_gaps WHERE status='PENDING'")
         pending_gaps = c.fetchone()["n"]
 
-    print("=" * 50)
-    print("  数据库统计")
-    print("=" * 50)
-    print(f"  账号: {acc_total} 总计 / {acc_active} 活跃 / {acc_dead} 死亡")
-    print(f"  任务: {task_total} 总计")
+    logger.info("=" * 50)
+    logger.info("  数据库统计")
+    logger.info("=" * 50)
+    logger.info(f"  账号: {acc_total} 总计 / {acc_active} 活跃 / {acc_dead} 死亡")
+    logger.info(f"  任务: {task_total} 总计")
     for state, n in sorted(task_states.items()):
-        print(f"    {state}: {n}")
-    print(f"  已采集答案: {ans_total}")
-    print(f"  请求记录: {attempts}")
-    print(f"  待回补缺口: {pending_gaps}")
-    print(f"  数据库大小: {os.path.getsize(DB_FILE) / (1024 * 1024):.1f} MB")
-    print("=" * 50)
+        logger.info(f"    {state}: {n}")
+    logger.info(f"  已采集答案: {ans_total}")
+    logger.info(f"  请求记录: {attempts}")
+    logger.info(f"  待回补缺口: {pending_gaps}")
+    logger.info(f"  数据库大小: {os.path.getsize(DB_FILE) / (1024 * 1024):.1f} MB")
+    logger.info("=" * 50)
 
 
 def prune_old_attempts(days=7):
@@ -113,7 +116,7 @@ def prune_old_attempts(days=7):
         c.execute("DELETE FROM task_attempts WHERE created_at < ?", (cutoff,))
         deleted = c.rowcount
         conn.commit()
-    print(f"[Prune] 已清理 {deleted} 条超过 {days} 天的审计记录")
+    logger.info(f"[Prune] 已清理 {deleted} 条超过 {days} 天的审计记录")
     vacuum()
 
 
@@ -123,17 +126,17 @@ def integrity_check():
         c = conn.cursor()
         c.execute("PRAGMA integrity_check")
         result = c.fetchone()
-        print(f"[Integrity] 数据库完整性: {result[0]}")
+        logger.info(f"[Integrity] 数据库完整性: {result[0]}")
 
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("用法: python db_maintenance.py [backup|vacuum|stats|prune|integrity]")
-        print("  backup   - 备份数据库")
-        print("  vacuum   - 压缩数据库")
-        print("  stats    - 显示统计信息")
-        print("  prune    - 清理旧审计记录")
-        print("  integrity - 完整性检查")
+        logger.info("用法: python db_maintenance.py [backup|vacuum|stats|prune|integrity]")
+        logger.info("  backup   - 备份数据库")
+        logger.info("  vacuum   - 压缩数据库")
+        logger.info("  stats    - 显示统计信息")
+        logger.info("  prune    - 清理旧审计记录")
+        logger.info("  integrity - 完整性检查")
         sys.exit(1)
 
     cmd = sys.argv[1].lower()
@@ -149,4 +152,4 @@ if __name__ == "__main__":
     elif cmd == "integrity":
         integrity_check()
     else:
-        print(f"未知命令: {cmd}")
+        logger.info(f"未知命令: {cmd}")

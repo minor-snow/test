@@ -10,7 +10,7 @@ from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
 try:
     from playwright_stealth import Stealth
 except ImportError:
-    print("[Error] 缺少 playwright-stealth，请先运行: pip install playwright-stealth")
+    logger.error("[Error] 缺少 playwright-stealth，请先运行: pip install playwright-stealth")
     exit(1)
 
 import sqlite3
@@ -19,35 +19,22 @@ import os
 import threading
 
 # ── 尝试加载配置 ─────────────────────────────────────────
-try:
-    from config_loader import config as _cfg
-except Exception:
-    _cfg = {}
+from config_loader import conf
+from logger_setup import logger
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-def _conf(key, default):
-    """从 config.yaml 取配置，不存在则用默认值"""
-    keys = key.split(".")
-    val = _cfg
-    for k in keys:
-        if isinstance(val, dict):
-            val = val.get(k)
-        else:
-            return default
-    return val if val is not None else default
-
-DB_FILE = os.path.join(BASE_DIR, _conf("paths.database", "bot_database.db"))
-SMS_CODE_TIMEOUT = _conf("harvester.sms_code_timeout", 180)
-SIGNIN_URL = _conf("harvester.signin_url", "https://www.zhihu.com/signin")
-HEADLESS = _conf("harvester.headless", False)
-COOKIE_LANDING_DELAY = _conf("harvester.cookie_landing_delay_sec", 2)
-SWITCH_DELAY = _conf("harvester.account_switch_delay_sec", 2)
-UA = _conf("browser.user_agent",
+DB_FILE = os.path.join(BASE_DIR, conf("paths.database", "bot_database.db"))
+SMS_CODE_TIMEOUT = conf("harvester.sms_code_timeout", 180)
+SIGNIN_URL = conf("harvester.signin_url", "https://www.zhihu.com/signin")
+HEADLESS = conf("harvester.headless", False)
+COOKIE_LANDING_DELAY = conf("harvester.cookie_landing_delay_sec", 2)
+SWITCH_DELAY = conf("harvester.account_switch_delay_sec", 2)
+UA = conf("browser.user_agent",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36")
-VP_WIDTH = _conf("browser.viewport_width", 1280)
-VP_HEIGHT = _conf("browser.viewport_height", 800)
-EXTRA_ARGS = _conf("browser.extra_args",
+VP_WIDTH = conf("browser.viewport_width", 1280)
+VP_HEIGHT = conf("browser.viewport_height", 800)
+EXTRA_ARGS = conf("browser.extra_args",
     ["--disable-blink-features=AutomationControlled", "--disable-infobars"])
 
 # ── 登录页定位器 ─────────────────────────────────────────
@@ -91,14 +78,14 @@ def _ensure_schema():
         if "z_c0" not in cols:
             try:
                 c.execute("ALTER TABLE accounts ADD COLUMN z_c0 TEXT")
-                print("[Schema] 已添加 accounts.z_c0 列")
+                logger.info("[Schema] 已添加 accounts.z_c0 列")
             except sqlite3.OperationalError:
                 pass
         # 检查是否有 d_c0 列 (旧表叫 dc0)
         if "d_c0" not in cols and "dc0" in cols:
             try:
                 c.execute("ALTER TABLE accounts RENAME COLUMN dc0 TO d_c0")
-                print("[Schema] 已重命名 dc0 → d_c0")
+                logger.info("[Schema] 已重命名 dc0 → d_c0")
             except sqlite3.OperationalError:
                 pass
         conn.commit()
@@ -117,7 +104,7 @@ def extract_cookies(page):
 def save_to_db(d_c0, z_c0):
     """将 d_c0 + z_c0 写入 accounts 表"""
     if not d_c0:
-        print("    [Error] d_c0 为空，无法入库")
+        logger.error("    [Error] d_c0 为空，无法入库")
         return False
     with sqlite3.connect(DB_FILE) as conn:
         c = conn.cursor()
@@ -140,8 +127,8 @@ def read_accounts():
     """读取 accounts.txt，过滤已成功的条目"""
     src = os.path.join(BASE_DIR, "accounts.txt")
     if not os.path.exists(src):
-        print("[Error] 找不到 accounts.txt")
-        print("        格式：每行一条  手机号  或  手机号----密码")
+        logger.error("[Error] 找不到 accounts.txt")
+        logger.info("        格式：每行一条  手机号  或  手机号----密码")
         return []
 
     with open(src, "r", encoding="utf-8") as f:
@@ -159,10 +146,10 @@ def read_accounts():
 
 def _wait_for_sms_input(phone):
     """在终端等待操作员输入 6 位验证码，超时返回 None"""
-    print(f"\n{'='*55}")
+    logger.info(f"\n{'='*55}")
     print(f"  📱  请查收手机 {phone} 的短信验证码")
     print(f"  ⏳  {SMS_CODE_TIMEOUT} 秒内未输入将跳过此账号")
-    print(f"{'='*55}")
+    logger.info(f"{'='*55}")
 
     code_holder = [None]
     event = threading.Event()
@@ -184,7 +171,7 @@ def _wait_for_sms_input(phone):
 
 def login_with_sms(page, phone, index, total, password=None):
     """主登录流程（短信验证码模式），返回 True = 登录成功"""
-    print(f"\n[{index}/{total}] 账号: {phone}")
+    logger.info(f"\n[{index}/{total}] 账号: {phone}")
 
     page.goto(SIGNIN_URL, timeout=60000)
     time.sleep(1)
@@ -200,30 +187,30 @@ def login_with_sms(page, phone, index, total, password=None):
             sms_tab.first.click()
             time.sleep(0.8)
             sms_tab_clicked = True
-            print("    ↳ 切换到短信验证码登录 Tab")
+            logger.info("    ↳ 切换到短信验证码登录 Tab")
     except Exception:
         pass
 
     if not password and not sms_tab_clicked:
-        print("    ↳ 无密码模式：等待发送验证码按钮出现...")
+        logger.info("    ↳ 无密码模式：等待发送验证码按钮出现...")
         try:
             page.wait_for_selector(SEL_BTN_SEND_SMS, timeout=8000)
             sms_tab_clicked = True
         except PWTimeout:
-            print("    [Warn] 未找到发送验证码按钮，等待人工操作...")
+            logger.warning("    [Warn] 未找到发送验证码按钮，等待人工操作...")
             try:
                 page.wait_for_selector(SEL_HOMEPAGE, timeout=SMS_CODE_TIMEOUT * 1000)
-                print("    ↳ 人工完成登录成功")
+                logger.info("    ↳ 人工完成登录成功")
                 return True
             except PWTimeout:
-                print("    [Timeout] 超时，跳过")
+                logger.warning("    [Timeout] 超时，跳过")
                 return False
 
     # 填手机号
     try:
         page.fill(SEL_INPUT_PHONE, phone)
     except Exception as e:
-        print(f"    [Error] 填手机号失败: {e}")
+        logger.error(f"    [Error] 填手机号失败: {e}")
         return False
 
     if sms_tab_clicked:
@@ -231,31 +218,31 @@ def login_with_sms(page, phone, index, total, password=None):
         try:
             send_btn = page.locator(SEL_BTN_SEND_SMS)
             send_btn.first.click(timeout=10000)
-            print("    ↳ 已点击「发送验证码」")
+            logger.info("    ↳ 已点击「发送验证码」")
         except Exception:
-            print("    [Warn] 标准按钮未找到，请手动点击发送验证码")
+            logger.warning("    [Warn] 标准按钮未找到，请手动点击发送验证码")
             try:
                 page.wait_for_selector(SEL_INPUT_SMS_CODE, timeout=15000)
-                print("    ↳ 检测到验证码输入框，继续...")
+                logger.info("    ↳ 检测到验证码输入框，继续...")
             except PWTimeout:
                 if not password:
-                    print("    [Error] 无密码且无法发送验证码，跳过")
+                    logger.error("    [Error] 无密码且无法发送验证码，跳过")
                     return False
-                print("    [Warn] 降级到密码模式")
+                logger.warning("    [Warn] 降级到密码模式")
                 sms_tab_clicked = False
 
     if not sms_tab_clicked and password:
         try:
             page.fill(SEL_INPUT_PASSWORD, password)
             page.click(SEL_BTN_SUBMIT)
-            print("    ↳ 已填账密并提交")
+            logger.info("    ↳ 已填账密并提交")
         except Exception as e:
-            print(f"    [Error] 填密码失败: {e}")
+            logger.error(f"    [Error] 填密码失败: {e}")
             return False
 
         try:
             page.wait_for_selector(SEL_HOMEPAGE, timeout=5000)
-            print("    ↳ 直接登录成功（无短信验证）")
+            logger.info("    ↳ 直接登录成功（无短信验证）")
             return True
         except PWTimeout:
             pass
@@ -263,21 +250,21 @@ def login_with_sms(page, phone, index, total, password=None):
         try:
             page.wait_for_selector(SEL_BTN_SEND_SMS, timeout=10000)
             page.locator(SEL_BTN_SEND_SMS).first.click()
-            print("    ↳ 检测到短信验证步骤，已点击发送")
+            logger.info("    ↳ 检测到短信验证步骤，已点击发送")
         except PWTimeout:
-            print("    ⚠️  等待人工完成滑块验证...")
+            logger.info("    ⚠️  等待人工完成滑块验证...")
             try:
                 page.wait_for_selector(SEL_HOMEPAGE, timeout=SMS_CODE_TIMEOUT * 1000)
-                print("    ↳ 人工完成登录成功")
+                logger.info("    ↳ 人工完成登录成功")
                 return True
             except PWTimeout:
-                print("    [Timeout] 人工操作超时，跳过")
+                logger.warning("    [Timeout] 人工操作超时，跳过")
                 return False
 
     # 等待并读取验证码
     sms_code = _wait_for_sms_input(phone)
     if not sms_code:
-        print("    [Skip] 未输入验证码，跳过此账号")
+        logger.warning("    [Skip] 未输入验证码，跳过此账号")
         return False
 
     # 填入验证码并提交
@@ -285,23 +272,23 @@ def login_with_sms(page, phone, index, total, password=None):
         page.fill(SEL_INPUT_SMS_CODE, sms_code)
         time.sleep(0.3)
         page.click(SEL_BTN_SUBMIT)
-        print(f"    ↳ 已填入验证码 {sms_code[:2]}**** 并提交")
+        logger.info(f"    ↳ 已填入验证码 {sms_code[:2]}**** 并提交")
     except Exception as e:
-        print(f"    [Error] 填验证码失败: {e}")
+        logger.error(f"    [Error] 填验证码失败: {e}")
         return False
 
     # 等待登录成功
     try:
         page.wait_for_selector(SEL_HOMEPAGE, timeout=20000)
-        print("    ↳ 首页出现，登录成功 ✓")
+        logger.info("    ↳ 首页出现，登录成功 ✓")
         return True
     except PWTimeout:
-        print("    [Warn] 提交验证码后首页仍未出现，等待人工处理...")
+        logger.warning("    [Warn] 提交验证码后首页仍未出现，等待人工处理...")
         try:
             page.wait_for_selector(SEL_HOMEPAGE, timeout=60000)
             return True
         except PWTimeout:
-            print("    [Timeout] 最终超时，跳过")
+            logger.warning("    [Timeout] 最终超时，跳过")
             return False
 
 
@@ -315,8 +302,8 @@ def run_harvester():
 
     total = len(lines)
     print(f"\n====== Cookie 提取车间启动 · 共 {total} 个账号待处理 ======")
-    print("  账号格式: 手机号  或  手机号----密码")
-    print("  短信发出后请在终端输入验证码\n")
+    logger.info("  账号格式: 手机号  或  手机号----密码")
+    logger.info("  短信发出后请在终端输入验证码\n")
 
     with Stealth().use_sync(sync_playwright()) as p:
         browser = p.chromium.launch(headless=HEADLESS, args=EXTRA_ARGS)
@@ -330,7 +317,7 @@ def run_harvester():
             password = parts[1].strip() if len(parts) >= 2 else None
 
             if not phone:
-                print(f"[跳过] 格式错误（手机号为空）: {line}")
+                logger.warning(f"[跳过] 格式错误（手机号为空）: {line}")
                 fail_count += 1
                 continue
 
@@ -352,18 +339,18 @@ def run_harvester():
                             mark_success(line)
                             ok_count += 1
                             masked = d_c0[:6] + "****" + d_c0[-4:] if len(d_c0) > 10 else d_c0
-                            print(f"    [✓ 入库] d_c0={masked} z_c0={'有' if z_c0 else '无'}")
+                            logger.info(f"    [✓ 入库] d_c0={masked} z_c0={'有' if z_c0 else '无'}")
                         else:
                             fail_count += 1
-                            print(f"    [✗ 无效] d_c0 为空")
+                            logger.info(f"    [✗ 无效] d_c0 为空")
                     else:
                         fail_count += 1
-                        print(f"    [✗ 无效] 登录成功但缺少 z_c0，账号 {phone} 跳过")
+                        logger.warning(f"    [✗ 无效] 登录成功但缺少 z_c0，账号 {phone} 跳过")
                 else:
                     fail_count += 1
 
             except Exception as e:
-                print(f"    [Exception] 账号 {phone} 处理异常: {e}")
+                logger.error(f"    [Exception] 账号 {phone} 处理异常: {e}")
                 fail_count += 1
             finally:
                 context.close()
@@ -371,11 +358,11 @@ def run_harvester():
 
         browser.close()
 
-    print(f"\n{'='*55}")
+    logger.info(f"\n{'='*55}")
     print(f"  提取车间收工")
     print(f"  ✓ 成功入库: {ok_count} 个")
     print(f"  ✗ 失败/跳过: {fail_count} 个")
-    print(f"{'='*55}\n")
+    logger.info(f"{'='*55}\n")
 
 
 if __name__ == "__main__":

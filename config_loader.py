@@ -1,6 +1,13 @@
 """
 配置加载器 — 从 config.yaml 读取所有配置
-用法: from config_loader import config
+用法:
+    from config_loader import config, conf
+    
+    # 直接取原始 dict
+    config["spider"]["concurrency"]
+    
+    # 用 conf() 安全取值（支持点分路径 + 默认值）
+    conf("spider.concurrency", 2)
 """
 import os
 import sys
@@ -40,3 +47,20 @@ def load_config() -> dict:
 
 
 config = load_config()
+
+
+def conf(key: str, default=None):
+    """安全取配置值，支持点分路径。
+    
+    用法:
+        conf("spider.concurrency", 2)
+        conf("paths.database", "bot_database.db")
+    """
+    keys = key.split(".")
+    val = config
+    for k in keys:
+        if isinstance(val, dict):
+            val = val.get(k)
+        else:
+            return default
+    return val if val is not None else default

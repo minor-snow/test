@@ -13,18 +13,40 @@ import re
 import html
 import os
 
+from config_loader import conf
+from logger_setup import logger
+
 # ==========================================
-# VNext Phase 1 架构配置
+# VNext Phase 1 架构配置 (全部从 config.yaml 读取)
 # ==========================================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-RPC_SERVER = "http://127.0.0.1:3000"
-DB_FILE = os.path.join(BASE_DIR, "bot_database.db")
-NODE_LOG = os.path.join(BASE_DIR, "node_signer.log")
-CONCURRENCY = 2                     # 降并发: 牢牢拉住请求频率
-TUNNEL_PROXY_URL = None             # ← 挂代理时填入
-ACCOUNT_MIN_GAP_SEC = 15            # 同一账号两次使用间隔不小于 15s
-MAX_ANSWERS_LIMIT = 0               # 0=无限制，>0=爬到这么多条自动停
-SIGNER_VERSION = "browser_hook_v16"
+
+# ── 路径 ──
+DB_FILE = os.path.join(BASE_DIR, conf("paths.database", "bot_database.db"))
+NODE_LOG = os.path.join(BASE_DIR, conf("paths.node_log", "node_signer.log"))
+
+# ── RPC Signer ──
+_SIGNER_HOST = conf("signer.host", "127.0.0.1")
+_SIGNER_PORT = conf("signer.port", 3000)
+RPC_SERVER = f"http://{_SIGNER_HOST}:{_SIGNER_PORT}"
+SIGNER_VERSION = conf("spider.signer_version", "browser_hook_v16")
+
+# ── Spider 引擎 ──
+CONCURRENCY = conf("spider.concurrency", 2)
+ACCOUNT_MIN_GAP_SEC = conf("spider.account_min_gap_sec", 15)
+MAX_ANSWERS_LIMIT = conf("spider.max_answers_limit", 0)
+TUNNEL_PROXY_URL = conf("spider.tunnel_proxy_url", None)
+LEASE_TIMEOUT_SEC = conf("spider.lease_timeout_sec", 300)
+GAP_THRESHOLD = conf("spider.gap_threshold", 3)
+TRUST_REGEN_PER_CYCLE = conf("spider.trust_regen_per_cycle", 1)
+MAINTENANCE_INTERVAL_SEC = conf("spider.maintenance_interval_sec", 30)
+SUCCESS_DELAY_MIN = conf("spider.success_delay_min", 2.0)
+SUCCESS_DELAY_MAX = conf("spider.success_delay_max", 6.0)
+ANSWERS_PER_PAGE = conf("spider.answers_per_page", 20)
+REQUEST_TIMEOUT_SEC = conf("spider.request_timeout_sec", 15)
+SIGN_RETRY = conf("spider.sign_retry", 3)
+USER_AGENT = conf("browser.user_agent",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36")
 
 # ── 签名缓存 ─────────────────────────────────────────────
 _SIG_CACHE = {}          # key: (url, d_c0) → (signature, expire_at)
@@ -86,29 +108,28 @@ E_SIGNER_ERROR = "SIGNER_ERROR"
 E_FALSE_EMPTY = "FALSE_EMPTY"
 E_PERMANENT_404 = "PERMANENT_404"
 
-# 退避/阀值配置（稳健模式：全线加长）
+# 退避/阀值配置（从 config.yaml 读取，带默认值）
+_backoff_cfg = conf("spider.backoff", {})
 BACKOFF_SECONDS = {
-    E_TRANSIENT_NETWORK: 60,            # 30→60
-    E_HTTP_403_429: 120,                # 60→120
-    E_CAPTCHA_HTML: 300,                # 120→300
-    E_FALSE_EMPTY: [600, 3600, None],   # 300/1800→600/3600
-    E_SIGNER_ERROR: [120, 300, None],   # 60/120→120/300
-    E_FORMAT_ERROR: [120, 300, None],
+    E_TRANSIENT_NETWORK: _backoff_cfg.get("TRANSIENT_NETWORK", 60),
+    E_HTTP_403_429: _backoff_cfg.get("HTTP_403_429", 120),
+    E_CAPTCHA_HTML: _backoff_cfg.get("CAPTCHA_HTML", 300),
+    E_FALSE_EMPTY: _backoff_cfg.get("FALSE_EMPTY", [600, 3600, None]),
+    E_SIGNER_ERROR: _backoff_cfg.get("SIGNER_ERROR", [120, 300, None]),
+    E_FORMAT_ERROR: _backoff_cfg.get("FORMAT_ERROR", [120, 300, None]),
 }
-GAP_THRESHOLD = 3
-LEASE_TIMEOUT_SEC = 300
 
-# 账号信任分惩罚（稳健模式：大幅软化）
+# 账号信任分惩罚（从 config.yaml 读取）
+_penalty_cfg = conf("spider.trust_penalty", {})
 TRUST_PENALTY = {
-    E_HTTP_403_429: 3,     # 原 10 → 3，容许 33 次 403 才死
-    E_CAPTCHA_HTML: 5,     # 原 10 → 5
-    E_FALSE_EMPTY:  2,     # 原 5  → 2
+    E_HTTP_403_429: _penalty_cfg.get("HTTP_403_429", 3),
+    E_CAPTCHA_HTML: _penalty_cfg.get("CAPTCHA_HTML", 5),
+    E_FALSE_EMPTY: _penalty_cfg.get("FALSE_EMPTY", 2),
 }
-TRUST_REGEN_PER_CYCLE = 1  # 维护线程每 30s 给 ACTIVE 账号回 +1 信任分
 
 
 def _get_db_conn():
-    conn = sqlite3.connect(DB_FILE, timeout=20)
+    conn = sqlite3.connect(DB_FILE, timeout=conf("spider.db_timeout_sec", 20))
     conn.execute("PRAGMA busy_timeout = 5000")
     conn.execute("PRAGMA synchronous = NORMAL")
     conn.row_factory = sqlite3.Row
@@ -129,10 +150,10 @@ def _db_retry(fn):
                 return fn(*args, **kwargs)
             except sqlite3.OperationalError as e:
                 if attempt == max_retries - 1:
-                    print(f"[DB] {fn.__qualname__} 重试 {max_retries} 次仍失败: {e}")
+                    logger.warning(f"[DB] {fn.__qualname__} 重试 {max_retries} 次仍失败: {e}")
                     raise
                 wait = (0.1 * (2 ** attempt)) + _random.uniform(0, 0.1)
-                print(f"[DB] {fn.__qualname__} 锁冲突 (第{attempt+1}次)，{wait:.2f}s 后重试")
+                logger.debug(f"[DB] {fn.__qualname__} 锁冲突 (第{attempt+1}次)，{wait:.2f}s 后重试")
                 time.sleep(wait)
     return wrapper
 
@@ -141,7 +162,7 @@ def _db_retry(fn):
 # Schema 迁移（兼容旧版 + 新建）
 # ==========================================
 def _check_and_migrate_schema():
-    print("[System] VNext Phase 1: 执行 schema 巡检与迁移...")
+    logger.info("[System] VNext Phase 1: 执行 schema 巡检与迁移...")
     with _get_db_conn() as conn:
         c = conn.cursor()
         c.execute("PRAGMA journal_mode=WAL;")
@@ -172,7 +193,7 @@ def _check_and_migrate_schema():
 
         # 迁移旧 tasks 表数据
         if has_old_tasks and not has_new_tasks:
-            print("[Migration] 检测到旧版 tasks 表，迁移数据到 question_tasks...")
+            logger.info("[Migration] 检测到旧版 tasks 表，迁移数据到 question_tasks...")
             now = int(time.time())
             c.execute(f'''INSERT OR IGNORE INTO question_tasks 
                          (question_id, current_offset, state, retry_count, created_at, updated_at)
@@ -182,7 +203,7 @@ def _check_and_migrate_schema():
                                 COALESCE(retry_count, 0), {now}, {now}
                          FROM tasks''')
             c.execute("ALTER TABLE tasks RENAME TO tasks_v15_backup")
-            print(f"[Migration] 迁移完成，旧表已备份为 tasks_v15_backup")
+            logger.info("[Migration] 迁移完成，旧表已备份为 tasks_v15_backup")
 
         # ── 2. task_attempts（审计表）──
         c.execute('''CREATE TABLE IF NOT EXISTS task_attempts (
@@ -230,7 +251,7 @@ def _check_and_migrate_schema():
         if "dc0" in acc_cols and "d_c0" not in acc_cols:
             try:
                 c.execute("ALTER TABLE accounts RENAME COLUMN dc0 TO d_c0")
-                print("[Migration] 已重命名 accounts.dc0 → d_c0")
+                logger.info("[Migration] 已重命名 accounts.dc0 → d_c0")
                 acc_cols = [r['name'] for r in c.execute("PRAGMA table_info(accounts)").fetchall()]
             except sqlite3.OperationalError:
                 pass
@@ -261,17 +282,17 @@ def _check_and_migrate_schema():
         # ── 6. 旧 missing_gaps 迁移到 replay_gaps ──
         c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='missing_gaps'")
         if c.fetchone():
-            print("[Migration] 迁移 missing_gaps → replay_gaps...")
+            logger.info("[Migration] 迁移 missing_gaps → replay_gaps...")
             now = int(time.time())
             c.execute(f"""INSERT OR IGNORE INTO replay_gaps 
                          (question_id, offset, reason_class, status, first_seen_at)
                          SELECT question_id, offset, 'LEGACY', 'PENDING', COALESCE(created_at, {now})
                          FROM missing_gaps""")
             c.execute("ALTER TABLE missing_gaps RENAME TO missing_gaps_v15_backup")
-            print("[Migration] missing_gaps 迁移完成")
+            logger.info("[Migration] missing_gaps 迁移完成")
 
         conn.commit()
-    print("[System] Schema 巡检完成。")
+    logger.info("[System] Schema 巡检完成。")
 
 
 def clean_html(raw_html):
@@ -339,7 +360,7 @@ class NodeSupervisor:
                                 shell=True, stderr=subprocess.DEVNULL
                             ).decode(errors='ignore')
                             if 'node' in wmic_out.lower() and 'rpc_server.js' in wmic_out:
-                                print(f"[Supervisor] 发现 3000 端口孤儿 signer (PID: {pid})，清理。")
+                                logger.info(f"[Supervisor] 发现 3000 端口孤儿 signer (PID: {pid})，清理。")
                                 subprocess.check_call(["taskkill", "/F", "/T", "/PID", pid],
                                                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                         except Exception:
@@ -348,7 +369,7 @@ class NodeSupervisor:
             pass
 
     def _start(self):
-        print(f"[Supervisor] 启动 Node signer (重启次数: {self.restart_count})...")
+        logger.info(f"[Supervisor] 启动 Node signer (重启次数: {self.restart_count})...")
         self._log_handle = open(NODE_LOG, 'a', encoding='utf-8')
         env = os.environ.copy()
         env["SIGNER_MAX_REQUESTS"] = "0"  # 永不自杀，由 Supervisor 控制生命周期
@@ -362,7 +383,7 @@ class NodeSupervisor:
 
     def kill_all(self):
         if self.process and self.process.poll() is None:
-            print("\n[Supervisor] 执行进程树终止 (taskkill /F /T)...")
+            logger.info("[Supervisor] 执行进程树终止 (taskkill /F /T)...")
             try:
                 subprocess.check_call(["taskkill", "/F", "/T", "/PID", str(self.process.pid)],
                                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -408,7 +429,7 @@ class NodeSupervisor:
 
     def _graceful_restart(self):
         """温和重启：先标记 NOT READY，排空队列后再杀旧进程启动新的"""
-        print("[Supervisor] 执行温和重启...")
+        logger.info("[Supervisor] 执行温和重启...")
         old_pid = self.process.pid if self.process else None
         self.is_ready = False
 
@@ -437,16 +458,16 @@ class NodeSupervisor:
                 health = self._get_health()
                 if health and health.get("ready"):
                     self.is_ready = True
-                    print("[Supervisor] 新 signer 实例已就绪")
+                    logger.info("[Supervisor] 新 signer 实例已就绪")
                     return
             time.sleep(1)
-        print("[Supervisor] 新 signer 实例启动超时")
+        logger.warning("[Supervisor] 新 signer 实例启动超时")
 
     def _watchdog_loop(self):
         while True:
             time.sleep(5)
             if self.restart_count > 8:
-                print("\n[CRITICAL] Node signer 不可恢复（重启 > 8 轮）。退出。")
+                logger.critical("[CRITICAL] Node signer 不可恢复（重启 > 8 轮）。退出。")
                 self.kill_all()
                 os._exit(1)
 
@@ -461,9 +482,9 @@ class NodeSupervisor:
                         self.last_canary_ok > 0 and int(time.time()) - self.last_canary_ok > 600
                     ):
                         if self.run_canary():
-                            print(f"[Supervisor] Canary 验活通过 (v{self.signer_version})")
+                            logger.info(f"[Supervisor] Canary 验活通过 (v{self.signer_version})")
                         else:
-                            print("[Supervisor] Canary 验活失败，signer 标记为 NOT READY")
+                            logger.warning("[Supervisor] Canary 验活失败，signer 标记为 NOT READY")
                             self.is_ready = False
                             self.consecutive_failures += 1
                             continue
@@ -474,7 +495,7 @@ class NodeSupervisor:
                     # 近 TTL 预温：触发温和重启
                     if self.should_prewarm() and not self._prewarming:
                         self._prewarming = True
-                        print(f"[Supervisor] Signer 接近 TTL ({self._last_request_count}/{self._ttl_limit})，触发预温重启")
+                        logger.info(f"[Supervisor] Signer 接近 TTL ({self._last_request_count}/{self._ttl_limit})，触发预温重启")
                         self._graceful_restart()
                         self._prewarming = False
                 else:
@@ -483,7 +504,7 @@ class NodeSupervisor:
 
             if self.consecutive_failures >= 3:
                 self.is_ready = False
-                print("[Supervisor] 连续 3 轮健康检查失败，重启 Node...")
+                logger.warning("[Supervisor] 连续 3 轮健康检查失败，重启 Node...")
                 self.kill_all()
                 self.restart_count += 1
                 backoff = min(2 ** self.restart_count, 60)
@@ -598,7 +619,7 @@ class TaskManager:
             affected = c.rowcount
             conn.commit()
             if affected:
-                print(f"[TaskManager] 恢复了 {affected} 个过期租约任务")
+                logger.info(f"[TaskManager] 恢复了 {affected} 个过期租约任务")
 
     def lock_and_get_target(self, worker_id):
         """按状态机选取任务，返回 dict 或 None"""
@@ -716,7 +737,7 @@ class TaskManager:
 
             if answer_count_from_api > 0 and collected < answer_count_from_api * 0.95:
                 missing = answer_count_from_api - collected
-                print(f"[Integrity] Q{question_id}: 采集 {collected} / 标注 {answer_count_from_api} (缺失 {missing} 条)")
+                logger.warning(f"[Integrity] Q{question_id}: 采集 {collected} / 标注 {answer_count_from_api} (缺失 {missing} 条)")
                 # 记录缺失的 offset 范围
                 now = int(time.time())
                 gap_start = collected  # 简化：以采集数为起点
@@ -740,7 +761,7 @@ class TaskManager:
 # ==========================================
 def maintenance_thread(am, tm):
     while True:
-        time.sleep(30)
+        time.sleep(MAINTENANCE_INTERVAL_SEC)
         try:
             now = int(time.time())
             am._rescue_cooldowns()
@@ -765,7 +786,7 @@ def maintenance_thread(am, tm):
 
                 conn.commit()
                 if recovered:
-                    print(f"[Maintenance] 回收 {recovered} 个过期租约")
+                    logger.debug(f"[Maintenance] 回收 {recovered} 个过期租约")
         except Exception:
             pass
 
@@ -863,7 +884,7 @@ def worker_cycle(worker_id, am, tm, supervisor):
         if MAX_ANSWERS_LIMIT > 0:
             with stats.lock:
                 if stats.scraped_answers >= MAX_ANSWERS_LIMIT:
-                    print(f"[{worker_name}] 已达采集上限 {MAX_ANSWERS_LIMIT} 条，Worker 退出")
+                    logger.info(f"[{worker_name}] 已达采集上限 {MAX_ANSWERS_LIMIT} 条，Worker 退出")
                     return
 
         # 等待 signer 就绪
@@ -910,7 +931,7 @@ def worker_cycle(worker_id, am, tm, supervisor):
                 tm.create_gap(question_id, offset, E_SIGNER_ERROR, attempt_id)
                 tm.transition_state(question_id, S_GAP, error_class=E_SIGNER_ERROR,
                                     retry_count=current_retries + 1)
-                print(f"[{worker_name}] Q{question_id} 签名连续失败 → GAP")
+                logger.info(f"[{worker_name}] Q{question_id} 签名连续失败 → GAP")
             else:
                 tm.transition_state(question_id, S_BACKOFF, error_class=E_SIGNER_ERROR,
                                     retry_count=current_retries + 1,
@@ -937,7 +958,7 @@ def worker_cycle(worker_id, am, tm, supervisor):
             with stats.lock:
                 stats.total_requests += 1
 
-            resp = session.get(f"https://www.zhihu.com{target_api}", headers=headers, timeout=15)
+            resp = session.get(f"https://www.zhihu.com{target_api}", headers=headers, timeout=REQUEST_TIMEOUT_SEC)
             latency = int((time.time() - t0) * 1000)
 
             if resp.status_code == 200:
@@ -1009,7 +1030,7 @@ def worker_cycle(worker_id, am, tm, supervisor):
                         alt_account = am.lock_and_get_weapon()
                         if alt_account[0]:
                             alt_d_c0, alt_z_c0 = alt_account
-                            print(f"[{worker_name}] Q{question_id} 假空页 → 换号重试 offset={offset}")
+                            logger.info(f"[{worker_name}] Q{question_id} 假空页 → 换号重试 offset={offset}")
                             # 用新账号重新签名
                             alt_sig = _get_signature_cached(session, target_api, alt_d_c0)
                             if alt_sig:
@@ -1019,7 +1040,7 @@ def worker_cycle(worker_id, am, tm, supervisor):
                                 try:
                                     alt_resp = session.get(f"https://www.zhihu.com{target_api}",
                                                           headers={**headers, 'Cookie': alt_cookie},
-                                                          timeout=15)
+                                                          timeout=REQUEST_TIMEOUT_SEC)
                                     if alt_resp.status_code == 200:
                                         try:
                                             alt_data = alt_resp.json()
@@ -1035,7 +1056,7 @@ def worker_cycle(worker_id, am, tm, supervisor):
                                                 next_offset = offset + 20
                                                 new_state = S_DONE if is_end else S_READY
                                                 tm.transition_state(question_id, new_state, new_offset=next_offset, retry_count=0)
-                                                print(f"[{worker_name}] Q{question_id} 换号重试成功 ✓ 获得 {len(alt_data['data'])} 条")
+                                                logger.info(f"[{worker_name}] Q{question_id} 换号重试成功 ✓ 获得 {len(alt_data['data'])} 条")
                                                 continue
                                         except ValueError:
                                             pass
@@ -1044,19 +1065,19 @@ def worker_cycle(worker_id, am, tm, supervisor):
                                     am.release_weapon(alt_d_c0)
                             else:
                                 am.release_weapon(alt_d_c0)
-                            print(f"[{worker_name}] Q{question_id} 换号重试也失败，进入退避")
+                            logger.info(f"[{worker_name}] Q{question_id} 换号重试也失败，进入退避")
 
                         backoff = _get_backoff_seconds(error_class, current_retries)
                         if backoff is None:
                             tm.create_gap(question_id, offset, error_class, attempt_id)
                             tm.transition_state(question_id, S_GAP, error_class=error_class,
                                                 retry_count=current_retries + 1)
-                            print(f"[{worker_name}] Q{question_id} offset={offset} 假空页 ×{current_retries+1} → GAP")
+                            logger.info(f"[{worker_name}] Q{question_id} offset={offset} 假空页 ×{current_retries+1} → GAP")
                         else:
                             tm.transition_state(question_id, S_BACKOFF, error_class=error_class,
                                                 retry_count=current_retries + 1,
                                                 next_run_at=int(time.time()) + backoff)
-                            print(f"[{worker_name}] Q{question_id} 假空页 → BACKOFF {backoff}s")
+                            logger.info(f"[{worker_name}] Q{question_id} 假空页 → BACKOFF {backoff}s")
                     continue
 
                 # 有数据，保存
@@ -1100,7 +1121,7 @@ def worker_cycle(worker_id, am, tm, supervisor):
                                   404, error_class, "Not Found", latency)
                 am.release_weapon(d_c0)
                 tm.transition_state(question_id, S_DEAD, error_class=error_class)
-                print(f"[{worker_name}] Q{question_id} → DEAD (404)")
+                logger.info(f"[{worker_name}] Q{question_id} → DEAD (404)")
 
             else:
                 # 403/429/挑战页/其他
@@ -1176,10 +1197,10 @@ def dashboard_thread():
         done = state_counts.get(S_DONE, 0)
 
         rate = (s200 / reqs * 100) if reqs > 0 else 0
-        print(f"\n[VNext Board] "
-              f"REQ:{reqs} OK:{s200}({rate:.0f}%) BAN:{s403} SIG_ERR:{s_sig} OTHER:{s_oth} | "
-              f"Ans:+{ans} | Accs:{active_acc} | "
-              f"R:{ready} B:{backoff} G:{gap} D:{done}")
+        logger.info(
+            f"[VNext Board] REQ:{reqs} OK:{s200}({rate:.0f}%) BAN:{s403} SIG_ERR:{s_sig} OTHER:{s_oth} | "
+            f"Ans:+{ans} | Accs:{active_acc} | R:{ready} B:{backoff} G:{gap} D:{done}"
+        )
 
 
 # ==========================================
@@ -1195,7 +1216,7 @@ if __name__ == "__main__":
 
     _check_and_migrate_schema()
     limit_msg = f"（限制 {MAX_ANSWERS_LIMIT} 条）" if MAX_ANSWERS_LIMIT > 0 else "（无限制）"
-    print(f"====== VNext Phase 1 启动 {limit_msg} ======")
+    logger.info(f"====== VNext Phase 1 启动 {limit_msg} ======")
 
     supervisor = NodeSupervisor()
     am = AccountManager()
@@ -1212,4 +1233,4 @@ if __name__ == "__main__":
         for future in concurrent.futures.as_completed(futures):
             future.result()
 
-    print("\n[System] 全部任务完成，退出。")
+    logger.info("[System] 全部任务完成，退出。")

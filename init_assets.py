@@ -3,13 +3,21 @@ import argparse
 import os
 import time
 
+try:
+    from config_loader import conf
+except Exception:
+    def conf(key, default=None):
+        return default
+
+from logger_setup import logger
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_FILE = os.path.join(BASE_DIR, "bot_database.db")
+DB_FILE = os.path.join(BASE_DIR, conf("paths.database", "bot_database.db"))
 
 
 def setup_database():
     """VNext Phase 1: 创建/迁移数据库到最新 schema"""
-    print(">>> VNext Phase 1: 初始化数据库...")
+    logger.info(">>> VNext Phase 1: 初始化数据库...")
     with sqlite3.connect(DB_FILE) as conn:
         c = conn.cursor()
         c.execute('PRAGMA journal_mode=WAL;')
@@ -35,7 +43,7 @@ def setup_database():
         if "dc0" in cols and "d_c0" not in cols:
             try:
                 c.execute("ALTER TABLE accounts RENAME COLUMN dc0 TO d_c0")
-                print(">>> [迁移] 已重命名 accounts.dc0 → d_c0")
+                logger.info(">>> [迁移] 已重命名 accounts.dc0 → d_c0")
             except sqlite3.OperationalError:
                 pass
             cols = [col[1] for col in (c.execute("PRAGMA table_info(accounts)").fetchall())]
@@ -118,7 +126,7 @@ def setup_database():
             # question_tasks 表刚创建，检查是否已有数据
             c.execute("SELECT COUNT(*) FROM question_tasks")
             if c.fetchone()[0] == 0:
-                print(">>> [迁移] 旧 tasks → question_tasks...")
+                logger.info(">>> [迁移] 旧 tasks → question_tasks...")
                 now = int(time.time())
                 c.execute(f"""INSERT OR IGNORE INTO question_tasks
                              (question_id, current_offset, state, retry_count, created_at, updated_at)
@@ -126,9 +134,9 @@ def setup_database():
                                     CASE WHEN is_completed = 1 THEN 'DONE' ELSE 'READY' END,
                                     COALESCE(retry_count, 0), {now}, {now}
                              FROM tasks""")
-                print(f">>> [迁移] 迁移了 {c.rowcount} 条任务")
+                logger.info(f">>> [迁移] 迁移了 {c.rowcount} 条任务")
             c.execute("ALTER TABLE tasks RENAME TO tasks_v15_backup")
-            print(">>> [迁移] 旧 tasks 已备份为 tasks_v15_backup")
+            logger.info(">>> [迁移] 旧 tasks 已备份为 tasks_v15_backup")
 
         # 旧 missing_gaps → replay_gaps
         c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='missing_gaps'")
@@ -139,23 +147,23 @@ def setup_database():
                          SELECT question_id, offset, 'LEGACY', 'PENDING', COALESCE(created_at, {now})
                          FROM missing_gaps""")
             c.execute("ALTER TABLE missing_gaps RENAME TO missing_gaps_v15_backup")
-            print(">>> [迁移] missing_gaps → replay_gaps 完成")
+            logger.info(">>> [迁移] missing_gaps → replay_gaps 完成")
 
         conn.commit()
-    print(">>> 数据库 schema 已就绪 (VNext Phase 1)。")
+    logger.info(">>> 数据库 schema 已就绪 (VNext Phase 1)。")
 
 
 def seed_data():
     with sqlite3.connect(DB_FILE) as conn:
         c = conn.cursor()
-        print(">>> ⚠️  正在执行高危操作：清空数据...")
+        logger.warning(">>> ⚠️  正在执行高危操作：清空数据...")
         c.execute("DELETE FROM accounts")
         c.execute("DELETE FROM question_tasks")
         c.execute("DELETE FROM raw_answers")
         c.execute("DELETE FROM task_attempts")
         c.execute("DELETE FROM replay_gaps")
 
-        print(">>> 正在填装测试弹仓 (Accounts)...")
+        logger.info(">>> 正在填装测试弹仓 (Accounts)...")
         dummy_dc0s = [
             ('mock_dc0_identity_111111111', 'mock_zc0_AAAAA111111'),
             ('mock_dc0_identity_AAAAA22222', 'mock_zc0_BBBBB22222'),
@@ -168,7 +176,7 @@ def seed_data():
             c.execute("INSERT OR IGNORE INTO accounts (d_c0, z_c0, status, trust_score) VALUES (?, ?, 'ACTIVE', ?)",
                       (d_c0, z_c0, random.randint(80, 100)))
 
-        print(">>> 正在填装测试任务 (Tasks)...")
+        logger.info(">>> 正在填装测试任务 (Tasks)...")
         now = int(time.time())
         dummy_questions = ['550742168', '601323835', '604812328', '264627402', '565809772']
         for qid in dummy_questions:
@@ -177,7 +185,7 @@ def seed_data():
                          VALUES (?, 0, 'READY', 'manual', ?, ?)""", (qid, now, now))
 
         conn.commit()
-    print(">>> 【沙盒弹库】填装完毕！")
+    logger.info(">>> 【沙盒弹库】填装完毕！")
 
 
 if __name__ == '__main__':
@@ -190,4 +198,4 @@ if __name__ == '__main__':
     if args.seed:
         seed_data()
     else:
-        print(">>> (提示：未执行种子数据装填。如需重置，请加 --seed 参数)")
+        logger.info(">>> (提示：未执行种子数据装填。如需重置，请加 --seed 参数)")
