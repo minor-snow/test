@@ -9,10 +9,30 @@ import sqlite3
 import requests
 from flask import Flask, Response, jsonify
 
+try:
+    from config_loader import config as _cfg
+except Exception:
+    _cfg = {}
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_FILE = os.path.join(BASE_DIR, "bot_database.db")
-NODE_LOG = os.path.join(BASE_DIR, "node_signer.log")
-RPC_HEALTH = "http://127.0.0.1:3000/health"
+
+def _conf(key, default):
+    keys = key.split(".")
+    val = _cfg
+    for k in keys:
+        if isinstance(val, dict):
+            val = val.get(k)
+        else:
+            return default
+    return val if val is not None else default
+
+DB_FILE = os.path.join(BASE_DIR, _conf("paths.database", "bot_database.db"))
+NODE_LOG = os.path.join(BASE_DIR, _conf("paths.node_log", "node_signer.log"))
+RPC_HOST = _conf("signer.host", "127.0.0.1")
+RPC_PORT = _conf("signer.port", 3000)
+RPC_HEALTH = f"http://{RPC_HOST}:{RPC_PORT}{_conf('signer.health_endpoint', '/health')}"
+DASHBOARD_HOST = _conf("dashboard.host", "127.0.0.1")
+DASHBOARD_PORT = _conf("dashboard.port", 5000)
 
 app = Flask(__name__)
 
@@ -117,12 +137,12 @@ def api_tasks():
 def api_accounts():
     with _get_db() as conn:
         c = conn.cursor()
-        c.execute("SELECT dc0, status, trust_score, cooldown_until, is_in_use, last_error_class FROM accounts ORDER BY status, trust_score DESC")
+        c.execute("SELECT d_c0, z_c0, status, trust_score, cooldown_until, is_in_use, last_error_class FROM accounts ORDER BY status, trust_score DESC")
         rows = []
         now = int(time.time())
         for r in c.fetchall():
             d = dict(r)
-            dc0 = d["dc0"]
+            dc0 = d["d_c0"]
             d["dc0_masked"] = dc0[:6] + "****" + dc0[-4:] if len(dc0) > 10 else dc0
             d["cooling_remaining"] = max(0, d["cooldown_until"] - now)
             rows.append(d)
@@ -658,6 +678,6 @@ def index():
 if __name__ == "__main__":
     print("=" * 50)
     print("  知乎采集系统 · VNext 实时监控仪表盘")
-    print("  访问 http://127.0.0.1:5000")
+    print(f"  访问 http://{DASHBOARD_HOST}:{DASHBOARD_PORT}")
     print("=" * 50)
-    app.run(host="127.0.0.1", port=5000, debug=False, threaded=True)
+    app.run(host=DASHBOARD_HOST, port=DASHBOARD_PORT, debug=False, threaded=True)

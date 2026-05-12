@@ -26,6 +26,47 @@ ACCOUNT_MIN_GAP_SEC = 15            # 同一账号两次使用间隔不小于 15
 MAX_ANSWERS_LIMIT = 0               # 0=无限制，>0=爬到这么多条自动停
 SIGNER_VERSION = "browser_hook_v16"
 
+# ── 签名缓存 ─────────────────────────────────────────────
+_SIG_CACHE = {}          # key: (url, d_c0) → (signature, expire_at)
+_SIG_CACHE_TTL = 120     # 签名缓存有效期秒数 (知乎同一 URL 签名短时间内不变)
+
+
+def _get_signature_cached(session, target_api, d_c0):
+    """获取签名，优先从缓存读取。同时负责 RPC 调用和重试逻辑。"""
+    now = time.time()
+    cache_key = (target_api, d_c0)
+
+    # 检查缓存
+    if cache_key in _SIG_CACHE:
+        sig_val, expire_at = _SIG_CACHE[cache_key]
+        if now < expire_at:
+            return sig_val
+        del _SIG_CACHE[cache_key]
+
+    # 请求 RPC Signer
+    sig = None
+    for attempt in range(3):
+        try:
+            resp = session.post(f"{RPC_SERVER}/get_sign",
+                              json={"url": target_api, "dc0": d_c0},
+                              timeout=5, proxies={"http": None, "https": None})
+            if resp.status_code == 200:
+                sig = resp.json().get("signature")
+                break
+        except Exception:
+            time.sleep(1)
+
+    # 缓存有效签名
+    if sig:
+        _SIG_CACHE[cache_key] = (sig, now + _SIG_CACHE_TTL)
+        # 清理过期缓存条目
+        expired = [k for k, v in _SIG_CACHE.items() if v[1] < now]
+        for k in expired:
+            del _SIG_CACHE[k]
+
+    return sig
+
+
 # 任务状态常量
 S_READY = "READY"
 S_LEASED = "LEASED"
@@ -175,7 +216,8 @@ def _check_and_migrate_schema():
 
         # ── 4. accounts 补列（兼容旧表，不改名）──
         c.execute('''CREATE TABLE IF NOT EXISTS accounts (
-            dc0 TEXT PRIMARY KEY,
+            d_c0 TEXT PRIMARY KEY,
+            z_c0 TEXT,
             status TEXT DEFAULT 'ACTIVE',
             cooldown_until INTEGER DEFAULT 0,
             trust_score INTEGER DEFAULT 100,
@@ -254,6 +296,9 @@ stats = MemoryDashboardStats()
 # NodeSupervisor（保持，仅微调）
 # ==========================================
 class NodeSupervisor:
+    """管理 Node signer 进程生命周期。
+    支持：健康检查、Canary 验活、渐进式重启 (指数退避)、近 TTL 预温。"""
+
     def __init__(self):
         self.process = None
         self.is_ready = False
@@ -262,8 +307,18 @@ class NodeSupervisor:
         self._log_handle = None
         self.signer_version = SIGNER_VERSION
         self.last_canary_ok = 0
+        self._last_request_count = 0
+        self._ttl_limit = 0
+        self._prewarming = False
 
-        # 启动前清理本项目的孤儿 signer
+        self._cleanup_orphans()
+        atexit.register(self.kill_all)
+        self._start()
+        self.watchdog_thread = threading.Thread(target=self._watchdog_loop, daemon=True)
+        self.watchdog_thread.start()
+
+    def _cleanup_orphans(self):
+        """清理本项目的孤儿 signer 进程"""
         try:
             output = subprocess.check_output('netstat -aon', shell=True, stderr=subprocess.DEVNULL).decode()
             for line in output.splitlines():
@@ -279,24 +334,20 @@ class NodeSupervisor:
                                 print(f"[Supervisor] 发现 3000 端口孤儿 signer (PID: {pid})，清理。")
                                 subprocess.check_call(["taskkill", "/F", "/T", "/PID", pid],
                                                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                            else:
-                                print(f"[Supervisor] 3000 端口被非本项目进程 (PID: {pid}) 占用，跳过。")
                         except Exception:
                             pass
         except Exception:
             pass
 
-        atexit.register(self.kill_all)
-        self._start()
-        self.watchdog_thread = threading.Thread(target=self._watchdog_loop, daemon=True)
-        self.watchdog_thread.start()
-
     def _start(self):
         print(f"[Supervisor] 启动 Node signer (重启次数: {self.restart_count})...")
         self._log_handle = open(NODE_LOG, 'a', encoding='utf-8')
+        env = os.environ.copy()
+        env["SIGNER_MAX_REQUESTS"] = "0"  # 永不自杀，由 Supervisor 控制生命周期
         self.process = subprocess.Popen(
             ["node", "rpc_server.js"],
             cwd=BASE_DIR,
+            env=env,
             stdout=subprocess.DEVNULL,
             stderr=self._log_handle
         )
@@ -307,16 +358,34 @@ class NodeSupervisor:
             try:
                 subprocess.check_call(["taskkill", "/F", "/T", "/PID", str(self.process.pid)],
                                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            except:
+            except Exception:
                 pass
         if self._log_handle:
             try:
                 self._log_handle.close()
-            except:
+            except Exception:
                 pass
 
+    def _get_health(self):
+        """获取 signer 健康数据，失败返回 None"""
+        try:
+            resp = requests.get(f"{RPC_SERVER}/health", timeout=3, proxies={"http": None, "https": None})
+            if resp.status_code == 200:
+                data = resp.json()
+                self._last_request_count = data.get("totalResolved", 0)
+                self._ttl_limit = data.get("ttlLimit", 0)
+                return data
+        except Exception:
+            pass
+        return None
+
+    def should_prewarm(self):
+        """判断是否需要预温重启（当前 signer 接近 TTL 时）"""
+        if self._ttl_limit <= 0:
+            return False
+        return self._last_request_count > self._ttl_limit * 0.7
+
     def run_canary(self):
-        """执行 Canary 验活：调用 /canary 端点做一次真实签名"""
         try:
             r = requests.get(f"{RPC_SERVER}/canary", timeout=10, proxies={"http": None, "https": None})
             if r.status_code == 200:
@@ -328,6 +397,42 @@ class NodeSupervisor:
         except Exception:
             pass
         return False
+
+    def _graceful_restart(self):
+        """温和重启：先标记 NOT READY，排空队列后再杀旧进程启动新的"""
+        print("[Supervisor] 执行温和重启...")
+        old_pid = self.process.pid if self.process else None
+        self.is_ready = False
+
+        # 等待任务队列排空 (最多等 30s)
+        for _ in range(30):
+            health = self._get_health()
+            if health and health.get("queueDepth", 0) == 0:
+                break
+            time.sleep(1)
+
+        # 杀旧进程
+        if old_pid:
+            try:
+                subprocess.check_call(["taskkill", "/F", "/T", "/PID", str(old_pid)],
+                                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except Exception:
+                pass
+
+        time.sleep(2)
+        self.consecutive_failures = 0
+        self._start()
+
+        # 等待新进程就绪 (最多等 30s)
+        for _ in range(30):
+            if self.process and self.process.poll() is None:
+                health = self._get_health()
+                if health and health.get("ready"):
+                    self.is_ready = True
+                    print("[Supervisor] 新 signer 实例已就绪")
+                    return
+            time.sleep(1)
+        print("[Supervisor] 新 signer 实例启动超时")
 
     def _watchdog_loop(self):
         while True:
@@ -341,27 +446,30 @@ class NodeSupervisor:
                 self.is_ready = False
                 self.consecutive_failures += 1
             else:
-                try:
-                    resp = requests.get(f"{RPC_SERVER}/health", timeout=3, proxies={"http": None, "https": None})
-                    data = resp.json()
-                    if data.get("ok") is True and data.get("ready") is True:
-                        # 首次 ready 或每 100 次签名做 canary
-                        if not self.is_ready or (self.last_canary_ok > 0 and
-                                                  int(time.time()) - self.last_canary_ok > 600):
-                            if self.run_canary():
-                                print(f"[Supervisor] Canary 验活通过 (version: {self.signer_version})")
-                            else:
-                                print("[Supervisor] Canary 验活失败，signer 标记为 NOT READY")
-                                self.is_ready = False
-                                self.consecutive_failures += 1
-                                continue
-                        self.consecutive_failures = 0
-                        self.is_ready = True
-                        self.restart_count = 0
-                    else:
-                        self.is_ready = False
-                        self.consecutive_failures += 1
-                except Exception:
+                health = self._get_health()
+                if health and health.get("ok") is True and health.get("ready") is True:
+                    # 首次 ready 或每 10 分钟做 canary
+                    if not self.is_ready or (
+                        self.last_canary_ok > 0 and int(time.time()) - self.last_canary_ok > 600
+                    ):
+                        if self.run_canary():
+                            print(f"[Supervisor] Canary 验活通过 (v{self.signer_version})")
+                        else:
+                            print("[Supervisor] Canary 验活失败，signer 标记为 NOT READY")
+                            self.is_ready = False
+                            self.consecutive_failures += 1
+                            continue
+                    self.consecutive_failures = 0
+                    self.is_ready = True
+                    self.restart_count = 0
+
+                    # 近 TTL 预温：触发温和重启
+                    if self.should_prewarm() and not self._prewarming:
+                        self._prewarming = True
+                        print(f"[Supervisor] Signer 接近 TTL ({self._last_request_count}/{self._ttl_limit})，触发预温重启")
+                        self._graceful_restart()
+                        self._prewarming = False
+                else:
                     self.is_ready = False
                     self.consecutive_failures += 1
 
@@ -398,15 +506,14 @@ class AccountManager:
 
     @_db_retry
     def lock_and_get_weapon(self):
-        """Returns (dc0, z_c0) tuple. z_c0 may be None for legacy rows.
-        强制同一账号间隔 ACCOUNT_MIN_GAP_SEC 才能再次使用。"""
+        """返回 (d_c0, z_c0) 元组。强制同一账号间隔 ACCOUNT_MIN_GAP_SEC 才能再次使用。"""
         now = int(time.time())
-        min_last_used = now - ACCOUNT_MIN_GAP_SEC  # 账号最近使用时间必须早于这个时间点
+        min_last_used = now - ACCOUNT_MIN_GAP_SEC
         with _get_db_conn() as conn:
             c = conn.cursor()
             c.execute("BEGIN IMMEDIATE")
-            c.execute('''SELECT dc0, z_c0 FROM (
-                            SELECT dc0, z_c0, trust_score FROM accounts
+            c.execute('''SELECT d_c0, z_c0 FROM (
+                            SELECT d_c0, z_c0, trust_score FROM accounts
                             WHERE status = 'ACTIVE' AND is_in_use = 0
                               AND cooldown_until < ?
                               AND (last_used_at IS NULL OR last_used_at < ?)
@@ -414,59 +521,54 @@ class AccountManager:
                          ) ORDER BY RANDOM() LIMIT 1''', (now, min_last_used))
             row = c.fetchone()
             if row:
-                dc0 = row['dc0']
+                d_c0 = row['d_c0']
                 z_c0 = row['z_c0']
-                c.execute("UPDATE accounts SET is_in_use = 1, last_leased_at = ?, last_used_at = ? WHERE dc0 = ?",
-                          (now, now, dc0))
+                c.execute("UPDATE accounts SET is_in_use = 1, last_leased_at = ?, last_used_at = ? WHERE d_c0 = ?",
+                          (now, now, d_c0))
                 conn.commit()
-                return dc0, z_c0
+                return d_c0, z_c0
             conn.rollback()
             return None, None
 
     @_db_retry
-    def release_weapon(self, dc0):
-        if not dc0:
+    def release_weapon(self, d_c0):
+        if not d_c0:
             return
         with _get_db_conn() as conn:
             c = conn.cursor()
-            c.execute("UPDATE accounts SET is_in_use = 0 WHERE dc0 = ?", (dc0,))
+            c.execute("UPDATE accounts SET is_in_use = 0 WHERE d_c0 = ?", (d_c0,))
             conn.commit()
 
     @_db_retry
-    def report_damage(self, dc0, error_class):
+    def report_damage(self, d_c0, error_class):
         """[VNext] 按错误分类精确处罚账号"""
-        if not dc0:
+        if not d_c0:
             return
         now = int(time.time())
         with _get_db_conn() as conn:
             c = conn.cursor()
 
             if error_class == E_HTTP_401:
-                # 账号死亡
-                c.execute("UPDATE accounts SET status = 'DEAD', trust_score = 0, is_in_use = 0, last_error_class = ? WHERE dc0 = ?",
-                          (error_class, dc0))
+                c.execute("UPDATE accounts SET status = 'DEAD', trust_score = 0, is_in_use = 0, last_error_class = ? WHERE d_c0 = ?",
+                          (error_class, d_c0))
             elif error_class in (E_HTTP_403_429, E_CAPTCHA_HTML):
-                # 账号冷却，软性扣分
                 penalty  = TRUST_PENALTY.get(error_class, 3)
                 cooldown = BACKOFF_SECONDS.get(error_class, 120)
-                c.execute("""UPDATE accounts 
+                c.execute("""UPDATE accounts
                              SET status = 'COOLDOWN', cooldown_until = ?, trust_score = MAX(0, trust_score - ?),
                                  is_in_use = 0, last_error_class = ?
-                             WHERE dc0 = ?""", (now + cooldown, penalty, error_class, dc0))
+                             WHERE d_c0 = ?""", (now + cooldown, penalty, error_class, d_c0))
             elif error_class == E_FALSE_EMPTY:
-                # 轻度冷却
                 penalty = TRUST_PENALTY.get(E_FALSE_EMPTY, 2)
-                c.execute("""UPDATE accounts 
+                c.execute("""UPDATE accounts
                              SET status = 'COOLDOWN', cooldown_until = ?, trust_score = MAX(0, trust_score - ?),
                                  is_in_use = 0, last_error_class = ?
-                             WHERE dc0 = ?""", (now + 90, penalty, error_class, dc0))
+                             WHERE d_c0 = ?""", (now + 90, penalty, error_class, d_c0))
             elif error_class in (E_SIGNER_ERROR, E_TRANSIENT_NETWORK, E_FORMAT_ERROR, E_PERMANENT_404):
-                # 不罚账号，只释放
-                c.execute("UPDATE accounts SET is_in_use = 0 WHERE dc0 = ?", (dc0,))
+                c.execute("UPDATE accounts SET is_in_use = 0 WHERE d_c0 = ?", (d_c0,))
             else:
-                c.execute("UPDATE accounts SET is_in_use = 0 WHERE dc0 = ?", (dc0,))
+                c.execute("UPDATE accounts SET is_in_use = 0 WHERE d_c0 = ?", (d_c0,))
 
-            # 信任分归零则永久死亡
             c.execute("UPDATE accounts SET status = 'DEAD' WHERE trust_score <= 0 AND status != 'DEAD'")
             conn.commit()
 
@@ -595,6 +697,29 @@ class TaskManager:
                           (ans_id, question_id, content, plain_txt, json.dumps(item, ensure_ascii=False)))
             conn.commit()
 
+    @_db_retry
+    def verify_completeness(self, question_id, answer_count_from_api):
+        """校验采集完整性：比对实际采集数与问题标注的 answer_count。
+        如果缺失超过 5%，记录 GAP 供后续回补。"""
+        with _get_db_conn() as conn:
+            c = conn.cursor()
+            c.execute("SELECT COUNT(*) as n FROM raw_answers WHERE question_id = ?", (question_id,))
+            collected = c.fetchone()['n']
+
+            if answer_count_from_api > 0 and collected < answer_count_from_api * 0.95:
+                missing = answer_count_from_api - collected
+                print(f"[Integrity] Q{question_id}: 采集 {collected} / 标注 {answer_count_from_api} (缺失 {missing} 条)")
+                # 记录缺失的 offset 范围
+                now = int(time.time())
+                gap_start = collected  # 简化：以采集数为起点
+                c.execute("""INSERT OR IGNORE INTO replay_gaps
+                             (question_id, offset, reason_class, status, first_seen_at)
+                             VALUES (?, ?, 'INCOMPLETE_CHECK', 'PENDING', ?)""",
+                          (question_id, gap_start, now))
+                conn.commit()
+                return False
+            return True
+
     def get_remaining_count(self):
         with _get_db_conn() as conn:
             c = conn.cursor()
@@ -641,13 +766,37 @@ def maintenance_thread(am, tm):
 # 辅助函数
 # ==========================================
 def _is_zhihu_challenge_page(resp):
-    """检测知乎反爬验证页面"""
+    """检测知乎反爬验证页面。支持 HTML 和 JSON 两种响应格式。"""
+    # 先检查完整 body，不只看前 500 字符
+    body = resp.text if resp.text else ""
+    body_lower = body[:2000].lower()
+
+    # JSON 格式的反爬响应: {"error":{"code":403,"message":"..."}}
+    if resp.status_code == 200 and body.startswith('{'):
+        try:
+            import json as _json
+            err_data = _json.loads(body)
+            if isinstance(err_data, dict):
+                error = err_data.get("error", {})
+                if isinstance(error, dict):
+                    err_code = error.get("code", 0)
+                    err_msg = str(error.get("message", "")).lower()
+                    if err_code in (403, 429, 4031, 4032) or any(
+                        m in err_msg for m in ['captcha', 'limit', 'block', '安全', '频率']
+                    ):
+                        return True
+        except Exception:
+            pass
+
+    # HTML 格式的反爬页面
     content_type = resp.headers.get('Content-Type', '')
-    if 'text/html' in content_type:
-        return True
-    body_snippet = resp.text[:500] if len(resp.text) > 0 else ""
-    challenge_markers = ['unhuman', '安全验证', 'captcha', '知乎安全中心']
-    return any(marker in body_snippet.lower() for marker in challenge_markers)
+    challenge_markers = [
+        'unhuman', '安全验证', 'captcha', '知乎安全中心',
+        '人机验证', '系统检测到异常', 'request rejected',
+        'too many requests', '访问过于频繁', '您的IP暂时',
+        '请完成验证', '滑块验证', '请点击下方'
+    ]
+    return any(marker in body_lower for marker in challenge_markers)
 
 
 def _classify_error(resp, data=None):
@@ -657,17 +806,24 @@ def _classify_error(resp, data=None):
     if resp.status_code == 401:
         return E_HTTP_401
     if resp.status_code in (403, 429) or _is_zhihu_challenge_page(resp):
-        # 区分 CAPTCHA 和普通 403
-        body = resp.text[:500] if resp.text else ""
-        if any(m in body.lower() for m in ['captcha', '安全验证', 'unhuman']):
+        body = resp.text[:2000] if resp.text else ""
+        body_lower = body.lower()
+        if any(m in body_lower for m in ['captcha', '安全验证', 'unhuman', '人机验证', '滑块']):
             return E_CAPTCHA_HTML
         return E_HTTP_403_429
     if resp.status_code == 404:
         return E_PERMANENT_404
     if resp.status_code == 200:
         if data is None:
-            return E_CAPTCHA_HTML  # 200 but not JSON
+            # 200 但非 JSON，进一步甄别是否为反爬页面
+            if _is_zhihu_challenge_page(resp):
+                return E_CAPTCHA_HTML
+            return E_FORMAT_ERROR
         if "data" not in data or not isinstance(data.get("data"), list):
+            # 可能是 JSON 格式的错误响应
+            error = data.get("error", {})
+            if isinstance(error, dict) and error.get("code", 0) in (403, 429):
+                return E_HTTP_403_429
             return E_FORMAT_ERROR
     return E_FORMAT_ERROR
 
@@ -719,8 +875,8 @@ def worker_cycle(worker_id, am, tm, supervisor):
         offset = task['current_offset']
         current_retries = task['retry_count']
 
-        dc0, z_c0 = am.lock_and_get_weapon()
-        if not dc0:
+        d_c0, z_c0 = am.lock_and_get_weapon()
+        if not d_c0:
             # 没有可用账号，任务回 READY
             tm.transition_state(question_id, S_READY)
             time.sleep(10)
@@ -728,27 +884,18 @@ def worker_cycle(worker_id, am, tm, supervisor):
 
         target_api = f"/api/v4/questions/{question_id}/answers?limit=20&offset={offset}&include=data[*].content"
 
-        # ── 签名 ──
+        # ── 签名（带缓存）──
         t0 = time.time()
-        sig = None
-        for _ in range(3):
-            try:
-                resp = session.post(f"{RPC_SERVER}/get_sign", json={"url": target_api, "dc0": dc0},
-                                    timeout=5, proxies={"http": None, "https": None})
-                if resp.status_code == 200:
-                    sig = resp.json().get("signature")
-                    break
-            except Exception:
-                time.sleep(1)
+        sig = _get_signature_cached(session, target_api, d_c0)
 
         if not sig:
             latency = int((time.time() - t0) * 1000)
-            attempt_id = tm.record_attempt(question_id, offset, dc0, supervisor.signer_version,
+            attempt_id = tm.record_attempt(question_id, offset, d_c0, supervisor.signer_version,
                                            None, E_SIGNER_ERROR, "签名获取失败", latency)
             with stats.lock:
                 stats.fail_signer += 1
 
-            am.release_weapon(dc0)  # SIGNER_ERROR 不罚账号
+            am.release_weapon(d_c0)
 
             backoff = _get_backoff_seconds(E_SIGNER_ERROR, current_retries)
             if backoff is None:
@@ -763,8 +910,8 @@ def worker_cycle(worker_id, am, tm, supervisor):
             continue
 
         # ── 发起知乎 API 请求 ──
-        # ── 构建 Cookie 头（d_c0 用于签名，z_c0 用于鉴权）──
-        cookie_parts = [f'd_c0="{dc0}"']
+        # ── 构建 Cookie 头 ──
+        cookie_parts = [f'd_c0="{d_c0}"']
         if z_c0:
             cookie_parts.append(f'z_c0="{z_c0}"')
         cookie_header = '; '.join(cookie_parts)
@@ -791,11 +938,11 @@ def worker_cycle(worker_id, am, tm, supervisor):
                     data = resp.json()
                 except ValueError:
                     error_class = E_CAPTCHA_HTML
-                    attempt_id = tm.record_attempt(question_id, offset, dc0, supervisor.signer_version,
+                    attempt_id = tm.record_attempt(question_id, offset, d_c0, supervisor.signer_version,
                                                    200, error_class, "200 但非 JSON", latency)
                     with stats.lock:
                         stats.fail_403_429 += 1
-                    am.report_damage(dc0, error_class)
+                    am.report_damage(d_c0, error_class)
 
                     backoff = _get_backoff_seconds(error_class, current_retries)
                     if backoff is None:
@@ -811,11 +958,11 @@ def worker_cycle(worker_id, am, tm, supervisor):
                 # 格式校验
                 if "data" not in data or not isinstance(data["data"], list):
                     error_class = E_FORMAT_ERROR
-                    attempt_id = tm.record_attempt(question_id, offset, dc0, supervisor.signer_version,
+                    attempt_id = tm.record_attempt(question_id, offset, d_c0, supervisor.signer_version,
                                                    200, error_class, "格式异常: 缺少 data 数组", latency)
                     with stats.lock:
                         stats.fail_other += 1
-                    am.report_damage(dc0, error_class)  # FORMAT_ERROR 不罚账号
+                    am.report_damage(d_c0, error_class)  # FORMAT_ERROR 不罚账号
 
                     backoff = _get_backoff_seconds(error_class, current_retries)
                     if backoff is None:
@@ -838,20 +985,61 @@ def worker_cycle(worker_id, am, tm, supervisor):
                 if len(answers) == 0:
                     if is_end:
                         # 真正的末页
-                        tm.record_attempt(question_id, offset, dc0, supervisor.signer_version,
+                        tm.record_attempt(question_id, offset, d_c0, supervisor.signer_version,
                                           200, None, "空页+is_end=true", latency)
-                        am.release_weapon(dc0)
+                        am.release_weapon(d_c0)
                         tm.transition_state(question_id, S_DONE, retry_count=0)
                     else:
-                        # FALSE_EMPTY：空页但 is_end=false（绝不跳页！）
+                        # FALSE_EMPTY：空页但 is_end=false
+                        # 策略：先换号重试同一 offset，不超过 GAP_THRESHOLD 次
                         error_class = E_FALSE_EMPTY
-                        attempt_id = tm.record_attempt(question_id, offset, dc0, supervisor.signer_version,
+                        attempt_id = tm.record_attempt(question_id, offset, d_c0, supervisor.signer_version,
                                                        200, error_class, "data=[] && is_end=false", latency)
-                        am.report_damage(dc0, error_class)
+                        am.report_damage(d_c0, error_class)
+
+                        # 换号重试：当前账号可能被风控限制返回空数据
+                        alt_account = am.lock_and_get_weapon()
+                        if alt_account[0]:
+                            alt_d_c0, alt_z_c0 = alt_account
+                            print(f"[{worker_name}] Q{question_id} 假空页 → 换号重试 offset={offset}")
+                            # 用新账号重新签名
+                            alt_sig = _get_signature_cached(session, target_api, alt_d_c0)
+                            if alt_sig:
+                                alt_cookie = f'd_c0="{alt_d_c0}"'
+                                if alt_z_c0:
+                                    alt_cookie += f'; z_c0="{alt_z_c0}"'
+                                try:
+                                    alt_resp = session.get(f"https://www.zhihu.com{target_api}",
+                                                          headers={**headers, 'Cookie': alt_cookie},
+                                                          timeout=15)
+                                    if alt_resp.status_code == 200:
+                                        try:
+                                            alt_data = alt_resp.json()
+                                            if "data" in alt_data and isinstance(alt_data["data"], list) and len(alt_data["data"]) > 0:
+                                                # 换号成功！使用新数据
+                                                tm.save_raw_answers(question_id, alt_data["data"])
+                                                with stats.lock:
+                                                    stats.scraped_answers += len(alt_data["data"])
+                                                tm.record_attempt(question_id, offset, alt_d_c0, supervisor.signer_version,
+                                                                  200, None, f"换号成功 {len(alt_data['data'])} 条", latency)
+                                                am.release_weapon(alt_d_c0)
+                                                is_end = alt_data.get("paging", {}).get("is_end", False)
+                                                next_offset = offset + 20
+                                                new_state = S_DONE if is_end else S_READY
+                                                tm.transition_state(question_id, new_state, new_offset=next_offset, retry_count=0)
+                                                print(f"[{worker_name}] Q{question_id} 换号重试成功 ✓ 获得 {len(alt_data['data'])} 条")
+                                                continue
+                                        except ValueError:
+                                            pass
+                                    am.report_damage(alt_d_c0, error_class)
+                                except Exception:
+                                    am.release_weapon(alt_d_c0)
+                            else:
+                                am.release_weapon(alt_d_c0)
+                            print(f"[{worker_name}] Q{question_id} 换号重试也失败，进入退避")
 
                         backoff = _get_backoff_seconds(error_class, current_retries)
                         if backoff is None:
-                            # 第 3 次：转 GAP，不推进 offset
                             tm.create_gap(question_id, offset, error_class, attempt_id)
                             tm.transition_state(question_id, S_GAP, error_class=error_class,
                                                 retry_count=current_retries + 1)
@@ -868,13 +1056,17 @@ def worker_cycle(worker_id, am, tm, supervisor):
                 with stats.lock:
                     stats.scraped_answers += len(answers)
 
-                tm.record_attempt(question_id, offset, dc0, supervisor.signer_version,
+                tm.record_attempt(question_id, offset, d_c0, supervisor.signer_version,
                                   200, None, f"成功 {len(answers)} 条", latency)
-                am.release_weapon(dc0)
+                am.release_weapon(d_c0)
 
                 next_offset = offset + 20
                 if is_end:
                     tm.transition_state(question_id, S_DONE, new_offset=next_offset, retry_count=0)
+                    # 完整性校验：比对 answer_count
+                    answer_total = data.get("paging", {}).get("totals", 0)
+                    if answer_total > 0:
+                        tm.verify_completeness(question_id, answer_total)
                 else:
                     tm.transition_state(question_id, S_READY, new_offset=next_offset, retry_count=0)
 
@@ -886,19 +1078,19 @@ def worker_cycle(worker_id, am, tm, supervisor):
             elif resp.status_code == 401:
                 # HTTP 401: 账号死，任务不罚（换号重试）
                 error_class = E_HTTP_401
-                tm.record_attempt(question_id, offset, dc0, supervisor.signer_version,
+                tm.record_attempt(question_id, offset, d_c0, supervisor.signer_version,
                                   401, error_class, "Unauthorized", latency)
                 with stats.lock:
                     stats.fail_401 += 1
-                am.report_damage(dc0, error_class)
+                am.report_damage(d_c0, error_class)
                 tm.transition_state(question_id, S_READY, error_class=error_class)
 
             elif resp.status_code == 404:
                 # 题目不存在
                 error_class = E_PERMANENT_404
-                tm.record_attempt(question_id, offset, dc0, supervisor.signer_version,
+                tm.record_attempt(question_id, offset, d_c0, supervisor.signer_version,
                                   404, error_class, "Not Found", latency)
-                am.release_weapon(dc0)
+                am.release_weapon(d_c0)
                 tm.transition_state(question_id, S_DEAD, error_class=error_class)
                 print(f"[{worker_name}] Q{question_id} → DEAD (404)")
 
@@ -906,11 +1098,11 @@ def worker_cycle(worker_id, am, tm, supervisor):
                 # 403/429/挑战页/其他
                 error_class = _classify_error(resp)
                 detail = f"HTTP {resp.status_code}"
-                attempt_id = tm.record_attempt(question_id, offset, dc0, supervisor.signer_version,
+                attempt_id = tm.record_attempt(question_id, offset, d_c0, supervisor.signer_version,
                                                resp.status_code, error_class, detail, latency)
                 with stats.lock:
                     stats.fail_403_429 += 1
-                am.report_damage(dc0, error_class)
+                am.report_damage(d_c0, error_class)
 
                 backoff = _get_backoff_seconds(error_class, current_retries)
                 if backoff is None:
@@ -925,9 +1117,9 @@ def worker_cycle(worker_id, am, tm, supervisor):
         except requests.exceptions.RequestException as e:
             latency = int((time.time() - t0) * 1000)
             error_class = E_TRANSIENT_NETWORK
-            tm.record_attempt(question_id, offset, dc0, supervisor.signer_version,
+            tm.record_attempt(question_id, offset, d_c0, supervisor.signer_version,
                               None, error_class, str(e)[:200], latency)
-            am.release_weapon(dc0)  # 网络错误不罚账号
+            am.release_weapon(d_c0)  # 网络错误不罚账号
             with stats.lock:
                 stats.fail_other += 1
             tm.transition_state(question_id, S_BACKOFF, error_class=error_class,
@@ -937,11 +1129,11 @@ def worker_cycle(worker_id, am, tm, supervisor):
 
         except Exception as e:
             latency = int((time.time() - t0) * 1000) if 't0' in dir() else 0
-            tm.record_attempt(question_id, offset, dc0, supervisor.signer_version,
+            tm.record_attempt(question_id, offset, d_c0, supervisor.signer_version,
                               None, E_FORMAT_ERROR, f"未知异常: {str(e)[:150]}", latency)
             with stats.lock:
                 stats.fail_other += 1
-            am.release_weapon(dc0)
+            am.release_weapon(d_c0)
             tm.transition_state(question_id, S_BACKOFF, error_class=E_FORMAT_ERROR,
                                 retry_count=current_retries + 1,
                                 next_run_at=int(time.time()) + 60)

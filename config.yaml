@@ -1,0 +1,132 @@
+# ============================================================
+# 知乎答案采集系统 VNext Phase 1 — 全局配置
+# 所有原来硬编码在代码中的值统一收口到此文件
+# ============================================================
+
+# ── 路径 (支持相对路径，基于项目根目录) ──────────────────
+paths:
+  database: bot_database.db
+  node_log: node_signer.log
+  success_log: success.txt
+  accounts_file: accounts.txt
+
+# ── RPC Signer ────────────────────────────────────────────
+signer:
+  host: 127.0.0.1
+  port: 3000
+  health_endpoint: /health
+  canary_endpoint: /canary
+  sign_endpoint: /get_sign
+  # canary 验活用参数
+  canary_url: /api/v4/questions/1/answers?limit=1&offset=0
+  canary_dc0: canary_test_dc0_value
+  # 浏览器上下文数量
+  concurrency: 2
+  # 签名 TT L，达到后自动优雅退出 (0=永远不自杀)
+  max_requests_before_death: 800
+  # evaluate 超时毫秒
+  evaluate_timeout_ms: 15000
+  # 内部 canary 执行间隔秒数
+  canary_interval_sec: 600
+
+# ── Spider 采集引擎 ───────────────────────────────────────
+spider:
+  # Worker 并发数
+  concurrency: 2
+  # 同一账号两次使用最小间隔秒数
+  account_min_gap_sec: 15
+  # 最大采集答案数，0=无限制
+  max_answers_limit: 0
+  # 签名版本标识
+  signer_version: browser_hook_v16
+  # 租约超时秒数 (超时后其他 Worker 可抢占)
+  lease_timeout_sec: 300
+  # 缺口阈值：同 offset 失败 N 次后转 GAP
+  gap_threshold: 3
+  # 信任分每周期再生量
+  trust_regen_per_cycle: 1
+  # 维护线程间隔秒数
+  maintenance_interval_sec: 30
+  # 成功后随机延迟范围秒数 (模拟人类浏览节律)
+  success_delay_min: 2.0
+  success_delay_max: 6.0
+  # API 每页答案数
+  answers_per_page: 20
+  # 请求超时秒数
+  request_timeout_sec: 15
+  # 签名重试次数
+  sign_retry: 3
+
+  # 错误退避秒数配置
+  # 值可以是数字(固定秒数)或数组(按重试次数递增，最后一个=None表示转GAP)
+  backoff:
+    TRANSIENT_NETWORK: 60
+    HTTP_403_429: 120
+    CAPTCHA_HTML: 300
+    FALSE_EMPTY: [600, 3600, null]   # 第3次转 GAP
+    SIGNER_ERROR: [120, 300, null]
+    FORMAT_ERROR: [120, 300, null]
+    HTTP_401: 0                       # 不重试，换号
+    PERMANENT_404: 0                  # 直接 DEAD
+
+  # 账号信任分惩罚
+  trust_penalty:
+    HTTP_403_429: 3
+    CAPTCHA_HTML: 5
+    FALSE_EMPTY: 2
+
+  # 隧道代理 URL，null=不使用
+  tunnel_proxy_url: null
+
+# ── Dashboard 监控仪表盘 ──────────────────────────────────
+dashboard:
+  host: 127.0.0.1
+  port: 5000
+  # 最近错误统计窗口秒数
+  error_window_sec: 3600
+
+# ── Harvester Cookie 提取器 ───────────────────────────────
+harvester:
+  # 等待操作员输入验证码的最长秒数
+  sms_code_timeout: 180
+  # 浏览器类型: chromium / firefox / webkit
+  browser: chromium
+  # 是否显示浏览器窗口
+  headless: false
+  # 换号间隔秒数 (防 IP 激增)
+  account_switch_delay_sec: 2
+  # 登录后等待 Cookie 落地秒数
+  cookie_landing_delay_sec: 2
+  # 登录页 URL
+  signin_url: https://www.zhihu.com/signin
+
+# ── Scout 侦察兵 ──────────────────────────────────────────
+scout:
+  # 搜索间隔秒数范围 (防封禁抖动)
+  search_delay_min: 2.0
+  search_delay_max: 4.0
+  # 回答数过滤阈值
+  min_answer_count: 50
+  # 搜索组合 (目标专业 × 情绪关键词)
+  target_majors:
+    - 计算机科学与技术
+    - 土木工程
+    - 环境工程
+    - 临床医学
+    - 法学
+  emotion_keywords:
+    - 劝退
+    - 后悔
+    - 坑
+    - 转行
+    - 就业惨
+
+# ── 浏览器 & 请求伪装 ─────────────────────────────────────
+browser:
+  user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
+  viewport_width: 1280
+  viewport_height: 800
+  # Chromium 启动参数
+  extra_args:
+    - --disable-blink-features=AutomationControlled
+    - --disable-infobars

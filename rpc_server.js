@@ -4,12 +4,15 @@ const { chromium } = require('playwright');
 const app = express();
 app.use(express.json());
 
-const CONCURRENCY = 2; 
-const MAX_REQUESTS_BEFORE_DEATH = 800; 
-const EVALUATE_TIMEOUT_MS = 15000; 
+// 支持环境变量覆盖配置 (无环境变量时使用默认值)
+const CONCURRENCY = parseInt(process.env.SIGNER_CONCURRENCY, 10) || 2;
+const MAX_REQUESTS_BEFORE_DEATH = parseInt(process.env.SIGNER_MAX_REQUESTS, 10) || 0; // 0=永不自杀
+const EVALUATE_TIMEOUT_MS = parseInt(process.env.SIGNER_EVAL_TIMEOUT, 10) || 15000;
+const SIGNER_VERSION = process.env.SIGNER_VERSION || 'browser_hook_v16';
 
 let requestCount = 0;
-let isShuttingDown = false; 
+let isShuttingDown = false;
+let isRecycling = false; // 温和回收模式：排空队列后重建 contexts
 
 let contextPool = []; 
 let availableWorkers = []; 

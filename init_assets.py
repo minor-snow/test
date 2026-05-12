@@ -14,9 +14,10 @@ def setup_database():
         c = conn.cursor()
         c.execute('PRAGMA journal_mode=WAL;')
 
-        # ── 1. accounts（保持表名，兼容 harvester）──
+        # ── 1. accounts ──
         c.execute('''CREATE TABLE IF NOT EXISTS accounts (
-                        dc0 TEXT PRIMARY KEY,
+                        d_c0 TEXT PRIMARY KEY,
+                        z_c0 TEXT,
                         status TEXT DEFAULT 'ACTIVE',
                         cooldown_until INTEGER DEFAULT 0,
                         trust_score INTEGER DEFAULT 100,
@@ -30,7 +31,16 @@ def setup_database():
         # accounts 兼容迁移
         c.execute("PRAGMA table_info(accounts)")
         cols = [col[1] for col in c.fetchall()]
+        # 处理 dc0 → d_c0 重命名
+        if "dc0" in cols and "d_c0" not in cols:
+            try:
+                c.execute("ALTER TABLE accounts RENAME COLUMN dc0 TO d_c0")
+                print(">>> [迁移] 已重命名 accounts.dc0 → d_c0")
+            except sqlite3.OperationalError:
+                pass
+            cols = [col[1] for col in (c.execute("PRAGMA table_info(accounts)").fetchall())]
         for colname, coltype, default in [
+            ("z_c0", "TEXT", "NULL"),
             ("is_in_use", "INTEGER", "0"),
             ("last_leased_at", "INTEGER", "0"),
             ("last_error_class", "TEXT", "NULL"),
@@ -147,16 +157,16 @@ def seed_data():
 
         print(">>> 正在填装测试弹仓 (Accounts)...")
         dummy_dc0s = [
-            'mock_dc0_identity_111111111="',
-            'mock_dc0_identity_AAAAA2222="',
-            'mock_dc0_identity_BBBBB3333="',
-            'mock_dc0_identity_CCCCC4444="',
-            'mock_dc0_identity_DDDDD5555="'
+            ('mock_dc0_identity_111111111', 'mock_zc0_AAAAA111111'),
+            ('mock_dc0_identity_AAAAA22222', 'mock_zc0_BBBBB22222'),
+            ('mock_dc0_identity_BBBBB33333', 'mock_zc0_CCCCC33333'),
+            ('mock_dc0_identity_CCCCC44444', 'mock_zc0_DDDDD44444'),
+            ('mock_dc0_identity_DDDDD55555', 'mock_zc0_EEEEE55555'),
         ]
         import random
-        for dc0 in dummy_dc0s:
-            c.execute("INSERT OR IGNORE INTO accounts (dc0, status, trust_score) VALUES (?, 'ACTIVE', ?)",
-                      (dc0, random.randint(80, 100)))
+        for d_c0, z_c0 in dummy_dc0s:
+            c.execute("INSERT OR IGNORE INTO accounts (d_c0, z_c0, status, trust_score) VALUES (?, ?, 'ACTIVE', ?)",
+                      (d_c0, z_c0, random.randint(80, 100)))
 
         print(">>> 正在填装测试任务 (Tasks)...")
         now = int(time.time())

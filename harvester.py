@@ -16,15 +16,43 @@ except ImportError:
 import sqlite3
 import time
 import os
-import sys
+import threading
+
+# ── 尝试加载配置 ─────────────────────────────────────────
+try:
+    from config_loader import config as _cfg
+except Exception:
+    _cfg = {}
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_FILE  = os.path.join(BASE_DIR, "bot_database.db")
+
+def _conf(key, default):
+    """从 config.yaml 取配置，不存在则用默认值"""
+    keys = key.split(".")
+    val = _cfg
+    for k in keys:
+        if isinstance(val, dict):
+            val = val.get(k)
+        else:
+            return default
+    return val if val is not None else default
+
+DB_FILE = os.path.join(BASE_DIR, _conf("paths.database", "bot_database.db"))
+SMS_CODE_TIMEOUT = _conf("harvester.sms_code_timeout", 180)
+SIGNIN_URL = _conf("harvester.signin_url", "https://www.zhihu.com/signin")
+HEADLESS = _conf("harvester.headless", False)
+COOKIE_LANDING_DELAY = _conf("harvester.cookie_landing_delay_sec", 2)
+SWITCH_DELAY = _conf("harvester.account_switch_delay_sec", 2)
+UA = _conf("browser.user_agent",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36")
+VP_WIDTH = _conf("browser.viewport_width", 1280)
+VP_HEIGHT = _conf("browser.viewport_height", 800)
+EXTRA_ARGS = _conf("browser.extra_args",
+    ["--disable-blink-features=AutomationControlled", "--disable-infobars"])
 
 # ── 登录页定位器 ─────────────────────────────────────────
-# 知乎可能随版本变动选择器，集中在此方便维护
-SEL_TAB_PASSWORD   = ".SignFlow-tabs .SignFlow-tab"   # 密码登录页签(第1个)
-SEL_TAB_SMS        = ".SignFlow-tabs .SignFlow-tab"   # 短信登录页签(第0个)
+SEL_TAB_PASSWORD   = ".SignFlow-tabs .SignFlow-tab"
+SEL_TAB_SMS        = ".SignFlow-tabs .SignFlow-tab"
 SEL_INPUT_PHONE    = 'input[name="username"]'
 SEL_INPUT_PASSWORD = 'input[name="password"]'
 SEL_INPUT_SMS_CODE = 'input[placeholder*="验证码"]'
@@ -34,28 +62,72 @@ SEL_BTN_SEND_SMS   = ('button:has-text("发送验证码"), '
                       'button:has-text("发送"), '
                       'span:has-text("发送验证码")')
 SEL_BTN_SUBMIT     = 'button.SignFlow-submitButton'
-SEL_HOMEPAGE       = '.GlobalSideBar'                 # 首页侧边栏 = 登录成功
-SMS_CODE_TIMEOUT   = 180                              # 等操作员输入验证码的最长秒数
+SEL_HOMEPAGE       = '.GlobalSideBar'
 
 
 # ─────────────────────────────────────────────────────────
+def _ensure_schema():
+    """确保 accounts 表有 z_c0, d_c0 等必要列"""
+    with sqlite3.connect(DB_FILE) as conn:
+        c = conn.cursor()
+        c.execute("PRAGMA journal_mode=WAL")
+        c.execute('''CREATE TABLE IF NOT EXISTS accounts (
+                        d_c0 TEXT PRIMARY KEY,
+                        z_c0 TEXT,
+                        status TEXT DEFAULT 'ACTIVE',
+                        cooldown_until INTEGER DEFAULT 0,
+                        trust_score INTEGER DEFAULT 100,
+                        is_in_use INTEGER DEFAULT 0,
+                        last_leased_at INTEGER DEFAULT 0,
+                        last_error_class TEXT,
+                        ban_score INTEGER DEFAULT 0,
+                        last_used_at INTEGER DEFAULT 0
+                    )''')
+        # 列迁移：兼容旧表
+        c.execute("PRAGMA table_info(accounts)")
+        cols = [col[1] for col in c.fetchall()]
+        # 旧表可能用 dc0 做主键但存的是完整 cookie 字符串
+        # 检查是否有 z_c0 列
+        if "z_c0" not in cols:
+            try:
+                c.execute("ALTER TABLE accounts ADD COLUMN z_c0 TEXT")
+                print("[Schema] 已添加 accounts.z_c0 列")
+            except sqlite3.OperationalError:
+                pass
+        # 检查是否有 d_c0 列 (旧表叫 dc0)
+        if "d_c0" not in cols and "dc0" in cols:
+            try:
+                c.execute("ALTER TABLE accounts RENAME COLUMN dc0 TO d_c0")
+                print("[Schema] 已重命名 dc0 → d_c0")
+            except sqlite3.OperationalError:
+                pass
+        conn.commit()
+
+
 def extract_cookies(page):
-    """提取全量 Cookie，返回 (cookie_str, has_z_c0)"""
-    cookies     = page.context.cookies()
+    """提取 Cookie，返回 (d_c0, z_c0, cookie_str, has_zc0)"""
+    cookies = page.context.cookies()
     cookie_dict = {c["name"]: c["value"] for c in cookies}
-    cookie_str  = "; ".join(f"{k}={v}" for k, v in cookie_dict.items())
-    return cookie_str, "z_c0" in cookie_dict
+    cookie_str = "; ".join(f"{k}={v}" for k, v in cookie_dict.items())
+    d_c0 = cookie_dict.get("d_c0", "")
+    z_c0 = cookie_dict.get("z_c0", "")
+    return d_c0, z_c0, cookie_str, "z_c0" in cookie_dict
 
 
-def save_to_db(cookie_str):
-    """将 Cookie 字符串写入 accounts 表"""
+def save_to_db(d_c0, z_c0):
+    """将 d_c0 + z_c0 写入 accounts 表"""
+    if not d_c0:
+        print("    [Error] d_c0 为空，无法入库")
+        return False
     with sqlite3.connect(DB_FILE) as conn:
         c = conn.cursor()
         c.execute(
-            "INSERT OR IGNORE INTO accounts (dc0, status, trust_score) VALUES (?, 'ACTIVE', 100)",
-            (cookie_str,)
+            """INSERT OR REPLACE INTO accounts (d_c0, z_c0, status, trust_score)
+               VALUES (?, ?, 'ACTIVE', 100)""",
+            (d_c0, z_c0)
         )
         conn.commit()
+    return True
 
 
 def mark_success(line):
@@ -92,9 +164,6 @@ def _wait_for_sms_input(phone):
     print(f"  ⏳  {SMS_CODE_TIMEOUT} 秒内未输入将跳过此账号")
     print(f"{'='*55}")
 
-    # Windows 下 sys.stdin.readline 会阻塞，用 input() 即可
-    # 但要防止超时——在独立线程里跑 input() 并用 Event 通知
-    import threading
     code_holder = [None]
     event = threading.Event()
 
@@ -113,21 +182,14 @@ def _wait_for_sms_input(phone):
     return code_holder[0]
 
 
-# ─────────────────────────────────────────────────────────
 def login_with_sms(page, phone, index, total, password=None):
-    """
-    主登录流程（短信验证码模式）
-    返回 True = 登录成功，False = 失败/跳过
-    """
+    """主登录流程（短信验证码模式），返回 True = 登录成功"""
     print(f"\n[{index}/{total}] 账号: {phone}")
 
-    # ① 打开登录页
-    page.goto("https://www.zhihu.com/signin", timeout=60000)
+    page.goto(SIGNIN_URL, timeout=60000)
     time.sleep(1)
 
-    # ② 无密码时强制走短信 Tab；有密码时作为备用路径
-
-    # ③ 优先尝试短信登录 Tab
+    # 优先尝试短信登录 Tab
     sms_tab_clicked = False
     try:
         sms_tab = page.locator(
@@ -142,14 +204,13 @@ def login_with_sms(page, phone, index, total, password=None):
     except Exception:
         pass
 
-    # 无密码时如果没找到短信 Tab，继续尝试直接找「发送验证码」按钮
     if not password and not sms_tab_clicked:
         print("    ↳ 无密码模式：等待发送验证码按钮出现...")
         try:
             page.wait_for_selector(SEL_BTN_SEND_SMS, timeout=8000)
-            sms_tab_clicked = True  # 直接有发送按钮，视为 SMS 模式
+            sms_tab_clicked = True
         except PWTimeout:
-            print("    [Warn] 未找到发送验证码按钮，页面可能需要人工操作")
+            print("    [Warn] 未找到发送验证码按钮，等待人工操作...")
             try:
                 page.wait_for_selector(SEL_HOMEPAGE, timeout=SMS_CODE_TIMEOUT * 1000)
                 print("    ↳ 人工完成登录成功")
@@ -158,7 +219,7 @@ def login_with_sms(page, phone, index, total, password=None):
                 print("    [Timeout] 超时，跳过")
                 return False
 
-    # ④ 填手机号
+    # 填手机号
     try:
         page.fill(SEL_INPUT_PHONE, phone)
     except Exception as e:
@@ -166,19 +227,14 @@ def login_with_sms(page, phone, index, total, password=None):
         return False
 
     if sms_tab_clicked:
-        # ── 短信登录模式：填手机号后点「发送验证码」──
-        time.sleep(1)  # 等按钮从灰色激活
+        time.sleep(1)
         try:
-            # 广谱选择器：覆盖知乎各版本按钮文字
             send_btn = page.locator(SEL_BTN_SEND_SMS)
             send_btn.first.click(timeout=10000)
             print("    ↳ 已点击「发送验证码」")
-        except Exception as e:
-            # 备用：截图调试 + 尝试 Tab 键触发
-            print(f"    [Warn] 标准按钮未找到 ({e})")
-            print("    ↳ 备用方案：请在弹出的浏览器窗口中手动点击发送验证码")
+        except Exception:
+            print("    [Warn] 标准按钮未找到，请手动点击发送验证码")
             try:
-                # 给用户 15s 手动点发送
                 page.wait_for_selector(SEL_INPUT_SMS_CODE, timeout=15000)
                 print("    ↳ 检测到验证码输入框，继续...")
             except PWTimeout:
@@ -189,7 +245,6 @@ def login_with_sms(page, phone, index, total, password=None):
                 sms_tab_clicked = False
 
     if not sms_tab_clicked and password:
-        # ── 密码登录模式（触发短信二次验证）──
         try:
             page.fill(SEL_INPUT_PASSWORD, password)
             page.click(SEL_BTN_SUBMIT)
@@ -198,8 +253,6 @@ def login_with_sms(page, phone, index, total, password=None):
             print(f"    [Error] 填密码失败: {e}")
             return False
 
-        # 等待页面跳转到短信验证阶段
-        # 情况 1: 直接登录成功（无二次验证）
         try:
             page.wait_for_selector(SEL_HOMEPAGE, timeout=5000)
             print("    ↳ 直接登录成功（无短信验证）")
@@ -207,15 +260,12 @@ def login_with_sms(page, phone, index, total, password=None):
         except PWTimeout:
             pass
 
-        # 情况 2: 弹出短信验证框 / "发送验证码"按钮出现
         try:
             page.wait_for_selector(SEL_BTN_SEND_SMS, timeout=10000)
             page.locator(SEL_BTN_SEND_SMS).first.click()
             print("    ↳ 检测到短信验证步骤，已点击发送")
         except PWTimeout:
-            # 情况 3: 可能是图形验证码 / 滑块，需人工介入
-            print("    ⚠️  未出现发送验证码按钮，可能需要人工处理滑块验证")
-            print("    ⏳  等待您在浏览器中手动完成验证后，脚本将继续...")
+            print("    ⚠️  等待人工完成滑块验证...")
             try:
                 page.wait_for_selector(SEL_HOMEPAGE, timeout=SMS_CODE_TIMEOUT * 1000)
                 print("    ↳ 人工完成登录成功")
@@ -224,13 +274,13 @@ def login_with_sms(page, phone, index, total, password=None):
                 print("    [Timeout] 人工操作超时，跳过")
                 return False
 
-    # ⑤ 等待并读取验证码（终端输入）
+    # 等待并读取验证码
     sms_code = _wait_for_sms_input(phone)
     if not sms_code:
         print("    [Skip] 未输入验证码，跳过此账号")
         return False
 
-    # ⑥ 填入验证码并提交
+    # 填入验证码并提交
     try:
         page.fill(SEL_INPUT_SMS_CODE, sms_code)
         time.sleep(0.3)
@@ -240,13 +290,12 @@ def login_with_sms(page, phone, index, total, password=None):
         print(f"    [Error] 填验证码失败: {e}")
         return False
 
-    # ⑦ 等待登录成功（首页出现）
+    # 等待登录成功
     try:
         page.wait_for_selector(SEL_HOMEPAGE, timeout=20000)
         print("    ↳ 首页出现，登录成功 ✓")
         return True
     except PWTimeout:
-        # 可能还有一个二次验证（极少见）
         print("    [Warn] 提交验证码后首页仍未出现，等待人工处理...")
         try:
             page.wait_for_selector(SEL_HOMEPAGE, timeout=60000)
@@ -256,8 +305,9 @@ def login_with_sms(page, phone, index, total, password=None):
             return False
 
 
-# ─────────────────────────────────────────────────────────
 def run_harvester():
+    _ensure_schema()
+
     lines = read_accounts()
     if not lines:
         print("====== 没有需要处理的账号 ======")
@@ -269,20 +319,14 @@ def run_harvester():
     print("  短信发出后请在终端输入验证码\n")
 
     with Stealth().use_sync(sync_playwright()) as p:
-        browser = p.chromium.launch(
-            headless=False,
-            args=[
-                "--disable-blink-features=AutomationControlled",
-                "--disable-infobars",
-            ]
-        )
+        browser = p.chromium.launch(headless=HEADLESS, args=EXTRA_ARGS)
 
-        ok_count   = 0
+        ok_count = 0
         fail_count = 0
 
         for idx, line in enumerate(lines, start=1):
-            parts    = line.split("----")
-            phone    = parts[0].strip()
+            parts = line.split("----")
+            phone = parts[0].strip()
             password = parts[1].strip() if len(parts) >= 2 else None
 
             if not phone:
@@ -291,12 +335,8 @@ def run_harvester():
                 continue
 
             context = browser.new_context(
-                user_agent=(
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                    "AppleWebKit/537.36 (KHTML, like Gecko) "
-                    "Chrome/124.0.0.0 Safari/537.36"
-                ),
-                viewport={"width": 1280, "height": 800},
+                user_agent=UA,
+                viewport={"width": VP_WIDTH, "height": VP_HEIGHT},
             )
             page = context.new_page()
 
@@ -304,14 +344,18 @@ def run_harvester():
                 success = login_with_sms(page, phone, idx, total, password=password)
 
                 if success:
-                    time.sleep(2)  # 等 Cookie 完全落地
-                    cookie_str, has_zc0 = extract_cookies(page)
+                    time.sleep(COOKIE_LANDING_DELAY)
+                    d_c0, z_c0, cookie_str, has_zc0 = extract_cookies(page)
 
                     if has_zc0:
-                        save_to_db(cookie_str)
-                        mark_success(line)
-                        ok_count += 1
-                        print(f"    [✓ 入库] z_c0 已提取，账号 {phone} 入库成功")
+                        if save_to_db(d_c0, z_c0):
+                            mark_success(line)
+                            ok_count += 1
+                            masked = d_c0[:6] + "****" + d_c0[-4:] if len(d_c0) > 10 else d_c0
+                            print(f"    [✓ 入库] d_c0={masked} z_c0={'有' if z_c0 else '无'}")
+                        else:
+                            fail_count += 1
+                            print(f"    [✗ 无效] d_c0 为空")
                     else:
                         fail_count += 1
                         print(f"    [✗ 无效] 登录成功但缺少 z_c0，账号 {phone} 跳过")
@@ -323,7 +367,7 @@ def run_harvester():
                 fail_count += 1
             finally:
                 context.close()
-                time.sleep(2)  # 换号间隔，防 IP 激增
+                time.sleep(SWITCH_DELAY)
 
         browser.close()
 
