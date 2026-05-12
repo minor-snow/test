@@ -214,7 +214,7 @@ def _check_and_migrate_schema():
             UNIQUE(question_id, offset)
         )''')
 
-        # ── 4. accounts 补列（兼容旧表，不改名）──
+        # ── 4. accounts（兼容旧表迁移）──
         c.execute('''CREATE TABLE IF NOT EXISTS accounts (
             d_c0 TEXT PRIMARY KEY,
             z_c0 TEXT,
@@ -226,7 +226,15 @@ def _check_and_migrate_schema():
 
         c.execute("PRAGMA table_info(accounts)")
         acc_cols = [r['name'] for r in c.fetchall()]
-        for col, default in [("is_in_use", "0"), ("last_leased_at", "0"),
+        # 处理 dc0 → d_c0 重命名（兼容旧 harvester 写入的 schema）
+        if "dc0" in acc_cols and "d_c0" not in acc_cols:
+            try:
+                c.execute("ALTER TABLE accounts RENAME COLUMN dc0 TO d_c0")
+                print("[Migration] 已重命名 accounts.dc0 → d_c0")
+                acc_cols = [r['name'] for r in c.execute("PRAGMA table_info(accounts)").fetchall()]
+            except sqlite3.OperationalError:
+                pass
+        for col, default in [("z_c0", "NULL"), ("is_in_use", "0"), ("last_leased_at", "0"),
                              ("last_error_class", "NULL"), ("ban_score", "0"), ("last_used_at", "0")]:
             if col not in acc_cols:
                 try:

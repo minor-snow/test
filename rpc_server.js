@@ -12,7 +12,6 @@ const SIGNER_VERSION = process.env.SIGNER_VERSION || 'browser_hook_v16';
 
 let requestCount = 0;
 let isShuttingDown = false;
-let isRecycling = false; // 温和回收模式：排空队列后重建 contexts
 
 let contextPool = []; 
 let availableWorkers = []; 
@@ -279,7 +278,6 @@ async function processQueue() {
     }
 }
 
-const SIGNER_VERSION = 'browser_hook_v16';
 let lastCanaryOk = 0;
 
 app.get('/health', (req, res) => {
