@@ -27,9 +27,16 @@ def _deep_merge(base: dict, override: dict) -> dict:
     return base
 
 
+import sys as _sys
+
+def _bootstrap_log(msg: str):
+    """引导阶段日志（logger 尚未初始化时使用）"""
+    _sys.stderr.write(f"[配置] {msg}\n")
+
+
 def load_config() -> dict:
     if not os.path.exists(CONFIG_FILE):
-        print(f"[Config] 找不到 {CONFIG_FILE}，使用默认配置")
+        _bootstrap_log(f"找不到 {CONFIG_FILE}，使用默认配置")
         return {}
 
     with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -41,7 +48,7 @@ def load_config() -> dict:
         with open(local_file, "r", encoding="utf-8") as f:
             local = yaml.safe_load(f) or {}
         _deep_merge(cfg, local)
-        print("[Config] 已加载本地覆盖配置 (config.local.yaml)")
+        _bootstrap_log("已加载本地覆盖配置 (config.local.yaml)")
 
     return cfg
 

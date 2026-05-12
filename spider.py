@@ -348,10 +348,11 @@ class NodeSupervisor:
 
     def _cleanup_orphans(self):
         """清理本项目的孤儿 signer 进程"""
+        signer_port = str(conf("signer.port", 3000))
         try:
             output = subprocess.check_output('netstat -aon', shell=True, stderr=subprocess.DEVNULL).decode()
             for line in output.splitlines():
-                if ':3000 ' in line and 'LISTENING' in line:
+                if f':{signer_port} ' in line and 'LISTENING' in line:
                     pid = line.strip().split()[-1]
                     if str(pid) != "0":
                         try:

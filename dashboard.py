@@ -1,7 +1,7 @@
 """
 知乎 RPC 采集系统 - VNext 实时监控仪表盘
 启动: python dashboard.py
-访问: http://127.0.0.1:5000
+访问: http://127.0.0.1:{dashboard.port} (默认 5000，可在 config.yaml 中配置)
 """
 import os
 import time

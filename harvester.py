@@ -147,8 +147,8 @@ def read_accounts():
 def _wait_for_sms_input(phone):
     """在终端等待操作员输入 6 位验证码，超时返回 None"""
     logger.info(f"\n{'='*55}")
-    print(f"  📱  请查收手机 {phone} 的短信验证码")
-    print(f"  ⏳  {SMS_CODE_TIMEOUT} 秒内未输入将跳过此账号")
+    logger.info(f"  📱  请查收手机 {phone} 的短信验证码")
+    logger.info(f"  ⏳  {SMS_CODE_TIMEOUT} 秒内未输入将跳过此账号")
     logger.info(f"{'='*55}")
 
     code_holder = [None]
@@ -297,11 +297,11 @@ def run_harvester():
 
     lines = read_accounts()
     if not lines:
-        print("====== 没有需要处理的账号 ======")
+        logger.info("====== 没有需要处理的账号 ======")
         return
 
     total = len(lines)
-    print(f"\n====== Cookie 提取车间启动 · 共 {total} 个账号待处理 ======")
+    logger.info(f"\n====== Cookie 提取车间启动 · 共 {total} 个账号待处理 ======")
     logger.info("  账号格式: 手机号  或  手机号----密码")
     logger.info("  短信发出后请在终端输入验证码\n")
 
@@ -359,9 +359,9 @@ def run_harvester():
         browser.close()
 
     logger.info(f"\n{'='*55}")
-    print(f"  提取车间收工")
-    print(f"  ✓ 成功入库: {ok_count} 个")
-    print(f"  ✗ 失败/跳过: {fail_count} 个")
+    logger.info(f"  提取车间收工")
+    logger.info(f"  ✓ 成功入库: {ok_count} 个")
+    logger.info(f"  ✗ 失败/跳过: {fail_count} 个")
     logger.info(f"{'='*55}\n")
 
 
