@@ -1,0 +1,33 @@
+name: Pantheon Repair Gate (Agent Report)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  pantheon-repair:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ./action
+        id: pantheon
+        with:
+          mode: repair
+          agent_bug_report: .pantheon/repair/inbox/agent_bug_report.json
+          audit_mode: require_plan_approval
+          artifact_mode: public
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pantheon-repair-report
+          path: ${{ steps.pantheon.outputs.artifact_dir }}

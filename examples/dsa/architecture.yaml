@@ -1,0 +1,23 @@
+# Example Architecture Definition
+# Purpose: Demonstrate synthetic, public-safe architecture input.
+
+domains:
+  engine:
+    description: "Core execution logic and state management."
+    includes:
+      - "src/engine/**/*"
+  
+  api:
+    description: "External interface for CLI and Gateway."
+    includes:
+      - "src/cli/**/*"
+      - "src/gateway/**/*"
+  
+  storage:
+    description: "Persistent stores for governance artifacts."
+    includes:
+      - "src/stores/**/*"
+
+enforcement:
+  strict_boundaries: true
+  prevent_cycles: true

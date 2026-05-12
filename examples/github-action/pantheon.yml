@@ -1,0 +1,43 @@
+name: Pantheon Boundary Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  pantheon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pantheon/pantheon-action@v0
+        with:
+          intent: ${{ github.event.pull_request.title }}
+          scope: |
+            saleor/checkout/**
+            saleor/graphql/checkout/**
+          review: |
+            saleor/tax/**
+            saleor/order/**
+          forbid: |
+            saleor/payment/**
+            saleor/account/**
+            saleor/discount/**
+            saleor/plugins/**
+            **/migrations/**
+          fail_on: forbidden,outside_scope
+          post_comment: true
+          upload_artifacts: true
+          artifact_mode: public
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pantheon-report
+          path: pantheon-report/
